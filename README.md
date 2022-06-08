@@ -1,0 +1,1 @@
+# ResistanceCalculatorApp
