@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ResistanceCalculator</string>
+    <string name="app_name">Resistance Calculator</string>
 
     <string-array name="color_bands">
         <item>Black</item>
@@ -30,14 +30,14 @@
     </string-array>
 
     <string-array name="tolerance_band">
+        <item>Gold</item>
+        <item>Silver</item>
         <item>Brown</item>
         <item>Red</item>
         <item>Green</item>
         <item>Blue</item>
         <item>Violet</item>
         <item>Gray</item>
-        <item>Gold</item>
-        <item>Silver</item>
     </string-array>
 
 </resources>

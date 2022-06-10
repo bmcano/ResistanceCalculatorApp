@@ -7,43 +7,32 @@ package com.example.resistancecalculator
 fun calcResistance(Band1: String, Band2: String, Multiplier: String, Tolerance: String) : String {
     val band1 = bandHelper(Band1)
     val band2 = bandHelper(Band2)
+    val multiplier = multiplierHelper(Multiplier, band1, band2)
+    val tolerance = toleranceHelper(Tolerance)
 
-    val multiplier: String = when (Multiplier) {
-        "Black" -> "1"
-        "Brown" -> "10"
-        "Red" -> "100"
-        "Orange" -> "1000"
-        "Yellow" -> "10000"
-        "Green" -> "100000"
-        "Blue" -> "1000000"
-        "Violet" -> "10000000"
-        "Gray" -> "100000000"
-        "White" -> "1000000000"
-        "Gold" -> "0.1"
-        "Silver" -> "0.01"
-        else -> { "1" }
+    var resistance = "${multiplier}Ω  $tolerance%"
+
+    // fix for when band1 is black
+    if(Band1 == "Black" && Band2 == "Black") {
+        resistance = "0 Ω  $tolerance%"
+    } else if(Band1 == "Black") {
+        resistance = when(Multiplier) {
+            "Red","Green","Gray","Gold" -> {
+                "0${multiplierHelper(Multiplier, "", band2)}Ω  $tolerance%"
+            }
+            else -> {
+                "${multiplierHelper(Multiplier, "", band2)}Ω  $tolerance%"
+            }
+        }
     }
 
-    val tolerance: String = when (Tolerance) {
-        "Brown" -> "1"
-        "Red" -> "2"
-        "Green" -> "0.5"
-        "Blue" -> "0.25"
-        "Violet" -> "0.1"
-        "Gray" -> "0.05"
-        "Gold" -> "5"
-        "Silver" -> "10"
-        else -> { "5" }
-    }
-
-    val value: String = ((band1 + band2).toInt() * multiplier.toDouble()).toInt().toString()
-    return "$value Ohms $tolerance%"
+    return resistance
 }
 
 
 // purely grabs the number from the color (happens twice)
 private fun bandHelper(Color: String) : String {
-    val color: String = when (Color) {
+    return when (Color) {
         "Black" -> "0"
         "Brown" -> "1"
         "Red" -> "2"
@@ -54,8 +43,38 @@ private fun bandHelper(Color: String) : String {
         "Violet" -> "7"
         "Gray" -> "8"
         "White" -> "9"
-        else -> { "0" }
+        else -> { "" }
     }
+}
 
-    return color
+private fun multiplierHelper(Color: String, band1: String, band2: String) : String {
+    return when (Color) {
+        "Black" -> "$band1$band2 "
+        "Brown" -> "${band1}${band2}0 "
+        "Red" -> "${band1}.${band2} k"
+        "Orange" -> "${band1}${band2} k"
+        "Yellow" -> "${band1}${band2}0 k"
+        "Green" -> "${band1}.${band2} M"
+        "Blue" -> "${band1}${band2} M"
+        "Violet" -> "${band1}${band2}0 M"
+        "Gray" -> "${band1}.${band2} G"
+        "White" -> "${band1}${band2} G"
+        "Gold" -> "${band1}.${band2} "
+        "Silver" -> "0.${band1}${band2} "
+        else -> { "$band1$band2 " }
+    }
+}
+
+private fun toleranceHelper(Color: String) : String {
+    return when (Color) {
+        "Brown" -> "1"
+        "Red" -> "2"
+        "Green" -> "0.5"
+        "Blue" -> "0.25"
+        "Violet" -> "0.1"
+        "Gray" -> "0.05"
+        "Gold" -> "5"
+        "Silver" -> "10"
+        else -> { "5" }
+    }
 }
