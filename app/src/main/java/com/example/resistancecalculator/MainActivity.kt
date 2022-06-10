@@ -8,13 +8,12 @@ import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
-    private lateinit var colorImage_1: ImageView
-    private lateinit var colorImage_2: ImageView
-    private lateinit var colorImage_3: ImageView
-    private lateinit var colorImage_4: ImageView
+    private lateinit var colorImage1: ImageView
+    private lateinit var colorImage2: ImageView
+    private lateinit var colorImage3: ImageView
+    private lateinit var colorImage4: ImageView
 
     // initialize empty strings
     private var colorBand1: String = ""
@@ -31,9 +30,6 @@ class MainActivity : AppCompatActivity() {
         val actionBar: ActionBar? = supportActionBar
         val colorDrawable = ColorDrawable(Color.parseColor("#FF6200EE"))
         actionBar!!.setBackgroundDrawable(colorDrawable)
-
-
-        R.layout.activity_main
     }
 
     override fun onResume() {
@@ -46,10 +42,10 @@ class MainActivity : AppCompatActivity() {
         // shows the calculated resistance
         textView = findViewById(R.id.resistance_display)
 
-        colorImage_1 = findViewById(R.id.color_image_1)
-        colorImage_2 = findViewById(R.id.color_image_2)
-        colorImage_3 = findViewById(R.id.color_image_3)
-        colorImage_4 = findViewById(R.id.color_image_4)
+        colorImage1 = findViewById(R.id.color_image_1)
+        colorImage2 = findViewById(R.id.color_image_2)
+        colorImage3 = findViewById(R.id.color_image_3)
+        colorImage4 = findViewById(R.id.color_image_4)
 
         // color band 1
         val spinner1: Spinner = findViewById(R.id.color_band_1)
@@ -90,19 +86,19 @@ class MainActivity : AppCompatActivity() {
                 when(parent!!.id) {
                     R.id.color_band_1 -> {
                         colorBand1 = parent.getItemAtPosition(position).toString()
-                        colorImage_1.setImageResource(imageColor(colorBand1))
+                        colorImage1.setImageResource(imageColor(colorBand1))
                     }
                     R.id.color_band_2 -> {
                         colorBand2 = parent.getItemAtPosition(position).toString()
-                        colorImage_2.setImageResource(imageColor(colorBand2))
+                        colorImage2.setImageResource(imageColor(colorBand2))
                     }
                     R.id.multiplier_band -> {
                         multiplierBand = parent.getItemAtPosition(position).toString()
-                        colorImage_3.setImageResource(imageColor(multiplierBand))
+                        colorImage3.setImageResource(imageColor(multiplierBand))
                     }
                     R.id.tolerance_band -> {
                         toleranceBand = parent.getItemAtPosition(position).toString()
-                        colorImage_4.setImageResource(imageColor(toleranceBand))
+                        colorImage4.setImageResource(imageColor(toleranceBand))
                     }
                 }
                 textView.text = calcResistance(colorBand1, colorBand2, multiplierBand, toleranceBand)
