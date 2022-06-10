@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         val actionBar: ActionBar? = supportActionBar
         val colorDrawable = ColorDrawable(Color.parseColor("#FF6200EE"))
         actionBar!!.setBackgroundDrawable(colorDrawable)
+
+
+        R.layout.activity_main
     }
 
     override fun onResume() {
