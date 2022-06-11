@@ -1,45 +1,5 @@
 <resources>
     <string name="app_name">Resistance Calculator</string>
     <string name="spinner_hint">Color</string>
-
-
-    <string-array name="color_bands">
-        <item>Black</item>
-        <item>Brown</item>
-        <item>Red</item>
-        <item>Orange</item>
-        <item>Yellow</item>
-        <item>Green</item>
-        <item>Blue</item>
-        <item>Violet</item>
-        <item>Gray</item>
-        <item>White</item>
-    </string-array>
-
-    <string-array name="multiplier_band">
-        <item>Black</item>
-        <item>Brown</item>
-        <item>Red</item>
-        <item>Orange</item>
-        <item>Yellow</item>
-        <item>Green</item>
-        <item>Blue</item>
-        <item>Violet</item>
-        <item>Gray</item>
-        <item>White</item>
-        <item>Gold</item>
-        <item>Silver</item>
-    </string-array>
-
-    <string-array name="tolerance_band">
-        <item>Gold</item>
-        <item>Silver</item>
-        <item>Brown</item>
-        <item>Red</item>
-        <item>Green</item>
-        <item>Blue</item>
-        <item>Violet</item>
-        <item>Gray</item>
-    </string-array>
-
+    <string name="default_text">Select Colors</string>
 </resources>

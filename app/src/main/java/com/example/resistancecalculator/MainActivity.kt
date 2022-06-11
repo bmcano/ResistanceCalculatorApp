@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         // will display the resistance
         textView = findViewById(R.id.resistance_display_new)
 
-
         // number band 1
         val dropDown1 : AutoCompleteTextView = findViewById(R.id.spinner1)
         ArrayAdapter(

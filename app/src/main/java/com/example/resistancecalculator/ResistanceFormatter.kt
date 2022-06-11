@@ -1,13 +1,13 @@
 package com.example.resistancecalculator
 
-// TODO: better formatting of the output string
+/**
+ * Job: will take the string inputs from the ENUM to format the resistance of the resistor
+ */
 
-
-// will take the proper inputs to calculate the resistance of a resistor
 fun calcResistance(Band1: String, Band2: String, Multiplier: String, Tolerance: String) : String {
     // will not work properly with any empty strings
     if(Band1 == "" || Band2 == "" || Multiplier == "" || Tolerance == "") {
-        return ""
+        return "Select Colors"
     }
 
     val band1 = bandHelper(Band1)
@@ -34,8 +34,6 @@ fun calcResistance(Band1: String, Band2: String, Multiplier: String, Tolerance: 
     return resistance
 }
 
-
-// purely grabs the number from the color (happens twice)
 private fun bandHelper(Color: String) : String {
     return when (Color) {
         "Black" -> "0"
