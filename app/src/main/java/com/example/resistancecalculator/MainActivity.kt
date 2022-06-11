@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         // sets the action bar to @color/purple_500
         val actionBar: ActionBar? = supportActionBar
-        val colorDrawable = ColorDrawable(Color.parseColor("#FF6200EE"))
+        val colorDrawable = ColorDrawable(Color.parseColor("#DDA15E"))
         actionBar!!.setBackgroundDrawable(colorDrawable)
     }
 
@@ -59,10 +59,10 @@ class MainActivity : AppCompatActivity() {
         // button listeners
         // toggle four band resistor
         button1.setOnClickListener {
-            button1.setBackgroundColor(getColor(R.color.teal_200))
+            button1.setBackgroundColor(getColor(R.color.green_700))
 
-            button2.setBackgroundColor(getColor(R.color.purple_500))
-            button3.setBackgroundColor(getColor(R.color.purple_500))
+            button2.setBackgroundColor(getColor(R.color.green_500))
+            button3.setBackgroundColor(getColor(R.color.green_500))
 
             toggleDropDown3.visibility = View.GONE
             toggleDropDown6.visibility = View.GONE
@@ -72,10 +72,10 @@ class MainActivity : AppCompatActivity() {
 
         // toggle five band resistor
         button2.setOnClickListener {
-            button2.setBackgroundColor(getColor(R.color.teal_200))
+            button2.setBackgroundColor(getColor(R.color.green_700))
 
-            button1.setBackgroundColor(getColor(R.color.purple_500))
-            button3.setBackgroundColor(getColor(R.color.purple_500))
+            button1.setBackgroundColor(getColor(R.color.green_500))
+            button3.setBackgroundColor(getColor(R.color.green_500))
 
             toggleDropDown3.visibility = View.VISIBLE
             toggleDropDown6.visibility = View.GONE
@@ -85,10 +85,10 @@ class MainActivity : AppCompatActivity() {
 
         // toggle six band resistor
         button3.setOnClickListener {
-            button3.setBackgroundColor(getColor(R.color.teal_200))
+            button3.setBackgroundColor(getColor(R.color.green_700))
 
-            button1.setBackgroundColor(getColor(R.color.purple_500))
-            button2.setBackgroundColor(getColor(R.color.purple_500))
+            button1.setBackgroundColor(getColor(R.color.green_500))
+            button2.setBackgroundColor(getColor(R.color.green_500))
 
             toggleDropDown3.visibility = View.VISIBLE
             toggleDropDown6.visibility = View.VISIBLE
@@ -222,11 +222,11 @@ class MainActivity : AppCompatActivity() {
     // will determine which calculations to do
     private fun calcResistanceHelper() {
         if(toggleDropDown3.visibility == View.GONE && toggleDropDown6.visibility == View.GONE) {
-            textView.text = calcResistance(numberBand1, numberBand2, multiplierBand, toleranceBand)
+            textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, multiplierBand, toleranceBand)
         } else if(toggleDropDown6.visibility == View.GONE){
-            textView.text = calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand)
+            textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand)
         } else {
-            textView.text = "Not implemented yet."
+            textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand)
         }
     }
 

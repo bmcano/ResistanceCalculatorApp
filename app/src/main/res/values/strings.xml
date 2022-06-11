@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">Resistance Calculator</string>
+
     <string name="spinner_hint">Color</string>
+    <string name="number_band_hint1">First Number</string>
+    <string name="number_band_hint2">Second Number</string>
+    <string name="number_band_hint3">Third Number</string>
+    <string name="multiplier_band_hint">Multiplier</string>
+    <string name="tolerance_band_hint">Tolerance</string>
+    <string name="ppm_band_hint">PPM</string>
+
     <string name="default_text">Select Colors</string>
     <string name="show_chart">Show Chart</string>
+
     <string name="four_band">Four Band Resistor</string>
     <string name="five_band">Five Band Resistor</string>
     <string name="six_band">Six Band Resistor</string>
