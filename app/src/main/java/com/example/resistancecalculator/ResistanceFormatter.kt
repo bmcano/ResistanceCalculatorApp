@@ -5,6 +5,11 @@ package com.example.resistancecalculator
 
 // will take the proper inputs to calculate the resistance of a resistor
 fun calcResistance(Band1: String, Band2: String, Multiplier: String, Tolerance: String) : String {
+    // will not work properly with any empty strings
+    if(Band1 == "" || Band2 == "" || Multiplier == "" || Tolerance == "") {
+        return ""
+    }
+
     val band1 = bandHelper(Band1)
     val band2 = bandHelper(Band2)
     val multiplier = multiplierHelper(Multiplier, band1, band2)

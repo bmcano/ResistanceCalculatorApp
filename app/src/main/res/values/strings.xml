@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Resistance Calculator</string>
+    <string name="spinner_hint">Color</string>
+
 
     <string-array name="color_bands">
         <item>Black</item>
