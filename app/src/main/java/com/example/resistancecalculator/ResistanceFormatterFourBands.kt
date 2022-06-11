@@ -1,7 +1,8 @@
 package com.example.resistancecalculator
 
 /**
- * Job: will take the string inputs from the ENUM to format the resistance of the resistor
+ * Job: will take the string inputs from the ENUM to format the resistance of a resistor
+ * with four bands.
  */
 
 fun calcResistance(Band1: String, Band2: String, Multiplier: String, Tolerance: String) : String {
