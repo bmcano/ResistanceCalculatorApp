@@ -14,5 +14,10 @@ enum class Bands(val array: Array<String>){
     TOLERANCE(arrayOf(
     "Gold", "Silver", "Brown", "Red",
     "Green", "Blue", "Violet", "Gray",
+    )),
+
+    PPM(arrayOf(
+        "Brown", "Red", "Orange",
+        "Yellow", "Blue", "Violet"
     ))
 }

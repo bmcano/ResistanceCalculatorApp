@@ -2,4 +2,8 @@
     <string name="app_name">Resistance Calculator</string>
     <string name="spinner_hint">Color</string>
     <string name="default_text">Select Colors</string>
+    <string name="show_chart">Show Chart</string>
+    <string name="four_band">Four Band Resistor</string>
+    <string name="five_band">Five Band Resistor</string>
+    <string name="six_band">Six Band Resistor</string>
 </resources>
