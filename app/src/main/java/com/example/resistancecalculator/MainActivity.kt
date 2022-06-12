@@ -1,9 +1,12 @@
 package com.example.resistancecalculator
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
@@ -37,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setup()
         buttonSetup()
 
-        // sets the action bar to @color/purple_500
+        // sets the action bar color
         val actionBar: ActionBar? = supportActionBar
         val colorDrawable = ColorDrawable(Color.parseColor("#DDA15E"))
         actionBar!!.setBackgroundDrawable(colorDrawable)
@@ -47,6 +50,24 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         setup()
         buttonSetup()
+    }
+
+    // options menu dropdown in top right corner
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_dropdown, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.about_item -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            else -> { return super.onOptionsItemSelected(item) }
+        }
     }
 
     // sets up all button related events

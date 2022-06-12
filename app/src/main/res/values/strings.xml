@@ -15,4 +15,15 @@
     <string name="four_band">Four Band Resistor</string>
     <string name="five_band">Five Band Resistor</string>
     <string name="six_band">Six Band Resistor</string>
+
+    <string name="about">About This App</string>
+    <string name="version">v1.0</string>
+    <string name="created_by">Created By\n\nBrandon Cano</string>
+    <string name="description">
+        This app has can find the resistance of three types of resistors; four, five, and six
+        banded resistors. The idea is that you will look at the colors of the bands on the resistor
+        then, plug them into the dropdowns, and then the resistance and other information will be
+        displayed on screen.\nYou can also look at the charts for each type of resistor
+        for convince.
+    </string>
 </resources>
