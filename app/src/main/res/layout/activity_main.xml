@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dropDownSelector1"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -115,7 +114,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dropDownSelector5"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -190,7 +188,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
     <Button
         android:id="@+id/four_band"
         android:layout_width="112dp"
@@ -255,6 +252,5 @@
         app:layout_constraintStart_toStartOf="parent">
 
     </Button>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
