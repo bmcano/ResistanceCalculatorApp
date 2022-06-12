@@ -23,10 +23,11 @@
             android:id="@+id/spinner1"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:textSize="16dp"
             android:drawableStart="@drawable/blank32"
             android:drawablePadding="16dp"
             android:inputType="none"
-            tools:ignore="LabelFor">
+            tools:ignore="LabelFor,SpUsage">
 
         </AutoCompleteTextView>
 
@@ -50,10 +51,11 @@
             android:id="@+id/spinner2"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:textSize="16dp"
             android:drawableStart="@drawable/blank32"
             android:drawablePadding="16dp"
             android:inputType="none"
-            tools:ignore="LabelFor">
+            tools:ignore="LabelFor,SpUsage">
 
         </AutoCompleteTextView>
 
@@ -78,10 +80,11 @@
             android:id="@+id/spinner3"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:textSize="16dp"
             android:drawableStart="@drawable/blank32"
             android:drawablePadding="16dp"
             android:inputType="none"
-            tools:ignore="LabelFor">
+            tools:ignore="LabelFor,SpUsage">
 
         </AutoCompleteTextView>
 
@@ -105,10 +108,11 @@
             android:id="@+id/spinner4"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:textSize="16dp"
             android:drawableStart="@drawable/blank32"
             android:drawablePadding="16dp"
             android:inputType="none"
-            tools:ignore="LabelFor">
+            tools:ignore="LabelFor,SpUsage">
 
         </AutoCompleteTextView>
 
@@ -133,10 +137,11 @@
             android:id="@+id/spinner5"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:textSize="16dp"
             android:drawableStart="@drawable/blank32"
             android:drawablePadding="16dp"
             android:inputType="none"
-            tools:ignore="LabelFor">
+            tools:ignore="LabelFor,SpUsage">
 
         </AutoCompleteTextView>
 
@@ -162,10 +167,11 @@
             android:id="@+id/spinner6"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:textSize="16dp"
             android:drawableStart="@drawable/blank32"
             android:drawablePadding="16dp"
             android:inputType="none"
-            tools:ignore="LabelFor">
+            tools:ignore="LabelFor,SpUsage">
 
         </AutoCompleteTextView>
 
@@ -181,12 +187,13 @@
         android:text="@string/default_text"
         android:textAlignment="center"
         android:textColor="?android:textColor"
-        android:textSize="35sp"
+        android:textSize="35dp"
         android:textStyle="bold"
         android:background="@drawable/outlined_box"
         app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpUsage" />
 
     <Button
         android:id="@+id/four_band"
@@ -197,10 +204,11 @@
         android:text="@string/four_band"
         android:textAllCaps="false"
         android:textColor="@color/neutral"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:backgroundTint="@color/green_700"
         app:layout_constraintBottom_toTopOf="@+id/show_charts"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpUsage">
 
     </Button>
 
@@ -214,11 +222,12 @@
         android:text="@string/five_band"
         android:textAllCaps="false"
         android:textColor="@color/neutral"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:backgroundTint="@color/green_500"
         app:layout_constraintBottom_toTopOf="@+id/show_charts"
         app:layout_constraintEnd_toStartOf="@+id/six_band"
-        app:layout_constraintStart_toEndOf="@+id/four_band">
+        app:layout_constraintStart_toEndOf="@+id/four_band"
+        tools:ignore="SpUsage">
 
     </Button>
 
@@ -231,10 +240,11 @@
         android:text="@string/six_band"
         android:textAllCaps="false"
         android:textColor="@color/neutral"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:backgroundTint="@color/green_500"
         app:layout_constraintBottom_toTopOf="@+id/show_charts"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpUsage">
 
     </Button>
 
@@ -247,12 +257,13 @@
         android:layout_marginBottom="16dp"
         android:text="@string/show_chart"
         android:textColor="@color/neutral"
-        android:textSize="24sp"
+        android:textSize="24dp"
         android:textStyle="italic"
         android:background="@drawable/custom_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpUsage">
 
     </Button>
 
