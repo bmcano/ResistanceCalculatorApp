@@ -178,7 +178,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:text="@string/default_text"
@@ -186,21 +185,22 @@
         android:textColor="?android:textColor"
         android:textSize="35sp"
         android:textStyle="bold"
+        android:background="@drawable/outlined_box"
         app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropDownSelector6" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button
         android:id="@+id/four_band"
         android:layout_width="112dp"
         android:layout_height="64dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="12dp"
-        android:hint="@string/four_band"
-        android:textColorHint="@color/neutral"
         android:backgroundTint="@color/green_700"
+        android:text="@string/four_band"
+        android:textColor="@color/neutral"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/show_charts"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -211,11 +211,14 @@
         android:layout_width="112dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="12dp"
-        android:hint="@string/five_band"
-        android:textColorHint="@color/neutral"
         android:backgroundTint="@color/green_500"
+        android:text="@string/five_band"
+        android:textColor="@color/neutral"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/show_charts"
+        app:layout_constraintEnd_toStartOf="@+id/six_band"
         app:layout_constraintStart_toEndOf="@+id/four_band">
 
     </Button>
@@ -224,13 +227,14 @@
         android:id="@+id/six_band"
         android:layout_width="112dp"
         android:layout_height="64dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="12dp"
-        android:hint="@string/six_band"
-        android:textColorHint="@color/neutral"
         android:backgroundTint="@color/green_500"
+        android:text="@string/six_band"
+        android:textColor="@color/neutral"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/show_charts"
-        app:layout_constraintStart_toEndOf="@+id/five_band">
+        app:layout_constraintEnd_toEndOf="parent">
 
     </Button>
 
@@ -245,7 +249,7 @@
         android:textColor="@color/neutral"
         android:textSize="24sp"
         android:textStyle="italic"
-
+        android:background="@drawable/custom_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         button4 = findViewById(R.id.show_charts)
 
         dialog = Dialog(this)
-        var imageSelection: Int = 4
+        var imageSelection = 4
 
         // button listeners
         // toggle four band resistor
