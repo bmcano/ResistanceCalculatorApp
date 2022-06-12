@@ -12,9 +12,9 @@
     <string name="default_text">Select Colors</string>
     <string name="show_chart">Show Chart</string>
 
-    <string name="four_band">Four Band Resistor</string>
-    <string name="five_band">Five Band Resistor</string>
-    <string name="six_band">Six Band Resistor</string>
+    <string name="four_band">Four Band\nResistor</string>
+    <string name="five_band">Five Band\nResistor</string>
+    <string name="six_band">Six Band \nResistor</string>
 
     <string name="about">About This App</string>
     <string name="version">v1.0</string>

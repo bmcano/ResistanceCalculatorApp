@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. (Light Mode) -->
     <style name="Theme.ResistanceCalculator" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
@@ -13,6 +13,10 @@
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
 
         <item name="android:windowBackground">@color/neutral</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/neutral_night</item>
+        <item name="hintTextColor">@color/neutral_night</item>
     </style>
+
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/neutral_night</color>
+
 </resources>
