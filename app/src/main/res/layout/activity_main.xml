@@ -245,7 +245,7 @@
         android:textColor="@color/neutral"
         android:textSize="24sp"
         android:textStyle="italic"
-        android:background="@drawable/custom_button"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

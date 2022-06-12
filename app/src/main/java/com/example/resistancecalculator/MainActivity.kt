@@ -1,5 +1,6 @@
 package com.example.resistancecalculator
 
+import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var button2: Button
     private lateinit var button3: Button
     private lateinit var button4: Button
+
+    private lateinit var dialog: Dialog
 
     // initialize as empty strings
     private var numberBand1: String = ""
@@ -55,6 +58,9 @@ class MainActivity : AppCompatActivity() {
         button1 = findViewById(R.id.four_band)
         button2 = findViewById(R.id.five_band)
         button3 = findViewById(R.id.six_band)
+        button4 = findViewById(R.id.show_charts)
+
+        dialog = Dialog(this)
 
         // button listeners
         // toggle four band resistor
@@ -96,8 +102,12 @@ class MainActivity : AppCompatActivity() {
             calcResistanceHelper()
         }
 
-        // will add "Show Chart" button at a later time
-
+        // show pop up window
+        button4.setOnClickListener {
+            dialog.setContentView(R.layout.popup_chart)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+        }
     }
 
     // sets up all drop down menus and related events
