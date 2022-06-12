@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         button4 = findViewById(R.id.show_charts)
 
         dialog = Dialog(this)
+        var imageSelection: Int = 4
 
         // button listeners
         // toggle four band resistor
@@ -74,6 +75,7 @@ class MainActivity : AppCompatActivity() {
             toggleDropDown6.visibility = View.GONE
 
             calcResistanceHelper()
+            imageSelection = 4
         }
 
         // toggle five band resistor
@@ -87,6 +89,7 @@ class MainActivity : AppCompatActivity() {
             toggleDropDown6.visibility = View.GONE
 
             calcResistanceHelper()
+            imageSelection = 5
         }
 
         // toggle six band resistor
@@ -100,11 +103,19 @@ class MainActivity : AppCompatActivity() {
             toggleDropDown6.visibility = View.VISIBLE
 
             calcResistanceHelper()
+            imageSelection = 6
         }
 
         // show pop up window
         button4.setOnClickListener {
-            dialog.setContentView(R.layout.popup_chart)
+            dialog.setContentView(
+                when(imageSelection) {
+                    4 -> R.layout.popup_chart_4
+                    5 -> R.layout.popup_chart_5
+                    6 -> R.layout.popup_chart_6
+                    else -> { R.layout.popup_chart_6 }
+                }
+            )
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
         }
