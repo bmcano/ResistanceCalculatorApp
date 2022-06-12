@@ -160,12 +160,12 @@ object ResistanceFormatter {
     // temperature coefficient - only on six band resistor
     private fun ppmHelper(Color: String) : String {
         return when (Color) {
-            "Brown" -> "\n100 ppm"
-            "Red" -> "\n50 ppm"
-            "Orange" -> "\n15 ppm"
-            "Yellow" -> "\n25 ppm"
-            "Blue" -> "\n10 ppm"
-            "Violet" -> "\n5 ppm"
+            "Brown" -> "\n100 ppm/K"
+            "Red" -> "\n50 ppm/K"
+            "Orange" -> "\n15 ppm/K"
+            "Yellow" -> "\n25 ppm/K"
+            "Blue" -> "\n10 ppm/K"
+            "Violet" -> "\n5 ppm/K"
             else -> { "" }
         }
     }

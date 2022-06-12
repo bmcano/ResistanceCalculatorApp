@@ -15,6 +15,4 @@
     <string name="four_band">Four Band Resistor</string>
     <string name="five_band">Five Band Resistor</string>
     <string name="six_band">Six Band Resistor</string>
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

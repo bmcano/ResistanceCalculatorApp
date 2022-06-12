@@ -194,10 +194,11 @@
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="12dp"
-        android:backgroundTint="@color/green_700"
         android:text="@string/four_band"
+        android:textAllCaps="false"
         android:textColor="@color/neutral"
         android:textSize="12sp"
+        android:backgroundTint="@color/green_700"
         app:layout_constraintBottom_toTopOf="@+id/show_charts"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -210,10 +211,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="12dp"
-        android:backgroundTint="@color/green_500"
         android:text="@string/five_band"
+        android:textAllCaps="false"
         android:textColor="@color/neutral"
         android:textSize="12sp"
+        android:backgroundTint="@color/green_500"
         app:layout_constraintBottom_toTopOf="@+id/show_charts"
         app:layout_constraintEnd_toStartOf="@+id/six_band"
         app:layout_constraintStart_toEndOf="@+id/four_band">
@@ -226,10 +228,11 @@
         android:layout_height="64dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="12dp"
-        android:backgroundTint="@color/green_500"
         android:text="@string/six_band"
+        android:textAllCaps="false"
         android:textColor="@color/neutral"
         android:textSize="12sp"
+        android:backgroundTint="@color/green_500"
         app:layout_constraintBottom_toTopOf="@+id/show_charts"
         app:layout_constraintEnd_toEndOf="parent">
 
