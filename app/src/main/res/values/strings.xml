@@ -20,10 +20,9 @@
     <string name="version">v1.0</string>
     <string name="created_by">Created By\n\nBrandon Cano</string>
     <string name="description">
-        This app has can find the resistance of three types of resistors; four, five, and six
-        banded resistors. The idea is that you will look at the colors of the bands on the resistor
-        then, plug them into the dropdowns, and then the resistance and other information will be
-        displayed on screen.\nYou can also look at the charts for each type of resistor
-        for convince.
+        In this app you are able to calculate the resistance for four, five, or six bands resistors.
+        \n\nYou can also look at the color charts, under "Show Chart", for each of the resistors
+        for reference.
     </string>
+    <string name="last_updated">Last Updated On: 6/12/2022</string>
 </resources>

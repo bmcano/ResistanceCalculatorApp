@@ -60,13 +60,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        return when(item.itemId) {
             R.id.about_item -> {
                 val intent = Intent(this, AboutActivity::class.java)
                 startActivity(intent)
-                return true
+                true
             }
-            else -> { return super.onOptionsItemSelected(item) }
+            else -> { super.onOptionsItemSelected(item) }
         }
     }
 
@@ -271,7 +271,6 @@ class MainActivity : AppCompatActivity() {
             textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand)
         }
     }
-
 
     // take the color name from the string arrays and finds the correct id
     private fun imageColor(color: String): Int {
