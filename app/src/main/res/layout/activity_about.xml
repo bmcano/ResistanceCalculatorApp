@@ -82,4 +82,141 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
+    <!-- Start of custom resistor image -->
+
+    <ImageView
+        android:id="@+id/r_left"
+        android:layout_width="69dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_left"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_band_1"
+        android:layout_width="11.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_band_1"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_1"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/r_post_band_1"
+        android:layout_width="10dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_post_band_1"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_2"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/r_band_2"
+        android:layout_width="11dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_band_2"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_2"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+
+    <ImageView
+        android:id="@+id/r_post_band_2"
+        android:layout_width="9.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_post_band_2"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_3"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/r_band_3"
+        android:layout_width="11.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_band_3"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_3"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/r_post_band_3"
+        android:layout_width="10.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_post_band_3"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/r_band_4"
+        android:layout_width="11.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_band_4"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/r_post_band_4"
+        android:layout_width="16.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_post_band_4"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_5"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/r_band_5"
+        android:layout_width="11.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_band_5"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_5"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/r_post_band_5"
+        android:layout_width="11dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_post_band_5"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_6"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/r_band_6"
+        android:layout_width="11.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/resistor_band_6"
+        app:layout_constraintEnd_toStartOf="@+id/r_right"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/r_right"
+        android:layout_width="52.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="72dp"
+        android:src="@drawable/resistor_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="ContentDescription"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

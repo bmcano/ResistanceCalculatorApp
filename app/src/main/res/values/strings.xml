@@ -21,7 +21,7 @@
     <string name="created_by">Created By\n\nBrandon Cano</string>
     <string name="description">
         In this app you are able to calculate the resistance for four, five, or six bands resistors.
-        \n\nYou can also look at the color charts, under "Show Chart", for each of the resistors
+        \n\nYou can also look at the color charts, under \"Show Chart\", for each of the resistors
         for reference.
     </string>
     <string name="last_updated">Last Updated On: 6/12/2022</string>

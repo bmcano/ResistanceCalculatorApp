@@ -5,9 +5,11 @@
       <map>
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2795" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/drawable/custom_button.xml" value="0.2425" />
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/drawable/ic_test.xml" value="0.2965" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/drawable/outlined_box.xml" value="0.2525" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/drawable/popup_background.xml" value="0.2425" />
-        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_about.xml" value="0.36041666666666666" />
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/drawable/test_layout_drawable.xml" value="0.2965" />
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_about.xml" value="1.2" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_about3.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_five_band.xml" value="0.29572649572649573" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
@@ -20,6 +22,7 @@
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/popup_chart_5.xml" value="0.36041666666666666" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/popup_chart_6.xml" value="0.36041666666666666" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/spinner_design.xml" value="0.176" />
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/test_layout.xml" value="0.264" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/menu/menu_dropdown.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.264" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2" />
