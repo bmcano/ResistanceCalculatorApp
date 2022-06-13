@@ -7,7 +7,7 @@
     <string name="number_band_hint3">Third Number</string>
     <string name="multiplier_band_hint">Multiplier</string>
     <string name="tolerance_band_hint">Tolerance</string>
-    <string name="ppm_band_hint">PPM</string>
+    <string name="ppm_band_hint">Temp Coefficient</string>
 
     <string name="default_text">Select Colors</string>
     <string name="show_chart">Show Chart</string>
