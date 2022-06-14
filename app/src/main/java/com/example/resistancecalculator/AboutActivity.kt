@@ -45,7 +45,6 @@ class AboutActivity : AppCompatActivity() {
         makeResistorImage()
     }
 
-    // TODO - will make color accurate resistors later
     // TODO - make the numbers truly random
     private fun makeResistorImage() {
         band1.setColorFilter(resources.getColor(ColorFinder.randomColor()))
@@ -54,9 +53,13 @@ class AboutActivity : AppCompatActivity() {
         band5.setColorFilter(resources.getColor(ColorFinder.randomColor()))
 
         when((4..6).random()) {
-            4 -> { /* do nothing */ }
+            4 -> {
+                band3.setColorFilter(resources.getColor(ColorFinder.bandColor()))
+                band6.setColorFilter(resources.getColor(ColorFinder.bandColor()))
+            }
             5 -> {
                 band3.setColorFilter(resources.getColor(ColorFinder.randomColor()))
+                band6.setColorFilter(resources.getColor(ColorFinder.bandColor()))
             }
             6 -> {
                 band3.setColorFilter(resources.getColor(ColorFinder.randomColor()))

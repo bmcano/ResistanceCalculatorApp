@@ -165,9 +165,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="32dp"
+        android:visibility="gone"
         android:hint="@string/ppm_band_hint"
         android:textColorHint="?hintTextColor"
-        android:visibility="gone"
         app:boxStrokeColor="@color/brown_200"
         app:boxStrokeWidth="2dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,10 +179,10 @@
             android:id="@+id/spinner6"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:textSize="16dp"
             android:drawableStart="@drawable/blank32"
             android:drawablePadding="16dp"
             android:inputType="none"
+            android:textSize="16dp"
             tools:ignore="LabelFor,SpUsage">
 
         </AutoCompleteTextView>
@@ -225,10 +225,6 @@
 
     </Button>
 
-
-    <!-- Start of custom resistor image -->
-    <!-- Order: wires, left, bands, post bands, right -->
-
     <Button
         android:id="@+id/five_band"
         android:layout_width="wrap_content"
@@ -266,34 +262,19 @@
 
     </Button>
 
-    <ImageView
-        android:id="@+id/wire_left"
-        android:layout_width="75dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_wire"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="ContentDescription" />
-
-    <ImageView
-        android:id="@+id/wire_right"
-        android:layout_width="75dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_wire"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ContentDescription" />
+    <!-- Start of custom resistor image -->
+    <!-- Order: wires, left, bands, post bands, right -->
 
     <ImageView
         android:id="@+id/r_left"
         android:layout_width="69dp"
         android:layout_height="66dp"
+        android:layout_marginStart="72dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_left"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
-        app:layout_constraintStart_toEndOf="@+id/wire_left"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_1"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription" />
 
     <ImageView
@@ -303,6 +284,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_band_1"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_1"
         app:layout_constraintStart_toEndOf="@+id/r_left"
         tools:ignore="ContentDescription" />
 
@@ -313,6 +295,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_band_2"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_2"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_1"
         tools:ignore="ContentDescription" />
 
@@ -323,6 +306,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_band_3"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_3"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_2"
         tools:ignore="ContentDescription" />
 
@@ -334,6 +318,7 @@
         android:src="@drawable/resistor_band_4"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_4"
+        app:layout_constraintStart_toEndOf="@+id/r_post_band_3"
         tools:ignore="ContentDescription" />
 
     <ImageView
@@ -344,6 +329,7 @@
         android:src="@drawable/resistor_band_5"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_5"
+        app:layout_constraintStart_toEndOf="@+id/r_post_band_4"
         tools:ignore="ContentDescription" />
 
     <ImageView
@@ -354,6 +340,7 @@
         android:src="@drawable/resistor_band_6"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
         app:layout_constraintEnd_toStartOf="@+id/r_right"
+        app:layout_constraintStart_toEndOf="@+id/r_post_band_5"
         tools:ignore="ContentDescription" />
 
     <ImageView
@@ -363,6 +350,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_post_band_1"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_2"
         app:layout_constraintStart_toEndOf="@+id/r_band_1"
         tools:ignore="ContentDescription" />
 
@@ -373,6 +361,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_post_band_2"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_3"
         app:layout_constraintStart_toEndOf="@+id/r_band_2"
         tools:ignore="ContentDescription" />
 
@@ -384,6 +373,7 @@
         android:src="@drawable/resistor_post_band_3"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
         app:layout_constraintEnd_toStartOf="@+id/r_band_4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/r_band_3"
         tools:ignore="ContentDescription" />
 
@@ -395,6 +385,7 @@
         android:src="@drawable/resistor_post_band_4"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
         app:layout_constraintEnd_toStartOf="@+id/r_band_5"
+        app:layout_constraintStart_toEndOf="@+id/r_band_4"
         tools:ignore="ContentDescription" />
 
     <ImageView
@@ -405,6 +396,7 @@
         android:src="@drawable/resistor_post_band_5"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
         app:layout_constraintEnd_toStartOf="@+id/r_band_6"
+        app:layout_constraintStart_toEndOf="@+id/r_band_5"
         tools:ignore="ContentDescription" />
 
     <ImageView
@@ -414,7 +406,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_right"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
-        app:layout_constraintEnd_toStartOf="@+id/wire_right"
+        app:layout_constraintStart_toEndOf="@+id/r_band_6"
         tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
