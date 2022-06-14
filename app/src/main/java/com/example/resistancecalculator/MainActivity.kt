@@ -13,15 +13,16 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
 
     private lateinit var button1: Button
     private lateinit var button2: Button
     private lateinit var button3: Button
-    private lateinit var button4: Button
 
     private lateinit var dialog: Dialog
+    private var imageSelection = 4
 
     // initialize as empty strings
     private var numberBand1: String = ""
@@ -34,10 +35,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toggleDropDown3: TextInputLayout
     private lateinit var toggleDropDown6: TextInputLayout
 
+    private lateinit var band1: ImageView
+    private lateinit var band2: ImageView
+    private lateinit var band3: ImageView
+    private lateinit var band4: ImageView
+    private lateinit var band5: ImageView
+    private lateinit var band6: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setup()
+        imageSetup()
         buttonSetup()
 
         // sets the action bar color
@@ -49,6 +58,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         setup()
+        imageSetup()
         buttonSetup()
     }
 
@@ -61,6 +71,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
+            R.id.show_resistor_charts -> {
+                dialog.setContentView(
+                    when(imageSelection) {
+                        4 -> R.layout.popup_chart_4
+                        5 -> R.layout.popup_chart_5
+                        6 -> R.layout.popup_chart_6
+                        else -> { R.layout.popup_chart_6 }
+                    }
+                )
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+                return true
+            }
             R.id.about_item -> {
                 val intent = Intent(this, AboutActivity::class.java)
                 startActivity(intent)
@@ -69,6 +92,16 @@ class MainActivity : AppCompatActivity() {
             else -> { super.onOptionsItemSelected(item) }
         }
     }
+
+    private fun imageSetup() {
+        band1 = findViewById(R.id.r_band_1)
+        band2 = findViewById(R.id.r_band_2)
+        band3 = findViewById(R.id.r_band_3)
+        band4 = findViewById(R.id.r_band_4)
+        band5 = findViewById(R.id.r_band_5)
+        band6 = findViewById(R.id.r_band_6)
+    }
+
 
     // sets up all button related events
     private fun buttonSetup() {
@@ -79,10 +112,8 @@ class MainActivity : AppCompatActivity() {
         button1 = findViewById(R.id.four_band)
         button2 = findViewById(R.id.five_band)
         button3 = findViewById(R.id.six_band)
-        button4 = findViewById(R.id.show_charts)
 
         dialog = Dialog(this)
-        var imageSelection = 4
 
         // button listeners
         // toggle four band resistor
@@ -97,6 +128,9 @@ class MainActivity : AppCompatActivity() {
 
             calcResistanceHelper()
             imageSelection = 4
+
+            band3.setColorFilter(resources.getColor(ColorFinder.bandColor()))
+            band6.setColorFilter(resources.getColor(ColorFinder.bandColor()))
         }
 
         // toggle five band resistor
@@ -111,6 +145,9 @@ class MainActivity : AppCompatActivity() {
 
             calcResistanceHelper()
             imageSelection = 5
+
+            band3.setColorFilter(resources.getColor(ColorFinder.bandColor(numberBand3)))
+            band6.setColorFilter(resources.getColor(ColorFinder.bandColor()))
         }
 
         // toggle six band resistor
@@ -125,20 +162,9 @@ class MainActivity : AppCompatActivity() {
 
             calcResistanceHelper()
             imageSelection = 6
-        }
 
-        // show pop up window
-        button4.setOnClickListener {
-            dialog.setContentView(
-                when(imageSelection) {
-                    4 -> R.layout.popup_chart_4
-                    5 -> R.layout.popup_chart_5
-                    6 -> R.layout.popup_chart_6
-                    else -> { R.layout.popup_chart_6 }
-                }
-            )
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
+            band3.setColorFilter(resources.getColor(ColorFinder.bandColor(numberBand3)))
+            band6.setColorFilter(resources.getColor(ColorFinder.bandColor(ppmBand)))
         }
     }
 
@@ -161,8 +187,9 @@ class MainActivity : AppCompatActivity() {
         dropDown1.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand1 = dropDown1.adapter.getItem(position).toString()
-                dropDown1.setCompoundDrawablesRelativeWithIntrinsicBounds(imageColor(numberBand1),0,0,0)
+                dropDown1.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand1),0,0,0)
                 calcResistanceHelper()
+                band1.setColorFilter(resources.getColor(ColorFinder.bandColor(numberBand1)))
             }
 
 
@@ -180,8 +207,9 @@ class MainActivity : AppCompatActivity() {
         dropDown2.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand2 = dropDown2.adapter.getItem(position).toString()
-                dropDown2.setCompoundDrawablesRelativeWithIntrinsicBounds(imageColor(numberBand2),0,0,0)
+                dropDown2.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand2),0,0,0)
                 calcResistanceHelper()
+                band2.setColorFilter(resources.getColor(ColorFinder.bandColor(numberBand2)))
             }
 
 
@@ -199,8 +227,9 @@ class MainActivity : AppCompatActivity() {
         dropDown3.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand3 = dropDown3.adapter.getItem(position).toString()
-                dropDown3.setCompoundDrawablesRelativeWithIntrinsicBounds(imageColor(numberBand3),0,0,0)
+                dropDown3.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand3),0,0,0)
                 calcResistanceHelper()
+                band3.setColorFilter(resources.getColor(ColorFinder.bandColor(numberBand3)))
             }
 
 
@@ -218,8 +247,9 @@ class MainActivity : AppCompatActivity() {
         dropDown4.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 multiplierBand = dropDown4.adapter.getItem(position).toString()
-                dropDown4.setCompoundDrawablesRelativeWithIntrinsicBounds(imageColor(multiplierBand),0,0,0)
+                dropDown4.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(multiplierBand),0,0,0)
                 calcResistanceHelper()
+                band4.setColorFilter(resources.getColor(ColorFinder.bandColor(multiplierBand)))
             }
 
 
@@ -237,8 +267,9 @@ class MainActivity : AppCompatActivity() {
         dropDown5.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceBand = dropDown5.adapter.getItem(position).toString()
-                dropDown5.setCompoundDrawablesRelativeWithIntrinsicBounds(imageColor(toleranceBand),0,0,0)
+                dropDown5.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(toleranceBand),0,0,0)
                 calcResistanceHelper()
+                band5.setColorFilter(resources.getColor(ColorFinder.bandColor(toleranceBand)))
             }
 
 
@@ -256,8 +287,9 @@ class MainActivity : AppCompatActivity() {
         dropDown6.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 ppmBand = dropDown6.adapter.getItem(position).toString()
-                dropDown6.setCompoundDrawablesRelativeWithIntrinsicBounds(imageColor(ppmBand),0,0,0)
+                dropDown6.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(ppmBand),0,0,0)
                 calcResistanceHelper()
+                band6.setColorFilter(resources.getColor(ColorFinder.bandColor(ppmBand)))
             }
     }
 
@@ -269,25 +301,6 @@ class MainActivity : AppCompatActivity() {
             textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand)
         } else {
             textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand)
-        }
-    }
-
-    // take the color name from the string arrays and finds the correct id
-    private fun imageColor(color: String): Int {
-        return when(color) {
-            "Black" -> R.drawable.black32
-            "Blue" -> R.drawable.blue32
-            "Brown" -> R.drawable.brown32
-            "Gold" -> R.drawable.gold32
-            "Gray" -> R.drawable.gray32
-            "Green" -> R.drawable.green32
-            "Orange" -> R.drawable.orange32
-            "Red" -> R.drawable.red32
-            "Silver" -> R.drawable.silver32
-            "Violet" -> R.drawable.violet32
-            "White" -> R.drawable.white32
-            "Yellow" -> R.drawable.yellow32
-            else -> { R.drawable.blank32 }
         }
     }
 }
