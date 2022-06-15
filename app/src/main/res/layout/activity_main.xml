@@ -5,189 +5,206 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dropDownSelector1"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="256dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="32dp"
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/number_band_hint1"
-        android:textColorHint="?hintTextColor"
-        app:boxStrokeColor="@color/brown_200"
-        app:boxStrokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
-        <AutoCompleteTextView
-            android:id="@+id/spinner1"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:drawableStart="@drawable/blank32"
-            android:drawablePadding="16dp"
-            android:inputType="none"
-            android:textSize="16dp"
-            tools:ignore="LabelFor,SpUsage">
+            android:layout_height="wrap_content">
 
-        </AutoCompleteTextView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dropDownSelector1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="256dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/number_band_hint1"
+                android:textColorHint="?hintTextColor"
+                app:boxStrokeColor="@color/brown_200"
+                app:boxStrokeWidth="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/spinner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:drawableStart="@drawable/blank32"
+                    android:drawablePadding="16dp"
+                    android:inputType="none"
+                    android:textSize="16dp"
+                    tools:ignore="LabelFor,SpUsage">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dropDownSelector2"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="256dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/number_band_hint2"
-        android:textColorHint="?hintTextColor"
-        app:boxStrokeColor="@color/brown_200"
-        app:boxStrokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropDownSelector1">
+                </AutoCompleteTextView>
 
-        <AutoCompleteTextView
-            android:id="@+id/spinner2"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:drawableStart="@drawable/blank32"
-            android:drawablePadding="16dp"
-            android:inputType="none"
-            android:textSize="16dp"
-            tools:ignore="LabelFor,SpUsage">
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </AutoCompleteTextView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dropDownSelector2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="256dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/number_band_hint2"
+                android:textColorHint="?hintTextColor"
+                app:boxStrokeColor="@color/brown_200"
+                app:boxStrokeWidth="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dropDownSelector1">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:drawableStart="@drawable/blank32"
+                    android:drawablePadding="16dp"
+                    android:inputType="none"
+                    android:textSize="16dp"
+                    tools:ignore="LabelFor,SpUsage">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dropDownSelector3"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="256dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/number_band_hint3"
-        android:textColorHint="?hintTextColor"
-        android:visibility="gone"
-        app:boxStrokeColor="@color/brown_200"
-        app:boxStrokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropDownSelector2">
+                </AutoCompleteTextView>
 
-        <AutoCompleteTextView
-            android:id="@+id/spinner3"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:drawableStart="@drawable/blank32"
-            android:drawablePadding="16dp"
-            android:inputType="none"
-            android:textSize="16dp"
-            tools:ignore="LabelFor,SpUsage">
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </AutoCompleteTextView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dropDownSelector3"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="256dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/number_band_hint3"
+                android:textColorHint="?hintTextColor"
+                android:visibility="gone"
+                app:boxStrokeColor="@color/brown_200"
+                app:boxStrokeWidth="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dropDownSelector2">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:drawableStart="@drawable/blank32"
+                    android:drawablePadding="16dp"
+                    android:inputType="none"
+                    android:textSize="16dp"
+                    tools:ignore="LabelFor,SpUsage">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dropDownSelector4"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="256dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/multiplier_band_hint"
-        android:textColorHint="?hintTextColor"
-        app:boxStrokeColor="@color/brown_200"
-        app:boxStrokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropDownSelector3">
+                </AutoCompleteTextView>
 
-        <AutoCompleteTextView
-            android:id="@+id/spinner4"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:drawableStart="@drawable/blank32"
-            android:drawablePadding="16dp"
-            android:inputType="none"
-            android:textSize="16dp"
-            tools:ignore="LabelFor,SpUsage">
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </AutoCompleteTextView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dropDownSelector4"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="256dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/multiplier_band_hint"
+                android:textColorHint="?hintTextColor"
+                app:boxStrokeColor="@color/brown_200"
+                app:boxStrokeWidth="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dropDownSelector3">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/spinner4"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:drawableStart="@drawable/blank32"
+                    android:drawablePadding="16dp"
+                    android:inputType="none"
+                    android:textSize="16dp"
+                    tools:ignore="LabelFor,SpUsage">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dropDownSelector5"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="256dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/tolerance_band_hint"
-        android:textColorHint="?hintTextColor"
-        app:boxStrokeColor="@color/brown_200"
-        app:boxStrokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropDownSelector4">
+                </AutoCompleteTextView>
 
-        <AutoCompleteTextView
-            android:id="@+id/spinner5"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:drawableStart="@drawable/blank32"
-            android:drawablePadding="16dp"
-            android:inputType="none"
-            android:textSize="16dp"
-            tools:ignore="LabelFor,SpUsage">
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </AutoCompleteTextView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dropDownSelector5"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="256dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/tolerance_band_hint"
+                android:textColorHint="?hintTextColor"
+                app:boxStrokeColor="@color/brown_200"
+                app:boxStrokeWidth="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.505"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dropDownSelector4">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/spinner5"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:drawableStart="@drawable/blank32"
+                    android:drawablePadding="16dp"
+                    android:inputType="none"
+                    android:textSize="16dp"
+                    tools:ignore="LabelFor,SpUsage">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dropDownSelector6"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="256dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/ppm_band_hint"
-        android:textColorHint="?hintTextColor"
-        android:visibility="gone"
-        app:boxStrokeColor="@color/brown_200"
-        app:boxStrokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropDownSelector5">
+                </AutoCompleteTextView>
 
-        <AutoCompleteTextView
-            android:id="@+id/spinner6"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:drawableStart="@drawable/blank32"
-            android:drawablePadding="16dp"
-            android:inputType="none"
-            android:textSize="16dp"
-            tools:ignore="LabelFor,SpUsage">
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </AutoCompleteTextView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dropDownSelector6"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="256dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/ppm_band_hint"
+                android:textColorHint="?hintTextColor"
+                android:visibility="gone"
+                app:boxStrokeColor="@color/brown_200"
+                app:boxStrokeWidth="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.505"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dropDownSelector5">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/spinner6"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:drawableStart="@drawable/blank32"
+                    android:drawablePadding="16dp"
+                    android:inputType="none"
+                    android:textSize="16dp"
+                    tools:ignore="LabelFor,SpUsage">
+
+                </AutoCompleteTextView>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <TextView
         android:id="@+id/resistance_display_new"
@@ -202,7 +219,7 @@
         android:textAlignment="center"
         android:textColor="?android:textColor"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
+        app:layout_constraintBottom_toTopOf="@+id/r_post_band_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -213,6 +230,7 @@
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/green_700"
         android:text="@string/four_band"
@@ -220,6 +238,7 @@
         android:textColor="@color/neutral"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/five_band"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpUsage">
 
@@ -245,10 +264,14 @@
 
     </Button>
 
+    <!-- Start of custom resistor image -->
+    <!-- Order: wires, left, bands, post bands, right -->
+
     <Button
         android:id="@+id/six_band"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/green_500"
@@ -258,12 +281,10 @@
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/five_band"
         tools:ignore="SpUsage">
 
     </Button>
-
-    <!-- Start of custom resistor image -->
-    <!-- Order: wires, left, bands, post bands, right -->
 
     <ImageView
         android:id="@+id/r_left"
@@ -272,7 +293,7 @@
         android:layout_marginStart="76dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_left"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/four_band"
         app:layout_constraintEnd_toStartOf="@+id/r_band_1"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription" />
@@ -283,7 +304,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_band_1"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_1"
         app:layout_constraintStart_toEndOf="@+id/r_left"
         tools:ignore="ContentDescription" />
@@ -294,7 +315,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_band_2"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_2"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_1"
         tools:ignore="ContentDescription" />
@@ -305,7 +326,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_band_3"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_3"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_2"
         tools:ignore="ContentDescription" />
@@ -316,7 +337,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_band_4"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_4"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_3"
         tools:ignore="ContentDescription" />
@@ -327,7 +348,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_band_5"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_5"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_4"
         tools:ignore="ContentDescription" />
@@ -338,7 +359,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_band_6"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/six_band"
         app:layout_constraintEnd_toStartOf="@+id/r_right"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_5"
         tools:ignore="ContentDescription" />
@@ -349,7 +370,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_post_band_1"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toStartOf="@+id/r_band_2"
         app:layout_constraintStart_toEndOf="@+id/r_band_1"
         tools:ignore="ContentDescription" />
@@ -360,7 +381,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_post_band_2"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toStartOf="@+id/r_band_3"
         app:layout_constraintStart_toEndOf="@+id/r_band_2"
         tools:ignore="ContentDescription" />
@@ -371,7 +392,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_post_band_3"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toStartOf="@+id/r_band_4"
         app:layout_constraintStart_toEndOf="@+id/r_band_3"
         tools:ignore="ContentDescription" />
@@ -382,7 +403,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_post_band_4"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toStartOf="@+id/r_band_5"
         app:layout_constraintStart_toEndOf="@+id/r_band_4"
         tools:ignore="ContentDescription" />
@@ -393,7 +414,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_post_band_5"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toStartOf="@+id/r_band_6"
         app:layout_constraintStart_toEndOf="@+id/r_band_5"
         tools:ignore="ContentDescription" />
@@ -404,7 +425,7 @@
         android:layout_height="66dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_right"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/six_band"
         app:layout_constraintStart_toEndOf="@+id/r_band_6"
         tools:ignore="ContentDescription" />
 
@@ -412,6 +433,7 @@
         android:id="@+id/group2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="r_post_band_4,r_post_band_3,r_band_6,r_band_1,r_band_5,r_left,r_post_band_1,r_band_4,r_right,r_post_band_5,r_band_3,r_post_band_2,r_band_2" />
+        app:constraint_referenced_ids="r_post_band_4,r_post_band_3,r_band_6,r_band_1,r_band_5,r_left,r_post_band_1,r_band_4,r_right,r_post_band_5,r_band_3,r_post_band_2,r_band_2"
+ />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
