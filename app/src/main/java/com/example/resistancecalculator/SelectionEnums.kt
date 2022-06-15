@@ -11,14 +11,15 @@ enum class SelectionEnums(val array: Array<String>){
         "Blue", "Violet", "Gray", "White", "Gold", "Silver"
     )),
 
-    TOLERANCE(arrayOf( // orange, yellow, None(?)
-    "Gold", "Silver", "Brown", "Red",
-    "Green", "Blue", "Violet", "Gray",
+    TOLERANCE(arrayOf(
+        "Brown", "Red", "Orange", "Yellow", "Green", "Blue",
+        "Violet", "Gray", "Gold", "Silver", "None"
     )),
 
-    PPM(arrayOf( // black, green, gray
-        "Brown", "Red", "Orange",
-        "Yellow", "Blue", "Violet"
+    PPM(arrayOf(
+        "Black", "Brown", "Red",
+        "Orange",  "Yellow", "Green",
+        "Blue", "Violet", "Gray"
     )),
 
     UNITS(arrayOf(

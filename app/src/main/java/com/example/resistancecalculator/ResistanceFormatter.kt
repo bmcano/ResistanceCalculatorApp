@@ -4,6 +4,7 @@ object ResistanceFormatter {
 
     private const val OMEGA: String = "Ω"
     private const val PLUS_MINUS: String = "±"
+    private const val DEGREE: String = "°"
 
     // four band resistors
     fun calcResistance(Band1: String, Band2: String, Multiplier: String, Tolerance: String) : String {
@@ -153,19 +154,23 @@ object ResistanceFormatter {
             "Gray" -> "0.05"
             "Gold" -> "5"
             "Silver" -> "10"
-            else -> { "5" }
+            "None" -> "20"
+            else -> { "20" }
         }
     }
 
     // temperature coefficient - only on six band resistor
     private fun ppmHelper(Color: String) : String {
         return when (Color) {
-            "Brown" -> "\n100 ppm/K"
-            "Red" -> "\n50 ppm/K"
-            "Orange" -> "\n15 ppm/K"
-            "Yellow" -> "\n25 ppm/K"
-            "Blue" -> "\n10 ppm/K"
-            "Violet" -> "\n5 ppm/K"
+            "Black" -> "\n250 ppm/${DEGREE}C"
+            "Brown" -> "\n100 ppm/${DEGREE}C"
+            "Red" -> "\n50 ppm/${DEGREE}C"
+            "Orange" -> "\n15 ppm/${DEGREE}C"
+            "Yellow" -> "\n25 ppm/${DEGREE}C"
+            "Green" -> "\n20 ppm/${DEGREE}C"
+            "Blue" -> "\n10 ppm/${DEGREE}C"
+            "Violet" -> "\n5 ppm/${DEGREE}C"
+            "Gray" -> "\n1 ppm/${DEGREE}C"
             else -> { "" }
         }
     }
