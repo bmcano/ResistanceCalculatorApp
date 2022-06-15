@@ -24,11 +24,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:onClick="easterEgg"
         android:text="@string/version"
         android:textAlignment="center"
         android:textColor="?android:textColor"
         android:textSize="16sp"
-        android:onClick="easterEgg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -230,6 +230,12 @@
         app:layout_constraintStart_toEndOf="@+id/r_band_6"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:ignore="ContentDescription" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="r_post_band_3,r_post_band_4,r_right,r_band_2,r_post_band_2,r_band_1,r_post_band_5,r_left,r_band_4,r_post_band_1,r_band_3,r_band_5,r_band_6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
