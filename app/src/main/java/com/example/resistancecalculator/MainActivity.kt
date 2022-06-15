@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity() {
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
-            Bands.NUMBER.array
+            SelectionEnums.NUMBER.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
             dropDown1.setAdapter(adapter)
@@ -215,7 +215,7 @@ class MainActivity : AppCompatActivity() {
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
-            Bands.NUMBER.array
+            SelectionEnums.NUMBER.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
             dropDown2.setAdapter(adapter)
@@ -235,7 +235,7 @@ class MainActivity : AppCompatActivity() {
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
-            Bands.NUMBER.array
+            SelectionEnums.NUMBER.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
             dropDown3.setAdapter(adapter)
@@ -255,7 +255,7 @@ class MainActivity : AppCompatActivity() {
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
-            Bands.MULTIPLIER.array
+            SelectionEnums.MULTIPLIER.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
             dropDown4.setAdapter(adapter)
@@ -275,7 +275,7 @@ class MainActivity : AppCompatActivity() {
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
-            Bands.TOLERANCE.array
+            SelectionEnums.TOLERANCE.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
             dropDown5.setAdapter(adapter)
@@ -295,7 +295,7 @@ class MainActivity : AppCompatActivity() {
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
-            Bands.PPM.array
+            SelectionEnums.PPM.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
             dropDown6.setAdapter(adapter)

@@ -264,9 +264,6 @@
 
     </Button>
 
-    <!-- Start of custom resistor image -->
-    <!-- Order: wires, left, bands, post bands, right -->
-
     <Button
         android:id="@+id/six_band"
         android:layout_width="wrap_content"
@@ -285,6 +282,9 @@
         tools:ignore="SpUsage">
 
     </Button>
+
+    <!-- Start of custom resistor image -->
+    <!-- Order: wires, left, bands, post bands, right -->
 
     <ImageView
         android:id="@+id/r_left"

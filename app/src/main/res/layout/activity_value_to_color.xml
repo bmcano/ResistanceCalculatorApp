@@ -6,4 +6,141 @@
     android:layout_height="match_parent"
     tools:context=".ValueToColorActivity">
 
+
+    <!-- Design Top-Down
+    TODO - ScrollView? (If needed)
+         - EditText, Dropdown for units (constrained to top)
+         - Button to generate resistor (top)
+         - Resistor (top?)
+         - Tolerance, and PPM Dropdowns (top?)
+         - Buttons for number of bands (constrained to bottom)
+    -->
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dropDownSelectorTolerance"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:hint="@string/tolerance_band_hint"
+        android:textColorHint="?hintTextColor"
+        app:boxStrokeColor="@color/brown_200"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/dropDownSelectorPPM"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/spinnerTolerance"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:drawableStart="@drawable/blank32"
+            android:drawablePadding="16dp"
+            android:inputType="none"
+            android:textSize="16dp"
+            tools:ignore="LabelFor,SpUsage">
+
+        </AutoCompleteTextView>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dropDownSelectorPPM"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:hint="@string/ppm_band_hint"
+        android:textColorHint="?hintTextColor"
+        app:boxStrokeColor="@color/brown_200"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/four_band"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/spinnerPPM"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:drawableStart="@drawable/blank32"
+            android:drawablePadding="16dp"
+            android:inputType="none"
+            android:textSize="16dp"
+            tools:ignore="LabelFor,SpUsage">
+
+        </AutoCompleteTextView>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+    <!-- Buttons are in the correct spot -->
+
+    <Button
+        android:id="@+id/four_band"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/green_700"
+        android:text="@string/four_band"
+        android:textAllCaps="false"
+        android:textColor="@color/neutral"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/five_band"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpUsage">
+
+    </Button>
+
+    <Button
+        android:id="@+id/five_band"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/green_500"
+        android:text="@string/five_band"
+        android:textAllCaps="false"
+        android:textColor="@color/neutral"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/six_band"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toEndOf="@+id/four_band"
+        tools:ignore="SpUsage">
+
+    </Button>
+
+    <Button
+        android:id="@+id/six_band"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/green_500"
+        android:text="@string/six_band"
+        android:textAllCaps="false"
+        android:textColor="@color/neutral"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/five_band"
+        tools:ignore="SpUsage">
+
+    </Button>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
