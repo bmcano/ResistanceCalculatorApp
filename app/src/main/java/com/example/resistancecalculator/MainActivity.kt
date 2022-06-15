@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,15 +17,13 @@ import com.google.android.material.textfield.TextInputLayout
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
-
     private lateinit var button1: Button
     private lateinit var button2: Button
     private lateinit var button3: Button
 
-    private lateinit var dialog: Dialog
+    private lateinit var chartDialog: Dialog
     private var imageSelection = 4
 
-    // initialize as empty strings
     private var numberBand1: String = ""
     private var numberBand2: String = ""
     private var numberBand3: String = ""
@@ -72,7 +71,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.show_resistor_charts -> {
-                dialog.setContentView(
+                chartDialog = Dialog(this)
+                chartDialog.setContentView(
                     when(imageSelection) {
                         4 -> R.layout.popup_chart_4
                         5 -> R.layout.popup_chart_5
@@ -80,15 +80,29 @@ class MainActivity : AppCompatActivity() {
                         else -> { R.layout.popup_chart_6 }
                     }
                 )
-                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.show()
-                return true
+                chartDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                chartDialog.show()
+                true
             }
+
+            R.id.feedback -> {
+                val intent = Intent(Intent.ACTION_VIEW)
+                val data: Uri = Uri.parse(
+                    "mailto:brandoncano.development@gmail.com?subject="
+                            + Uri.encode("[Feedback] - Resistance Calculator")
+                        .toString() + "&body=" + Uri.encode("")
+                )
+                intent.data = data
+                startActivity(intent)
+                true
+            }
+
             R.id.about_item -> {
                 val intent = Intent(this, AboutActivity::class.java)
                 startActivity(intent)
                 true
             }
+
             else -> { super.onOptionsItemSelected(item) }
         }
     }
@@ -102,7 +116,6 @@ class MainActivity : AppCompatActivity() {
         band6 = findViewById(R.id.r_band_6)
     }
 
-
     // sets up all button related events
     private fun buttonSetup() {
         toggleDropDown3 = findViewById(R.id.dropDownSelector3)
@@ -113,9 +126,6 @@ class MainActivity : AppCompatActivity() {
         button2 = findViewById(R.id.five_band)
         button3 = findViewById(R.id.six_band)
 
-        dialog = Dialog(this)
-
-        // button listeners
         // toggle four band resistor
         button1.setOnClickListener {
             button1.setBackgroundColor(getColor(R.color.green_700))

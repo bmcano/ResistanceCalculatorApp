@@ -11,6 +11,7 @@
 
     <string name="default_text">Select Colors</string>
     <string name="show_chart">Show Chart</string>
+    <string name="feedback_tab">Feedback</string>
 
     <string name="four_band">Four Band\nResistor</string>
     <string name="five_band">Five Band\nResistor</string>
@@ -24,5 +25,5 @@
         \n\nYou can also look at the color charts, under \"Show Chart\", for each of the resistors
         for reference.
     </string>
-    <string name="last_updated">Last Updated On: 6/12/2022</string>
+    <string name="last_updated">Last Updated On: 6/14/2022</string>
 </resources>
