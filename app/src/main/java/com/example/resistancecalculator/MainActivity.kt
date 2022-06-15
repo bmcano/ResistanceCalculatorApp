@@ -48,10 +48,11 @@ class MainActivity : AppCompatActivity() {
         imageSetup()
         buttonSetup()
 
-        // sets the action bar color
+        // sets up the action bar
         val actionBar: ActionBar? = supportActionBar
         val colorDrawable = ColorDrawable(Color.parseColor("#DDA15E"))
         actionBar!!.setBackgroundDrawable(colorDrawable)
+        actionBar.title = getString(R.string.color_to_value)
     }
 
     override fun onResume() {
@@ -64,12 +65,18 @@ class MainActivity : AppCompatActivity() {
     // options menu dropdown in top right corner
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu_dropdown, menu)
+        inflater.inflate(R.menu.menu_dropdown_1, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
+            R.id.value_to_color -> {
+                val intent = Intent(this, ValueToColorActivity::class.java)
+                startActivity(intent)
+                true
+            }
+
             R.id.show_resistor_charts -> {
                 chartDialog = Dialog(this)
                 chartDialog.setContentView(

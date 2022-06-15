@@ -17,6 +17,8 @@
     <string name="five_band">Five Band\nResistor</string>
     <string name="six_band">Six Band \nResistor</string>
 
+    <string name="value_to_color">Value to Color</string>
+    <string name="color_to_value">Color to Value</string>
     <string name="about">About This App</string>
     <string name="version">v1.0</string>
     <string name="created_by">Created By\n\nBrandon Cano</string>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/value_to_color"
+        android:title="@string/value_to_color" />
+
+    <item
+        android:id="@+id/show_resistor_charts"
+        android:title="@string/show_chart" />
+
+    <item
+        android:id="@+id/feedback"
+        android:title="@string/feedback_tab"/>
+
+    <item
+        android:id="@+id/about_item"
+        android:title="@string/about" />
+
+</menu>
