@@ -8,14 +8,83 @@
 
 
     <!-- Design Top-Down
-    TODO - ScrollView? (If needed)
+    TODO
          - EditText, Dropdown for units (constrained to top)
+         - Tolerance, and PPM Dropdowns (top)
          - Button to generate resistor (top)
-         - Resistor (top?)
-         - Tolerance, and PPM Dropdowns (top?)
+         - Resistor (top)
          - Buttons for number of bands (constrained to bottom)
     -->
 
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_text_outline"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="120dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/type_resistance"
+        android:textColorHint="?hintTextColor"
+        app:boxStrokeColor="@color/brown_200"
+        app:boxStrokeWidth="2dp"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_error"
+        app:layout_constraintStart_toStartOf="@+id/dropDownSelectorTolerance"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/enter_resistance"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"/>
+
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dropDownSelectorUnits"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="120dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/units"
+        android:textColorHint="?hintTextColor"
+        app:boxStrokeColor="@color/brown_200"
+        app:boxStrokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="@+id/dropDownSelectorTolerance"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/spinnerUnits"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:inputType="none"
+            android:textSize="16dp"
+            tools:ignore="LabelFor,SpUsage">
+
+        </AutoCompleteTextView>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/calculate"
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/calculate_btn"
+        android:textAllCaps="false"
+        android:textSize="24dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dropDownSelectorPPM"
+        tools:ignore="SpUsage" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dropDownSelectorTolerance"
@@ -23,16 +92,16 @@
         android:layout_width="256dp"
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
         android:hint="@string/tolerance_band_hint"
         android:textColorHint="?hintTextColor"
         app:boxStrokeColor="@color/brown_200"
         app:boxStrokeWidth="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/dropDownSelectorPPM"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_outline">
 
         <AutoCompleteTextView
             android:id="@+id/spinnerTolerance"
@@ -54,16 +123,17 @@
         android:layout_width="256dp"
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
         android:hint="@string/ppm_band_hint"
         android:textColorHint="?hintTextColor"
+        android:visibility="invisible"
         app:boxStrokeColor="@color/brown_200"
         app:boxStrokeWidth="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/four_band"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dropDownSelectorTolerance">
 
         <AutoCompleteTextView
             android:id="@+id/spinnerPPM"
@@ -79,11 +149,175 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Resistor images start here -->
+
+    <ImageView
+        android:id="@+id/r_left"
+        android:layout_width="69dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_left"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_1"
+        app:layout_constraintStart_toStartOf="@+id/place_holder_text"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_band_1"
+        android:layout_width="11.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_band_1"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_1"
+        app:layout_constraintStart_toEndOf="@+id/r_left"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_band_5"
+        android:layout_width="11.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_band_5"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_5"
+        app:layout_constraintStart_toEndOf="@+id/r_post_band_4"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_post_band_2"
+        android:layout_width="9.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_post_band_2"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_3"
+        app:layout_constraintStart_toEndOf="@+id/r_band_2"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_post_band_3"
+        android:layout_width="10.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_post_band_3"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_4"
+        app:layout_constraintStart_toEndOf="@+id/r_band_3"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_post_band_5"
+        android:layout_width="11dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_post_band_5"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_6"
+        app:layout_constraintStart_toEndOf="@+id/r_band_5"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_band_3"
+        android:layout_width="11.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_band_3"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_3"
+        app:layout_constraintStart_toEndOf="@+id/r_post_band_2"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_post_band_4"
+        android:layout_width="16.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_post_band_4"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_5"
+        app:layout_constraintStart_toEndOf="@+id/r_band_4"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_band_6"
+        android:layout_width="11.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_band_6"
+        app:layout_constraintEnd_toStartOf="@+id/r_right"
+        app:layout_constraintStart_toEndOf="@+id/r_post_band_5"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_post_band_1"
+        android:layout_width="10dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_post_band_1"
+        app:layout_constraintEnd_toStartOf="@+id/r_band_2"
+        app:layout_constraintStart_toEndOf="@+id/r_band_1"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_band_4"
+        android:layout_width="11.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_band_4"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_4"
+        app:layout_constraintStart_toEndOf="@+id/r_post_band_3"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_right"
+        android:layout_width="52.5dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_right"
+        app:layout_constraintEnd_toEndOf="@+id/place_holder_text"
+        app:layout_constraintStart_toEndOf="@+id/r_band_6"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/r_band_2"
+        android:layout_width="11dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/resistor_band_2"
+        app:layout_constraintEnd_toStartOf="@+id/r_post_band_2"
+        app:layout_constraintStart_toEndOf="@+id/r_post_band_1"
+        app:layout_constraintTop_toBottomOf="@+id/calculate"
+        tools:ignore="ContentDescription" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="r_post_band_4,r_post_band_3,r_band_6,r_band_1,r_band_5,r_left,r_post_band_1,r_band_4,r_right,r_post_band_5,r_band_3,r_post_band_2,r_band_2"
+        app:layout_constraintEnd_toEndOf="@+id/r_right"
+        app:layout_constraintStart_toStartOf="@+id/r_left"
+        app:layout_constraintTop_toBottomOf="@+id/r_post_band_3" />
+
+    <!-- placeholder textview -->
+    <TextView
+        android:id="@+id/place_holder_text"
+        android:layout_width="247.5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/r_post_band_3" />
 
 
-
-
-    <!-- Buttons are in the correct spot -->
+    <!-- Buttons at the bottom of the screen -->
 
     <Button
         android:id="@+id/four_band"
