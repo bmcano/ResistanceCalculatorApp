@@ -434,6 +434,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="r_post_band_4,r_post_band_3,r_band_6,r_band_1,r_band_5,r_left,r_post_band_1,r_band_4,r_right,r_post_band_5,r_band_3,r_post_band_2,r_band_2"
- />
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

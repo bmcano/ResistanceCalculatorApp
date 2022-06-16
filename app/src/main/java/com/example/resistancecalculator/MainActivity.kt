@@ -12,9 +12,9 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputLayout
 
-@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
     private lateinit var button1: Button
@@ -146,8 +146,8 @@ class MainActivity : AppCompatActivity() {
             calcResistanceHelper()
             imageSelection = 4
 
-            band3.setColorFilter(resources.getColor(ColorFinder.bandColor()))
-            band6.setColorFilter(resources.getColor(ColorFinder.bandColor()))
+            band3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
+            band6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
         }
 
         // toggle five band resistor
@@ -163,8 +163,8 @@ class MainActivity : AppCompatActivity() {
             calcResistanceHelper()
             imageSelection = 5
 
-            band3.setColorFilter(resources.getColor(ColorFinder.bandColor(numberBand3)))
-            band6.setColorFilter(resources.getColor(ColorFinder.bandColor()))
+            band3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
+            band6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
         }
 
         // toggle six band resistor
@@ -180,8 +180,8 @@ class MainActivity : AppCompatActivity() {
             calcResistanceHelper()
             imageSelection = 6
 
-            band3.setColorFilter(resources.getColor(ColorFinder.bandColor(numberBand3)))
-            band6.setColorFilter(resources.getColor(ColorFinder.bandColor(ppmBand)))
+            band3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
+            band6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(ppmBand)))
         }
     }
 
@@ -197,7 +197,7 @@ class MainActivity : AppCompatActivity() {
             android.R.layout.simple_spinner_dropdown_item,
             SelectionEnums.NUMBER.array
         ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             dropDown1.setAdapter(adapter)
         }
 
@@ -206,7 +206,7 @@ class MainActivity : AppCompatActivity() {
                 numberBand1 = dropDown1.adapter.getItem(position).toString()
                 dropDown1.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand1),0,0,0)
                 calcResistanceHelper()
-                band1.setColorFilter(resources.getColor(ColorFinder.bandColor(numberBand1)))
+                band1.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand1)))
             }
 
 
@@ -226,7 +226,7 @@ class MainActivity : AppCompatActivity() {
                 numberBand2 = dropDown2.adapter.getItem(position).toString()
                 dropDown2.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand2),0,0,0)
                 calcResistanceHelper()
-                band2.setColorFilter(resources.getColor(ColorFinder.bandColor(numberBand2)))
+                band2.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand2)))
             }
 
 
@@ -246,7 +246,7 @@ class MainActivity : AppCompatActivity() {
                 numberBand3 = dropDown3.adapter.getItem(position).toString()
                 dropDown3.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand3),0,0,0)
                 calcResistanceHelper()
-                band3.setColorFilter(resources.getColor(ColorFinder.bandColor(numberBand3)))
+                band3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
             }
 
 
@@ -266,7 +266,7 @@ class MainActivity : AppCompatActivity() {
                 multiplierBand = dropDown4.adapter.getItem(position).toString()
                 dropDown4.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(multiplierBand),0,0,0)
                 calcResistanceHelper()
-                band4.setColorFilter(resources.getColor(ColorFinder.bandColor(multiplierBand)))
+                band4.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(multiplierBand)))
             }
 
 
@@ -286,7 +286,7 @@ class MainActivity : AppCompatActivity() {
                 toleranceBand = dropDown5.adapter.getItem(position).toString()
                 dropDown5.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(toleranceBand),0,0,0)
                 calcResistanceHelper()
-                band5.setColorFilter(resources.getColor(ColorFinder.bandColor(toleranceBand)))
+                band5.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(toleranceBand)))
             }
 
 
@@ -306,7 +306,7 @@ class MainActivity : AppCompatActivity() {
                 ppmBand = dropDown6.adapter.getItem(position).toString()
                 dropDown6.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(ppmBand),0,0,0)
                 calcResistanceHelper()
-                band6.setColorFilter(resources.getColor(ColorFinder.bandColor(ppmBand)))
+                band6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(ppmBand)))
             }
     }
 
