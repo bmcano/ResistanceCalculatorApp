@@ -1,6 +1,7 @@
 package com.example.resistancecalculator
 
 enum class SelectionEnums(val array: Array<String>){
+
     NUMBER(arrayOf(
         "Black", "Brown", "Red", "Orange", "Yellow",
         "Green", "Blue", "Violet", "Gray", "White"
@@ -12,28 +13,36 @@ enum class SelectionEnums(val array: Array<String>){
     )),
 
     TOLERANCE(arrayOf(
-        "Brown", "Red", "Orange", "Yellow", "Green", "Blue",
-        "Violet", "Gray", "Gold", "Silver", "None"
+        "Brown", "Red", "Green", "Blue", "Violet",
+        "Gray", "Gold", "Silver", "None"
     )),
 
     PPM(arrayOf(
         "Black", "Brown", "Red",
-        "Orange",  "Yellow", "Green",
+        "Orange", "Yellow", "Green",
         "Blue", "Violet", "Gray"
     )),
 
     UNITS(arrayOf(
-        "Ω", "kΩ", "MΩ", "GΩ"
+        Symbols.OMEGA, "k${Symbols.OMEGA}", "M${Symbols.OMEGA}", "G${Symbols.OMEGA}"
     )),
 
     TOLERANCE_TEXT(arrayOf(
-        "±1%", "±2%", "±0.05%", "±0.02%", "±0.5%", "±0.25%",
-        "±0.1%", "±0.01%", "±5%", "±10%", "±20%"
+        "${Symbols.PLUS_MINUS}1%", "${Symbols.PLUS_MINUS}2%", "${Symbols.PLUS_MINUS}0.5%",
+        "${Symbols.PLUS_MINUS}0.25%", "${Symbols.PLUS_MINUS}0.1%", "${Symbols.PLUS_MINUS}0.05%",
+        "${Symbols.PLUS_MINUS}5%", "${Symbols.PLUS_MINUS}10%", "${Symbols.PLUS_MINUS}20%"
     )),
 
     PPM_TEXT(arrayOf(
-        "250 ppm/K", "100 ppm/K", "50 ppm/K",
-        "15 ppm/K", "25 ppm/K", "20 ppm/K",
-        "10 ppm/K", "5 ppm/K", "1 ppm/K"
+        "250 ppm/${Symbols.DEGREE}C", "100 ppm/${Symbols.DEGREE}C", "50 ppm/${Symbols.DEGREE}C",
+        "15 ppm/${Symbols.DEGREE}C", "25 ppm/${Symbols.DEGREE}C", "20 ppm/${Symbols.DEGREE}C",
+        "10 ppm/${Symbols.DEGREE}C", "5 ppm/${Symbols.DEGREE}C", "1 ppm/${Symbols.DEGREE}C"
     ))
+}
+
+// private const for special symbols
+private object Symbols {
+    const val OMEGA: String = "Ω"
+    const val PLUS_MINUS: String = "±"
+    const val DEGREE: String = "°"
 }
