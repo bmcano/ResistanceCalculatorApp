@@ -285,17 +285,26 @@
 
     <!-- Start of custom resistor image -->
     <!-- Order: wires, left, bands, post bands, right -->
+    <TextView
+        android:id="@+id/place_holder"
+        android:layout_width="247dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/r_post_band_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/r_left"
         android:layout_width="69dp"
         android:layout_height="66dp"
-        android:layout_marginStart="76dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_left"
         app:layout_constraintBottom_toTopOf="@+id/four_band"
         app:layout_constraintEnd_toStartOf="@+id/r_band_1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/place_holder"
         tools:ignore="ContentDescription" />
 
     <ImageView
@@ -426,6 +435,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/resistor_right"
         app:layout_constraintBottom_toTopOf="@+id/six_band"
+        app:layout_constraintEnd_toEndOf="@+id/place_holder"
         app:layout_constraintStart_toEndOf="@+id/r_band_6"
         tools:ignore="ContentDescription" />
 

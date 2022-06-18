@@ -185,7 +185,9 @@ class ValueToColorActivity : AppCompatActivity() {
             if(colors.isNotEmpty()) {
                 if (colors[0] != -1) { band1.setColorFilter(ContextCompat.getColor(this, colors[0])) }
                 if (colors[1] != -1) { band2.setColorFilter(ContextCompat.getColor(this, colors[1])) }
-                if (colors[2] != -1) { band3.setColorFilter(ContextCompat.getColor(this, colors[2])) }
+                if (colors[2] != -1) { band3.setColorFilter(ContextCompat.getColor(this, colors[2])) } else {
+                    band3.setColorFilter(ContextCompat.getColor(this, R.color.resistor_blank))
+                }
                 if (colors[3] != -1) { band4.setColorFilter(ContextCompat.getColor(this, colors[3])) }
             }
         }

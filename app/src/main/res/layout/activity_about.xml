@@ -85,15 +85,25 @@
 
     <!-- Start of custom resistor image -->
 
+    <TextView
+        android:id="@+id/place_holder"
+        android:layout_width="247dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/r_post_band_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/r_left"
         android:layout_width="69dp"
         android:layout_height="66dp"
-        android:layout_marginStart="76dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_left"
         app:layout_constraintEnd_toStartOf="@+id/r_band_1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/place_holder"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:ignore="ContentDescription" />
 
@@ -224,9 +234,8 @@
         android:layout_width="52.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="76dp"
         android:src="@drawable/resistor_right"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/place_holder"
         app:layout_constraintStart_toEndOf="@+id/r_band_6"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:ignore="ContentDescription" />
