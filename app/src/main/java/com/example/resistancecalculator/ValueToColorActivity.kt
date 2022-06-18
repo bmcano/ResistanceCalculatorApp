@@ -19,6 +19,7 @@ import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputLayout
 
 class ValueToColorActivity : AppCompatActivity() {
+    private lateinit var screenText: TextView
     private lateinit var fourBandButton: Button
     private lateinit var fiveBandButton: Button
     private lateinit var sixBandButton: Button
@@ -117,6 +118,7 @@ class ValueToColorActivity : AppCompatActivity() {
     }
 
     private fun idSetup() {
+        screenText = findViewById(R.id.display_resistance)
         numberBand1 = findViewById(R.id.r_band_1)
         numberBand2 = findViewById(R.id.r_band_2)
         numberBand3 = findViewById(R.id.r_band_3)
@@ -142,7 +144,6 @@ class ValueToColorActivity : AppCompatActivity() {
 
             toggleDropDown.visibility = View.INVISIBLE
             imageSelection = 4
-            ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
         }
 
         // toggle five band resistor
@@ -154,7 +155,6 @@ class ValueToColorActivity : AppCompatActivity() {
 
             toggleDropDown.visibility = View.INVISIBLE
             imageSelection = 5
-            ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
         }
 
         // toggle six band resistor
@@ -166,7 +166,6 @@ class ValueToColorActivity : AppCompatActivity() {
 
             toggleDropDown.visibility = View.VISIBLE
             imageSelection = 6
-            ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor(ppmBand)))
         }
 
         // calculate button and related items
@@ -190,9 +189,30 @@ class ValueToColorActivity : AppCompatActivity() {
             if(colors.isNotEmpty()) {
                 numberBand1.setColorFilter(ContextCompat.getColor(this, colors[0]))
                 numberBand2.setColorFilter(ContextCompat.getColor(this, colors[1]))
-                if (colors[2] != -1) numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
-                else numberBand3.setColorFilter(ContextCompat.getColor(this, R.color.resistor_blank))
+                numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
                 multiplierBand.setColorFilter(ContextCompat.getColor(this, colors[3]))
+                toleranceColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.toleranceColor(toleranceBand)))
+
+                var text = ""
+                when (imageSelection) {
+                    4 -> {
+                        numberBand3.setColorFilter(ContextCompat.getColor(this, R.color.resistor_blank))
+                        ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
+                        text = "$resistance $units $toleranceBand"
+                    }
+                    5 -> {
+                        numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
+                        ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
+                        text = "$resistance $units $toleranceBand"
+                    }
+                    6-> {
+                        numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
+                        ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor(ppmBand)))
+                        text = if(ppmBand == "") "$resistance $units $toleranceBand" else "$resistance $units $toleranceBand\n$ppmBand"
+                    }
+                }
+
+                screenText.text = text
             }
 
             // close keyboard
@@ -236,7 +256,6 @@ class ValueToColorActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
                 dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.toleranceImage(toleranceBand),0,0,0)
-                toleranceColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.toleranceColor(toleranceBand)))
             }
 
         // temperature coefficient
@@ -254,7 +273,6 @@ class ValueToColorActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 ppmBand = dropDownPPM.adapter.getItem(position).toString()
                 dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.ppmImage(ppmBand),0,0,0)
-                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor(ppmBand)))
             }
     }
 }

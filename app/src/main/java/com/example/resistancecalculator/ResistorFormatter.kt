@@ -57,7 +57,7 @@ object ResistorFormatter {
             arrayOf(
                 ColorFinder.numberColor(numberBand1),
                 ColorFinder.numberColor(numberBand2),
-                -1,
+                R.color.resistor_blank,
                 ColorFinder.bandColor(multiplierBand)
             )
         } else {
