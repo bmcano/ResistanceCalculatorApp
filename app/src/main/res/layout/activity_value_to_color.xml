@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ValueToColorActivity">
 
-
-    <!-- Design Top-Down
-    TODO
-         - EditText, Dropdown for units (constrained to top)
-         - Tolerance, and PPM Dropdowns (top)
-         - Button to generate resistor (top)
-         - Resistor (top)
-         - Buttons for number of bands (constrained to bottom)
-    -->
-
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_text_outline"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -40,9 +29,6 @@
             android:maxLength="5"
             android:inputType="numberDecimal"
             android:maxLines="1"/>
-
-
-
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -306,7 +292,6 @@
         app:layout_constraintStart_toStartOf="@+id/r_left"
         app:layout_constraintTop_toBottomOf="@+id/r_post_band_3" />
 
-    <!-- placeholder textview -->
     <TextView
         android:id="@+id/place_holder_text"
         android:layout_width="247dp"
@@ -318,7 +303,6 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/r_post_band_3" />
-
 
     <!-- Buttons at the bottom of the screen -->
 
