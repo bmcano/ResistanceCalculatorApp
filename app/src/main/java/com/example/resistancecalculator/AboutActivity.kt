@@ -7,16 +7,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
+import androidx.core.content.ContextCompat
 
-@Suppress("DEPRECATION")
 class AboutActivity : AppCompatActivity() {
 
-    private lateinit var band1: ImageView
-    private lateinit var band2: ImageView
-    private lateinit var band3: ImageView
-    private lateinit var band4: ImageView
-    private lateinit var band5: ImageView
-    private lateinit var band6: ImageView
+    private lateinit var numBand1: ImageView
+    private lateinit var numBand2: ImageView
+    private lateinit var numBand3: ImageView
+    private lateinit var multiplierBand: ImageView
+    private lateinit var toleranceBand: ImageView
+    private lateinit var ppmBand: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +29,12 @@ class AboutActivity : AppCompatActivity() {
         actionBar.title = getString(R.string.about)
 
         // changeable images
-        band1 = findViewById(R.id.r_band_1)
-        band2 = findViewById(R.id.r_band_2)
-        band3 = findViewById(R.id.r_band_3)
-        band4 = findViewById(R.id.r_band_4)
-        band5 = findViewById(R.id.r_band_5)
-        band6 = findViewById(R.id.r_band_6)
+        numBand1 = findViewById(R.id.r_band_1)
+        numBand2 = findViewById(R.id.r_band_2)
+        numBand3 = findViewById(R.id.r_band_3)
+        multiplierBand = findViewById(R.id.r_band_4)
+        toleranceBand = findViewById(R.id.r_band_5)
+        ppmBand = findViewById(R.id.r_band_6)
 
         makeResistorImage()
     }
@@ -45,25 +45,24 @@ class AboutActivity : AppCompatActivity() {
         makeResistorImage()
     }
 
-    // TODO - make the numbers truly random
     private fun makeResistorImage() {
-        band1.setColorFilter(resources.getColor(ColorFinder.randomColor()))
-        band2.setColorFilter(resources.getColor(ColorFinder.randomColor()))
-        band4.setColorFilter(resources.getColor(ColorFinder.randomColor()))
-        band5.setColorFilter(resources.getColor(ColorFinder.randomColor()))
+        numBand1.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
+        numBand2.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
+        multiplierBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
+        toleranceBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
 
         when((4..6).random()) {
             4 -> {
-                band3.setColorFilter(resources.getColor(ColorFinder.bandColor()))
-                band6.setColorFilter(resources.getColor(ColorFinder.bandColor()))
+                numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
+                ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
             }
             5 -> {
-                band3.setColorFilter(resources.getColor(ColorFinder.randomColor()))
-                band6.setColorFilter(resources.getColor(ColorFinder.bandColor()))
+                numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
+                ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
             }
             6 -> {
-                band3.setColorFilter(resources.getColor(ColorFinder.randomColor()))
-                band6.setColorFilter(resources.getColor(ColorFinder.randomColor()))
+                numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
+                ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
             }
         }
     }
