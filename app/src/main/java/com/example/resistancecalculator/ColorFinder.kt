@@ -1,12 +1,11 @@
 package com.example.resistancecalculator
 
 object ColorFinder {
-    private const val OMEGA: String = "Ω"
     private const val PLUS_MINUS: String = "±"
     private const val DEGREE: String = "°"
 
     // finds the image representation
-    fun imageColor(color: String): Int {
+    fun imageColor(color: String) : Int {
         return when(color) {
             "Black" -> R.drawable.black32
             "Blue" -> R.drawable.blue32
@@ -24,8 +23,24 @@ object ColorFinder {
         }
     }
 
+    fun numberColor(color: Int) : Int {
+        return when(color) {
+            0 -> R.color.black32
+            1 -> R.color.brown32
+            2 -> R.color.red32
+            3 -> R.color.orange32
+            4 -> R.color.yellow32
+            5 -> R.color.green32
+            6 -> R.color.blue32
+            7 -> R.color.violet32
+            8 -> R.color.gray32
+            9 -> R.color.white32
+            else -> { R.color.black32 }
+        }
+    }
+
     // finds the color based on the selection
-    fun bandColor(color: String = "else") : Int {
+    fun bandColor(color: String = "blank") : Int {
         return when(color) {
             "Red" -> R.color.red32
             "Orange" -> R.color.orange32

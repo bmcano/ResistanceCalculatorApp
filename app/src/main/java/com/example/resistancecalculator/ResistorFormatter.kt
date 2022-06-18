@@ -1,0 +1,189 @@
+package com.example.resistancecalculator
+
+import com.Ostermiller.util.SignificantFigures
+
+object ResistorFormatter {
+    // EditText already limits this to decimal and whole numbers and 5 characters
+    // Invalid Inputs: 0.0... , 00... , 0.xyz , 0x , .0x , too many sig figs
+    fun isValidInput(numBands: Int, input: String, units: String) : Boolean {
+        try { input.toDouble() } catch (e: NumberFormatException) { return false }
+        val sigFigs = SignificantFigures(input)
+
+        when {
+            numBands == 4 && sigFigs.numberSignificantFigures > 2 -> return false
+            (numBands == 5 || numBands == 6) && sigFigs.numberSignificantFigures > 3 -> return false
+            (numBands == 5 || numBands == 6) && (input[0] == '0' || input[0] == '.')
+                    && (units == "Ω" || units == "") -> return false
+            input.length > 1 && input[0] == '0' && input[1] == '0' -> return false
+            input.length > 2 && input[0] == '0' && input[1] == '.' && input[2] == '0' -> return false
+            input.length > 1 && input[0] == '0' && input[1] != '.' -> return false
+            input.length > 1 && input[0] == '.' && input[1] == '0' -> return false
+        }
+
+        return true
+    }
+
+    // returns an array of the 3 or 4 colors to be returned
+    // return order: numberBand1, numberBand2, *numberBand3*, multiplierBand
+    fun generateResistor(resistance: String, units: String, numBands: Int) : Array<Int> {
+        // this will prevent the program from crashing
+        if (resistance == "NotValid" || resistance == "") {
+            return arrayOf()
+        }
+
+        // find color for the sig fig bands
+        var numBand1 = 0; var numBand2 = 0; var numBand3 = 0
+        val formattedResistance = resistance.replace(".","").toInt().toString()
+        var i = 0
+        for (digit in formattedResistance) {
+            if(i == 0) numBand1 = digit.digitToInt()
+            if(i == 1) numBand2 = digit.digitToInt()
+            if(i == 2) numBand3 = digit.digitToInt()
+            i += 1
+        }
+
+        // find color for multiplier band
+        val decimalPresent = '.' in resistance
+        val multiplierBand: String = if(decimalPresent) {
+            decimalInput(units, resistance, numBands)
+        } else {
+            numericalInput(resistance, numBands, units)
+        }
+
+        // return correct values
+        return if (numBands == 4) {
+            arrayOf(
+                ColorFinder.numberColor(numBand1),
+                ColorFinder.numberColor(numBand2),
+                -1,
+                ColorFinder.bandColor(multiplierBand)
+            )
+        } else {
+            arrayOf(
+                ColorFinder.numberColor(numBand1),
+                ColorFinder.numberColor(numBand2),
+                ColorFinder.numberColor(numBand3),
+                ColorFinder.bandColor(multiplierBand)
+            )
+        }
+    }
+
+    // find the correct multiplier for an input with a decimal
+    private fun decimalInput(units: String, resistance: String, numBands: Int) : String {
+        var before = 0; var after = 0
+        var change = false
+        for (digit in resistance) {
+            if(digit == '.') { change = true; continue }
+            if(!change) before++
+            else after++
+        }
+
+        val first = resistance[0]
+        return if(numBands == 4) {
+            when {
+                units == "Ω" && (first == '0' || first == '.') -> "Silver"
+                units == "Ω" && before == 1 -> "Gold"
+                units == "Ω" && before == 2 && after == 0 -> "Black"
+
+                units == "kΩ" && (first == '0' || first == '.') -> "Brown"
+                units == "kΩ" && before == 1 -> "Red"
+                units == "kΩ" && before == 2 && after == 0 -> "Orange"
+
+                units == "MΩ" && (first == '0' || first == '.') -> "Yellow"
+                units == "MΩ" && before == 1 -> "Green"
+                units == "MΩ" && before == 2 && after == 0 -> "Blue"
+
+                units == "GΩ" && (first == '0' || first == '.') -> "Violet"
+                units == "GΩ" && before == 1 -> "Gray"
+                units == "GΩ" && before == 2 && after == 0 -> "White"
+
+                else -> "Blank"
+            }
+        } else {
+            when {
+                units == "Ω" && before == 1 -> "Silver"
+                units == "Ω" && before == 2 -> "Gold"
+                units == "Ω" && before == 3 && after == 0 -> "Black"
+
+                units == "kΩ" && (first == '0' || first == '.')  -> "Black"
+                units == "kΩ" && before == 1 -> "Brown"
+                units == "kΩ" && before == 2 -> "Red"
+                units == "kΩ" && before == 3 && after == 0 -> "Orange"
+
+                units == "MΩ" && (first == '0' || first == '.') -> "Orange"
+                units == "MΩ" && before == 1 -> "Yellow"
+                units == "MΩ" && before == 2 -> "Green"
+                units == "MΩ" && before == 3 && after == 0 -> "Blue"
+
+                units == "GΩ" && (first == '0' || first == '.') -> "Blue"
+                units == "GΩ" && before == 1 -> "Violet"
+                units == "GΩ" && before == 2 -> "Gray"
+                units == "GΩ" && before == 3 && after == 0 -> "White"
+
+                else -> "Blank"
+            }
+        }
+    }
+
+    // find the value of the multiplier for any whole numbers
+    private fun numericalInput(resistance: String, numBands: Int, units: String) : String {
+        var length: Int = resistance.length
+
+        var shifts = 0
+        var remainder = length.mod(3)
+        while (length > 3) {
+            length -= 3
+            remainder = length.mod(3)
+            shifts++
+        }
+
+        shifts = when(units) {
+            "Ω" -> shifts + 0
+            "kΩ" -> shifts + 1
+            "MΩ" -> shifts + 2
+            "GΩ" -> shifts + 3
+            else -> 0
+        }
+
+        return if(numBands == 4) {
+            when {
+                shifts == 0 && remainder == 1 -> "Gold"
+                shifts == 0 && remainder == 2 -> "Black"
+                shifts == 0 && remainder == 0 -> "Brown"
+
+                shifts == 1 && remainder == 1 -> "Red"
+                shifts == 1 && remainder == 2 -> "Orange"
+                shifts == 1 && remainder == 0 -> "Yellow"
+
+                shifts == 2 && remainder == 1 -> "Green"
+                shifts == 2 && remainder == 2 -> "Blue"
+                shifts == 2 && remainder == 0 -> "Violet"
+
+                shifts == 3 && remainder == 1 -> "Gray"
+                shifts == 3 && remainder == 2 -> "White"
+
+                else -> "Blank"
+            }
+        } else {
+            when {
+                shifts == 0 && remainder == 1 -> "Silver"
+                shifts == 0 && remainder == 2 -> "Gold"
+                shifts == 0 && remainder == 0 -> "Black"
+
+                shifts == 1 && remainder == 1 -> "Brown"
+                shifts == 1 && remainder == 2 -> "Red"
+                shifts == 1 && remainder == 0 -> "Orange"
+
+                shifts == 2 && remainder == 1 -> "Yellow"
+                shifts == 2 && remainder == 2 -> "Green"
+                shifts == 2 && remainder == 0 -> "Blue"
+
+                shifts == 3 && remainder == 1 -> "Violet"
+                shifts == 3 && remainder == 2 -> "Gray"
+                shifts == 3 && remainder == 0 -> "White"
+
+                else -> "Blank"
+            }
+        }
+    }
+}
