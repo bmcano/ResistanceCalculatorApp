@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var textView: TextView
+    private lateinit var screenText: TextView
     private lateinit var fourBandButton: Button
     private lateinit var fiveBandButton: Button
     private lateinit var sixBandButton: Button
@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.value_to_color -> {
+                super.finish()
                 val intent = Intent(this, ValueToColorActivity::class.java)
                 startActivity(intent)
                 true
@@ -89,6 +90,20 @@ class MainActivity : AppCompatActivity() {
                 )
                 chartDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 chartDialog.show()
+                true
+            }
+
+            R.id.share_item -> {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "plain/text"
+                val text = when (imageSelection) {
+                    4 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $multiplierBand, $toleranceBand ]"
+                    5 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $numberBand3 $multiplierBand, $toleranceBand ]"
+                    6 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $numberBand3, $multiplierBand, $toleranceBand, $ppmBand ]"
+                    else -> ""
+                }
+                intent.putExtra(Intent.EXTRA_TEXT, text)
+                startActivity(Intent.createChooser(intent, ""))
                 true
             }
 
@@ -115,7 +130,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun idSetup() {
-        textView = findViewById(R.id.resistance_display_new)
+        screenText = findViewById(R.id.resistance_display_new)
         band1 = findViewById(R.id.r_band_1)
         band2 = findViewById(R.id.r_band_2)
         band3 = findViewById(R.id.r_band_3)
@@ -301,11 +316,11 @@ class MainActivity : AppCompatActivity() {
     // will determine which calculations to do
     private fun calcResistanceHelper() {
         if(toggleDropDownNumberBand3.visibility == View.GONE && toggleDropDownPPM.visibility == View.GONE) {
-            textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, multiplierBand, toleranceBand)
+            screenText.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, multiplierBand, toleranceBand)
         } else if(toggleDropDownPPM.visibility == View.GONE){
-            textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand)
+            screenText.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand)
         } else {
-            textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand)
+            screenText.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand)
         }
     }
 }

@@ -75,6 +75,7 @@ class ValueToColorActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.color_to_value -> {
+                super.finish()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 true
@@ -92,6 +93,21 @@ class ValueToColorActivity : AppCompatActivity() {
                 )
                 chartDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 chartDialog.show()
+                true
+            }
+
+            // TODO - construct message to copy
+            R.id.share_item -> {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "plain/text"
+                val text = when (imageSelection) {
+                    4 -> "${screenText.text}"
+                    5 -> "${screenText.text}"
+                    6 -> "${screenText.text}"
+                    else -> ""
+                }
+                intent.putExtra(Intent.EXTRA_TEXT, text)
+                startActivity(Intent.createChooser(intent, ""))
                 true
             }
 
