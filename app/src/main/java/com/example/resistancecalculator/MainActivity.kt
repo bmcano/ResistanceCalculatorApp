@@ -17,9 +17,9 @@ import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
-    private lateinit var button1: Button
-    private lateinit var button2: Button
-    private lateinit var button3: Button
+    private lateinit var fourBandButton: Button
+    private lateinit var fiveBandButton: Button
+    private lateinit var sixBandButton: Button
 
     private lateinit var chartDialog: Dialog
     private var imageSelection = 4
@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
     private var toleranceBand: String = ""
     private var ppmBand: String = ""
 
-    private lateinit var toggleDropDown3: TextInputLayout
-    private lateinit var toggleDropDown6: TextInputLayout
+    private lateinit var toggleDropDownNumberBand3: TextInputLayout
+    private lateinit var toggleDropDownPPM: TextInputLayout
 
     private lateinit var band1: ImageView
     private lateinit var band2: ImageView
@@ -44,25 +44,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setup()
-        imageSetup()
-        buttonSetup()
 
         // sets up the action bar
         val actionBar: ActionBar? = supportActionBar
         val colorDrawable = ColorDrawable(Color.parseColor("#DDA15E"))
         actionBar!!.setBackgroundDrawable(colorDrawable)
         actionBar.title = getString(R.string.color_to_value)
+
+        dropDownSetup()
+        idSetup()
+        buttonSetup()
     }
 
     override fun onResume() {
         super.onResume()
-        setup()
-        imageSetup()
+        dropDownSetup()
+        idSetup()
         buttonSetup()
     }
 
-    // options menu dropdown in top right corner
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_dropdown_1, menu)
@@ -114,34 +114,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun imageSetup() {
+    private fun idSetup() {
+        textView = findViewById(R.id.resistance_display_new)
         band1 = findViewById(R.id.r_band_1)
         band2 = findViewById(R.id.r_band_2)
         band3 = findViewById(R.id.r_band_3)
         band4 = findViewById(R.id.r_band_4)
         band5 = findViewById(R.id.r_band_5)
         band6 = findViewById(R.id.r_band_6)
+        fourBandButton = findViewById(R.id.four_band)
+        fiveBandButton = findViewById(R.id.five_band)
+        sixBandButton = findViewById(R.id.six_band)
+        toggleDropDownNumberBand3 = findViewById(R.id.dropDownSelector3)
+        toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
     }
 
-    // sets up all button related events
     private fun buttonSetup() {
-        toggleDropDown3 = findViewById(R.id.dropDownSelector3)
-        toggleDropDown6 = findViewById(R.id.dropDownSelector6)
-
-        // find button IDs
-        button1 = findViewById(R.id.four_band)
-        button2 = findViewById(R.id.five_band)
-        button3 = findViewById(R.id.six_band)
-
         // toggle four band resistor
-        button1.setOnClickListener {
-            button1.setBackgroundColor(getColor(R.color.green_700))
+        fourBandButton.setOnClickListener {
+            fourBandButton.setBackgroundColor(getColor(R.color.green_700))
 
-            button2.setBackgroundColor(getColor(R.color.green_500))
-            button3.setBackgroundColor(getColor(R.color.green_500))
+            fiveBandButton.setBackgroundColor(getColor(R.color.green_500))
+            sixBandButton.setBackgroundColor(getColor(R.color.green_500))
 
-            toggleDropDown3.visibility = View.GONE
-            toggleDropDown6.visibility = View.GONE
+            toggleDropDownNumberBand3.visibility = View.GONE
+            toggleDropDownPPM.visibility = View.GONE
 
             calcResistanceHelper()
             imageSelection = 4
@@ -151,14 +148,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         // toggle five band resistor
-        button2.setOnClickListener {
-            button2.setBackgroundColor(getColor(R.color.green_700))
+        fiveBandButton.setOnClickListener {
+            fiveBandButton.setBackgroundColor(getColor(R.color.green_700))
 
-            button1.setBackgroundColor(getColor(R.color.green_500))
-            button3.setBackgroundColor(getColor(R.color.green_500))
+            fourBandButton.setBackgroundColor(getColor(R.color.green_500))
+            sixBandButton.setBackgroundColor(getColor(R.color.green_500))
 
-            toggleDropDown3.visibility = View.VISIBLE
-            toggleDropDown6.visibility = View.GONE
+            toggleDropDownNumberBand3.visibility = View.VISIBLE
+            toggleDropDownPPM.visibility = View.GONE
 
             calcResistanceHelper()
             imageSelection = 5
@@ -168,14 +165,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         // toggle six band resistor
-        button3.setOnClickListener {
-            button3.setBackgroundColor(getColor(R.color.green_700))
+        sixBandButton.setOnClickListener {
+            sixBandButton.setBackgroundColor(getColor(R.color.green_700))
 
-            button1.setBackgroundColor(getColor(R.color.green_500))
-            button2.setBackgroundColor(getColor(R.color.green_500))
+            fourBandButton.setBackgroundColor(getColor(R.color.green_500))
+            fiveBandButton.setBackgroundColor(getColor(R.color.green_500))
 
-            toggleDropDown3.visibility = View.VISIBLE
-            toggleDropDown6.visibility = View.VISIBLE
+            toggleDropDownNumberBand3.visibility = View.VISIBLE
+            toggleDropDownPPM.visibility = View.VISIBLE
 
             calcResistanceHelper()
             imageSelection = 6
@@ -185,126 +182,117 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // sets up all drop down menus and related events
-    private fun setup() {
-        // will display the resistance
-        textView = findViewById(R.id.resistance_display_new)
-
+    private fun dropDownSetup() {
         // number band 1
-        val dropDown1 : AutoCompleteTextView = findViewById(R.id.spinner1)
+        val dropDownBand1 : AutoCompleteTextView = findViewById(R.id.spinner1)
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
             SelectionEnums.NUMBER.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            dropDown1.setAdapter(adapter)
+            dropDownBand1.setAdapter(adapter)
         }
 
-        dropDown1.onItemClickListener =
+        dropDownBand1.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                numberBand1 = dropDown1.adapter.getItem(position).toString()
-                dropDown1.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand1),0,0,0)
+                numberBand1 = dropDownBand1.adapter.getItem(position).toString()
+                dropDownBand1.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand1),0,0,0)
                 calcResistanceHelper()
                 band1.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand1)))
             }
 
-
         // number band 2
-        val dropDown2 : AutoCompleteTextView = findViewById(R.id.spinner2)
+        val dropDownBand2 : AutoCompleteTextView = findViewById(R.id.spinner2)
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
             SelectionEnums.NUMBER.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
-            dropDown2.setAdapter(adapter)
+            dropDownBand2.setAdapter(adapter)
         }
 
-        dropDown2.onItemClickListener =
+        dropDownBand2.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                numberBand2 = dropDown2.adapter.getItem(position).toString()
-                dropDown2.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand2),0,0,0)
+                numberBand2 = dropDownBand2.adapter.getItem(position).toString()
+                dropDownBand2.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand2),0,0,0)
                 calcResistanceHelper()
                 band2.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand2)))
             }
 
-
         // number band 3
-        val dropDown3 : AutoCompleteTextView = findViewById(R.id.spinner3)
+        val dropDownBand3 : AutoCompleteTextView = findViewById(R.id.spinner3)
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
             SelectionEnums.NUMBER.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
-            dropDown3.setAdapter(adapter)
+            dropDownBand3.setAdapter(adapter)
         }
 
-        dropDown3.onItemClickListener =
+        dropDownBand3.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                numberBand3 = dropDown3.adapter.getItem(position).toString()
-                dropDown3.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand3),0,0,0)
+                numberBand3 = dropDownBand3.adapter.getItem(position).toString()
+                dropDownBand3.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand3),0,0,0)
                 calcResistanceHelper()
                 band3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
             }
 
-
         // multiplier band
-        val dropDown4 : AutoCompleteTextView = findViewById(R.id.spinner4)
+        val dropDownMultiplier : AutoCompleteTextView = findViewById(R.id.spinner4)
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
             SelectionEnums.MULTIPLIER.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
-            dropDown4.setAdapter(adapter)
+            dropDownMultiplier.setAdapter(adapter)
         }
 
-        dropDown4.onItemClickListener =
+        dropDownMultiplier.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                multiplierBand = dropDown4.adapter.getItem(position).toString()
-                dropDown4.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(multiplierBand),0,0,0)
+                multiplierBand = dropDownMultiplier.adapter.getItem(position).toString()
+                dropDownMultiplier.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(multiplierBand),0,0,0)
                 calcResistanceHelper()
                 band4.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(multiplierBand)))
             }
 
-
         // tolerance band
-        val dropDown5 : AutoCompleteTextView = findViewById(R.id.spinner5)
+        val dropDownTolerance : AutoCompleteTextView = findViewById(R.id.spinner5)
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
             SelectionEnums.TOLERANCE.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
-            dropDown5.setAdapter(adapter)
+            dropDownTolerance.setAdapter(adapter)
         }
 
-        dropDown5.onItemClickListener =
+        dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                toleranceBand = dropDown5.adapter.getItem(position).toString()
-                dropDown5.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(toleranceBand),0,0,0)
+                toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
+                dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(toleranceBand),0,0,0)
                 calcResistanceHelper()
                 band5.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(toleranceBand)))
             }
 
-
         // temperature coefficient band
-        val dropDown6 : AutoCompleteTextView = findViewById(R.id.spinner6)
+        val dropDownPPM : AutoCompleteTextView = findViewById(R.id.spinner6)
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
             SelectionEnums.PPM.array
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
-            dropDown6.setAdapter(adapter)
+            dropDownPPM.setAdapter(adapter)
         }
 
-        dropDown6.onItemClickListener =
+        dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                ppmBand = dropDown6.adapter.getItem(position).toString()
-                dropDown6.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(ppmBand),0,0,0)
+                ppmBand = dropDownPPM.adapter.getItem(position).toString()
+                dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(ppmBand),0,0,0)
                 calcResistanceHelper()
                 band6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(ppmBand)))
             }
@@ -312,9 +300,9 @@ class MainActivity : AppCompatActivity() {
 
     // will determine which calculations to do
     private fun calcResistanceHelper() {
-        if(toggleDropDown3.visibility == View.GONE && toggleDropDown6.visibility == View.GONE) {
+        if(toggleDropDownNumberBand3.visibility == View.GONE && toggleDropDownPPM.visibility == View.GONE) {
             textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, multiplierBand, toleranceBand)
-        } else if(toggleDropDown6.visibility == View.GONE){
+        } else if(toggleDropDownPPM.visibility == View.GONE){
             textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand)
         } else {
             textView.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand)
