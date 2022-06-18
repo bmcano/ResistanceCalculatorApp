@@ -1,6 +1,7 @@
 package com.example.resistancecalculator
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,6 +10,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -173,7 +175,7 @@ class ValueToColorActivity : AppCompatActivity() {
             if (text.toString() == "" || text.toString() == ".") {
                 textInputLayout.error = null
                 resistance = "NotValid"
-            }else if (!ResistorFormatter.isValidInput(imageSelection, text.toString(), units)) {
+            } else if (!ResistorFormatter.isValidInput(imageSelection, text.toString(), units)) {
                 textInputLayout.error = "Invalid Input"
                 resistance = "NotValid"
             } else {
@@ -191,6 +193,13 @@ class ValueToColorActivity : AppCompatActivity() {
                 if (colors[2] != -1) numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
                 else numberBand3.setColorFilter(ContextCompat.getColor(this, R.color.resistor_blank))
                 multiplierBand.setColorFilter(ContextCompat.getColor(this, colors[3]))
+            }
+
+            // close keyboard
+            val view = this.currentFocus
+            if (view != null) {
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
             }
         }
     }

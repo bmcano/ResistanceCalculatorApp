@@ -9,7 +9,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_text_outline"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="120dp"
+        android:layout_width="132dp"
         android:layout_height="64dp"
         android:layout_marginTop="16dp"
         android:hint="@string/type_resistance"
@@ -35,7 +35,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dropDownSelectorUnits"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="120dp"
+        android:layout_width="108dp"
         android:layout_height="64dp"
         android:layout_marginTop="16dp"
         android:hint="@string/units"

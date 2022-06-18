@@ -208,10 +208,10 @@
 
     <TextView
         android:id="@+id/resistance_display_new"
-        android:layout_width="match_parent"
+        android:layout_width="256dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/outlined_box"
         android:padding="4dp"
@@ -221,7 +221,6 @@
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/r_post_band_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpUsage" />
 
