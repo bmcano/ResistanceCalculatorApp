@@ -51,7 +51,7 @@ object ColorFinder {
             "Violet" -> R.color.violet32
             "White" -> R.color.white32
             "Silver" -> R.color.silver32
-            "Gray" -> R.color.gray
+            "Gray" -> R.color.gray32
             "Black" -> R.color.black32
             "Brown" -> R.color.brown32
             else -> { R.color.resistor_blank }
@@ -134,7 +134,7 @@ object ColorFinder {
             7 -> R.color.violet32
             8 -> R.color.white32
             9 -> R.color.silver32
-            10 -> R.color.gray
+            10 -> R.color.gray32
             11 -> R.color.black32
             12 -> R.color.brown32
             else -> { R.color.black32 }
