@@ -1,4 +1,4 @@
-package com.example.resistancecalculator
+package com.brandoncano.resistancecalculator
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

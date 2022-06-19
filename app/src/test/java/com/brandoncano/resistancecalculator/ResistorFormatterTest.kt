@@ -1,4 +1,4 @@
-package com.example.resistancecalculator
+package com.brandoncano.resistancecalculator
 
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertFalse

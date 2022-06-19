@@ -1,4 +1,4 @@
-package com.example.resistancecalculator
+package com.brandoncano.resistancecalculator
 
 object ColorFinder {
     private const val PLUS_MINUS: String = "±"

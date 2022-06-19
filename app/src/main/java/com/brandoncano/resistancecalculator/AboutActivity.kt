@@ -1,4 +1,4 @@
-package com.example.resistancecalculator
+package com.brandoncano.resistancecalculator
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

@@ -1,4 +1,4 @@
-package com.example.resistancecalculator
+package com.brandoncano.resistancecalculator
 
 object ResistanceFormatter {
     private const val OMEGA: String = "Ω"

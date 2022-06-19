@@ -1,4 +1,4 @@
-package com.example.resistancecalculator
+package com.brandoncano.resistancecalculator
 
 enum class SelectionEnums(val array: Array<String>){
 
