@@ -44,6 +44,9 @@ class ValueToColorActivity : AppCompatActivity() {
     private lateinit var textInputLayout: TextInputLayout
     private lateinit var inputResistance: EditText
 
+    private var buttonCheck = ""
+    private var resistance = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_value_to_color)
@@ -172,6 +175,7 @@ class ValueToColorActivity : AppCompatActivity() {
 
             toggleDropDown.visibility = View.INVISIBLE
             imageSelection = 4
+            if (resistance != "") resistance = errorFinder(buttonCheck)
         }
 
         // toggle five band resistor
@@ -183,6 +187,7 @@ class ValueToColorActivity : AppCompatActivity() {
 
             toggleDropDown.visibility = View.INVISIBLE
             imageSelection = 5
+            if (resistance != "") resistance = errorFinder(buttonCheck)
         }
 
         // toggle six band resistor
@@ -194,21 +199,13 @@ class ValueToColorActivity : AppCompatActivity() {
 
             toggleDropDown.visibility = View.VISIBLE
             imageSelection = 6
+            if (resistance != "") resistance = errorFinder(buttonCheck)
         }
 
         // calculate button and related items
-        var resistance = "NotValid"
+
         inputResistance.doOnTextChanged { text, _, _, _ ->
-            if (text.toString() == "" || text.toString() == ".") {
-                textInputLayout.error = null
-                resistance = "NotValid"
-            } else if (!ResistorFormatter.isValidInput(imageSelection, text.toString(), units)) {
-                textInputLayout.error = "Invalid Input"
-                resistance = "NotValid"
-            } else {
-                textInputLayout.error = null
-                resistance = text.toString()
-            }
+            resistance = errorFinder(text.toString())
         }
 
         // make the resistor
@@ -253,6 +250,22 @@ class ValueToColorActivity : AppCompatActivity() {
         }
     }
 
+    private fun errorFinder(text: String) : String {
+        return if (text == "" || text == ".") {
+            textInputLayout.error = null
+            buttonCheck = ""
+            ""
+        } else if (!ResistorFormatter.isValidInput(imageSelection, text, units)) {
+            textInputLayout.error = "Invalid Input"
+            buttonCheck = text
+            "NotValid"
+        } else {
+            textInputLayout.error = null
+            buttonCheck = text
+            text
+        }
+    }
+
     private fun dropDownSetup() {
         // units
         val dropDownUnits : AutoCompleteTextView = findViewById(R.id.spinnerUnits)
@@ -268,6 +281,7 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownUnits.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 units = dropDownUnits.adapter.getItem(position).toString()
+                if (resistance != "") resistance = errorFinder(buttonCheck)
             }
 
         // tolerance
