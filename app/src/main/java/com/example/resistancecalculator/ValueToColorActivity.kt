@@ -37,6 +37,7 @@ class ValueToColorActivity : AppCompatActivity() {
     private var toleranceBand: String = ""
     private var ppmBand: String = ""
     private var units: String = ""
+    private var shareColors: Array<Int> = arrayOf()
 
     private var imageSelection = 4
     private lateinit var chartDialog: Dialog
@@ -96,16 +97,27 @@ class ValueToColorActivity : AppCompatActivity() {
                 true
             }
 
-            // TODO - construct message to copy
             R.id.share_item -> {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "plain/text"
+
+                var nb1 = ""; var nb2 = ""; var nb3 = ""; var multi= ""; var tol = ""; var ppm = ""
+                if(shareColors.isNotEmpty()) {
+                    nb1 = ColorFinder.idToColorText(shareColors[0])
+                    nb2 = ColorFinder.idToColorText(shareColors[1])
+                    nb3 = ColorFinder.idToColorText(shareColors[2])
+                    multi = ColorFinder.idToColorText(shareColors[3])
+                    tol = ColorFinder.idToColorText(ColorFinder.toleranceImage(toleranceBand))
+                    ppm = ColorFinder.idToColorText(ColorFinder.ppmImage(ppmBand))
+                }
+
                 val text = when (imageSelection) {
-                    4 -> "${screenText.text}"
-                    5 -> "${screenText.text}"
-                    6 -> "${screenText.text}"
+                    4 -> "${screenText.text}\n[ $nb1, $nb2, $multi, $tol ]"
+                    5 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol ]"
+                    6 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol, $ppm ]"
                     else -> ""
                 }
+
                 intent.putExtra(Intent.EXTRA_TEXT, text)
                 startActivity(Intent.createChooser(intent, ""))
                 true
@@ -202,6 +214,7 @@ class ValueToColorActivity : AppCompatActivity() {
         // make the resistor
         calculateButton.setOnClickListener {
             val colors: Array<Int> = ResistorFormatter.generateResistor(imageSelection, resistance, units)
+            shareColors = colors
             if(colors.isNotEmpty()) {
                 numberBand1.setColorFilter(ContextCompat.getColor(this, colors[0]))
                 numberBand2.setColorFilter(ContextCompat.getColor(this, colors[1]))

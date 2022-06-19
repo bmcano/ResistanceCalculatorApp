@@ -122,6 +122,24 @@ object ColorFinder {
         }
     }
 
+    fun idToColorText(colorId: Int) : String {
+        return when(colorId) {
+            R.color.black32, R.drawable.black32 -> "Black"
+            R.color.brown32, R.drawable.brown32 -> "Brown"
+            R.color.red32, R.drawable.red32 -> "Red"
+            R.color.orange32, R.drawable.orange32 -> "Orange"
+            R.color.yellow32, R.drawable.yellow32 -> "Yellow"
+            R.color.green32, R.drawable.green32 -> "Green"
+            R.color.blue32, R.drawable.blue32 -> "Blue"
+            R.color.violet32, R.drawable.violet32 -> "Violet"
+            R.color.gray32, R.drawable.gray32 -> "Gray"
+            R.color.gold32, R.drawable.gold32 -> "Gold"
+            R.color.silver32, R.drawable.silver32 -> "Silver"
+            else -> ""
+        }
+
+    }
+
     // picks a random color
     fun randomColor() : Int {
         return when((1..12).random()) {

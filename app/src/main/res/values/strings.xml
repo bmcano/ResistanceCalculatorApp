@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Resistance Calculator</string>
+    <string name="app_name">RCV - Calculator</string>
 
     <string name="spinner_hint">Color</string>
     <string name="number_band_hint1">First Number</string>
@@ -28,9 +28,10 @@
     <string name="version">v1.0</string>
     <string name="created_by">Created By\n\nBrandon Cano</string>
     <string name="description">
-        In this app you are able to calculate the resistance for four, five, or six bands resistors.
-        \n\nYou can also look at the color charts, under \"Show Chart\", for each of the resistors
-        for reference.
+        In this app you are able to find the resistance of a resistor based on the color of its
+        bands or you can type in a resistance and it will generate what the resistor will look like.
+        This can be done for four, five, and six band resistors.
+        \n\nYou can also look at the color charts, under \"Show Chart\", for reference.
     </string>
     <string name="last_updated">Last Updated On: 6/18/2022</string>
 </resources>
