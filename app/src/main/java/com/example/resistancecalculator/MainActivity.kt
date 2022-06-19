@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu_dropdown_1, menu)
+        inflater.inflate(R.menu.menu_dropdown_ctv, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

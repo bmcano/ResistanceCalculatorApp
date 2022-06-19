@@ -69,7 +69,7 @@ class ValueToColorActivity : AppCompatActivity() {
     // options menu dropdown in top right corner
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu_dropdown_2, menu)
+        inflater.inflate(R.menu.menu_dropdown_vtc, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
