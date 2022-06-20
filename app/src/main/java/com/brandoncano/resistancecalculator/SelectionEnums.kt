@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator
 
 enum class SelectionEnums(val array: Array<String>){
-
     NUMBER(arrayOf(
         "Black", "Brown", "Red", "Orange", "Yellow", "Green", "Blue", "Violet", "Gray", "White"
     )),
@@ -34,10 +33,10 @@ enum class SelectionEnums(val array: Array<String>){
         "15 ppm/${S.DEGREE}C", "25 ppm/${S.DEGREE}C", "20 ppm/${S.DEGREE}C",
         "10 ppm/${S.DEGREE}C", "5 ppm/${S.DEGREE}C", "1 ppm/${S.DEGREE}C"
     ))
-}
-
-private object S {
-    const val OMEGA: String = "Ω"
-    const val PLUS_MINUS: String = "±"
-    const val DEGREE: String = "°"
+    ;
+    private object S {
+        const val OMEGA: String = "Ω"
+        const val PLUS_MINUS: String = "±"
+        const val DEGREE: String = "°"
+    }
 }
