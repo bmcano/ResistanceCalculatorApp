@@ -1,11 +1,9 @@
 package com.brandoncano.resistancecalculator
 
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -40,7 +38,6 @@ class ValueToColorActivity : AppCompatActivity() {
     private var shareColors: Array<Int> = arrayOf()
 
     private var imageSelection = 4
-    private lateinit var chartDialog: Dialog
     private lateinit var textInputLayout: TextInputLayout
     private lateinit var inputResistance: EditText
 
@@ -86,54 +83,19 @@ class ValueToColorActivity : AppCompatActivity() {
             }
 
             R.id.show_resistor_charts -> {
-                chartDialog = Dialog(this)
-                chartDialog.setContentView(
-                    when(imageSelection) {
-                        4 -> R.layout.popup_chart_4
-                        5 -> R.layout.popup_chart_5
-                        6 -> R.layout.popup_chart_6
-                        else -> { R.layout.popup_chart_6 }
-                    }
-                )
-                chartDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                chartDialog.show()
+                MenuFunctions.showResistorCharts(this, imageSelection)
                 true
             }
 
             R.id.share_item -> {
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.type = "plain/text"
-
-                var nb1 = ""; var nb2 = ""; var nb3 = ""; var multi= ""; var tol = ""; var ppm = ""
-                if(shareColors.isNotEmpty()) {
-                    nb1 = ColorFinder.idToColorText(shareColors[0])
-                    nb2 = ColorFinder.idToColorText(shareColors[1])
-                    nb3 = ColorFinder.idToColorText(shareColors[2])
-                    multi = ColorFinder.idToColorText(shareColors[3])
-                    tol = ColorFinder.idToColorText(ColorFinder.toleranceImage(toleranceBand))
-                    ppm = ColorFinder.idToColorText(ColorFinder.ppmImage(ppmBand))
-                }
-
-                val text = when (imageSelection) {
-                    4 -> "${screenText.text}\n[ $nb1, $nb2, $multi, $tol ]"
-                    5 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol ]"
-                    6 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol, $ppm ]"
-                    else -> ""
-                }
-
-                intent.putExtra(Intent.EXTRA_TEXT, text)
+                val intent = MenuFunctions.shareItemVTC(imageSelection, shareColors, screenText, toleranceBand, ppmBand)
                 startActivity(Intent.createChooser(intent, ""))
                 true
             }
 
             R.id.feedback -> {
                 val intent = Intent(Intent.ACTION_VIEW)
-                val data: Uri = Uri.parse(
-                    "mailto:brandoncano.development@gmail.com?subject="
-                            + Uri.encode("[Feedback] - Resistance Calculator")
-                        .toString() + "&body=" + Uri.encode("")
-                )
-                intent.data = data
+                intent.data = MenuFunctions.feedback()
                 startActivity(intent)
                 true
             }

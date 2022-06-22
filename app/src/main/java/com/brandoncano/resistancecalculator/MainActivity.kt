@@ -1,10 +1,8 @@
 package com.brandoncano.resistancecalculator
 
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -21,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fiveBandButton: Button
     private lateinit var sixBandButton: Button
 
-    private lateinit var chartDialog: Dialog
     private var imageSelection = 4
 
     private var numberBand1: String = ""
@@ -79,42 +76,19 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.show_resistor_charts -> {
-                chartDialog = Dialog(this)
-                chartDialog.setContentView(
-                    when(imageSelection) {
-                        4 -> R.layout.popup_chart_4
-                        5 -> R.layout.popup_chart_5
-                        6 -> R.layout.popup_chart_6
-                        else -> { R.layout.popup_chart_6 }
-                    }
-                )
-                chartDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                chartDialog.show()
+                MenuFunctions.showResistorCharts(this, imageSelection)
                 true
             }
 
             R.id.share_item -> {
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.type = "plain/text"
-                val text = when (imageSelection) {
-                    4 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $multiplierBand, $toleranceBand ]"
-                    5 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $numberBand3 $multiplierBand, $toleranceBand ]"
-                    6 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $numberBand3, $multiplierBand, $toleranceBand, $ppmBand ]"
-                    else -> ""
-                }
-                intent.putExtra(Intent.EXTRA_TEXT, text)
+                val intent = MenuFunctions.shareItemCTV(imageSelection, screenText, numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand)
                 startActivity(Intent.createChooser(intent, ""))
                 true
             }
 
             R.id.feedback -> {
                 val intent = Intent(Intent.ACTION_VIEW)
-                val data: Uri = Uri.parse(
-                    "mailto:brandoncano.development@gmail.com?subject="
-                            + Uri.encode("[Feedback] - Resistance Calculator")
-                        .toString() + "&body=" + Uri.encode("")
-                )
-                intent.data = data
+                intent.data = MenuFunctions.feedback()
                 startActivity(intent)
                 true
             }
