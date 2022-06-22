@@ -9,7 +9,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,32 +23,26 @@ import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputLayout
 
 class ValueToColorActivity : AppCompatActivity() {
+    companion object {
+        private const val EMPTY_STRING = ""
+    }
+
     private lateinit var screenText: TextView
-    private lateinit var fourBandButton: Button
-    private lateinit var fiveBandButton: Button
-    private lateinit var sixBandButton: Button
-    private lateinit var calculateButton: Button
-
-    private lateinit var toggleDropDown: TextInputLayout
-
     private lateinit var numberBand1: ImageView
     private lateinit var numberBand2: ImageView
     private lateinit var numberBand3: ImageView
     private lateinit var multiplierBand: ImageView
     private lateinit var toleranceColor: ImageView
     private lateinit var ppmColor: ImageView
-
-    private var toleranceBand: String = ""
-    private var ppmBand: String = ""
-    private var units: String = ""
-    private var shareColors: Array<Int> = arrayOf()
+    private lateinit var toggleDropDown: TextInputLayout
 
     private var imageSelection = 4
-    private lateinit var textInputLayout: TextInputLayout
-    private lateinit var inputResistance: EditText
-
-    private var buttonCheck = ""
-    private var resistance = ""
+    private var buttonCheck = EMPTY_STRING
+    private var resistance = EMPTY_STRING
+    private var toleranceBand: String = EMPTY_STRING
+    private var ppmBand: String = EMPTY_STRING
+    private var units: String = EMPTY_STRING
+    private var shareColors: Array<Int> = arrayOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +56,7 @@ class ValueToColorActivity : AppCompatActivity() {
 
         idSetup()
         buttonSetup()
+        calculateButtonSetup()
         dropDownSetup()
     }
 
@@ -63,16 +64,18 @@ class ValueToColorActivity : AppCompatActivity() {
         super.onResume()
         idSetup()
         buttonSetup()
+        calculateButtonSetup()
         dropDownSetup()
     }
 
-    // options menu dropdown in top right corner
+    // create menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_dropdown_vtc, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
+    // menu options
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.color_to_value -> {
@@ -89,7 +92,7 @@ class ValueToColorActivity : AppCompatActivity() {
 
             R.id.share_item -> {
                 val intent = MenuFunctions.shareItemVTC(imageSelection, shareColors, screenText, toleranceBand, ppmBand)
-                startActivity(Intent.createChooser(intent, ""))
+                startActivity(Intent.createChooser(intent, EMPTY_STRING))
                 true
             }
 
@@ -118,53 +121,43 @@ class ValueToColorActivity : AppCompatActivity() {
         multiplierBand = findViewById(R.id.r_band_4)
         toleranceColor = findViewById(R.id.r_band_5)
         ppmColor = findViewById(R.id.r_band_6)
-        inputResistance = findViewById(R.id.enter_resistance)
-        fourBandButton = findViewById(R.id.four_band)
-        fiveBandButton = findViewById(R.id.five_band)
-        sixBandButton = findViewById(R.id.six_band)
-        calculateButton = findViewById(R.id.calculate)
         toggleDropDown = findViewById(R.id.dropDownSelectorPPM)
-        textInputLayout = findViewById(R.id.edit_text_outline)
     }
 
     private fun buttonSetup() {
+        val fourBandButton: Button = findViewById(R.id.four_band)
+        val fiveBandButton: Button = findViewById(R.id.five_band)
+        val sixBandButton: Button = findViewById(R.id.six_band)
+
         // toggle four band resistor
         fourBandButton.setOnClickListener {
-            fourBandButton.setBackgroundColor(getColor(R.color.green_700))
-
-            fiveBandButton.setBackgroundColor(getColor(R.color.green_500))
-            sixBandButton.setBackgroundColor(getColor(R.color.green_500))
-
-            toggleDropDown.visibility = View.INVISIBLE
-            imageSelection = 4
-            if (resistance != "") resistance = errorFinder(buttonCheck)
+            buttonListener(fourBandButton, fiveBandButton, sixBandButton, 4, View.INVISIBLE)
         }
 
         // toggle five band resistor
         fiveBandButton.setOnClickListener {
-            fiveBandButton.setBackgroundColor(getColor(R.color.green_700))
-
-            fourBandButton.setBackgroundColor(getColor(R.color.green_500))
-            sixBandButton.setBackgroundColor(getColor(R.color.green_500))
-
-            toggleDropDown.visibility = View.INVISIBLE
-            imageSelection = 5
-            if (resistance != "") resistance = errorFinder(buttonCheck)
+            buttonListener(fiveBandButton, fourBandButton, sixBandButton, 5, View.INVISIBLE)
         }
 
         // toggle six band resistor
         sixBandButton.setOnClickListener {
-            sixBandButton.setBackgroundColor(getColor(R.color.green_700))
-
-            fourBandButton.setBackgroundColor(getColor(R.color.green_500))
-            fiveBandButton.setBackgroundColor(getColor(R.color.green_500))
-
-            toggleDropDown.visibility = View.VISIBLE
-            imageSelection = 6
-            if (resistance != "") resistance = errorFinder(buttonCheck)
+            buttonListener(sixBandButton, fourBandButton, fiveBandButton, 6, View.VISIBLE)
         }
+    }
 
-        // calculate button and related items
+    private fun buttonListener(selectedBtn: Button, btn1: Button, btn2: Button, btnNumber: Int, view: Int ) {
+        selectedBtn.setBackgroundColor(getColor(R.color.green_700))
+        btn1.setBackgroundColor(getColor(R.color.green_500))
+        btn2.setBackgroundColor(getColor(R.color.green_500))
+
+        toggleDropDown.visibility = view
+        imageSelection = btnNumber
+        if (resistance != EMPTY_STRING) resistance = errorFinder(buttonCheck)
+    }
+
+    private fun calculateButtonSetup() {
+        val inputResistance: EditText = findViewById(R.id.enter_resistance)
+        val calculateButton: Button = findViewById(R.id.calculate)
 
         inputResistance.doOnTextChanged { text, _, _, _ ->
             resistance = errorFinder(text.toString())
@@ -173,7 +166,7 @@ class ValueToColorActivity : AppCompatActivity() {
         // make the resistor
         calculateButton.setOnClickListener {
             val colors: Array<Int> = ResistorFormatter.generateResistor(imageSelection, resistance, units)
-            shareColors = colors
+            shareColors = colors // for sharing in menu
             if(colors.isNotEmpty()) {
                 numberBand1.setColorFilter(ContextCompat.getColor(this, colors[0]))
                 numberBand2.setColorFilter(ContextCompat.getColor(this, colors[1]))
@@ -181,42 +174,20 @@ class ValueToColorActivity : AppCompatActivity() {
                 multiplierBand.setColorFilter(ContextCompat.getColor(this, colors[3]))
                 toleranceColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.toleranceColor(toleranceBand)))
 
-                var text = ""
-                when (imageSelection) {
-                    4 -> {
-                        numberBand3.setColorFilter(ContextCompat.getColor(this, R.color.resistor_blank))
-                        ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
-                        text = "$resistance $units $toleranceBand"
-                    }
-                    5 -> {
-                        numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
-                        ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
-                        text = "$resistance $units $toleranceBand"
-                    }
-                    6-> {
-                        numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
-                        ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor(ppmBand)))
-                        text = if(ppmBand == "") "$resistance $units $toleranceBand" else "$resistance $units $toleranceBand\n$ppmBand"
-                    }
-                }
-
-                screenText.text = text
+                screenText.text = updateText(colors)
             }
 
-            // close keyboard
-            val view = this.currentFocus
-            if (view != null) {
-                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(view.windowToken, 0)
-            }
+            closeKeyboard()
         }
     }
 
+    // finds any errors in the user input
     private fun errorFinder(text: String) : String {
-        return if (text == "" || text == ".") {
+        val textInputLayout: TextInputLayout = findViewById(R.id.edit_text_outline)
+        return if (text == EMPTY_STRING || text == ".") {
             textInputLayout.error = null
-            buttonCheck = ""
-            ""
+            buttonCheck = EMPTY_STRING
+            EMPTY_STRING
         } else if (!ResistorFormatter.isValidInput(imageSelection, text, units)) {
             textInputLayout.error = "Invalid Input"
             buttonCheck = text
@@ -228,6 +199,38 @@ class ValueToColorActivity : AppCompatActivity() {
         }
     }
 
+    // updates the text on the screen
+    private fun updateText(colors: Array<Int>) : String {
+        return when (imageSelection) {
+            4 -> {
+                numberBand3.setColorFilter(ContextCompat.getColor(this, R.color.resistor_blank))
+                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
+                "$resistance $units $toleranceBand"
+            }
+            5 -> {
+                numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
+                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
+                "$resistance $units $toleranceBand"
+            }
+            6-> {
+                numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
+                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor(ppmBand)))
+                if(ppmBand == EMPTY_STRING) "$resistance $units $toleranceBand" else "$resistance $units $toleranceBand\n$ppmBand"
+            }
+            else -> { EMPTY_STRING }
+        }
+    }
+
+    // closes the keyboard
+    private fun closeKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
+    // drop downs
     private fun dropDownSetup() {
         // units
         val dropDownUnits : AutoCompleteTextView = findViewById(R.id.spinnerUnits)
@@ -243,7 +246,7 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownUnits.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 units = dropDownUnits.adapter.getItem(position).toString()
-                if (resistance != "") resistance = errorFinder(buttonCheck)
+                if (resistance != EMPTY_STRING) resistance = errorFinder(buttonCheck)
             }
 
         // tolerance

@@ -8,7 +8,14 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.widget.TextView
 
+/**
+ * Job: holds all the logic for the menu items, to keep activities cleaner and more condense
+ *
+ * @author: Brandon
+ */
+
 object MenuFunctions {
+    // determines which chart to display
     fun showResistorCharts(context: Context, imageSelection: Int) {
         val chartDialog = Dialog(context)
         chartDialog.setContentView(
@@ -23,6 +30,7 @@ object MenuFunctions {
         chartDialog.show()
     }
 
+    // generates to text to copy/share for CTV
     fun shareItemCTV(imageSelection: Int, screenText: TextView, numberBand1: String, numberBand2: String,
                      numberBand3: String, multiplierBand: String, toleranceBand: String, ppmBand: String ) : Intent {
         val intent = Intent(Intent.ACTION_SEND)
@@ -37,6 +45,7 @@ object MenuFunctions {
         return intent
     }
 
+    // generates to text to copy/share for VTC
     fun shareItemVTC(imageSelection: Int, shareColors: Array<Int>, screenText: TextView, toleranceBand: String, ppmBand: String) : Intent {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
@@ -62,6 +71,7 @@ object MenuFunctions {
         return intent
     }
 
+    // setups up the email for feedback
     fun feedback(): Uri {
         return Uri.parse(
             "mailto:brandoncano.development@gmail.com?subject="

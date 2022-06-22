@@ -7,7 +7,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -15,10 +20,6 @@ import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
     private lateinit var screenText: TextView
-    private lateinit var fourBandButton: Button
-    private lateinit var fiveBandButton: Button
-    private lateinit var sixBandButton: Button
-
     private var imageSelection = 4
 
     private var numberBand1: String = ""
@@ -31,12 +32,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toggleDropDownNumberBand3: TextInputLayout
     private lateinit var toggleDropDownPPM: TextInputLayout
 
-    private lateinit var band1: ImageView
-    private lateinit var band2: ImageView
-    private lateinit var band3: ImageView
-    private lateinit var band4: ImageView
-    private lateinit var band5: ImageView
-    private lateinit var band6: ImageView
+    private lateinit var bandImgae1: ImageView
+    private lateinit var bandImage2: ImageView
+    private lateinit var bandImage3: ImageView
+    private lateinit var bandImage4: ImageView
+    private lateinit var bandImage5: ImageView
+    private lateinit var bandImage6: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,12 +61,14 @@ class MainActivity : AppCompatActivity() {
         buttonSetup()
     }
 
+    // create menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_dropdown_ctv, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
+    // menu options
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.value_to_color -> {
@@ -105,70 +108,56 @@ class MainActivity : AppCompatActivity() {
 
     private fun idSetup() {
         screenText = findViewById(R.id.resistance_display_new)
-        band1 = findViewById(R.id.r_band_1)
-        band2 = findViewById(R.id.r_band_2)
-        band3 = findViewById(R.id.r_band_3)
-        band4 = findViewById(R.id.r_band_4)
-        band5 = findViewById(R.id.r_band_5)
-        band6 = findViewById(R.id.r_band_6)
-        fourBandButton = findViewById(R.id.four_band)
-        fiveBandButton = findViewById(R.id.five_band)
-        sixBandButton = findViewById(R.id.six_band)
+        bandImgae1 = findViewById(R.id.r_band_1)
+        bandImage2 = findViewById(R.id.r_band_2)
+        bandImage3 = findViewById(R.id.r_band_3)
+        bandImage4 = findViewById(R.id.r_band_4)
+        bandImage5 = findViewById(R.id.r_band_5)
+        bandImage6 = findViewById(R.id.r_band_6)
         toggleDropDownNumberBand3 = findViewById(R.id.dropDownSelector3)
         toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
     }
 
     private fun buttonSetup() {
+        val fourBandButton: Button = findViewById(R.id.four_band)
+        val fiveBandButton: Button = findViewById(R.id.five_band)
+        val sixBandButton: Button = findViewById(R.id.six_band)
+
         // toggle four band resistor
         fourBandButton.setOnClickListener {
-            fourBandButton.setBackgroundColor(getColor(R.color.green_700))
+            buttonListener(fourBandButton, fiveBandButton, sixBandButton, 4, View.GONE, View.GONE)
 
-            fiveBandButton.setBackgroundColor(getColor(R.color.green_500))
-            sixBandButton.setBackgroundColor(getColor(R.color.green_500))
-
-            toggleDropDownNumberBand3.visibility = View.GONE
-            toggleDropDownPPM.visibility = View.GONE
-
-            calcResistanceHelper()
-            imageSelection = 4
-
-            band3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
-            band6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
+            bandImage3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
+            bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
         }
 
         // toggle five band resistor
         fiveBandButton.setOnClickListener {
-            fiveBandButton.setBackgroundColor(getColor(R.color.green_700))
+            buttonListener(fiveBandButton, fourBandButton, sixBandButton, 5, View.VISIBLE, View.GONE)
 
-            fourBandButton.setBackgroundColor(getColor(R.color.green_500))
-            sixBandButton.setBackgroundColor(getColor(R.color.green_500))
-
-            toggleDropDownNumberBand3.visibility = View.VISIBLE
-            toggleDropDownPPM.visibility = View.GONE
-
-            calcResistanceHelper()
-            imageSelection = 5
-
-            band3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
-            band6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
+            bandImage3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
+            bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
         }
 
         // toggle six band resistor
         sixBandButton.setOnClickListener {
-            sixBandButton.setBackgroundColor(getColor(R.color.green_700))
+            buttonListener(sixBandButton, fourBandButton, fiveBandButton, 6, View.VISIBLE, View.VISIBLE)
 
-            fourBandButton.setBackgroundColor(getColor(R.color.green_500))
-            fiveBandButton.setBackgroundColor(getColor(R.color.green_500))
-
-            toggleDropDownNumberBand3.visibility = View.VISIBLE
-            toggleDropDownPPM.visibility = View.VISIBLE
-
-            calcResistanceHelper()
-            imageSelection = 6
-
-            band3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
-            band6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(ppmBand)))
+            bandImage3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
+            bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(ppmBand)))
         }
+    }
+
+    private fun buttonListener(selectedBtn: Button, btn1: Button, btn2: Button, btnNumber: Int, view1: Int, view2: Int ) {
+        selectedBtn.setBackgroundColor(getColor(R.color.green_700))
+        btn1.setBackgroundColor(getColor(R.color.green_500))
+        btn2.setBackgroundColor(getColor(R.color.green_500))
+
+        toggleDropDownNumberBand3.visibility = view1
+        toggleDropDownPPM.visibility = view2
+
+        calcResistanceHelper()
+        imageSelection = btnNumber
     }
 
     private fun dropDownSetup() {
@@ -188,7 +177,7 @@ class MainActivity : AppCompatActivity() {
                 numberBand1 = dropDownBand1.adapter.getItem(position).toString()
                 dropDownBand1.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand1),0,0,0)
                 calcResistanceHelper()
-                band1.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand1)))
+                bandImgae1.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand1)))
             }
 
         // number band 2
@@ -207,7 +196,7 @@ class MainActivity : AppCompatActivity() {
                 numberBand2 = dropDownBand2.adapter.getItem(position).toString()
                 dropDownBand2.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand2),0,0,0)
                 calcResistanceHelper()
-                band2.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand2)))
+                bandImage2.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand2)))
             }
 
         // number band 3
@@ -226,7 +215,7 @@ class MainActivity : AppCompatActivity() {
                 numberBand3 = dropDownBand3.adapter.getItem(position).toString()
                 dropDownBand3.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand3),0,0,0)
                 calcResistanceHelper()
-                band3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
+                bandImage3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
             }
 
         // multiplier band
@@ -245,7 +234,7 @@ class MainActivity : AppCompatActivity() {
                 multiplierBand = dropDownMultiplier.adapter.getItem(position).toString()
                 dropDownMultiplier.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(multiplierBand),0,0,0)
                 calcResistanceHelper()
-                band4.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(multiplierBand)))
+                bandImage4.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(multiplierBand)))
             }
 
         // tolerance band
@@ -264,7 +253,7 @@ class MainActivity : AppCompatActivity() {
                 toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
                 dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(toleranceBand),0,0,0)
                 calcResistanceHelper()
-                band5.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(toleranceBand)))
+                bandImage5.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(toleranceBand)))
             }
 
         // temperature coefficient band
@@ -283,7 +272,7 @@ class MainActivity : AppCompatActivity() {
                 ppmBand = dropDownPPM.adapter.getItem(position).toString()
                 dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(ppmBand),0,0,0)
                 calcResistanceHelper()
-                band6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(ppmBand)))
+                bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(ppmBand)))
             }
     }
 
