@@ -22,6 +22,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputLayout
 
+/**
+ * Job: activity for the value to color page
+ *
+ * @author: Brandon
+ */
+
 class ValueToColorActivity : AppCompatActivity() {
     companion object {
         private const val EMPTY_STRING = ""

@@ -18,6 +18,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputLayout
 
+/**
+ * Job: activity for the color to value page
+ *
+ * @author: Brandon
+ */
+
 class MainActivity : AppCompatActivity() {
     private lateinit var screenText: TextView
     private var imageSelection = 4

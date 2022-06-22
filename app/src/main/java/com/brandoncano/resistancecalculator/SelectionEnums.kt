@@ -1,5 +1,11 @@
 package com.brandoncano.resistancecalculator
 
+/**
+ * Job: contains the arrays for each of the drop downs that exist in the app
+ *
+ * @author: Brandon
+ */
+
 enum class SelectionEnums(val array: Array<String>){
     NUMBER(arrayOf(
         "Black", "Brown", "Red", "Orange", "Yellow", "Green", "Blue", "Violet", "Gray", "White"
