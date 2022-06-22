@@ -15,6 +15,8 @@ import android.widget.TextView
  */
 
 object MenuFunctions {
+    private const val EMPTY_STRING = ""
+
     // determines which chart to display
     fun showResistorCharts(context: Context, imageSelection: Int) {
         val chartDialog = Dialog(context)
@@ -39,7 +41,7 @@ object MenuFunctions {
             4 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $multiplierBand, $toleranceBand ]"
             5 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $numberBand3 $multiplierBand, $toleranceBand ]"
             6 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $numberBand3, $multiplierBand, $toleranceBand, $ppmBand ]"
-            else -> ""
+            else -> EMPTY_STRING
         }
         intent.putExtra(Intent.EXTRA_TEXT, text)
         return intent
@@ -50,7 +52,9 @@ object MenuFunctions {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
 
-        var nb1 = ""; var nb2 = ""; var nb3 = ""; var multi= ""; var tol = ""; var ppm = ""
+        var nb1 = EMPTY_STRING; var nb2 = EMPTY_STRING; var nb3 = EMPTY_STRING
+        var multi= EMPTY_STRING; var tol = EMPTY_STRING; var ppm = EMPTY_STRING
+
         if(shareColors.isNotEmpty()) {
             nb1 = ColorFinder.idToColorText(shareColors[0])
             nb2 = ColorFinder.idToColorText(shareColors[1])
@@ -64,7 +68,7 @@ object MenuFunctions {
             4 -> "${screenText.text}\n[ $nb1, $nb2, $multi, $tol ]"
             5 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol ]"
             6 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol, $ppm ]"
-            else -> ""
+            else -> EMPTY_STRING
         }
 
         intent.putExtra(Intent.EXTRA_TEXT, text)
@@ -76,7 +80,7 @@ object MenuFunctions {
         return Uri.parse(
             "mailto:brandoncano.development@gmail.com?subject="
                     + Uri.encode("[Feedback] - Resistance Calculator")
-                .toString() + "&body=" + Uri.encode("")
+                .toString() + "&body=" + Uri.encode(EMPTY_STRING)
         )
     }
 }

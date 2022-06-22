@@ -2,8 +2,15 @@ package com.brandoncano.resistancecalculator
 
 import com.Ostermiller.util.SignificantFigures
 
+/**
+ * Job: formats the resistor based resistance that has been entered
+ *
+ * @author: Brandon
+ */
+
 object ResistorFormatter {
     private const val OMEGA: String = "Ω"
+    private const val EMPTY_STRING = ""
 
     // EditText already limits this to decimal and whole numbers and 5 characters
     // Invalid Inputs: 0.0... , 00... , 0.xyz , 0x , .0x , too many sig figs, etc.
@@ -14,7 +21,7 @@ object ResistorFormatter {
         when {
             numBands == 4 && sigFigs.numberSignificantFigures > 2 -> return false
             (numBands == 5 || numBands == 6) && sigFigs.numberSignificantFigures > 3 -> return false
-            (numBands == 5 || numBands == 6) && (input[0] == '0' || input[0] == '.') && (units == OMEGA || units == "") -> return false
+            (numBands == 5 || numBands == 6) && (input[0] == '0' || input[0] == '.') && (units == OMEGA || units == EMPTY_STRING) -> return false
             (numBands == 5 || numBands == 6) && units == "G$OMEGA" && input.length > 3  -> return false
             (numBands == 4) && units == "G$OMEGA" && input.length > 2  -> return false
             input.length > 1 && input[0] == '0' && input[1] == '0' -> return false
@@ -29,13 +36,13 @@ object ResistorFormatter {
     // returns an array of the 3 or 4 colors to be returned
     fun generateResistor(numBands: Int, resistance: String, units: String) : Array<Int> {
         // this will prevent the program from crashing
-        if (resistance == "NotValid" || resistance == "") {
+        if (resistance == "NotValid" || resistance == EMPTY_STRING) {
             return arrayOf()
         }
 
         // find color for the sig fig bands
         var numberBand1 = 0; var numberBand2 = 0; var numberBand3 = 0
-        val formattedResistance = resistance.replace(".","").toInt().toString()
+        val formattedResistance = resistance.replace(".",EMPTY_STRING).toInt().toString()
         var i = 0
         for (digit in formattedResistance) {
             if(i == 0) numberBand1 = digit.digitToInt()

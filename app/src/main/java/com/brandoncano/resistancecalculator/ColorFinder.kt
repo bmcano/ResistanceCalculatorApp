@@ -1,8 +1,15 @@
 package com.brandoncano.resistancecalculator
 
+/**
+ * Job: find the correct color or drawable based on an int or string input
+ *
+ * @author: Brandon
+ */
+
 object ColorFinder {
     private const val PLUS_MINUS: String = "±"
     private const val DEGREE: String = "°"
+    private const val EMPTY_STRING = ""
 
     // finds the image representation
     fun imageColor(color: String) : Int {
@@ -135,9 +142,8 @@ object ColorFinder {
             R.color.gray32, R.drawable.gray32 -> "Gray"
             R.color.gold32, R.drawable.gold32 -> "Gold"
             R.color.silver32, R.drawable.silver32 -> "Silver"
-            else -> ""
+            else -> EMPTY_STRING
         }
-
     }
 
     // picks a random color
@@ -159,4 +165,3 @@ object ColorFinder {
         }
     }
 }
-

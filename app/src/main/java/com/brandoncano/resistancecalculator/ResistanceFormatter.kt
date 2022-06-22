@@ -1,14 +1,21 @@
 package com.brandoncano.resistancecalculator
 
+/**
+ * Job: formats the resistance based on the colors selected for the bands
+ *
+ * @author: Brandon
+ */
+
 object ResistanceFormatter {
     private const val OMEGA: String = "Ω"
     private const val PLUS_MINUS: String = "±"
     private const val DEGREE: String = "°"
+    private const val EMPTY_STRING = ""
 
     // four band resistors
     fun calcResistance(NumberBand1: String, NumberBand2: String, Multiplier: String, Tolerance: String) : String {
         // will not work properly with any empty strings
-        if (NumberBand1 == "" || NumberBand2 == "" || Multiplier == "" || Tolerance == "") {
+        if (NumberBand1 == EMPTY_STRING || NumberBand2 == EMPTY_STRING || Multiplier == EMPTY_STRING || Tolerance == EMPTY_STRING) {
             return "Select Colors"
         }
 
@@ -27,7 +34,7 @@ object ResistanceFormatter {
                 "Gray" -> { "${numberBand2}00 M$OMEGA $PLUS_MINUS$tolerance%" }
                 "Silver" -> { "0.0${numberBand2} $OMEGA $PLUS_MINUS$tolerance%" }
                 else -> {
-                    "${multiplierHelper(Multiplier, "", numberBand2)}$OMEGA $PLUS_MINUS$tolerance%"
+                    "${multiplierHelper(Multiplier, EMPTY_STRING, numberBand2)}$OMEGA $PLUS_MINUS$tolerance%"
                 }
             }
         } else {
@@ -36,9 +43,9 @@ object ResistanceFormatter {
     }
 
     // five or six band resistors
-    fun calcResistance(NumberBand1: String, NumberBand2: String, NumberBand3: String, Multiplier: String, Tolerance: String, PPM: String = "") : String {
+    fun calcResistance(NumberBand1: String, NumberBand2: String, NumberBand3: String, Multiplier: String, Tolerance: String, PPM: String = EMPTY_STRING) : String {
         // will not work properly with any empty strings
-        if (NumberBand1 == "" || NumberBand2 == "" || NumberBand3 == "" || Multiplier == "" || Tolerance == "") {
+        if (NumberBand1 == EMPTY_STRING || NumberBand2 == EMPTY_STRING || NumberBand3 == EMPTY_STRING || Multiplier == EMPTY_STRING || Tolerance == EMPTY_STRING) {
             return "Select Colors"
         }
 
@@ -63,7 +70,7 @@ object ResistanceFormatter {
                 "Gold" -> { "0.${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm" }
                 "Silver" -> { "0.0${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm" }
                 else -> {
-                    "${multiplierHelper(Multiplier, "", "", numberBand3)}$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                    "${multiplierHelper(Multiplier, EMPTY_STRING, EMPTY_STRING, numberBand3)}$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 }
             }
         } else if (NumberBand1 == "Black") {
@@ -73,7 +80,7 @@ object ResistanceFormatter {
                 "Violet" -> { "${numberBand2}${numberBand3}0 M$OMEGA $PLUS_MINUS$tolerance%$ppm" }
                 "Silver" -> { "0.${numberBand2}${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm" }
                 else -> {
-                    "${multiplierHelper(Multiplier, "", numberBand2, numberBand3)}$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                    "${multiplierHelper(Multiplier, EMPTY_STRING, numberBand2, numberBand3)}$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 }
             }
         } else {
@@ -164,7 +171,7 @@ object ResistanceFormatter {
             "Blue" -> "\n10 ppm/${DEGREE}C"
             "Violet" -> "\n5 ppm/${DEGREE}C"
             "Gray" -> "\n1 ppm/${DEGREE}C"
-            else -> { "" }
+            else -> { EMPTY_STRING }
         }
     }
 }
