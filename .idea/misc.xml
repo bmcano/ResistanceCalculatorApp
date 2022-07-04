@@ -19,6 +19,7 @@
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/drawable/test_layout_drawable.xml" value="0.2965" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_about.xml" value="0.536" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_about3.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_color_to_value.xml" value="0.2965811965811966" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_five_band.xml" value="0.29572649572649573" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_main_2.xml" value="0.2698087431693989" />
@@ -37,6 +38,8 @@
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/menu/menu_dropdown.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/menu/menu_dropdown_1.xml" value="0.2965811965811966" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/menu/menu_dropdown_2.xml" value="0.1" />
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/menu/menu_dropdown_vtc.xml" value="0.29282700421940927" />
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/menu/menu_main.xml" value="0.2919831223628692" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.264" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2" />
       </map>
