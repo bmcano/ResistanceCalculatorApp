@@ -21,6 +21,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
 /**
  * Job: activity for the value to color page
@@ -74,19 +77,17 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownSetup()
     }
 
-    // create menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_dropdown_vtc, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
-    // menu options
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.color_to_value -> {
                 super.finish()
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, ColorToValueActivity::class.java)
                 startActivity(intent)
                 true
             }
@@ -163,13 +164,13 @@ class ValueToColorActivity : AppCompatActivity() {
 
     private fun calculateButtonSetup() {
         val inputResistance: EditText = findViewById(R.id.enter_resistance)
-        val calculateButton: Button = findViewById(R.id.calculate)
-
+        inputResistance.setText(loadDropDownSelection("UserInput", "user input"))
         inputResistance.doOnTextChanged { text, _, _, _ ->
             resistance = errorFinder(text.toString())
         }
 
         // make the resistor
+        val calculateButton: Button = findViewById(R.id.calculate)
         calculateButton.setOnClickListener {
             val colors: Array<Int> = ResistorFormatter.generateResistor(imageSelection, resistance, units)
             shareColors = colors // for sharing in menu
@@ -183,6 +184,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 screenText.text = updateText(colors)
             }
 
+            saveDropDownSelection("UserInput", "user input", resistance)
             closeKeyboard()
         }
     }
@@ -218,12 +220,12 @@ class ValueToColorActivity : AppCompatActivity() {
                 ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
                 "$resistance $units $toleranceBand"
             }
-            6-> {
+            6 -> {
                 numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
                 ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor(ppmBand)))
                 if(ppmBand == EMPTY_STRING) "$resistance $units $toleranceBand" else "$resistance $units $toleranceBand\n$ppmBand"
             }
-            else -> { EMPTY_STRING }
+            else -> EMPTY_STRING
         }
     }
 
@@ -240,6 +242,8 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun dropDownSetup() {
         // units
         val dropDownUnits : AutoCompleteTextView = findViewById(R.id.spinnerUnits)
+        dropDownUnits.setText(loadDropDownSelection("unitsDropDown", "units dropDown"))
+        units = loadDropDownSelection("unitsDropDown", "units dropDown")
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
@@ -253,10 +257,14 @@ class ValueToColorActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 units = dropDownUnits.adapter.getItem(position).toString()
                 if (resistance != EMPTY_STRING) resistance = errorFinder(buttonCheck)
+                saveDropDownSelection("unitsDropDown", "units dropDown", dropDownUnits.text.toString())
             }
 
         // tolerance
-        val dropDownTolerance : AutoCompleteTextView = findViewById(R.id.spinnerTolerance)
+        val dropDownTolerance: AutoCompleteTextView = findViewById(R.id.spinnerTolerance)
+        dropDownTolerance.setText(loadDropDownSelection("toleranceDropDown", "tolerance dropDown"))
+        toleranceBand = loadDropDownSelection("toleranceDropDown", "tolerance dropDown")
+        dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.toleranceImage(toleranceBand),0,0,0)
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
@@ -270,10 +278,14 @@ class ValueToColorActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
                 dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.toleranceImage(toleranceBand),0,0,0)
+                saveDropDownSelection("toleranceDropDown", "tolerance dropDown", dropDownTolerance.text.toString())
             }
 
         // temperature coefficient
-        val dropDownPPM : AutoCompleteTextView = findViewById(R.id.spinnerPPM)
+        val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinnerPPM)
+        dropDownPPM.setText(loadDropDownSelection("ppmDropDown", "ppm dropDown"))
+        ppmBand = loadDropDownSelection("ppmDropDown", "ppm dropDown")
+        dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.ppmImage(ppmBand),0,0,0)
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
@@ -287,6 +299,31 @@ class ValueToColorActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 ppmBand = dropDownPPM.adapter.getItem(position).toString()
                 dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.ppmImage(ppmBand),0,0,0)
+                saveDropDownSelection("ppmDropDown", "ppm dropDown", dropDownPPM.text.toString())
             }
+    }
+
+    // TODO - saving and loading
+    //      - screen text
+    //      - resistor image
+    //      - button selection
+
+    // saves the user input
+    private fun saveDropDownSelection(name: String, key: String, input: String) {
+        val sharedPreferences = getSharedPreferences(name, MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json: String = gson.toJson(input)
+        editor.putString(key, json)
+        editor.apply()
+    }
+
+    // loads the user input
+    private fun loadDropDownSelection(name: String, key: String) : String {
+        val sharedPreferences = getSharedPreferences(name, MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences!!.getString(key, null)
+        val type: Type = object : TypeToken<String?>() {}.type
+        return gson.fromJson<String?>(json, type) ?: return EMPTY_STRING
     }
 }
