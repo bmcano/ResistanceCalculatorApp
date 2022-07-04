@@ -11,7 +11,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 
 /**
- * Job: activity for the color to value page
+ * Job: activity for the home screen page
  *
  * @author: Brandon
  */
