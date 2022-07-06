@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
+import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**
  * Job: activity for the about page

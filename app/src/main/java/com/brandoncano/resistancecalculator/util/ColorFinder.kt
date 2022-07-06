@@ -1,4 +1,6 @@
-package com.brandoncano.resistancecalculator
+package com.brandoncano.resistancecalculator.util
+
+import com.brandoncano.resistancecalculator.R
 
 /**
  * Job: find the correct color or drawable based on an int or string input
@@ -12,7 +14,7 @@ object ColorFinder {
     private const val EMPTY_STRING = ""
 
     // finds the image representation
-    fun imageColor(color: String) : Int {
+    fun imageColor(color: String = "blank") : Int {
         return when(color) {
             "Black" -> R.drawable.black32
             "Blue" -> R.drawable.blue32
@@ -26,23 +28,7 @@ object ColorFinder {
             "Violet" -> R.drawable.violet32
             "White" -> R.drawable.white32
             "Yellow" -> R.drawable.yellow32
-            else -> { R.drawable.blank32 }
-        }
-    }
-
-    fun numberColor(color: Int) : Int {
-        return when(color) {
-            0 -> R.color.black32
-            1 -> R.color.brown32
-            2 -> R.color.red32
-            3 -> R.color.orange32
-            4 -> R.color.yellow32
-            5 -> R.color.green32
-            6 -> R.color.blue32
-            7 -> R.color.violet32
-            8 -> R.color.gray32
-            9 -> R.color.white32
-            else -> { R.color.black32 }
+            else -> R.drawable.blank32
         }
     }
 
@@ -61,7 +47,24 @@ object ColorFinder {
             "Gray" -> R.color.gray32
             "Black" -> R.color.black32
             "Brown" -> R.color.brown32
-            else -> { R.color.resistor_blank }
+            else -> R.color.resistor_blank
+        }
+    }
+
+    // finds the color depending on the position
+    fun numberColor(color: Int) : Int {
+        return when(color) {
+            0 -> R.color.black32
+            1 -> R.color.brown32
+            2 -> R.color.red32
+            3 -> R.color.orange32
+            4 -> R.color.yellow32
+            5 -> R.color.green32
+            6 -> R.color.blue32
+            7 -> R.color.violet32
+            8 -> R.color.gray32
+            9 -> R.color.white32
+            else -> R.color.black32
         }
     }
 
@@ -77,7 +80,7 @@ object ColorFinder {
             "${PLUS_MINUS}5%" -> R.drawable.gold32
             "${PLUS_MINUS}10%" -> R.drawable.silver32
             "${PLUS_MINUS}20%" -> R.drawable.blank32
-            else ->{ R.drawable.blank32 }
+            else -> R.drawable.blank32
         }
     }
 
@@ -93,7 +96,7 @@ object ColorFinder {
             "${PLUS_MINUS}5%" -> R.color.gold32
             "${PLUS_MINUS}10%" -> R.color.silver32
             "${PLUS_MINUS}20%" -> R.color.resistor_blank
-            else ->{ R.color.resistor_blank }
+            else -> R.color.resistor_blank
         }
     }
 
@@ -109,7 +112,7 @@ object ColorFinder {
             "10 ppm/${DEGREE}C" -> R.drawable.blue32
             "5 ppm/${DEGREE}C" -> R.drawable.violet32
             "1 ppm/${DEGREE}C" -> R.drawable.gray32
-            else ->{ R.drawable.blank32 }
+            else -> R.drawable.blank32
         }
     }
 
@@ -125,10 +128,11 @@ object ColorFinder {
             "10 ppm/${DEGREE}C" -> R.color.blue32
             "5 ppm/${DEGREE}C" -> R.color.violet32
             "1 ppm/${DEGREE}C" -> R.color.gray32
-            else ->{ R.color.resistor_blank }
+            else -> R.color.resistor_blank
         }
     }
 
+    // find text (color) from id
     fun idToColorText(colorId: Int) : String {
         return when(colorId) {
             R.color.black32, R.drawable.black32 -> "Black"
@@ -161,7 +165,7 @@ object ColorFinder {
             10 -> R.color.gray32
             11 -> R.color.black32
             12 -> R.color.brown32
-            else -> { R.color.black32 }
+            else -> R.color.resistor_blank
         }
     }
 }

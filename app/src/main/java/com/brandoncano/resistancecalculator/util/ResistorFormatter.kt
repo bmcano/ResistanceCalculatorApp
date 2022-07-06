@@ -1,6 +1,7 @@
-package com.brandoncano.resistancecalculator
+package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
+import com.brandoncano.resistancecalculator.R
 
 /**
  * Job: formats the resistor based resistance that has been entered
@@ -42,7 +43,7 @@ object ResistorFormatter {
 
         // find color for the sig fig bands
         var numberBand1 = 0; var numberBand2 = 0; var numberBand3 = 0
-        val formattedResistance = resistance.replace(".",EMPTY_STRING).toInt().toString()
+        val formattedResistance = resistance.replace(".", EMPTY_STRING).toInt().toString()
         var i = 0
         for (digit in formattedResistance) {
             if(i == 0) numberBand1 = digit.digitToInt()

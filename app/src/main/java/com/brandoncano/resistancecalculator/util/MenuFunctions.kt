@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator
+package com.brandoncano.resistancecalculator.util
 
 import android.app.Dialog
 import android.content.Context
@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.widget.TextView
+import com.brandoncano.resistancecalculator.R
 
 /**
  * Job: holds all the logic for the menu items, to keep activities cleaner and more condense
@@ -25,7 +26,9 @@ object MenuFunctions {
                 4 -> R.layout.popup_chart_4
                 5 -> R.layout.popup_chart_5
                 6 -> R.layout.popup_chart_6
-                else -> { R.layout.popup_chart_6 }
+                else -> {
+                    R.layout.popup_chart_6
+                }
             }
         )
         chartDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

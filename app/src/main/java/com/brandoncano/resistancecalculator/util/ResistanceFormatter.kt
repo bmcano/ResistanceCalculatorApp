@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator
+package com.brandoncano.resistancecalculator.util
 
 /**
  * Job: formats the resistance based on the colors selected for the bands
