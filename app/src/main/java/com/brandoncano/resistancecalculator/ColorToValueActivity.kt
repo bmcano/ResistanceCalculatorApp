@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.brandoncano.resistancecalculator.spinner.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.MenuFunctions
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
@@ -200,153 +201,116 @@ class ColorToValueActivity : AppCompatActivity() {
         toggleDropDownNumberBand3.visibility = view1
         toggleDropDownPPM.visibility = view2
 
-        calcResistanceHelper()
+        calculateResistanceHelper()
         imageSelection = btnNumber
         saveData("buttonSelection1", "button selection1", "$imageSelection")
     }
 
     private fun dropDownSetup() {
-        // number band 1
         val dropDownBand1 : AutoCompleteTextView = findViewById(R.id.spinner1)
+        val dropDownBand2 : AutoCompleteTextView = findViewById(R.id.spinner2)
+        val dropDownBand3 : AutoCompleteTextView = findViewById(R.id.spinner3)
+        val dropDownMultiplier : AutoCompleteTextView = findViewById(R.id.spinner4)
+        val dropDownTolerance : AutoCompleteTextView = findViewById(R.id.spinner5)
+        val dropDownPPM : AutoCompleteTextView = findViewById(R.id.spinner6)
+
+        // load and set saved data
         dropDownBand1.setText(loadData("numBand1", "num band1"))
         numberBand1 = loadData("numBand1", "num band1")
         dropDownBand1.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand1),0,0,0)
-        ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            SelectionEnums.NUMBER.array
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            dropDownBand1.setAdapter(adapter)
-        }
 
+        dropDownBand2.setText(loadData("numBand2", "num band2"))
+        numberBand2 = loadData("numBand2", "num band2")
+        dropDownBand2.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand2),0,0,0)
+
+        dropDownBand3.setText(loadData("numBand3", "num band3"))
+        numberBand3 = loadData("numBand3", "num band3")
+        dropDownBand3.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand3),0,0,0)
+
+        dropDownMultiplier.setText(loadData("multiplierBand1", "multiplier band1"))
+        multiplierBand = loadData("multiplierBand1", "multiplier band1")
+        dropDownMultiplier.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(multiplierBand),0,0,0)
+
+        dropDownTolerance.setText(loadData("toleranceBand1", "tolerance band1"))
+        toleranceBand = loadData("toleranceBand1", "tolerance band1")
+        dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(toleranceBand),0,0,0)
+
+        dropDownPPM.setText(loadData("ppmBand1", "ppm band1"))
+        ppmBand = loadData("ppmBand1", "ppm band1")
+        dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(ppmBand),0,0,0)
+
+
+        // create and set adapters
+        val numberAdapter = ImageTextArrayAdapter(this, SelectionEnums1.NUMBER.array)
+        dropDownBand1.setAdapter(numberAdapter)
+        dropDownBand2.setAdapter(numberAdapter)
+        dropDownBand3.setAdapter(numberAdapter)
+
+        val multiplierAdapter = ImageTextArrayAdapter(this, SelectionEnums1.MULTIPLIER.array)
+        dropDownMultiplier.setAdapter(multiplierAdapter)
+        val toleranceAdapter = ImageTextArrayAdapter(this, SelectionEnums1.TOLERANCE.array)
+        dropDownTolerance.setAdapter(toleranceAdapter)
+        val ppmAdapter = ImageTextArrayAdapter(this, SelectionEnums1.PPM.array)
+        dropDownPPM.setAdapter(ppmAdapter)
+
+        // listeners
         dropDownBand1.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand1 = dropDownBand1.adapter.getItem(position).toString()
                 dropDownBand1.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand1),0,0,0)
-                calcResistanceHelper()
+                calculateResistanceHelper()
                 bandImage1.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand1)))
                 saveData("numBand1", "num band1", dropDownBand1.text.toString())
             }
-
-        // number band 2
-        val dropDownBand2 : AutoCompleteTextView = findViewById(R.id.spinner2)
-        dropDownBand2.setText(loadData("numBand2", "num band2"))
-        numberBand2 = loadData("numBand2", "num band2")
-        dropDownBand2.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand2),0,0,0)
-        ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            SelectionEnums.NUMBER.array
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
-            dropDownBand2.setAdapter(adapter)
-        }
 
         dropDownBand2.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand2 = dropDownBand2.adapter.getItem(position).toString()
                 dropDownBand2.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand2),0,0,0)
-                calcResistanceHelper()
+                calculateResistanceHelper()
                 bandImage2.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand2)))
                 saveData("numBand2", "num band2", dropDownBand2.text.toString())
             }
-
-        // number band 3
-        val dropDownBand3 : AutoCompleteTextView = findViewById(R.id.spinner3)
-        dropDownBand3.setText(loadData("numBand3", "num band3"))
-        numberBand3 = loadData("numBand3", "num band3")
-        dropDownBand3.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand3),0,0,0)
-        ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            SelectionEnums.NUMBER.array
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
-            dropDownBand3.setAdapter(adapter)
-        }
 
         dropDownBand3.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand3 = dropDownBand3.adapter.getItem(position).toString()
                 dropDownBand3.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(numberBand3),0,0,0)
-                calcResistanceHelper()
+                calculateResistanceHelper()
                 bandImage3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(numberBand3)))
                 saveData("numBand3", "num band3", dropDownBand3.text.toString())
             }
-
-        // multiplier band
-        val dropDownMultiplier : AutoCompleteTextView = findViewById(R.id.spinner4)
-        dropDownMultiplier.setText(loadData("multiplierBand1", "multiplier band1"))
-        multiplierBand = loadData("multiplierBand1", "multiplier band1")
-        dropDownMultiplier.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(multiplierBand),0,0,0)
-        ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            SelectionEnums.MULTIPLIER.array
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
-            dropDownMultiplier.setAdapter(adapter)
-        }
 
         dropDownMultiplier.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 multiplierBand = dropDownMultiplier.adapter.getItem(position).toString()
                 dropDownMultiplier.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(multiplierBand),0,0,0)
-                calcResistanceHelper()
+                calculateResistanceHelper()
                 bandImage4.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(multiplierBand)))
                 saveData("multiplierBand1", "multiplier band1", dropDownMultiplier.text.toString())
             }
-
-        // tolerance band
-        val dropDownTolerance : AutoCompleteTextView = findViewById(R.id.spinner5)
-        dropDownTolerance.setText(loadData("toleranceBand1", "tolerance band1"))
-        toleranceBand = loadData("toleranceBand1", "tolerance band1")
-        dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(toleranceBand),0,0,0)
-        ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            SelectionEnums.TOLERANCE.array
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
-            dropDownTolerance.setAdapter(adapter)
-        }
 
         dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
                 dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(toleranceBand),0,0,0)
-                calcResistanceHelper()
+                calculateResistanceHelper()
                 bandImage5.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(toleranceBand)))
                 saveData("toleranceBand1", "tolerance band1", dropDownTolerance.text.toString())
             }
-
-        // temperature coefficient band
-        val dropDownPPM : AutoCompleteTextView = findViewById(R.id.spinner6)
-        dropDownPPM.setText(loadData("ppmBand1", "ppm band1"))
-        ppmBand = loadData("ppmBand1", "ppm band1")
-        dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(ppmBand),0,0,0)
-        ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            SelectionEnums.PPM.array
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // simple_spinner_item
-            dropDownPPM.setAdapter(adapter)
-        }
 
         dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 ppmBand = dropDownPPM.adapter.getItem(position).toString()
                 dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(ppmBand),0,0,0)
-                calcResistanceHelper()
+                calculateResistanceHelper()
                 bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(ppmBand)))
                 saveData("ppmBand1", "ppm band1", dropDownPPM.text.toString())
             }
     }
 
     // will determine which calculations to do
-    private fun calcResistanceHelper() {
+    private fun calculateResistanceHelper() {
         if(toggleDropDownNumberBand3.visibility == View.GONE && toggleDropDownPPM.visibility == View.GONE) {
             screenText.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, multiplierBand, toleranceBand)
         } else if(toggleDropDownPPM.visibility == View.GONE){

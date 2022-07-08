@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.Button
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import com.brandoncano.resistancecalculator.util.MenuFunctions
 
 /**
  * Job: activity for the home screen page
@@ -56,9 +57,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
-            else -> {
-                super.onOptionsItemSelected(item)
-            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

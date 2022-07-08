@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator
 
+import com.brandoncano.resistancecalculator.spinner.SpinnerItem
+
 /**
  * Job: contains the arrays for each of the drop downs that exist in the app
  *
@@ -45,4 +47,60 @@ enum class SelectionEnums(val array: Array<String>){
         const val PLUS_MINUS: String = "±"
         const val DEGREE: String = "°"
     }
+}
+
+// This will be progressively written, then will replace the original
+//"Black", "Brown", "Red", "Orange", "Yellow", "Green", "Blue", "Violet", "Gray", "White"
+enum class SelectionEnums1(val array: Array<SpinnerItem>) {
+    NUMBER(arrayOf(
+        SpinnerItem("Black", R.drawable.black32),
+        SpinnerItem("Brown", R.drawable.brown32),
+        SpinnerItem("Red", R.drawable.red32),
+        SpinnerItem("Orange", R.drawable.orange32),
+        SpinnerItem("Yellow", R.drawable.yellow32),
+        SpinnerItem("Green", R.drawable.green32),
+        SpinnerItem("Blue", R.drawable.blue32),
+        SpinnerItem("Violet", R.drawable.violet32),
+        SpinnerItem("Gray", R.drawable.gray32),
+        SpinnerItem("White", R.drawable.white32)
+    )),
+
+    MULTIPLIER(arrayOf(
+        SpinnerItem("Black", R.drawable.black32),
+        SpinnerItem("Brown", R.drawable.brown32),
+        SpinnerItem("Red", R.drawable.red32),
+        SpinnerItem("Orange", R.drawable.orange32),
+        SpinnerItem("Yellow", R.drawable.yellow32),
+        SpinnerItem("Green", R.drawable.green32),
+        SpinnerItem("Blue", R.drawable.blue32),
+        SpinnerItem("Violet", R.drawable.violet32),
+        SpinnerItem("Gray", R.drawable.gray32),
+        SpinnerItem("White", R.drawable.white32),
+        SpinnerItem("Gold", R.drawable.gold32),
+        SpinnerItem("Silver", R.drawable.silver32)
+    )),
+
+    TOLERANCE(arrayOf(
+        SpinnerItem("Brown", R.drawable.brown32),
+        SpinnerItem("Red", R.drawable.red32),
+        SpinnerItem("Green", R.drawable.green32),
+        SpinnerItem("Blue", R.drawable.blue32),
+        SpinnerItem("Violet", R.drawable.violet32),
+        SpinnerItem("Gray", R.drawable.gray32),
+        SpinnerItem("Gold", R.drawable.gold32),
+        SpinnerItem("Silver", R.drawable.silver32),
+        SpinnerItem("None", R.drawable.blank32)
+    )),
+
+    PPM(arrayOf(
+        SpinnerItem("Black", R.drawable.black32),
+        SpinnerItem("Brown", R.drawable.brown32),
+        SpinnerItem("Red", R.drawable.red32),
+        SpinnerItem("Orange", R.drawable.orange32),
+        SpinnerItem("Yellow", R.drawable.yellow32),
+        SpinnerItem("Green", R.drawable.green32),
+        SpinnerItem("Blue", R.drawable.blue32),
+        SpinnerItem("Violet", R.drawable.violet32),
+        SpinnerItem("Gray", R.drawable.gray32)
+    ))
 }
