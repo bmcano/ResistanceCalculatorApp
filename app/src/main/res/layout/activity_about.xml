@@ -82,7 +82,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
     <!-- Start of custom resistor image -->
 
     <TextView
@@ -102,10 +101,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_left"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_band_1"
         app:layout_constraintStart_toStartOf="@+id/place_holder"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_band_1"
@@ -113,10 +112,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_band_1"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_1"
         app:layout_constraintStart_toEndOf="@+id/r_left"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_post_band_1"
@@ -124,10 +123,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_post_band_1"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_band_2"
         app:layout_constraintStart_toEndOf="@+id/r_band_1"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_band_2"
@@ -135,10 +134,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_band_2"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_2"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_1"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
     <ImageView
@@ -147,10 +146,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_post_band_2"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_band_3"
         app:layout_constraintStart_toEndOf="@+id/r_band_2"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_band_3"
@@ -158,10 +157,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_band_3"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_3"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_2"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_post_band_3"
@@ -169,10 +168,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_post_band_3"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_band_4"
         app:layout_constraintStart_toEndOf="@+id/r_band_3"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_band_4"
@@ -180,10 +179,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_band_4"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_4"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_3"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_post_band_4"
@@ -191,10 +190,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_post_band_4"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_band_5"
         app:layout_constraintStart_toEndOf="@+id/r_band_4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_band_5"
@@ -202,10 +201,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_band_5"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_5"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_post_band_5"
@@ -213,10 +212,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_post_band_5"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_band_6"
         app:layout_constraintStart_toEndOf="@+id/r_band_5"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_band_6"
@@ -224,10 +223,10 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_band_6"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toStartOf="@+id/r_right"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_5"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/r_right"
@@ -235,15 +234,9 @@
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/resistor_right"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toEndOf="@+id/place_holder"
         app:layout_constraintStart_toEndOf="@+id/r_band_6"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="ContentDescription" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="r_post_band_3,r_post_band_4,r_right,r_band_2,r_post_band_2,r_band_1,r_post_band_5,r_left,r_band_4,r_post_band_1,r_band_3,r_band_5,r_band_6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

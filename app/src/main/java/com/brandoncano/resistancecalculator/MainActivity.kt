@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator
 
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
@@ -22,11 +21,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // sets up the action bar
+        // sets up the action bar correctly
         val actionBar: ActionBar? = supportActionBar
-        val colorDrawable = ColorDrawable(Color.parseColor("#F4A261"))
-        actionBar!!.setBackgroundDrawable(colorDrawable)
-        actionBar.title = getString(R.string.app_name)
+        if(actionBar != null) {
+            val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
+            actionBar.setBackgroundDrawable(colorDrawable)
+            actionBar.title = getString(R.string.app_name)
+        }
 
         buttonSetup()
     }

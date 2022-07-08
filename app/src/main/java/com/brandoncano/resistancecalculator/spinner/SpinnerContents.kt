@@ -8,7 +8,7 @@ import com.brandoncano.resistancecalculator.R
  * @author: Brandon
  */
 
-enum class SelectionEnums(val array: Array<SpinnerItem>) {
+enum class SpinnerContents(val array: Array<SpinnerItem>) {
     NUMBER(arrayOf(
         S.BLACK, S.BROWN, S.RED, S.ORANGE, S.YELLOW,
         S.GREEN, S.BLUE, S.VIOLET, S.GRAY, S.WHITE
@@ -51,13 +51,10 @@ enum class SelectionEnums(val array: Array<SpinnerItem>) {
         SpinnerItem("10 ppm/${S.DEGREE}C", R.drawable.blue32),
         SpinnerItem("5 ppm/${S.DEGREE}C", R.drawable.violet32),
         SpinnerItem("1 ppm/${S.DEGREE}C", R.drawable.gray32)
-    )),
+    ));
 
-    ;
-    enum class U(val array: Array<String>) {
-        UNITS(arrayOf(
-            S.OMEGA, "k${S.OMEGA}", "M${S.OMEGA}", "G${S.OMEGA}"
-        ))
+    enum class SimpleArray(val array: Array<String>) {
+        UNITS(arrayOf(S.OMEGA, "k${S.OMEGA}", "M${S.OMEGA}", "G${S.OMEGA}"))
     }
 
     private object S {

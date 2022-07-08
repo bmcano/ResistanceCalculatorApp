@@ -46,9 +46,9 @@ object ResistorFormatter {
         val formattedResistance = resistance.replace(".", EMPTY_STRING).toInt().toString()
         var i = 0
         for (digit in formattedResistance) {
-            if(i == 0) numberBand1 = digit.digitToInt()
-            if(i == 1) numberBand2 = digit.digitToInt()
-            if(i == 2) numberBand3 = digit.digitToInt()
+            if (i == 0) numberBand1 = digit.digitToInt()
+            if (i == 1) numberBand2 = digit.digitToInt()
+            if (i == 2) numberBand3 = digit.digitToInt()
             i += 1
         }
 
@@ -83,8 +83,8 @@ object ResistorFormatter {
         var before = 0; var after = 0
         var change = false
         for (digit in resistance) {
-            if(digit == '.') { change = true; continue }
-            if(!change) before++
+            if (digit == '.') { change = true; continue }
+            if (!change) before++
             else after++
         }
 

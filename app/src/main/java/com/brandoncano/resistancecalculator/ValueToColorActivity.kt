@@ -2,7 +2,6 @@ package com.brandoncano.resistancecalculator
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
@@ -21,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.brandoncano.resistancecalculator.spinner.ImageTextArrayAdapter
-import com.brandoncano.resistancecalculator.spinner.SelectionEnums
+import com.brandoncano.resistancecalculator.spinner.SpinnerContents
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.MenuFunctions
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
@@ -62,11 +61,14 @@ class ValueToColorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_value_to_color)
 
-        // sets up the action bar
+        // sets up the action bar correctly
         val actionBar: ActionBar? = supportActionBar
-        val colorDrawable = ColorDrawable(Color.parseColor("#F4A261"))
-        actionBar!!.setBackgroundDrawable(colorDrawable)
-        actionBar.title = getString(R.string.value_to_color)
+        if(actionBar != null) {
+            val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
+            actionBar.setBackgroundDrawable(colorDrawable)
+            actionBar.title = getString(R.string.value_to_color)
+        }
+
         idSetup()
         dropDownSetup()
         buttonSetup()
@@ -106,7 +108,9 @@ class ValueToColorActivity : AppCompatActivity() {
             }
 
             R.id.share_item -> {
-                val intent = MenuFunctions.shareItemVTC(imageSelection, shareColors, screenText, toleranceBand, ppmBand)
+                val intent = MenuFunctions.shareItemVTC(
+                    imageSelection, shareColors, screenText, toleranceBand, ppmBand
+                )
                 startActivity(Intent.createChooser(intent, EMPTY_STRING))
                 true
             }
@@ -124,7 +128,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 true
             }
 
-            else -> { super.onOptionsItemSelected(item) }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -245,7 +249,6 @@ class ValueToColorActivity : AppCompatActivity() {
         }
     }
 
-    // updates the text on the screen
     private fun updateText(colors: Array<Int>) : String {
         return when (imageSelection) {
             4 -> {
@@ -267,7 +270,6 @@ class ValueToColorActivity : AppCompatActivity() {
         }
     }
 
-    // closes the keyboard
     private fun closeKeyboard() {
         val view = this.currentFocus
         if (view != null) {
@@ -276,7 +278,6 @@ class ValueToColorActivity : AppCompatActivity() {
         }
     }
 
-    // drop downs
     private fun dropDownSetup() {
         val dropDownUnits : AutoCompleteTextView = findViewById(R.id.spinnerUnits)
         val dropDownTolerance: AutoCompleteTextView = findViewById(R.id.spinnerTolerance)
@@ -294,19 +295,19 @@ class ValueToColorActivity : AppCompatActivity() {
         ppmBand = loadData("ppmDropDown", "ppm dropDown")
         dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.ppmImage(ppmBand),0,0,0)
 
-        // adapters
+        // create and set adapters
         ArrayAdapter(
             this,
             R.layout.spinner_units_layout,
-            SelectionEnums.U.UNITS.array
+            SpinnerContents.SimpleArray.UNITS.array
         ).also { adapter ->
             adapter.setDropDownViewResource(R.layout.spinner_units_layout)
             dropDownUnits.setAdapter(adapter)
         }
 
-        val toleranceAdapter = ImageTextArrayAdapter(this, SelectionEnums.TOLERANCE_TEXT.array)
+        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerContents.TOLERANCE_TEXT.array)
         dropDownTolerance.setAdapter(toleranceAdapter)
-        val ppmAdapter = ImageTextArrayAdapter(this, SelectionEnums.PPM_TEXT.array)
+        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerContents.PPM_TEXT.array)
         dropDownPPM.setAdapter(ppmAdapter)
 
         // listeners

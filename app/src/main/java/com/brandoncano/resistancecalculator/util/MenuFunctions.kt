@@ -26,9 +26,7 @@ object MenuFunctions {
                 4 -> R.layout.popup_chart_4
                 5 -> R.layout.popup_chart_5
                 6 -> R.layout.popup_chart_6
-                else -> {
-                    R.layout.popup_chart_6
-                }
+                else -> R.layout.popup_chart_6
             }
         )
         chartDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -56,9 +54,9 @@ object MenuFunctions {
         intent.type = "plain/text"
 
         var nb1 = EMPTY_STRING; var nb2 = EMPTY_STRING; var nb3 = EMPTY_STRING
-        var multi= EMPTY_STRING; var tol = EMPTY_STRING; var ppm = EMPTY_STRING
+        var multi = EMPTY_STRING; var tol = EMPTY_STRING; var ppm = EMPTY_STRING
 
-        if(shareColors.isNotEmpty()) {
+        if (shareColors.isNotEmpty()) {
             nb1 = ColorFinder.idToColorText(shareColors[0])
             nb2 = ColorFinder.idToColorText(shareColors[1])
             nb3 = ColorFinder.idToColorText(shareColors[2])

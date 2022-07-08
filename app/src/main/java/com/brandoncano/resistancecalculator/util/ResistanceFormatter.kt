@@ -29,17 +29,15 @@ object ResistanceFormatter {
             "0 $OMEGA $PLUS_MINUS$tolerance%"
         } else if (NumberBand1 == "Black") {
             when(Multiplier) {
-                "Red" -> { "${numberBand2}00 $OMEGA $PLUS_MINUS$tolerance%" }
-                "Green" -> { "${numberBand2}00 k$OMEGA $PLUS_MINUS$tolerance%" }
-                "Gray" -> { "${numberBand2}00 M$OMEGA $PLUS_MINUS$tolerance%" }
-                "Silver" -> { "0.0${numberBand2} $OMEGA $PLUS_MINUS$tolerance%" }
+                "Red" -> "${numberBand2}00 $OMEGA $PLUS_MINUS$tolerance%"
+                "Green" -> "${numberBand2}00 k$OMEGA $PLUS_MINUS$tolerance%"
+                "Gray" -> "${numberBand2}00 M$OMEGA $PLUS_MINUS$tolerance%"
+                "Silver" -> "0.0${numberBand2} $OMEGA $PLUS_MINUS$tolerance%"
                 else -> {
                     "${multiplierHelper(Multiplier, EMPTY_STRING, numberBand2)}$OMEGA $PLUS_MINUS$tolerance%"
                 }
             }
-        } else {
-            "$multiplier$OMEGA $PLUS_MINUS$tolerance%"
-        }
+        } else "$multiplier$OMEGA $PLUS_MINUS$tolerance%"
     }
 
     // five or six band resistors
@@ -61,31 +59,29 @@ object ResistanceFormatter {
             "0 $OMEGA $PLUS_MINUS$tolerance%$ppm"
         } else if (NumberBand1 == "Black" && NumberBand2 == "Black") {
             when(Multiplier) {
-                "Brown" -> { "${numberBand3}0 $OMEGA $PLUS_MINUS$tolerance%$ppm" }
-                "Red" -> { "${numberBand3}00 $OMEGA $PLUS_MINUS$tolerance%$ppm" }
-                "Yellow" -> { "${numberBand3}0 k$OMEGA $PLUS_MINUS$tolerance%$ppm" }
-                "Green" -> { "${numberBand3}00 k$OMEGA $PLUS_MINUS$tolerance%$ppm" }
-                "Violet" -> { "${numberBand3}0 M$.OMEGA $PLUS_MINUS$tolerance%$ppm" }
-                "Gray" -> { "${numberBand3}00 M$OMEGA $PLUS_MINUS$tolerance%$ppm" }
-                "Gold" -> { "0.${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm" }
-                "Silver" -> { "0.0${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm" }
+                "Brown" -> "${numberBand3}0 $OMEGA $PLUS_MINUS$tolerance%$ppm"
+                "Red" -> "${numberBand3}00 $OMEGA $PLUS_MINUS$tolerance%$ppm"
+                "Yellow" -> "${numberBand3}0 k$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                "Green" -> "${numberBand3}00 k$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                "Violet" -> "${numberBand3}0 M$.OMEGA $PLUS_MINUS$tolerance%$ppm"
+                "Gray" -> "${numberBand3}00 M$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                "Gold" -> "0.${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm"
+                "Silver" -> "0.0${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 else -> {
                     "${multiplierHelper(Multiplier, EMPTY_STRING, EMPTY_STRING, numberBand3)}$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 }
             }
         } else if (NumberBand1 == "Black") {
             when(Multiplier) {
-                "Brown" -> { "${numberBand2}${numberBand3}0 $OMEGA $PLUS_MINUS$tolerance%$ppm" }
-                "Yellow" -> { "${numberBand2}${numberBand3}0 k$OMEGA $PLUS_MINUS$tolerance%$ppm" }
-                "Violet" -> { "${numberBand2}${numberBand3}0 M$OMEGA $PLUS_MINUS$tolerance%$ppm" }
-                "Silver" -> { "0.${numberBand2}${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm" }
+                "Brown" -> "${numberBand2}${numberBand3}0 $OMEGA $PLUS_MINUS$tolerance%$ppm"
+                "Yellow" -> "${numberBand2}${numberBand3}0 k$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                "Violet" -> "${numberBand2}${numberBand3}0 M$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                "Silver" -> "0.${numberBand2}${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 else -> {
                     "${multiplierHelper(Multiplier, EMPTY_STRING, numberBand2, numberBand3)}$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 }
             }
-        } else {
-            "$multiplier$OMEGA $PLUS_MINUS$tolerance%$ppm"
-        }
+        } else "$multiplier$OMEGA $PLUS_MINUS$tolerance%$ppm"
     }
 
     // gets the number from its color representation
@@ -101,7 +97,7 @@ object ResistanceFormatter {
             "Violet" -> "7"
             "Gray" -> "8"
             "White" -> "9"
-            else -> { "0" }
+            else -> "0"
         }
     }
 
@@ -120,7 +116,7 @@ object ResistanceFormatter {
             "White" -> "${band1}${band2} G"
             "Gold" -> "${band1}.${band2} "
             "Silver" -> "0.${band1}${band2} "
-            else -> { "$band1$band2 " }
+            else -> "$band1$band2 "
         }
     }
 
@@ -139,7 +135,7 @@ object ResistanceFormatter {
             "White" -> "${band1}${band2}${band3} G"
             "Gold" -> "${band1}${band2}.${band3} "
             "Silver" -> "${band1}.${band2}${band3} "
-            else -> { "$band1$band2$band3 " }
+            else -> "$band1$band2$band3 "
         }
     }
 
@@ -155,7 +151,7 @@ object ResistanceFormatter {
             "Gold" -> "5"
             "Silver" -> "10"
             "None" -> "20"
-            else -> { "20" }
+            else -> "20"
         }
     }
 
@@ -171,7 +167,7 @@ object ResistanceFormatter {
             "Blue" -> "\n10 ppm/${DEGREE}C"
             "Violet" -> "\n5 ppm/${DEGREE}C"
             "Gray" -> "\n1 ppm/${DEGREE}C"
-            else -> { EMPTY_STRING }
+            else -> EMPTY_STRING
         }
     }
 }

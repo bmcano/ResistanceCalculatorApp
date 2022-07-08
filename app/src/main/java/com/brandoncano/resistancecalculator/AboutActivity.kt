@@ -1,11 +1,10 @@
 package com.brandoncano.resistancecalculator
 
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.util.ColorFinder
@@ -23,20 +22,19 @@ class AboutActivity : AppCompatActivity() {
 
         // sets up the action bar correctly
         val actionBar: ActionBar? = supportActionBar
-        val colorDrawable = ColorDrawable(Color.parseColor("#F4A261"))
-        actionBar!!.setBackgroundDrawable(colorDrawable)
-        actionBar.title = getString(R.string.about)
+        if(actionBar != null) {
+            val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
+            actionBar.setBackgroundDrawable(colorDrawable)
+            actionBar.title = getString(R.string.about)
+        }
 
-        makeResistorImage()
+        makeRandomResistorImage()
     }
 
-    // fun little easter egg
     @Suppress("UNUSED_PARAMETER")
-    fun easterEgg(view: View) {
-        makeResistorImage()
-    }
+    fun easterEgg(view: View) = makeRandomResistorImage()
 
-    private fun makeResistorImage() {
+    private fun makeRandomResistorImage() {
         val numBand1: ImageView = findViewById(R.id.r_band_1)
         val numBand2: ImageView = findViewById(R.id.r_band_2)
         val numBand3: ImageView = findViewById(R.id.r_band_3)

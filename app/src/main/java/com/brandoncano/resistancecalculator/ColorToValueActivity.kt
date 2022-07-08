@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator
 
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
@@ -16,7 +15,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.spinner.ImageTextArrayAdapter
-import com.brandoncano.resistancecalculator.spinner.SelectionEnums
+import com.brandoncano.resistancecalculator.spinner.SpinnerContents
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.MenuFunctions
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
@@ -36,8 +35,10 @@ class ColorToValueActivity : AppCompatActivity() {
         private const val EMPTY_STRING = ""
     }
 
-    private lateinit var screenText: TextView
     private var imageSelection = 4
+    private lateinit var screenText: TextView
+    private lateinit var toggleDropDownNumberBand3: TextInputLayout
+    private lateinit var toggleDropDownPPM: TextInputLayout
 
     private var numberBand1: String = EMPTY_STRING
     private var numberBand2: String = EMPTY_STRING
@@ -45,9 +46,6 @@ class ColorToValueActivity : AppCompatActivity() {
     private var multiplierBand: String = EMPTY_STRING
     private var toleranceBand: String = EMPTY_STRING
     private var ppmBand: String = EMPTY_STRING
-
-    private lateinit var toggleDropDownNumberBand3: TextInputLayout
-    private lateinit var toggleDropDownPPM: TextInputLayout
 
     private lateinit var bandImage1: ImageView
     private lateinit var bandImage2: ImageView
@@ -60,17 +58,19 @@ class ColorToValueActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_to_value)
 
-        // sets up the action bar
+        // sets up the action bar correctly
         val actionBar: ActionBar? = supportActionBar
-        val colorDrawable = ColorDrawable(Color.parseColor("#F4A261"))
-        actionBar!!.setBackgroundDrawable(colorDrawable)
-        actionBar.title = getString(R.string.color_to_value)
+        if (actionBar != null) {
+            val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
+            actionBar.setBackgroundDrawable(colorDrawable)
+            actionBar.title = getString(R.string.color_to_value)
+        }
 
         dropDownSetup()
         idSetup()
         buttonSetup()
         screenText.text = loadData("screenText1", "screen text1")
-        if(screenText.text == EMPTY_STRING) screenText.text = getString(R.string.default_text)
+        if (screenText.text == EMPTY_STRING) screenText.text = getString(R.string.default_text)
     }
 
     override fun onResume() {
@@ -79,7 +79,7 @@ class ColorToValueActivity : AppCompatActivity() {
         idSetup()
         buttonSetup()
         screenText.text = loadData("screenText1", "screen text1")
-        if(screenText.text == EMPTY_STRING) screenText.text = getString(R.string.default_text)
+        if (screenText.text == EMPTY_STRING) screenText.text = getString(R.string.default_text)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -103,7 +103,10 @@ class ColorToValueActivity : AppCompatActivity() {
             }
 
             R.id.share_item -> {
-                val intent = MenuFunctions.shareItemCTV(imageSelection, screenText, numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand)
+                val intent = MenuFunctions.shareItemCTV(
+                    imageSelection, screenText, numberBand1, numberBand2,
+                    numberBand3, multiplierBand, toleranceBand, ppmBand
+                )
                 startActivity(Intent.createChooser(intent, EMPTY_STRING))
                 true
             }
@@ -239,18 +242,16 @@ class ColorToValueActivity : AppCompatActivity() {
         ppmBand = loadData("ppmBand1", "ppm band1")
         dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.imageColor(ppmBand),0,0,0)
 
-
         // create and set adapters
-        val numberAdapter = ImageTextArrayAdapter(this, SelectionEnums.NUMBER.array)
+        val numberAdapter = ImageTextArrayAdapter(this, SpinnerContents.NUMBER.array)
         dropDownBand1.setAdapter(numberAdapter)
         dropDownBand2.setAdapter(numberAdapter)
         dropDownBand3.setAdapter(numberAdapter)
-
-        val multiplierAdapter = ImageTextArrayAdapter(this, SelectionEnums.MULTIPLIER.array)
+        val multiplierAdapter = ImageTextArrayAdapter(this, SpinnerContents.MULTIPLIER.array)
         dropDownMultiplier.setAdapter(multiplierAdapter)
-        val toleranceAdapter = ImageTextArrayAdapter(this, SelectionEnums.TOLERANCE.array)
+        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerContents.TOLERANCE.array)
         dropDownTolerance.setAdapter(toleranceAdapter)
-        val ppmAdapter = ImageTextArrayAdapter(this, SelectionEnums.PPM.array)
+        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerContents.PPM.array)
         dropDownPPM.setAdapter(ppmAdapter)
 
         // listeners
@@ -309,7 +310,6 @@ class ColorToValueActivity : AppCompatActivity() {
             }
     }
 
-    // will determine which calculations to do
     private fun calculateResistanceHelper() {
         if(toggleDropDownNumberBand3.visibility == View.GONE && toggleDropDownPPM.visibility == View.GONE) {
             screenText.text = ResistanceFormatter.calcResistance(numberBand1, numberBand2, multiplierBand, toleranceBand)
