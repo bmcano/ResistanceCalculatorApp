@@ -23,7 +23,7 @@ class AboutActivity : AppCompatActivity() {
 
         // sets up the action bar correctly
         val actionBar: ActionBar? = supportActionBar
-        val colorDrawable = ColorDrawable(Color.parseColor("#DDA15E"))
+        val colorDrawable = ColorDrawable(Color.parseColor("#F4A261"))
         actionBar!!.setBackgroundDrawable(colorDrawable)
         actionBar.title = getString(R.string.about)
 

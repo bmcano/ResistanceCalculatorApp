@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TODO - make nicer home screen, not sure what to add at the moment -->
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/color_to_value_button"
         android:layout_width="256dp"
@@ -19,7 +17,7 @@
         android:textAllCaps="false"
         android:textSize="24sp"
         android:textStyle="italic"
-        app:backgroundTint="@color/green_500"
+        app:backgroundTint="@color/mango_primary"
         app:layout_constraintBottom_toTopOf="@+id/value_to_color_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -39,7 +37,7 @@
         android:textAllCaps="false"
         android:textSize="24sp"
         android:textStyle="italic"
-        app:backgroundTint="@color/green_500"
+        app:backgroundTint="@color/mango_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.ImageView
@@ -62,7 +61,7 @@ class ColorToValueActivity : AppCompatActivity() {
 
         // sets up the action bar
         val actionBar: ActionBar? = supportActionBar
-        val colorDrawable = ColorDrawable(Color.parseColor("#DDA15E"))
+        val colorDrawable = ColorDrawable(Color.parseColor("#F4A261"))
         actionBar!!.setBackgroundDrawable(colorDrawable)
         actionBar.title = getString(R.string.color_to_value)
 
@@ -194,9 +193,9 @@ class ColorToValueActivity : AppCompatActivity() {
     }
 
     private fun buttonListener(selectedBtn: Button, btn1: Button, btn2: Button, btnNumber: Int, view1: Int, view2: Int ) {
-        selectedBtn.setBackgroundColor(getColor(R.color.green_700))
-        btn1.setBackgroundColor(getColor(R.color.green_500))
-        btn2.setBackgroundColor(getColor(R.color.green_500))
+        selectedBtn.setBackgroundColor(getColor(R.color.mango_dark))
+        btn1.setBackgroundColor(getColor(R.color.mango_primary))
+        btn2.setBackgroundColor(getColor(R.color.mango_primary))
 
         toggleDropDownNumberBand3.visibility = view1
         toggleDropDownPPM.visibility = view2

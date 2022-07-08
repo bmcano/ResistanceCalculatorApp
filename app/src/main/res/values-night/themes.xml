@@ -1,22 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. (Dark Mode) -->
+    <!-- Base application theme (Dark Mode) -->
     <style name="Theme.ResistanceCalculator" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/brown_200</item>
-        <item name="colorPrimaryVariant">@color/brown_500</item>
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/yellow_primary</item>
+        <item name="colorPrimaryVariant">@color/mango_primary</item>
         <item name="colorOnPrimary">@color/neutral</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
 
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <!-- Background color -->
         <item name="android:windowBackground">@color/neutral_night</item>
+
+        <!-- Dropdown colors -->
         <item name="android:textColor">@color/neutral</item>
         <item name="hintTextColor">@color/neutral</item>
+        <item name="android:textColorPrimary">@color/neutral</item>
+
     </style>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/neutral</color>
+    <color name="selected_dropdown_color">@color/yellow_primary</color>
+    <color name="text_outline_color">@color/yellow_primary</color>
 
 </resources>

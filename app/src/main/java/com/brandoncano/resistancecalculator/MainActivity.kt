@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         // sets up the action bar
         val actionBar: ActionBar? = supportActionBar
-        val colorDrawable = ColorDrawable(Color.parseColor("#DDA15E"))
+        val colorDrawable = ColorDrawable(Color.parseColor("#F4A261"))
         actionBar!!.setBackgroundDrawable(colorDrawable)
         actionBar.title = getString(R.string.app_name)
 
