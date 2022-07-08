@@ -20,6 +20,8 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import com.brandoncano.resistancecalculator.spinner.ImageTextArrayAdapter
+import com.brandoncano.resistancecalculator.spinner.SelectionEnums
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.MenuFunctions
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
@@ -276,19 +278,38 @@ class ValueToColorActivity : AppCompatActivity() {
 
     // drop downs
     private fun dropDownSetup() {
-        // units
         val dropDownUnits : AutoCompleteTextView = findViewById(R.id.spinnerUnits)
+        val dropDownTolerance: AutoCompleteTextView = findViewById(R.id.spinnerTolerance)
+        val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinnerPPM)
+
+        // load and set saved data
         dropDownUnits.setText(loadData("unitsDropDown", "units dropDown"))
         units = loadData("unitsDropDown", "units dropDown")
+
+        dropDownTolerance.setText(loadData("toleranceDropDown", "tolerance dropDown"))
+        toleranceBand = loadData("toleranceDropDown", "tolerance dropDown")
+        dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.toleranceImage(toleranceBand),0,0,0)
+
+        dropDownPPM.setText(loadData("ppmDropDown", "ppm dropDown"))
+        ppmBand = loadData("ppmDropDown", "ppm dropDown")
+        dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.ppmImage(ppmBand),0,0,0)
+
+        // adapters
         ArrayAdapter(
             this,
-            android.R.layout.simple_spinner_dropdown_item,
-            SelectionEnums.UNITS.array
+            R.layout.spinner_units_layout,
+            SelectionEnums.U.UNITS.array
         ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            adapter.setDropDownViewResource(R.layout.spinner_units_layout)
             dropDownUnits.setAdapter(adapter)
         }
 
+        val toleranceAdapter = ImageTextArrayAdapter(this, SelectionEnums.TOLERANCE_TEXT.array)
+        dropDownTolerance.setAdapter(toleranceAdapter)
+        val ppmAdapter = ImageTextArrayAdapter(this, SelectionEnums.PPM_TEXT.array)
+        dropDownPPM.setAdapter(ppmAdapter)
+
+        // listeners
         dropDownUnits.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 units = dropDownUnits.adapter.getItem(position).toString()
@@ -296,40 +317,12 @@ class ValueToColorActivity : AppCompatActivity() {
                 saveData("unitsDropDown", "units dropDown", dropDownUnits.text.toString())
             }
 
-        // tolerance
-        val dropDownTolerance: AutoCompleteTextView = findViewById(R.id.spinnerTolerance)
-        dropDownTolerance.setText(loadData("toleranceDropDown", "tolerance dropDown"))
-        toleranceBand = loadData("toleranceDropDown", "tolerance dropDown")
-        dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.toleranceImage(toleranceBand),0,0,0)
-        ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            SelectionEnums.TOLERANCE_TEXT.array
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            dropDownTolerance.setAdapter(adapter)
-        }
-
         dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
                 dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.toleranceImage(toleranceBand),0,0,0)
                 saveData("toleranceDropDown", "tolerance dropDown", dropDownTolerance.text.toString())
             }
-
-        // temperature coefficient
-        val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinnerPPM)
-        dropDownPPM.setText(loadData("ppmDropDown", "ppm dropDown"))
-        ppmBand = loadData("ppmDropDown", "ppm dropDown")
-        dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.ppmImage(ppmBand),0,0,0)
-        ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            SelectionEnums.PPM_TEXT.array
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            dropDownPPM.setAdapter(adapter)
-        }
 
         dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->

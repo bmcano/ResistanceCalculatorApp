@@ -16,6 +16,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.spinner.ImageTextArrayAdapter
+import com.brandoncano.resistancecalculator.spinner.SelectionEnums
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.MenuFunctions
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
@@ -240,16 +241,16 @@ class ColorToValueActivity : AppCompatActivity() {
 
 
         // create and set adapters
-        val numberAdapter = ImageTextArrayAdapter(this, SelectionEnums1.NUMBER.array)
+        val numberAdapter = ImageTextArrayAdapter(this, SelectionEnums.NUMBER.array)
         dropDownBand1.setAdapter(numberAdapter)
         dropDownBand2.setAdapter(numberAdapter)
         dropDownBand3.setAdapter(numberAdapter)
 
-        val multiplierAdapter = ImageTextArrayAdapter(this, SelectionEnums1.MULTIPLIER.array)
+        val multiplierAdapter = ImageTextArrayAdapter(this, SelectionEnums.MULTIPLIER.array)
         dropDownMultiplier.setAdapter(multiplierAdapter)
-        val toleranceAdapter = ImageTextArrayAdapter(this, SelectionEnums1.TOLERANCE.array)
+        val toleranceAdapter = ImageTextArrayAdapter(this, SelectionEnums.TOLERANCE.array)
         dropDownTolerance.setAdapter(toleranceAdapter)
-        val ppmAdapter = ImageTextArrayAdapter(this, SelectionEnums1.PPM.array)
+        val ppmAdapter = ImageTextArrayAdapter(this, SelectionEnums.PPM.array)
         dropDownPPM.setAdapter(ppmAdapter)
 
         // listeners
