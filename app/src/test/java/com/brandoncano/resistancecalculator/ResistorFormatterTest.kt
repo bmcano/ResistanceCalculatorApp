@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator
 
+import com.brandoncano.resistancecalculator.util.ResistorFormatter
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

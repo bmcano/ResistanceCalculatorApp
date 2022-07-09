@@ -14,17 +14,22 @@
         android:theme="@style/Theme.ResistanceCalculator"
         tools:targetApi="31">
         <activity
-            android:name="com.brandoncano.resistancecalculator.ValueToColorActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity
-            android:name="com.brandoncano.resistancecalculator.AboutActivity"
+            android:name=".ColorToValueActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.brandoncano.resistancecalculator.MainActivity"
+            android:name=".ValueToColorActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">

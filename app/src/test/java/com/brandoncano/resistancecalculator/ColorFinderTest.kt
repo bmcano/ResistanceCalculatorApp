@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator
 
+import com.brandoncano.resistancecalculator.util.ColorFinder
 import org.junit.Assert.assertEquals
 import org.junit.Ignore
 import org.junit.Test
