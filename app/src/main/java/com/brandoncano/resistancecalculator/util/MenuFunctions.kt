@@ -19,7 +19,7 @@ object MenuFunctions {
     private const val EMPTY_STRING = ""
 
     // determines which chart to display
-    fun showResistorCharts(context: Context, imageSelection: Int) {
+    fun showResistorCharts(context: Context, imageSelection: Int) : Boolean {
         val chartDialog = Dialog(context)
         chartDialog.setContentView(
             when(imageSelection) {
@@ -31,6 +31,7 @@ object MenuFunctions {
         )
         chartDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         chartDialog.show()
+        return true
     }
 
     // generates to text to copy/share for CTV

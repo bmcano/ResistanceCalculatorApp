@@ -104,7 +104,6 @@ class ValueToColorActivity : AppCompatActivity() {
 
             R.id.show_resistor_charts -> {
                 MenuFunctions.showResistorCharts(this, imageSelection)
-                true
             }
 
             R.id.share_item -> {
