@@ -202,7 +202,7 @@
 
     <ImageView
         android:id="@+id/r_post_band_5"
-        android:layout_width="11dp"
+        android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/resistor_post_band_5"
