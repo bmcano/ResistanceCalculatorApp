@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_about.xml" value="0.353713768115942" />
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_color_to_value.xml" value="0.7389558232931727" />
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/activity_value_to_color.xml" value="0.353713768115942" />
+        <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/popup_chart_6.xml" value="0.353713768115942" />
         <entry key="..\:/Users/Brand/Documents/GitHub/ResistanceCalculatorApp/app/src/main/res/layout/spinner_value_layout.xml" value="0.1" />
       </map>
     </option>
