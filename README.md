@@ -13,4 +13,8 @@ specific bands represent and their numerical values assocaited with it.
 This app is also on the Google Play Store.
 Link: https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator
 
+The app was released on 6/19/22 and has 2 updates since then.
+
 Current version of the app is *v1.2*.
+
+As of 8/22/22 the app has a 5 star review and over 100 downloads on the Google Play Store.
