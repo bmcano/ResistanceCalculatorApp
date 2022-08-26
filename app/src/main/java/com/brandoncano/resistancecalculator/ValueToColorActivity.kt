@@ -149,6 +149,10 @@ class ValueToColorActivity : AppCompatActivity() {
 
         fun loadImage(button: String) {
             resistance = loadData("UserInput", "user input")
+            // fix for those with crashing screens
+            if(resistance == "NotValid") {
+                resistance = "51"
+            }
             shareColors = ResistorFormatter.generateResistor(imageSelection, resistance, units)
             numberBand1.setColorFilter(ContextCompat.getColor(this, shareColors[0]))
             numberBand2.setColorFilter(ContextCompat.getColor(this, shareColors[1]))
@@ -224,8 +228,10 @@ class ValueToColorActivity : AppCompatActivity() {
                 screenText.text = updateText(colors)
                 saveData("screenText2", "screen text2", screenText.text.toString())
             }
-
-            saveData("UserInput", "user input", resistance)
+            // prevents an invalid input from being saved
+            if(resistance != "NotValid") {
+                saveData("UserInput", "user input", resistance)
+            }
             closeKeyboard()
         }
     }
