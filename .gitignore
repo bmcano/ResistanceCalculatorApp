@@ -18,3 +18,4 @@ local.properties
 /.idea/other.xml
 /app/.idea/workspace.xml
 /app/gradle/wrapper/gradle-wrapper.properties
+app/.idea/deploymentTargetDropDown.xml

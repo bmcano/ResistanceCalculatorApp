@@ -37,7 +37,7 @@
     <string name="resistor_description">Resistor</string>
 
     <!-- About page text -->
-    <string name="version">v1.2</string>
+    <string name="version">v1.3</string>
     <string name="created_by">Created By\n\nBrandon Cano</string>
     <string name="description">
         In this app you are able to find the resistance of a resistor based on the color of its

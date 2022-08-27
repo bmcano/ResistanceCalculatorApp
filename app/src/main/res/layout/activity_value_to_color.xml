@@ -29,7 +29,9 @@
             android:layout_height="56dp"
             android:maxLength="5"
             android:inputType="numberDecimal"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:textSize="16dp"
+            tools:ignore="LabelFor,SpUsage"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
