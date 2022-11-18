@@ -11,19 +11,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.util.MenuFunctions
 
 /**
- * Job: activity for the home screen page
- *
  * @author: Brandon
+ *
+ * Job: This hold the structure for the starting screen of the app.
  */
-
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // sets up the action bar correctly
         val actionBar: ActionBar? = supportActionBar
-        if(actionBar != null) {
+        if (actionBar != null) {
             val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
             actionBar.setBackgroundDrawable(colorDrawable)
             actionBar.title = getString(R.string.app_name)

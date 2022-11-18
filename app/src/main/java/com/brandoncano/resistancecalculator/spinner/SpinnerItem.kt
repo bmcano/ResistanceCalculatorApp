@@ -1,16 +1,13 @@
 package com.brandoncano.resistancecalculator.spinner
 
 /**
- * Job: holds the information for each item in the dropdown
- *
  * @author Brandon
+ *
+ * Job: holds the data for each spinner option
  */
+data class SpinnerItem(val name: String, val logo: Int) {
 
-data class SpinnerItem (
-    val name: String,
-    val logo: Int
-) {
-    override fun toString() : String {
+    override fun toString(): String {
         return name
     }
 }

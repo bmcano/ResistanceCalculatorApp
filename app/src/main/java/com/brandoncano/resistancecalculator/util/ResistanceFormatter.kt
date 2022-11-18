@@ -1,19 +1,24 @@
 package com.brandoncano.resistancecalculator.util
 
 /**
- * Job: formats the resistance based on the colors selected for the bands
- *
  * @author: Brandon
+ *
+ * Job: formats the resistance based on the colors selected for the bands
  */
-
 object ResistanceFormatter {
+
     private const val OMEGA: String = "Ω"
     private const val PLUS_MINUS: String = "±"
     private const val DEGREE: String = "°"
     private const val EMPTY_STRING = ""
 
     // four band resistors
-    fun calcResistance(NumberBand1: String, NumberBand2: String, Multiplier: String, Tolerance: String) : String {
+    fun calcResistance(
+        NumberBand1: String,
+        NumberBand2: String,
+        Multiplier: String,
+        Tolerance: String
+    ): String {
         // will not work properly with any empty strings
         if (NumberBand1 == EMPTY_STRING || NumberBand2 == EMPTY_STRING || Multiplier == EMPTY_STRING || Tolerance == EMPTY_STRING) {
             return "Select Colors"
@@ -28,20 +33,33 @@ object ResistanceFormatter {
         return if (NumberBand1 == "Black" && NumberBand2 == "Black") {
             "0 $OMEGA $PLUS_MINUS$tolerance%"
         } else if (NumberBand1 == "Black") {
-            when(Multiplier) {
+            when (Multiplier) {
                 "Red" -> "${numberBand2}00 $OMEGA $PLUS_MINUS$tolerance%"
                 "Green" -> "${numberBand2}00 k$OMEGA $PLUS_MINUS$tolerance%"
                 "Gray" -> "${numberBand2}00 M$OMEGA $PLUS_MINUS$tolerance%"
                 "Silver" -> "0.0${numberBand2} $OMEGA $PLUS_MINUS$tolerance%"
                 else -> {
-                    "${multiplierHelper(Multiplier, EMPTY_STRING, numberBand2)}$OMEGA $PLUS_MINUS$tolerance%"
+                    "${
+                        multiplierHelper(
+                            Multiplier,
+                            EMPTY_STRING,
+                            numberBand2
+                        )
+                    }$OMEGA $PLUS_MINUS$tolerance%"
                 }
             }
         } else "$multiplier$OMEGA $PLUS_MINUS$tolerance%"
     }
 
     // five or six band resistors
-    fun calcResistance(NumberBand1: String, NumberBand2: String, NumberBand3: String, Multiplier: String, Tolerance: String, PPM: String = EMPTY_STRING) : String {
+    fun calcResistance(
+        NumberBand1: String,
+        NumberBand2: String,
+        NumberBand3: String,
+        Multiplier: String,
+        Tolerance: String,
+        PPM: String = EMPTY_STRING
+    ): String {
         // will not work properly with any empty strings
         if (NumberBand1 == EMPTY_STRING || NumberBand2 == EMPTY_STRING || NumberBand3 == EMPTY_STRING || Multiplier == EMPTY_STRING || Tolerance == EMPTY_STRING) {
             return "Select Colors"
@@ -58,7 +76,7 @@ object ResistanceFormatter {
         return if (NumberBand1 == "Black" && NumberBand2 == "Black" && NumberBand3 == "Black") {
             "0 $OMEGA $PLUS_MINUS$tolerance%$ppm"
         } else if (NumberBand1 == "Black" && NumberBand2 == "Black") {
-            when(Multiplier) {
+            when (Multiplier) {
                 "Brown" -> "${numberBand3}0 $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 "Red" -> "${numberBand3}00 $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 "Yellow" -> "${numberBand3}0 k$OMEGA $PLUS_MINUS$tolerance%$ppm"
@@ -68,24 +86,38 @@ object ResistanceFormatter {
                 "Gold" -> "0.${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 "Silver" -> "0.0${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 else -> {
-                    "${multiplierHelper(Multiplier, EMPTY_STRING, EMPTY_STRING, numberBand3)}$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                    "${
+                        multiplierHelper(
+                            Multiplier,
+                            EMPTY_STRING,
+                            EMPTY_STRING,
+                            numberBand3
+                        )
+                    }$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 }
             }
         } else if (NumberBand1 == "Black") {
-            when(Multiplier) {
+            when (Multiplier) {
                 "Brown" -> "${numberBand2}${numberBand3}0 $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 "Yellow" -> "${numberBand2}${numberBand3}0 k$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 "Violet" -> "${numberBand2}${numberBand3}0 M$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 "Silver" -> "0.${numberBand2}${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 else -> {
-                    "${multiplierHelper(Multiplier, EMPTY_STRING, numberBand2, numberBand3)}$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                    "${
+                        multiplierHelper(
+                            Multiplier,
+                            EMPTY_STRING,
+                            numberBand2,
+                            numberBand3
+                        )
+                    }$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 }
             }
         } else "$multiplier$OMEGA $PLUS_MINUS$tolerance%$ppm"
     }
 
     // gets the number from its color representation
-    private fun numberHelper(Color: String) : String {
+    private fun numberHelper(Color: String): String {
         return when (Color) {
             "Black" -> "0"
             "Brown" -> "1"
@@ -102,7 +134,7 @@ object ResistanceFormatter {
     }
 
     // four band resistor
-    private fun multiplierHelper(Color: String, band1: String, band2: String) : String {
+    private fun multiplierHelper(Color: String, band1: String, band2: String): String {
         return when (Color) {
             "Black" -> "$band1$band2 "
             "Brown" -> "${band1}${band2}0 "
@@ -121,7 +153,12 @@ object ResistanceFormatter {
     }
 
     // five or six band resistor
-    private fun multiplierHelper(Color: String, band1: String, band2: String, band3: String) : String {
+    private fun multiplierHelper(
+        Color: String,
+        band1: String,
+        band2: String,
+        band3: String
+    ): String {
         return when (Color) {
             "Black" -> "$band1$band2$band3 "
             "Brown" -> "${band1}.${band2}${band3} k"
@@ -140,7 +177,7 @@ object ResistanceFormatter {
     }
 
     // finds the tolerance
-    private fun toleranceHelper(Color: String) : String {
+    private fun toleranceHelper(Color: String): String {
         return when (Color) {
             "Brown" -> "1"
             "Red" -> "2"
@@ -156,7 +193,7 @@ object ResistanceFormatter {
     }
 
     // temperature coefficient - only on six band resistor
-    private fun ppmHelper(Color: String) : String {
+    private fun ppmHelper(Color: String): String {
         return when (Color) {
             "Black" -> "\n250 ppm/${DEGREE}C"
             "Brown" -> "\n100 ppm/${DEGREE}C"

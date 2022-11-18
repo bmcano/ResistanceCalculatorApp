@@ -11,25 +11,25 @@ import android.widget.TextView
 import com.brandoncano.resistancecalculator.R
 
 /**
- * Job: customer array adapter to have an ImageView and a TextView
- *
  * @author Brandon
+ *
+ * Job: customer array adapter to have an ImageView and a TextView
  */
-
 class ImageTextArrayAdapter(context: Context, private var items: Array<SpinnerItem>) :
     ArrayAdapter<SpinnerItem?>(context, R.layout.spinner_value_layout, items) {
+
     private var inflater: LayoutInflater = (context as Activity).layoutInflater
     private var holder: ViewHolder? = null
 
-    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?) : View {
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
         return getCustomView(position, convertView, parent)
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup) : View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return getCustomView(position, convertView, parent)
     }
 
-    private fun getCustomView(position: Int, convertView: View?, parent: ViewGroup?) : View {
+    private fun getCustomView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val (name, logo) = items[position]
         var row = convertView
         if (row == null) {

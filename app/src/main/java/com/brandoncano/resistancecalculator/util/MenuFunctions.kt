@@ -19,10 +19,10 @@ object MenuFunctions {
     private const val EMPTY_STRING = ""
 
     // determines which chart to display
-    fun showResistorCharts(context: Context, imageSelection: Int) : Boolean {
+    fun showResistorCharts(context: Context, imageSelection: Int): Boolean {
         val chartDialog = Dialog(context)
         chartDialog.setContentView(
-            when(imageSelection) {
+            when (imageSelection) {
                 4 -> R.layout.popup_chart_4
                 5 -> R.layout.popup_chart_5
                 6 -> R.layout.popup_chart_6
@@ -35,8 +35,10 @@ object MenuFunctions {
     }
 
     // generates to text to copy/share for CTV
-    fun shareItemCTV(imageSelection: Int, screenText: TextView, numberBand1: String, numberBand2: String,
-                     numberBand3: String, multiplierBand: String, toleranceBand: String, ppmBand: String ) : Intent {
+    fun shareItemCTV(
+        imageSelection: Int, screenText: TextView, numberBand1: String, numberBand2: String,
+        numberBand3: String, multiplierBand: String, toleranceBand: String, ppmBand: String
+    ): Intent {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
         val text = when (imageSelection) {
@@ -50,12 +52,22 @@ object MenuFunctions {
     }
 
     // generates to text to copy/share for VTC
-    fun shareItemVTC(imageSelection: Int, shareColors: Array<Int>, screenText: TextView, toleranceBand: String, ppmBand: String) : Intent {
+    fun shareItemVTC(
+        imageSelection: Int,
+        shareColors: Array<Int>,
+        screenText: TextView,
+        toleranceBand: String,
+        ppmBand: String
+    ): Intent {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
 
-        var nb1 = EMPTY_STRING; var nb2 = EMPTY_STRING; var nb3 = EMPTY_STRING
-        var multi = EMPTY_STRING; var tol = EMPTY_STRING; var ppm = EMPTY_STRING
+        var nb1 = EMPTY_STRING
+        var nb2 = EMPTY_STRING
+        var nb3 = EMPTY_STRING
+        var multi = EMPTY_STRING
+        var tol = EMPTY_STRING
+        var ppm = EMPTY_STRING
 
         if (shareColors.isNotEmpty()) {
             nb1 = ColorFinder.idToColorText(shareColors[0])

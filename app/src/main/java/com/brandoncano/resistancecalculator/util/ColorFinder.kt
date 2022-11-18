@@ -14,8 +14,8 @@ object ColorFinder {
     private const val EMPTY_STRING = ""
 
     // finds the image representation
-    fun imageColor(color: String = "blank") : Int {
-        return when(color) {
+    fun imageColor(color: String = "blank"): Int {
+        return when (color) {
             "Black" -> R.drawable.black32
             "Blue" -> R.drawable.blue32
             "Brown" -> R.drawable.brown32
@@ -33,8 +33,8 @@ object ColorFinder {
     }
 
     // finds the color based on the selection
-    fun bandColor(color: String = "blank") : Int {
-        return when(color) {
+    fun bandColor(color: String = "blank"): Int {
+        return when (color) {
             "Red" -> R.color.red32
             "Orange" -> R.color.orange32
             "Yellow" -> R.color.yellow32
@@ -52,8 +52,8 @@ object ColorFinder {
     }
 
     // finds the color depending on the position
-    fun numberColor(color: Int) : Int {
-        return when(color) {
+    fun numberColor(color: Int): Int {
+        return when (color) {
             0 -> R.color.black32
             1 -> R.color.brown32
             2 -> R.color.red32
@@ -69,8 +69,8 @@ object ColorFinder {
     }
 
     // find image based on tolerance value
-    fun toleranceImage(color: String = "None") : Int {
-        return when(color) {
+    fun toleranceImage(color: String = "None"): Int {
+        return when (color) {
             "${PLUS_MINUS}1%" -> R.drawable.brown32
             "${PLUS_MINUS}2%" -> R.drawable.red32
             "${PLUS_MINUS}0.5%" -> R.drawable.green32
@@ -85,8 +85,8 @@ object ColorFinder {
     }
 
     // find color based on tolerance value
-    fun toleranceColor(color: String = "None") : Int {
-        return when(color) {
+    fun toleranceColor(color: String = "None"): Int {
+        return when (color) {
             "${PLUS_MINUS}1%" -> R.color.brown32
             "${PLUS_MINUS}2%" -> R.color.red32
             "${PLUS_MINUS}0.5%" -> R.color.green32
@@ -101,8 +101,8 @@ object ColorFinder {
     }
 
     // find image based on ppm value
-    fun ppmImage(color: String = "None") : Int {
-        return when(color) {
+    fun ppmImage(color: String = "None"): Int {
+        return when (color) {
             "250 ppm/${DEGREE}C" -> R.drawable.black32
             "100 ppm/${DEGREE}C" -> R.drawable.brown32
             "50 ppm/${DEGREE}C" -> R.drawable.red32
@@ -117,8 +117,8 @@ object ColorFinder {
     }
 
     // find color based on ppm value
-    fun ppmColor(color: String = "None") : Int {
-        return when(color) {
+    fun ppmColor(color: String = "None"): Int {
+        return when (color) {
             "250 ppm/${DEGREE}C" -> R.color.black32
             "100 ppm/${DEGREE}C" -> R.color.brown32
             "50 ppm/${DEGREE}C" -> R.color.red32
@@ -133,8 +133,8 @@ object ColorFinder {
     }
 
     // find text (color) from id
-    fun idToColorText(colorId: Int) : String {
-        return when(colorId) {
+    fun idToColorText(colorId: Int): String {
+        return when (colorId) {
             R.color.black32, R.drawable.black32 -> "Black"
             R.color.brown32, R.drawable.brown32 -> "Brown"
             R.color.red32, R.drawable.red32 -> "Red"
@@ -151,8 +151,8 @@ object ColorFinder {
     }
 
     // picks a random color
-    fun randomColor() : Int {
-        return when((1..12).random()) {
+    fun randomColor(): Int {
+        return when ((1..12).random()) {
             1 -> R.color.red32
             2 -> R.color.orange32
             3 -> R.color.yellow32

@@ -10,19 +10,18 @@ import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**
- * Job: activity for the about page
+ * @author Brandon
  *
- * @author: Brandon
+ * Job: This hold the structure for the about page of the app.
  */
-
 class AboutActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
-        // sets up the action bar correctly
         val actionBar: ActionBar? = supportActionBar
-        if(actionBar != null) {
+        if (actionBar != null) {
             val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
             actionBar.setBackgroundDrawable(colorDrawable)
             actionBar.title = getString(R.string.about)
@@ -47,7 +46,7 @@ class AboutActivity : AppCompatActivity() {
         multiplierBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
         toleranceBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
 
-        when((4..6).random()) {
+        when ((4..6).random()) {
             4 -> {
                 numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
                 ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))

@@ -30,12 +30,12 @@ import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
 /**
- * Job: activity for the value to color page
- *
  * @author: Brandon
+ *
+ * Job: activity for the value to color page.
  */
-
 class ValueToColorActivity : AppCompatActivity() {
+
     companion object {
         private const val EMPTY_STRING = ""
     }
@@ -63,7 +63,7 @@ class ValueToColorActivity : AppCompatActivity() {
 
         // sets up the action bar correctly
         val actionBar: ActionBar? = supportActionBar
-        if(actionBar != null) {
+        if (actionBar != null) {
             val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
             actionBar.setBackgroundDrawable(colorDrawable)
             actionBar.title = getString(R.string.value_to_color)
@@ -74,7 +74,7 @@ class ValueToColorActivity : AppCompatActivity() {
         buttonSetup()
         calculateButtonSetup()
         screenText.text = loadData("screenText2", "screen text2")
-        if(screenText.text == EMPTY_STRING) screenText.text = getString(R.string.enter_value)
+        if (screenText.text == EMPTY_STRING) screenText.text = getString(R.string.enter_value)
     }
 
     override fun onResume() {
@@ -84,7 +84,7 @@ class ValueToColorActivity : AppCompatActivity() {
         buttonSetup()
         calculateButtonSetup()
         screenText.text = loadData("screenText2", "screen text2")
-        if(screenText.text == EMPTY_STRING) screenText.text = getString(R.string.enter_value)
+        if (screenText.text == EMPTY_STRING) screenText.text = getString(R.string.enter_value)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -94,7 +94,7 @@ class ValueToColorActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.color_to_value -> {
                 super.finish()
                 val intent = Intent(this, ColorToValueActivity::class.java)
@@ -150,7 +150,7 @@ class ValueToColorActivity : AppCompatActivity() {
         fun loadImage(button: String) {
             resistance = loadData("UserInput", "user input")
             // fix for those with crashing screens
-            if(resistance == "NotValid" || resistance == "") {
+            if (resistance == "NotValid" || resistance == "") {
                 resistance = "51"
             }
             shareColors = ResistorFormatter.generateResistor(imageSelection, resistance, units)
@@ -159,12 +159,17 @@ class ValueToColorActivity : AppCompatActivity() {
             if (button == "5" || button == "6")
                 numberBand3.setColorFilter(ContextCompat.getColor(this, shareColors[2]))
             multiplierBand.setColorFilter(ContextCompat.getColor(this, shareColors[3]))
-            toleranceColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.toleranceColor(toleranceBand)))
+            toleranceColor.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    ColorFinder.toleranceColor(toleranceBand)
+                )
+            )
             if (button == "6")
                 ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor(ppmBand)))
         }
 
-        when(loadData("buttonSelection2", "button selection2")) {
+        when (loadData("buttonSelection2", "button selection2")) {
             "4" -> {
                 buttonListener(fourBandButton, fiveBandButton, sixBandButton, 4, View.INVISIBLE)
                 loadImage("4")
@@ -195,7 +200,13 @@ class ValueToColorActivity : AppCompatActivity() {
         }
     }
 
-    private fun buttonListener(selectedBtn: Button, btn1: Button, btn2: Button, btnNumber: Int, view: Int ) {
+    private fun buttonListener(
+        selectedBtn: Button,
+        btn1: Button,
+        btn2: Button,
+        btnNumber: Int,
+        view: Int
+    ) {
         selectedBtn.setBackgroundColor(getColor(R.color.mango_dark))
         btn1.setBackgroundColor(getColor(R.color.mango_primary))
         btn2.setBackgroundColor(getColor(R.color.mango_primary))
@@ -216,20 +227,26 @@ class ValueToColorActivity : AppCompatActivity() {
         // make the resistor
         val calculateButton: Button = findViewById(R.id.calculate)
         calculateButton.setOnClickListener {
-            val colors: Array<Int> = ResistorFormatter.generateResistor(imageSelection, resistance, units)
+            val colors: Array<Int> =
+                ResistorFormatter.generateResistor(imageSelection, resistance, units)
             shareColors = colors // for sharing in menu
             if (colors.isNotEmpty()) {
                 numberBand1.setColorFilter(ContextCompat.getColor(this, colors[0]))
                 numberBand2.setColorFilter(ContextCompat.getColor(this, colors[1]))
                 numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
                 multiplierBand.setColorFilter(ContextCompat.getColor(this, colors[3]))
-                toleranceColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.toleranceColor(toleranceBand)))
+                toleranceColor.setColorFilter(
+                    ContextCompat.getColor(
+                        this,
+                        ColorFinder.toleranceColor(toleranceBand)
+                    )
+                )
 
                 screenText.text = updateText(colors)
                 saveData("screenText2", "screen text2", screenText.text.toString())
             }
             // prevents an invalid input from being saved
-            if(resistance != "NotValid") {
+            if (resistance != "NotValid") {
                 saveData("UserInput", "user input", resistance)
             }
             closeKeyboard()
@@ -237,7 +254,7 @@ class ValueToColorActivity : AppCompatActivity() {
     }
 
     // finds any errors in the user input
-    private fun errorFinder(text: String) : String {
+    private fun errorFinder(text: String): String {
         val textInputLayout: TextInputLayout = findViewById(R.id.edit_text_outline)
         return if (text == EMPTY_STRING || text == ".") {
             textInputLayout.error = null
@@ -254,7 +271,7 @@ class ValueToColorActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateText(colors: Array<Int>) : String {
+    private fun updateText(colors: Array<Int>): String {
         return when (imageSelection) {
             4 -> {
                 numberBand3.setColorFilter(ContextCompat.getColor(this, R.color.resistor_blank))
@@ -278,13 +295,14 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun closeKeyboard() {
         val view = this.currentFocus
         if (view != null) {
-            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm: InputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 
     private fun dropDownSetup() {
-        val dropDownUnits : AutoCompleteTextView = findViewById(R.id.spinnerUnits)
+        val dropDownUnits: AutoCompleteTextView = findViewById(R.id.spinnerUnits)
         val dropDownTolerance: AutoCompleteTextView = findViewById(R.id.spinnerTolerance)
         val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinnerPPM)
 
@@ -294,11 +312,20 @@ class ValueToColorActivity : AppCompatActivity() {
 
         dropDownTolerance.setText(loadData("toleranceDropDown", "tolerance dropDown"))
         toleranceBand = loadData("toleranceDropDown", "tolerance dropDown")
-        dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.toleranceImage(toleranceBand),0,0,0)
+        dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            ColorFinder.toleranceImage(
+                toleranceBand
+            ), 0, 0, 0
+        )
 
         dropDownPPM.setText(loadData("ppmDropDown", "ppm dropDown"))
         ppmBand = loadData("ppmDropDown", "ppm dropDown")
-        dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.ppmImage(ppmBand),0,0,0)
+        dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            ColorFinder.ppmImage(ppmBand),
+            0,
+            0,
+            0
+        )
 
         // create and set adapters
         ArrayAdapter(
@@ -326,14 +353,26 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
-                dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.toleranceImage(toleranceBand),0,0,0)
-                saveData("toleranceDropDown", "tolerance dropDown", dropDownTolerance.text.toString())
+                dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    ColorFinder.toleranceImage(
+                        toleranceBand
+                    ), 0, 0, 0
+                )
+                saveData(
+                    "toleranceDropDown",
+                    "tolerance dropDown",
+                    dropDownTolerance.text.toString()
+                )
             }
 
         dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 ppmBand = dropDownPPM.adapter.getItem(position).toString()
-                dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(ColorFinder.ppmImage(ppmBand),0,0,0)
+                dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    ColorFinder.ppmImage(
+                        ppmBand
+                    ), 0, 0, 0
+                )
                 saveData("ppmDropDown", "ppm dropDown", dropDownPPM.text.toString())
             }
     }
@@ -349,7 +388,7 @@ class ValueToColorActivity : AppCompatActivity() {
     }
 
     // loads the user input
-    private fun loadData(name: String, key: String) : String {
+    private fun loadData(name: String, key: String): String {
         val sharedPreferences = getSharedPreferences(name, MODE_PRIVATE)
         val gson = Gson()
         val json = sharedPreferences!!.getString(key, null)
