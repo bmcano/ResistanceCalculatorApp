@@ -162,11 +162,11 @@ class ValueToColorActivity : AppCompatActivity() {
             toleranceColor.setColorFilter(
                 ContextCompat.getColor(
                     this,
-                    ColorFinder.toleranceColor(toleranceBand)
+                    ColorFinder.textToColor(toleranceBand)
                 )
             )
             if (button == "6")
-                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor(ppmBand)))
+                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor(ppmBand)))
         }
 
         when (loadData("buttonSelection2", "button selection2")) {
@@ -238,7 +238,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 toleranceColor.setColorFilter(
                     ContextCompat.getColor(
                         this,
-                        ColorFinder.toleranceColor(toleranceBand)
+                        ColorFinder.textToColor(toleranceBand)
                     )
                 )
 
@@ -275,17 +275,17 @@ class ValueToColorActivity : AppCompatActivity() {
         return when (imageSelection) {
             4 -> {
                 numberBand3.setColorFilter(ContextCompat.getColor(this, R.color.resistor_blank))
-                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
+                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
                 "$resistance $units $toleranceBand"
             }
             5 -> {
                 numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
-                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor()))
+                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
                 "$resistance $units $toleranceBand"
             }
             6 -> {
                 numberBand3.setColorFilter(ContextCompat.getColor(this, colors[2]))
-                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.ppmColor(ppmBand)))
+                ppmColor.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor(ppmBand)))
                 if (ppmBand == EMPTY_STRING) "$resistance $units $toleranceBand" else "$resistance $units $toleranceBand\n$ppmBand"
             }
             else -> EMPTY_STRING
