@@ -10,12 +10,12 @@ import android.widget.TextView
 import com.brandoncano.resistancecalculator.R
 
 /**
- * Job: holds all the logic for the menu items, to keep activities cleaner and more condense
- *
  * @author: Brandon
+ *
+ * Job: holds all the logic for the menu items, to keep activities cleaner and more condense
  */
-
 object MenuFunctions {
+
     private const val EMPTY_STRING = ""
 
     // determines which chart to display
@@ -93,8 +93,8 @@ object MenuFunctions {
     fun feedback(): Uri {
         return Uri.parse(
             "mailto:brandoncano.development@gmail.com?subject="
-                    + Uri.encode("[Feedback] - Resistance Calculator")
-                .toString() + "&body=" + Uri.encode(EMPTY_STRING)
+                    + Uri.encode("[Feedback] - Resistance Calculator").toString()
+                    + "&body=" + Uri.encode(EMPTY_STRING)
         )
     }
 }

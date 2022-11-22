@@ -22,19 +22,19 @@ object ResistorFormatter {
         }
         val sigFigs = SignificantFigures(input)
 
-        when {
-            numBands == 4 && sigFigs.numberSignificantFigures > 2 -> return false
-            (numBands == 5 || numBands == 6) && sigFigs.numberSignificantFigures > 3 -> return false
-            (numBands == 5 || numBands == 6) && (input[0] == '0' || input[0] == '.') && (units == OMEGA || units == EMPTY_STRING) -> return false
-            (numBands == 5 || numBands == 6) && units == "G$OMEGA" && input.length > 3 -> return false
-            (numBands == 4) && units == "G$OMEGA" && input.length > 2 -> return false
-            input.length > 1 && input[0] == '0' && input[1] == '0' -> return false
-            input.length > 2 && input[0] == '0' && input[1] == '.' && input[2] == '0' -> return false
-            input.length > 1 && input[0] == '0' && input[1] != '.' -> return false
-            input.length > 1 && input[0] == '.' && input[1] == '0' -> return false
+        return when {
+            (numBands == 4 && sigFigs.numberSignificantFigures > 2) ||
+                    ((numBands == 5 || numBands == 6) && sigFigs.numberSignificantFigures > 3) ||
+                    ((numBands == 5 || numBands == 6) && (input[0] == '0' || input[0] == '.') &&
+                            (units == OMEGA || units == EMPTY_STRING)) ||
+                    ((numBands == 5 || numBands == 6) && units == "G$OMEGA" && input.length > 3) ||
+                    ((numBands == 4) && units == "G$OMEGA" && input.length > 2) ||
+                    (input.length > 1 && input[0] == '0' && input[1] == '0') ||
+                    (input.length > 2 && input[0] == '0' && input[1] == '.' && input[2] == '0') ||
+                    (input.length > 1 && input[0] == '0' && input[1] != '.') ||
+                    (input.length > 1 && input[0] == '.' && input[1] == '0') -> return false
+            else -> true
         }
-
-        return true
     }
 
     // returns an array of the 3 or 4 colors to be returned
