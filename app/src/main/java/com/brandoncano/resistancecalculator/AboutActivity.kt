@@ -48,12 +48,12 @@ class AboutActivity : AppCompatActivity() {
 
         when ((4..6).random()) {
             4 -> {
-                numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
-                ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
+                numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
+                ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
             }
             5 -> {
                 numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
-                ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
+                ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
             }
             6 -> {
                 numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))

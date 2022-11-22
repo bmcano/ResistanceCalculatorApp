@@ -148,39 +148,39 @@ class ColorToValueActivity : AppCompatActivity() {
             bandImage1.setColorFilter(
                 ContextCompat.getColor(
                     this,
-                    ColorFinder.bandColor(numberBand1)
+                    ColorFinder.textToColor(numberBand1)
                 )
             )
             bandImage2.setColorFilter(
                 ContextCompat.getColor(
                     this,
-                    ColorFinder.bandColor(numberBand2)
+                    ColorFinder.textToColor(numberBand2)
                 )
             )
             if (button == "5" || button == "6")
                 bandImage3.setColorFilter(
                     ContextCompat.getColor(
                         this,
-                        ColorFinder.bandColor(numberBand3)
+                        ColorFinder.textToColor(numberBand3)
                     )
                 )
             bandImage4.setColorFilter(
                 ContextCompat.getColor(
                     this,
-                    ColorFinder.bandColor(multiplierBand)
+                    ColorFinder.textToColor(multiplierBand)
                 )
             )
             bandImage5.setColorFilter(
                 ContextCompat.getColor(
                     this,
-                    ColorFinder.bandColor(toleranceBand)
+                    ColorFinder.textToColor(toleranceBand)
                 )
             )
             if (button == "6")
                 bandImage6.setColorFilter(
                     ContextCompat.getColor(
                         this,
-                        ColorFinder.bandColor(ppmBand)
+                        ColorFinder.textToColor(ppmBand)
                     )
                 )
         }
@@ -225,8 +225,8 @@ class ColorToValueActivity : AppCompatActivity() {
         fourBandButton.setOnClickListener {
             buttonListener(fourBandButton, fiveBandButton, sixBandButton, 4, View.GONE, View.GONE)
 
-            bandImage3.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
-            bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
+            bandImage3.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
+            bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
         }
 
         // toggle five band resistor
@@ -243,10 +243,10 @@ class ColorToValueActivity : AppCompatActivity() {
             bandImage3.setColorFilter(
                 ContextCompat.getColor(
                     this,
-                    ColorFinder.bandColor(numberBand3)
+                    ColorFinder.textToColor(numberBand3)
                 )
             )
-            bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor()))
+            bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
         }
 
         // toggle six band resistor
@@ -263,10 +263,10 @@ class ColorToValueActivity : AppCompatActivity() {
             bandImage3.setColorFilter(
                 ContextCompat.getColor(
                     this,
-                    ColorFinder.bandColor(numberBand3)
+                    ColorFinder.textToColor(numberBand3)
                 )
             )
-            bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.bandColor(ppmBand)))
+            bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor(ppmBand)))
         }
     }
 
@@ -302,7 +302,7 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownBand1.setText(loadData("numBand1", "num band1"))
         numberBand1 = loadData("numBand1", "num band1")
         dropDownBand1.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.imageColor(
+            ColorFinder.textToColoredDrawable(
                 numberBand1
             ), 0, 0, 0
         )
@@ -310,7 +310,7 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownBand2.setText(loadData("numBand2", "num band2"))
         numberBand2 = loadData("numBand2", "num band2")
         dropDownBand2.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.imageColor(
+            ColorFinder.textToColoredDrawable(
                 numberBand2
             ), 0, 0, 0
         )
@@ -318,7 +318,7 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownBand3.setText(loadData("numBand3", "num band3"))
         numberBand3 = loadData("numBand3", "num band3")
         dropDownBand3.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.imageColor(
+            ColorFinder.textToColoredDrawable(
                 numberBand3
             ), 0, 0, 0
         )
@@ -326,7 +326,7 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownMultiplier.setText(loadData("multiplierBand1", "multiplier band1"))
         multiplierBand = loadData("multiplierBand1", "multiplier band1")
         dropDownMultiplier.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.imageColor(
+            ColorFinder.textToColoredDrawable(
                 multiplierBand
             ), 0, 0, 0
         )
@@ -334,7 +334,7 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownTolerance.setText(loadData("toleranceBand1", "tolerance band1"))
         toleranceBand = loadData("toleranceBand1", "tolerance band1")
         dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.imageColor(
+            ColorFinder.textToColoredDrawable(
                 toleranceBand
             ), 0, 0, 0
         )
@@ -342,7 +342,7 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownPPM.setText(loadData("ppmBand1", "ppm band1"))
         ppmBand = loadData("ppmBand1", "ppm band1")
         dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.imageColor(ppmBand),
+            ColorFinder.textToColoredDrawable(ppmBand),
             0,
             0,
             0
@@ -365,7 +365,7 @@ class ColorToValueActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand1 = dropDownBand1.adapter.getItem(position).toString()
                 dropDownBand1.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    ColorFinder.imageColor(
+                    ColorFinder.textToColoredDrawable(
                         numberBand1
                     ), 0, 0, 0
                 )
@@ -373,7 +373,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 bandImage1.setColorFilter(
                     ContextCompat.getColor(
                         this,
-                        ColorFinder.bandColor(numberBand1)
+                        ColorFinder.textToColor(numberBand1)
                     )
                 )
                 saveData("numBand1", "num band1", dropDownBand1.text.toString())
@@ -383,7 +383,7 @@ class ColorToValueActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand2 = dropDownBand2.adapter.getItem(position).toString()
                 dropDownBand2.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    ColorFinder.imageColor(
+                    ColorFinder.textToColoredDrawable(
                         numberBand2
                     ), 0, 0, 0
                 )
@@ -391,7 +391,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 bandImage2.setColorFilter(
                     ContextCompat.getColor(
                         this,
-                        ColorFinder.bandColor(numberBand2)
+                        ColorFinder.textToColor(numberBand2)
                     )
                 )
                 saveData("numBand2", "num band2", dropDownBand2.text.toString())
@@ -401,7 +401,7 @@ class ColorToValueActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand3 = dropDownBand3.adapter.getItem(position).toString()
                 dropDownBand3.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    ColorFinder.imageColor(
+                    ColorFinder.textToColoredDrawable(
                         numberBand3
                     ), 0, 0, 0
                 )
@@ -409,7 +409,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 bandImage3.setColorFilter(
                     ContextCompat.getColor(
                         this,
-                        ColorFinder.bandColor(numberBand3)
+                        ColorFinder.textToColor(numberBand3)
                     )
                 )
                 saveData("numBand3", "num band3", dropDownBand3.text.toString())
@@ -419,7 +419,7 @@ class ColorToValueActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 multiplierBand = dropDownMultiplier.adapter.getItem(position).toString()
                 dropDownMultiplier.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    ColorFinder.imageColor(
+                    ColorFinder.textToColoredDrawable(
                         multiplierBand
                     ), 0, 0, 0
                 )
@@ -427,7 +427,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 bandImage4.setColorFilter(
                     ContextCompat.getColor(
                         this,
-                        ColorFinder.bandColor(multiplierBand)
+                        ColorFinder.textToColor(multiplierBand)
                     )
                 )
                 saveData("multiplierBand1", "multiplier band1", dropDownMultiplier.text.toString())
@@ -437,7 +437,7 @@ class ColorToValueActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
                 dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    ColorFinder.imageColor(
+                    ColorFinder.textToColoredDrawable(
                         toleranceBand
                     ), 0, 0, 0
                 )
@@ -445,7 +445,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 bandImage5.setColorFilter(
                     ContextCompat.getColor(
                         this,
-                        ColorFinder.bandColor(toleranceBand)
+                        ColorFinder.textToColor(toleranceBand)
                     )
                 )
                 saveData("toleranceBand1", "tolerance band1", dropDownTolerance.text.toString())
@@ -455,7 +455,7 @@ class ColorToValueActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 ppmBand = dropDownPPM.adapter.getItem(position).toString()
                 dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    ColorFinder.imageColor(
+                    ColorFinder.textToColoredDrawable(
                         ppmBand
                     ), 0, 0, 0
                 )
@@ -463,7 +463,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 bandImage6.setColorFilter(
                     ContextCompat.getColor(
                         this,
-                        ColorFinder.bandColor(ppmBand)
+                        ColorFinder.textToColor(ppmBand)
                     )
                 )
                 saveData("ppmBand1", "ppm band1", dropDownPPM.text.toString())

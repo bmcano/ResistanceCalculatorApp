@@ -313,7 +313,7 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownTolerance.setText(loadData("toleranceDropDown", "tolerance dropDown"))
         toleranceBand = loadData("toleranceDropDown", "tolerance dropDown")
         dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.toleranceImage(
+            ColorFinder.textToColoredDrawable(
                 toleranceBand
             ), 0, 0, 0
         )
@@ -321,7 +321,7 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownPPM.setText(loadData("ppmDropDown", "ppm dropDown"))
         ppmBand = loadData("ppmDropDown", "ppm dropDown")
         dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.ppmImage(ppmBand),
+            ColorFinder.textToColoredDrawable(ppmBand),
             0,
             0,
             0
@@ -354,7 +354,7 @@ class ValueToColorActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
                 dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    ColorFinder.toleranceImage(
+                    ColorFinder.textToColoredDrawable(
                         toleranceBand
                     ), 0, 0, 0
                 )
@@ -369,7 +369,7 @@ class ValueToColorActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 ppmBand = dropDownPPM.adapter.getItem(position).toString()
                 dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    ColorFinder.ppmImage(
+                    ColorFinder.textToColoredDrawable(
                         ppmBand
                     ), 0, 0, 0
                 )

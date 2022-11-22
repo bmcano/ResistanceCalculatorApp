@@ -71,14 +71,14 @@ object ResistorFormatter {
                 ColorFinder.numberColor(numberBand1),
                 ColorFinder.numberColor(numberBand2),
                 R.color.resistor_blank,
-                ColorFinder.bandColor(multiplierBand)
+                ColorFinder.textToColor(multiplierBand)
             )
         } else {
             arrayOf(
                 ColorFinder.numberColor(numberBand1),
                 ColorFinder.numberColor(numberBand2),
                 ColorFinder.numberColor(numberBand3),
-                ColorFinder.bandColor(multiplierBand)
+                ColorFinder.textToColor(multiplierBand)
             )
         }
     }

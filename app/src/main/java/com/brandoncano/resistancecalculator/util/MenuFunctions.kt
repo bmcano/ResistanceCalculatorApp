@@ -74,8 +74,8 @@ object MenuFunctions {
             nb2 = ColorFinder.idToColorText(shareColors[1])
             nb3 = ColorFinder.idToColorText(shareColors[2])
             multi = ColorFinder.idToColorText(shareColors[3])
-            tol = ColorFinder.idToColorText(ColorFinder.toleranceImage(toleranceBand))
-            ppm = ColorFinder.idToColorText(ColorFinder.ppmImage(ppmBand))
+            tol = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(toleranceBand))
+            ppm = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(ppmBand))
         }
 
         val text = when (imageSelection) {

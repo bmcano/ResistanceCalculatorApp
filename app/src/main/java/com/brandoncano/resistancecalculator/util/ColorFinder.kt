@@ -3,37 +3,38 @@ package com.brandoncano.resistancecalculator.util
 import com.brandoncano.resistancecalculator.R
 
 /**
- * Job: find the correct color or drawable based on an int or string input
- *
  * @author: Brandon
+ *
+ * Job: find the correct color or drawable based on an int or string input
  */
-
 object ColorFinder {
+
     private const val PLUS_MINUS: String = "±"
     private const val DEGREE: String = "°"
     private const val EMPTY_STRING = ""
 
-    // finds the image representation
-    fun imageColor(color: String = "blank"): Int {
+    // Text to Image Color, includes;
+    // name of colors, tolerance text, ppm text
+    // note: "${PLUS_MINUS}20%" -> R.drawable.blank32
+    fun textToColoredDrawable(color: String = ""): Int {
         return when (color) {
-            "Black" -> R.drawable.black32
-            "Blue" -> R.drawable.blue32
-            "Brown" -> R.drawable.brown32
-            "Gold" -> R.drawable.gold32
-            "Gray" -> R.drawable.gray32
-            "Green" -> R.drawable.green32
-            "Orange" -> R.drawable.orange32
-            "Red" -> R.drawable.red32
-            "Silver" -> R.drawable.silver32
-            "Violet" -> R.drawable.violet32
+            "Black", "250 ppm/${DEGREE}C" -> R.drawable.black32
+            "Brown", "${PLUS_MINUS}1%", "100 ppm/${DEGREE}C" -> R.drawable.brown32
+            "Red", "${PLUS_MINUS}2%", "50 ppm/${DEGREE}C" -> R.drawable.red32
+            "Orange", "15 ppm/${DEGREE}C" -> R.drawable.orange32
+            "Yellow", "25 ppm/${DEGREE}C" -> R.drawable.yellow32
+            "Green", "${PLUS_MINUS}0.5%", "20 ppm/${DEGREE}C" -> R.drawable.green32
+            "Blue", "${PLUS_MINUS}0.25%", "10 ppm/${DEGREE}C" -> R.drawable.blue32
+            "Violet", "${PLUS_MINUS}0.1%", "5 ppm/${DEGREE}C" -> R.drawable.violet32
+            "Gray", "${PLUS_MINUS}0.05%", "1 ppm/${DEGREE}C" -> R.drawable.gray32
             "White" -> R.drawable.white32
-            "Yellow" -> R.drawable.yellow32
+            "Gold", "${PLUS_MINUS}5%" -> R.drawable.gold32
+            "Silver", "${PLUS_MINUS}10%" -> R.drawable.silver32
             else -> R.drawable.blank32
         }
     }
 
-    // finds the color based on the selection
-    fun bandColor(color: String = "blank"): Int {
+    fun textToColor(color: String = ""): Int {
         return when (color) {
             "Red" -> R.color.red32
             "Orange" -> R.color.orange32
@@ -68,22 +69,6 @@ object ColorFinder {
         }
     }
 
-    // find image based on tolerance value
-    fun toleranceImage(color: String = "None"): Int {
-        return when (color) {
-            "${PLUS_MINUS}1%" -> R.drawable.brown32
-            "${PLUS_MINUS}2%" -> R.drawable.red32
-            "${PLUS_MINUS}0.5%" -> R.drawable.green32
-            "${PLUS_MINUS}0.25%" -> R.drawable.blue32
-            "${PLUS_MINUS}0.1%" -> R.drawable.violet32
-            "${PLUS_MINUS}0.05%" -> R.drawable.gray32
-            "${PLUS_MINUS}5%" -> R.drawable.gold32
-            "${PLUS_MINUS}10%" -> R.drawable.silver32
-            "${PLUS_MINUS}20%" -> R.drawable.blank32
-            else -> R.drawable.blank32
-        }
-    }
-
     // find color based on tolerance value
     fun toleranceColor(color: String = "None"): Int {
         return when (color) {
@@ -97,22 +82,6 @@ object ColorFinder {
             "${PLUS_MINUS}10%" -> R.color.silver32
             "${PLUS_MINUS}20%" -> R.color.resistor_blank
             else -> R.color.resistor_blank
-        }
-    }
-
-    // find image based on ppm value
-    fun ppmImage(color: String = "None"): Int {
-        return when (color) {
-            "250 ppm/${DEGREE}C" -> R.drawable.black32
-            "100 ppm/${DEGREE}C" -> R.drawable.brown32
-            "50 ppm/${DEGREE}C" -> R.drawable.red32
-            "15 ppm/${DEGREE}C" -> R.drawable.orange32
-            "25 ppm/${DEGREE}C" -> R.drawable.yellow32
-            "20 ppm/${DEGREE}C" -> R.drawable.green32
-            "10 ppm/${DEGREE}C" -> R.drawable.blue32
-            "5 ppm/${DEGREE}C" -> R.drawable.violet32
-            "1 ppm/${DEGREE}C" -> R.drawable.gray32
-            else -> R.drawable.blank32
         }
     }
 
