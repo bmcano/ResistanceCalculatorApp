@@ -11,67 +11,67 @@ enum class SpinnerContents(val array: Array<SpinnerItem>) {
 
     NUMBER(
         arrayOf(
-            S.BLACK, S.BROWN, S.RED, S.ORANGE, S.YELLOW,
-            S.GREEN, S.BLUE, S.VIOLET, S.GRAY, S.WHITE
+            Item.BLACK, Item.BROWN, Item.RED, Item.ORANGE, Item.YELLOW,
+            Item.GREEN, Item.BLUE, Item.VIOLET, Item.GRAY, Item.WHITE
         )
     ),
 
     MULTIPLIER(
         arrayOf(
-            S.BLACK, S.BROWN, S.RED, S.ORANGE, S.YELLOW, S.GREEN,
-            S.BLUE, S.VIOLET, S.GRAY, S.WHITE, S.GOLD, S.SILVER
+            Item.BLACK, Item.BROWN, Item.RED, Item.ORANGE, Item.YELLOW, Item.GREEN,
+            Item.BLUE, Item.VIOLET, Item.GRAY, Item.WHITE, Item.GOLD, Item.SILVER
         )
     ),
 
     TOLERANCE(
         arrayOf(
-            S.BROWN, S.RED, S.GREEN, S.BLUE,
-            S.VIOLET, S.GRAY, S.GOLD, S.SILVER
+            Item.BROWN, Item.RED, Item.GREEN, Item.BLUE,
+            Item.VIOLET, Item.GRAY, Item.GOLD, Item.SILVER
         )
     ),
 
     PPM(
         arrayOf(
-            S.BLACK, S.BROWN, S.RED, S.ORANGE, S.YELLOW,
-            S.GREEN, S.BLUE, S.VIOLET, S.GRAY
+            Item.BLACK, Item.BROWN, Item.RED, Item.ORANGE, Item.YELLOW,
+            Item.GREEN, Item.BLUE, Item.VIOLET, Item.GRAY
         )
     ),
 
     TOLERANCE_TEXT(
         arrayOf(
-            SpinnerItem("${S.PLUS_MINUS}1%", R.drawable.brown32),
-            SpinnerItem("${S.PLUS_MINUS}2%", R.drawable.red32),
-            SpinnerItem("${S.PLUS_MINUS}0.5%", R.drawable.green32),
-            SpinnerItem("${S.PLUS_MINUS}0.25%", R.drawable.blue32),
-            SpinnerItem("${S.PLUS_MINUS}0.1%", R.drawable.violet32),
-            SpinnerItem("${S.PLUS_MINUS}0.05%", R.drawable.gray32),
-            SpinnerItem("${S.PLUS_MINUS}5%", R.drawable.gold32),
-            SpinnerItem("${S.PLUS_MINUS}10%", R.drawable.silver32),
-            SpinnerItem("${S.PLUS_MINUS}20%", R.drawable.blank32),
+            SpinnerItem("${Item.PLUS_MINUS}1%", R.drawable.brown32),
+            SpinnerItem("${Item.PLUS_MINUS}2%", R.drawable.red32),
+            SpinnerItem("${Item.PLUS_MINUS}0.5%", R.drawable.green32),
+            SpinnerItem("${Item.PLUS_MINUS}0.25%", R.drawable.blue32),
+            SpinnerItem("${Item.PLUS_MINUS}0.1%", R.drawable.violet32),
+            SpinnerItem("${Item.PLUS_MINUS}0.05%", R.drawable.gray32),
+            SpinnerItem("${Item.PLUS_MINUS}5%", R.drawable.gold32),
+            SpinnerItem("${Item.PLUS_MINUS}10%", R.drawable.silver32),
+            SpinnerItem("${Item.PLUS_MINUS}20%", R.drawable.blank32),
         )
     ),
 
     PPM_TEXT(
         arrayOf(
-            SpinnerItem("250 ppm/${S.DEGREE}C", R.drawable.black32),
-            SpinnerItem("100 ppm/${S.DEGREE}C", R.drawable.brown32),
-            SpinnerItem("50 ppm/${S.DEGREE}C", R.drawable.red32),
-            SpinnerItem("15 ppm/${S.DEGREE}C", R.drawable.orange32),
-            SpinnerItem("25 ppm/${S.DEGREE}C", R.drawable.yellow32),
-            SpinnerItem("20 ppm/${S.DEGREE}C", R.drawable.green32),
-            SpinnerItem("10 ppm/${S.DEGREE}C", R.drawable.blue32),
-            SpinnerItem("5 ppm/${S.DEGREE}C", R.drawable.violet32),
-            SpinnerItem("1 ppm/${S.DEGREE}C", R.drawable.gray32)
+            SpinnerItem("250 ppm/${Item.DEGREE}C", R.drawable.black32),
+            SpinnerItem("100 ppm/${Item.DEGREE}C", R.drawable.brown32),
+            SpinnerItem("50 ppm/${Item.DEGREE}C", R.drawable.red32),
+            SpinnerItem("15 ppm/${Item.DEGREE}C", R.drawable.orange32),
+            SpinnerItem("25 ppm/${Item.DEGREE}C", R.drawable.yellow32),
+            SpinnerItem("20 ppm/${Item.DEGREE}C", R.drawable.green32),
+            SpinnerItem("10 ppm/${Item.DEGREE}C", R.drawable.blue32),
+            SpinnerItem("5 ppm/${Item.DEGREE}C", R.drawable.violet32),
+            SpinnerItem("1 ppm/${Item.DEGREE}C", R.drawable.gray32)
         )
     );
 
     enum class SimpleArray(val array: Array<String>) {
-        UNITS(arrayOf(S.OMEGA, "k${S.OMEGA}", "M${S.OMEGA}", "G${S.OMEGA}"))
+        UNITS(arrayOf(Item.OMEGA, "k${Item.OMEGA}", "M${Item.OMEGA}", "G${Item.OMEGA}"))
     }
 
-    private object S {
-        val BLACK: SpinnerItem = SpinnerItem("Black", R.drawable.black32)
-        val BROWN: SpinnerItem = SpinnerItem("Brown", R.drawable.brown32)
+    private object Item {
+        val BLACK = SpinnerItem("Black", R.drawable.black32)
+        val BROWN = SpinnerItem("Brown", R.drawable.brown32)
         val RED = SpinnerItem("Red", R.drawable.red32)
         val ORANGE = SpinnerItem("Orange", R.drawable.orange32)
         val YELLOW = SpinnerItem("Yellow", R.drawable.yellow32)
