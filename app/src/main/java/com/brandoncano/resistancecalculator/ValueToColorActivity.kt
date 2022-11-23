@@ -67,6 +67,7 @@ class ValueToColorActivity : AppCompatActivity() {
             val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
             actionBar.setBackgroundDrawable(colorDrawable)
             actionBar.title = getString(R.string.value_to_color)
+            actionBar.elevation = 4F
         }
 
         idSetup()
@@ -87,7 +88,7 @@ class ValueToColorActivity : AppCompatActivity() {
         if (screenText.text == EMPTY_STRING) screenText.text = getString(R.string.enter_value)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_dropdown_vtc, menu)
         return super.onCreateOptionsMenu(menu)

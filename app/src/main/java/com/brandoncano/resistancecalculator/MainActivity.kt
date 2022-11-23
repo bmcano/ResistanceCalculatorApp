@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
             val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
             actionBar.setBackgroundDrawable(colorDrawable)
             actionBar.title = getString(R.string.app_name)
+            actionBar.elevation = 4F
         }
 
         buttonSetup()
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         buttonSetup()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)

@@ -25,6 +25,7 @@ class AboutActivity : AppCompatActivity() {
             val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
             actionBar.setBackgroundDrawable(colorDrawable)
             actionBar.title = getString(R.string.about)
+            actionBar.elevation = 4F
         }
 
         makeRandomResistorImage()
