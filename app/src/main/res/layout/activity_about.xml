@@ -6,70 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".AboutActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/app_name"
-        android:textColor="?android:textColor"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="easterEgg"
-        android:text="@string/version"
-        android:textAlignment="center"
-        android:textColor="?android:textColor"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/created_by"
-        android:textAlignment="center"
-        android:textColor="?android:textColor"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
     <ScrollView
-        android:id="@+id/description_scroll_view"
+        android:id="@+id/about_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="216dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/outlined_box"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toTopOf="@+id/last_updated_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/app_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/app_name"
+                android:textColor="?android:textColor"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/version_number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/version_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="easterEgg"
+                android:text="@string/version"
+                android:textAlignment="center"
+                android:textColor="?android:textColor"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/created_by_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/app_name_text" />
+
+            <TextView
+                android:id="@+id/created_by_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/created_by"
+                android:textAlignment="center"
+                android:textColor="?android:textColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/description_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/version_number" />
+
+            <TextView
+                android:id="@+id/description_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
@@ -78,173 +84,28 @@
                 android:textAlignment="textStart"
                 android:textColor="?android:textColor"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/created_by_text" />
+
+            <include
+                android:id="@+id/resistor"
+                layout="@layout/resistor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/description_text" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
-    <!-- Start of custom resistor image -->
     <TextView
-        android:id="@+id/place_holder"
-        android:layout_width="247dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/r_post_band_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/r_left"
-        android:layout_width="69dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_left"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_1"
-        app:layout_constraintStart_toStartOf="@+id/place_holder"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_band_1"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_band_1"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_1"
-        app:layout_constraintStart_toEndOf="@+id/r_left"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_post_band_1"
-        android:layout_width="10dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_post_band_1"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_2"
-        app:layout_constraintStart_toEndOf="@+id/r_band_1"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_band_2"
-        android:layout_width="11dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_band_2"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_2"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_1"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-
-    <ImageView
-        android:id="@+id/r_post_band_2"
-        android:layout_width="9.5dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_post_band_2"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_3"
-        app:layout_constraintStart_toEndOf="@+id/r_band_2"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_band_3"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_band_3"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_3"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_2"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_post_band_3"
-        android:layout_width="10.5dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_post_band_3"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_4"
-        app:layout_constraintStart_toEndOf="@+id/r_band_3"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_band_4"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_band_4"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_4"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_3"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_post_band_4"
-        android:layout_width="16.5dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_post_band_4"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_5"
-        app:layout_constraintStart_toEndOf="@+id/r_band_4"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_band_5"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_band_5"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_5"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_4"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_post_band_5"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_post_band_5"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_6"
-        app:layout_constraintStart_toEndOf="@+id/r_band_5"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_band_6"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_band_6"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toStartOf="@+id/r_right"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_5"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <ImageView
-        android:id="@+id/r_right"
-        android:layout_width="52.5dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/resistor_right"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintEnd_toEndOf="@+id/place_holder"
-        app:layout_constraintStart_toEndOf="@+id/r_band_6"
-        app:layout_constraintTop_toBottomOf="@+id/description_scroll_view" />
-
-    <!-- this text stays outside of scroll view -->
-    <TextView
+        android:id="@+id/last_updated_text"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
