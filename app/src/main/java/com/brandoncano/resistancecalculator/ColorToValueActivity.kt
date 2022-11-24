@@ -350,15 +350,15 @@ class ColorToValueActivity : AppCompatActivity() {
         )
 
         // create and set adapters
-        val numberAdapter = ImageTextArrayAdapter(this, SpinnerContents.NUMBER.array)
+        val numberAdapter = ImageTextArrayAdapter(this, SpinnerContents.numberArray)
         dropDownBand1.setAdapter(numberAdapter)
         dropDownBand2.setAdapter(numberAdapter)
         dropDownBand3.setAdapter(numberAdapter)
-        val multiplierAdapter = ImageTextArrayAdapter(this, SpinnerContents.MULTIPLIER.array)
+        val multiplierAdapter = ImageTextArrayAdapter(this, SpinnerContents.multiplierArray)
         dropDownMultiplier.setAdapter(multiplierAdapter)
-        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerContents.TOLERANCE.array)
+        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerContents.toleranceArray)
         dropDownTolerance.setAdapter(toleranceAdapter)
-        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerContents.PPM.array)
+        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerContents.ppmArray)
         dropDownPPM.setAdapter(ppmAdapter)
 
         // listeners

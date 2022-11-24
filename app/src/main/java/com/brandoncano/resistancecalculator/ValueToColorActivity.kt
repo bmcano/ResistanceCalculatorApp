@@ -332,15 +332,15 @@ class ValueToColorActivity : AppCompatActivity() {
         ArrayAdapter(
             this,
             R.layout.spinner_units_layout,
-            SpinnerContents.SimpleArray.UNITS.array
+            SpinnerContents.unitsArray
         ).also { adapter ->
             adapter.setDropDownViewResource(R.layout.spinner_units_layout)
             dropDownUnits.setAdapter(adapter)
         }
 
-        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerContents.TOLERANCE_TEXT.array)
+        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerContents.toleranceTextArray)
         dropDownTolerance.setAdapter(toleranceAdapter)
-        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerContents.PPM_TEXT.array)
+        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerContents.ppmTextArray)
         dropDownPPM.setAdapter(ppmAdapter)
 
         // listeners
