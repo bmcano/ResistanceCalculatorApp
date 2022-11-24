@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintBottom_toTopOf="@+id/resistor"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp">
 
@@ -28,9 +28,9 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/number_band_hint1"
                 android:textColorHint="?hintTextColor"
-                app:hintTextColor="?android:textColorPrimary"
                 app:boxStrokeColor="@color/selected_dropdown_color"
                 app:boxStrokeWidth="2dp"
+                app:hintTextColor="?android:textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -59,9 +59,9 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/number_band_hint2"
                 android:textColorHint="?hintTextColor"
-                app:hintTextColor="?android:textColorPrimary"
                 app:boxStrokeColor="@color/selected_dropdown_color"
                 app:boxStrokeWidth="2dp"
+                app:hintTextColor="?android:textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dropDownSelector1">
@@ -91,9 +91,9 @@
                 android:hint="@string/number_band_hint3"
                 android:textColorHint="?hintTextColor"
                 android:visibility="gone"
-                app:hintTextColor="?android:textColorPrimary"
                 app:boxStrokeColor="@color/selected_dropdown_color"
                 app:boxStrokeWidth="2dp"
+                app:hintTextColor="?android:textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dropDownSelector2">
@@ -122,9 +122,9 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/multiplier_band_hint"
                 android:textColorHint="?hintTextColor"
-                app:hintTextColor="?android:textColorPrimary"
                 app:boxStrokeColor="@color/selected_dropdown_color"
                 app:boxStrokeWidth="2dp"
+                app:hintTextColor="?android:textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dropDownSelector3">
@@ -153,9 +153,9 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/tolerance_band_hint"
                 android:textColorHint="?hintTextColor"
-                app:hintTextColor="?android:textColorPrimary"
                 app:boxStrokeColor="@color/selected_dropdown_color"
                 app:boxStrokeWidth="2dp"
+                app:hintTextColor="?android:textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.505"
                 app:layout_constraintStart_toStartOf="parent"
@@ -186,9 +186,9 @@
                 android:hint="@string/ppm_band_hint"
                 android:textColorHint="?hintTextColor"
                 android:visibility="gone"
-                app:hintTextColor="?android:textColorPrimary"
                 app:boxStrokeColor="@color/selected_dropdown_color"
                 app:boxStrokeWidth="2dp"
+                app:hintTextColor="?android:textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.505"
                 app:layout_constraintStart_toStartOf="parent"
@@ -212,6 +212,17 @@
 
     </ScrollView>
 
+    <include
+        android:id="@+id/resistor"
+        layout="@layout/resistor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/resistance_display_new"
         android:layout_width="256dp"
@@ -225,7 +236,7 @@
         android:textAlignment="center"
         android:textColor="?android:textColor"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/r_post_band_3"
+        app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpUsage" />
@@ -288,161 +299,5 @@
         tools:ignore="SpUsage">
 
     </Button>
-
-    <!-- Start of custom resistor image -->
-
-    <TextView
-        android:id="@+id/place_holder"
-        android:layout_width="247dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/r_post_band_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/r_left"
-        android:layout_width="69dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_left"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/four_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_1"
-        app:layout_constraintStart_toStartOf="@+id/place_holder" />
-
-    <ImageView
-        android:id="@+id/r_band_1"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_band_1"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_1"
-        app:layout_constraintStart_toEndOf="@+id/r_left" />
-
-    <ImageView
-        android:id="@+id/r_band_2"
-        android:layout_width="11dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_band_2"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_2"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_1" />
-
-    <ImageView
-        android:id="@+id/r_band_3"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_band_3"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_3"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_2" />
-
-    <ImageView
-        android:id="@+id/r_band_4"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_band_4"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_4"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_3" />
-
-    <ImageView
-        android:id="@+id/r_band_5"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_band_5"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_5"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_4" />
-
-    <ImageView
-        android:id="@+id/r_band_6"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_band_6"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/six_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_right"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_5" />
-
-    <ImageView
-        android:id="@+id/r_post_band_1"
-        android:layout_width="10dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_post_band_1"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_2"
-        app:layout_constraintStart_toEndOf="@+id/r_band_1" />
-
-    <ImageView
-        android:id="@+id/r_post_band_2"
-        android:layout_width="9.5dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_post_band_2"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_3"
-        app:layout_constraintStart_toEndOf="@+id/r_band_2" />
-
-    <ImageView
-        android:id="@+id/r_post_band_3"
-        android:layout_width="10.5dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_post_band_3"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_4"
-        app:layout_constraintStart_toEndOf="@+id/r_band_3" />
-
-    <ImageView
-        android:id="@+id/r_post_band_4"
-        android:layout_width="16.5dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_post_band_4"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_5"
-        app:layout_constraintStart_toEndOf="@+id/r_band_4" />
-
-    <ImageView
-        android:id="@+id/r_post_band_5"
-        android:layout_width="11.5dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_post_band_5"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_6"
-        app:layout_constraintStart_toEndOf="@+id/r_band_5" />
-
-    <ImageView
-        android:id="@+id/r_right"
-        android:layout_width="52.5dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/resistor_right"
-        android:contentDescription="@string/resistor_description"
-        app:layout_constraintBottom_toTopOf="@+id/six_band"
-        app:layout_constraintEnd_toEndOf="@+id/place_holder"
-        app:layout_constraintStart_toEndOf="@+id/r_band_6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
