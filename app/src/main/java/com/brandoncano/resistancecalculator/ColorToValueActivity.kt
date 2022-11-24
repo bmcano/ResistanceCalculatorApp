@@ -189,34 +189,22 @@ class ColorToValueActivity : AppCompatActivity() {
         when (loadData("buttonSelection1", "button selection1")) {
             "4" -> {
                 buttonListener(
-                    fourBandButton,
-                    fiveBandButton,
-                    sixBandButton,
-                    4,
-                    View.GONE,
-                    View.GONE
+                    fourBandButton, fiveBandButton, sixBandButton,
+                    4, View.GONE, View.GONE
                 )
                 loadImage("4")
             }
             "5" -> {
                 buttonListener(
-                    fiveBandButton,
-                    fourBandButton,
-                    sixBandButton,
-                    5,
-                    View.VISIBLE,
-                    View.GONE
+                    fiveBandButton, fourBandButton, sixBandButton,
+                    5, View.VISIBLE, View.GONE
                 )
                 loadImage("5")
             }
             "6" -> {
                 buttonListener(
-                    sixBandButton,
-                    fourBandButton,
-                    fiveBandButton,
-                    6,
-                    View.VISIBLE,
-                    View.VISIBLE
+                    sixBandButton, fourBandButton, fiveBandButton,
+                    6, View.VISIBLE, View.VISIBLE
                 )
                 loadImage("6")
             }
@@ -224,7 +212,10 @@ class ColorToValueActivity : AppCompatActivity() {
 
         // toggle four band resistor
         fourBandButton.setOnClickListener {
-            buttonListener(fourBandButton, fiveBandButton, sixBandButton, 4, View.GONE, View.GONE)
+            buttonListener(
+                fourBandButton, fiveBandButton, sixBandButton,
+                4, View.GONE, View.GONE
+            )
 
             bandImage3.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
             bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
@@ -233,51 +224,28 @@ class ColorToValueActivity : AppCompatActivity() {
         // toggle five band resistor
         fiveBandButton.setOnClickListener {
             buttonListener(
-                fiveBandButton,
-                fourBandButton,
-                sixBandButton,
-                5,
-                View.VISIBLE,
-                View.GONE
+                fiveBandButton, fourBandButton, sixBandButton,
+                5, View.VISIBLE, View.GONE
             )
 
-            bandImage3.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    ColorFinder.textToColor(numberBand3)
-                )
-            )
+            bandImage3.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor(numberBand3)))
             bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
         }
 
         // toggle six band resistor
         sixBandButton.setOnClickListener {
             buttonListener(
-                sixBandButton,
-                fourBandButton,
-                fiveBandButton,
-                6,
-                View.VISIBLE,
-                View.VISIBLE
+                sixBandButton, fourBandButton, fiveBandButton,
+                6, View.VISIBLE, View.VISIBLE
             )
 
-            bandImage3.setColorFilter(
-                ContextCompat.getColor(
-                    this,
-                    ColorFinder.textToColor(numberBand3)
-                )
-            )
+            bandImage3.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor(numberBand3)))
             bandImage6.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor(ppmBand)))
         }
     }
 
     private fun buttonListener(
-        selectedBtn: Button,
-        btn1: Button,
-        btn2: Button,
-        btnNumber: Int,
-        view1: Int,
-        view2: Int
+        selectedBtn: Button, btn1: Button, btn2: Button, btnNumber: Int, view1: Int, view2: Int
     ) {
         selectedBtn.setBackgroundColor(getColor(R.color.mango_dark))
         btn1.setBackgroundColor(getColor(R.color.mango_primary))
@@ -344,9 +312,7 @@ class ColorToValueActivity : AppCompatActivity() {
         ppmBand = loadData("ppmBand1", "ppm band1")
         dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(
             ColorFinder.textToColoredDrawable(ppmBand),
-            0,
-            0,
-            0
+            0, 0, 0
         )
 
         // create and set adapters
@@ -474,27 +440,15 @@ class ColorToValueActivity : AppCompatActivity() {
     private fun calculateResistanceHelper() {
         if (toggleDropDownNumberBand3.visibility == View.GONE && toggleDropDownPPM.visibility == View.GONE) {
             screenText.text = ResistanceFormatter.calcResistance(
-                numberBand1,
-                numberBand2,
-                multiplierBand,
-                toleranceBand
+                numberBand1, numberBand2, multiplierBand, toleranceBand
             )
         } else if (toggleDropDownPPM.visibility == View.GONE) {
             screenText.text = ResistanceFormatter.calcResistance(
-                numberBand1,
-                numberBand2,
-                numberBand3,
-                multiplierBand,
-                toleranceBand
+                numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand
             )
         } else {
             screenText.text = ResistanceFormatter.calcResistance(
-                numberBand1,
-                numberBand2,
-                numberBand3,
-                multiplierBand,
-                toleranceBand,
-                ppmBand
+                numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand
             )
         }
         saveData("screenText1", "screen text1", screenText.text.toString())
