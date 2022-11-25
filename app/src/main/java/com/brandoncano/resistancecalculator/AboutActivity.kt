@@ -16,6 +16,7 @@ import com.brandoncano.resistancecalculator.util.ColorFinder
  *
  * Job: This hold the structure for the about page of the app.
  */
+@Suppress("UNUSED_PARAMETER")
 class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +34,6 @@ class AboutActivity : AppCompatActivity() {
         makeRandomResistorImage()
     }
 
-    @Suppress("UNUSED_PARAMETER")
     fun easterEgg(view: View) = makeRandomResistorImage()
 
     private fun makeRandomResistorImage() {
@@ -61,10 +61,6 @@ class AboutActivity : AppCompatActivity() {
                 ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
             }
         }
-
-        //Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
-        //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        //startActivity(intent)
     }
 
     fun rateApp(view: View) {
