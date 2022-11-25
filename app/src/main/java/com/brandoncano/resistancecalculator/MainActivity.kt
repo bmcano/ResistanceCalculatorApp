@@ -51,13 +51,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
-
             R.id.about_item -> {
                 val intent = Intent(this, AboutActivity::class.java)
                 startActivity(intent)
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
