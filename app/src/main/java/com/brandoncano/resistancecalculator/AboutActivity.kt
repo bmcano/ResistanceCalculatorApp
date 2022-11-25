@@ -1,6 +1,8 @@
 package com.brandoncano.resistancecalculator
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -51,15 +53,23 @@ class AboutActivity : AppCompatActivity() {
             4 -> {
                 numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
                 ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
-            }
-            5 -> {
+            } 5 -> {
                 numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
                 ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
-            }
-            6 -> {
+            } 6 -> {
                 numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
                 ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
             }
         }
+
+        //Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
+        //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        //startActivity(intent)
+    }
+
+    fun rateApp(view: View) {
+        val uri = Uri.parse("https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator&pli=1")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 }

@@ -28,12 +28,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="4dp"
                 android:text="@string/app_name"
                 android:textColor="?android:textColor"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/version_number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -42,14 +40,12 @@
                 android:id="@+id/version_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="8dp"
                 android:onClick="easterEgg"
                 android:text="@string/version"
                 android:textAlignment="center"
                 android:textColor="?android:textColor"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/created_by_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/app_name_text" />
@@ -59,34 +55,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/created_by"
                 android:textAlignment="center"
                 android:textColor="?android:textColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/description_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/version_number" />
-
-            <TextView
-                android:id="@+id/description_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:padding="16dp"
-                android:text="@string/description"
-                android:textAlignment="textStart"
-                android:textColor="?android:textColor"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/created_by_text" />
 
             <include
                 android:id="@+id/resistor"
@@ -94,8 +73,41 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/created_by_text" />
+
+            <TextView
+                android:id="@+id/description_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="16dp"
+                android:text="@string/description"
+                android:textAlignment="textStart"
+                android:textColor="?android:textColor"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/resistor" />
+
+            <Button
+                android:id="@+id/color_to_value_button"
+                style="@style/Widget.Material3.Button.Icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/custom_button"
+                android:onClick="rateApp"
+                android:text="@string/rate_us"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:icon="@drawable/ic_star"
+                app:backgroundTint="@color/mango_primary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description_text" />
@@ -103,6 +115,18 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:textColor"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/last_updated_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/last_updated_text"

@@ -62,6 +62,5 @@ object SpinnerContents {
         SpinnerItem("1 ppm/${DEGREE}C", R.drawable.gray_square)
     )
 
-    val unitsArray =
-        arrayOf(OMEGA, "k${OMEGA}", "M${OMEGA}", "G${OMEGA}")
+    val unitsArray = arrayOf(OMEGA, "k$OMEGA", "M$OMEGA", "G$OMEGA")
 }
