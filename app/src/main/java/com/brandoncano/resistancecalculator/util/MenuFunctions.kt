@@ -53,36 +53,27 @@ object MenuFunctions {
 
     // generates to text to copy/share for VTC
     fun shareItemVTC(
-        imageSelection: Int,
-        shareColors: Array<Int>,
-        screenText: TextView,
-        toleranceBand: String,
-        ppmBand: String
+        imageSelection: Int, shareColors: Array<Int>, screenText: TextView,
+        toleranceBand: String, ppmBand: String
     ): Intent {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
-
-        var nb1 = EMPTY_STRING
-        var nb2 = EMPTY_STRING
-        var nb3 = EMPTY_STRING
-        var multi = EMPTY_STRING
-        var tol = EMPTY_STRING
-        var ppm = EMPTY_STRING
+        var text = EMPTY_STRING
 
         if (shareColors.isNotEmpty()) {
-            nb1 = ColorFinder.idToColorText(shareColors[0])
-            nb2 = ColorFinder.idToColorText(shareColors[1])
-            nb3 = ColorFinder.idToColorText(shareColors[2])
-            multi = ColorFinder.idToColorText(shareColors[3])
-            tol = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(toleranceBand))
-            ppm = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(ppmBand))
-        }
+            val nb1 = ColorFinder.idToColorText(shareColors[0])
+            val nb2 = ColorFinder.idToColorText(shareColors[1])
+            val nb3 = ColorFinder.idToColorText(shareColors[2])
+            val multi = ColorFinder.idToColorText(shareColors[3])
+            val tol = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(toleranceBand))
+            val ppm = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(ppmBand))
 
-        val text = when (imageSelection) {
-            4 -> "${screenText.text}\n[ $nb1, $nb2, $multi, $tol ]"
-            5 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol ]"
-            6 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol, $ppm ]"
-            else -> EMPTY_STRING
+            text = when (imageSelection) {
+                4 -> "${screenText.text}\n[ $nb1, $nb2, $multi, $tol ]"
+                5 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol ]"
+                6 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol, $ppm ]"
+                else -> EMPTY_STRING
+            }
         }
 
         intent.putExtra(Intent.EXTRA_TEXT, text)
