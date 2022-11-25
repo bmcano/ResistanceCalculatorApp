@@ -100,23 +100,28 @@ class ValueToColorActivity : AppCompatActivity() {
                 super.finish()
                 startActivity(Intent(this, ColorToValueActivity::class.java))
                 return true
-            } R.id.show_resistor_charts -> {
+            }
+            R.id.show_resistor_charts -> {
                 return MenuFunctions.showResistorCharts(this, imageSelection)
-            } R.id.share_item -> {
+            }
+            R.id.share_item -> {
                 val intent = MenuFunctions.shareItemVTC(
                     imageSelection, shareColors, screenText, toleranceColor, ppmColor
                 )
                 startActivity(Intent.createChooser(intent, EMPTY_STRING))
                 return true
-            } R.id.feedback -> {
+            }
+            R.id.feedback -> {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = MenuFunctions.feedback()
                 startActivity(intent)
                 return true
-            } R.id.about_item -> {
+            }
+            R.id.about_item -> {
                 startActivity(Intent(this, AboutActivity::class.java))
                 return true
-            } else -> return super.onOptionsItemSelected(item)
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 
@@ -157,10 +162,12 @@ class ValueToColorActivity : AppCompatActivity() {
             "4" -> {
                 buttonListener(fourBandButton, fiveBandButton, sixBandButton, 4, View.INVISIBLE)
                 loadImage("4")
-            } "5" -> {
+            }
+            "5" -> {
                 buttonListener(fiveBandButton, fourBandButton, sixBandButton, 5, View.INVISIBLE)
                 loadImage("5")
-            } "6" -> {
+            }
+            "6" -> {
                 buttonListener(sixBandButton, fourBandButton, fiveBandButton, 6, View.VISIBLE)
                 loadImage("6")
             }
@@ -250,22 +257,26 @@ class ValueToColorActivity : AppCompatActivity() {
                 setBandColor(numberBand3, ColorFinder.textToColor())
                 setBandColor(ppmBand, ColorFinder.textToColor())
                 "$resistance $units $toleranceColor"
-            } 5 -> {
+            }
+            5 -> {
                 setBandColor(numberBand3, colors[2])
                 setBandColor(ppmBand, ColorFinder.textToColor())
                 "$resistance $units $toleranceColor"
-            } 6 -> {
+            }
+            6 -> {
                 setBandColor(numberBand3, colors[2])
                 setBandColor(ppmBand, ColorFinder.textToColor(ppmColor))
                 if (ppmColor == EMPTY_STRING) "$resistance $units $toleranceColor" else "$resistance $units $toleranceColor\n$ppmColor"
-            } else -> EMPTY_STRING
+            }
+            else -> EMPTY_STRING
         }
     }
 
     private fun closeKeyboard() {
         val view = this.currentFocus
         if (view != null) {
-            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm: InputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
@@ -281,20 +292,11 @@ class ValueToColorActivity : AppCompatActivity() {
 
         dropDownTolerance.setText(loadData("toleranceDropDown", "tolerance dropDown"))
         toleranceColor = loadData("toleranceDropDown", "tolerance dropDown")
-        dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.textToColoredDrawable(
-                toleranceColor
-            ), 0, 0, 0
-        )
+        setDropDownDrawable(dropDownTolerance, toleranceColor)
 
         dropDownPPM.setText(loadData("ppmDropDown", "ppm dropDown"))
         ppmColor = loadData("ppmDropDown", "ppm dropDown")
-        dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.textToColoredDrawable(ppmColor),
-            0,
-            0,
-            0
-        )
+        setDropDownDrawable(dropDownPPM, ppmColor)
 
         // create and set adapters
         ArrayAdapter(
@@ -322,32 +324,27 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceColor = dropDownTolerance.adapter.getItem(position).toString()
-                dropDownTolerance.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    ColorFinder.textToColoredDrawable(
-                        toleranceColor
-                    ), 0, 0, 0
-                )
-                saveData(
-                    "toleranceDropDown",
-                    "tolerance dropDown",
-                    dropDownTolerance.text.toString()
-                )
+                setDropDownDrawable(dropDownTolerance, toleranceColor)
+                saveData("toleranceDropDown", "tolerance dropDown",
+                    dropDownTolerance.text.toString())
             }
 
         dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 ppmColor = dropDownPPM.adapter.getItem(position).toString()
-                dropDownPPM.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    ColorFinder.textToColoredDrawable(
-                        ppmColor
-                    ), 0, 0, 0
-                )
+                setDropDownDrawable(dropDownPPM, ppmColor)
                 saveData("ppmDropDown", "ppm dropDown", dropDownPPM.text.toString())
             }
     }
 
     private fun setBandColor(band: ImageView, color: Int) {
         band.setColorFilter(ContextCompat.getColor(this, color))
+    }
+
+    private fun setDropDownDrawable(dropDown: AutoCompleteTextView, color: String) {
+        dropDown.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            ColorFinder.textToColoredDrawable(color), 0, 0, 0
+        )
     }
 
     // saves the user input
