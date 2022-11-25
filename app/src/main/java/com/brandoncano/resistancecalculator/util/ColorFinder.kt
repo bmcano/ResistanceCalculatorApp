@@ -16,18 +16,18 @@ object ColorFinder {
     // note: "${PLUS_MINUS}20%" -> R.drawable.blank32
     fun textToColoredDrawable(color: String = ""): Int {
         return when (color) {
-            "Black" ,                       "250 ppm/${DEGREE}C" -> R.drawable.black32
-            "Brown" , "${PLUS_MINUS}1%"   , "100 ppm/${DEGREE}C" -> R.drawable.brown32
-            "Red"   , "${PLUS_MINUS}2%"   , "50 ppm/${DEGREE}C"  -> R.drawable.red32
-            "Orange",                       "15 ppm/${DEGREE}C"  -> R.drawable.orange32
-            "Yellow",                       "25 ppm/${DEGREE}C"  -> R.drawable.yellow32
-            "Green" , "${PLUS_MINUS}0.5%" , "20 ppm/${DEGREE}C"  -> R.drawable.green32
-            "Blue"  , "${PLUS_MINUS}0.25%", "10 ppm/${DEGREE}C"  -> R.drawable.blue32
-            "Violet", "${PLUS_MINUS}0.1%" , "5 ppm/${DEGREE}C"   -> R.drawable.violet32
-            "Gray"  , "${PLUS_MINUS}0.05%", "1 ppm/${DEGREE}C"   -> R.drawable.gray32
-            "White"                                              -> R.drawable.white32
-            "Gold"  , "${PLUS_MINUS}5%"                          -> R.drawable.gold32
-            "Silver", "${PLUS_MINUS}10%"                         -> R.drawable.silver32
+            "Black" ,                       "250 ppm/${DEGREE}C" -> R.drawable.black_square
+            "Brown" , "${PLUS_MINUS}1%"   , "100 ppm/${DEGREE}C" -> R.drawable.brown_square
+            "Red"   , "${PLUS_MINUS}2%"   , "50 ppm/${DEGREE}C"  -> R.drawable.red_square
+            "Orange",                       "15 ppm/${DEGREE}C"  -> R.drawable.orange_square
+            "Yellow",                       "25 ppm/${DEGREE}C"  -> R.drawable.yellow_square
+            "Green" , "${PLUS_MINUS}0.5%" , "20 ppm/${DEGREE}C"  -> R.drawable.green_square
+            "Blue"  , "${PLUS_MINUS}0.25%", "10 ppm/${DEGREE}C"  -> R.drawable.blue_square
+            "Violet", "${PLUS_MINUS}0.1%" , "5 ppm/${DEGREE}C"   -> R.drawable.violet_square
+            "Gray"  , "${PLUS_MINUS}0.05%", "1 ppm/${DEGREE}C"   -> R.drawable.gray_square
+            "White"                                              -> R.drawable.white_square
+            "Gold"  , "${PLUS_MINUS}5%"                          -> R.drawable.gold_square
+            "Silver", "${PLUS_MINUS}10%"                         -> R.drawable.silver_square
             else                                                 -> R.drawable.blank32
         }
     }
@@ -71,17 +71,17 @@ object ColorFinder {
     // find text (color) from id
     fun idToColorText(colorId: Int): String {
         return when (colorId) {
-            R.color.black32, R.drawable.black32 -> "Black"
-            R.color.brown32, R.drawable.brown32 -> "Brown"
-            R.color.red32, R.drawable.red32 -> "Red"
-            R.color.orange32, R.drawable.orange32 -> "Orange"
-            R.color.yellow32, R.drawable.yellow32 -> "Yellow"
-            R.color.green32, R.drawable.green32 -> "Green"
-            R.color.blue32, R.drawable.blue32 -> "Blue"
-            R.color.violet32, R.drawable.violet32 -> "Violet"
-            R.color.gray32, R.drawable.gray32 -> "Gray"
-            R.color.gold32, R.drawable.gold32 -> "Gold"
-            R.color.silver32, R.drawable.silver32 -> "Silver"
+            R.color.black32, R.drawable.black_square -> "Black"
+            R.color.brown32, R.drawable.brown_square -> "Brown"
+            R.color.red32, R.drawable.red_square -> "Red"
+            R.color.orange32, R.drawable.orange_square -> "Orange"
+            R.color.yellow32, R.drawable.yellow_square -> "Yellow"
+            R.color.green32, R.drawable.green_square -> "Green"
+            R.color.blue32, R.drawable.blue_square -> "Blue"
+            R.color.violet32, R.drawable.violet_square -> "Violet"
+            R.color.gray32, R.drawable.gray_square -> "Gray"
+            R.color.gold32, R.drawable.gold_square -> "Gold"
+            R.color.silver32, R.drawable.silver_square -> "Silver"
             else -> EMPTY_STRING
         }
     }

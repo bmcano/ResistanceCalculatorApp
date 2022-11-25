@@ -15,14 +15,14 @@
 
         <ImageView
             android:id="@+id/spinner_img"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:contentDescription="@string/dropdown_image_description"/>
 
         <TextView
             android:id="@+id/spinner_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:padding="8dp"
             android:textColor="?android:textColorPrimary"/>
 
