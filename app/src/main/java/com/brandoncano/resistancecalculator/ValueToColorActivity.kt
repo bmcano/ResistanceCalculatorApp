@@ -74,7 +74,7 @@ class ValueToColorActivity : AppCompatActivity() {
         buttonSetup()
         calculateButtonSetup()
         screenText.text = loadData("screenText2", "screen text2")
-        if (screenText.text == EMPTY_STRING) screenText.text = getString(R.string.enter_value)
+        if (screenText.text.isEmpty()) screenText.text = getString(R.string.enter_value)
     }
 
     override fun onResume() {
@@ -84,7 +84,7 @@ class ValueToColorActivity : AppCompatActivity() {
         buttonSetup()
         calculateButtonSetup()
         screenText.text = loadData("screenText2", "screen text2")
-        if (screenText.text == EMPTY_STRING) screenText.text = getString(R.string.enter_value)
+        if (screenText.text.isEmpty()) screenText.text = getString(R.string.enter_value)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -235,7 +235,7 @@ class ValueToColorActivity : AppCompatActivity() {
     // finds any errors in the user input
     private fun errorFinder(text: String): String {
         val textInputLayout: TextInputLayout = findViewById(R.id.edit_text_outline)
-        return if (text == EMPTY_STRING || text == ".") {
+        return if (text.isEmpty() || text == ".") {
             textInputLayout.error = null
             buttonCheck = EMPTY_STRING
             EMPTY_STRING
@@ -265,7 +265,7 @@ class ValueToColorActivity : AppCompatActivity() {
             6 -> {
                 setBandColor(numberBand3, colors[2])
                 setBandColor(ppmBand, ColorFinder.textToColor(ppmColor))
-                if (ppmColor == EMPTY_STRING) "$resistance $units $toleranceColor" else "$resistance $units $toleranceColor\n$ppmColor"
+                if (ppmColor.isEmpty()) "$resistance $units $toleranceColor" else "$resistance $units $toleranceColor\n$ppmColor"
             }
             else -> EMPTY_STRING
         }

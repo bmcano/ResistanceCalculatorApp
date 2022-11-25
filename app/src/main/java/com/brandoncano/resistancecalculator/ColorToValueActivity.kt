@@ -71,7 +71,7 @@ class ColorToValueActivity : AppCompatActivity() {
         idSetup()
         buttonSetup()
         screenText.text = loadData("screenText1", "screen text1")
-        if (screenText.text == EMPTY_STRING) screenText.text = getString(R.string.default_text)
+        if (screenText.text.isEmpty()) screenText.text = getString(R.string.default_text)
     }
 
     override fun onResume() {
@@ -80,7 +80,7 @@ class ColorToValueActivity : AppCompatActivity() {
         idSetup()
         buttonSetup()
         screenText.text = loadData("screenText1", "screen text1")
-        if (screenText.text == EMPTY_STRING) screenText.text = getString(R.string.default_text)
+        if (screenText.text.isEmpty()) screenText.text = getString(R.string.default_text)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -325,15 +325,15 @@ class ColorToValueActivity : AppCompatActivity() {
 
     private fun calculateResistanceHelper() {
         screenText.text = if (toggleDropDownNumberBand3.visibility == View.GONE && toggleDropDownPPM.visibility == View.GONE) {
-            ResistanceFormatter.calcResistance(
+            ResistanceFormatter.calculateResistance(
                 numberBand1, numberBand2, multiplierBand, toleranceBand
             )
         } else if (toggleDropDownPPM.visibility == View.GONE) {
-            ResistanceFormatter.calcResistance(
+            ResistanceFormatter.calculateResistance(
                 numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand
             )
         } else {
-            ResistanceFormatter.calcResistance(
+            ResistanceFormatter.calculateResistance(
                 numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand
             )
         }

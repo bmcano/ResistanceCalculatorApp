@@ -13,14 +13,10 @@ object ResistanceFormatter {
     private const val EMPTY_STRING = ""
 
     // four band resistors
-    fun calcResistance(
-        NumberBand1: String,
-        NumberBand2: String,
-        Multiplier: String,
-        Tolerance: String
+    fun calculateResistance(
+        NumberBand1: String, NumberBand2: String, Multiplier: String, Tolerance: String
     ): String {
-        // will not work properly with any empty strings
-        if (NumberBand1 == EMPTY_STRING || NumberBand2 == EMPTY_STRING || Multiplier == EMPTY_STRING || Tolerance == EMPTY_STRING) {
+        if (NumberBand1.isEmpty() || NumberBand2.isEmpty() || Multiplier.isEmpty() || Tolerance.isEmpty()) {
             return "Select Colors"
         }
 
@@ -39,29 +35,19 @@ object ResistanceFormatter {
                 "Gray" -> "${numberBand2}00 M$OMEGA $PLUS_MINUS$tolerance%"
                 "Silver" -> "0.0${numberBand2} $OMEGA $PLUS_MINUS$tolerance%"
                 else -> {
-                    "${
-                        multiplierHelper(
-                            Multiplier,
-                            EMPTY_STRING,
-                            numberBand2
-                        )
-                    }$OMEGA $PLUS_MINUS$tolerance%"
+                    multiplierHelper(Multiplier, EMPTY_STRING, numberBand2) +
+                            "$OMEGA $PLUS_MINUS$tolerance%"
                 }
             }
         } else "$multiplier$OMEGA $PLUS_MINUS$tolerance%"
     }
 
     // five or six band resistors
-    fun calcResistance(
-        NumberBand1: String,
-        NumberBand2: String,
-        NumberBand3: String,
-        Multiplier: String,
-        Tolerance: String,
-        PPM: String = EMPTY_STRING
+    fun calculateResistance(
+        NumberBand1: String, NumberBand2: String, NumberBand3: String,
+        Multiplier: String, Tolerance: String, PPM: String = EMPTY_STRING
     ): String {
-        // will not work properly with any empty strings
-        if (NumberBand1 == EMPTY_STRING || NumberBand2 == EMPTY_STRING || NumberBand3 == EMPTY_STRING || Multiplier == EMPTY_STRING || Tolerance == EMPTY_STRING) {
+        if (NumberBand1.isEmpty() || NumberBand2.isEmpty() || NumberBand3.isEmpty() || Multiplier.isEmpty() || Tolerance.isEmpty()) {
             return "Select Colors"
         }
 
@@ -86,14 +72,8 @@ object ResistanceFormatter {
                 "Gold" -> "0.${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 "Silver" -> "0.0${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 else -> {
-                    "${
-                        multiplierHelper(
-                            Multiplier,
-                            EMPTY_STRING,
-                            EMPTY_STRING,
-                            numberBand3
-                        )
-                    }$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                    multiplierHelper(Multiplier, EMPTY_STRING, EMPTY_STRING, numberBand3) +
+                            "$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 }
             }
         } else if (NumberBand1 == "Black") {
@@ -103,14 +83,8 @@ object ResistanceFormatter {
                 "Violet" -> "${numberBand2}${numberBand3}0 M$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 "Silver" -> "0.${numberBand2}${numberBand3} $OMEGA $PLUS_MINUS$tolerance%$ppm"
                 else -> {
-                    "${
-                        multiplierHelper(
-                            Multiplier,
-                            EMPTY_STRING,
-                            numberBand2,
-                            numberBand3
-                        )
-                    }$OMEGA $PLUS_MINUS$tolerance%$ppm"
+                    multiplierHelper(Multiplier, EMPTY_STRING, numberBand2, numberBand3) +
+                            "$OMEGA $PLUS_MINUS$tolerance%$ppm"
                 }
             }
         } else "$multiplier$OMEGA $PLUS_MINUS$tolerance%$ppm"
@@ -154,10 +128,7 @@ object ResistanceFormatter {
 
     // five or six band resistor
     private fun multiplierHelper(
-        Color: String,
-        band1: String,
-        band2: String,
-        band3: String
+        Color: String, band1: String, band2: String, band3: String
     ): String {
         return when (Color) {
             "Black" -> "$band1$band2$band3 "

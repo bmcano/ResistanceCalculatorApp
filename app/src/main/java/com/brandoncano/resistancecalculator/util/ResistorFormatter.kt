@@ -21,7 +21,7 @@ object ResistorFormatter {
             (numBands == 4 && sigFigs.numberSignificantFigures > 2) ||
                     ((numBands == 5 || numBands == 6) && sigFigs.numberSignificantFigures > 3) ||
                     ((numBands == 5 || numBands == 6) && (input[0] == '0' || input[0] == '.') &&
-                            (units == OMEGA || units == EMPTY_STRING)) ||
+                            (units == OMEGA || units.isEmpty())) ||
                     ((numBands == 5 || numBands == 6) && units == "G$OMEGA" && input.length > 3) ||
                     ((numBands == 4) && units == "G$OMEGA" && input.length > 2) ||
                     (input.length > 1 && input[0] == '0' && input[1] == '0') ||
@@ -35,7 +35,7 @@ object ResistorFormatter {
     // returns an array of the 3 or 4 colors to be returned
     fun generateResistor(numBands: Int, resistance: String, units: String): Array<Int> {
         // this will prevent the program from crashing
-        if (resistance == "NotValid" || resistance == EMPTY_STRING) {
+        if (resistance == "NotValid" || resistance.isEmpty()) {
             return arrayOf()
         }
 
