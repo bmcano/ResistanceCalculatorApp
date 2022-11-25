@@ -93,7 +93,6 @@ class ValueToColorActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    // TODO - try to simplify further
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.color_to_value -> {
@@ -287,22 +286,20 @@ class ValueToColorActivity : AppCompatActivity() {
         val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinnerPPM)
 
         // load and set saved data
-        dropDownUnits.setText(loadData("unitsDropDown", "units dropDown"))
         units = loadData("unitsDropDown", "units dropDown")
+        dropDownUnits.setText(units)
 
-        dropDownTolerance.setText(loadData("toleranceDropDown", "tolerance dropDown"))
         toleranceColor = loadData("toleranceDropDown", "tolerance dropDown")
+        dropDownTolerance.setText(toleranceColor)
         setDropDownDrawable(dropDownTolerance, toleranceColor)
 
-        dropDownPPM.setText(loadData("ppmDropDown", "ppm dropDown"))
         ppmColor = loadData("ppmDropDown", "ppm dropDown")
+        dropDownPPM.setText(ppmColor)
         setDropDownDrawable(dropDownPPM, ppmColor)
 
         // create and set adapters
         ArrayAdapter(
-            this,
-            R.layout.spinner_units_layout,
-            SpinnerContents.unitsArray
+            this, R.layout.spinner_units_layout, SpinnerContents.unitsArray
         ).also { adapter ->
             adapter.setDropDownViewResource(R.layout.spinner_units_layout)
             dropDownUnits.setAdapter(adapter)
