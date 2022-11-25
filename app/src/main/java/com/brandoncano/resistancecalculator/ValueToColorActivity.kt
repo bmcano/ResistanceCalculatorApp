@@ -358,7 +358,7 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun loadData(name: String, key: String): String {
         val sharedPreferences = getSharedPreferences(name, MODE_PRIVATE)
         val gson = Gson()
-        val json = sharedPreferences!!.getString(key, null)
+        val json = sharedPreferences.getString(key, null)
         val type: Type = object : TypeToken<String?>() {}.type
         return gson.fromJson<String?>(json, type) ?: return EMPTY_STRING
     }

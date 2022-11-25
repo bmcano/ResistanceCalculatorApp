@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
-import com.brandoncano.resistancecalculator.R
 
 /**
  * @author: Brandon
@@ -15,11 +14,7 @@ object ResistorFormatter {
     // EditText already limits this to decimal and whole numbers and 5 characters
     // Invalid Inputs: 0.0... , 00... , 0.xyz , 0x , .0x , too many sig figs, etc.
     fun isValidInput(numBands: Int, input: String, units: String): Boolean {
-        try {
-            input.toDouble()
-        } catch (e: NumberFormatException) {
-            return false
-        }
+        input.toDoubleOrNull() ?: return false
         val sigFigs = SignificantFigures(input)
 
         return when {
@@ -49,17 +44,14 @@ object ResistorFormatter {
         var numberBand2 = 0
         var numberBand3 = 0
         val formattedResistance = resistance.replace(".", EMPTY_STRING).toInt().toString()
-        var i = 0
-        for (digit in formattedResistance) {
-            if (i == 0) numberBand1 = digit.digitToInt()
-            if (i == 1) numberBand2 = digit.digitToInt()
-            if (i == 2) numberBand3 = digit.digitToInt()
-            i += 1
+        formattedResistance.forEachIndexed { index, digit ->
+            if (index == 0) { numberBand1 = digit.digitToInt() }
+            if (index == 1) { numberBand2 = digit.digitToInt() }
+            if (index == 2) { numberBand3 = digit.digitToInt() }
         }
 
         // find color for multiplier band
-        val decimalPresent = '.' in resistance
-        val multiplierBand: String = if (decimalPresent) {
+        val multiplierBand: String = if ('.' in resistance) {
             decimalInput(numBands, resistance, units)
         } else {
             numericalInput(numBands, resistance, units)
@@ -68,16 +60,16 @@ object ResistorFormatter {
         // return correct values
         return if (numBands == 4) {
             arrayOf(
-                ColorFinder.numberColor(numberBand1),
-                ColorFinder.numberColor(numberBand2),
-                R.color.resistor_blank,
+                ColorFinder.numberToColor(numberBand1),
+                ColorFinder.numberToColor(numberBand2),
+                ColorFinder.numberToColor(),
                 ColorFinder.textToColor(multiplierBand)
             )
         } else {
             arrayOf(
-                ColorFinder.numberColor(numberBand1),
-                ColorFinder.numberColor(numberBand2),
-                ColorFinder.numberColor(numberBand3),
+                ColorFinder.numberToColor(numberBand1),
+                ColorFinder.numberToColor(numberBand2),
+                ColorFinder.numberToColor(numberBand3),
                 ColorFinder.textToColor(multiplierBand)
             )
         }

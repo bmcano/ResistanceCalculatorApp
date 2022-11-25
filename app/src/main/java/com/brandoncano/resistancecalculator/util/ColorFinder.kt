@@ -52,7 +52,7 @@ object ColorFinder {
     }
 
     // finds the color depending on the position
-    fun numberColor(color: Int): Int {
+    fun numberToColor(color: Int = -1): Int {
         return when (color) {
             0 -> R.color.black32
             1 -> R.color.brown32
@@ -64,7 +64,7 @@ object ColorFinder {
             7 -> R.color.violet32
             8 -> R.color.gray32
             9 -> R.color.white32
-            else -> R.color.black32
+            else -> R.color.resistor_blank
         }
     }
 
