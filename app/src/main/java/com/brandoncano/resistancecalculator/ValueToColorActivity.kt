@@ -142,10 +142,9 @@ class ValueToColorActivity : AppCompatActivity() {
 
         fun loadImage(button: String) {
             resistance = loadData("UserInput", "user input")
-            // fix for those with crashing screens
-            if (resistance == "NotValid" || resistance == "") {
-                resistance = "51"
-            }
+
+            // crash fix - leaving this activity with invalid input would cause a crash
+            if (resistance == "NotValid" || resistance.isEmpty()) return
 
             shareColors = ResistorFormatter.generateResistor(imageSelection, resistance, units)
             setBandColor(numberBand1, shareColors[0])

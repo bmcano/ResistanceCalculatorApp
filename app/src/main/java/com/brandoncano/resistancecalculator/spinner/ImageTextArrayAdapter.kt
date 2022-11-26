@@ -21,7 +21,7 @@ class ImageTextArrayAdapter(context: Context, private var items: Array<SpinnerIt
     private var inflater: LayoutInflater = (context as Activity).layoutInflater
     private var holder: ViewHolder? = null
 
-    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         return getCustomView(position, convertView, parent)
     }
 

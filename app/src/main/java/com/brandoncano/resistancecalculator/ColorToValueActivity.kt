@@ -58,7 +58,6 @@ class ColorToValueActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_to_value)
 
-        // sets up the action bar correctly
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null) {
             val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
@@ -93,8 +92,7 @@ class ColorToValueActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.value_to_color -> {
                 super.finish()
-                val intent = Intent(this, ValueToColorActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, ValueToColorActivity::class.java))
                 return true
             }
             R.id.show_resistor_charts -> {
@@ -115,8 +113,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 return true
             }
             R.id.about_item -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, AboutActivity::class.java))
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
