@@ -42,4 +42,13 @@
         <item name="boxStrokeWidth">2dp</item>
     </style>
 
+    <style name="AutoCompleteTextViewColorTextDesign">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:drawableStart">@drawable/blank32</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:inputType">none</item>
+        <item name="android:textSize" tools:ignore="SpUsage">16dp</item>
+    </style>
+
 </resources>

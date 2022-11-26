@@ -29,13 +29,8 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/spinner1"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:drawableStart="@drawable/blank32"
-                    android:drawablePadding="16dp"
-                    android:inputType="none"
-                    android:textSize="16dp"
-                    tools:ignore="LabelFor,SpUsage">
+                    style="@style/AutoCompleteTextViewColorTextDesign"
+                    tools:ignore="LabelFor">
 
                 </AutoCompleteTextView>
 
@@ -52,13 +47,8 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/spinner2"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:drawableStart="@drawable/blank32"
-                    android:drawablePadding="16dp"
-                    android:inputType="none"
-                    android:textSize="16dp"
-                    tools:ignore="LabelFor,SpUsage">
+                    style="@style/AutoCompleteTextViewColorTextDesign"
+                    tools:ignore="LabelFor">
 
                 </AutoCompleteTextView>
 
@@ -76,13 +66,8 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/spinner3"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:drawableStart="@drawable/blank32"
-                    android:drawablePadding="16dp"
-                    android:inputType="none"
-                    android:textSize="16dp"
-                    tools:ignore="LabelFor,SpUsage">
+                    style="@style/AutoCompleteTextViewColorTextDesign"
+                    tools:ignore="LabelFor">
 
                 </AutoCompleteTextView>
 
@@ -99,13 +84,8 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/spinner4"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:drawableStart="@drawable/blank32"
-                    android:drawablePadding="16dp"
-                    android:inputType="none"
-                    android:textSize="16dp"
-                    tools:ignore="LabelFor,SpUsage">
+                    style="@style/AutoCompleteTextViewColorTextDesign"
+                    tools:ignore="LabelFor">
 
                 </AutoCompleteTextView>
 
@@ -123,13 +103,8 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/spinner5"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:drawableStart="@drawable/blank32"
-                    android:drawablePadding="16dp"
-                    android:inputType="none"
-                    android:textSize="16dp"
-                    tools:ignore="LabelFor,SpUsage">
+                    style="@style/AutoCompleteTextViewColorTextDesign"
+                    tools:ignore="LabelFor">
 
                 </AutoCompleteTextView>
 
@@ -148,13 +123,8 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/spinner6"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:drawableStart="@drawable/blank32"
-                    android:drawablePadding="16dp"
-                    android:inputType="none"
-                    android:textSize="16dp"
-                    tools:ignore="LabelFor,SpUsage">
+                    style="@style/AutoCompleteTextViewColorTextDesign"
+                    tools:ignore="LabelFor">
 
                 </AutoCompleteTextView>
 
