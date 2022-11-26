@@ -6,10 +6,10 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="gray">#585858</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#585858</color>
     <color name="dark_gray">#2C2C2C</color>
+    <color name="black">#FF000000</color>
 
     <!-- Current theme colors -->
     <color name="yellow_primary">#E9C46A</color>
@@ -20,9 +20,6 @@
     <!-- Background colors -->
     <color name="neutral">#EBE7CD</color>
     <color name="neutral_night">#7B5E41</color>
-
-    <!-- Outline color -->
-    <color name="dialog_outline_color">@color/orange_primary</color>
 
     <!-- Colors that relate to the resistor bands -->
     <color name="red32">#ED1C24</color>

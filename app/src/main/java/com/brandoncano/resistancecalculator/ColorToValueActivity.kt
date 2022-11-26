@@ -40,12 +40,12 @@ class ColorToValueActivity : AppCompatActivity() {
     private lateinit var toggleDropDownNumberBand3: TextInputLayout
     private lateinit var toggleDropDownPPM: TextInputLayout
 
-    private var numberBand1: String = EMPTY_STRING
-    private var numberBand2: String = EMPTY_STRING
-    private var numberBand3: String = EMPTY_STRING
-    private var multiplierBand: String = EMPTY_STRING
-    private var toleranceBand: String = EMPTY_STRING
-    private var ppmBand: String = EMPTY_STRING
+    private var numberBand1 = EMPTY_STRING
+    private var numberBand2 = EMPTY_STRING
+    private var numberBand3 = EMPTY_STRING
+    private var multiplierBand = EMPTY_STRING
+    private var toleranceBand = EMPTY_STRING
+    private var ppmBand = EMPTY_STRING
 
     private lateinit var bandImage1: ImageView
     private lateinit var bandImage2: ImageView
