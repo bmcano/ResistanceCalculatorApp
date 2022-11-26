@@ -97,7 +97,6 @@
                 android:layout_marginTop="4dp"
                 android:hint="@string/tolerance_band_hint"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.505"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dropDownSelector4">
 
@@ -117,7 +116,6 @@
                 android:hint="@string/ppm_band_hint"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.505"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dropDownSelector5">
 
@@ -142,7 +140,6 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_new"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -196,7 +193,6 @@
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/six_band"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toEndOf="@+id/four_band"
         tools:ignore="SpUsage">
 
