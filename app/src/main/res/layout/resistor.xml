@@ -60,7 +60,6 @@
         app:layout_constraintStart_toEndOf="@+id/r_post_band_1"
         app:layout_constraintTop_toBottomOf="@id/group" />
 
-
     <ImageView
         android:id="@+id/r_post_band_2"
         android:layout_width="9.5dp"
@@ -159,6 +158,5 @@
         app:layout_constraintEnd_toEndOf="@+id/group"
         app:layout_constraintStart_toEndOf="@+id/r_band_6"
         app:layout_constraintTop_toBottomOf="@id/group" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
