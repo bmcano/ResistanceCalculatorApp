@@ -22,6 +22,7 @@ import androidx.core.widget.doOnTextChanged
 import com.brandoncano.resistancecalculator.spinner.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.spinner.SpinnerContents
 import com.brandoncano.resistancecalculator.util.ColorFinder
+import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.MenuFunctions
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
 import com.google.android.material.textfield.TextInputLayout
@@ -112,7 +113,7 @@ class ValueToColorActivity : AppCompatActivity() {
             }
             R.id.feedback -> {
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = MenuFunctions.feedback()
+                intent.data = EmailFeedback.execute()
                 startActivity(intent)
                 return true
             }
@@ -321,8 +322,10 @@ class ValueToColorActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceColor = dropDownTolerance.adapter.getItem(position).toString()
                 setDropDownDrawable(dropDownTolerance, toleranceColor)
-                saveData("toleranceDropDown", "tolerance dropDown",
-                    dropDownTolerance.text.toString())
+                saveData(
+                    "toleranceDropDown", "tolerance dropDown",
+                    dropDownTolerance.text.toString()
+                )
             }
 
         dropDownPPM.onItemClickListener =

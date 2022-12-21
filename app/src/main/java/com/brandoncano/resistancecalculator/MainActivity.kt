@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.Button
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import com.brandoncano.resistancecalculator.util.MenuFunctions
+import com.brandoncano.resistancecalculator.util.EmailFeedback
 
 /**
  * @author: Brandon
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.feedback -> {
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = MenuFunctions.feedback()
+                intent.data = EmailFeedback.execute()
                 startActivity(intent)
                 true
             }

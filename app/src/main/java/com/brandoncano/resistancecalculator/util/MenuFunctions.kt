@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.widget.TextView
 import com.brandoncano.resistancecalculator.R
 
@@ -78,14 +77,5 @@ object MenuFunctions {
 
         intent.putExtra(Intent.EXTRA_TEXT, text)
         return intent
-    }
-
-    // setups up the email for feedback
-    fun feedback(): Uri {
-        return Uri.parse(
-            "mailto:brandoncano.development@gmail.com?subject="
-                    + Uri.encode("[Feedback] - Resistance Calculator").toString()
-                    + "&body=" + Uri.encode(EMPTY_STRING)
-        )
     }
 }

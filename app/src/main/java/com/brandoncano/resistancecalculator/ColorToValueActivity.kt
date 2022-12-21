@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.spinner.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.spinner.SpinnerContents
 import com.brandoncano.resistancecalculator.util.ColorFinder
+import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.MenuFunctions
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
 import com.google.android.material.textfield.TextInputLayout
@@ -105,7 +106,7 @@ class ColorToValueActivity : AppCompatActivity() {
             }
             R.id.feedback -> {
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = MenuFunctions.feedback()
+                intent.data = EmailFeedback.execute()
                 startActivity(intent)
                 return true
             }
@@ -323,19 +324,20 @@ class ColorToValueActivity : AppCompatActivity() {
 
     // TODO - remove this/move logic out of activity
     private fun calculateResistanceHelper() {
-        screenText.text = if (toggleDropDownNumberBand3.visibility == View.GONE && toggleDropDownPPM.visibility == View.GONE) {
-            ResistanceFormatter.calculateResistance(
-                numberBand1, numberBand2, multiplierBand, toleranceBand
-            )
-        } else if (toggleDropDownPPM.visibility == View.GONE) {
-            ResistanceFormatter.calculateResistance(
-                numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand
-            )
-        } else {
-            ResistanceFormatter.calculateResistance(
-                numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand
-            )
-        }
+        screenText.text =
+            if (toggleDropDownNumberBand3.visibility == View.GONE && toggleDropDownPPM.visibility == View.GONE) {
+                ResistanceFormatter.calculateResistance(
+                    numberBand1, numberBand2, multiplierBand, toleranceBand
+                )
+            } else if (toggleDropDownPPM.visibility == View.GONE) {
+                ResistanceFormatter.calculateResistance(
+                    numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand
+                )
+            } else {
+                ResistanceFormatter.calculateResistance(
+                    numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand
+                )
+            }
         saveStateData(StateData.RESISTANCE_CTV, screenText.text.toString())
     }
 
