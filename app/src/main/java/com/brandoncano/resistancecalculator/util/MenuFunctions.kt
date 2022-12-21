@@ -1,12 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.widget.TextView
-import com.brandoncano.resistancecalculator.R
 
 /**
  * @author: Brandon
@@ -16,22 +11,6 @@ import com.brandoncano.resistancecalculator.R
 object MenuFunctions {
 
     private const val EMPTY_STRING = ""
-
-    // determines which chart to display
-    fun showResistorCharts(context: Context, imageSelection: Int): Boolean {
-        val chartDialog = Dialog(context)
-        chartDialog.setContentView(
-            when (imageSelection) {
-                4 -> R.layout.popup_chart_4
-                5 -> R.layout.popup_chart_5
-                6 -> R.layout.popup_chart_6
-                else -> R.layout.popup_chart_6
-            }
-        )
-        chartDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        chartDialog.show()
-        return true
-    }
 
     // generates to text to copy/share for CTV
     fun shareItemCTV(

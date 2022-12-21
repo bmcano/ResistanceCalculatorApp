@@ -16,10 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.spinner.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.spinner.SpinnerContents
-import com.brandoncano.resistancecalculator.util.ColorFinder
-import com.brandoncano.resistancecalculator.util.EmailFeedback
-import com.brandoncano.resistancecalculator.util.MenuFunctions
-import com.brandoncano.resistancecalculator.util.ResistanceFormatter
+import com.brandoncano.resistancecalculator.util.*
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -94,7 +91,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 return true
             }
             R.id.show_resistor_charts -> {
-                return MenuFunctions.showResistorCharts(this, imageSelection)
+                return ResistorChart.show(this, imageSelection)
             }
             R.id.share_item -> {
                 val intent = MenuFunctions.shareItemCTV(
