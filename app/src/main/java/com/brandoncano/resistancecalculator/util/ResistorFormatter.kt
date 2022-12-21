@@ -8,6 +8,7 @@ import com.Ostermiller.util.SignificantFigures
  * Job: formats the resistor based resistance that has been entered
  */
 object ResistorFormatter {
+
     private const val OMEGA: String = "Ω"
     private const val EMPTY_STRING = ""
 
