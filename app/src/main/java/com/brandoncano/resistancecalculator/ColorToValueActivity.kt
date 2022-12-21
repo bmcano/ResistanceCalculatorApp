@@ -267,56 +267,50 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownBand1.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand1 = dropDownBand1.adapter.getItem(position).toString()
-                setDropDownDrawable(dropDownBand1, numberBand1)
-                updateResistance()
-                setBandColor(bandImage1, ColorFinder.textToColor(numberBand1))
+                updateDropDownSelection(dropDownBand1, numberBand1, bandImage1)
                 saveStateData(StateData.SIGFIG_BAND_ONE_CTV, dropDownBand1.text.toString())
             }
 
         dropDownBand2.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand2 = dropDownBand2.adapter.getItem(position).toString()
-                setDropDownDrawable(dropDownBand2, numberBand2)
-                updateResistance()
-                setBandColor(bandImage2, ColorFinder.textToColor(numberBand2))
+                updateDropDownSelection(dropDownBand2, numberBand2, bandImage2)
                 saveStateData(StateData.SIGFIG_BAND_TWO_CTV, dropDownBand2.text.toString())
             }
 
         dropDownBand3.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 numberBand3 = dropDownBand3.adapter.getItem(position).toString()
-                setDropDownDrawable(dropDownBand3, numberBand3)
-                updateResistance()
-                setBandColor(bandImage3, ColorFinder.textToColor(numberBand3))
+                updateDropDownSelection(dropDownBand3, numberBand3, bandImage3)
                 saveStateData(StateData.SIGFIG_BAND_THREE_CTV, dropDownBand3.text.toString())
             }
 
         dropDownMultiplier.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 multiplierBand = dropDownMultiplier.adapter.getItem(position).toString()
-                setDropDownDrawable(dropDownMultiplier, multiplierBand)
-                updateResistance()
-                setBandColor(bandImage4, ColorFinder.textToColor(multiplierBand))
+                updateDropDownSelection(dropDownMultiplier, multiplierBand, bandImage4)
                 saveStateData(StateData.MULTIPLIER_BAND_CTV, dropDownMultiplier.text.toString())
             }
 
         dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
-                setDropDownDrawable(dropDownTolerance, toleranceBand)
-                updateResistance()
-                setBandColor(bandImage5, ColorFinder.textToColor(toleranceBand))
+                updateDropDownSelection(dropDownTolerance, toleranceBand, bandImage5)
                 saveStateData(StateData.TOLERANCE_BAND_CTV, dropDownTolerance.text.toString())
             }
 
         dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 ppmBand = dropDownPPM.adapter.getItem(position).toString()
-                setDropDownDrawable(dropDownPPM, ppmBand)
-                updateResistance()
-                setBandColor(bandImage6, ColorFinder.textToColor(ppmBand))
+                updateDropDownSelection(dropDownPPM, ppmBand, bandImage6)
                 saveStateData(StateData.PPM_BAND_CTV, dropDownPPM.text.toString())
             }
+    }
+
+    private fun updateDropDownSelection(dropDown: AutoCompleteTextView, color: String, band: ImageView) {
+        setDropDownDrawable(dropDown, color)
+        setBandColor(band, ColorFinder.textToColor(color))
+        updateResistance()
     }
 
     private fun updateResistance() {
