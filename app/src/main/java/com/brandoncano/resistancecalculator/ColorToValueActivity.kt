@@ -67,19 +67,15 @@ class ColorToValueActivity : AppCompatActivity() {
         }
 
         dropDownSetup()
-        idSetup()
+        generalSetup()
         buttonSetup()
-        screenText.text = loadData("screenText1", "screen text1")
-        if (screenText.text.isEmpty()) screenText.text = getString(R.string.default_text)
     }
 
     override fun onResume() {
         super.onResume()
         dropDownSetup()
-        idSetup()
+        generalSetup()
         buttonSetup()
-        screenText.text = loadData("screenText1", "screen text1")
-        if (screenText.text.isEmpty()) screenText.text = getString(R.string.default_text)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -88,6 +84,7 @@ class ColorToValueActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    // TODO - will make single purpose util objects for these, maybe a resistor data class
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.value_to_color -> {
@@ -120,7 +117,7 @@ class ColorToValueActivity : AppCompatActivity() {
         }
     }
 
-    private fun idSetup() {
+    private fun generalSetup() {
         screenText = findViewById(R.id.resistance_display_new)
         bandImage1 = findViewById(R.id.r_band_1)
         bandImage2 = findViewById(R.id.r_band_2)
@@ -130,6 +127,9 @@ class ColorToValueActivity : AppCompatActivity() {
         bandImage6 = findViewById(R.id.r_band_6)
         toggleDropDownNumberBand3 = findViewById(R.id.dropDownSelector3)
         toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
+
+        screenText.text = loadStateData(StateData.RESISTANCE_CTV)
+        if (screenText.text.isEmpty()) screenText.text = getString(R.string.default_text)
     }
 
     private fun buttonSetup() {
@@ -150,21 +150,21 @@ class ColorToValueActivity : AppCompatActivity() {
                 setBandColor(bandImage6, ColorFinder.textToColor(ppmBand))
         }
 
-        when (loadData("buttonSelection1", "button selection1")) {
+        when (loadStateData(StateData.BUTTON_SELECTION_CTV)) {
             "4" -> {
-                buttonListener(
+                updateButtonSelection(
                     fourBandButton, fiveBandButton, sixBandButton, 4, View.GONE, View.GONE
                 )
                 loadImage("4")
             }
             "5" -> {
-                buttonListener(
+                updateButtonSelection(
                     fiveBandButton, fourBandButton, sixBandButton, 5, View.VISIBLE, View.GONE
                 )
                 loadImage("5")
             }
             "6" -> {
-                buttonListener(
+                updateButtonSelection(
                     sixBandButton, fourBandButton, fiveBandButton, 6, View.VISIBLE, View.VISIBLE
                 )
                 loadImage("6")
@@ -173,16 +173,17 @@ class ColorToValueActivity : AppCompatActivity() {
 
         // toggle four band resistor
         fourBandButton.setOnClickListener {
-            buttonListener(
+            updateButtonSelection(
                 fourBandButton, fiveBandButton, sixBandButton, 4, View.GONE, View.GONE
             )
+
             setBandColor(bandImage3, ColorFinder.textToColor())
             setBandColor(bandImage6, ColorFinder.textToColor())
         }
 
         // toggle five band resistor
         fiveBandButton.setOnClickListener {
-            buttonListener(
+            updateButtonSelection(
                 fiveBandButton, fourBandButton, sixBandButton, 5, View.VISIBLE, View.GONE
             )
 
@@ -192,7 +193,7 @@ class ColorToValueActivity : AppCompatActivity() {
 
         // toggle six band resistor
         sixBandButton.setOnClickListener {
-            buttonListener(
+            updateButtonSelection(
                 sixBandButton, fourBandButton, fiveBandButton, 6, View.VISIBLE, View.VISIBLE
             )
 
@@ -201,7 +202,7 @@ class ColorToValueActivity : AppCompatActivity() {
         }
     }
 
-    private fun buttonListener(
+    private fun updateButtonSelection(
         selectedBtn: Button, btn1: Button, btn2: Button, btnNumber: Int, view1: Int, view2: Int
     ) {
         selectedBtn.setBackgroundColor(getColor(R.color.mango_dark))
@@ -213,7 +214,7 @@ class ColorToValueActivity : AppCompatActivity() {
 
         calculateResistanceHelper()
         imageSelection = btnNumber
-        saveData("buttonSelection1", "button selection1", "$imageSelection")
+        saveStateData(StateData.BUTTON_SELECTION_CTV, "$imageSelection")
     }
 
     private fun dropDownSetup() {
@@ -225,27 +226,27 @@ class ColorToValueActivity : AppCompatActivity() {
         val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinner6)
 
         // load and set saved data
-        numberBand1 = loadData("numBand1", "num band1")
+        numberBand1 = loadStateData(StateData.SIGFIG_BAND_ONE_CTV)
         dropDownBand1.setText(numberBand1)
         setDropDownDrawable(dropDownBand1, numberBand1)
 
-        numberBand2 = loadData("numBand2", "num band2")
+        numberBand2 = loadStateData(StateData.SIGFIG_BAND_TWO_CTV)
         dropDownBand2.setText(numberBand2)
         setDropDownDrawable(dropDownBand2, numberBand2)
 
-        numberBand3 = loadData("numBand3", "num band3")
+        numberBand3 = loadStateData(StateData.SIGFIG_BAND_THREE_CTV)
         dropDownBand3.setText(numberBand3)
         setDropDownDrawable(dropDownBand3, numberBand3)
 
-        multiplierBand = loadData("multiplierBand1", "multiplier band1")
+        multiplierBand = loadStateData(StateData.MULTIPLIER_BAND_CTV)
         dropDownMultiplier.setText(multiplierBand)
         setDropDownDrawable(dropDownMultiplier, multiplierBand)
 
-        toleranceBand = loadData("toleranceBand1", "tolerance band1")
+        toleranceBand = loadStateData(StateData.TOLERANCE_BAND_CTV)
         dropDownTolerance.setText(toleranceBand)
         setDropDownDrawable(dropDownTolerance, toleranceBand)
 
-        ppmBand = loadData("ppmBand1", "ppm band1")
+        ppmBand = loadStateData(StateData.PPM_BAND_CTV)
         dropDownPPM.setText(ppmBand)
         setDropDownDrawable(dropDownPPM, ppmBand)
 
@@ -271,7 +272,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 setDropDownDrawable(dropDownBand1, numberBand1)
                 calculateResistanceHelper()
                 setBandColor(bandImage1, ColorFinder.textToColor(numberBand1))
-                saveData("numBand1", "num band1", dropDownBand1.text.toString())
+                saveStateData(StateData.SIGFIG_BAND_ONE_CTV, dropDownBand1.text.toString())
             }
 
         dropDownBand2.onItemClickListener =
@@ -280,7 +281,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 setDropDownDrawable(dropDownBand2, numberBand2)
                 calculateResistanceHelper()
                 setBandColor(bandImage2, ColorFinder.textToColor(numberBand2))
-                saveData("numBand2", "num band2", dropDownBand2.text.toString())
+                saveStateData(StateData.SIGFIG_BAND_TWO_CTV, dropDownBand2.text.toString())
             }
 
         dropDownBand3.onItemClickListener =
@@ -289,7 +290,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 setDropDownDrawable(dropDownBand3, numberBand3)
                 calculateResistanceHelper()
                 setBandColor(bandImage3, ColorFinder.textToColor(numberBand3))
-                saveData("numBand3", "num band3", dropDownBand3.text.toString())
+                saveStateData(StateData.SIGFIG_BAND_THREE_CTV, dropDownBand3.text.toString())
             }
 
         dropDownMultiplier.onItemClickListener =
@@ -298,7 +299,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 setDropDownDrawable(dropDownMultiplier, multiplierBand)
                 calculateResistanceHelper()
                 setBandColor(bandImage4, ColorFinder.textToColor(multiplierBand))
-                saveData("multiplierBand1", "multiplier band1", dropDownMultiplier.text.toString())
+                saveStateData(StateData.MULTIPLIER_BAND_CTV, dropDownMultiplier.text.toString())
             }
 
         dropDownTolerance.onItemClickListener =
@@ -307,7 +308,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 setDropDownDrawable(dropDownTolerance, toleranceBand)
                 calculateResistanceHelper()
                 setBandColor(bandImage5, ColorFinder.textToColor(toleranceBand))
-                saveData("toleranceBand1", "tolerance band1", dropDownTolerance.text.toString())
+                saveStateData(StateData.TOLERANCE_BAND_CTV, dropDownTolerance.text.toString())
             }
 
         dropDownPPM.onItemClickListener =
@@ -316,10 +317,11 @@ class ColorToValueActivity : AppCompatActivity() {
                 setDropDownDrawable(dropDownPPM, ppmBand)
                 calculateResistanceHelper()
                 setBandColor(bandImage6, ColorFinder.textToColor(ppmBand))
-                saveData("ppmBand1", "ppm band1", dropDownPPM.text.toString())
+                saveStateData(StateData.PPM_BAND_CTV, dropDownPPM.text.toString())
             }
     }
 
+    // TODO - remove this/move logic out of activity
     private fun calculateResistanceHelper() {
         screenText.text = if (toggleDropDownNumberBand3.visibility == View.GONE && toggleDropDownPPM.visibility == View.GONE) {
             ResistanceFormatter.calculateResistance(
@@ -334,13 +336,15 @@ class ColorToValueActivity : AppCompatActivity() {
                 numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand
             )
         }
-        saveData("screenText1", "screen text1", screenText.text.toString())
+        saveStateData(StateData.RESISTANCE_CTV, screenText.text.toString())
     }
 
+    // helper method to set the color of the band on screen
     private fun setBandColor(band: ImageView, color: Int) {
         band.setColorFilter(ContextCompat.getColor(this, color))
     }
 
+    // helper method to set the drawable that appears after a selection
     private fun setDropDownDrawable(dropDown: AutoCompleteTextView, color: String) {
         dropDown.setCompoundDrawablesRelativeWithIntrinsicBounds(
             ColorFinder.textToColoredDrawable(color), 0, 0, 0
@@ -348,20 +352,20 @@ class ColorToValueActivity : AppCompatActivity() {
     }
 
     // saves the user input
-    private fun saveData(name: String, key: String, input: String) {
-        val sharedPreferences = getSharedPreferences(name, MODE_PRIVATE)
+    private fun saveStateData(data: StateData, input: String) {
+        val sharedPreferences = getSharedPreferences(data.name_, MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val gson = Gson()
         val json: String = gson.toJson(input)
-        editor.putString(key, json)
+        editor.putString(data.key_, json)
         editor.apply()
     }
 
     // loads the user input
-    private fun loadData(name: String, key: String): String {
-        val sharedPreferences = getSharedPreferences(name, MODE_PRIVATE)
+    private fun loadStateData(data: StateData): String {
+        val sharedPreferences = getSharedPreferences(data.name_, MODE_PRIVATE)
         val gson = Gson()
-        val json = sharedPreferences.getString(key, null)
+        val json = sharedPreferences.getString(data.key_, null)
         val type: Type = object : TypeToken<String?>() {}.type
         return gson.fromJson<String?>(json, type) ?: return EMPTY_STRING
     }
