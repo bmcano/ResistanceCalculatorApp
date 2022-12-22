@@ -16,4 +16,12 @@ enum class StateData(val name_: String, val key_: String) {
     MULTIPLIER_BAND_CTV("multiplierBand1","multiplier band1"),
     TOLERANCE_BAND_CTV("toleranceBand1","tolerance band1"),
     PPM_BAND_CTV("ppmBand1","ppm band1"),
+
+    // value to color
+    RESISTANCE_VTC("screenText2", "screen text2"),
+    BUTTON_SELECTION_VTC("buttonSelection2", "button selection2"),
+    USER_INPUT_VTC("UserInput", "user input"),
+    UNITS_DROPDOWN_VTC("unitsDropDown", "units dropDown"),
+    TOLERANCE_DROPDOWN_VTC("toleranceDropDown", "tolerance dropDown"),
+    PPM_DROPDOWN_VTC("ppmDropDown", "ppm dropDown")
 }

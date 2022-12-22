@@ -71,7 +71,7 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownSetup()
         buttonSetup()
         calculateButtonSetup()
-        screenText.text = loadData("screenText2", "screen text2")
+        screenText.text = loadStateData(StateData.RESISTANCE_CTV)
         if (screenText.text.isEmpty()) screenText.text = getString(R.string.enter_value)
     }
 
@@ -81,7 +81,7 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownSetup()
         buttonSetup()
         calculateButtonSetup()
-        screenText.text = loadData("screenText2", "screen text2")
+        screenText.text = loadStateData(StateData.RESISTANCE_CTV)
         if (screenText.text.isEmpty()) screenText.text = getString(R.string.enter_value)
     }
 
@@ -139,7 +139,7 @@ class ValueToColorActivity : AppCompatActivity() {
         val sixBandButton: Button = findViewById(R.id.six_band)
 
         fun loadImage(button: String) {
-            resistance = loadData("UserInput", "user input")
+            resistance = loadStateData(StateData.USER_INPUT_VTC)
 
             // crash fix - leaving this activity with invalid input would cause a crash
             if (resistance == "NotValid" || resistance.isEmpty()) return
@@ -154,7 +154,7 @@ class ValueToColorActivity : AppCompatActivity() {
             if (button == "6") setBandColor(ppmBand, ColorFinder.textToColor(ppmColor))
         }
 
-        when (loadData("buttonSelection2", "button selection2")) {
+        when (loadStateData(StateData.BUTTON_SELECTION_VTC)) {
             "4" -> {
                 buttonListener(fourBandButton, fiveBandButton, sixBandButton, 4, View.INVISIBLE)
                 loadImage("4")
@@ -195,12 +195,12 @@ class ValueToColorActivity : AppCompatActivity() {
         toggleDropDown.visibility = view
         imageSelection = btnNumber
         if (resistance != EMPTY_STRING) resistance = errorFinder(buttonCheck)
-        saveData("buttonSelection2", "button selection2", "$imageSelection")
+        saveStateData(StateData.BUTTON_SELECTION_VTC, "$imageSelection")
     }
 
     private fun calculateButtonSetup() {
         val inputResistance: EditText = findViewById(R.id.enter_resistance)
-        inputResistance.setText(loadData("UserInput", "user input"))
+        inputResistance.setText(loadStateData(StateData.USER_INPUT_VTC))
         inputResistance.doOnTextChanged { text, _, _, _ ->
             resistance = errorFinder(text.toString())
         }
@@ -219,11 +219,11 @@ class ValueToColorActivity : AppCompatActivity() {
                 setBandColor(toleranceBand, ColorFinder.textToColor(toleranceColor))
 
                 screenText.text = updateText(colors)
-                saveData("screenText2", "screen text2", screenText.text.toString())
+                saveStateData(StateData.RESISTANCE_VTC, screenText.text.toString())
             }
             // prevents an invalid input from being saved
             if (resistance != "NotValid") {
-                saveData("UserInput", "user input", resistance)
+                saveStateData(StateData.USER_INPUT_VTC, resistance)
             }
             closeKeyboard()
         }
@@ -283,14 +283,14 @@ class ValueToColorActivity : AppCompatActivity() {
         val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinnerPPM)
 
         // load and set saved data
-        units = loadData("unitsDropDown", "units dropDown")
+        units = loadStateData(StateData.UNITS_DROPDOWN_VTC)
         dropDownUnits.setText(units)
 
-        toleranceColor = loadData("toleranceDropDown", "tolerance dropDown")
+        toleranceColor = loadStateData(StateData.TOLERANCE_DROPDOWN_VTC)
         dropDownTolerance.setText(toleranceColor)
         setDropDownDrawable(dropDownTolerance, toleranceColor)
 
-        ppmColor = loadData("ppmDropDown", "ppm dropDown")
+        ppmColor = loadStateData(StateData.PPM_DROPDOWN_VTC)
         dropDownPPM.setText(ppmColor)
         setDropDownDrawable(dropDownPPM, ppmColor)
 
@@ -312,24 +312,21 @@ class ValueToColorActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 units = dropDownUnits.adapter.getItem(position).toString()
                 if (resistance != EMPTY_STRING) resistance = errorFinder(buttonCheck)
-                saveData("unitsDropDown", "units dropDown", dropDownUnits.text.toString())
+                saveStateData(StateData.UNITS_DROPDOWN_VTC, dropDownUnits.text.toString())
             }
 
         dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 toleranceColor = dropDownTolerance.adapter.getItem(position).toString()
                 setDropDownDrawable(dropDownTolerance, toleranceColor)
-                saveData(
-                    "toleranceDropDown", "tolerance dropDown",
-                    dropDownTolerance.text.toString()
-                )
+                saveStateData(StateData.TOLERANCE_DROPDOWN_VTC, dropDownTolerance.text.toString())
             }
 
         dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 ppmColor = dropDownPPM.adapter.getItem(position).toString()
                 setDropDownDrawable(dropDownPPM, ppmColor)
-                saveData("ppmDropDown", "ppm dropDown", dropDownPPM.text.toString())
+                saveStateData(StateData.PPM_DROPDOWN_VTC, dropDownPPM.text.toString())
             }
     }
 
@@ -344,20 +341,20 @@ class ValueToColorActivity : AppCompatActivity() {
     }
 
     // saves the user input
-    private fun saveData(name: String, key: String, input: String) {
-        val sharedPreferences = getSharedPreferences(name, MODE_PRIVATE)
+    private fun saveStateData(data: StateData, input: String) {
+        val sharedPreferences = getSharedPreferences(data.name_, MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val gson = Gson()
         val json: String = gson.toJson(input)
-        editor.putString(key, json)
+        editor.putString(data.key_, json)
         editor.apply()
     }
 
     // loads the user input
-    private fun loadData(name: String, key: String): String {
-        val sharedPreferences = getSharedPreferences(name, MODE_PRIVATE)
+    private fun loadStateData(data: StateData): String {
+        val sharedPreferences = getSharedPreferences(data.name_, MODE_PRIVATE)
         val gson = Gson()
-        val json = sharedPreferences.getString(key, null)
+        val json = sharedPreferences.getString(data.key_, null)
         val type: Type = object : TypeToken<String?>() {}.type
         return gson.fromJson<String?>(json, type) ?: return EMPTY_STRING
     }
