@@ -78,7 +78,7 @@ object ResistanceFormatter {
         }
 
         if (resistor.allDigitsZero(resistor.getNumberOfBands())) {
-            multiplier = "0"
+            multiplier = "0 "
         }
 
         return "$multiplier$OMEGA $tolerance$ppm"
