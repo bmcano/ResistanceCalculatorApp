@@ -23,10 +23,7 @@ object ShareResistance {
     }
 
     // generates to text to copy/share for VTC
-    fun shareItemVTC(
-        imageSelection: Int, shareColors: Array<Int>, screenText: TextView,
-        toleranceBand: String, ppmBand: String
-    ): Intent {
+    fun shareItemVTC(resistor: Resistor, shareColors: Array<Int>, screenText: TextView, ): Intent {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
         var text = EMPTY_STRING
@@ -36,10 +33,10 @@ object ShareResistance {
             val nb2 = ColorFinder.idToColorText(shareColors[1])
             val nb3 = ColorFinder.idToColorText(shareColors[2])
             val multi = ColorFinder.idToColorText(shareColors[3])
-            val tol = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(toleranceBand))
-            val ppm = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(ppmBand))
+            val tol = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(resistor.toleranceValue))
+            val ppm = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(resistor.ppmValue))
 
-            text = when (imageSelection) {
+            text = when (resistor.getNumberOfBands()) {
                 4 -> "${screenText.text}\n[ $nb1, $nb2, $multi, $tol ]"
                 5 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol ]"
                 6 -> "${screenText.text}\n[ $nb1, $nb2, $nb3, $multi, $tol, $ppm ]"

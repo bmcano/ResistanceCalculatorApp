@@ -4,8 +4,13 @@ package com.brandoncano.resistancecalculator
  * @author Brandon
  *
  * Job: Holds the colors for each band and performs certain task with the info
+ *
+ * Notes: the data values in the parameters are the 6 bands of the resistor.
+ *  the number of bands will determine which resistor is selected, the resistance and units is
+ *  specifically for the value-to-color section
  */
 data class Resistor(
+    // color to value specific attributes
     var sigFigBandOne: String = "",
     var sigFigBandTwo: String = "",
     var sigFigBandThree: String = "",
@@ -13,6 +18,11 @@ data class Resistor(
     var toleranceBand: String = "",
     var ppmBand: String = ""
 ) {
+    // value to color specific attributes
+    var resistance: String = ""
+    var units: String = ""
+    var toleranceValue: String = ""
+    var ppmValue: String = ""
 
     private var numberOfBands: Int = 4
 
@@ -30,10 +40,10 @@ data class Resistor(
     }
 
     fun setNumberOfBands(number: Int) {
+        numberOfBands = number
         if (number != 4 && number != 5 && number != 6) {
             numberOfBands = 4
         }
-        numberOfBands = number
     }
 
     fun isEmpty(numberOfBands: Int = 4): Boolean {
