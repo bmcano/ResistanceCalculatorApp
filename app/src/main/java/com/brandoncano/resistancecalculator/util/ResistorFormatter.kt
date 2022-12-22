@@ -19,27 +19,6 @@ object ResistorFormatter {
         "Blank"
     )
 
-    // EditText already limits this to decimal and whole numbers and 5 characters
-    // Invalid Inputs: 0.0... , 00... , 0.xyz , 0x , .0x , too many sig figs, etc.
-    fun isValidInput(numBands: Int, input: String, units: String): Boolean {
-        input.toDoubleOrNull() ?: return false
-        val sigFigs = SignificantFigures(input)
-
-        return when {
-            (numBands == 4 && sigFigs.numberSignificantFigures > 2) ||
-                    ((numBands == 5 || numBands == 6) && sigFigs.numberSignificantFigures > 3) ||
-                    ((numBands == 5 || numBands == 6) && (input[0] == '0' || input[0] == '.') &&
-                            (units == OMEGA || units.isEmpty())) ||
-                    ((numBands == 5 || numBands == 6) && units == "G$OMEGA" && input.length > 3) ||
-                    ((numBands == 4) && units == "G$OMEGA" && input.length > 2) ||
-                    (input.length > 1 && input[0] == '0' && input[1] == '0') ||
-                    (input.length > 2 && input[0] == '0' && input[1] == '.' && input[2] == '0') ||
-                    (input.length > 1 && input[0] == '0' && input[1] != '.') ||
-                    (input.length > 1 && input[0] == '.' && input[1] == '0') -> return false
-            else -> true
-        }
-    }
-
     fun generateResistor(resistor: Resistor) {
         val resistance = resistor.resistance
         if (resistance == "NotValid" || resistance.isEmpty()) {

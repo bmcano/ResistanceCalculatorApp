@@ -262,7 +262,7 @@ class ValueToColorActivity : AppCompatActivity() {
         resistor.resistance = if (text.isEmpty() || text == ".") {
             textInputLayout.error = null
             EMPTY_STRING
-        } else if (!ResistorFormatter.isValidInput(resistor.getNumberOfBands(), text, resistor.units)) {
+        } else if (!ResistanceInput.isValid(resistor, text)) {
             textInputLayout.error = "Invalid Input"
             "NotValid"
         } else {
