@@ -38,14 +38,15 @@ class ValueToColorActivity : AppCompatActivity() {
         private const val EMPTY_STRING = ""
     }
 
-    private lateinit var screenText: TextView
-    private lateinit var numberBand1: ImageView
-    private lateinit var numberBand2: ImageView
-    private lateinit var numberBand3: ImageView
-    private lateinit var multiplierBand: ImageView
-    private lateinit var toleranceBand: ImageView
-    private lateinit var ppmBand: ImageView
+    private lateinit var resistanceText: TextView
     private lateinit var toggleDropDown: TextInputLayout
+
+    private lateinit var bandImage1: ImageView
+    private lateinit var bandImage2: ImageView
+    private lateinit var bandImage3: ImageView
+    private lateinit var bandImage4: ImageView
+    private lateinit var bandImage5: ImageView
+    private lateinit var bandImage6: ImageView
 
     private var imageSelection = 4
     private var buttonCheck = EMPTY_STRING
@@ -67,22 +68,18 @@ class ValueToColorActivity : AppCompatActivity() {
             actionBar.elevation = 4F
         }
 
-        idSetup()
         dropDownSetup()
+        generalSetup()
         buttonSetup()
         calculateButtonSetup()
-        screenText.text = loadStateData(StateData.RESISTANCE_CTV)
-        if (screenText.text.isEmpty()) screenText.text = getString(R.string.enter_value)
     }
 
     override fun onResume() {
         super.onResume()
-        idSetup()
         dropDownSetup()
+        generalSetup()
         buttonSetup()
         calculateButtonSetup()
-        screenText.text = loadStateData(StateData.RESISTANCE_CTV)
-        if (screenText.text.isEmpty()) screenText.text = getString(R.string.enter_value)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -103,7 +100,7 @@ class ValueToColorActivity : AppCompatActivity() {
             }
             R.id.share_item -> {
                 val intent = ShareResistance.shareItemVTC(
-                    imageSelection, shareColors, screenText, toleranceColor, ppmColor
+                    imageSelection, shareColors, resistanceText, toleranceColor, ppmColor
                 )
                 startActivity(Intent.createChooser(intent, EMPTY_STRING))
                 return true
@@ -122,15 +119,18 @@ class ValueToColorActivity : AppCompatActivity() {
         }
     }
 
-    private fun idSetup() {
-        screenText = findViewById(R.id.display_resistance)
-        numberBand1 = findViewById(R.id.r_band_1)
-        numberBand2 = findViewById(R.id.r_band_2)
-        numberBand3 = findViewById(R.id.r_band_3)
-        multiplierBand = findViewById(R.id.r_band_4)
-        toleranceBand = findViewById(R.id.r_band_5)
-        ppmBand = findViewById(R.id.r_band_6)
+    private fun generalSetup() {
+        resistanceText = findViewById(R.id.display_resistance)
+        bandImage1 = findViewById(R.id.r_band_1)
+        bandImage2 = findViewById(R.id.r_band_2)
+        bandImage3 = findViewById(R.id.r_band_3)
+        bandImage4 = findViewById(R.id.r_band_4)
+        bandImage5 = findViewById(R.id.r_band_5)
+        bandImage6 = findViewById(R.id.r_band_6)
         toggleDropDown = findViewById(R.id.dropDownSelectorPPM)
+
+        resistanceText.text = loadStateData(StateData.RESISTANCE_CTV)
+        if (resistanceText.text.isEmpty()) resistanceText.text = getString(R.string.enter_value)
     }
 
     private fun buttonSetup() {
@@ -145,13 +145,16 @@ class ValueToColorActivity : AppCompatActivity() {
             if (resistance == "NotValid" || resistance.isEmpty()) return
 
             shareColors = ResistorFormatter.generateResistor(imageSelection, resistance, units)
-            setBandColor(numberBand1, shareColors[0])
-            setBandColor(numberBand2, shareColors[1])
-            setBandColor(multiplierBand, shareColors[3])
-            setBandColor(toleranceBand, ColorFinder.textToColor(toleranceColor))
+            setBandColor(bandImage1, shareColors[0])
+            setBandColor(bandImage2, shareColors[1])
+            setBandColor(bandImage4, shareColors[3])
+            setBandColor(bandImage5, ColorFinder.textToColor(toleranceColor))
 
-            if (button == "5" || button == "6") setBandColor(numberBand3, shareColors[2])
-            if (button == "6") setBandColor(ppmBand, ColorFinder.textToColor(ppmColor))
+            if (button == "5" || button == "6")
+                setBandColor(bandImage3, shareColors[2])
+
+            if (button == "6")
+                setBandColor(bandImage6, ColorFinder.textToColor(ppmColor))
         }
 
         when (loadStateData(StateData.BUTTON_SELECTION_VTC)) {
@@ -212,14 +215,14 @@ class ValueToColorActivity : AppCompatActivity() {
                 ResistorFormatter.generateResistor(imageSelection, resistance, units)
             shareColors = colors // for sharing in menu
             if (colors.isNotEmpty()) {
-                setBandColor(numberBand1, colors[0])
-                setBandColor(numberBand2, colors[1])
-                setBandColor(numberBand3, colors[2])
-                setBandColor(multiplierBand, colors[3])
-                setBandColor(toleranceBand, ColorFinder.textToColor(toleranceColor))
+                setBandColor(bandImage1, colors[0])
+                setBandColor(bandImage2, colors[1])
+                setBandColor(bandImage3, colors[2])
+                setBandColor(bandImage4, colors[3])
+                setBandColor(bandImage5, ColorFinder.textToColor(toleranceColor))
 
-                screenText.text = updateText(colors)
-                saveStateData(StateData.RESISTANCE_VTC, screenText.text.toString())
+                resistanceText.text = updateText(colors)
+                saveStateData(StateData.RESISTANCE_VTC, resistanceText.text.toString())
             }
             // prevents an invalid input from being saved
             if (resistance != "NotValid") {
@@ -250,18 +253,18 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun updateText(colors: Array<Int>): String {
         return when (imageSelection) {
             4 -> {
-                setBandColor(numberBand3, ColorFinder.textToColor())
-                setBandColor(ppmBand, ColorFinder.textToColor())
+                setBandColor(bandImage3, ColorFinder.textToColor())
+                setBandColor(bandImage6, ColorFinder.textToColor())
                 "$resistance $units $toleranceColor"
             }
             5 -> {
-                setBandColor(numberBand3, colors[2])
-                setBandColor(ppmBand, ColorFinder.textToColor())
+                setBandColor(bandImage3, colors[2])
+                setBandColor(bandImage6, ColorFinder.textToColor())
                 "$resistance $units $toleranceColor"
             }
             6 -> {
-                setBandColor(numberBand3, colors[2])
-                setBandColor(ppmBand, ColorFinder.textToColor(ppmColor))
+                setBandColor(bandImage3, colors[2])
+                setBandColor(bandImage6, ColorFinder.textToColor(ppmColor))
                 if (ppmColor.isEmpty()) "$resistance $units $toleranceColor" else "$resistance $units $toleranceColor\n$ppmColor"
             }
             else -> EMPTY_STRING
@@ -294,7 +297,7 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownPPM.setText(ppmColor)
         setDropDownDrawable(dropDownPPM, ppmColor)
 
-        // create and set adapters
+        // create and set dropdown adapters
         ArrayAdapter(
             this, R.layout.spinner_units_layout, SpinnerContents.unitsArray
         ).also { adapter ->
@@ -304,10 +307,11 @@ class ValueToColorActivity : AppCompatActivity() {
 
         val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerContents.toleranceTextArray)
         dropDownTolerance.setAdapter(toleranceAdapter)
+
         val ppmAdapter = ImageTextArrayAdapter(this, SpinnerContents.ppmTextArray)
         dropDownPPM.setAdapter(ppmAdapter)
 
-        // listeners
+        // dropdown listeners
         dropDownUnits.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 units = dropDownUnits.adapter.getItem(position).toString()
@@ -330,10 +334,12 @@ class ValueToColorActivity : AppCompatActivity() {
             }
     }
 
+    // helper method to set the color of the band on screen
     private fun setBandColor(band: ImageView, color: Int) {
         band.setColorFilter(ContextCompat.getColor(this, color))
     }
 
+    // helper method to set the drawable that appears after a selection
     private fun setDropDownDrawable(dropDown: AutoCompleteTextView, color: String) {
         dropDown.setCompoundDrawablesRelativeWithIntrinsicBounds(
             ColorFinder.textToColoredDrawable(color), 0, 0, 0
