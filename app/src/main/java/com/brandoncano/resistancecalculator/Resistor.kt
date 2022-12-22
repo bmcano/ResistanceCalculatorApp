@@ -35,6 +35,14 @@ data class Resistor(
         }
     }
 
+    fun getResistanceText(): String {
+        return when (numberOfBands) {
+            4, 5 -> "$resistance $units $toleranceValue"
+            6 -> "$resistance $units $toleranceValue\n$ppmValue".trimEnd('\n')
+            else -> ""
+        }
+    }
+
     fun getNumberOfBands(): Int {
         return numberOfBands
     }
@@ -62,5 +70,9 @@ data class Resistor(
             return true
         }
         return false
+    }
+
+    fun isNotFourBandResistor(): Boolean {
+        return numberOfBands != 4
     }
 }

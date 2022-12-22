@@ -35,6 +35,7 @@
     <string name="default_text">Select Colors</string>
     <string name="enter_value">Enter Resistance</string>
     <string name="resistor_description">Resistor</string>
+    <string name="invalid_input">Invalid Input</string>
 
     <!-- About page text -->
     <string name="version">v2.0</string>

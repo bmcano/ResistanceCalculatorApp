@@ -68,6 +68,23 @@ object ColorFinder {
         }
     }
 
+    // TODO - add unit test for this
+    fun numberToText(color: Int = -1): String {
+        return when (color) {
+            0 -> "Black"
+            1 -> "Brown"
+            2 -> "Red"
+            3 -> "Orange"
+            4 -> "Yellow"
+            5 -> "Green"
+            6 -> "Blue"
+            7 -> "Violet"
+            8 -> "Gray"
+            9 -> "White"
+            else -> EMPTY_STRING
+        }
+    }
+
     // find text (color) from id
     fun idToColorText(colorId: Int): String {
         return when (colorId) {

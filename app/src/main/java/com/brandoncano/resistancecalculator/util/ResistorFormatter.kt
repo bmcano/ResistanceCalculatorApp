@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
+import com.brandoncano.resistancecalculator.Resistor
 
 /**
  * @author: Brandon
@@ -33,6 +34,39 @@ object ResistorFormatter {
         }
     }
 
+    fun generateResistor(resistor: Resistor) {
+        val resistance = resistor.resistance
+        if (resistance == "NotValid" || resistance.isEmpty()) {
+            return
+        }
+
+        // find color for the sig fig bands
+        var numberBand1 = 0
+        var numberBand2 = 0
+        var numberBand3 = 0
+        val formattedResistance = resistance.replace(".", EMPTY_STRING).toInt().toString()
+        formattedResistance.forEachIndexed { index, digit ->
+            if (index == 0) { numberBand1 = digit.digitToInt() }
+            if (index == 1) { numberBand2 = digit.digitToInt() }
+            if (index == 2) { numberBand3 = digit.digitToInt() }
+        }
+
+        resistor.sigFigBandOne = ColorFinder.numberToText(numberBand1)
+        resistor.sigFigBandTwo = ColorFinder.numberToText(numberBand2)
+
+        resistor.sigFigBandThree = if (resistor.isNotFourBandResistor()) {
+            ColorFinder.numberToText(numberBand3)
+        } else {
+            EMPTY_STRING
+        }
+
+        resistor.multiplierBand = if ('.' in resistance) {
+            decimalInput(resistor.getNumberOfBands(), resistance, resistor.units)
+        } else {
+            numericalInput(resistor.getNumberOfBands(), resistance, resistor.units)
+        }
+    }
+
     // returns an array of the 3 or 4 colors to be returned
     fun generateResistor(numBands: Int, resistance: String, units: String): Array<Int> {
         // this will prevent the program from crashing
@@ -51,7 +85,7 @@ object ResistorFormatter {
             if (index == 2) { numberBand3 = digit.digitToInt() }
         }
 
-        // find color for multiplier band
+        // find color for multiplier band -> String (color)
         val multiplierBand: String = if ('.' in resistance) {
             decimalInput(numBands, resistance, units)
         } else {

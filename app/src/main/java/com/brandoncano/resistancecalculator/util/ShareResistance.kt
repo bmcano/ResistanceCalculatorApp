@@ -23,16 +23,16 @@ object ShareResistance {
     }
 
     // generates to text to copy/share for VTC
-    fun shareItemVTC(resistor: Resistor, shareColors: Array<Int>, screenText: TextView, ): Intent {
+    fun shareItemVTC(resistor: Resistor, screenText: TextView): Intent {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
         var text = EMPTY_STRING
 
-        if (shareColors.isNotEmpty()) {
-            val nb1 = ColorFinder.idToColorText(shareColors[0])
-            val nb2 = ColorFinder.idToColorText(shareColors[1])
-            val nb3 = ColorFinder.idToColorText(shareColors[2])
-            val multi = ColorFinder.idToColorText(shareColors[3])
+        if (!resistor.isEmpty()) {
+            val nb1 = resistor.sigFigBandOne
+            val nb2 = resistor.sigFigBandTwo
+            val nb3 = resistor.sigFigBandThree
+            val multi = resistor.multiplierBand
             val tol = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(resistor.toleranceValue))
             val ppm = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(resistor.ppmValue))
 
