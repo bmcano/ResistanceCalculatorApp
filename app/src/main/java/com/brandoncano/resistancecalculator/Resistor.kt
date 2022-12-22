@@ -14,6 +14,28 @@ data class Resistor(
     var ppmBand: String = ""
 ) {
 
+    private var numberOfBands: Int = 4
+
+    override fun toString(): String {
+        return when (numberOfBands) {
+            4 -> "[ $sigFigBandOne, $sigFigBandTwo, $multiplierBand, $toleranceBand ]"
+            5 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree $multiplierBand, $toleranceBand ]"
+            6 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree, $multiplierBand, $toleranceBand, $ppmBand ]"
+            else -> ""
+        }
+    }
+
+    fun getNumberOfBands(): Int {
+        return numberOfBands
+    }
+
+    fun setNumberOfBands(number: Int) {
+        if (number != 4 && number != 5 && number != 6) {
+            numberOfBands = 4
+        }
+        numberOfBands = number
+    }
+
     fun isEmpty(numberOfBands: Int = 4): Boolean {
         return if (numberOfBands == 4) {
             sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || multiplierBand.isEmpty() || toleranceBand.isEmpty()

@@ -102,7 +102,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 return ResistorChart.show(this, imageSelection)
             }
             R.id.share_item -> {
-                val intent = MenuFunctions.shareItemVTC(
+                val intent = ShareResistance.shareItemVTC(
                     imageSelection, shareColors, screenText, toleranceColor, ppmColor
                 )
                 startActivity(Intent.createChooser(intent, EMPTY_STRING))

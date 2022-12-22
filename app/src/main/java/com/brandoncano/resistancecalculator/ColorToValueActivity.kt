@@ -33,17 +33,11 @@ class ColorToValueActivity : AppCompatActivity() {
         private const val EMPTY_STRING = ""
     }
 
-    private var imageSelection = 4
     private lateinit var resistanceText: TextView
     private lateinit var toggleDropDownNumberBand3: TextInputLayout
     private lateinit var toggleDropDownPPM: TextInputLayout
 
-    private var numberBand1 = EMPTY_STRING
-    private var numberBand2 = EMPTY_STRING
-    private var numberBand3 = EMPTY_STRING
-    private var multiplierBand = EMPTY_STRING
-    private var toleranceBand = EMPTY_STRING
-    private var ppmBand = EMPTY_STRING
+    private val resistor: Resistor = Resistor() // all bands, by default, are an empty string
 
     private lateinit var bandImage1: ImageView
     private lateinit var bandImage2: ImageView
@@ -82,7 +76,6 @@ class ColorToValueActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    // TODO - will make single purpose util objects for these, maybe a resistor data class
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.value_to_color -> {
@@ -91,13 +84,10 @@ class ColorToValueActivity : AppCompatActivity() {
                 return true
             }
             R.id.show_resistor_charts -> {
-                return ResistorChart.show(this, imageSelection)
+                return ResistorChart.show(this, resistor.getNumberOfBands())
             }
             R.id.share_item -> {
-                val intent = MenuFunctions.shareItemCTV(
-                    imageSelection, resistanceText, numberBand1, numberBand2,
-                    numberBand3, multiplierBand, toleranceBand, ppmBand
-                )
+                val intent = ShareResistance.shareCTV(resistanceText, resistor)
                 startActivity(Intent.createChooser(intent, EMPTY_STRING))
                 return true
             }
@@ -136,16 +126,16 @@ class ColorToValueActivity : AppCompatActivity() {
         val sixBandButton: Button = findViewById(R.id.six_band)
 
         fun loadImage(button: String) {
-            setBandColor(bandImage1, ColorFinder.textToColor(numberBand1))
-            setBandColor(bandImage2, ColorFinder.textToColor(numberBand2))
-            setBandColor(bandImage4, ColorFinder.textToColor(multiplierBand))
-            setBandColor(bandImage5, ColorFinder.textToColor(toleranceBand))
+            setBandColor(bandImage1, ColorFinder.textToColor(resistor.sigFigBandOne))
+            setBandColor(bandImage2, ColorFinder.textToColor(resistor.sigFigBandTwo))
+            setBandColor(bandImage4, ColorFinder.textToColor(resistor.multiplierBand))
+            setBandColor(bandImage5, ColorFinder.textToColor(resistor.toleranceBand))
 
             if (button == "5" || button == "6")
-                setBandColor(bandImage3, ColorFinder.textToColor(numberBand3))
+                setBandColor(bandImage3, ColorFinder.textToColor(resistor.sigFigBandThree))
 
             if (button == "6")
-                setBandColor(bandImage6, ColorFinder.textToColor(ppmBand))
+                setBandColor(bandImage6, ColorFinder.textToColor(resistor.ppmBand))
         }
 
         when (loadStateData(StateData.BUTTON_SELECTION_CTV)) {
@@ -169,7 +159,7 @@ class ColorToValueActivity : AppCompatActivity() {
             }
         }
 
-        // toggle four band resistor
+        // toggle number of bands listener
         fourBandButton.setOnClickListener {
             updateButtonSelection(
                 fourBandButton, fiveBandButton, sixBandButton, 4, View.GONE, View.GONE
@@ -179,24 +169,22 @@ class ColorToValueActivity : AppCompatActivity() {
             setBandColor(bandImage6, ColorFinder.textToColor())
         }
 
-        // toggle five band resistor
         fiveBandButton.setOnClickListener {
             updateButtonSelection(
                 fiveBandButton, fourBandButton, sixBandButton, 5, View.VISIBLE, View.GONE
             )
 
-            setBandColor(bandImage3, ColorFinder.textToColor(numberBand3))
+            setBandColor(bandImage3, ColorFinder.textToColor(resistor.sigFigBandThree))
             setBandColor(bandImage6, ColorFinder.textToColor())
         }
 
-        // toggle six band resistor
         sixBandButton.setOnClickListener {
             updateButtonSelection(
                 sixBandButton, fourBandButton, fiveBandButton, 6, View.VISIBLE, View.VISIBLE
             )
 
-            setBandColor(bandImage3, ColorFinder.textToColor(numberBand3))
-            setBandColor(bandImage6, ColorFinder.textToColor(ppmBand))
+            setBandColor(bandImage3, ColorFinder.textToColor(resistor.sigFigBandThree))
+            setBandColor(bandImage6, ColorFinder.textToColor(resistor.ppmBand))
         }
     }
 
@@ -210,9 +198,9 @@ class ColorToValueActivity : AppCompatActivity() {
         toggleDropDownNumberBand3.visibility = view1
         toggleDropDownPPM.visibility = view2
 
-        imageSelection = btnNumber
+        resistor.setNumberOfBands(btnNumber)
         updateResistance()
-        saveStateData(StateData.BUTTON_SELECTION_CTV, "$imageSelection")
+        saveStateData(StateData.BUTTON_SELECTION_CTV, "${resistor.getNumberOfBands()}")
     }
 
     private fun dropDownSetup() {
@@ -224,31 +212,31 @@ class ColorToValueActivity : AppCompatActivity() {
         val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinner6)
 
         // load and set saved data
-        numberBand1 = loadStateData(StateData.SIGFIG_BAND_ONE_CTV)
-        dropDownBand1.setText(numberBand1)
-        setDropDownDrawable(dropDownBand1, numberBand1)
+        resistor.sigFigBandOne = loadStateData(StateData.SIGFIG_BAND_ONE_CTV)
+        dropDownBand1.setText(resistor.sigFigBandOne)
+        setDropDownDrawable(dropDownBand1, resistor.sigFigBandOne)
 
-        numberBand2 = loadStateData(StateData.SIGFIG_BAND_TWO_CTV)
-        dropDownBand2.setText(numberBand2)
-        setDropDownDrawable(dropDownBand2, numberBand2)
+        resistor.sigFigBandTwo = loadStateData(StateData.SIGFIG_BAND_TWO_CTV)
+        dropDownBand2.setText(resistor.sigFigBandTwo)
+        setDropDownDrawable(dropDownBand2, resistor.sigFigBandTwo)
 
-        numberBand3 = loadStateData(StateData.SIGFIG_BAND_THREE_CTV)
-        dropDownBand3.setText(numberBand3)
-        setDropDownDrawable(dropDownBand3, numberBand3)
+        resistor.sigFigBandThree = loadStateData(StateData.SIGFIG_BAND_THREE_CTV)
+        dropDownBand3.setText(resistor.sigFigBandThree)
+        setDropDownDrawable(dropDownBand3, resistor.sigFigBandThree)
 
-        multiplierBand = loadStateData(StateData.MULTIPLIER_BAND_CTV)
-        dropDownMultiplier.setText(multiplierBand)
-        setDropDownDrawable(dropDownMultiplier, multiplierBand)
+        resistor.multiplierBand = loadStateData(StateData.MULTIPLIER_BAND_CTV)
+        dropDownMultiplier.setText(resistor.multiplierBand)
+        setDropDownDrawable(dropDownMultiplier, resistor.multiplierBand)
 
-        toleranceBand = loadStateData(StateData.TOLERANCE_BAND_CTV)
-        dropDownTolerance.setText(toleranceBand)
-        setDropDownDrawable(dropDownTolerance, toleranceBand)
+        resistor.toleranceBand = loadStateData(StateData.TOLERANCE_BAND_CTV)
+        dropDownTolerance.setText(resistor.toleranceBand)
+        setDropDownDrawable(dropDownTolerance, resistor.toleranceBand)
 
-        ppmBand = loadStateData(StateData.PPM_BAND_CTV)
-        dropDownPPM.setText(ppmBand)
-        setDropDownDrawable(dropDownPPM, ppmBand)
+        resistor.ppmBand = loadStateData(StateData.PPM_BAND_CTV)
+        dropDownPPM.setText(resistor.ppmBand)
+        setDropDownDrawable(dropDownPPM, resistor.ppmBand)
 
-        // create and set adapters
+        // create and set dropdown adapters
         val numberAdapter = ImageTextArrayAdapter(this, SpinnerContents.numberArray)
         dropDownBand1.setAdapter(numberAdapter)
         dropDownBand2.setAdapter(numberAdapter)
@@ -263,59 +251,60 @@ class ColorToValueActivity : AppCompatActivity() {
         val ppmAdapter = ImageTextArrayAdapter(this, SpinnerContents.ppmArray)
         dropDownPPM.setAdapter(ppmAdapter)
 
-        // listeners
+        // dropdown listeners
         dropDownBand1.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                numberBand1 = dropDownBand1.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownBand1, numberBand1, bandImage1)
+                resistor.sigFigBandOne = dropDownBand1.adapter.getItem(position).toString()
+                updateDropDownSelection(dropDownBand1, resistor.sigFigBandOne, bandImage1)
                 saveStateData(StateData.SIGFIG_BAND_ONE_CTV, dropDownBand1.text.toString())
             }
 
         dropDownBand2.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                numberBand2 = dropDownBand2.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownBand2, numberBand2, bandImage2)
+                resistor.sigFigBandTwo = dropDownBand2.adapter.getItem(position).toString()
+                updateDropDownSelection(dropDownBand2, resistor.sigFigBandTwo, bandImage2)
                 saveStateData(StateData.SIGFIG_BAND_TWO_CTV, dropDownBand2.text.toString())
             }
 
         dropDownBand3.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                numberBand3 = dropDownBand3.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownBand3, numberBand3, bandImage3)
+                resistor.sigFigBandThree = dropDownBand3.adapter.getItem(position).toString()
+                updateDropDownSelection(dropDownBand3, resistor.sigFigBandThree, bandImage3)
                 saveStateData(StateData.SIGFIG_BAND_THREE_CTV, dropDownBand3.text.toString())
             }
 
         dropDownMultiplier.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                multiplierBand = dropDownMultiplier.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownMultiplier, multiplierBand, bandImage4)
+                resistor.multiplierBand = dropDownMultiplier.adapter.getItem(position).toString()
+                updateDropDownSelection(dropDownMultiplier, resistor.multiplierBand, bandImage4)
                 saveStateData(StateData.MULTIPLIER_BAND_CTV, dropDownMultiplier.text.toString())
             }
 
         dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownTolerance, toleranceBand, bandImage5)
+                resistor.toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
+                updateDropDownSelection(dropDownTolerance, resistor.toleranceBand, bandImage5)
                 saveStateData(StateData.TOLERANCE_BAND_CTV, dropDownTolerance.text.toString())
             }
 
         dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                ppmBand = dropDownPPM.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownPPM, ppmBand, bandImage6)
+                resistor.ppmBand = dropDownPPM.adapter.getItem(position).toString()
+                updateDropDownSelection(dropDownPPM, resistor.ppmBand, bandImage6)
                 saveStateData(StateData.PPM_BAND_CTV, dropDownPPM.text.toString())
             }
     }
 
+    // update the dropdown with the current selection and update the text
     private fun updateDropDownSelection(dropDown: AutoCompleteTextView, color: String, band: ImageView) {
         setDropDownDrawable(dropDown, color)
         setBandColor(band, ColorFinder.textToColor(color))
         updateResistance()
     }
 
+    // update the resistance that displays on the screen
     private fun updateResistance() {
-        val resistor = Resistor(numberBand1, numberBand2, numberBand3, multiplierBand, toleranceBand, ppmBand)
-        resistanceText.text = ResistanceFormatter.calculate(resistor, imageSelection)
+        resistanceText.text = ResistanceFormatter.calculate(resistor)
         saveStateData(StateData.RESISTANCE_CTV, resistanceText.text.toString())
     }
 

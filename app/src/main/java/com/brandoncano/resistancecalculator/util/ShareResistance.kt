@@ -2,29 +2,22 @@ package com.brandoncano.resistancecalculator.util
 
 import android.content.Intent
 import android.widget.TextView
+import com.brandoncano.resistancecalculator.Resistor
 
 /**
  * @author: Brandon
  *
  * Job: holds all the logic for the menu items, to keep activities cleaner and more condense
  */
-object MenuFunctions {
+object ShareResistance {
 
     private const val EMPTY_STRING = ""
 
     // generates to text to copy/share for CTV
-    fun shareItemCTV(
-        imageSelection: Int, screenText: TextView, numberBand1: String, numberBand2: String,
-        numberBand3: String, multiplierBand: String, toleranceBand: String, ppmBand: String
-    ): Intent {
+    fun shareCTV(resistance: TextView, resistor: Resistor): Intent {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
-        val text = when (imageSelection) {
-            4 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $multiplierBand, $toleranceBand ]"
-            5 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $numberBand3 $multiplierBand, $toleranceBand ]"
-            6 -> "${screenText.text}\n[ $numberBand1, $numberBand2, $numberBand3, $multiplierBand, $toleranceBand, $ppmBand ]"
-            else -> EMPTY_STRING
-        }
+        val text = "${resistance.text}\n" + resistor.toString()
         intent.putExtra(Intent.EXTRA_TEXT, text)
         return intent
     }

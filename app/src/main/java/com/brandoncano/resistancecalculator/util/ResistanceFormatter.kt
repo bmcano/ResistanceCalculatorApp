@@ -15,8 +15,8 @@ object ResistanceFormatter {
     private const val EMPTY_STRING = ""
 
     // works for all 4, 5, and 6 band resistors
-    fun calculate(resistor: Resistor, numberOfBands: Int): String {
-        if (resistor.isEmpty(numberOfBands)) {
+    fun calculate(resistor: Resistor): String {
+        if (resistor.isEmpty(resistor.getNumberOfBands())) {
             return "Select Colors"
         }
 
@@ -26,20 +26,20 @@ object ResistanceFormatter {
         val sigFigThree = formatSigFig(resistor.sigFigBandThree)
         val tolerance = formatTolerance(resistor.toleranceBand)
 
-        var multiplier = if (numberOfBands == 4) {
+        var multiplier = if (resistor.getNumberOfBands() == 4) {
             formatMultiplier(resistor.multiplierBand, sigFigOne, sigFigTwo)
         } else {
             formatMultiplier(resistor.multiplierBand, sigFigOne, sigFigTwo, sigFigThree)
         }
 
-        val ppm = if (numberOfBands == 6) {
+        val ppm = if (resistor.getNumberOfBands() == 6) {
             formatPPM(resistor.ppmBand)
         } else {
             EMPTY_STRING
         }
 
         // format multiplier for edge cases of leading 0s
-        if (numberOfBands == 4 && resistor.sigFigBandOne == "Black") {
+        if (resistor.getNumberOfBands() == 4 && resistor.sigFigBandOne == "Black") {
             multiplier = when (resistor.multiplierBand) {
                 "Red" -> "${sigFigTwo}00 "
                 "Green" -> "${sigFigTwo}00 k"
@@ -49,7 +49,7 @@ object ResistanceFormatter {
                     formatMultiplier(resistor.multiplierBand, EMPTY_STRING, sigFigTwo)
                 }
             }
-        } else if (numberOfBands != 4 && resistor.sigFigBandOne == "Black" && resistor.sigFigBandTwo == "Black") {
+        } else if (resistor.getNumberOfBands() != 4 && resistor.sigFigBandOne == "Black" && resistor.sigFigBandTwo == "Black") {
             multiplier = when (resistor.multiplierBand) {
                 "Brown" -> "${sigFigThree}0 "
                 "Red" -> "${sigFigThree}00 "
@@ -65,7 +65,7 @@ object ResistanceFormatter {
                     )
                 }
             }
-        } else if (numberOfBands != 4 && resistor.sigFigBandOne == "Black") {
+        } else if (resistor.getNumberOfBands() != 4 && resistor.sigFigBandOne == "Black") {
             multiplier = when (resistor.multiplierBand) {
                 "Brown" -> "${sigFigTwo}${sigFigThree}0 "
                 "Yellow" -> "${sigFigTwo}${sigFigThree}0 k"
@@ -77,7 +77,7 @@ object ResistanceFormatter {
             }
         }
 
-        if (resistor.allDigitsZero(numberOfBands)) {
+        if (resistor.allDigitsZero(resistor.getNumberOfBands())) {
             multiplier = "0"
         }
 
