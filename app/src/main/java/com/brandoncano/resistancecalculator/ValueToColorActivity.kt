@@ -40,6 +40,7 @@ class ValueToColorActivity : AppCompatActivity() {
 
     private lateinit var resistanceText: TextView
     private lateinit var toggleDropDown: TextInputLayout
+    private lateinit var inputResistance: EditText
 
     private lateinit var bandImage1: ImageView
     private lateinit var bandImage2: ImageView
@@ -47,8 +48,6 @@ class ValueToColorActivity : AppCompatActivity() {
     private lateinit var bandImage4: ImageView
     private lateinit var bandImage5: ImageView
     private lateinit var bandImage6: ImageView
-
-    private var buttonCheck = EMPTY_STRING
 
     private val resistor: Resistor = Resistor()
 
@@ -175,7 +174,7 @@ class ValueToColorActivity : AppCompatActivity() {
 
         toggleDropDown.visibility = view
         resistor.setNumberOfBands(btnNumber)
-        if (resistor.resistance.isNotEmpty()) resistor.resistance = errorFinder(buttonCheck)
+        if (resistor.resistance.isNotEmpty()) errorFinder(inputResistance.text.toString())
         saveStateData(StateData.BUTTON_SELECTION_VTC, "${resistor.getNumberOfBands()}")
     }
 
@@ -214,7 +213,7 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownUnits.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.units = dropDownUnits.adapter.getItem(position).toString()
-                if (resistor.resistance.isNotEmpty()) resistor.resistance = errorFinder(buttonCheck)
+                if (resistor.resistance.isNotEmpty()) errorFinder(inputResistance.text.toString())
                 saveStateData(StateData.UNITS_DROPDOWN_VTC, dropDownUnits.text.toString())
             }
 
@@ -235,10 +234,10 @@ class ValueToColorActivity : AppCompatActivity() {
 
     private fun calculateButtonSetup() {
         // text input setup and listener
-        val inputResistance: EditText = findViewById(R.id.enter_resistance)
+        inputResistance = findViewById(R.id.enter_resistance)
         inputResistance.setText(loadStateData(StateData.USER_INPUT_VTC))
         inputResistance.doOnTextChanged { text, _, _, _ ->
-            resistor.resistance = errorFinder(text.toString())
+            errorFinder(text.toString())
         }
 
         // button setup and listener
@@ -258,19 +257,16 @@ class ValueToColorActivity : AppCompatActivity() {
     }
 
     // finds any errors in the user input
-    private fun errorFinder(text: String): String {
+    private fun errorFinder(text: String) {
         val textInputLayout: TextInputLayout = findViewById(R.id.edit_text_outline)
-        return if (text.isEmpty() || text == ".") {
+        resistor.resistance = if (text.isEmpty() || text == ".") {
             textInputLayout.error = null
-            buttonCheck = EMPTY_STRING
             EMPTY_STRING
         } else if (!ResistorFormatter.isValidInput(resistor.getNumberOfBands(), text, resistor.units)) {
             textInputLayout.error = "Invalid Input"
-            buttonCheck = text
             "NotValid"
         } else {
             textInputLayout.error = null
-            buttonCheck = text
             text
         }
     }
@@ -281,20 +277,20 @@ class ValueToColorActivity : AppCompatActivity() {
         setBandColor(bandImage1, resistor.sigFigBandOne)
         setBandColor(bandImage2, resistor.sigFigBandTwo)
         setBandColor(bandImage4, resistor.multiplierBand)
-        setBandColor(bandImage5, ColorFinder.textToColor(resistor.toleranceValue))
+        setBandColor(bandImage5, resistor.toleranceValue)
 
         when (resistor.getNumberOfBands()) {
             4 -> {
-                setBandColor(bandImage3, ColorFinder.textToColor())
-                setBandColor(bandImage6, ColorFinder.textToColor())
+                setBandColor(bandImage3)
+                setBandColor(bandImage6)
             }
             5 -> {
                 setBandColor(bandImage3, resistor.sigFigBandThree)
-                setBandColor(bandImage6, ColorFinder.textToColor())
+                setBandColor(bandImage6)
             }
             6 -> {
                 setBandColor(bandImage3, resistor.sigFigBandThree)
-                setBandColor(bandImage6, ColorFinder.textToColor(resistor.ppmValue))
+                setBandColor(bandImage6, resistor.ppmValue)
             }
         }
         resistanceText.text = resistor.getResistanceText()
@@ -305,18 +301,13 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun closeKeyboard() {
         val view = this.currentFocus
         if (view != null) {
-            val imm: InputMethodManager =
-                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 
     // helper method to set the color of the band on screen
-    private fun setBandColor(band: ImageView, color: Int) {
-        band.setColorFilter(ContextCompat.getColor(this, color))
-    }
-
-    private fun setBandColor(band: ImageView, colorText: String) {
+    private fun setBandColor(band: ImageView, colorText: String = "") {
         val color = ColorFinder.textToColor(colorText)
         band.setColorFilter(ContextCompat.getColor(this, color))
     }

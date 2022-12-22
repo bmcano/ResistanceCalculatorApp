@@ -13,6 +13,12 @@ object ResistorFormatter {
     private const val OMEGA: String = "Ω"
     private const val EMPTY_STRING = ""
 
+    private val colorsArray = arrayOf(
+        "Silver", "Gold", "Black", "Brown", "Red", "Orange",
+        "Yellow", "Green", "Blue", "Violet", "Gray", "White",
+        "Blank"
+    )
+
     // EditText already limits this to decimal and whole numbers and 5 characters
     // Invalid Inputs: 0.0... , 00... , 0.xyz , 0x , .0x , too many sig figs, etc.
     fun isValidInput(numBands: Int, input: String, units: String): Boolean {
@@ -171,64 +177,43 @@ object ResistorFormatter {
     }
 
     // find the value of the multiplier for any whole numbers
-    private fun numericalInput(numBands: Int, resistance: String, units: String): String {
-        var length: Int = resistance.length
+    private fun numericalInput(numberOfBands: Int, resistance: String, units: String): String {
+        val length: Int = resistance.length
 
         var shifts = 0
         var remainder = length.mod(3)
-        while (length > 3) {
-            length -= 3
-            remainder = length.mod(3)
+        if (length > 3) {
+            remainder = (length - 3).mod(3)
             shifts++
         }
 
         shifts = when (units) {
-            OMEGA -> shifts + 0
+            OMEGA -> shifts
             "k$OMEGA" -> shifts + 1
             "M$OMEGA" -> shifts + 2
             "G$OMEGA" -> shifts + 3
             else -> 0
         }
 
-        return if (numBands == 4) {
-            when {
-                shifts == 0 && remainder == 1 -> "Gold"
-                shifts == 0 && remainder == 2 -> "Black"
-                shifts == 0 && remainder == 0 -> "Brown"
-
-                shifts == 1 && remainder == 1 -> "Red"
-                shifts == 1 && remainder == 2 -> "Orange"
-                shifts == 1 && remainder == 0 -> "Yellow"
-
-                shifts == 2 && remainder == 1 -> "Green"
-                shifts == 2 && remainder == 2 -> "Blue"
-                shifts == 2 && remainder == 0 -> "Violet"
-
-                shifts == 3 && remainder == 1 -> "Gray"
-                shifts == 3 && remainder == 2 -> "White"
-
-                else -> "Blank"
-            }
-        } else {
-            when {
-                shifts == 0 && remainder == 1 -> "Silver"
-                shifts == 0 && remainder == 2 -> "Gold"
-                shifts == 0 && remainder == 0 -> "Black"
-
-                shifts == 1 && remainder == 1 -> "Brown"
-                shifts == 1 && remainder == 2 -> "Red"
-                shifts == 1 && remainder == 0 -> "Orange"
-
-                shifts == 2 && remainder == 1 -> "Yellow"
-                shifts == 2 && remainder == 2 -> "Green"
-                shifts == 2 && remainder == 0 -> "Blue"
-
-                shifts == 3 && remainder == 1 -> "Violet"
-                shifts == 3 && remainder == 2 -> "Gray"
-                shifts == 3 && remainder == 0 -> "White"
-
-                else -> "Blank"
-            }
+        var index = when {
+            shifts == 0 && remainder == 1 -> 0
+            shifts == 0 && remainder == 2 -> 1
+            shifts == 0 && remainder == 0 -> 2
+            shifts == 1 && remainder == 1 -> 3
+            shifts == 1 && remainder == 2 -> 4
+            shifts == 1 && remainder == 0 -> 5
+            shifts == 2 && remainder == 1 -> 6
+            shifts == 2 && remainder == 2 -> 7
+            shifts == 2 && remainder == 0 -> 8
+            shifts == 3 && remainder == 1 -> 9
+            shifts == 3 && remainder == 2 -> 10
+            shifts == 3 && remainder == 0 -> 11
+            else -> 12
         }
+
+        if (numberOfBands == 4) {
+            index++
+        }
+        return colorsArray[index]
     }
 }
