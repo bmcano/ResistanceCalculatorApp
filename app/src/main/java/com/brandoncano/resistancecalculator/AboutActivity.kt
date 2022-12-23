@@ -12,9 +12,7 @@ import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**
- * @author Brandon
- *
- * Job: This hold the structure for the about page of the app.
+ * Job: Activity for about page of the app.
  */
 @Suppress("UNUSED_PARAMETER")
 class AboutActivity : AppCompatActivity() {

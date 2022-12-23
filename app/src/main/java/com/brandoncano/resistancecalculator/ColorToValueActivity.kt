@@ -16,13 +16,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.spinner.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.spinner.SpinnerContents
-import com.brandoncano.resistancecalculator.util.*
+import com.brandoncano.resistancecalculator.util.ColorFinder
+import com.brandoncano.resistancecalculator.util.EmailFeedback
+import com.brandoncano.resistancecalculator.util.ResistanceFormatter
+import com.brandoncano.resistancecalculator.util.ResistorChart
+import com.brandoncano.resistancecalculator.util.ShareResistance
 import com.google.android.material.textfield.TextInputLayout
 
 /**
- * @author: Brandon
- *
- * Job: activity for the color to value page
+ * Job: Activity for the color to value page.
  */
 class ColorToValueActivity : AppCompatActivity() {
 

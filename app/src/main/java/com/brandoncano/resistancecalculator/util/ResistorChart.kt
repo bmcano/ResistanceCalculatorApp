@@ -7,9 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import com.brandoncano.resistancecalculator.R
 
 /**
- * @author Brandon
- *
- * Job: Will show a popup dialog of the resistor chart
+ * Job: Will show a popup dialog of the resistor chart.
  */
 object ResistorChart {
 

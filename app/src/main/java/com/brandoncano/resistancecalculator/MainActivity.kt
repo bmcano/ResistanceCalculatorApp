@@ -11,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 
 /**
- * @author: Brandon
- *
- * Job: This hold the structure for the starting screen of the app.
+ * Job: Activity for starting screen of the app.
  */
 class MainActivity : AppCompatActivity() {
 

@@ -5,9 +5,7 @@ import android.widget.TextView
 import com.brandoncano.resistancecalculator.Resistor
 
 /**
- * @author: Brandon
- *
- * Job: holds all the logic for the menu items, to keep activities cleaner and more condense
+ * Job: This will get the String built in order to share or copy it.
  */
 object ShareResistance {
 

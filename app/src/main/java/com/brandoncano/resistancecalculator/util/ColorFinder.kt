@@ -3,9 +3,7 @@ package com.brandoncano.resistancecalculator.util
 import com.brandoncano.resistancecalculator.R
 
 /**
- * @author: Brandon
- *
- * Job: find the correct color or drawable based on an int or string input
+ * Job: Find the correct color, string, or drawable based on the input.
  */
 object ColorFinder {
 

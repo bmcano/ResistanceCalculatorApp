@@ -3,9 +3,7 @@ package com.brandoncano.resistancecalculator.util
 import com.brandoncano.resistancecalculator.Resistor
 
 /**
- * @author: Brandon
- *
- * Job: formats the resistor based resistance that has been entered (VtC)
+ * Job: Formats the resistor based resistance that has been entered (VtC).
  */
 object ResistorFormatter {
 
@@ -36,7 +34,6 @@ object ResistorFormatter {
 
         resistor.sigFigBandOne = ColorFinder.numberToText(numberBand1)
         resistor.sigFigBandTwo = ColorFinder.numberToText(numberBand2)
-
         resistor.sigFigBandThree = if (resistor.getNumberOfBands() != 4) {
             ColorFinder.numberToText(numberBand3)
         } else {

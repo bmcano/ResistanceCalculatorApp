@@ -3,9 +3,7 @@ package com.brandoncano.resistancecalculator.spinner
 import com.brandoncano.resistancecalculator.R
 
 /**
- * @author Brandon
- *
- * Job: holds array information for the spinners
+ * Job: Holds array information for the spinners.
  */
 object SpinnerContents {
 

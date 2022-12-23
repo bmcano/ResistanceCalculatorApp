@@ -3,13 +3,12 @@ package com.brandoncano.resistancecalculator
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**
- * @author Brandon
+ * Job: Holds the colors for each band and performs certain task with the info.
  *
- * Job: Holds the colors for each band and performs certain task with the info
- *
- * Notes: the data values in the parameters are the 6 bands of the resistor.
- *  The number of bands will determine which resistor is selected, the public attributes not in the
- *  parameters are specifically set for the value-to-color section.
+ * Notes:
+ *   The data values in the parameters are the 6 bands of the resistor.
+ *   The number of bands will determine which resistor is selected, the public attributes not in
+ *   the parameters are specifically set for the value-to-color section.
  */
 data class Resistor(
     // color to value specific attributes

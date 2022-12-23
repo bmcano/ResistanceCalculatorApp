@@ -11,9 +11,7 @@ import android.widget.TextView
 import com.brandoncano.resistancecalculator.R
 
 /**
- * @author Brandon
- *
- * Job: customer array adapter to have an ImageView and a TextView
+ * Job: Custom array adapter to have an ImageView and a TextView.
  */
 class ImageTextArrayAdapter(context: Context, private var items: Array<SpinnerItem>) :
     ArrayAdapter<SpinnerItem?>(context, R.layout.spinner_value_layout, items) {

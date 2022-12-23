@@ -3,9 +3,7 @@ package com.brandoncano.resistancecalculator.util
 import com.brandoncano.resistancecalculator.Resistor
 
 /**
- * @author: Brandon
- *
- * Job: formats the resistance based on the colors selected for the bands (CtV)
+ * Job: Formats the resistance based on the colors selected for the bands (CtV).
  */
 object ResistanceFormatter {
 

@@ -7,10 +7,10 @@ import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
 /**
- * Job: Holds the names and keys for all shared_prefs data
+ * Job: Holds the names and keys for all shared_prefs data.
  *
  * Notes:
- *   Data is saved as xml files with mapping, where name_ -> file name; key_ -> key in map
+ *   Data is saved as xml files with mapping, where name_ -> file name; key_ -> key in map.
  *   Device File Explorer -> data -> data -> com.brandoncano.resistancecalculator -> shared_prefs
  */
 enum class StateData(private val name_: String, private val key_: String) {
