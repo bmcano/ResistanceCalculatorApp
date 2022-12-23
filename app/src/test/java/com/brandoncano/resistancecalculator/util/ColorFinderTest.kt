@@ -112,19 +112,19 @@ class ColorFinderTest {
 
     @Test
     fun numberToColorTest() {
-        assertEquals(R.color.black32, ColorFinder.numberToColor(0))
-        assertEquals(R.color.brown32, ColorFinder.numberToColor(1))
-        assertEquals(R.color.red32, ColorFinder.numberToColor(2))
-        assertEquals(R.color.orange32, ColorFinder.numberToColor(3))
-        assertEquals(R.color.yellow32, ColorFinder.numberToColor(4))
-        assertEquals(R.color.green32, ColorFinder.numberToColor(5))
-        assertEquals(R.color.blue32, ColorFinder.numberToColor(6))
-        assertEquals(R.color.violet32, ColorFinder.numberToColor(7))
-        assertEquals(R.color.gray32, ColorFinder.numberToColor(8))
-        assertEquals(R.color.white32, ColorFinder.numberToColor(9))
+        assertEquals("Black", ColorFinder.numberToText(0))
+        assertEquals("Brown", ColorFinder.numberToText(1))
+        assertEquals("Red", ColorFinder.numberToText(2))
+        assertEquals("Orange", ColorFinder.numberToText(3))
+        assertEquals("Yellow", ColorFinder.numberToText(4))
+        assertEquals("Green", ColorFinder.numberToText(5))
+        assertEquals("Blue", ColorFinder.numberToText(6))
+        assertEquals("Violet", ColorFinder.numberToText(7))
+        assertEquals("Gray", ColorFinder.numberToText(8))
+        assertEquals("White", ColorFinder.numberToText(9))
 
-        assertEquals(R.color.resistor_blank, ColorFinder.numberToColor(-1))
-        assertEquals(R.color.resistor_blank, ColorFinder.numberToColor())
+        assertEquals("", ColorFinder.numberToText(-1))
+        assertEquals("", ColorFinder.numberToText())
     }
 
     @Test

@@ -51,24 +51,7 @@ object ColorFinder {
         }
     }
 
-    // finds the color depending on the position
-    fun numberToColor(color: Int = -1): Int {
-        return when (color) {
-            0 -> R.color.black32
-            1 -> R.color.brown32
-            2 -> R.color.red32
-            3 -> R.color.orange32
-            4 -> R.color.yellow32
-            5 -> R.color.green32
-            6 -> R.color.blue32
-            7 -> R.color.violet32
-            8 -> R.color.gray32
-            9 -> R.color.white32
-            else -> R.color.resistor_blank
-        }
-    }
-
-    // TODO - add unit test for this
+    // find text (color) from numeric value
     fun numberToText(color: Int = -1): String {
         return when (color) {
             0 -> "Black"
