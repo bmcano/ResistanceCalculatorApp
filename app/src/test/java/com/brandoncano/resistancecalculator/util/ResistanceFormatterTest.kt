@@ -159,8 +159,32 @@ class ResistanceFormatterTest {
         resistor.setNumberOfBands(6)
         assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n10 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
 
-        resistor = Resistor("Brown", "Red", "Green","Red", "Gold", "Red")
+        // test ppm values
+        resistor = Resistor("Brown", "Red", "Green","Red", "Gold", "Black")
         resistor.setNumberOfBands(6)
+        assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n250 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
+        resistor.ppmBand = "Brown"
+        assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n100 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
+
+        resistor.ppmBand = "Red"
         assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n50 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
+
+        resistor.ppmBand = "Orange"
+        assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n15 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
+
+        resistor.ppmBand = "Yellow"
+        assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n25 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
+
+        resistor.ppmBand = "Green"
+        assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n20 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
+
+        resistor.ppmBand = "Blue"
+        assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n10 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
+
+        resistor.ppmBand = "Violet"
+        assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n5 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
+
+        resistor.ppmBand = "Gray"
+        assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n1 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
     }
 }
