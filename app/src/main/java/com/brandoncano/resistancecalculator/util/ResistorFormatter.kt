@@ -5,7 +5,7 @@ import com.brandoncano.resistancecalculator.Resistor
 /**
  * @author: Brandon
  *
- * Job: formats the resistor based resistance that has been entered
+ * Job: formats the resistor based resistance that has been entered (VtC)
  */
 object ResistorFormatter {
 

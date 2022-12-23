@@ -8,8 +8,8 @@ import com.brandoncano.resistancecalculator.util.ColorFinder
  * Job: Holds the colors for each band and performs certain task with the info
  *
  * Notes: the data values in the parameters are the 6 bands of the resistor.
- *  the number of bands will determine which resistor is selected, the resistance and units is
- *  specifically for the value-to-color section
+ *  The number of bands will determine which resistor is selected, the public attributes not in the
+ *  parameters are specifically set for the value-to-color section.
  */
 data class Resistor(
     // color to value specific attributes

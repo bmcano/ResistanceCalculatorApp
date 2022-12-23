@@ -11,22 +11,6 @@ class ResistorFormatterTest {
         private const val DEGREE: String = "°"
     }
 
-//    @Test
-//    fun inValidGeneration() {
-//        val expectedResult:Array<Int> = arrayOf()
-//        val actualResult = ResistorFormatter.generateResistor(4, "NotValid", OMEGA)
-//
-//        assertArrayEquals(expectedResult, actualResult)
-//    }
-//
-//    @Test
-//    fun emptyStringGeneration() {
-//        val expectedResult:Array<Int> = arrayOf()
-//        val actualResult = ResistorFormatter.generateResistor(4, "", OMEGA)
-//
-//        assertArrayEquals(expectedResult, actualResult)
-//    }
-
     @Test
     fun numericalInputs() {
         // 5 band
