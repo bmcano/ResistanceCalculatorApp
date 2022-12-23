@@ -22,7 +22,7 @@ object ResistanceInput {
         return when {
             numberOfBands == 4 && sigFigs.numberSignificantFigures > 2 -> false
 
-            resistor.isNotFourBandResistor() && (sigFigs.numberSignificantFigures > 3
+            resistor.getNumberOfBands() != 4 && (sigFigs.numberSignificantFigures > 3
                     || ((input[0] == '0' || input[0] == '.') && (units == OMEGA || units.isEmpty()))
                     || (units == "G$OMEGA" && input.length > 3)) -> false
 

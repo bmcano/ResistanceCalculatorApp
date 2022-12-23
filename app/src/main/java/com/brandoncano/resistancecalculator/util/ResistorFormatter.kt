@@ -13,9 +13,8 @@ object ResistorFormatter {
     private const val EMPTY_STRING = ""
 
     private val colorsArray = arrayOf(
-        "Silver", "Gold", "Black", "Brown", "Red", "Orange",
-        "Yellow", "Green", "Blue", "Violet", "Gray", "White",
-        "Blank"
+        "Silver", "Gold", "Black", "Brown", "Red", "Orange", "Yellow",
+        "Green", "Blue", "Violet", "Gray", "White", "Blank"
     )
 
     fun generateResistor(resistor: Resistor) {
@@ -38,7 +37,7 @@ object ResistorFormatter {
         resistor.sigFigBandOne = ColorFinder.numberToText(numberBand1)
         resistor.sigFigBandTwo = ColorFinder.numberToText(numberBand2)
 
-        resistor.sigFigBandThree = if (resistor.isNotFourBandResistor()) {
+        resistor.sigFigBandThree = if (resistor.getNumberOfBands() != 4) {
             ColorFinder.numberToText(numberBand3)
         } else {
             EMPTY_STRING

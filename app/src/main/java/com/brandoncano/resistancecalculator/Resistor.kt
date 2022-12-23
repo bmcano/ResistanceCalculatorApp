@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator
 
+import com.brandoncano.resistancecalculator.util.ColorFinder
+
 /**
  * @author Brandon
  *
@@ -26,7 +28,12 @@ data class Resistor(
 
     private var numberOfBands: Int = 4
 
-    override fun toString(): String {
+    fun toColorBandString(isVtC: Boolean = false): String {
+        if (isVtC) {
+            toleranceBand = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(toleranceValue))
+            ppmBand = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(ppmValue))
+        }
+
         return when (numberOfBands) {
             4 -> "[ $sigFigBandOne, $sigFigBandTwo, $multiplierBand, $toleranceBand ]"
             5 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree $multiplierBand, $toleranceBand ]"
@@ -50,7 +57,7 @@ data class Resistor(
     fun setNumberOfBands(number: Int) {
         numberOfBands = number
         if (number != 4 && number != 5 && number != 6) {
-            numberOfBands = 4
+            numberOfBands = 4 // only allows values of 4, 5, or 6
         }
     }
 
@@ -70,9 +77,5 @@ data class Resistor(
             return true
         }
         return false
-    }
-
-    fun isNotFourBandResistor(): Boolean {
-        return numberOfBands != 4
     }
 }
