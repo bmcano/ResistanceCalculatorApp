@@ -4,9 +4,6 @@ import com.brandoncano.resistancecalculator.R
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-/**
- * @author Brandon
- */
 class ColorFinderTest {
 
     private companion object {

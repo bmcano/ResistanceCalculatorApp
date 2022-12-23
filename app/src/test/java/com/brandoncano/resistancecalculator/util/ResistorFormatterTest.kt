@@ -1,10 +1,11 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.Resistor
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ResistorFormatterTest {
+
     companion object {
         private const val OMEGA: String = "Ω"
         private const val PLUS_MINUS: String = "±"
