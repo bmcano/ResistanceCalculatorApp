@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.util
 
-import com.Ostermiller.util.SignificantFigures
 import com.brandoncano.resistancecalculator.Resistor
 
 /**
@@ -49,49 +48,6 @@ object ResistorFormatter {
             decimalInput(resistor.getNumberOfBands(), resistance, resistor.units)
         } else {
             numericalInput(resistor.getNumberOfBands(), resistance, resistor.units)
-        }
-    }
-
-    // returns an array of the 3 or 4 colors to be returned
-    fun generateResistor(numBands: Int, resistance: String, units: String): Array<Int> {
-        // this will prevent the program from crashing
-        if (resistance == "NotValid" || resistance.isEmpty()) {
-            return arrayOf()
-        }
-
-        // find color for the sig fig bands
-        var numberBand1 = 0
-        var numberBand2 = 0
-        var numberBand3 = 0
-        val formattedResistance = resistance.replace(".", EMPTY_STRING).toInt().toString()
-        formattedResistance.forEachIndexed { index, digit ->
-            if (index == 0) { numberBand1 = digit.digitToInt() }
-            if (index == 1) { numberBand2 = digit.digitToInt() }
-            if (index == 2) { numberBand3 = digit.digitToInt() }
-        }
-
-        // find color for multiplier band -> String (color)
-        val multiplierBand: String = if ('.' in resistance) {
-            decimalInput(numBands, resistance, units)
-        } else {
-            numericalInput(numBands, resistance, units)
-        }
-
-        // return correct values
-        return if (numBands == 4) {
-            arrayOf(
-                ColorFinder.numberToColor(numberBand1),
-                ColorFinder.numberToColor(numberBand2),
-                ColorFinder.numberToColor(),
-                ColorFinder.textToColor(multiplierBand)
-            )
-        } else {
-            arrayOf(
-                ColorFinder.numberToColor(numberBand1),
-                ColorFinder.numberToColor(numberBand2),
-                ColorFinder.numberToColor(numberBand3),
-                ColorFinder.textToColor(multiplierBand)
-            )
         }
     }
 

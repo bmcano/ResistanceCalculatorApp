@@ -40,6 +40,7 @@ class ValueToColorActivity : AppCompatActivity() {
 
     private lateinit var resistanceText: TextView
     private lateinit var toggleDropDown: TextInputLayout
+    private lateinit var textInputLayout: TextInputLayout
     private lateinit var inputResistance: EditText
 
     private lateinit var bandImage1: ImageView
@@ -234,6 +235,7 @@ class ValueToColorActivity : AppCompatActivity() {
 
     private fun calculateButtonSetup() {
         // text input setup and listener
+        textInputLayout = findViewById(R.id.edit_text_outline)
         inputResistance = findViewById(R.id.enter_resistance)
         inputResistance.setText(loadStateData(StateData.USER_INPUT_VTC))
         inputResistance.doOnTextChanged { text, _, _, _ ->
@@ -258,7 +260,6 @@ class ValueToColorActivity : AppCompatActivity() {
 
     // finds any errors in the user input
     private fun errorFinder(text: String) {
-        val textInputLayout: TextInputLayout = findViewById(R.id.edit_text_outline)
         resistor.resistance = if (text.isEmpty() || text == ".") {
             textInputLayout.error = null
             EMPTY_STRING
