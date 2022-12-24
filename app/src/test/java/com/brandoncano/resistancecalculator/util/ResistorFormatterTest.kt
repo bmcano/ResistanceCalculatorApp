@@ -274,8 +274,6 @@ class ResistorFormatterTest {
         assertEquals("White", resistor.multiplierBand)
     }
 
-    // Note: might consider adding the xy.0 and xyz.0 be valid for 4/5/6 band resistors, and modify
-    // the output of xy. or xyz. to either append the 0 for remove the decimal
     @Test
     fun decimalFourBandInputs() {
         val resistor = Resistor()
@@ -406,6 +404,56 @@ class ResistorFormatterTest {
         assertEquals("White", resistor.multiplierBand)
     }
 
+    @Test
+    fun leadingZeroBandsTest() {
+        val resistor = Resistor()
+        resistor.units = OMEGA
+
+        // 4 bands
+        resistor.resistance = "0.12"
+        ResistorFormatter.generateResistor(resistor)
+        var expectedResult = Resistor("Brown", "Red", "", "Silver")
+        expectedResult.units = OMEGA
+        assertEquals(expectedResult, resistor)
+
+        resistor.resistance = "0.10"
+        ResistorFormatter.generateResistor(resistor)
+        expectedResult = Resistor("Brown", "Black", "", "Silver")
+        expectedResult.units = OMEGA
+        assertEquals(expectedResult, resistor)
+
+        resistor.resistance = "0.01"
+        ResistorFormatter.generateResistor(resistor)
+        expectedResult = Resistor("Black", "Brown", "", "Silver")
+        expectedResult.units = OMEGA
+        assertEquals(expectedResult, resistor)
+
+        // 5 bands
+        resistor.setNumberOfBands(5)
+        resistor.units = "k$OMEGA"
+        resistor.resistance = "0.123"
+        ResistorFormatter.generateResistor(resistor)
+        expectedResult = Resistor("Brown", "Red", "Orange", "Black")
+        expectedResult.setNumberOfBands(5)
+        expectedResult.units = "k$OMEGA"
+        assertEquals(expectedResult, resistor)
+
+        resistor.resistance = "0.12"
+        resistor.units = OMEGA
+        ResistorFormatter.generateResistor(resistor)
+        expectedResult = Resistor("Brown", "Red", "Black", "Silver")
+        expectedResult.setNumberOfBands(5)
+        expectedResult.units = OMEGA
+        assertEquals(expectedResult, resistor)
+
+        resistor.resistance = "0.01"
+        ResistorFormatter.generateResistor(resistor)
+        expectedResult = Resistor("Black", "Brown", "Black", "Silver")
+        expectedResult.setNumberOfBands(5)
+        expectedResult.units = OMEGA
+        assertEquals(expectedResult, resistor)
+    }
+
     // Note: we might need to change these to adhere to proper unit convention
     // i.e: 10000 Ω -> 10 kΩ
     @Test
@@ -442,5 +490,32 @@ class ResistorFormatterTest {
         resistor.resistance = "10000"
         ResistorFormatter.generateResistor(resistor)
         assertEquals("Red", resistor.multiplierBand) // 10000 Ω
+    }
+
+    @Test
+    fun elseClausesTest() {
+        // these are not possible outputs, only for code coverage
+        val resistor = Resistor()
+        resistor.resistance = "12"
+        resistor.units = "notValid"
+        ResistorFormatter.generateResistor(resistor)
+        assertEquals("Black", resistor.multiplierBand)
+
+        resistor.resistance = "123.0"
+        resistor.units = "G$OMEGA"
+        ResistorFormatter.generateResistor(resistor)
+        assertEquals("Blank", resistor.multiplierBand)
+
+        resistor.resistance = "1234.0"
+        resistor.setNumberOfBands(5)
+        resistor.units = "G$OMEGA"
+        ResistorFormatter.generateResistor(resistor)
+        assertEquals("Blank", resistor.multiplierBand)
+
+        resistor.resistance = "1234"
+        resistor.setNumberOfBands(5)
+        resistor.units = "G$OMEGA"
+        ResistorFormatter.generateResistor(resistor)
+        assertEquals("Blank", resistor.multiplierBand)
     }
 }
