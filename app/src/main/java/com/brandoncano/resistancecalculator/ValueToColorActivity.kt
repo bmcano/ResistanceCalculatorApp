@@ -216,6 +216,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 resistor.units = dropDownUnits.adapter.getItem(position).toString()
                 if (resistor.resistance.isNotEmpty()) errorFinder(inputResistance.text.toString())
                 StateData.UNITS_DROPDOWN_VTC.saveData(this, dropDownUnits.text.toString())
+                updateResistorAndText()
             }
 
         dropDownTolerance.onItemClickListener =
@@ -223,6 +224,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 resistor.toleranceValue = dropDownTolerance.adapter.getItem(position).toString()
                 setDropDownDrawable(dropDownTolerance, resistor.toleranceValue)
                 StateData.TOLERANCE_DROPDOWN_VTC.saveData(this, dropDownTolerance.text.toString())
+                updateResistorAndText()
             }
 
         dropDownPPM.onItemClickListener =
@@ -230,6 +232,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 resistor.ppmValue = dropDownPPM.adapter.getItem(position).toString()
                 setDropDownDrawable(dropDownPPM, resistor.ppmValue)
                 StateData.PPM_DROPDOWN_VTC.saveData(this, dropDownPPM.text.toString())
+                updateResistorAndText()
             }
     }
 
@@ -275,30 +278,35 @@ class ValueToColorActivity : AppCompatActivity() {
 
     // updates the resistor on screen and the text
     private fun updateResistorAndText() {
-        ResistorFormatter.generateResistor(resistor)
-        setBandColor(bandImage1, resistor.sigFigBandOne)
-        setBandColor(bandImage2, resistor.sigFigBandTwo)
-        setBandColor(bandImage4, resistor.multiplierBand)
-        setBandColor(bandImage5, resistor.toleranceValue)
+        if (resistor.resistance == "NotValid" || resistor.resistance.isEmpty()) {
+            resistanceText.text = getString(R.string.enter_value)
 
-        when (resistor.getNumberOfBands()) {
-            4 -> {
-                setBandColor(bandImage3)
-                setBandColor(bandImage6)
-            }
-            5 -> {
-                setBandColor(bandImage3, resistor.sigFigBandThree)
-                setBandColor(bandImage6)
-            }
-            6 -> {
-                setBandColor(bandImage3, resistor.sigFigBandThree)
+            setBandColor(bandImage5, resistor.toleranceValue)
+            if (resistor.getNumberOfBands() == 6) {
                 setBandColor(bandImage6, resistor.ppmValue)
             }
-        }
-        resistanceText.text = if (resistor.resistance == "NotValid" || resistor.resistance.isEmpty()) {
-            getString(R.string.enter_value)
         } else {
-            resistor.getResistanceText()
+            resistanceText.text = resistor.getResistanceText()
+            ResistorFormatter.generateResistor(resistor)
+            setBandColor(bandImage1, resistor.sigFigBandOne)
+            setBandColor(bandImage2, resistor.sigFigBandTwo)
+            setBandColor(bandImage4, resistor.multiplierBand)
+            setBandColor(bandImage5, resistor.toleranceValue)
+
+            when (resistor.getNumberOfBands()) {
+                4 -> {
+                    setBandColor(bandImage3)
+                    setBandColor(bandImage6)
+                }
+                5 -> {
+                    setBandColor(bandImage3, resistor.sigFigBandThree)
+                    setBandColor(bandImage6)
+                }
+                6 -> {
+                    setBandColor(bandImage3, resistor.sigFigBandThree)
+                    setBandColor(bandImage6, resistor.ppmValue)
+                }
+            }
         }
         StateData.RESISTANCE_VTC.saveData(this, resistanceText.text.toString())
     }
