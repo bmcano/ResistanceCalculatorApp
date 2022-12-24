@@ -63,6 +63,9 @@ object ResistorFormatter {
         val first = resistance[0]
         return if (numBands == 4) {
             when {
+                // Note, seems that any condition of before=2 and after=0 is impossible, because of
+                // error finder. Might be able to remove those conditions, since they only work for
+                // non decimal inputs
                 units == OMEGA && (first == '0' || first == '.') -> "Silver"
                 units == OMEGA && before == 1 -> "Gold"
                 units == OMEGA && before == 2 && after == 0 -> "Black"
