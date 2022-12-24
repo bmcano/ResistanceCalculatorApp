@@ -177,6 +177,7 @@ class ValueToColorActivity : AppCompatActivity() {
         resistor.setNumberOfBands(btnNumber)
         if (resistor.resistance.isNotEmpty()) errorFinder(inputResistance.text.toString())
         StateData.BUTTON_SELECTION_VTC.saveData(this, "${resistor.getNumberOfBands()}")
+        updateResistorAndText()
     }
 
     private fun dropDownSetup() {
@@ -255,7 +256,6 @@ class ValueToColorActivity : AppCompatActivity() {
                 StateData.USER_INPUT_VTC.saveData(this, resistor.resistance)
             } else {
                 resistanceText.text = getString(R.string.invalid_input)
-                clearResistor()
             }
 
             closeKeyboard()
@@ -268,7 +268,8 @@ class ValueToColorActivity : AppCompatActivity() {
             textInputLayout.error = null
             EMPTY_STRING
         } else if (!IsValidResistance.execute(resistor, text)) {
-            textInputLayout.error = "Invalid Input"
+            textInputLayout.error = getString(R.string.invalid_input)
+            clearResistor()
             "NotValid"
         } else {
             textInputLayout.error = null
@@ -307,6 +308,7 @@ class ValueToColorActivity : AppCompatActivity() {
                     setBandColor(bandImage6, resistor.ppmValue)
                 }
             }
+            StateData.USER_INPUT_VTC.saveData(this, resistor.resistance)
         }
         StateData.RESISTANCE_VTC.saveData(this, resistanceText.text.toString())
     }
