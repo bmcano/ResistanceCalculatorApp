@@ -11,8 +11,7 @@ import com.brandoncano.resistancecalculator.Resistor
  *    - 5/6 Bands: xyzw, 0xy(z), 00x(y); .xy, .0x; 0.xyz, 0.0xyz, x.0yz, x.y0z, 0.00x; 1230 for GΩ
  *   Valid inputs (special cases):
  *    - 4 Bands: xy.0, 0.xy, x.y
- *    - 5/6 Bands: x.yz, xy.z, xyz.0, 0.xyz for units not Ω
- *
+ *    - 5/6 Bands: x.yz, xy.z, xyz.0
  */
 object IsValidResistance {
 
@@ -41,12 +40,9 @@ object IsValidResistance {
 
             // FIVE/SIX BAND
             resistor.getNumberOfBands() != 4 && input.startsWith("0.00") -> false
-            // allow: xyz.0
             resistor.getNumberOfBands() != 4 && sigFigs == 4 && input.endsWith(".0") -> true
-            resistor.getNumberOfBands() != 4 && units == OMEGA && sigFigs == 3 && input.startsWith("0") -> false
+            resistor.getNumberOfBands() != 4 && sigFigs == 3 && input.startsWith("0") -> false
             resistor.getNumberOfBands() != 4 && sigFigs == 2 && input.startsWith("0.0") -> false
-
-            // allow: x.yz, xy.z, xyz.0, 0.xyz for units not Ω
             resistor.getNumberOfBands() != 4 && sigFigs <= 3 && '.' in input -> true
             resistor.getNumberOfBands() != 4 && sigFigs > 3 -> false
             resistor.getNumberOfBands() != 4 && units == "G$OMEGA" && input.length > 3 -> false

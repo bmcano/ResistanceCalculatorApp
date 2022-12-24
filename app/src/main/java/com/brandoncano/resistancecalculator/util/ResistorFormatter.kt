@@ -27,7 +27,7 @@ object ResistorFormatter {
         var numberBand3 = 0
 
         // remove decimal and check leading zeros
-        val formattedResistance = checkLeadingZeros(resistance.replace(".", EMPTY_STRING))
+        val formattedResistance = checkLeadingZeros(resistor.getNumberOfBands(), resistance.replace(".", EMPTY_STRING))
         formattedResistance.forEachIndexed { index, digit ->
             if (index == 0) { numberBand1 = digit.digitToInt() }
             if (index == 1) { numberBand2 = digit.digitToInt() }
@@ -50,9 +50,9 @@ object ResistorFormatter {
     }
 
     // check leading zero inputs
-    private fun checkLeadingZeros(values: String): String {
+    private fun checkLeadingZeros(bands: Int, values: String): String {
         val numbers = values.toCharArray()
-        if ((numbers.size == 2 || numbers.size == 3 || numbers.size == 4) && numbers[0] == '0') {
+        if (bands == 4 && (numbers.size == 2 || numbers.size == 3 || numbers.size == 4) && numbers[0] == '0') {
             return values.substring(1, values.length)
         }
         return values

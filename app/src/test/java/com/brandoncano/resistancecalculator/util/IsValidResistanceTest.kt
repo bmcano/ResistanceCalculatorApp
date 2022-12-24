@@ -66,6 +66,7 @@ class IsValidResistanceTest {
         val resistor = Resistor()
         // four band
         resistor.units = OMEGA
+        assertTrue(IsValidResistance.execute(resistor, "0"))
         assertTrue(IsValidResistance.execute(resistor, "12"))
         assertTrue(IsValidResistance.execute(resistor, "10"))
         assertTrue(IsValidResistance.execute(resistor, "5"))
@@ -83,6 +84,7 @@ class IsValidResistanceTest {
         // five band
         resistor.units = OMEGA
         resistor.setNumberOfBands(5)
+        assertTrue(IsValidResistance.execute(resistor, "0"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
         assertTrue(IsValidResistance.execute(resistor, "63.2"))
@@ -95,6 +97,5 @@ class IsValidResistanceTest {
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
         assertTrue(IsValidResistance.execute(resistor, "63.2"))
         assertTrue(IsValidResistance.execute(resistor, "663.0"))
-        assertTrue(IsValidResistance.execute(resistor, "0.123"))
     }
 }
