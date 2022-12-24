@@ -25,7 +25,9 @@ object ResistorFormatter {
         var numberBand1 = 0
         var numberBand2 = 0
         var numberBand3 = 0
-        val formattedResistance = resistance.replace(".", EMPTY_STRING).toInt().toString()
+
+        // remove decimal and check leading zeros
+        val formattedResistance = checkLeadingZeros(resistance.replace(".", EMPTY_STRING))
         formattedResistance.forEachIndexed { index, digit ->
             if (index == 0) { numberBand1 = digit.digitToInt() }
             if (index == 1) { numberBand2 = digit.digitToInt() }
@@ -47,6 +49,15 @@ object ResistorFormatter {
         }
     }
 
+    // check leading zero inputs
+    private fun checkLeadingZeros(values: String): String {
+        val numbers = values.toCharArray()
+        if ((numbers.size == 2 || numbers.size == 3 || numbers.size == 4) && numbers[0] == '0') {
+            return values.substring(1, values.length)
+        }
+        return values
+    }
+
     // find the correct multiplier for an input with a decimal
     private fun decimalInput(numBands: Int, resistance: String, units: String): String {
         var before = 0
@@ -63,24 +74,21 @@ object ResistorFormatter {
         val first = resistance[0]
         return if (numBands == 4) {
             when {
-                // Note, seems that any condition of before=2 and after=0 is impossible, because of
-                // error finder. Might be able to remove those conditions, since they only work for
-                // non decimal inputs
                 units == OMEGA && (first == '0' || first == '.') -> "Silver"
                 units == OMEGA && before == 1 -> "Gold"
-                units == OMEGA && before == 2 && after == 0 -> "Black"
+                units == OMEGA && before == 2 -> "Black"
 
                 units == "k$OMEGA" && (first == '0' || first == '.') -> "Brown"
                 units == "k$OMEGA" && before == 1 -> "Red"
-                units == "k$OMEGA" && before == 2 && after == 0 -> "Orange"
+                units == "k$OMEGA" && before == 2 -> "Orange"
 
                 units == "M$OMEGA" && (first == '0' || first == '.') -> "Yellow"
                 units == "M$OMEGA" && before == 1 -> "Green"
-                units == "M$OMEGA" && before == 2 && after == 0 -> "Blue"
+                units == "M$OMEGA" && before == 2 -> "Blue"
 
                 units == "G$OMEGA" && (first == '0' || first == '.') -> "Violet"
                 units == "G$OMEGA" && before == 1 -> "Gray"
-                units == "G$OMEGA" && before == 2 && after == 0 -> "White"
+                units == "G$OMEGA" && before == 2 -> "White"
 
                 else -> "Blank"
             }

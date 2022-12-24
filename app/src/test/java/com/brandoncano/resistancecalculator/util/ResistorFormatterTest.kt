@@ -9,7 +9,6 @@ class ResistorFormatterTest {
     companion object {
         private const val OMEGA: String = "Ω"
         private const val PLUS_MINUS: String = "±"
-        private const val DEGREE: String = "°"
     }
 
     @Test

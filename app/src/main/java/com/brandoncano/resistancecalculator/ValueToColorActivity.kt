@@ -25,7 +25,7 @@ import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.ResistorChart
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
-import com.brandoncano.resistancecalculator.util.ResistanceInput
+import com.brandoncano.resistancecalculator.util.IsValidResistance
 import com.brandoncano.resistancecalculator.util.ShareResistance
 import com.google.android.material.textfield.TextInputLayout
 
@@ -263,7 +263,7 @@ class ValueToColorActivity : AppCompatActivity() {
         resistor.resistance = if (text.isEmpty() || text == ".") {
             textInputLayout.error = null
             EMPTY_STRING
-        } else if (!ResistanceInput.isValid(resistor, text)) {
+        } else if (!IsValidResistance.execute(resistor, text)) {
             textInputLayout.error = "Invalid Input"
             "NotValid"
         } else {
