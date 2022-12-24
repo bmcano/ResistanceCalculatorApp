@@ -15,23 +15,23 @@ import java.lang.reflect.Type
  */
 enum class StateData(private val name_: String, private val key_: String) {
 
-    // color to value
-    RESISTANCE_CTV("screenText1", "screen text1"),
-    BUTTON_SELECTION_CTV("buttonSelection1", "button selection1"),
-    SIGFIG_BAND_ONE_CTV("numBand1", "num band1"),
-    SIGFIG_BAND_TWO_CTV("numBand2", "num band2"),
-    SIGFIG_BAND_THREE_CTV("numBand3", "num band3"),
-    MULTIPLIER_BAND_CTV("multiplierBand1", "multiplier band1"),
-    TOLERANCE_BAND_CTV("toleranceBand1", "tolerance band1"),
-    PPM_BAND_CTV("ppmBand1", "ppm band1"),
+    // color to value -> color_to_value
+    RESISTANCE_CTV("color_to_value", "resistance"),
+    BUTTON_SELECTION_CTV("color_to_value", "button_selection"),
+    SIGFIG_BAND_ONE_CTV("color_to_value", "sig_fig_band_1"),
+    SIGFIG_BAND_TWO_CTV("color_to_value", "sig_fig_band_2"),
+    SIGFIG_BAND_THREE_CTV("color_to_value", "sig_fig_band_3"),
+    MULTIPLIER_BAND_CTV("color_to_value", "multiplier_band"),
+    TOLERANCE_BAND_CTV("color_to_value", "tolerance_band"),
+    PPM_BAND_CTV("color_to_value", "ppm_band"),
 
-    // value to color
-    RESISTANCE_VTC("screenText2", "screen text2"),
-    BUTTON_SELECTION_VTC("buttonSelection2", "button selection2"),
-    USER_INPUT_VTC("UserInput", "user input"),
-    UNITS_DROPDOWN_VTC("unitsDropDown", "units dropDown"),
-    TOLERANCE_DROPDOWN_VTC("toleranceDropDown", "tolerance dropDown"),
-    PPM_DROPDOWN_VTC("ppmDropDown", "ppm dropDown"),
+    // value to color -> value_to_color
+    RESISTANCE_VTC("value_to_color", "resistance"),
+    BUTTON_SELECTION_VTC("value_to_color", "button_selection"),
+    USER_INPUT_VTC("value_to_color", "user_input"),
+    UNITS_DROPDOWN_VTC("value_to_color", "units_dropdown"),
+    TOLERANCE_DROPDOWN_VTC("value_to_color", "tolerance_dropdown"),
+    PPM_DROPDOWN_VTC("value_to_color", "ppm_dropdown"),
 
     ; // methods to save and load the data as strings
 
@@ -50,5 +50,11 @@ enum class StateData(private val name_: String, private val key_: String) {
         val json = sharedPreferences.getString(key_, null)
         val type: Type = object : TypeToken<String?>() {}.type
         return gson.fromJson<String?>(json, type) ?: return ""
+    }
+
+    fun clearData(context: Context) {
+        val sharedPreferences = context.getSharedPreferences(name_, AppCompatActivity.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear().apply()
     }
 }
