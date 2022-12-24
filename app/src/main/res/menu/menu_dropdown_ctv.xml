@@ -20,6 +20,10 @@
         android:title="@string/feedback_tab"/>
 
     <item
+        android:id="@+id/clear_selections"
+        android:title="@string/clear_selections"/>
+
+    <item
         android:id="@+id/about_item"
         android:title="@string/about" />
 

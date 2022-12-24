@@ -57,8 +57,8 @@ class ColorToValueActivity : AppCompatActivity() {
             actionBar.elevation = 4F
         }
 
-        dropDownSetup()
         generalSetup()
+        dropDownSetup()
         buttonSetup()
     }
 
@@ -96,6 +96,10 @@ class ColorToValueActivity : AppCompatActivity() {
                 startActivity(intent)
                 return true
             }
+            R.id.clear_selections -> {
+                reset()
+                return true
+            }
             R.id.about_item -> {
                 startActivity(Intent(this, AboutActivity::class.java))
                 return true
@@ -125,16 +129,16 @@ class ColorToValueActivity : AppCompatActivity() {
         val sixBandButton: Button = findViewById(R.id.six_band)
 
         fun loadImage(button: String) {
-            setBandColor(bandImage1, ColorFinder.textToColor(resistor.sigFigBandOne))
-            setBandColor(bandImage2, ColorFinder.textToColor(resistor.sigFigBandTwo))
-            setBandColor(bandImage4, ColorFinder.textToColor(resistor.multiplierBand))
-            setBandColor(bandImage5, ColorFinder.textToColor(resistor.toleranceBand))
+            setBandColor(bandImage1, resistor.sigFigBandOne)
+            setBandColor(bandImage2, resistor.sigFigBandTwo)
+            setBandColor(bandImage4, resistor.multiplierBand)
+            setBandColor(bandImage5, resistor.toleranceBand)
 
             if (button == "5" || button == "6")
-                setBandColor(bandImage3, ColorFinder.textToColor(resistor.sigFigBandThree))
+                setBandColor(bandImage3, resistor.sigFigBandThree)
 
             if (button == "6")
-                setBandColor(bandImage6, ColorFinder.textToColor(resistor.ppmBand))
+                setBandColor(bandImage6, resistor.ppmBand)
         }
 
         when (StateData.BUTTON_SELECTION_CTV.loadData(this)) {
@@ -164,8 +168,8 @@ class ColorToValueActivity : AppCompatActivity() {
                 fourBandButton, fiveBandButton, sixBandButton, 4, View.GONE, View.GONE
             )
 
-            setBandColor(bandImage3, ColorFinder.textToColor())
-            setBandColor(bandImage6, ColorFinder.textToColor())
+            setBandColor(bandImage3)
+            setBandColor(bandImage6)
         }
 
         fiveBandButton.setOnClickListener {
@@ -173,8 +177,8 @@ class ColorToValueActivity : AppCompatActivity() {
                 fiveBandButton, fourBandButton, sixBandButton, 5, View.VISIBLE, View.GONE
             )
 
-            setBandColor(bandImage3, ColorFinder.textToColor(resistor.sigFigBandThree))
-            setBandColor(bandImage6, ColorFinder.textToColor())
+            setBandColor(bandImage3, resistor.sigFigBandThree)
+            setBandColor(bandImage6)
         }
 
         sixBandButton.setOnClickListener {
@@ -182,8 +186,8 @@ class ColorToValueActivity : AppCompatActivity() {
                 sixBandButton, fourBandButton, fiveBandButton, 6, View.VISIBLE, View.VISIBLE
             )
 
-            setBandColor(bandImage3, ColorFinder.textToColor(resistor.sigFigBandThree))
-            setBandColor(bandImage6, ColorFinder.textToColor(resistor.ppmBand))
+            setBandColor(bandImage3, resistor.sigFigBandThree)
+            setBandColor(bandImage6, resistor.ppmBand)
         }
     }
 
@@ -297,7 +301,7 @@ class ColorToValueActivity : AppCompatActivity() {
     // update the dropdown with the current selection and update the text
     private fun updateDropDownSelection(dropDown: AutoCompleteTextView, color: String, band: ImageView) {
         setDropDownDrawable(dropDown, color)
-        setBandColor(band, ColorFinder.textToColor(color))
+        setBandColor(band, color)
         updateResistance()
     }
 
@@ -308,7 +312,8 @@ class ColorToValueActivity : AppCompatActivity() {
     }
 
     // helper method to set the color of the band on screen
-    private fun setBandColor(band: ImageView, color: Int) {
+    private fun setBandColor(band: ImageView, colorText: String = "") {
+        val color = ColorFinder.textToColor(colorText)
         band.setColorFilter(ContextCompat.getColor(this, color))
     }
 
@@ -317,5 +322,19 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDown.setCompoundDrawablesRelativeWithIntrinsicBounds(
             ColorFinder.textToColoredDrawable(color), 0, 0, 0
         )
+    }
+
+    // deletes all shared preferences and resets the screen
+    private fun reset() {
+        StateData.RESISTANCE_CTV.clearData(this)
+        StateData.BUTTON_SELECTION_CTV.saveData(this, "${resistor.getNumberOfBands()}")
+        resistanceText.text = getString(R.string.default_text)
+        setBandColor(bandImage1)
+        setBandColor(bandImage2)
+        setBandColor(bandImage3)
+        setBandColor(bandImage4)
+        setBandColor(bandImage5)
+        setBandColor(bandImage6)
+        dropDownSetup() // resets dropdown and resistor info
     }
 }

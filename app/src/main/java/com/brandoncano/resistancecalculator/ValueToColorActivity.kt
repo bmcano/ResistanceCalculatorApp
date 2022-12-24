@@ -105,6 +105,10 @@ class ValueToColorActivity : AppCompatActivity() {
                 startActivity(intent)
                 return true
             }
+            R.id.clear_selections -> {
+                reset()
+                return true
+            }
             R.id.about_item -> {
                 startActivity(Intent(this, AboutActivity::class.java))
                 return true
@@ -342,5 +346,20 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDown.setCompoundDrawablesRelativeWithIntrinsicBounds(
             ColorFinder.textToColoredDrawable(color), 0, 0, 0
         )
+    }
+
+    // deletes all shared preferences and resets the screen
+    private fun reset() {
+        StateData.RESISTANCE_VTC.clearData(this)
+        StateData.BUTTON_SELECTION_VTC.saveData(this, "${resistor.getNumberOfBands()}")
+        resistanceText.text = getString(R.string.default_text)
+        setBandColor(bandImage1)
+        setBandColor(bandImage2)
+        setBandColor(bandImage3)
+        setBandColor(bandImage4)
+        setBandColor(bandImage5)
+        setBandColor(bandImage6)
+        dropDownSetup() // resets dropdown and resistor info
+        calculateButtonSetup()
     }
 }
