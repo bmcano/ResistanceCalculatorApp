@@ -252,6 +252,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 StateData.USER_INPUT_VTC.saveData(this, resistor.resistance)
             } else {
                 resistanceText.text = getString(R.string.invalid_input)
+                clearResistor()
             }
 
             closeKeyboard()
@@ -294,7 +295,11 @@ class ValueToColorActivity : AppCompatActivity() {
                 setBandColor(bandImage6, resistor.ppmValue)
             }
         }
-        resistanceText.text = resistor.getResistanceText()
+        resistanceText.text = if (resistor.resistance == "NotValid" || resistor.resistance.isEmpty()) {
+            getString(R.string.enter_value)
+        } else {
+            resistor.getResistanceText()
+        }
         StateData.RESISTANCE_VTC.saveData(this, resistanceText.text.toString())
     }
 
@@ -305,6 +310,15 @@ class ValueToColorActivity : AppCompatActivity() {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
+    }
+
+    // clear resistor
+    private fun clearResistor() {
+        setBandColor(bandImage1)
+        setBandColor(bandImage2)
+        setBandColor(bandImage3)
+        setBandColor(bandImage4)
+        StateData.USER_INPUT_VTC.saveData(this, "")
     }
 
     // helper method to set the color of the band on screen
