@@ -210,82 +210,58 @@ class ColorToValueActivity : AppCompatActivity() {
         val fiveBandButton: Button = findViewById(R.id.five_band)
         val sixBandButton: Button = findViewById(R.id.six_band)
 
-        fun loadImage(button: String) {
-            setBandColor(bandImage1, resistor.sigFigBandOne)
-            setBandColor(bandImage2, resistor.sigFigBandTwo)
-            setBandColor(bandImage4, resistor.multiplierBand)
-            setBandColor(bandImage5, resistor.toleranceBand)
-
-            if (button == "5" || button == "6")
-                setBandColor(bandImage3, resistor.sigFigBandThree)
-
-            if (button == "6")
-                setBandColor(bandImage6, resistor.ppmBand)
-        }
+        setBandColor(bandImage1, resistor.sigFigBandOne)
+        setBandColor(bandImage2, resistor.sigFigBandTwo)
+        setBandColor(bandImage4, resistor.multiplierBand)
+        setBandColor(bandImage5, resistor.toleranceBand)
 
         when (StateData.BUTTON_SELECTION_CTV.loadData(this)) {
-            "4" -> {
-                updateButtonSelection(
-                    fourBandButton, fiveBandButton, sixBandButton, 4, View.GONE, View.GONE
-                )
-                loadImage("4")
-            }
-            "5" -> {
-                updateButtonSelection(
-                    fiveBandButton, fourBandButton, sixBandButton, 5, View.VISIBLE, View.GONE
-                )
-                loadImage("5")
-            }
-            "6" -> {
-                updateButtonSelection(
-                    sixBandButton, fourBandButton, fiveBandButton, 6, View.VISIBLE, View.VISIBLE
-                )
-                loadImage("6")
-            }
+            "4" -> updateButtonSelection(fourBandButton, fiveBandButton, sixBandButton, 4)
+            "5" -> updateButtonSelection(fiveBandButton, fourBandButton, sixBandButton, 5)
+            "6" -> updateButtonSelection(sixBandButton, fourBandButton, fiveBandButton, 6)
         }
 
-        // toggle number of bands listener
         fourBandButton.setOnClickListener {
-            updateButtonSelection(
-                fourBandButton, fiveBandButton, sixBandButton, 4, View.GONE, View.GONE
-            )
-
-            setBandColor(bandImage3)
-            setBandColor(bandImage6)
+            updateButtonSelection(fourBandButton, fiveBandButton, sixBandButton, 4)
         }
 
         fiveBandButton.setOnClickListener {
-            updateButtonSelection(
-                fiveBandButton, fourBandButton, sixBandButton, 5, View.VISIBLE, View.GONE
-            )
-
-            setBandColor(bandImage3, resistor.sigFigBandThree)
-            setBandColor(bandImage6)
+            updateButtonSelection(fiveBandButton, fourBandButton, sixBandButton, 5)
         }
 
         sixBandButton.setOnClickListener {
-            updateButtonSelection(
-                sixBandButton, fourBandButton, fiveBandButton, 6, View.VISIBLE, View.VISIBLE
-            )
-
-            setBandColor(bandImage3, resistor.sigFigBandThree)
-            setBandColor(bandImage6, resistor.ppmBand)
+            updateButtonSelection(sixBandButton, fourBandButton, fiveBandButton, 6)
         }
     }
 
-    private fun updateButtonSelection(
-        selectedBtn: Button, btn1: Button, btn2: Button, btnNumber: Int, view1: Int, view2: Int
-    ) {
-        selectedBtn.setBackgroundColor(getColor(R.color.mango_dark))
-        btn1.setBackgroundColor(getColor(R.color.mango_primary))
-        btn2.setBackgroundColor(getColor(R.color.mango_primary))
+    private fun updateButtonSelection(selected: Button, b1: Button, b2: Button, btnNumber: Int) {
+        selected.setBackgroundColor(getColor(R.color.mango_dark))
+        b1.setBackgroundColor(getColor(R.color.mango_primary))
+        b2.setBackgroundColor(getColor(R.color.mango_primary))
 
-        toggleDropDownNumberBand3.visibility = view1
-        toggleDropDownPPM.visibility = view2
-
+        when (btnNumber) {
+            4 -> {
+                toggleDropDownNumberBand3.visibility = View.GONE
+                toggleDropDownPPM.visibility = View.GONE
+                setBandColor(bandImage3)
+                setBandColor(bandImage6)
+            }
+            5 -> {
+                toggleDropDownNumberBand3.visibility = View.VISIBLE
+                toggleDropDownPPM.visibility = View.GONE
+                setBandColor(bandImage3, resistor.sigFigBandThree)
+                setBandColor(bandImage6)
+            }
+            6 -> {
+                toggleDropDownNumberBand3.visibility = View.VISIBLE
+                toggleDropDownPPM.visibility = View.VISIBLE
+                setBandColor(bandImage3, resistor.sigFigBandThree)
+                setBandColor(bandImage6, resistor.ppmBand)
+            }
+        }
+        StateData.BUTTON_SELECTION_CTV.saveData(this, "$btnNumber")
         resistor.setNumberOfBands(btnNumber)
         updateResistance()
-        StateData.BUTTON_SELECTION_CTV.saveData(this, "${resistor.getNumberOfBands()}")
     }
 
     // update the dropdown with the current selection and update the text
