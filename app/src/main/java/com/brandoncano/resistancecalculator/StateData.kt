@@ -33,7 +33,7 @@ enum class StateData(private val name_: String, private val key_: String) {
     TOLERANCE_DROPDOWN_VTC("value_to_color", "tolerance_dropdown"),
     PPM_DROPDOWN_VTC("value_to_color", "ppm_dropdown"),
 
-    ; // methods to save and load the data as strings
+    ; // methods to save, load, or clear the data as strings
 
     fun saveData(context: Context, input: String) {
         val sharedPreferences = context.getSharedPreferences(name_, AppCompatActivity.MODE_PRIVATE)

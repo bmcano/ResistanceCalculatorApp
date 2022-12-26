@@ -2,6 +2,7 @@ package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.R
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class ColorFinderTest {
@@ -164,5 +165,15 @@ class ColorFinderTest {
 
         assertEquals("", ColorFinder.idToColorText(R.color.resistor_blank))
         assertEquals("", ColorFinder.idToColorText(R.drawable.blank32))
+    }
+
+    @Test
+    fun randomColorTest() {
+        val colors = arrayOf(
+            R.color.red32, R.color.orange32, R.color.yellow32, R.color.gold32, R.color.green32,
+            R.color.blue32, R.color.violet32, R.color.white32, R.color.silver32, R.color.gray32,
+            R.color.black32, R.color.brown32, R.color.resistor_blank
+        )
+        assertTrue(ColorFinder.randomColor() in colors)
     }
 }
