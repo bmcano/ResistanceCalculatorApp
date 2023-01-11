@@ -23,6 +23,11 @@ object ResistanceFormatter {
         "White" to "1 G", "Gold" to "0.1 ", "Silver" to "0.01 "
     )
 
+    private val colorToTolerance = mapOf(
+        "Brown" to "1%", "Red" to "2%", "Green" to "0.5%", "Blue" to "0.25%",
+        "Violet" to "0.1%", "Gray" to "0.05%", "Gold" to "5%", "Silver" to "10%"
+    )
+
     private val colorToPPM = mapOf(
         "Black" to "\n250", "Brown" to "\n100", "Red" to "\n50",
         "Orange" to "\n15", "Yellow" to "\n25", "Green" to "\n20",
@@ -52,56 +57,50 @@ object ResistanceFormatter {
     private fun formatMultiplier(color: String, band1: String, band2: String): String {
         return when (color) {
             "Black" -> "$band1$band2 "
-            "Brown" -> "${band1}${band2}0 "
+            "Brown" -> "$band1${band2}0 "
             "Red" -> "${band1}.${band2} k"
-            "Orange" -> "${band1}${band2} k"
-            "Yellow" -> "${band1}${band2}0 k"
+            "Orange" -> "$band1${band2} k"
+            "Yellow" -> "$band1${band2}0 k"
             "Green" -> "${band1}.${band2} M"
-            "Blue" -> "${band1}${band2} M"
-            "Violet" -> "${band1}${band2}0 M"
+            "Blue" -> "$band1${band2} M"
+            "Violet" -> "$band1${band2}0 M"
             "Gray" -> "${band1}.${band2} G"
-            "White" -> "${band1}${band2} G"
+            "White" -> "$band1${band2} G"
             "Gold" -> "${band1}.${band2} "
-            "Silver" -> "0.${band1}${band2} "
+            "Silver" -> "0.$band1${band2} "
             else -> "$band1$band2 "
         }
     }
 
     // five or six band resistor
     private fun formatMultiplier(color: String, band1: String, band2: String, band3: String): String {
-        return when (color) {
-            "Black" -> "$band1$band2$band3 "
-            "Brown" -> "${band1}.${band2}${band3} k"
-            "Red" -> "${band1}${band2}.${band3} k"
-            "Orange" -> "${band1}${band2}${band3} k"
-            "Yellow" -> "${band1}.${band2}${band3} M"
-            "Green" -> "${band1}${band2}.${band3} M"
-            "Blue" -> "${band1}${band2}${band3} M"
-            "Violet" -> "${band1}.${band2}${band3} G"
-            "Gray" -> "${band1}${band2}.${band3} G"
-            "White" -> "${band1}${band2}${band3} G"
-            "Gold" -> "${band1}${band2}.${band3} "
-            "Silver" -> "${band1}.${band2}${band3} "
-            else -> "$band1$band2$band3 "
+        return band1 + when (color) {
+            "Black" -> "$band2$band3 "
+            "Brown" -> ".$band2$band3 k"
+            "Red" -> "${band2}.$band3 k"
+            "Orange" -> "$band2$band3 k"
+            "Yellow" -> ".$band2$band3 M"
+            "Green" -> "${band2}.$band3 M"
+            "Blue" -> "$band2$band3 M"
+            "Violet" -> ".$band2$band3 G"
+            "Gray" -> "${band2}.$band3 G"
+            "White" -> "$band2$band3 G"
+            "Gold" -> "$band2.$band3 "
+            "Silver" -> ".$band2$band3 "
+            else -> "$band2$band3 "
         }
     }
 
     private fun formatTolerance(color: String): String {
-        return PLUS_MINUS + when (color) {
-            "Brown" -> "1%"
-            "Red" -> "2%"
-            "Green" -> "0.5%"
-            "Blue" -> "0.25%"
-            "Violet" -> "0.1%"
-            "Gray" -> "0.05%"
-            "Gold" -> "5%"
-            "Silver" -> "10%"
-            else -> "20%"
-        }
+        return PLUS_MINUS + if (colorToTolerance.containsKey(color)) {
+            colorToTolerance.getValue(color)
+        } else "20%"
     }
 
     private fun formatPPM(color: String, bands: Int): String {
-        return if (colorToPPM.containsKey(color) && bands == 6) colorToPPM.getValue(color) + " $PPM_UNIT" else ""
+        return if (colorToPPM.containsKey(color) && bands == 6) {
+            colorToPPM.getValue(color) + " $PPM_UNIT"
+        } else ""
     }
 
     private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo:String, sigFigThree: String): String {
