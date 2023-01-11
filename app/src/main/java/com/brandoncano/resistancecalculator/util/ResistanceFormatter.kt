@@ -59,7 +59,11 @@ object ResistanceFormatter {
                 else -> formatMultiplier(resistor.multiplierBand, "", sigFigTwo, sigFigThree)
             }
         } else if (resistor.sigFigBandOne == "Black") {
-            multiplier = (value * multiple.toDouble()).toString()
+            multiplier = if (resistor.multiplierBand == "Silver") {
+                String.format("%.2f", (value * multiple.toFloat()))
+            } else {
+                String.format("%.1f", (value * multiple.toFloat()))
+            }
             if (multiplier.endsWith(".0")) {
                 multiplier = multiplier.substring(0, multiplier.length - 2)
             }

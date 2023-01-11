@@ -187,4 +187,120 @@ class ResistanceFormatterTest {
         resistor.ppmBand = "Gray"
         assertEquals("12.5 k$OMEGA ${PLUS_MINUS}5%\n1 ppm/${DEGREE}C", ResistanceFormatter.calculate(resistor))
     }
+
+    @Test
+    fun `leading zeros for 4 bands`() {
+        val resistor = Resistor("Black", "Brown", "", "Black", "Gold")
+        assertEquals("1 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Brown"
+        assertEquals("10 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Red"
+        assertEquals("100 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Orange"
+        assertEquals("1 k$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Yellow"
+        assertEquals("10 k$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Green"
+        assertEquals("100 k$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Blue"
+        assertEquals("1 M$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Violet"
+        assertEquals("10 M$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Gray"
+        assertEquals("100 M$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "White"
+        assertEquals("1 G$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Gold"
+        assertEquals("0.1 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Silver"
+        assertEquals("0.01 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+    }
+
+    @Test
+    fun `leading zeros for 5 bands`() {
+        var resistor = Resistor("Black", "Black", "Brown", "Black", "Gold")
+        resistor.setNumberOfBands(5)
+        assertEquals("1 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Brown"
+        assertEquals("10 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Red"
+        assertEquals("100 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Orange"
+        assertEquals("1 k$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Yellow"
+        assertEquals("10 k$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Green"
+        assertEquals("100 k$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Blue"
+        assertEquals("1 M$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Violet"
+        assertEquals("10 M$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Gray"
+        assertEquals("100 M$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "White"
+        assertEquals("1 G$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Gold"
+        assertEquals("0.1 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Silver"
+        assertEquals("0.01 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor = Resistor("Black", "Brown", "Brown", "Black", "Gold")
+        resistor.setNumberOfBands(5)
+        assertEquals("11 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Brown"
+        assertEquals("110 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Red"
+        assertEquals("1.1 k$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Orange"
+        assertEquals("11 k$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Yellow"
+        assertEquals("110 k$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Green"
+        assertEquals("1.1 M$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Blue"
+        assertEquals("11 M$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Violet"
+        assertEquals("110 M$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Gray"
+        assertEquals("1.1 G$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "White"
+        assertEquals("11 G$OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Gold"
+        assertEquals("1.1 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+
+        resistor.multiplierBand = "Silver"
+        assertEquals("0.11 $OMEGA ${PLUS_MINUS}5%", ResistanceFormatter.calculate(resistor))
+    }
 }
