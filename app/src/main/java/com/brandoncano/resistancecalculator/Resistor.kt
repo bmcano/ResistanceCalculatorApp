@@ -60,7 +60,7 @@ data class Resistor(
         }
     }
 
-    fun isEmpty(numberOfBands: Int = 4): Boolean {
+    fun isEmpty(): Boolean {
         return if (numberOfBands == 4) {
             sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || multiplierBand.isEmpty() || toleranceBand.isEmpty()
         } else {

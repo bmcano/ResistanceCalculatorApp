@@ -10,11 +10,15 @@ object ResistanceFormatter {
     private const val OMEGA: String = "Ω"
     private const val PLUS_MINUS: String = "±"
     private const val DEGREE: String = "°"
-    private const val EMPTY_STRING = ""
+
+    private val colorsToNumbers = mapOf(
+        "Black" to "0", "Brown" to "1", "Red" to "2", "Orange" to "3", "Yellow" to "4",
+        "Green" to "5", "Blue" to "6", "Violet" to "7", "Gray" to "8", "White" to "9"
+    )
 
     // works for all 4, 5, and 6 band resistors
     fun calculate(resistor: Resistor): String {
-        if (resistor.isEmpty(resistor.getNumberOfBands())) {
+        if (resistor.isEmpty()) {
             return "Select Colors"
         }
 
@@ -33,7 +37,7 @@ object ResistanceFormatter {
         val ppm = if (resistor.getNumberOfBands() == 6) {
             formatPPM(resistor.ppmBand)
         } else {
-            EMPTY_STRING
+            ""
         }
 
         // format multiplier for edge cases of leading 0s
@@ -44,7 +48,7 @@ object ResistanceFormatter {
                 "Gray" -> "${sigFigTwo}00 M"
                 "Silver" -> "0.0${sigFigTwo} "
                 else -> {
-                    formatMultiplier(resistor.multiplierBand, EMPTY_STRING, sigFigTwo)
+                    formatMultiplier(resistor.multiplierBand, "", sigFigTwo)
                 }
             }
         } else if (resistor.getNumberOfBands() != 4 && resistor.sigFigBandOne == "Black" && resistor.sigFigBandTwo == "Black") {
@@ -59,7 +63,7 @@ object ResistanceFormatter {
                 "Silver" -> "0.0${sigFigThree} "
                 else -> {
                     formatMultiplier(
-                        resistor.multiplierBand, EMPTY_STRING, EMPTY_STRING, sigFigThree
+                        resistor.multiplierBand, "", "", sigFigThree
                     )
                 }
             }
@@ -70,7 +74,7 @@ object ResistanceFormatter {
                 "Violet" -> "${sigFigTwo}${sigFigThree}0 M"
                 "Silver" -> "0.${sigFigTwo}${sigFigThree} "
                 else -> {
-                    formatMultiplier(resistor.multiplierBand, EMPTY_STRING, sigFigTwo, sigFigThree)
+                    formatMultiplier(resistor.multiplierBand, "", sigFigTwo, sigFigThree)
                 }
             }
         }
@@ -84,19 +88,7 @@ object ResistanceFormatter {
 
     // gets the number from its color representation
     private fun formatSigFig(color: String): String {
-        return when (color) {
-            "Black" -> "0"
-            "Brown" -> "1"
-            "Red" -> "2"
-            "Orange" -> "3"
-            "Yellow" -> "4"
-            "Green" -> "5"
-            "Blue" -> "6"
-            "Violet" -> "7"
-            "Gray" -> "8"
-            "White" -> "9"
-            else -> "0"
-        }
+        return if (colorsToNumbers.containsKey(color)) colorsToNumbers.getValue(color) else "0"
     }
 
     // four band resistor
@@ -164,7 +156,7 @@ object ResistanceFormatter {
             "Blue" -> "\n10 ppm/${DEGREE}C"
             "Violet" -> "\n5 ppm/${DEGREE}C"
             "Gray" -> "\n1 ppm/${DEGREE}C"
-            else -> EMPTY_STRING
+            else -> ""
         }
     }
 }
