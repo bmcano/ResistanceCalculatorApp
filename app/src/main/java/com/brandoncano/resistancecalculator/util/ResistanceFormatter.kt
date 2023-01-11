@@ -9,18 +9,23 @@ object ResistanceFormatter {
 
     private const val OMEGA: String = "Ω"
     private const val PLUS_MINUS: String = "±"
-    private const val DEGREE: String = "°"
+    private const val PPM_UNIT: String = "ppm/°C"
 
     private val colorsToNumbers = mapOf(
         "Black" to "0", "Brown" to "1", "Red" to "2", "Orange" to "3", "Yellow" to "4",
         "Green" to "5", "Blue" to "6", "Violet" to "7", "Gray" to "8", "White" to "9"
     )
 
+    private val multiplierValues = mapOf(
+        "Black" to "1 ", "Brown" to "10 ", "Red" to "100 ",
+        "Orange" to "1 k", "Yellow" to "10 k", "Green" to "100 k",
+        "Blue" to "1 M", "Violet" to "10 M", "Gray" to "100 M",
+        "White" to "1 G", "Gold" to "0.1 ", "Silver" to "0.01 "
+    )
+
     // works for all 4, 5, and 6 band resistors
     fun calculate(resistor: Resistor): String {
-        if (resistor.isEmpty()) {
-            return "Select Colors"
-        }
+        if (resistor.isEmpty()) return "Select Colors"
 
         // convert from color to values
         val sigFigOne = formatSigFig(resistor.sigFigBandOne)
@@ -28,9 +33,12 @@ object ResistanceFormatter {
         val sigFigThree = formatSigFig(resistor.sigFigBandThree)
         val tolerance = formatTolerance(resistor.toleranceBand)
 
+        val value: Int
         var multiplier = if (resistor.getNumberOfBands() == 4) {
+            value = (sigFigOne + sigFigTwo).toInt()
             formatMultiplier(resistor.multiplierBand, sigFigOne, sigFigTwo)
         } else {
+            value = (sigFigOne + sigFigTwo + sigFigThree).toInt()
             formatMultiplier(resistor.multiplierBand, sigFigOne, sigFigTwo, sigFigThree)
         }
 
@@ -41,45 +49,24 @@ object ResistanceFormatter {
         }
 
         // format multiplier for edge cases of leading 0s
-        if (resistor.getNumberOfBands() == 4 && resistor.sigFigBandOne == "Black") {
-            multiplier = when (resistor.multiplierBand) {
-                "Red" -> "${sigFigTwo}00 "
-                "Green" -> "${sigFigTwo}00 k"
-                "Gray" -> "${sigFigTwo}00 M"
-                "Silver" -> "0.0${sigFigTwo} "
-                else -> {
-                    formatMultiplier(resistor.multiplierBand, "", sigFigTwo)
-                }
-            }
-        } else if (resistor.getNumberOfBands() != 4 && resistor.sigFigBandOne == "Black" && resistor.sigFigBandTwo == "Black") {
-            multiplier = when (resistor.multiplierBand) {
-                "Brown" -> "${sigFigThree}0 "
-                "Red" -> "${sigFigThree}00 "
-                "Yellow" -> "${sigFigThree}0 k"
-                "Green" -> "${sigFigThree}00 k"
-                "Violet" -> "${sigFigThree}0 M"
-                "Gray" -> "${sigFigThree}00 M"
-                "Gold" -> "0.${sigFigThree} "
-                "Silver" -> "0.0${sigFigThree} "
-                else -> {
-                    formatMultiplier(
-                        resistor.multiplierBand, "", "", sigFigThree
-                    )
-                }
-            }
-        } else if (resistor.getNumberOfBands() != 4 && resistor.sigFigBandOne == "Black") {
+        val (multiple, unit) = multiplierValues.getValue(resistor.multiplierBand).split(" ")
+        if (resistor.getNumberOfBands() != 4 && resistor.sigFigBandOne == "Black" && resistor.sigFigBandTwo != "Black") {
             multiplier = when (resistor.multiplierBand) {
                 "Brown" -> "${sigFigTwo}${sigFigThree}0 "
                 "Yellow" -> "${sigFigTwo}${sigFigThree}0 k"
                 "Violet" -> "${sigFigTwo}${sigFigThree}0 M"
                 "Silver" -> "0.${sigFigTwo}${sigFigThree} "
-                else -> {
-                    formatMultiplier(resistor.multiplierBand, "", sigFigTwo, sigFigThree)
-                }
+                else -> formatMultiplier(resistor.multiplierBand, "", sigFigTwo, sigFigThree)
             }
+        } else if (resistor.sigFigBandOne == "Black") {
+            multiplier = (value * multiple.toDouble()).toString()
+            if (multiplier.endsWith(".0")) {
+                multiplier = multiplier.substring(0, multiplier.length - 2)
+            }
+            multiplier += " $unit"
         }
 
-        if (resistor.allDigitsZero(resistor.getNumberOfBands())) {
+        if (resistor.allDigitsZero()) {
             multiplier = "0 "
         }
 
@@ -129,7 +116,6 @@ object ResistanceFormatter {
         }
     }
 
-    // finds the tolerance
     private fun formatTolerance(color: String): String {
         return PLUS_MINUS + when (color) {
             "Brown" -> "1%"
@@ -144,18 +130,17 @@ object ResistanceFormatter {
         }
     }
 
-    // temperature coefficient - only on six band resistor
     private fun formatPPM(color: String): String {
         return when (color) {
-            "Black" -> "\n250 ppm/${DEGREE}C"
-            "Brown" -> "\n100 ppm/${DEGREE}C"
-            "Red" -> "\n50 ppm/${DEGREE}C"
-            "Orange" -> "\n15 ppm/${DEGREE}C"
-            "Yellow" -> "\n25 ppm/${DEGREE}C"
-            "Green" -> "\n20 ppm/${DEGREE}C"
-            "Blue" -> "\n10 ppm/${DEGREE}C"
-            "Violet" -> "\n5 ppm/${DEGREE}C"
-            "Gray" -> "\n1 ppm/${DEGREE}C"
+            "Black" -> "\n250 $PPM_UNIT"
+            "Brown" -> "\n100 $PPM_UNIT"
+            "Red" -> "\n50 $PPM_UNIT"
+            "Orange" -> "\n15 $PPM_UNIT"
+            "Yellow" -> "\n25 $PPM_UNIT"
+            "Green" -> "\n20 $PPM_UNIT"
+            "Blue" -> "\n10 $PPM_UNIT"
+            "Violet" -> "\n5 $PPM_UNIT"
+            "Gray" -> "\n1 $PPM_UNIT"
             else -> ""
         }
     }

@@ -68,7 +68,7 @@ data class Resistor(
         }
     }
 
-    fun allDigitsZero(numberOfBands: Int = 4): Boolean {
+    fun allDigitsZero(): Boolean {
         if (numberOfBands == 4 && sigFigBandOne == "Black" && sigFigBandTwo == "Black") {
             return true
         }
