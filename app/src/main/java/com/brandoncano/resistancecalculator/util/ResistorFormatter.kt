@@ -8,7 +8,6 @@ import com.brandoncano.resistancecalculator.Resistor
 object ResistorFormatter {
 
     private const val OMEGA: String = "Ω"
-    private const val EMPTY_STRING = ""
 
     private val colorsArray = arrayOf(
         "Silver", "Gold", "Black", "Brown", "Red", "Orange", "Yellow",
@@ -17,9 +16,7 @@ object ResistorFormatter {
 
     fun generateResistor(resistor: Resistor) {
         val resistance = resistor.resistance
-        if (resistance == "NotValid" || resistance.isEmpty()) {
-            return
-        }
+        if (resistance == "NotValid" || resistance.isEmpty()) return
 
         // find color for the sig fig bands
         var numberBand1 = 0
@@ -27,7 +24,7 @@ object ResistorFormatter {
         var numberBand3 = 0
 
         // remove decimal and check leading zeros
-        val formattedResistance = checkLeadingZeros(resistor.getNumberOfBands(), resistance.replace(".", EMPTY_STRING))
+        val formattedResistance = checkLeadingZeros(resistor.getNumberOfBands(), resistance.replace(".", ""))
         formattedResistance.forEachIndexed { index, digit ->
             if (index == 0) { numberBand1 = digit.digitToInt() }
             if (index == 1) { numberBand2 = digit.digitToInt() }
@@ -38,9 +35,7 @@ object ResistorFormatter {
         resistor.sigFigBandTwo = ColorFinder.numberToText(numberBand2)
         resistor.sigFigBandThree = if (resistor.getNumberOfBands() != 4) {
             ColorFinder.numberToText(numberBand3)
-        } else {
-            EMPTY_STRING
-        }
+        } else ""
 
         resistor.multiplierBand = if ('.' in resistance) {
             decimalInput(resistor.getNumberOfBands(), resistance, resistor.units)
@@ -67,8 +62,7 @@ object ResistorFormatter {
             if (digit == '.') {
                 change = true; continue
             }
-            if (!change) before++
-            else after++
+            if (!change) before++ else after++
         }
 
         val first = resistance[0]
