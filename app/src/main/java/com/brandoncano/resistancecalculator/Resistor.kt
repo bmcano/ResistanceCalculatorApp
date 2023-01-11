@@ -69,12 +69,8 @@ data class Resistor(
     }
 
     fun allDigitsZero(): Boolean {
-        if (numberOfBands == 4 && sigFigBandOne == "Black" && sigFigBandTwo == "Black") {
-            return true
-        }
-        if (sigFigBandOne == "Black" && sigFigBandTwo == "Black" && sigFigBandThree == "Black") {
-            return true
-        }
-        return false
+        val fourBand = numberOfBands == 4 && sigFigBandOne == "Black" && sigFigBandTwo == "Black"
+        val fiveBand = sigFigBandOne == "Black" && sigFigBandTwo == "Black" && sigFigBandThree == "Black"
+        return fourBand || fiveBand
     }
 }
