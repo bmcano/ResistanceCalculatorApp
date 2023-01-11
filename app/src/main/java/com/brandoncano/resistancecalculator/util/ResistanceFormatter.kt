@@ -11,75 +11,41 @@ object ResistanceFormatter {
     private const val PLUS_MINUS: String = "±"
     private const val PPM_UNIT: String = "ppm/°C"
 
-    private val colorsToNumbers = mapOf(
+    private val colorToNumber = mapOf(
         "Black" to "0", "Brown" to "1", "Red" to "2", "Orange" to "3", "Yellow" to "4",
         "Green" to "5", "Blue" to "6", "Violet" to "7", "Gray" to "8", "White" to "9"
     )
 
-    private val multiplierValues = mapOf(
+    private val colorToMultiplier = mapOf(
         "Black" to "1 ", "Brown" to "10 ", "Red" to "100 ",
         "Orange" to "1 k", "Yellow" to "10 k", "Green" to "100 k",
         "Blue" to "1 M", "Violet" to "10 M", "Gray" to "100 M",
         "White" to "1 G", "Gold" to "0.1 ", "Silver" to "0.01 "
     )
 
+    private val colorToPPM = mapOf(
+        "Black" to "\n250", "Brown" to "\n100", "Red" to "\n50",
+        "Orange" to "\n15", "Yellow" to "\n25", "Green" to "\n20",
+        "Blue" to "\n10", "Violet" to "\n5", "Gray" to "\n1"
+    )
+
     // works for all 4, 5, and 6 band resistors
     fun calculate(resistor: Resistor): String {
         if (resistor.isEmpty()) return "Select Colors"
 
-        // convert from color to values
         val sigFigOne = formatSigFig(resistor.sigFigBandOne)
         val sigFigTwo = formatSigFig(resistor.sigFigBandTwo)
         val sigFigThree = formatSigFig(resistor.sigFigBandThree)
+        val resistance = formatResistance(resistor, sigFigOne, sigFigTwo, sigFigThree)
         val tolerance = formatTolerance(resistor.toleranceBand)
+        val ppm = formatPPM(resistor.ppmBand, resistor.getNumberOfBands())
 
-        val value: Int
-        var multiplier = if (resistor.getNumberOfBands() == 4) {
-            value = (sigFigOne + sigFigTwo).toInt()
-            formatMultiplier(resistor.multiplierBand, sigFigOne, sigFigTwo)
-        } else {
-            value = (sigFigOne + sigFigTwo + sigFigThree).toInt()
-            formatMultiplier(resistor.multiplierBand, sigFigOne, sigFigTwo, sigFigThree)
-        }
-
-        val ppm = if (resistor.getNumberOfBands() == 6) {
-            formatPPM(resistor.ppmBand)
-        } else {
-            ""
-        }
-
-        // format multiplier for edge cases of leading 0s
-        val (multiple, unit) = multiplierValues.getValue(resistor.multiplierBand).split(" ")
-        if (resistor.getNumberOfBands() != 4 && resistor.sigFigBandOne == "Black" && resistor.sigFigBandTwo != "Black") {
-            multiplier = when (resistor.multiplierBand) {
-                "Brown" -> "${sigFigTwo}${sigFigThree}0 "
-                "Yellow" -> "${sigFigTwo}${sigFigThree}0 k"
-                "Violet" -> "${sigFigTwo}${sigFigThree}0 M"
-                "Silver" -> "0.${sigFigTwo}${sigFigThree} "
-                else -> formatMultiplier(resistor.multiplierBand, "", sigFigTwo, sigFigThree)
-            }
-        } else if (resistor.sigFigBandOne == "Black") {
-            multiplier = if (resistor.multiplierBand == "Silver") {
-                String.format("%.2f", (value * multiple.toFloat()))
-            } else {
-                String.format("%.1f", (value * multiple.toFloat()))
-            }
-            if (multiplier.endsWith(".0")) {
-                multiplier = multiplier.substring(0, multiplier.length - 2)
-            }
-            multiplier += " $unit"
-        }
-
-        if (resistor.allDigitsZero()) {
-            multiplier = "0 "
-        }
-
-        return "$multiplier$OMEGA $tolerance$ppm"
+        return "$resistance$OMEGA $tolerance$ppm"
     }
 
     // gets the number from its color representation
     private fun formatSigFig(color: String): String {
-        return if (colorsToNumbers.containsKey(color)) colorsToNumbers.getValue(color) else "0"
+        return if (colorToNumber.containsKey(color)) colorToNumber.getValue(color) else "0"
     }
 
     // four band resistor
@@ -134,18 +100,44 @@ object ResistanceFormatter {
         }
     }
 
-    private fun formatPPM(color: String): String {
-        return when (color) {
-            "Black" -> "\n250 $PPM_UNIT"
-            "Brown" -> "\n100 $PPM_UNIT"
-            "Red" -> "\n50 $PPM_UNIT"
-            "Orange" -> "\n15 $PPM_UNIT"
-            "Yellow" -> "\n25 $PPM_UNIT"
-            "Green" -> "\n20 $PPM_UNIT"
-            "Blue" -> "\n10 $PPM_UNIT"
-            "Violet" -> "\n5 $PPM_UNIT"
-            "Gray" -> "\n1 $PPM_UNIT"
-            else -> ""
+    private fun formatPPM(color: String, bands: Int): String {
+        return if (colorToPPM.containsKey(color) && bands == 6) colorToPPM.getValue(color) + " $PPM_UNIT" else ""
+    }
+
+    private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo:String, sigFigThree: String): String {
+        if (resistor.allDigitsZero()) return "0 "
+
+        val value: Int
+        var multiplier = if (resistor.getNumberOfBands() == 4) {
+            value = (sigFigOne + sigFigTwo).toInt()
+            formatMultiplier(resistor.multiplierBand, sigFigOne, sigFigTwo)
+        } else {
+            value = (sigFigOne + sigFigTwo + sigFigThree).toInt()
+            formatMultiplier(resistor.multiplierBand, sigFigOne, sigFigTwo, sigFigThree)
         }
+
+        // format multiplier for edge cases of leading 0s
+        val (multiple, unit) = colorToMultiplier.getValue(resistor.multiplierBand).split(" ")
+        if (resistor.getNumberOfBands() != 4 && resistor.sigFigBandOne == "Black" && resistor.sigFigBandTwo != "Black") {
+            multiplier = when (resistor.multiplierBand) {
+                "Brown" -> "${sigFigTwo}${sigFigThree}0 "
+                "Yellow" -> "${sigFigTwo}${sigFigThree}0 k"
+                "Violet" -> "${sigFigTwo}${sigFigThree}0 M"
+                "Silver" -> "0.${sigFigTwo}${sigFigThree} "
+                else -> formatMultiplier(resistor.multiplierBand, "", sigFigTwo, sigFigThree)
+            }
+        } else if (resistor.sigFigBandOne == "Black") {
+            multiplier = if (resistor.multiplierBand == "Silver") {
+                String.format("%.2f", (value * multiple.toFloat()))
+            } else {
+                String.format("%.1f", (value * multiple.toFloat()))
+            }
+            if (multiplier.endsWith(".0")) {
+                multiplier = multiplier.substring(0, multiplier.length - 2)
+            }
+            multiplier += " $unit"
+        }
+
+        return multiplier
     }
 }
