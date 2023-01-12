@@ -1,15 +1,14 @@
 package com.brandoncano.resistancecalculator.spinner
 
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.components.OHMS
+import com.brandoncano.resistancecalculator.components.PLUS_MINUS
+import com.brandoncano.resistancecalculator.components.PPM_UNIT
 
 /**
  * Job: Holds array information for the spinners.
  */
 object SpinnerContents {
-
-    private const val OMEGA: String = "Ω"
-    private const val PLUS_MINUS: String = "±"
-    private const val DEGREE: String = "°"
 
     private val BLACK = SpinnerItem("Black", R.drawable.black_square)
     private val BROWN = SpinnerItem("Brown", R.drawable.brown_square)
@@ -49,16 +48,16 @@ object SpinnerContents {
     )
 
     val ppmTextArray = arrayOf(
-        SpinnerItem("250 ppm/${DEGREE}C", R.drawable.black_square),
-        SpinnerItem("100 ppm/${DEGREE}C", R.drawable.brown_square),
-        SpinnerItem("50 ppm/${DEGREE}C", R.drawable.red_square),
-        SpinnerItem("15 ppm/${DEGREE}C", R.drawable.orange_square),
-        SpinnerItem("25 ppm/${DEGREE}C", R.drawable.yellow_square),
-        SpinnerItem("20 ppm/${DEGREE}C", R.drawable.green_square),
-        SpinnerItem("10 ppm/${DEGREE}C", R.drawable.blue_square),
-        SpinnerItem("5 ppm/${DEGREE}C", R.drawable.violet_square),
-        SpinnerItem("1 ppm/${DEGREE}C", R.drawable.gray_square)
+        SpinnerItem(PPM_UNIT, R.drawable.black_square),
+        SpinnerItem(PPM_UNIT, R.drawable.brown_square),
+        SpinnerItem(PPM_UNIT, R.drawable.red_square),
+        SpinnerItem(PPM_UNIT, R.drawable.orange_square),
+        SpinnerItem(PPM_UNIT, R.drawable.yellow_square),
+        SpinnerItem(PPM_UNIT, R.drawable.green_square),
+        SpinnerItem(PPM_UNIT, R.drawable.blue_square),
+        SpinnerItem(PPM_UNIT, R.drawable.violet_square),
+        SpinnerItem(PPM_UNIT, R.drawable.gray_square)
     )
 
-    val unitsArray = arrayOf(OMEGA, "k$OMEGA", "M$OMEGA", "G$OMEGA")
+    val unitsArray = arrayOf(OHMS, "k$OHMS", "M$OHMS", "G$OHMS")
 }

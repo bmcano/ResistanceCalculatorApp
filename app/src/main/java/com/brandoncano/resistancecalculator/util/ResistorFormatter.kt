@@ -1,13 +1,12 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.Resistor
+import com.brandoncano.resistancecalculator.components.OHMS
 
 /**
  * Job: Formats the resistor based resistance that has been entered (VtC).
  */
 object ResistorFormatter {
-
-    private const val OMEGA: String = "Ω"
 
     private val colorsArray = arrayOf(
         "Silver", "Gold", "Black", "Brown", "Red", "Orange", "Yellow",
@@ -64,44 +63,44 @@ object ResistorFormatter {
         val first = resistance[0]
         return if (numBands == 4) {
             when {
-                units == OMEGA && (first == '0' || first == '.') -> "Silver"
-                units == OMEGA && before == 1 -> "Gold"
-                units == OMEGA && before == 2 -> "Black"
+                units == OHMS && (first == '0' || first == '.') -> "Silver"
+                units == OHMS && before == 1 -> "Gold"
+                units == OHMS && before == 2 -> "Black"
 
-                units == "k$OMEGA" && (first == '0' || first == '.') -> "Brown"
-                units == "k$OMEGA" && before == 1 -> "Red"
-                units == "k$OMEGA" && before == 2 -> "Orange"
+                units == "k$OHMS" && (first == '0' || first == '.') -> "Brown"
+                units == "k$OHMS" && before == 1 -> "Red"
+                units == "k$OHMS" && before == 2 -> "Orange"
 
-                units == "M$OMEGA" && (first == '0' || first == '.') -> "Yellow"
-                units == "M$OMEGA" && before == 1 -> "Green"
-                units == "M$OMEGA" && before == 2 -> "Blue"
+                units == "M$OHMS" && (first == '0' || first == '.') -> "Yellow"
+                units == "M$OHMS" && before == 1 -> "Green"
+                units == "M$OHMS" && before == 2 -> "Blue"
 
-                units == "G$OMEGA" && (first == '0' || first == '.') -> "Violet"
-                units == "G$OMEGA" && before == 1 -> "Gray"
-                units == "G$OMEGA" && before == 2 -> "White"
+                units == "G$OHMS" && (first == '0' || first == '.') -> "Violet"
+                units == "G$OHMS" && before == 1 -> "Gray"
+                units == "G$OHMS" && before == 2 -> "White"
 
                 else -> "Blank"
             }
         } else {
             when {
-                units == OMEGA && before == 1 -> "Silver"
-                units == OMEGA && before == 2 -> "Gold"
-                units == OMEGA && before == 3 && after == 0 -> "Black"
+                units == OHMS && before == 1 -> "Silver"
+                units == OHMS && before == 2 -> "Gold"
+                units == OHMS && before == 3 && after == 0 -> "Black"
 
-                units == "k$OMEGA" && (first == '0' || first == '.') -> "Black"
-                units == "k$OMEGA" && before == 1 -> "Brown"
-                units == "k$OMEGA" && before == 2 -> "Red"
-                units == "k$OMEGA" && before == 3 && after == 0 -> "Orange"
+                units == "k$OHMS" && (first == '0' || first == '.') -> "Black"
+                units == "k$OHMS" && before == 1 -> "Brown"
+                units == "k$OHMS" && before == 2 -> "Red"
+                units == "k$OHMS" && before == 3 && after == 0 -> "Orange"
 
-                units == "M$OMEGA" && (first == '0' || first == '.') -> "Orange"
-                units == "M$OMEGA" && before == 1 -> "Yellow"
-                units == "M$OMEGA" && before == 2 -> "Green"
-                units == "M$OMEGA" && before == 3 && after == 0 -> "Blue"
+                units == "M$OHMS" && (first == '0' || first == '.') -> "Orange"
+                units == "M$OHMS" && before == 1 -> "Yellow"
+                units == "M$OHMS" && before == 2 -> "Green"
+                units == "M$OHMS" && before == 3 && after == 0 -> "Blue"
 
-                units == "G$OMEGA" && (first == '0' || first == '.') -> "Blue"
-                units == "G$OMEGA" && before == 1 -> "Violet"
-                units == "G$OMEGA" && before == 2 -> "Gray"
-                units == "G$OMEGA" && before == 3 && after == 0 -> "White"
+                units == "G$OHMS" && (first == '0' || first == '.') -> "Blue"
+                units == "G$OHMS" && before == 1 -> "Violet"
+                units == "G$OHMS" && before == 2 -> "Gray"
+                units == "G$OHMS" && before == 3 && after == 0 -> "White"
 
                 else -> "Blank"
             }
@@ -120,10 +119,10 @@ object ResistorFormatter {
         }
 
         shifts = when (units) {
-            OMEGA -> shifts
-            "k$OMEGA" -> shifts + 1
-            "M$OMEGA" -> shifts + 2
-            "G$OMEGA" -> shifts + 3
+            OHMS -> shifts
+            "k$OHMS" -> shifts + 1
+            "M$OHMS" -> shifts + 2
+            "G$OHMS" -> shifts + 3
             else -> 0
         }
 

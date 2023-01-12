@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.Resistor
+import com.brandoncano.resistancecalculator.components.OHMS
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -11,15 +12,11 @@ import org.junit.Test
  */
 class IsValidResistanceTest {
 
-    private companion object {
-        private const val OMEGA: String = "Ω"
-    }
-
     @Test
     fun invalidInputs() {
         val resistor = Resistor()
         // four band
-        resistor.units = OMEGA
+        resistor.units = OHMS
         assertFalse(IsValidResistance.execute(resistor, "InValid"))
 
         assertFalse(IsValidResistance.execute(resistor, "133"))
@@ -36,11 +33,11 @@ class IsValidResistanceTest {
         assertFalse(IsValidResistance.execute(resistor, "1.02"))
         assertFalse(IsValidResistance.execute(resistor, "1.023"))
 
-        resistor.units = "G$OMEGA"
+        resistor.units = "G$OHMS"
         assertFalse(IsValidResistance.execute(resistor, "130"))
 
         // five/six band
-        resistor.units = OMEGA
+        resistor.units = OHMS
         resistor.setNumberOfBands(5)
         assertFalse(IsValidResistance.execute(resistor, "1234"))
         assertFalse(IsValidResistance.execute(resistor, "0123"))
@@ -56,7 +53,7 @@ class IsValidResistanceTest {
         assertFalse(IsValidResistance.execute(resistor, "1.023"))
         assertFalse(IsValidResistance.execute(resistor, "1.203"))
         assertFalse(IsValidResistance.execute(resistor, "0.001"))
-        resistor.units = "G$OMEGA"
+        resistor.units = "G$OHMS"
         assertFalse(IsValidResistance.execute(resistor, "1230"))
         assertFalse(IsValidResistance.execute(resistor, "0.001"))
     }
@@ -65,7 +62,7 @@ class IsValidResistanceTest {
     fun validInputs() {
         val resistor = Resistor()
         // four band
-        resistor.units = OMEGA
+        resistor.units = OHMS
         assertTrue(IsValidResistance.execute(resistor, "0"))
         assertTrue(IsValidResistance.execute(resistor, "12"))
         assertTrue(IsValidResistance.execute(resistor, "10"))
@@ -75,14 +72,14 @@ class IsValidResistanceTest {
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "0.05"))
 
-        resistor.units = "G$OMEGA"
+        resistor.units = "G$OHMS"
         assertTrue(IsValidResistance.execute(resistor, "13.0"))
         assertTrue(IsValidResistance.execute(resistor, "0.67"))
         assertTrue(IsValidResistance.execute(resistor, "0.6"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
 
         // five band
-        resistor.units = OMEGA
+        resistor.units = OHMS
         resistor.setNumberOfBands(5)
         assertTrue(IsValidResistance.execute(resistor, "0"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
@@ -91,7 +88,7 @@ class IsValidResistanceTest {
         assertTrue(IsValidResistance.execute(resistor, "663.0"))
         assertTrue(IsValidResistance.execute(resistor, "0.01"))
 
-        resistor.units = "G$OMEGA"
+        resistor.units = "G$OHMS"
         resistor.setNumberOfBands(5)
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))

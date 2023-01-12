@@ -1,15 +1,14 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.Resistor
+import com.brandoncano.resistancecalculator.components.OHMS
+import com.brandoncano.resistancecalculator.components.PLUS_MINUS
+import com.brandoncano.resistancecalculator.components.PPM_UNIT
 
 /**
  * Job: Formats the resistance based on the colors selected for the bands (CtV).
  */
 object ResistanceFormatter {
-
-    private const val OMEGA: String = "Ω"
-    private const val PLUS_MINUS: String = "±"
-    private const val PPM_UNIT: String = "ppm/°C"
 
     private val colorToNumber = mapOf(
         "Black" to "0", "Brown" to "1", "Red" to "2", "Orange" to "3", "Yellow" to "4",
@@ -45,7 +44,7 @@ object ResistanceFormatter {
         val tolerance = formatTolerance(resistor.toleranceBand)
         val ppm = formatPPM(resistor.ppmBand, resistor.getNumberOfBands())
 
-        return "$resistance$OMEGA $tolerance$ppm"
+        return "$resistance${OHMS} $tolerance$ppm"
     }
 
     // gets the number from its color representation

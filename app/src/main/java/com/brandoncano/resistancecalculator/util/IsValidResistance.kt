@@ -2,6 +2,7 @@ package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
 import com.brandoncano.resistancecalculator.Resistor
+import com.brandoncano.resistancecalculator.components.OHMS
 
 /**
  * Notes:
@@ -14,8 +15,6 @@ import com.brandoncano.resistancecalculator.Resistor
  *    - 5/6 Bands: x.yz, xy.z, xyz.0
  */
 object IsValidResistance {
-
-    private const val OMEGA: String = "Ω"
 
     fun execute(resistor: Resistor, input: String): Boolean {
         input.toDoubleOrNull() ?: return false
@@ -36,7 +35,7 @@ object IsValidResistance {
             numberOfBands == 4 && sigFigs == 2 && input.startsWith("0.") -> true
             numberOfBands == 4 && sigFigs <= 2 && '.' in input -> true
             numberOfBands == 4 && sigFigs > 2 -> false
-            numberOfBands == 4 && units == "G$OMEGA" && input.length > 2 -> false
+            numberOfBands == 4 && units == "G$OHMS" && input.length > 2 -> false
 
             // FIVE/SIX BAND
             resistor.getNumberOfBands() != 4 && input.startsWith("0.00") -> false
@@ -45,7 +44,7 @@ object IsValidResistance {
             resistor.getNumberOfBands() != 4 && sigFigs == 2 && input.startsWith("0.0") -> false
             resistor.getNumberOfBands() != 4 && sigFigs <= 3 && '.' in input -> true
             resistor.getNumberOfBands() != 4 && sigFigs > 3 -> false
-            resistor.getNumberOfBands() != 4 && units == "G$OMEGA" && input.length > 3 -> false
+            resistor.getNumberOfBands() != 4 && units == "G$OHMS" && input.length > 3 -> false
 
             else -> true
         }
