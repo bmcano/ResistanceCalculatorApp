@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
-import com.brandoncano.resistancecalculator.Resistor
+import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.components.OHMS
 
 /**

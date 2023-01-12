@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.util
 
-import com.brandoncano.resistancecalculator.Resistor
+import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.components.OHMS
 import com.brandoncano.resistancecalculator.components.PLUS_MINUS
 import com.brandoncano.resistancecalculator.components.PPM_UNIT

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator
+package com.brandoncano.resistancecalculator.components
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator
+package com.brandoncano.resistancecalculator.components
 
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
