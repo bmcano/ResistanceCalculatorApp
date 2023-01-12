@@ -1,8 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.components.Resistor
-import com.brandoncano.resistancecalculator.components.OHMS
-import com.brandoncano.resistancecalculator.components.PLUS_MINUS
+import com.brandoncano.resistancecalculator.constants.OHMS
+import com.brandoncano.resistancecalculator.constants.PLUS_MINUS
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

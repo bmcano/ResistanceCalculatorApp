@@ -1,51 +1,48 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.constants.PLUS_MINUS
+import com.brandoncano.resistancecalculator.constants.PPM_UNIT
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class ColorFinderTest {
 
-    private companion object {
-        const val PLUS_MINUS: String = "±"
-        const val DEGREE: String = "°"
-    }
-
     @Test
     fun textToColorDrawableTest() {
         assertEquals(R.drawable.black_square, ColorFinder.textToColoredDrawable("Black"))
-        assertEquals(R.drawable.black_square, ColorFinder.textToColoredDrawable("250 ppm/${DEGREE}C"))
+        assertEquals(R.drawable.black_square, ColorFinder.textToColoredDrawable("250 $PPM_UNIT"))
 
         assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable("Brown"))
         assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable("${PLUS_MINUS}1%"))
-        assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable("100 ppm/${DEGREE}C"))
+        assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable("100 $PPM_UNIT"))
 
         assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable("Red"))
         assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable("${PLUS_MINUS}2%"))
-        assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable("50 ppm/${DEGREE}C"))
+        assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable("50 $PPM_UNIT"))
 
         assertEquals(R.drawable.orange_square, ColorFinder.textToColoredDrawable("Orange"))
-        assertEquals(R.drawable.orange_square, ColorFinder.textToColoredDrawable("15 ppm/${DEGREE}C"))
+        assertEquals(R.drawable.orange_square, ColorFinder.textToColoredDrawable("15 $PPM_UNIT"))
 
         assertEquals(R.drawable.yellow_square, ColorFinder.textToColoredDrawable("Yellow"))
-        assertEquals(R.drawable.yellow_square, ColorFinder.textToColoredDrawable("25 ppm/${DEGREE}C"))
+        assertEquals(R.drawable.yellow_square, ColorFinder.textToColoredDrawable("25 $PPM_UNIT"))
 
         assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable("Green"))
         assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable("${PLUS_MINUS}0.5%"))
-        assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable("20 ppm/${DEGREE}C"))
+        assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable("20 $PPM_UNIT"))
 
         assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable("Blue"))
         assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable("${PLUS_MINUS}0.25%"))
-        assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable("10 ppm/${DEGREE}C"))
+        assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable("10 $PPM_UNIT"))
 
         assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable("Violet"))
         assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable("${PLUS_MINUS}0.1%"))
-        assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable("5 ppm/${DEGREE}C"))
+        assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable("5 $PPM_UNIT"))
 
         assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable("Gray"))
         assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable("${PLUS_MINUS}0.05%"))
-        assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable("1 ppm/${DEGREE}C"))
+        assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable("1 $PPM_UNIT"))
 
         assertEquals(R.drawable.white_square, ColorFinder.textToColoredDrawable("White"))
 
@@ -63,37 +60,37 @@ class ColorFinderTest {
     @Test
     fun textToColorTest() {
         assertEquals(R.color.black32, ColorFinder.textToColor("Black"))
-        assertEquals(R.color.black32, ColorFinder.textToColor("250 ppm/${DEGREE}C"))
+        assertEquals(R.color.black32, ColorFinder.textToColor("250 $PPM_UNIT"))
 
         assertEquals(R.color.brown32, ColorFinder.textToColor("Brown"))
         assertEquals(R.color.brown32, ColorFinder.textToColor("${PLUS_MINUS}1%"))
-        assertEquals(R.color.brown32, ColorFinder.textToColor("100 ppm/${DEGREE}C"))
+        assertEquals(R.color.brown32, ColorFinder.textToColor("100 $PPM_UNIT"))
 
         assertEquals(R.color.red32, ColorFinder.textToColor("Red"))
         assertEquals(R.color.red32, ColorFinder.textToColor("${PLUS_MINUS}2%"))
-        assertEquals(R.color.red32, ColorFinder.textToColor("50 ppm/${DEGREE}C"))
+        assertEquals(R.color.red32, ColorFinder.textToColor("50 $PPM_UNIT"))
 
         assertEquals(R.color.orange32, ColorFinder.textToColor("Orange"))
-        assertEquals(R.color.orange32, ColorFinder.textToColor("15 ppm/${DEGREE}C"))
+        assertEquals(R.color.orange32, ColorFinder.textToColor("15 $PPM_UNIT"))
 
         assertEquals(R.color.yellow32, ColorFinder.textToColor("Yellow"))
-        assertEquals(R.color.yellow32, ColorFinder.textToColor("25 ppm/${DEGREE}C"))
+        assertEquals(R.color.yellow32, ColorFinder.textToColor("25 $PPM_UNIT"))
 
         assertEquals(R.color.green32, ColorFinder.textToColor("Green"))
         assertEquals(R.color.green32, ColorFinder.textToColor("${PLUS_MINUS}0.5%"))
-        assertEquals(R.color.green32, ColorFinder.textToColor("20 ppm/${DEGREE}C"))
+        assertEquals(R.color.green32, ColorFinder.textToColor("20 $PPM_UNIT"))
 
         assertEquals(R.color.blue32, ColorFinder.textToColor("Blue"))
         assertEquals(R.color.blue32, ColorFinder.textToColor("${PLUS_MINUS}0.25%"))
-        assertEquals(R.color.blue32, ColorFinder.textToColor("10 ppm/${DEGREE}C"))
+        assertEquals(R.color.blue32, ColorFinder.textToColor("10 $PPM_UNIT"))
 
         assertEquals(R.color.violet32, ColorFinder.textToColor("Violet"))
         assertEquals(R.color.violet32, ColorFinder.textToColor("${PLUS_MINUS}0.1%"))
-        assertEquals(R.color.violet32, ColorFinder.textToColor("5 ppm/${DEGREE}C"))
+        assertEquals(R.color.violet32, ColorFinder.textToColor("5 $PPM_UNIT"))
 
         assertEquals(R.color.gray32, ColorFinder.textToColor("Gray"))
         assertEquals(R.color.gray32, ColorFinder.textToColor("${PLUS_MINUS}0.05%"))
-        assertEquals(R.color.gray32, ColorFinder.textToColor("1 ppm/${DEGREE}C"))
+        assertEquals(R.color.gray32, ColorFinder.textToColor("1 $PPM_UNIT"))
 
         assertEquals(R.color.white32, ColorFinder.textToColor("White"))
 
