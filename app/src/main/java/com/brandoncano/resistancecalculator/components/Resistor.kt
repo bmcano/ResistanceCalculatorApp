@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator.components
 
+import com.brandoncano.resistancecalculator.constants.BLACK
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**
@@ -35,7 +36,7 @@ data class Resistor(
 
         return when (numberOfBands) {
             4 -> "[ $sigFigBandOne, $sigFigBandTwo, $multiplierBand, $toleranceBand ]"
-            5 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree $multiplierBand, $toleranceBand ]"
+            5 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree, $multiplierBand, $toleranceBand ]"
             6 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree, $multiplierBand, $toleranceBand, $ppmBand ]"
             else -> ""
         }
@@ -69,8 +70,8 @@ data class Resistor(
     }
 
     fun allDigitsZero(): Boolean {
-        val fourBand = numberOfBands == 4 && sigFigBandOne == "Black" && sigFigBandTwo == "Black"
-        val fiveBand = sigFigBandOne == "Black" && sigFigBandTwo == "Black" && sigFigBandThree == "Black"
+        val fourBand = numberOfBands == 4 && sigFigBandOne == BLACK && sigFigBandTwo == BLACK
+        val fiveBand = sigFigBandOne == BLACK && sigFigBandTwo == BLACK && sigFigBandThree == BLACK
         return fourBand || fiveBand
     }
 }
