@@ -18,23 +18,17 @@ object ResistorFormatter {
         val resistance = resistor.resistance
         if (resistance == "NotValid" || resistance.isEmpty()) return
 
-        // find color for the sig fig bands
-        var numberBand1 = 0
-        var numberBand2 = 0
-        var numberBand3 = 0
-
         // remove decimal and check leading zeros
-        val formattedResistance = checkLeadingZeros(resistor.getNumberOfBands(), resistance.replace(".", ""))
+        val numberBands = arrayOf(0, 0, 0)
+        val formattedResistance = checkLeadingZeros(resistor.getNumberOfBands(), resistance)
         formattedResistance.forEachIndexed { index, digit ->
-            if (index == 0) { numberBand1 = digit.digitToInt() }
-            if (index == 1) { numberBand2 = digit.digitToInt() }
-            if (index == 2) { numberBand3 = digit.digitToInt() }
+            if (index < 3) numberBands[index] = digit.digitToInt()
         }
 
-        resistor.sigFigBandOne = ColorFinder.numberToText(numberBand1)
-        resistor.sigFigBandTwo = ColorFinder.numberToText(numberBand2)
+        resistor.sigFigBandOne = ColorFinder.numberToText(numberBands[0])
+        resistor.sigFigBandTwo = ColorFinder.numberToText(numberBands[1])
         resistor.sigFigBandThree = if (resistor.getNumberOfBands() != 4) {
-            ColorFinder.numberToText(numberBand3)
+            ColorFinder.numberToText(numberBands[2])
         } else ""
 
         resistor.multiplierBand = if ('.' in resistance) {
@@ -45,9 +39,11 @@ object ResistorFormatter {
     }
 
     // check leading zero inputs
-    private fun checkLeadingZeros(bands: Int, values: String): String {
+    private fun checkLeadingZeros(bands: Int, value: String): String {
+        val values = value.replace(".", "")
         val numbers = values.toCharArray()
-        if (bands == 4 && (numbers.size == 2 || numbers.size == 3 || numbers.size == 4) && numbers[0] == '0') {
+        val validSize = numbers.size == 2 || numbers.size == 3 || numbers.size == 4
+        if (bands == 4 && validSize && numbers[0] == '0') {
             return values.substring(1, values.length)
         }
         return values
