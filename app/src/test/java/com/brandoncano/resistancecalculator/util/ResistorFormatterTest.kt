@@ -1,15 +1,17 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.components.Resistor
-import com.brandoncano.resistancecalculator.constants.OHMS
-import com.brandoncano.resistancecalculator.constants.PLUS_MINUS
+import com.brandoncano.resistancecalculator.constants.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
+/**
+ * Note: This will only test valid number inputs, since only valid inputs are allowed through this.
+ */
 class ResistorFormatterTest {
 
     @Test
-    fun invalidInputs() {
+    fun `non number resistance values`() {
         val resistor = Resistor()
         ResistorFormatter.generateResistor(resistor)
         assertEquals("", resistor.multiplierBand)
@@ -20,437 +22,308 @@ class ResistorFormatterTest {
     }
 
     @Test
-    fun fourBandMultiplierTest1() {
+    fun `numerical input for multiplier band of four band resistors`() {
+        val resistances = listOf(
+            "1", "10", "100", "1000", "10000",
+            "1", "10", "100", "1000", "10000",
+            "1", "10", "100", "1000", "10000",
+            "1", "10",
+            "23", "230", "2300", "23000",
+            "23", "230", "2300", "23000",
+            "23", "230", "2300", "23000",
+            "23", "230" // blank, since invalid
+        )
+
+        val units = listOf(
+            OHMS, OHMS, OHMS, OHMS, OHMS,
+            "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS",
+            "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS",
+            "G$OHMS", "G$OHMS",
+            OHMS, OHMS, OHMS, OHMS,
+            "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS",
+            "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS",
+            "G$OHMS", "G$OHMS"
+        )
+
+        val answers = listOf(
+            GOLD, BLACK, BROWN, RED, ORANGE,
+            RED, ORANGE, YELLOW, GREEN, BLUE,
+            GREEN, BLUE, VIOLET, GRAY, WHITE,
+            GRAY, WHITE,
+            BLACK, BROWN, RED, ORANGE,
+            ORANGE, YELLOW, GREEN, BLUE,
+            BLUE, VIOLET, GRAY, WHITE,
+            WHITE, "Blank"
+        )
+
         val resistor = Resistor()
         resistor.toleranceValue = "${PLUS_MINUS}5%"
         resistor.setNumberOfBands(4)
 
-        resistor.units = "M$OHMS"
-        resistor.resistance = "1"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Green", resistor.multiplierBand)
-
-        resistor.units = "k$OHMS"
-        resistor.resistance = "820"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Yellow", resistor.multiplierBand)
-
-        resistor.resistance = "680"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Yellow", resistor.multiplierBand)
-
-        resistor.resistance = "560"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Yellow", resistor.multiplierBand)
-
-        resistor.resistance = "470"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Yellow", resistor.multiplierBand)
-
-        resistor.resistance = "390"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Yellow", resistor.multiplierBand)
-
-        resistor.resistance = "330"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Yellow", resistor.multiplierBand)
-
-        resistor.resistance = "27"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand)
-
-        resistor.resistance = "22"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand)
-
-        resistor.resistance = "18"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand)
-
-        resistor.resistance = "15"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand)
-
-        resistor.resistance = "12"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand)
+        // test multiplier
+        for (i in answers.indices) {
+            resistor.units = units[i]
+            resistor.resistance = resistances[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(answers[i], resistor.multiplierBand)
+        }
     }
 
     @Test
-    fun fourBandMultiplierTest2() {
-        val resistor = Resistor()
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
-        resistor.setNumberOfBands(4)
+    fun `numerical input for multiplier band of five band resistors`() {
+        val resistances = listOf(
+            "1", "10", "100", "1000", "10000",
+            "1", "10", "100", "1000", "10000",
+            "1", "10", "100", "1000", "10000",
+            "1", "10", "100",
+            "23", "230", "2300", "23000",
+            "23", "230", "2300", "23000",
+            "23", "230", "2300", "23000",
+            "23", "230",
+            "456", "4560", "45600",
+            "456", "4560", "45600",
+            "456", "4560", "45600",
+            "456", "4560" // blank, since invalid
+        )
 
-        resistor.units = "k$OHMS"
-        resistor.resistance = "8.2"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand)
+        val units = listOf(
+            OHMS, OHMS, OHMS, OHMS, OHMS,
+            "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS",
+            "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS",
+            "G$OHMS", "G$OHMS", "G$OHMS",
+            OHMS, OHMS, OHMS, OHMS,
+            "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS",
+            "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS",
+            "G$OHMS", "G$OHMS",
+            OHMS, OHMS, OHMS,
+            "k$OHMS", "k$OHMS", "k$OHMS",
+            "M$OHMS", "M$OHMS", "M$OHMS",
+            "G$OHMS", "G$OHMS"
+        )
 
-        resistor.resistance = "6.8"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand)
+        val answers = listOf(
+            SILVER, GOLD, BLACK, BROWN, RED,
+            BROWN, RED, ORANGE, YELLOW, GREEN,
+            YELLOW, GREEN, BLUE, VIOLET, GRAY,
+            VIOLET, GRAY, WHITE,
+            GOLD, BLACK, BROWN, RED,
+            RED, ORANGE, YELLOW, GREEN,
+            GREEN, BLUE, VIOLET, GRAY,
+            GRAY, WHITE,
+            BLACK, BROWN, RED,
+            ORANGE, YELLOW, GREEN,
+            BLUE, VIOLET, GRAY,
+            WHITE, "Blank"
+        )
 
-        resistor.resistance = "5.6"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand)
-
-        resistor.resistance = "4.7"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand)
-
-        resistor.resistance = "3.9"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand)
-
-        resistor.resistance = "3.3"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand)
-
-        resistor.units = OHMS
-        resistor.resistance = "820"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Brown", resistor.multiplierBand)
-
-        resistor.resistance = "680"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Brown", resistor.multiplierBand)
-
-        resistor.resistance = "560"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Brown", resistor.multiplierBand)
-
-        resistor.resistance = "470"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Brown", resistor.multiplierBand)
-
-        resistor.resistance = "27"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Black", resistor.multiplierBand)
-
-        resistor.resistance = "22"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Black", resistor.multiplierBand)
-
-        resistor.resistance = "18"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Black", resistor.multiplierBand)
-
-        resistor.resistance = "15"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Black", resistor.multiplierBand)
-
-        resistor.resistance = "12"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Black", resistor.multiplierBand)
-    }
-
-    @Test
-    fun numericalFourBandInputs() {
-        val resistor = Resistor()
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
-        resistor.setNumberOfBands(4)
-
-        // Ohms
-        resistor.units = OHMS
-        resistor.resistance = "1"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Gold", resistor.multiplierBand)
-
-        resistor.resistance = "0.10"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Silver", resistor.multiplierBand)
-
-        resistor.resistance = "10"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Black", resistor.multiplierBand)
-
-        resistor.resistance = "100"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Brown", resistor.multiplierBand)
-
-        // kOhms
-        resistor.units = "k$OHMS"
-        resistor.resistance = "1"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand)
-
-        resistor.resistance = "10"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand)
-
-        resistor.resistance = "100"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Yellow", resistor.multiplierBand)
-
-        // MOhms
-        resistor.units = "M$OHMS"
-        resistor.resistance = "1"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Green", resistor.multiplierBand)
-
-        resistor.resistance = "10"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Blue", resistor.multiplierBand)
-
-        resistor.resistance = "100"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Violet", resistor.multiplierBand)
-
-        // GOhms
-        resistor.units = "G$OHMS"
-        resistor.resistance = "1"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Gray", resistor.multiplierBand)
-
-        resistor.resistance = "10"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("White", resistor.multiplierBand)
-    }
-
-    @Test
-    fun numericalFiveBandInputs() {
         val resistor = Resistor()
         resistor.toleranceValue = "${PLUS_MINUS}5%"
         resistor.setNumberOfBands(5)
 
-        // Ohms
-        resistor.units = OHMS
-        resistor.resistance = "12.3"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Gold", resistor.multiplierBand)
-
-        resistor.resistance = "1.23"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Silver", resistor.multiplierBand)
-
-        resistor.resistance = "123"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Black", resistor.multiplierBand)
-
-        // kOhms
-        resistor.units = "k$OHMS"
-        resistor.resistance = "1.23"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Brown", resistor.multiplierBand)
-
-        resistor.resistance = "12.3"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand)
-
-        resistor.resistance = "123"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand)
-
-        // MOhms
-        resistor.units = "M$OHMS"
-        resistor.resistance = "1.23"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Yellow", resistor.multiplierBand)
-
-        resistor.resistance = "12.3"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Green", resistor.multiplierBand)
-
-        resistor.resistance = "123"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Blue", resistor.multiplierBand)
-
-        // GOhms
-        resistor.units = "G$OHMS"
-        resistor.resistance = "1.23"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Violet", resistor.multiplierBand)
-
-        resistor.resistance = "12.3"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Gray", resistor.multiplierBand)
-
-        resistor.resistance = "123"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("White", resistor.multiplierBand)
+        // test multiplier
+        for (i in answers.indices) {
+            resistor.units = units[i]
+            resistor.resistance = resistances[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(answers[i], resistor.multiplierBand)
+        }
     }
 
     @Test
-    fun decimalFourBandInputs() {
+    fun `decimal inputs for multiplier band of four band resistors`() {
+        val resistances = listOf(
+            "1.0", "10.0", "1.0", "10.0", "1.0", "10.0", "1.0", "10.0",
+            "23.0", "23.0", "23.0", "23.0", "23.", "23.", "23.", "23.",
+            "4.5", "4.5", "4.5", "4.5",
+        )
+
+        val units = listOf(
+            OHMS, OHMS, "k$OHMS", "k$OHMS", "M$OHMS", "M$OHMS", "G$OHMS", "G$OHMS",
+            OHMS, "k$OHMS", "M$OHMS", "G$OHMS", OHMS, "k$OHMS", "M$OHMS", "G$OHMS",
+            OHMS, "k$OHMS", "M$OHMS", "G$OHMS",
+        )
+
+        val answers = listOf(
+            GOLD, BLACK, RED, ORANGE, GREEN, BLUE, GRAY, WHITE,
+            BLACK, ORANGE, BLUE, WHITE, BLACK, ORANGE, BLUE, WHITE,
+            GOLD, RED, GREEN, GRAY,
+        )
+
         val resistor = Resistor()
         resistor.toleranceValue = "${PLUS_MINUS}5%"
         resistor.setNumberOfBands(4)
 
-        resistor.units = OHMS
-        resistor.resistance = "0.70"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Silver", resistor.multiplierBand)
-
-        resistor.resistance = "1.7"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Gold", resistor.multiplierBand)
-
-        resistor.resistance = "17."
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Black", resistor.multiplierBand)
-
-        resistor.units = "k$OHMS"
-        resistor.resistance = "0.70"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Brown", resistor.multiplierBand)
-
-        resistor.resistance = "1.7"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand)
-
-        resistor.resistance = "17."
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand)
-
-        resistor.units = "M$OHMS"
-        resistor.resistance = "0.70"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Yellow", resistor.multiplierBand)
-
-        resistor.resistance = "1.7"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Green", resistor.multiplierBand)
-
-        resistor.resistance = "17."
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Blue", resistor.multiplierBand)
-
-        resistor.units = "G$OHMS"
-        resistor.resistance = "0.70"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Violet", resistor.multiplierBand)
-
-        resistor.resistance = "1.7"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Gray", resistor.multiplierBand)
-
-        resistor.resistance = "17."
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("White", resistor.multiplierBand)
+        // test multiplier
+        for (i in answers.indices) {
+            resistor.units = units[i]
+            resistor.resistance = resistances[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(answers[i], resistor.multiplierBand)
+        }
     }
 
     @Test
-    fun decimalFiveBandInputs() {
+    fun `decimal inputs for multiplier band of five band resistors`() {
+        val resistances = listOf(
+            "1.0", "10.0", "100.0", "1.0", "10.0", "100.0", "1.0", "10.0", "100.0", "1.0", "10.0", "100.0",
+            "23.0", "230.0", "23.0", "230.0", "23.0", "230.0", "23.0", "230.0",
+            "456.0", "456.0", "456.0", "456.0", "456.", "456.", "456.", "456.",
+            "4.5", "4.5", "4.50", "4.50", "4.56", "4.56", "4.56", "4.56",
+            "78.9", "78.9", "78.9", "78.9", "70.9", "70.9", "70.9", "70.9", "1.00"
+        )
+
+        val units = listOf(
+            OHMS, OHMS, OHMS, "k$OHMS", "k$OHMS", "k$OHMS", "M$OHMS", "M$OHMS", "M$OHMS", "G$OHMS", "G$OHMS", "G$OHMS",
+            OHMS, OHMS, "k$OHMS", "k$OHMS", "M$OHMS", "M$OHMS", "G$OHMS", "G$OHMS",
+            OHMS, "k$OHMS", "M$OHMS", "G$OHMS", OHMS, "k$OHMS", "M$OHMS", "G$OHMS",
+            OHMS, "k$OHMS", "M$OHMS", "G$OHMS", OHMS, "k$OHMS", "M$OHMS", "G$OHMS",
+            OHMS, "k$OHMS", "M$OHMS", "G$OHMS", OHMS, "k$OHMS", "M$OHMS", "G$OHMS", OHMS
+        )
+
+        val answers = listOf(
+            SILVER, GOLD, BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GRAY, WHITE,
+            GOLD, BLACK, RED, ORANGE, GREEN, BLUE, GRAY, WHITE,
+            BLACK, ORANGE, BLUE, WHITE, BLACK, ORANGE, BLUE, WHITE,
+            SILVER, BROWN, YELLOW, VIOLET, SILVER, BROWN, YELLOW, VIOLET,
+            GOLD, RED, GREEN, GRAY, GOLD, RED, GREEN, GRAY, SILVER
+        )
+
         val resistor = Resistor()
         resistor.toleranceValue = "${PLUS_MINUS}5%"
         resistor.setNumberOfBands(5)
 
-        resistor.units = OHMS
-        resistor.resistance = "6.89"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Silver", resistor.multiplierBand)
-
-        resistor.resistance = "68.9"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Gold", resistor.multiplierBand)
-
-        resistor.resistance = "689."
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Black", resistor.multiplierBand)
-
-        resistor.units = "k$OHMS"
-        resistor.resistance = "0.689"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Black", resistor.multiplierBand)
-
-        resistor.resistance = "6.89"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Brown", resistor.multiplierBand)
-
-        resistor.resistance = "68.9"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand)
-
-        resistor.resistance = "689."
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand)
-
-        resistor.units = "M$OHMS"
-        resistor.resistance = "0.689"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand)
-
-        resistor.resistance = "6.89"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Yellow", resistor.multiplierBand)
-
-        resistor.resistance = "68.9"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Green", resistor.multiplierBand)
-
-        resistor.resistance = "689"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Blue", resistor.multiplierBand)
-
-        resistor.units = "G$OHMS"
-        resistor.resistance = "0.689"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Blue", resistor.multiplierBand)
-
-        resistor.resistance = "6.89"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Violet", resistor.multiplierBand)
-
-        resistor.resistance = "68.9"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Gray", resistor.multiplierBand)
-
-        resistor.resistance = "689."
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("White", resistor.multiplierBand)
+        // test multiplier
+        for (i in answers.indices) {
+            resistor.units = units[i]
+            resistor.resistance = resistances[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(answers[i], resistor.multiplierBand)
+        }
     }
 
     @Test
-    fun leadingZeroBandsFourBandTest() {
-        // 4 -> 0.0x, 0.x0, 0.xy, x.y
+    fun `leading zeros as inputs for four band resistors`() {
+        val resistances = listOf(
+            "0.1", "0.10", "0.12", "0.1", "0.10", "0.12", "0.1", "0.10", "0.12", "0.1", "0.10", "0.12",
+            "0.01", "0.01", "0.01", "0.01"
+        )
+
+        var units = listOf(
+            OHMS, OHMS, OHMS, "k$OHMS", "k$OHMS", "k$OHMS", "M$OHMS", "M$OHMS", "M$OHMS", "G$OHMS", "G$OHMS", "G$OHMS",
+            OHMS, "k$OHMS", "M$OHMS", "G$OHMS"
+        )
+
+        val answers = listOf(
+            SILVER, SILVER, SILVER, BROWN, BROWN, BROWN, YELLOW, YELLOW, YELLOW, VIOLET, VIOLET, VIOLET,
+            SILVER, BLACK, ORANGE, BLUE
+        )
+
         val resistor = Resistor()
-        resistor.units = OHMS
+        resistor.toleranceValue = "${PLUS_MINUS}5%"
+        resistor.setNumberOfBands(4)
 
-        resistor.resistance = "0.12"
-        ResistorFormatter.generateResistor(resistor)
-        var expectedResult = Resistor("Brown", "Red", "", "Silver")
-        expectedResult.units = OHMS
-        assertEquals(expectedResult, resistor)
+        // test multiplier
+        for (i in answers.indices) {
+            resistor.units = units[i]
+            resistor.resistance = resistances[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(answers[i], resistor.multiplierBand)
+        }
 
-        resistor.resistance = "0.10"
-        ResistorFormatter.generateResistor(resistor)
-        expectedResult = Resistor("Brown", "Black", "", "Silver")
-        expectedResult.units = OHMS
-        assertEquals(expectedResult, resistor)
+        // test resistor
+        val resistors = listOf(
+            Resistor(BLACK, BROWN, "", SILVER, GOLD), // 0.01 Ohms
+            Resistor(BROWN, BLACK, "", BLACK, GOLD), // 0.01 kOhms -> 10 Ohms
+            Resistor(BROWN, BLACK, "", ORANGE, GOLD), // 0.01 MOhms -> 10 kOhms
+            Resistor(BROWN, BLACK, "", BLUE, GOLD), // 0.01 GOhms -> 10 MOhms
+        )
 
         resistor.resistance = "0.01"
-        ResistorFormatter.generateResistor(resistor)
-        expectedResult = Resistor("Black", "Brown", "", "Silver")
-        expectedResult.units = OHMS
-        assertEquals(expectedResult, resistor)
-
-        resistor.resistance = "1.2"
-        ResistorFormatter.generateResistor(resistor)
-        expectedResult = Resistor("Brown", "Red", "", "Gold")
-        expectedResult.units = OHMS
-        assertEquals(expectedResult, resistor)
+        resistor.toleranceBand = GOLD
+        units = listOf(OHMS, "k$OHMS", "M$OHMS", "G$OHMS")
+        for (i in resistors.indices) {
+            resistor.units = units[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(resistors[i], resistor)
+        }
     }
 
     @Test
-    fun leadingZerosFiveBandTest() {
-        // 5 -> 0.0x, 0.x0, x.00, 0.xy, x.y0, x.0y, x.yz
+    fun `leading zeros as inputs for five band resistors`() {
+        val resistances = listOf(
+            "0.1", "0.10", "0.12", "0.1", "0.10", "0.12", "0.1", "0.10", "0.12", "0.1", "0.10", "0.12",
+            "0.01", "0.01", "0.01", "0.01"
+        )
+
+        var units = listOf(
+            OHMS, OHMS, OHMS, "k$OHMS", "k$OHMS", "k$OHMS", "M$OHMS", "M$OHMS", "M$OHMS", "G$OHMS", "G$OHMS", "G$OHMS",
+            OHMS, "k$OHMS", "M$OHMS", "G$OHMS"
+        )
+
+        val answers = listOf(
+            SILVER, SILVER, SILVER, BROWN, BROWN, BROWN, YELLOW, YELLOW, YELLOW, VIOLET, VIOLET, VIOLET,
+            SILVER, BLACK, ORANGE, BLUE
+        )
+
         val resistor = Resistor()
-        resistor.units = OHMS
+        resistor.toleranceValue = "${PLUS_MINUS}5%"
+        resistor.setNumberOfBands(4)
+
+        // test multiplier
+        for (i in answers.indices) {
+            resistor.units = units[i]
+            resistor.resistance = resistances[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(answers[i], resistor.multiplierBand)
+        }
+
+        // test resistor
+        val resistors = listOf(
+            Resistor(BLACK, BROWN, "", SILVER, GOLD), // 0.01 Ohms
+            Resistor(BROWN, BLACK, "", BLACK, GOLD), // 0.01 kOhms -> 10 Ohms
+            Resistor(BROWN, BLACK, "", ORANGE, GOLD), // 0.01 MOhms -> 10 kOhms
+            Resistor(BROWN, BLACK, "", BLUE, GOLD), // 0.01 GOhms -> 10 MOhms
+        )
+
+        resistor.resistance = "0.01"
+        resistor.toleranceBand = GOLD
+        units = listOf(OHMS, "k$OHMS", "M$OHMS", "G$OHMS")
+        for (i in resistors.indices) {
+            resistor.units = units[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(resistors[i], resistor)
+        }
+    }
+
+    // TODO - need to rewrite this will all conditions
+    @Test
+    fun leadingZerosInputsFiveBand() {
+        val resistor = Resistor()
+        resistor.toleranceValue = "${PLUS_MINUS}5%"
+        resistor.setNumberOfBands(5)
 
         resistor.units = OHMS
-        resistor.resistance = "1.23"
-        resistor.setNumberOfBands(5)
+
+        resistor.units = "k$OHMS"
+        resistor.resistance = "0.689"
         ResistorFormatter.generateResistor(resistor)
-        var expectedResult = Resistor("Brown", "Red", "Orange", "Silver")
-        expectedResult.setNumberOfBands(5)
-        expectedResult.units = "k$OHMS"
-        assertEquals(expectedResult, resistor)
+        assertEquals("Black", resistor.multiplierBand)
+
+        resistor.units = "M$OHMS"
+        resistor.resistance = "0.689"
+        ResistorFormatter.generateResistor(resistor)
+        assertEquals("Orange", resistor.multiplierBand)
+
+        resistor.units = "G$OHMS"
+        resistor.resistance = "0.689"
+        ResistorFormatter.generateResistor(resistor)
+        assertEquals("Blue", resistor.multiplierBand)
 
         resistor.resistance = "0.01"
         resistor.units = OHMS
+        resistor.setNumberOfBands(5)
         ResistorFormatter.generateResistor(resistor)
-        expectedResult = Resistor("Black", "Black", "Brown", "Silver")
+        var expectedResult = Resistor("Black", "Black", "Brown", "Silver")
         expectedResult.setNumberOfBands(5)
         expectedResult.units = OHMS
         assertEquals(expectedResult, resistor)
@@ -462,14 +335,6 @@ class ResistorFormatterTest {
         expectedResult.units = OHMS
         assertEquals(expectedResult, resistor)
 
-        resistor.resistance = "1.00"
-        resistor.units = OHMS
-        ResistorFormatter.generateResistor(resistor)
-        expectedResult = Resistor("Brown", "Black", "Black", "Silver")
-        expectedResult.setNumberOfBands(5)
-        expectedResult.units = OHMS
-        assertEquals(expectedResult, resistor)
-
         resistor.resistance = "0.12"
         resistor.units = OHMS
         ResistorFormatter.generateResistor(resistor)
@@ -477,94 +342,14 @@ class ResistorFormatterTest {
         expectedResult.setNumberOfBands(5)
         expectedResult.units = OHMS
         assertEquals(expectedResult, resistor)
-
-        resistor.resistance = "1.20"
-        resistor.units = OHMS
-        ResistorFormatter.generateResistor(resistor)
-        expectedResult = Resistor("Brown", "Red", "Black", "Silver")
-        expectedResult.setNumberOfBands(5)
-        expectedResult.units = OHMS
-        assertEquals(expectedResult, resistor)
-
-        resistor.resistance = "1.02"
-        resistor.units = OHMS
-        ResistorFormatter.generateResistor(resistor)
-        expectedResult = Resistor("Brown", "Black", "Red", "Silver")
-        expectedResult.setNumberOfBands(5)
-        expectedResult.units = OHMS
-        assertEquals(expectedResult, resistor)
-
-        resistor.resistance = "1.23"
-        resistor.units = OHMS
-        ResistorFormatter.generateResistor(resistor)
-        expectedResult = Resistor("Brown", "Red", "Orange", "Silver")
-        expectedResult.setNumberOfBands(5)
-        expectedResult.units = OHMS
-        assertEquals(expectedResult, resistor)
-    }
-
-    // Note: we might need to change these to adhere to proper unit convention
-    // i.e: 10000 Ω -> 10 kΩ
-    @Test
-    fun longInputResistanceTest() {
-        val resistor = Resistor()
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
-        resistor.setNumberOfBands(4)
-
-        resistor.units = OHMS
-        resistor.resistance = "1000"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand) // 1000 Ω
-
-        resistor.resistance = "10000"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Orange", resistor.multiplierBand) // 10000 Ω
-
-        resistor.setNumberOfBands(5)
-        resistor.units = OHMS
-        resistor.resistance = "1000"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Brown", resistor.multiplierBand) // 1000 Ω
-
-        resistor.resistance = "10000"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand) // 10000 Ω
-
-        resistor.setNumberOfBands(6)
-        resistor.units = OHMS
-        resistor.resistance = "1000"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Brown", resistor.multiplierBand) // 1000 Ω
-
-        resistor.resistance = "10000"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Red", resistor.multiplierBand) // 10000 Ω
     }
 
     @Test
-    fun elseClausesTest() {
-        // these are not possible outputs, only for code coverage
+    fun `not valid unit string`() {
         val resistor = Resistor()
         resistor.resistance = "12"
         resistor.units = "notValid"
         ResistorFormatter.generateResistor(resistor)
         assertEquals("Black", resistor.multiplierBand)
-
-        resistor.resistance = "123.0"
-        resistor.units = "G$OHMS"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Blank", resistor.multiplierBand)
-
-        resistor.resistance = "1234.0"
-        resistor.setNumberOfBands(5)
-        resistor.units = "G$OHMS"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Blank", resistor.multiplierBand)
-
-        resistor.resistance = "1234"
-        resistor.setNumberOfBands(5)
-        resistor.units = "G$OHMS"
-        ResistorFormatter.generateResistor(resistor)
-        assertEquals("Blank", resistor.multiplierBand)
     }
 }
