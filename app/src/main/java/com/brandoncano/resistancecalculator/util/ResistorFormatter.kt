@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.components.Resistor
+import com.brandoncano.resistancecalculator.constants.BLANK
 import com.brandoncano.resistancecalculator.constants.OHMS
 
 /**
@@ -64,7 +65,7 @@ object ResistorFormatter {
         if (colorsMap.containsKey(index)) {
             return colorsMap.getValue(index)
         }
-        return "Blank"
+        return BLANK
     }
 
     // find the value of the multiplier for any whole numbers
@@ -74,7 +75,7 @@ object ResistorFormatter {
         if (colorsMap.containsKey(length)) {
             return colorsMap.getValue(length)
         }
-        return "Blank"
+        return BLANK
     }
 
     // multiplier to convert to ohms

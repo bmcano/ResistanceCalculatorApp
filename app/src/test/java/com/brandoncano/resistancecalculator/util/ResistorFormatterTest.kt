@@ -53,7 +53,7 @@ class ResistorFormatterTest {
             BLACK, BROWN, RED, ORANGE,
             ORANGE, YELLOW, GREEN, BLUE,
             BLUE, VIOLET, GRAY, WHITE,
-            WHITE, "Blank"
+            WHITE, BLANK
         )
 
         val resistor = Resistor()
@@ -113,7 +113,7 @@ class ResistorFormatterTest {
             BLACK, BROWN, RED,
             ORANGE, YELLOW, GREEN,
             BLUE, VIOLET, GRAY,
-            WHITE, "Blank"
+            WHITE, BLANK
         )
 
         val resistor = Resistor()
