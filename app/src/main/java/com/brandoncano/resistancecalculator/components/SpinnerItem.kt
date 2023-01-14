@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.spinner
+package com.brandoncano.resistancecalculator.components
 
 /**
  * Job: Holds the drawable and the name of the color.

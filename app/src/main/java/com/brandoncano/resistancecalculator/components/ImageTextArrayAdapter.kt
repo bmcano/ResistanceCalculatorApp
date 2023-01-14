@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.spinner
+package com.brandoncano.resistancecalculator.components
 
 import android.app.Activity
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.spinner
+package com.brandoncano.resistancecalculator.components
 
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.OHMS

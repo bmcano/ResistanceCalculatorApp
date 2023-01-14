@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.components.StateData
-import com.brandoncano.resistancecalculator.spinner.ImageTextArrayAdapter
-import com.brandoncano.resistancecalculator.spinner.SpinnerContents
+import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
+import com.brandoncano.resistancecalculator.components.SpinnerContents
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
