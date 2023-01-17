@@ -2,7 +2,6 @@ package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.constants.BLANK
-import com.brandoncano.resistancecalculator.constants.OHMS
 
 /**
  * Job: Formats the resistor based resistance that has been entered (VtC).
@@ -18,7 +17,7 @@ object ResistorFormatter {
         val resistance = resistor.resistance
         if (resistance == "NotValid" || resistance.isEmpty()) return
 
-        val multiplier = unitsMultiplier(resistor.units)
+        val multiplier = MultiplierFromUnits.execute(resistor.units)
         val resLong: Long? = resistance.toLongOrNull()?.times(multiplier)
         val resDouble: Double = resistance.toDoubleOrNull()?.times(multiplier) ?: return
         if (resLong == null) {
@@ -76,15 +75,5 @@ object ResistorFormatter {
             return colorsMap.getValue(length)
         }
         return BLANK
-    }
-
-    // multiplier to convert to ohms
-    private fun unitsMultiplier(units: String): Int {
-        return when (units) {
-            "k$OHMS" -> 1000
-            "M$OHMS" -> 1000000
-            "G$OHMS" -> 1000000000
-            else -> 1 // Ohms
-        }
     }
 }
