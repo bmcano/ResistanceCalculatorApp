@@ -8,29 +8,6 @@ import com.brandoncano.resistancecalculator.constants.*
  */
 object ResistanceFormatter {
 
-    private val colorToNumber = mapOf(
-        BLACK to "0", BROWN to "1", RED to "2", ORANGE to "3", YELLOW to "4",
-        GREEN to "5", BLUE to "6", VIOLET to "7", GRAY to "8", WHITE to "9"
-    )
-
-    private val colorToMultiplier = mapOf(
-        BLACK to "1 ", BROWN to "10 ", RED to "100 ",
-        ORANGE to "1 k", YELLOW to "10 k", GREEN to "100 k",
-        BLUE to "1 M", VIOLET to "10 M", GRAY to "100 M",
-        WHITE to "1 G", GOLD to "0.1 ", SILVER to "0.01 "
-    )
-
-    private val colorToTolerance = mapOf(
-        BROWN to "1%", RED to "2%", GREEN to "0.5%", BLUE to "0.25%",
-        VIOLET to "0.1%", GRAY to "0.05%", GOLD to "5%", SILVER to "10%"
-    )
-
-    private val colorToPPM = mapOf(
-        BLACK to "\n250", BROWN to "\n100", RED to "\n50", ORANGE to "\n15",
-        YELLOW to "\n25", GREEN to "\n20", BLUE to "\n10", VIOLET to "\n5", GRAY to "\n1"
-    )
-
-    // works for all 4, 5, and 6 band resistors
     fun calculate(resistor: Resistor): String {
         if (resistor.isEmpty()) return "Select Colors"
 
@@ -41,98 +18,88 @@ object ResistanceFormatter {
         val tolerance = formatTolerance(resistor.toleranceBand)
         val ppm = formatPPM(resistor.ppmBand, resistor.getNumberOfBands())
 
-        return "$resistance${OHMS} $tolerance$ppm"
+        return "$resistance $tolerance$ppm"
     }
 
-    // gets the number from its color representation
     private fun formatSigFig(color: String): String {
+        val colorToNumber = mapOf(
+            BLACK to "0", BROWN to "1", RED to "2", ORANGE to "3", YELLOW to "4",
+            GREEN to "5", BLUE to "6", VIOLET to "7", GRAY to "8", WHITE to "9"
+        )
         return if (colorToNumber.containsKey(color)) colorToNumber.getValue(color) else "0"
     }
 
-    // four band resistor
-    private fun formatMultiplier(color: String, band1: String, band2: String): String {
-        return when (color) {
-            BLACK -> "$band1$band2 "
-            BROWN -> "$band1${band2}0 "
-            RED -> "${band1}.${band2} k"
-            ORANGE -> "$band1${band2} k"
-            YELLOW -> "$band1${band2}0 k"
-            GREEN -> "${band1}.${band2} M"
-            BLUE -> "$band1${band2} M"
-            VIOLET -> "$band1${band2}0 M"
-            GRAY -> "${band1}.${band2} G"
-            WHITE -> "$band1${band2} G"
-            GOLD -> "${band1}.${band2} "
-            SILVER -> "0.$band1${band2} "
-            else -> "$band1$band2 "
-        }
-    }
-
-    // five or six band resistor
-    private fun formatMultiplier(color: String, band1: String, band2: String, band3: String): String {
-        return band1 + when (color) {
-            BLACK -> "$band2$band3 "
-            BROWN -> ".$band2$band3 k"
-            RED -> "${band2}.$band3 k"
-            ORANGE -> "$band2$band3 k"
-            YELLOW -> ".$band2$band3 M"
-            GREEN -> "${band2}.$band3 M"
-            BLUE -> "$band2$band3 M"
-            VIOLET -> ".$band2$band3 G"
-            GRAY -> "${band2}.$band3 G"
-            WHITE -> "$band2$band3 G"
-            GOLD -> "$band2.$band3 "
-            SILVER -> ".$band2$band3 "
-            else -> "$band2$band3 "
-        }
-    }
-
     private fun formatTolerance(color: String): String {
+        val colorToTolerance = mapOf(
+            BROWN to "1%", RED to "2%", GREEN to "0.5%", BLUE to "0.25%",
+            VIOLET to "0.1%", GRAY to "0.05%", GOLD to "5%", SILVER to "10%"
+        )
         return PLUS_MINUS + if (colorToTolerance.containsKey(color)) {
             colorToTolerance.getValue(color)
         } else "20%"
     }
 
     private fun formatPPM(color: String, bands: Int): String {
+        val colorToPPM = mapOf(
+            BLACK to "250", BROWN to "100", RED to "50", ORANGE to "15",
+            YELLOW to "25", GREEN to "20", BLUE to "10", VIOLET to "5", GRAY to "1"
+        )
         return if (colorToPPM.containsKey(color) && bands == 6) {
-            colorToPPM.getValue(color) + " $PPM_UNIT"
+            "\n${colorToPPM.getValue(color)} $PPM_UNIT"
         } else ""
     }
 
-    private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo:String, sigFigThree: String): String {
-        if (resistor.allDigitsZero()) return "0 "
+    private fun getMultiplierValue(color: String): Double {
+        val colorToMultiplier = mapOf(
+            BLACK to 1.0, BROWN to 10.0, RED to 100.0, ORANGE to 1000.0, YELLOW to 10000.0,
+            GREEN to 100000.0, BLUE to 1000000.0, VIOLET to 10000000.0, GRAY to 100000000.0,
+            WHITE to 1000000000.0, GOLD to 0.1, SILVER to 0.01
+        )
+        return if (colorToMultiplier.containsKey(color)) {
+            colorToMultiplier.getValue(color)
+        } else 1.0
+    }
 
-        val value: Int
-        var multiplier = if (resistor.getNumberOfBands() == 4) {
-            value = (sigFigOne + sigFigTwo).toInt()
-            formatMultiplier(resistor.multiplierBand, sigFigOne, sigFigTwo)
+    private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
+        if (resistor.allDigitsZero()) return "0 $OHMS" // 0 Ohm resistor
+
+        val hasLeadingZero = sigFigOne == "0"
+        val hasTwoLeadingZeros = sigFigOne == "0" && sigFigTwo == "0"
+        val value: Int = if (resistor.getNumberOfBands() == 4) {
+            (sigFigOne + sigFigTwo).toIntOrNull() ?: return "0 $OHMS"
         } else {
-            value = (sigFigOne + sigFigTwo + sigFigThree).toInt()
-            formatMultiplier(resistor.multiplierBand, sigFigOne, sigFigTwo, sigFigThree)
+            (sigFigOne + sigFigTwo + sigFigThree).toIntOrNull() ?: return "0 $OHMS"
         }
 
-        // format multiplier for edge cases of leading 0s
-        val (multiple, unit) = colorToMultiplier.getValue(resistor.multiplierBand).split(" ")
-        if (resistor.getNumberOfBands() != 4 && resistor.sigFigBandOne == BLACK && resistor.sigFigBandTwo != BLACK) {
-            multiplier = when (resistor.multiplierBand) {
-                BROWN -> "${sigFigTwo}${sigFigThree}0 "
-                YELLOW -> "${sigFigTwo}${sigFigThree}0 k"
-                VIOLET -> "${sigFigTwo}${sigFigThree}0 M"
-                SILVER -> "0.${sigFigTwo}${sigFigThree} "
-                else -> formatMultiplier(resistor.multiplierBand, "", sigFigTwo, sigFigThree)
-            }
-        } else if (resistor.sigFigBandOne == BLACK) {
-            multiplier = if (resistor.multiplierBand == SILVER) {
-                String.format("%.2f", (value * multiple.toFloat()))
-            } else {
-                String.format("%.1f", (value * multiple.toFloat()))
-            }
-            if (multiplier.endsWith(".0")) {
-                multiplier = multiplier.substring(0, multiplier.length - 2)
-            }
-            multiplier += " $unit"
+        val multiplier = getMultiplierValue(resistor.multiplierBand)
+        var resistanceAsDecimal = value.times(multiplier)
+        val units = unitConversion(resistanceAsDecimal)
+        while (resistanceAsDecimal >= 1000) {
+            resistanceAsDecimal /= 1000
         }
 
-        return multiplier
+        val bands = resistor.getNumberOfBands()
+        val noDecimal = (bands == 4 && resistanceAsDecimal >= 10) ||
+                (bands != 4 && resistanceAsDecimal >= 100) ||
+                (bands == 4 && hasLeadingZero && resistanceAsDecimal >= 1) ||
+                (bands != 4 && hasLeadingZero && resistanceAsDecimal >= 10) ||
+                (bands != 4 && hasTwoLeadingZeros && resistanceAsDecimal >= 1)
+
+        return if (noDecimal) {
+            "${String.format("%.0f", resistanceAsDecimal)} $units"
+        } else if (resistor.multiplierBand == SILVER) {
+            "${String.format("%.2f", resistanceAsDecimal)} $units"
+        } else {
+            "${String.format("%.1f", resistanceAsDecimal)} $units"
+        }
+    }
+
+    private fun unitConversion(value: Double): String {
+        return when {
+            value >= 1000000000 -> "G$OHMS"
+            value >= 1000000 -> "M$OHMS"
+            value >= 1000 -> "k$OHMS"
+            else -> OHMS
+        }
     }
 }
