@@ -26,8 +26,6 @@ class MainActivity : AppCompatActivity() {
             actionBar.title = getString(R.string.app_name)
             actionBar.elevation = 4F
         }
-
-        buttonSetup()
     }
 
     override fun onResume() {
@@ -50,7 +48,9 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.about_item -> {
-                startActivity(Intent(this, AboutActivity::class.java))
+                val intent = Intent(this, AboutActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -63,11 +63,13 @@ class MainActivity : AppCompatActivity() {
 
         colorToValueButton.setOnClickListener {
             val intent = Intent(this, ColorToValueActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
         }
 
         valueToColorButton.setOnClickListener {
             val intent = Intent(this, ValueToColorActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
         }
     }

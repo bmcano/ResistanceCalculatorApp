@@ -60,11 +60,6 @@ class ValueToColorActivity : AppCompatActivity() {
             actionBar.title = getString(R.string.value_to_color)
             actionBar.elevation = 4F
         }
-
-        generalSetup()
-        dropDownSetup()
-        buttonSetup()
-        calculateButtonSetup()
     }
 
     override fun onResume() {
@@ -85,7 +80,9 @@ class ValueToColorActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.color_to_value -> {
                 super.finish()
-                startActivity(Intent(this, ColorToValueActivity::class.java))
+                val intent = Intent(this, ColorToValueActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
                 return true
             }
             R.id.show_resistor_charts -> {
@@ -107,7 +104,9 @@ class ValueToColorActivity : AppCompatActivity() {
                 return true
             }
             R.id.about_item -> {
-                startActivity(Intent(this, AboutActivity::class.java))
+                val intent = Intent(this, AboutActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
