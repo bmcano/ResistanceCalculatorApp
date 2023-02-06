@@ -10,8 +10,8 @@ android {
         applicationId "com.brandoncano.resistancecalculator"
         minSdk 24
         targetSdk 33
-        versionCode 7
-        versionName "2.2"
+        versionCode 8
+        versionName "2.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,7 +38,7 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

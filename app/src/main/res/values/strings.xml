@@ -38,7 +38,7 @@
     <string name="invalid_input">Invalid Input</string>
 
     <!-- About page text -->
-    <string name="version">v2.1</string>
+    <string name="version">v2.3</string>
     <string name="created_by">Created By\n\nBrandon Cano</string>
     <string name="description">
         In this app you are able to find the resistance of a resistor based on the color of its
@@ -47,6 +47,6 @@
         \n\nYou can also look at the color charts, under \"Show Chart\", for reference.
     </string>
     <string name="rate_us">Rate this app on Google Play</string>
-    <string name="last_updated">Last Updated On: 12/26/2022</string>
+    <string name="last_updated">Last Updated On: 2/6/2023</string>
 
 </resources>
