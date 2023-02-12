@@ -31,7 +31,8 @@ object ResistorFormatter {
         val numberOfBands = resistor.getNumberOfBands()
         val formattedResistance = checkLeadingZeros(numberOfBands, String.format("%.2f", resDouble))
         formattedResistance.forEachIndexed { index, digit ->
-            if (index < 3) numberBands[index] = digit.digitToInt()
+            // if a invalid character makes its way through, set to -1 for a blank band
+            if (index < 3) numberBands[index] = digit.digitToIntOrNull() ?: -1
         }
 
         resistor.sigFigBandOne = ColorFinder.numberToText(numberBands[0])

@@ -59,7 +59,7 @@ object ColorFinder {
             7 -> VIOLET
             8 -> GRAY
             9 -> WHITE
-            else -> ""
+            else -> BLANK
         }
     }
 
