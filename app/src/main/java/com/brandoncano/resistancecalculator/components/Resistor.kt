@@ -12,19 +12,19 @@ import com.brandoncano.resistancecalculator.util.ColorFinder
  *   the parameters are specifically set for the value-to-color section.
  */
 data class Resistor(
-    // color to value specific attributes
-    var sigFigBandOne: String = "",
-    var sigFigBandTwo: String = "",
+    // holds the color of each band
+    var sigFigBandOne:   String = "",
+    var sigFigBandTwo:   String = "",
     var sigFigBandThree: String = "",
-    var multiplierBand: String = "",
-    var toleranceBand: String = "",
-    var ppmBand: String = ""
+    var multiplierBand:  String = "",
+    var toleranceBand:   String = "",
+    var ppmBand:         String = ""
 ) {
-    // value to color specific attributes
-    var resistance: String = ""
-    var units: String = ""
+    // specific values of the resistor
+    var resistance:     String = ""
+    var units:          String = ""
     var toleranceValue: String = ""
-    var ppmValue: String = ""
+    var ppmValue:       String = ""
 
     private var numberOfBands: Int = 4
 
@@ -50,23 +50,18 @@ data class Resistor(
         }
     }
 
-    fun getNumberOfBands(): Int {
-        return numberOfBands
-    }
+    fun getNumberOfBands(): Int = numberOfBands
 
     fun setNumberOfBands(number: Int) {
         numberOfBands = number
-        if (number != 4 && number != 5 && number != 6) {
-            numberOfBands = 4 // only allows values of 4, 5, or 6
+        if (number !in 4..6) {
+            numberOfBands = 4 // reset if not 4, 5, or 6
         }
     }
 
     fun isEmpty(): Boolean {
-        return if (numberOfBands == 4) {
-            sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || multiplierBand.isEmpty() || toleranceBand.isEmpty()
-        } else {
-            sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || sigFigBandThree.isEmpty() || multiplierBand.isEmpty() || toleranceBand.isEmpty()
-        }
+        val isMissingBands = sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || multiplierBand.isEmpty() || toleranceBand.isEmpty()
+        return (numberOfBands == 4 && isMissingBands) || (numberOfBands != 4 && (isMissingBands || sigFigBandThree.isEmpty()))
     }
 
     fun allDigitsZero(): Boolean {
