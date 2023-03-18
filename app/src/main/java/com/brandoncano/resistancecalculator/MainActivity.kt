@@ -17,7 +17,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        // if user is using android 7.1 or lower, then we use the old activity without the icon
+        if (android.os.Build.VERSION.SDK_INT < 26) {
+            setContentView(R.layout.activity_main_old_sdk)
+        } else {
+            setContentView(R.layout.activity_main)
+        }
 
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null) {
