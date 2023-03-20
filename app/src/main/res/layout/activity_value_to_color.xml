@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ValueToColorActivity">
+    android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_text_outline"
@@ -30,8 +29,8 @@
             android:maxLength="5"
             android:inputType="numberDecimal"
             android:maxLines="1"
-            android:textSize="16dp"
-            tools:ignore="LabelFor,SpUsage"/>
+            android:textSize="16sp"
+            tools:ignore="LabelFor"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,8 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:inputType="none"
-            android:textSize="16dp"
-            tools:ignore="LabelFor,SpUsage">
+            android:textSize="16sp"
+            tools:ignore="LabelFor">
 
         </AutoCompleteTextView>
 
@@ -108,13 +107,13 @@
         android:background="@drawable/custom_button"
         android:text="@string/calculate_btn"
         android:textAllCaps="false"
-        android:textSize="24dp"
-        android:textStyle="italic"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:backgroundTint="@color/mango_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropDownSelectorPPM"
-        tools:ignore="SpUsage" />
+        app:layout_constraintTop_toBottomOf="@+id/dropDownSelectorPPM" />
 
     <include
         android:id="@+id/resistor"
@@ -149,51 +148,51 @@
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/mango_dark"
         android:text="@string/four_band_btn"
         android:textAllCaps="false"
-        android:textColor="@color/neutral"
-        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/five_band"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpUsage"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/five_band"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/mango_primary"
         android:text="@string/five_band_btn"
         android:textAllCaps="false"
-        android:textColor="@color/neutral"
-        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/six_band"
-        app:layout_constraintStart_toEndOf="@+id/four_band"
-        tools:ignore="SpUsage"/>
+        app:layout_constraintStart_toEndOf="@+id/four_band" />
 
     <Button
         android:id="@+id/six_band"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
-        android:minWidth="94dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/mango_primary"
+        android:minWidth="94dp"
         android:text="@string/six_band_btn"
         android:textAllCaps="false"
-        android:textColor="@color/neutral"
-        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/five_band"
-        tools:ignore="SpUsage"/>
+        app:layout_constraintStart_toEndOf="@+id/five_band" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
