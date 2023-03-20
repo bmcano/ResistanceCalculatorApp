@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/resistor_chart_5"
-        android:background="@drawable/popup_background"/>
+        android:background="@drawable/popup_background"
+        android:contentDescription="@string/popup_chart_content_description"/>
 
 </RelativeLayout>

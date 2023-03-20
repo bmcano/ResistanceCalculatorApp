@@ -45,4 +45,7 @@
     <string name="rate_us">Rate this app on Google Play</string>
     <string name="last_updated">Last Updated On: 3/18/2023</string>
 
+    <!-- Content descriptions -->
+    <string name="popup_chart_content_description">Resistor chart</string>
+
 </resources>
