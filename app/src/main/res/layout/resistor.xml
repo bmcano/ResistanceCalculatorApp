@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
@@ -14,15 +14,15 @@
         app:layout_constraintBottom_toTopOf="@+id/r_post_band_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/group"/>
+        app:layout_constraintTop_toBottomOf="@id/group" />
 
     <ImageView
         android:id="@+id/r_left"
         android:layout_width="69dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_left"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_left"
         app:layout_constraintEnd_toStartOf="@+id/r_band_1"
         app:layout_constraintStart_toStartOf="@+id/group"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -32,8 +32,8 @@
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_band_1"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_band_1"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_1"
         app:layout_constraintStart_toEndOf="@+id/r_left"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -43,8 +43,8 @@
         android:layout_width="10dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_post_band_1"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_post_band_1"
         app:layout_constraintEnd_toStartOf="@+id/r_band_2"
         app:layout_constraintStart_toEndOf="@+id/r_band_1"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -54,8 +54,8 @@
         android:layout_width="11dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_band_2"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_band_2"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_2"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_1"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -65,8 +65,8 @@
         android:layout_width="9.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_post_band_2"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_post_band_2"
         app:layout_constraintEnd_toStartOf="@+id/r_band_3"
         app:layout_constraintStart_toEndOf="@+id/r_band_2"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -76,8 +76,8 @@
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_band_3"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_band_3"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_3"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_2"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -87,8 +87,8 @@
         android:layout_width="10.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_post_band_3"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_post_band_3"
         app:layout_constraintEnd_toStartOf="@+id/r_band_4"
         app:layout_constraintStart_toEndOf="@+id/r_band_3"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -98,8 +98,8 @@
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_band_4"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_band_4"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_4"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_3"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -109,8 +109,8 @@
         android:layout_width="16.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_post_band_4"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_post_band_4"
         app:layout_constraintEnd_toStartOf="@+id/r_band_5"
         app:layout_constraintStart_toEndOf="@+id/r_band_4"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -120,8 +120,8 @@
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_band_5"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_band_5"
         app:layout_constraintEnd_toStartOf="@+id/r_post_band_5"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_4"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -131,8 +131,8 @@
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_post_band_5"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_post_band_5"
         app:layout_constraintEnd_toStartOf="@+id/r_band_6"
         app:layout_constraintStart_toEndOf="@+id/r_band_5"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -142,8 +142,8 @@
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_band_6"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_band_6"
         app:layout_constraintEnd_toStartOf="@+id/r_right"
         app:layout_constraintStart_toEndOf="@+id/r_post_band_5"
         app:layout_constraintTop_toBottomOf="@id/group" />
@@ -153,8 +153,8 @@
         android:layout_width="52.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
-        android:src="@drawable/resistor_right"
         android:contentDescription="@string/resistor_description"
+        android:src="@drawable/resistor_right"
         app:layout_constraintEnd_toEndOf="@+id/group"
         app:layout_constraintStart_toEndOf="@+id/r_band_6"
         app:layout_constraintTop_toBottomOf="@id/group" />

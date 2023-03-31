@@ -13,12 +13,12 @@
         android:layout_marginTop="16dp"
         android:hint="@string/type_resistance_hint"
         android:textColorHint="?hintTextColor"
-        app:hintTextColor="?android:textColorPrimary"
         app:boxStrokeColor="@color/selected_dropdown_color"
         app:boxStrokeWidth="2dp"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:errorIconDrawable="@drawable/ic_error"
+        app:hintTextColor="?android:textColorPrimary"
         app:layout_constraintStart_toStartOf="@+id/dropDownSelectorTolerance"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -26,11 +26,11 @@
             android:id="@+id/enter_resistance"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:maxLength="5"
             android:inputType="numberDecimal"
+            android:maxLength="5"
             android:maxLines="1"
             android:textSize="16sp"
-            tools:ignore="LabelFor"/>
+            tools:ignore="LabelFor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,9 +42,9 @@
         android:layout_marginTop="16dp"
         android:hint="@string/units_hint"
         android:textColorHint="?hintTextColor"
-        app:hintTextColor="?android:textColorPrimary"
         app:boxStrokeColor="@color/selected_dropdown_color"
         app:boxStrokeWidth="2dp"
+        app:hintTextColor="?android:textColorPrimary"
         app:layout_constraintEnd_toEndOf="@+id/dropDownSelectorTolerance"
         app:layout_constraintTop_toTopOf="parent">
 
