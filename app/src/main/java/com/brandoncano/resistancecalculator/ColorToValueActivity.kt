@@ -106,7 +106,7 @@ class ColorToValueActivity : AppCompatActivity() {
     }
 
     private fun generalSetup() {
-        resistanceText = findViewById(R.id.resistance_display_new)
+        resistanceText = findViewById(R.id.resistance_display_ctv)
         toggleDropDownNumberBand3 = findViewById(R.id.dropDownSelector3)
         toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
         bandImage1 = findViewById(R.id.r_band_1)

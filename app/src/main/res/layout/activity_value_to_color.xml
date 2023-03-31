@@ -127,21 +127,11 @@
 
     <TextView
         android:id="@+id/display_resistance"
-        android:layout_width="256dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/outlined_box"
-        android:padding="4dp"
+        style="@style/resistanceDisplayTextDesign"
         android:text="@string/enter_value"
-        android:textAlignment="center"
-        android:textColor="?android:textColor"
-        android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/five_band"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpUsage" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/four_band"

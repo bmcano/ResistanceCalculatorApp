@@ -52,6 +52,20 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <!-- Text box design for displaying resistance -->
+    <style name="resistanceDisplayTextDesign">
+        <item name="android:layout_width">256dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:background">@drawable/outlined_box</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">?android:textColor</item>
+        <item name="android:textSize" tools:ignore="SpUsage">30dp</item>
+    </style>
+
     <!-- Bottom selector buttons for number of bands -->
     <style name="bandSelectorButtonDesign">
         <item name="android:layout_width">wrap_content</item>
