@@ -2,7 +2,7 @@ package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
 import com.brandoncano.resistancecalculator.components.Resistor
-import com.brandoncano.resistancecalculator.constants.OHMS
+import com.brandoncano.resistancecalculator.constants.Symbols as S
 
 /**
  * Notes:
@@ -35,7 +35,7 @@ object IsValidResistance {
             numberOfBands == 4 && sigFigs == 2 && input.startsWith("0.") -> true
             numberOfBands == 4 && sigFigs <= 2 && '.' in input -> true
             numberOfBands == 4 && sigFigs > 2 -> false
-            numberOfBands == 4 && units == "G$OHMS" && input.length > 2 -> false
+            numberOfBands == 4 && units == S.GOhms && input.length > 2 -> false
 
             // FIVE/SIX BAND
             resistor.getNumberOfBands() != 4 && input.startsWith("0.00") -> false
@@ -44,7 +44,7 @@ object IsValidResistance {
             resistor.getNumberOfBands() != 4 && sigFigs == 2 && input.startsWith("0.0") -> false
             resistor.getNumberOfBands() != 4 && sigFigs <= 3 && '.' in input -> true
             resistor.getNumberOfBands() != 4 && sigFigs > 3 -> false
-            resistor.getNumberOfBands() != 4 && units == "G$OHMS" && input.length > 3 -> false
+            resistor.getNumberOfBands() != 4 && units == S.GOhms && input.length > 3 -> false
 
             else -> true
         }

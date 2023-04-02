@@ -1,88 +1,85 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.*
+import com.brandoncano.resistancecalculator.constants.Colors as C
+import com.brandoncano.resistancecalculator.constants.Symbols as S
 
 /**
  * Job: Find the correct color, string, or drawable based on the input.
+ * Note: "${PLUS_MINUS}20%" -> blank - hidden in else conditions.
  */
 object ColorFinder {
 
-    // note: "${PLUS_MINUS}20%" -> R.drawable.blank32
     fun textToColoredDrawable(color: String = ""): Int {
         return when (color) {
-            BLACK ,                       "250 $PPM_UNIT" -> R.drawable.black_square
-            BROWN , "${PLUS_MINUS}1%"   , "100 $PPM_UNIT" -> R.drawable.brown_square
-            RED   , "${PLUS_MINUS}2%"   , "50 $PPM_UNIT"  -> R.drawable.red_square
-            ORANGE,                       "15 $PPM_UNIT"  -> R.drawable.orange_square
-            YELLOW,                       "25 $PPM_UNIT"  -> R.drawable.yellow_square
-            GREEN , "${PLUS_MINUS}0.5%" , "20 $PPM_UNIT"  -> R.drawable.green_square
-            BLUE  , "${PLUS_MINUS}0.25%", "10 $PPM_UNIT"  -> R.drawable.blue_square
-            VIOLET, "${PLUS_MINUS}0.1%" , "5 $PPM_UNIT"   -> R.drawable.violet_square
-            GRAY  , "${PLUS_MINUS}0.05%", "1 $PPM_UNIT"   -> R.drawable.gray_square
-            WHITE                                         -> R.drawable.white_square
-            GOLD  , "${PLUS_MINUS}5%"                     -> R.drawable.gold_square
-            SILVER, "${PLUS_MINUS}10%"                    -> R.drawable.silver_square
-            else                                          -> R.drawable.blank32
+            C.BLACK ,                         "250 ${S.PPM_UNIT}" -> R.drawable.black_square
+            C.BROWN , "${S.PLUS_MINUS}1%"   , "100 ${S.PPM_UNIT}" -> R.drawable.brown_square
+            C.RED   , "${S.PLUS_MINUS}2%"   , "50 ${S.PPM_UNIT}"  -> R.drawable.red_square
+            C.ORANGE,                         "15 ${S.PPM_UNIT}"  -> R.drawable.orange_square
+            C.YELLOW,                         "25 ${S.PPM_UNIT}"  -> R.drawable.yellow_square
+            C.GREEN , "${S.PLUS_MINUS}0.5%" , "20 ${S.PPM_UNIT}"  -> R.drawable.green_square
+            C.BLUE  , "${S.PLUS_MINUS}0.25%", "10 ${S.PPM_UNIT}"  -> R.drawable.blue_square
+            C.VIOLET, "${S.PLUS_MINUS}0.1%" , "5 ${S.PPM_UNIT}"   -> R.drawable.violet_square
+            C.GRAY  , "${S.PLUS_MINUS}0.05%", "1 ${S.PPM_UNIT}"   -> R.drawable.gray_square
+            C.WHITE                                               -> R.drawable.white_square
+            C.GOLD  , "${S.PLUS_MINUS}5%"                         -> R.drawable.gold_square
+            C.SILVER, "${S.PLUS_MINUS}10%"                        -> R.drawable.silver_square
+            else                                                  -> R.drawable.blank32
         }
     }
 
-    // note: "${PLUS_MINUS}20%" -> R.color.resistor_blank
     fun textToColor(color: String = ""): Int {
         return when (color) {
-            BLACK ,                       "250 $PPM_UNIT" -> R.color.black32
-            BROWN , "${PLUS_MINUS}1%"   , "100 $PPM_UNIT" -> R.color.brown32
-            RED   , "${PLUS_MINUS}2%"   , "50 $PPM_UNIT"  -> R.color.red32
-            ORANGE,                       "15 $PPM_UNIT"  -> R.color.orange32
-            YELLOW,                       "25 $PPM_UNIT"  -> R.color.yellow32
-            GREEN , "${PLUS_MINUS}0.5%" , "20 $PPM_UNIT"  -> R.color.green32
-            BLUE  , "${PLUS_MINUS}0.25%", "10 $PPM_UNIT"  -> R.color.blue32
-            VIOLET, "${PLUS_MINUS}0.1%" , "5 $PPM_UNIT"   -> R.color.violet32
-            GRAY  , "${PLUS_MINUS}0.05%", "1 $PPM_UNIT"   -> R.color.gray32
-            WHITE                                         -> R.color.white32
-            GOLD  , "${PLUS_MINUS}5%"                     -> R.color.gold32
-            SILVER, "${PLUS_MINUS}10%"                    -> R.color.silver32
-            else                                          -> R.color.resistor_blank
+            C.BLACK ,                         "250 ${S.PPM_UNIT}" -> R.color.black32
+            C.BROWN , "${S.PLUS_MINUS}1%"   , "100 ${S.PPM_UNIT}" -> R.color.brown32
+            C.RED   , "${S.PLUS_MINUS}2%"   , "50 ${S.PPM_UNIT}"  -> R.color.red32
+            C.ORANGE,                         "15 ${S.PPM_UNIT}"  -> R.color.orange32
+            C.YELLOW,                         "25 ${S.PPM_UNIT}"  -> R.color.yellow32
+            C.GREEN , "${S.PLUS_MINUS}0.5%" , "20 ${S.PPM_UNIT}"  -> R.color.green32
+            C.BLUE  , "${S.PLUS_MINUS}0.25%", "10 ${S.PPM_UNIT}"  -> R.color.blue32
+            C.VIOLET, "${S.PLUS_MINUS}0.1%" , "5 ${S.PPM_UNIT}"   -> R.color.violet32
+            C.GRAY  , "${S.PLUS_MINUS}0.05%", "1 ${S.PPM_UNIT}"   -> R.color.gray32
+            C.WHITE                                               -> R.color.white32
+            C.GOLD  , "${S.PLUS_MINUS}5%"                         -> R.color.gold32
+            C.SILVER, "${S.PLUS_MINUS}10%"                        -> R.color.silver32
+            else                                                  -> R.color.resistor_blank
         }
     }
 
-    // find text (color) from numeric value
     fun numberToText(color: Int = -1): String {
         return when (color) {
-            0 -> BLACK
-            1 -> BROWN
-            2 -> RED
-            3 -> ORANGE
-            4 -> YELLOW
-            5 -> GREEN
-            6 -> BLUE
-            7 -> VIOLET
-            8 -> GRAY
-            9 -> WHITE
-            else -> BLANK
+            0 -> C.BLACK
+            1 -> C.BROWN
+            2 -> C.RED
+            3 -> C.ORANGE
+            4 -> C.YELLOW
+            5 -> C.GREEN
+            6 -> C.BLUE
+            7 -> C.VIOLET
+            8 -> C.GRAY
+            9 -> C.WHITE
+            else -> C.BLANK
         }
     }
 
-    // find text (color) from id
     fun idToColorText(colorId: Int): String {
         return when (colorId) {
-            R.color.black32, R.drawable.black_square -> BLACK
-            R.color.brown32, R.drawable.brown_square -> BROWN
-            R.color.red32, R.drawable.red_square -> RED
-            R.color.orange32, R.drawable.orange_square -> ORANGE
-            R.color.yellow32, R.drawable.yellow_square -> YELLOW
-            R.color.green32, R.drawable.green_square -> GREEN
-            R.color.blue32, R.drawable.blue_square -> BLUE
-            R.color.violet32, R.drawable.violet_square -> VIOLET
-            R.color.gray32, R.drawable.gray_square -> GRAY
-            R.color.white32, R.drawable.white_square -> WHITE
-            R.color.gold32, R.drawable.gold_square -> GOLD
-            R.color.silver32, R.drawable.silver_square -> SILVER
+            R.color.black32,  R.drawable.black_square  -> C.BLACK
+            R.color.brown32,  R.drawable.brown_square  -> C.BROWN
+            R.color.red32,    R.drawable.red_square    -> C.RED
+            R.color.orange32, R.drawable.orange_square -> C.ORANGE
+            R.color.yellow32, R.drawable.yellow_square -> C.YELLOW
+            R.color.green32,  R.drawable.green_square  -> C.GREEN
+            R.color.blue32,   R.drawable.blue_square   -> C.BLUE
+            R.color.violet32, R.drawable.violet_square -> C.VIOLET
+            R.color.gray32,   R.drawable.gray_square   -> C.GRAY
+            R.color.white32,  R.drawable.white_square  -> C.WHITE
+            R.color.gold32,   R.drawable.gold_square   -> C.GOLD
+            R.color.silver32, R.drawable.silver_square -> C.SILVER
             else -> ""
         }
     }
 
-    // picks a random color
     fun randomColor(): Int {
         return when ((1..12).random()) {
             1 -> R.color.red32

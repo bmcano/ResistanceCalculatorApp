@@ -1,9 +1,7 @@
 package com.brandoncano.resistancecalculator.components
 
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.OHMS
-import com.brandoncano.resistancecalculator.constants.PLUS_MINUS
-import com.brandoncano.resistancecalculator.constants.PPM_UNIT
+import com.brandoncano.resistancecalculator.constants.Symbols as S
 
 /**
  * Job: Holds array information for the spinners.
@@ -36,28 +34,28 @@ object SpinnerContents {
         arrayOf(BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GRAY)
 
     val toleranceTextArray = arrayOf(
-        SpinnerItem("${PLUS_MINUS}1%", R.drawable.brown_square),
-        SpinnerItem("${PLUS_MINUS}2%", R.drawable.red_square),
-        SpinnerItem("${PLUS_MINUS}0.5%", R.drawable.green_square),
-        SpinnerItem("${PLUS_MINUS}0.25%", R.drawable.blue_square),
-        SpinnerItem("${PLUS_MINUS}0.1%", R.drawable.violet_square),
-        SpinnerItem("${PLUS_MINUS}0.05%", R.drawable.gray_square),
-        SpinnerItem("${PLUS_MINUS}5%", R.drawable.gold_square),
-        SpinnerItem("${PLUS_MINUS}10%", R.drawable.silver_square),
-        SpinnerItem("${PLUS_MINUS}20%", R.drawable.blank32),
+        SpinnerItem("${S.PLUS_MINUS}1%", R.drawable.brown_square),
+        SpinnerItem("${S.PLUS_MINUS}2%", R.drawable.red_square),
+        SpinnerItem("${S.PLUS_MINUS}0.5%", R.drawable.green_square),
+        SpinnerItem("${S.PLUS_MINUS}0.25%", R.drawable.blue_square),
+        SpinnerItem("${S.PLUS_MINUS}0.1%", R.drawable.violet_square),
+        SpinnerItem("${S.PLUS_MINUS}0.05%", R.drawable.gray_square),
+        SpinnerItem("${S.PLUS_MINUS}5%", R.drawable.gold_square),
+        SpinnerItem("${S.PLUS_MINUS}10%", R.drawable.silver_square),
+        SpinnerItem("${S.PLUS_MINUS}20%", R.drawable.blank32),
     )
 
     val ppmTextArray = arrayOf(
-        SpinnerItem("250 $PPM_UNIT", R.drawable.black_square),
-        SpinnerItem("100 $PPM_UNIT", R.drawable.brown_square),
-        SpinnerItem("50 $PPM_UNIT", R.drawable.red_square),
-        SpinnerItem("15 $PPM_UNIT", R.drawable.orange_square),
-        SpinnerItem("25 $PPM_UNIT", R.drawable.yellow_square),
-        SpinnerItem("20 $PPM_UNIT", R.drawable.green_square),
-        SpinnerItem("10 $PPM_UNIT", R.drawable.blue_square),
-        SpinnerItem("5 $PPM_UNIT", R.drawable.violet_square),
-        SpinnerItem("1 $PPM_UNIT", R.drawable.gray_square)
+        SpinnerItem("250 ${S.PLUS_MINUS}", R.drawable.black_square),
+        SpinnerItem("100 ${S.PLUS_MINUS}", R.drawable.brown_square),
+        SpinnerItem("50 ${S.PLUS_MINUS}", R.drawable.red_square),
+        SpinnerItem("15 ${S.PLUS_MINUS}", R.drawable.orange_square),
+        SpinnerItem("25 ${S.PLUS_MINUS}", R.drawable.yellow_square),
+        SpinnerItem("20 ${S.PLUS_MINUS}", R.drawable.green_square),
+        SpinnerItem("10 ${S.PLUS_MINUS}", R.drawable.blue_square),
+        SpinnerItem("5 ${S.PLUS_MINUS}", R.drawable.violet_square),
+        SpinnerItem("1 ${S.PLUS_MINUS}", R.drawable.gray_square)
     )
 
-    val unitsArray = arrayOf(OHMS, "k$OHMS", "M$OHMS", "G$OHMS")
+    val unitsArray = arrayOf(S.ohms, S.kOhms, S.MOhms, S.GOhms)
 }

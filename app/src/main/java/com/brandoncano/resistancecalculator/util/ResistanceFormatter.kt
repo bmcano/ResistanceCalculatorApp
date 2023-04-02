@@ -1,7 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.components.Resistor
-import com.brandoncano.resistancecalculator.constants.*
+import com.brandoncano.resistancecalculator.constants.Colors as C
+import com.brandoncano.resistancecalculator.constants.Symbols as S
 
 /**
  * Job: Formats the resistance based on the colors selected for the bands (CtV).
@@ -23,37 +24,37 @@ object ResistanceFormatter {
 
     private fun formatSigFig(color: String): String {
         val colorToNumber = mapOf(
-            BLACK to "0", BROWN to "1", RED to "2", ORANGE to "3", YELLOW to "4",
-            GREEN to "5", BLUE to "6", VIOLET to "7", GRAY to "8", WHITE to "9"
+            C.BLACK to "0", C.BROWN to "1", C.RED to "2", C.ORANGE to "3", C.YELLOW to "4",
+            C.GREEN to "5", C.BLUE to "6", C.VIOLET to "7", C.GRAY to "8", C.WHITE to "9"
         )
         return if (colorToNumber.containsKey(color)) colorToNumber.getValue(color) else "0"
     }
 
     private fun formatTolerance(color: String): String {
         val colorToTolerance = mapOf(
-            BROWN to "1%", RED to "2%", GREEN to "0.5%", BLUE to "0.25%",
-            VIOLET to "0.1%", GRAY to "0.05%", GOLD to "5%", SILVER to "10%"
+            C.BROWN to "1%", C.RED to "2%", C.GREEN to "0.5%", C.BLUE to "0.25%",
+            C.VIOLET to "0.1%", C.GRAY to "0.05%", C.GOLD to "5%", C.SILVER to "10%"
         )
-        return PLUS_MINUS + if (colorToTolerance.containsKey(color)) {
+        return S.PLUS_MINUS + if (colorToTolerance.containsKey(color)) {
             colorToTolerance.getValue(color)
         } else "20%"
     }
 
     private fun formatPPM(color: String, bands: Int): String {
         val colorToPPM = mapOf(
-            BLACK to "250", BROWN to "100", RED to "50", ORANGE to "15",
-            YELLOW to "25", GREEN to "20", BLUE to "10", VIOLET to "5", GRAY to "1"
+            C.BLACK to "250", C.BROWN to "100", C.RED to "50", C.ORANGE to "15",
+            C.YELLOW to "25", C.GREEN to "20", C.BLUE to "10", C.VIOLET to "5", C.GRAY to "1"
         )
         return if (colorToPPM.containsKey(color) && bands == 6) {
-            "\n${colorToPPM.getValue(color)} $PPM_UNIT"
+            "\n${colorToPPM.getValue(color)} ${S.PPM_UNIT}"
         } else ""
     }
 
     private fun getMultiplierValue(color: String): Double {
         val colorToMultiplier = mapOf(
-            BLACK to 1.0, BROWN to 10.0, RED to 100.0, ORANGE to 1000.0, YELLOW to 10000.0,
-            GREEN to 100000.0, BLUE to 1000000.0, VIOLET to 10000000.0, GRAY to 100000000.0,
-            WHITE to 1000000000.0, GOLD to 0.1, SILVER to 0.01
+            C.BLACK to 1.0, C.BROWN to 10.0, C.RED to 100.0, C.ORANGE to 1000.0, C.YELLOW to 10000.0,
+            C.GREEN to 100000.0, C.BLUE to 1000000.0, C.VIOLET to 10000000.0, C.GRAY to 100000000.0,
+            C.WHITE to 1000000000.0, C.GOLD to 0.1, C.SILVER to 0.01
         )
         return if (colorToMultiplier.containsKey(color)) {
             colorToMultiplier.getValue(color)
@@ -61,14 +62,14 @@ object ResistanceFormatter {
     }
 
     private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
-        if (resistor.allDigitsZero()) return "0 $OHMS" // 0 Ohm resistor
+        if (resistor.allDigitsZero()) return "0 ${S.ohms}" // 0 Ohm resistor
 
         val hasLeadingZero = sigFigOne == "0"
         val hasTwoLeadingZeros = sigFigOne == "0" && sigFigTwo == "0"
         val value: Int = if (resistor.getNumberOfBands() == 4) {
-            (sigFigOne + sigFigTwo).toIntOrNull() ?: return "0 $OHMS"
+            (sigFigOne + sigFigTwo).toIntOrNull() ?: return "0 ${S.ohms}"
         } else {
-            (sigFigOne + sigFigTwo + sigFigThree).toIntOrNull() ?: return "0 $OHMS"
+            (sigFigOne + sigFigTwo + sigFigThree).toIntOrNull() ?: return "0 ${S.ohms}"
         }
 
         val multiplier = getMultiplierValue(resistor.multiplierBand)
@@ -87,7 +88,7 @@ object ResistanceFormatter {
 
         return if (noDecimal) {
             "${String.format("%.0f", resistanceAsDecimal)} $units"
-        } else if (resistor.multiplierBand == SILVER) {
+        } else if (resistor.multiplierBand == C.SILVER) {
             "${String.format("%.2f", resistanceAsDecimal)} $units"
         } else {
             "${String.format("%.1f", resistanceAsDecimal)} $units"
@@ -96,10 +97,10 @@ object ResistanceFormatter {
 
     private fun unitConversion(value: Double): String {
         return when {
-            value >= 1000000000 -> "G$OHMS"
-            value >= 1000000 -> "M$OHMS"
-            value >= 1000 -> "k$OHMS"
-            else -> OHMS
+            value >= 1000000000 -> S.GOhms
+            value >= 1000000 -> S.MOhms
+            value >= 1000 -> S.kOhms
+            else -> S.ohms
         }
     }
 }
