@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- TODO - add correct icons -->
+    <item
+        android:id="@+id/selected_four_nav"
+        android:title="@string/four_band_nav"
+        />
+    <item
+        android:id="@+id/selected_five_nav"
+        android:title="@string/five_band_nav"
+        android:icon="@drawable/ic_star"/>
+    <item
+        android:id="@+id/selected_six_nav"
+        android:title="@string/six_band_nav"
+        android:icon="@drawable/ic_error"/>
+</menu>

@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
@@ -23,6 +22,7 @@ import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
 import com.brandoncano.resistancecalculator.util.ResistorChart
 import com.brandoncano.resistancecalculator.util.ShareResistance
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 
 /**
@@ -59,7 +59,7 @@ class ColorToValueActivity : AppCompatActivity() {
         super.onResume()
         generalSetup()
         dropDownSetup()
-        buttonSetup()
+        bottomNavigationSetup()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -207,10 +207,8 @@ class ColorToValueActivity : AppCompatActivity() {
             }
     }
 
-    private fun buttonSetup() {
-        val fourBandButton: Button = findViewById(R.id.four_band)
-        val fiveBandButton: Button = findViewById(R.id.five_band)
-        val sixBandButton: Button = findViewById(R.id.six_band)
+    private fun bottomNavigationSetup() {
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_ctv)
 
         setBandColor(bandImage1, resistor.sigFigBandOne)
         setBandColor(bandImage2, resistor.sigFigBandTwo)
@@ -218,30 +216,32 @@ class ColorToValueActivity : AppCompatActivity() {
         setBandColor(bandImage5, resistor.toleranceBand)
 
         when (StateData.BUTTON_SELECTION_CTV.loadData(this)) {
-            "4" -> updateButtonSelection(fourBandButton, fiveBandButton, sixBandButton, 4)
-            "5" -> updateButtonSelection(fiveBandButton, fourBandButton, sixBandButton, 5)
-            "6" -> updateButtonSelection(sixBandButton, fourBandButton, fiveBandButton, 6)
+            "4" -> {
+                bottomNavigationView.selectedItemId = R.id.selected_four_nav
+                updateNavigationSelection(4)
+            }
+            "5" -> {
+                bottomNavigationView.selectedItemId = R.id.selected_five_nav
+                updateNavigationSelection(5)
+            }
+            "6" -> {
+                bottomNavigationView.selectedItemId = R.id.selected_six_nav
+                updateNavigationSelection(6)
+            }
         }
 
-        fourBandButton.setOnClickListener {
-            updateButtonSelection(fourBandButton, fiveBandButton, sixBandButton, 4)
-        }
-
-        fiveBandButton.setOnClickListener {
-            updateButtonSelection(fiveBandButton, fourBandButton, sixBandButton, 5)
-        }
-
-        sixBandButton.setOnClickListener {
-            updateButtonSelection(sixBandButton, fourBandButton, fiveBandButton, 6)
+        bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.selected_four_nav -> updateNavigationSelection(4)
+                R.id.selected_five_nav -> updateNavigationSelection(5)
+                R.id.selected_six_nav -> updateNavigationSelection(6)
+            }
+            true
         }
     }
 
-    private fun updateButtonSelection(selected: Button, b1: Button, b2: Button, btnNumber: Int) {
-        selected.setBackgroundColor(getColor(R.color.mango_dark))
-        b1.setBackgroundColor(getColor(R.color.mango_primary))
-        b2.setBackgroundColor(getColor(R.color.mango_primary))
-
-        when (btnNumber) {
+    private fun updateNavigationSelection(numberOfBands: Int) {
+        when (numberOfBands) {
             4 -> {
                 toggleDropDownNumberBand3.visibility = View.GONE
                 toggleDropDownPPM.visibility = View.GONE
@@ -261,8 +261,8 @@ class ColorToValueActivity : AppCompatActivity() {
                 setBandColor(bandImage6, resistor.ppmBand)
             }
         }
-        StateData.BUTTON_SELECTION_CTV.saveData(this, "$btnNumber")
-        resistor.setNumberOfBands(btnNumber)
+        StateData.BUTTON_SELECTION_CTV.saveData(this, "$numberOfBands")
+        resistor.setNumberOfBands(numberOfBands)
         updateResistance()
     }
 

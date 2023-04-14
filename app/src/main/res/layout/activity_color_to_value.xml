@@ -146,43 +146,21 @@
         android:id="@+id/resistance_display_ctv"
         style="@style/resistanceDisplayTextDesign"
         android:text="@string/default_text"
-        app:layout_constraintBottom_toTopOf="@+id/five_band"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_ctv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/four_band"
-        style="@style/bandSelectorButtonDesign"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/mango_dark"
-        android:text="@string/four_band_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/five_band"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/five_band"
-        style="@style/bandSelectorButtonDesign"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/five_band_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/six_band"
-        app:layout_constraintStart_toEndOf="@+id/four_band" />
-
-    <Button
-        android:id="@+id/six_band"
-        style="@style/bandSelectorButtonDesign"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:minWidth="94dp"
-        android:text="@string/six_band_btn"
+    <!-- TODO - might need to make this a selector to icon tint - still WIP -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav_ctv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/mango_primary"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/five_band" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,7 @@ import com.brandoncano.resistancecalculator.util.ResistorChart
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
 import com.brandoncano.resistancecalculator.util.IsValidResistance
 import com.brandoncano.resistancecalculator.util.ShareResistance
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 
 /**
@@ -66,7 +67,7 @@ class ValueToColorActivity : AppCompatActivity() {
         super.onResume()
         generalSetup()
         dropDownSetup()
-        buttonSetup()
+        bottomNavigationSetup()
         calculateButtonSetup()
     }
 
@@ -192,15 +193,27 @@ class ValueToColorActivity : AppCompatActivity() {
             }
     }
 
-    private fun buttonSetup() {
-        val fourBandButton: Button = findViewById(R.id.four_band)
-        val fiveBandButton: Button = findViewById(R.id.five_band)
-        val sixBandButton: Button = findViewById(R.id.six_band)
+    private fun bottomNavigationSetup() {
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_vtc)
+
+        setBandColor(bandImage1, resistor.sigFigBandOne)
+        setBandColor(bandImage2, resistor.sigFigBandTwo)
+        setBandColor(bandImage4, resistor.multiplierBand)
+        setBandColor(bandImage5, resistor.toleranceBand)
 
         when (StateData.BUTTON_SELECTION_VTC.loadData(this)) {
-            "4" -> updateButtonSelection(fourBandButton, fiveBandButton, sixBandButton, 4)
-            "5" -> updateButtonSelection(fiveBandButton, fourBandButton, sixBandButton, 5)
-            "6" -> updateButtonSelection(sixBandButton, fourBandButton, fiveBandButton, 6)
+            "4" -> {
+                bottomNavigationView.selectedItemId = R.id.selected_four_nav
+                updateNavigationSelection(4)
+            }
+            "5" -> {
+                bottomNavigationView.selectedItemId = R.id.selected_five_nav
+                updateNavigationSelection(5)
+            }
+            "6" -> {
+                bottomNavigationView.selectedItemId = R.id.selected_six_nav
+                updateNavigationSelection(6)
+            }
         }
 
         resistor.resistance = StateData.USER_INPUT_VTC.loadData(this)
@@ -209,28 +222,20 @@ class ValueToColorActivity : AppCompatActivity() {
             updateResistorAndText()
         }
 
-        // button listeners
-        fourBandButton.setOnClickListener {
-            updateButtonSelection(fourBandButton, fiveBandButton, sixBandButton, 4)
-        }
-
-        fiveBandButton.setOnClickListener {
-            updateButtonSelection(fiveBandButton, fourBandButton, sixBandButton, 5)
-        }
-
-        sixBandButton.setOnClickListener {
-            updateButtonSelection(sixBandButton, fourBandButton, fiveBandButton, 6)
+        bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.selected_four_nav -> updateNavigationSelection(4)
+                R.id.selected_five_nav -> updateNavigationSelection(5)
+                R.id.selected_six_nav -> updateNavigationSelection(6)
+            }
+            true
         }
     }
 
-    private fun updateButtonSelection(selected: Button, b1: Button, b2: Button, btnNumber: Int) {
-        selected.setBackgroundColor(getColor(R.color.mango_dark))
-        b1.setBackgroundColor(getColor(R.color.mango_primary))
-        b2.setBackgroundColor(getColor(R.color.mango_primary))
-
-        toggleDropDown.visibility = if (btnNumber == 6) View.VISIBLE else View.INVISIBLE
-        StateData.BUTTON_SELECTION_VTC.saveData(this, "$btnNumber")
-        resistor.setNumberOfBands(btnNumber)
+    private fun updateNavigationSelection(numberOfBands: Int) {
+        toggleDropDown.visibility = if (numberOfBands == 6) View.VISIBLE else View.INVISIBLE
+        StateData.BUTTON_SELECTION_VTC.saveData(this, "$numberOfBands")
+        resistor.setNumberOfBands(numberOfBands)
         errorFinder(inputResistance.text.toString())
         updateResistorAndText()
     }

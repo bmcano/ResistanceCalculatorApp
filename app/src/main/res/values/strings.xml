@@ -30,6 +30,11 @@
     <string name="feedback_tab">Feedback</string>
     <string name="about">About This App</string>
 
+    <!-- Bottom navigation -->
+    <string name="four_band_nav">Four Bands</string>
+    <string name="five_band_nav">Five Bands</string>
+    <string name="six_band_nav">Six Bands</string>
+
     <!-- Default/Blank text descriptions -->
     <string name="dropdown_image_description">Color</string>
     <string name="default_text">Select Colors</string>
