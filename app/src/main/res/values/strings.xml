@@ -3,7 +3,6 @@
     <string name="app_name">RCV - Calculator</string>
 
     <!-- TextInputLayouts hint text -->
-    <string name="spinner_hint">Color</string>
     <string name="number_band_hint1">First Number</string>
     <string name="number_band_hint2">Second Number</string>
     <string name="number_band_hint3">Third Number</string>
@@ -17,9 +16,6 @@
     <string name="value_to_color_btn">Value to Color</string>
     <string name="color_to_value_btn">Color to Value</string>
     <string name="calculate_btn">Calculate</string>
-    <string name="four_band_btn">Four Band\nResistor</string>
-    <string name="five_band_btn">Five Band\nResistor</string>
-    <string name="six_band_btn">Six Band\nResistor</string>
 
     <!-- Menu items -->
     <string name="value_to_color">Value to Color</string>
