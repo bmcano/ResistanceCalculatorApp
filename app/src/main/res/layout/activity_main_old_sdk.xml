@@ -7,9 +7,9 @@
     <Button
         android:id="@+id/color_to_value_button"
         style="@style/calculatorButtonSelectionDesign"
-        android:layout_marginTop="336dp"
         android:text="@string/color_to_value_btn"
         app:backgroundTint="@color/mango_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/value_to_color_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -17,9 +17,9 @@
     <Button
         android:id="@+id/value_to_color_button"
         style="@style/calculatorButtonSelectionDesign"
-        android:layout_marginTop="336dp"
         android:text="@string/value_to_color_btn"
         app:backgroundTint="@color/mango_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/color_to_value_button"
         app:layout_constraintTop_toTopOf="parent" />
