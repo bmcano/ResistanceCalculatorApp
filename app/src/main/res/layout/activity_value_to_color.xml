@@ -133,17 +133,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- TODO - might need to make this a selector to icon tint - still WIP -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_vtc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/mango_primary"
-        app:itemTextColor="@color/white"
-        app:itemIconTint="@color/white"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
+        app:itemTextColor="@drawable/bottom_navigation_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_bar" />
+        app:menu="@menu/bottom_navigation_bar"
+        tools:ignore="VisualLintBottomNav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

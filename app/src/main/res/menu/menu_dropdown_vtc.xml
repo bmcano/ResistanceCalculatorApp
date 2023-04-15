@@ -6,25 +6,19 @@
         android:icon="@drawable/ic_baseline_switch_right"
         android:title="@string/color_to_value"
         app:showAsAction="always" />
-
     <item
         android:id="@+id/show_resistor_charts"
         android:title="@string/show_chart" />
-
     <item
         android:id="@+id/share_item"
         android:title="@string/share" />
-
     <item
         android:id="@+id/feedback"
         android:title="@string/feedback_tab" />
-
     <item
         android:id="@+id/clear_selections"
         android:title="@string/clear_selections" />
-
     <item
         android:id="@+id/about_item"
         android:title="@string/about" />
-
 </menu>

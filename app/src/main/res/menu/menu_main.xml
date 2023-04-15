@@ -3,9 +3,7 @@
     <item
         android:id="@+id/feedback"
         android:title="@string/feedback_tab" />
-
     <item
         android:id="@+id/about_item"
         android:title="@string/about" />
-
 </menu>
