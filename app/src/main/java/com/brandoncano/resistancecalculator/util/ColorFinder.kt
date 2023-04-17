@@ -21,10 +21,10 @@ object ColorFinder {
             C.BLUE  , "${S.PM}0.25%", "10 ${S.PPM}"  -> R.drawable.blue_square
             C.VIOLET, "${S.PM}0.1%" , "5 ${S.PPM}"   -> R.drawable.violet_square
             C.GRAY  , "${S.PM}0.05%", "1 ${S.PPM}"   -> R.drawable.gray_square
-            C.WHITE                                       -> R.drawable.white_square
-            C.GOLD  , "${S.PM}5%"                         -> R.drawable.gold_square
-            C.SILVER, "${S.PM}10%"                        -> R.drawable.silver_square
-            else                                          -> R.drawable.blank32
+            C.WHITE                                  -> R.drawable.white_square
+            C.GOLD  , "${S.PM}5%"                    -> R.drawable.gold_square
+            C.SILVER, "${S.PM}10%"                   -> R.drawable.silver_square
+            else                                     -> R.drawable.blank32
         }
     }
 
@@ -39,10 +39,10 @@ object ColorFinder {
             C.BLUE  , "${S.PM}0.25%", "10 ${S.PPM}"  -> R.color.blue32
             C.VIOLET, "${S.PM}0.1%" , "5 ${S.PPM}"   -> R.color.violet32
             C.GRAY  , "${S.PM}0.05%", "1 ${S.PPM}"   -> R.color.gray32
-            C.WHITE                                       -> R.color.white32
-            C.GOLD  , "${S.PM}5%"                         -> R.color.gold32
-            C.SILVER, "${S.PM}10%"                        -> R.color.silver32
-            else                                          -> R.color.resistor_blank
+            C.WHITE                                  -> R.color.white32
+            C.GOLD  , "${S.PM}5%"                    -> R.color.gold32
+            C.SILVER, "${S.PM}10%"                   -> R.color.silver32
+            else                                     -> R.color.resistor_blank
         }
     }
 

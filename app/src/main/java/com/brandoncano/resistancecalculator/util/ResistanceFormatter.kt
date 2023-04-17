@@ -23,21 +23,33 @@ object ResistanceFormatter {
     }
 
     private fun formatSigFig(color: String): String {
-        val colorToNumber = mapOf(
-            C.BLACK to "0", C.BROWN to "1", C.RED to "2", C.ORANGE to "3", C.YELLOW to "4",
-            C.GREEN to "5", C.BLUE to "6", C.VIOLET to "7", C.GRAY to "8", C.WHITE to "9"
-        )
-        return if (colorToNumber.containsKey(color)) colorToNumber.getValue(color) else "0"
+        return when (color) {
+            C.BLACK  -> "0"
+            C.BROWN  -> "1"
+            C.RED    -> "2"
+            C.ORANGE -> "3"
+            C.YELLOW -> "4"
+            C.GREEN  -> "5"
+            C.BLUE   -> "6"
+            C.VIOLET -> "7"
+            C.GRAY   -> "8"
+            C.WHITE  -> "9"
+            else     -> "0"
+        }
     }
 
     private fun formatTolerance(color: String): String {
-        val colorToTolerance = mapOf(
-            C.BROWN to "1%", C.RED to "2%", C.GREEN to "0.5%", C.BLUE to "0.25%",
-            C.VIOLET to "0.1%", C.GRAY to "0.05%", C.GOLD to "5%", C.SILVER to "10%"
-        )
-        return S.PM + if (colorToTolerance.containsKey(color)) {
-            colorToTolerance.getValue(color)
-        } else "20%"
+        return S.PM + when (color) {
+            C.BROWN  -> "1%"
+            C.RED    -> "2%"
+            C.GREEN  -> "0.5%"
+            C.BLUE   -> "0.25%"
+            C.VIOLET -> "0.1%"
+            C.GRAY   -> "0.05%"
+            C.GOLD   -> "5%"
+            C.SILVER -> "10%"
+            else     -> "20%"
+        }
     }
 
     private fun formatPPM(color: String, bands: Int): String {

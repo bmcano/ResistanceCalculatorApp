@@ -231,6 +231,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 R.id.selected_four_nav -> updateNavigationSelection(4)
                 R.id.selected_five_nav -> updateNavigationSelection(5)
                 R.id.selected_six_nav -> updateNavigationSelection(6)
+                else -> updateNavigationSelection(4)
             }
             true
         }
