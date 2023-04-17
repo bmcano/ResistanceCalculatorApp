@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.components
 
-import com.brandoncano.resistancecalculator.constants.*
+import com.brandoncano.resistancecalculator.constants.Colors as C
+import com.brandoncano.resistancecalculator.constants.Symbols as S
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -20,30 +21,30 @@ class ResistorTest {
 
     @Test
     fun `resistors as a string`() {
-        val resistor = Resistor(BLACK, BROWN, RED, ORANGE, GOLD, SILVER)
-        assertEquals("[ $BLACK, $BROWN, $ORANGE, $GOLD ]", resistor.toColorBandString())
+        val resistor = Resistor(C.BLACK, C.BROWN, C.RED, C.ORANGE, C.GOLD, C.SILVER)
+        assertEquals("[ ${C.BLACK}, ${C.BROWN}, ${C.ORANGE}, ${C.GOLD} ]", resistor.toColorBandString())
         resistor.setNumberOfBands(5)
-        assertEquals("[ $BLACK, $BROWN, $RED, $ORANGE, $GOLD ]", resistor.toColorBandString())
+        assertEquals("[ ${C.BLACK}, ${C.BROWN}, ${C.RED}, ${C.ORANGE}, ${C.GOLD} ]", resistor.toColorBandString())
         resistor.setNumberOfBands(6)
-        assertEquals("[ $BLACK, $BROWN, $RED, $ORANGE, $GOLD, $SILVER ]", resistor.toColorBandString())
+        assertEquals("[ ${C.BLACK}, ${C.BROWN}, ${C.RED}, ${C.ORANGE}, ${C.GOLD}, ${C.SILVER} ]", resistor.toColorBandString())
 
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
-        resistor.ppmValue = "250 $PPM_UNIT"
-        assertEquals("[ $BLACK, $BROWN, $RED, $ORANGE, $GOLD, $BLACK ]", resistor.toColorBandString(true))
+        resistor.toleranceValue = "${S.PM}5%"
+        resistor.ppmValue = "250 ${S.PPM_UNIT}"
+        assertEquals("[ ${C.BLACK}, ${C.BROWN}, ${C.RED}, ${C.ORANGE}, ${C.GOLD}, ${C.BLACK} ]", resistor.toColorBandString(true))
     }
 
     @Test
     fun `make displayable text`() {
         val resistor = Resistor()
         resistor.resistance = "12"
-        resistor.units = OHMS
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
-        resistor.ppmValue = "250 $PPM_UNIT"
-        assertEquals("12 $OHMS ${PLUS_MINUS}5%", resistor.getResistanceText())
+        resistor.units = S.Ohms
+        resistor.toleranceValue = "${S.PM}5%"
+        resistor.ppmValue = "250 ${S.PPM_UNIT}"
+        assertEquals("12 ${S.Ohms} ${S.PM}5%", resistor.getResistanceText())
         resistor.setNumberOfBands(5)
-        assertEquals("12 $OHMS ${PLUS_MINUS}5%", resistor.getResistanceText())
+        assertEquals("12 ${S.Ohms} ${S.PM}5%", resistor.getResistanceText())
         resistor.setNumberOfBands(6)
-        assertEquals("12 $OHMS ${PLUS_MINUS}5%\n250 $PPM_UNIT", resistor.getResistanceText())
+        assertEquals("12 ${S.Ohms} ${S.PM}5%\n250 ${S.PPM_UNIT}", resistor.getResistanceText())
     }
 
     @Test
@@ -67,12 +68,12 @@ class ResistorTest {
 
     @Test
     fun `all sig figs are zero`() {
-        val resistor = Resistor(BLACK, BLACK, BLACK)
+        val resistor = Resistor(C.BLACK, C.BLACK, C.BLACK)
         assertTrue(resistor.allDigitsZero())
         resistor.setNumberOfBands(5)
         assertTrue(resistor.allDigitsZero())
 
-        resistor.sigFigBandTwo = BROWN
+        resistor.sigFigBandTwo = C.BROWN
         assertFalse(resistor.allDigitsZero())
         resistor.setNumberOfBands(4)
         assertFalse(resistor.allDigitsZero())

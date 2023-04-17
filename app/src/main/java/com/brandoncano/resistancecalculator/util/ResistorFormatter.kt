@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.components.Resistor
-import com.brandoncano.resistancecalculator.constants.*
+import com.brandoncano.resistancecalculator.constants.Colors as C
 
 /**
  * Job: Formats the resistor based resistance that has been entered (VtC).
@@ -9,8 +9,8 @@ import com.brandoncano.resistancecalculator.constants.*
 object ResistorFormatter {
 
     private val colorsMap = mapOf(
-        0 to SILVER, 1 to GOLD, 2 to BLACK, 3 to BROWN, 4 to RED, 5 to ORANGE,
-        6 to YELLOW, 7 to GREEN, 8 to BLUE, 9 to VIOLET, 10 to GRAY, 11 to WHITE,
+        0 to C.SILVER, 1 to C.GOLD, 2 to C.BLACK, 3 to C.BROWN, 4 to C.RED, 5 to C.ORANGE,
+        6 to C.YELLOW, 7 to C.GREEN, 8 to C.BLUE, 9 to C.VIOLET, 10 to C.GRAY, 11 to C.WHITE,
     )
 
     fun generateResistor(resistor: Resistor) {
@@ -65,7 +65,7 @@ object ResistorFormatter {
         if (colorsMap.containsKey(index)) {
             return colorsMap.getValue(index)
         }
-        return BLANK
+        return C.BLANK
     }
 
     // find the value of the multiplier for any whole numbers
@@ -75,6 +75,6 @@ object ResistorFormatter {
         if (colorsMap.containsKey(length)) {
             return colorsMap.getValue(length)
         }
-        return BLANK
+        return C.BLANK
     }
 }

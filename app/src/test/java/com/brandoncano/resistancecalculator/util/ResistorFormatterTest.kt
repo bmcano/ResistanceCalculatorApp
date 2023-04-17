@@ -1,7 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.components.Resistor
-import com.brandoncano.resistancecalculator.constants.*
+import com.brandoncano.resistancecalculator.constants.Colors as C
+import com.brandoncano.resistancecalculator.constants.Symbols as S
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -35,29 +36,29 @@ class ResistorFormatterTest {
         )
 
         val units = listOf(
-            OHMS, OHMS, OHMS, OHMS, OHMS,
-            "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS",
-            "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS",
-            "G$OHMS", "G$OHMS",
-            OHMS, OHMS, OHMS, OHMS,
-            "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS",
-            "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS",
-            "G$OHMS", "G$OHMS"
+            S.Ohms, S.Ohms, S.Ohms, S.Ohms, S.Ohms,
+            S.kOhms, S.kOhms, S.kOhms, S.kOhms, S.kOhms,
+            S.MOhms, S.MOhms, S.MOhms, S.MOhms, S.MOhms,
+            S.GOhms, S.GOhms,
+            S.Ohms, S.Ohms, S.Ohms, S.Ohms,
+            S.kOhms, S.kOhms, S.kOhms, S.kOhms,
+            S.MOhms, S.MOhms, S.MOhms, S.MOhms,
+            S.GOhms, S.GOhms
         )
 
         val answers = listOf(
-            GOLD, BLACK, BROWN, RED, ORANGE,
-            RED, ORANGE, YELLOW, GREEN, BLUE,
-            GREEN, BLUE, VIOLET, GRAY, WHITE,
-            GRAY, WHITE,
-            BLACK, BROWN, RED, ORANGE,
-            ORANGE, YELLOW, GREEN, BLUE,
-            BLUE, VIOLET, GRAY, WHITE,
-            WHITE, BLANK
+            C.GOLD, C.BLACK, C.BROWN, C.RED, C.ORANGE,
+            C.RED, C.ORANGE, C.YELLOW, C.GREEN, C.BLUE,
+            C.GREEN, C.BLUE, C.VIOLET, C.GRAY, C.WHITE,
+            C.GRAY, C.WHITE,
+            C.BLACK, C.BROWN, C.RED, C.ORANGE,
+            C.ORANGE, C.YELLOW, C.GREEN, C.BLUE,
+            C.BLUE, C.VIOLET, C.GRAY, C.WHITE,
+            C.WHITE, C.BLANK
         )
 
         val resistor = Resistor()
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
+        resistor.toleranceValue = "${S.PM}5%"
         resistor.setNumberOfBands(4)
 
         // test multiplier
@@ -87,37 +88,37 @@ class ResistorFormatterTest {
         )
 
         val units = listOf(
-            OHMS, OHMS, OHMS, OHMS, OHMS,
-            "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS",
-            "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS",
-            "G$OHMS", "G$OHMS", "G$OHMS",
-            OHMS, OHMS, OHMS, OHMS,
-            "k$OHMS", "k$OHMS", "k$OHMS", "k$OHMS",
-            "M$OHMS", "M$OHMS", "M$OHMS", "M$OHMS",
-            "G$OHMS", "G$OHMS",
-            OHMS, OHMS, OHMS,
-            "k$OHMS", "k$OHMS", "k$OHMS",
-            "M$OHMS", "M$OHMS", "M$OHMS",
-            "G$OHMS", "G$OHMS"
+            S.Ohms, S.Ohms, S.Ohms, S.Ohms, S.Ohms,
+            S.kOhms, S.kOhms, S.kOhms, S.kOhms, S.kOhms,
+            S.MOhms, S.MOhms, S.MOhms, S.MOhms, S.MOhms,
+            S.GOhms, S.GOhms, S.GOhms,
+            S.Ohms, S.Ohms, S.Ohms, S.Ohms,
+            S.kOhms, S.kOhms, S.kOhms, S.kOhms,
+            S.MOhms, S.MOhms, S.MOhms, S.MOhms,
+            S.GOhms, S.GOhms,
+            S.Ohms, S.Ohms, S.Ohms,
+            S.kOhms, S.kOhms, S.kOhms,
+            S.MOhms, S.MOhms, S.MOhms,
+            S.GOhms, S.GOhms
         )
 
         val answers = listOf(
-            SILVER, GOLD, BLACK, BROWN, RED,
-            BROWN, RED, ORANGE, YELLOW, GREEN,
-            YELLOW, GREEN, BLUE, VIOLET, GRAY,
-            VIOLET, GRAY, WHITE,
-            GOLD, BLACK, BROWN, RED,
-            RED, ORANGE, YELLOW, GREEN,
-            GREEN, BLUE, VIOLET, GRAY,
-            GRAY, WHITE,
-            BLACK, BROWN, RED,
-            ORANGE, YELLOW, GREEN,
-            BLUE, VIOLET, GRAY,
-            WHITE, BLANK
+            C.SILVER, C.GOLD, C.BLACK, C.BROWN, C.RED,
+            C.BROWN, C.RED, C.ORANGE, C.YELLOW, C.GREEN,
+            C.YELLOW, C.GREEN, C.BLUE, C.VIOLET, C.GRAY,
+            C.VIOLET, C.GRAY, C.WHITE,
+            C.GOLD, C.BLACK, C.BROWN, C.RED,
+            C.RED, C.ORANGE, C.YELLOW, C.GREEN,
+            C.GREEN, C.BLUE, C.VIOLET, C.GRAY,
+            C.GRAY, C.WHITE,
+            C.BLACK, C.BROWN, C.RED,
+            C.ORANGE, C.YELLOW, C.GREEN,
+            C.BLUE, C.VIOLET, C.GRAY,
+            C.WHITE, C.BLANK
         )
 
         val resistor = Resistor()
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
+        resistor.toleranceValue = "${S.PM}5%"
         resistor.setNumberOfBands(5)
 
         // test multiplier
@@ -138,19 +139,19 @@ class ResistorFormatterTest {
         )
 
         val units = listOf(
-            OHMS, OHMS, "k$OHMS", "k$OHMS", "M$OHMS", "M$OHMS", "G$OHMS", "G$OHMS",
-            OHMS, "k$OHMS", "M$OHMS", "G$OHMS", OHMS, "k$OHMS", "M$OHMS", "G$OHMS",
-            OHMS, "k$OHMS", "M$OHMS", "G$OHMS",
+            S.Ohms, S.Ohms, S.kOhms, S.kOhms, S.MOhms, S.MOhms, S.GOhms, S.GOhms,
+            S.Ohms, S.kOhms, S.MOhms, S.GOhms, S.Ohms, S.kOhms, S.MOhms, S.GOhms,
+            S.Ohms, S.kOhms, S.MOhms, S.GOhms,
         )
 
         val answers = listOf(
-            GOLD, BLACK, RED, ORANGE, GREEN, BLUE, GRAY, WHITE,
-            BLACK, ORANGE, BLUE, WHITE, BLACK, ORANGE, BLUE, WHITE,
-            GOLD, RED, GREEN, GRAY,
+            C.GOLD, C.BLACK, C.RED, C.ORANGE, C.GREEN, C.BLUE, C.GRAY, C.WHITE,
+            C.BLACK, C.ORANGE, C.BLUE, C.WHITE, C.BLACK, C.ORANGE, C.BLUE, C.WHITE,
+            C.GOLD, C.RED, C.GREEN, C.GRAY,
         )
 
         val resistor = Resistor()
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
+        resistor.toleranceValue = "${S.PM}5%"
         resistor.setNumberOfBands(4)
 
         // test multiplier
@@ -173,23 +174,23 @@ class ResistorFormatterTest {
         )
 
         val units = listOf(
-            OHMS, OHMS, OHMS, "k$OHMS", "k$OHMS", "k$OHMS", "M$OHMS", "M$OHMS", "M$OHMS", "G$OHMS", "G$OHMS", "G$OHMS",
-            OHMS, OHMS, "k$OHMS", "k$OHMS", "M$OHMS", "M$OHMS", "G$OHMS", "G$OHMS",
-            OHMS, "k$OHMS", "M$OHMS", "G$OHMS", OHMS, "k$OHMS", "M$OHMS", "G$OHMS",
-            OHMS, "k$OHMS", "M$OHMS", "G$OHMS", OHMS, "k$OHMS", "M$OHMS", "G$OHMS",
-            OHMS, "k$OHMS", "M$OHMS", "G$OHMS", OHMS, "k$OHMS", "M$OHMS", "G$OHMS", OHMS
+            S.Ohms, S.Ohms, S.Ohms, S.kOhms, S.kOhms, S.kOhms, S.MOhms, S.MOhms, S.MOhms, S.GOhms, S.GOhms, S.GOhms,
+            S.Ohms, S.Ohms, S.kOhms, S.kOhms, S.MOhms, S.MOhms, S.GOhms, S.GOhms,
+            S.Ohms, S.kOhms, S.MOhms, S.GOhms, S.Ohms, S.kOhms, S.MOhms, S.GOhms,
+            S.Ohms, S.kOhms, S.MOhms, S.GOhms, S.Ohms, S.kOhms, S.MOhms, S.GOhms,
+            S.Ohms, S.kOhms, S.MOhms, S.GOhms, S.Ohms, S.kOhms, S.MOhms, S.GOhms, S.Ohms
         )
 
         val answers = listOf(
-            SILVER, GOLD, BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GRAY, WHITE,
-            GOLD, BLACK, RED, ORANGE, GREEN, BLUE, GRAY, WHITE,
-            BLACK, ORANGE, BLUE, WHITE, BLACK, ORANGE, BLUE, WHITE,
-            SILVER, BROWN, YELLOW, VIOLET, SILVER, BROWN, YELLOW, VIOLET,
-            GOLD, RED, GREEN, GRAY, GOLD, RED, GREEN, GRAY, SILVER
+            C.SILVER, C.GOLD, C.BLACK, C.BROWN, C.RED, C.ORANGE, C.YELLOW, C.GREEN, C.BLUE, C.VIOLET, C.GRAY, C.WHITE,
+            C.GOLD, C.BLACK, C.RED, C.ORANGE, C.GREEN, C.BLUE, C.GRAY, C.WHITE,
+            C.BLACK, C.ORANGE, C.BLUE, C.WHITE, C.BLACK, C.ORANGE, C.BLUE, C.WHITE,
+            C.SILVER, C.BROWN, C.YELLOW, C.VIOLET, C.SILVER, C.BROWN, C.YELLOW, C.VIOLET,
+            C.GOLD, C.RED, C.GREEN, C.GRAY, C.GOLD, C.RED, C.GREEN, C.GRAY, C.SILVER
         )
 
         val resistor = Resistor()
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
+        resistor.toleranceValue = "${S.PM}5%"
         resistor.setNumberOfBands(5)
 
         // test multiplier
@@ -209,17 +210,17 @@ class ResistorFormatterTest {
         )
 
         var units = listOf(
-            OHMS, OHMS, OHMS, "k$OHMS", "k$OHMS", "k$OHMS", "M$OHMS", "M$OHMS", "M$OHMS", "G$OHMS", "G$OHMS", "G$OHMS",
-            OHMS, "k$OHMS", "M$OHMS", "G$OHMS"
+            S.Ohms, S.Ohms, S.Ohms, S.kOhms, S.kOhms, S.kOhms, S.MOhms, S.MOhms, S.MOhms, S.GOhms, S.GOhms, S.GOhms,
+            S.Ohms, S.kOhms, S.MOhms, S.GOhms
         )
 
         val answers = listOf(
-            SILVER, SILVER, SILVER, BROWN, BROWN, BROWN, YELLOW, YELLOW, YELLOW, VIOLET, VIOLET, VIOLET,
-            SILVER, BLACK, ORANGE, BLUE
+            C.SILVER, C.SILVER, C.SILVER, C.BROWN, C.BROWN, C.BROWN, C.YELLOW, C.YELLOW, C.YELLOW, C.VIOLET, C.VIOLET, C.VIOLET,
+            C.SILVER, C.BLACK, C.ORANGE, C.BLUE
         )
 
         val resistor = Resistor()
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
+        resistor.toleranceValue = "${S.PM}5%"
         resistor.setNumberOfBands(4)
 
         // test multiplier
@@ -232,15 +233,15 @@ class ResistorFormatterTest {
 
         // test resistor
         val resistors = listOf(
-            Resistor(BLACK, BROWN, "", SILVER, GOLD), // 0.01 Ohms
-            Resistor(BROWN, BLACK, "", BLACK, GOLD), // 0.01 kOhms -> 10 Ohms
-            Resistor(BROWN, BLACK, "", ORANGE, GOLD), // 0.01 MOhms -> 10 kOhms
-            Resistor(BROWN, BLACK, "", BLUE, GOLD), // 0.01 GOhms -> 10 MOhms
+            Resistor(C.BLACK, C.BROWN, "", C.SILVER, C.GOLD), // 0.01 Ohms
+            Resistor(C.BROWN, C.BLACK, "", C.BLACK, C.GOLD), // 0.01 kOhms -> 10 Ohms
+            Resistor(C.BROWN, C.BLACK, "", C.ORANGE, C.GOLD), // 0.01 MOhms -> 10 kOhms
+            Resistor(C.BROWN, C.BLACK, "", C.BLUE, C.GOLD), // 0.01 GOhms -> 10 MOhms
         )
 
         resistor.resistance = "0.01"
-        resistor.toleranceBand = GOLD
-        units = listOf(OHMS, "k$OHMS", "M$OHMS", "G$OHMS")
+        resistor.toleranceBand = C.GOLD
+        units = listOf(S.Ohms, S.kOhms, S.MOhms, S.GOhms)
         for (i in resistors.indices) {
             resistor.units = units[i]
             ResistorFormatter.generateResistor(resistor)
@@ -256,17 +257,17 @@ class ResistorFormatterTest {
         )
 
         var units = listOf(
-            OHMS, OHMS, "k$OHMS", "k$OHMS", "M$OHMS", "M$OHMS", "G$OHMS", "G$OHMS",
-            OHMS, "k$OHMS", "M$OHMS", "G$OHMS",
+            S.Ohms, S.Ohms, S.kOhms, S.kOhms, S.MOhms, S.MOhms, S.GOhms, S.GOhms,
+            S.Ohms, S.kOhms, S.MOhms, S.GOhms,
         )
 
         val answers = listOf(
-            SILVER, SILVER, BLACK, BLACK, ORANGE, ORANGE, BLUE, BLUE,
-            SILVER, GOLD, RED, GREEN
+            C.SILVER, C.SILVER, C.BLACK, C.BLACK, C.ORANGE, C.ORANGE, C.BLUE, C.BLUE,
+            C.SILVER, C.GOLD, C.RED, C.GREEN
         )
 
         val resistor = Resistor()
-        resistor.toleranceValue = "${PLUS_MINUS}5%"
+        resistor.toleranceValue = "${S.PM}5%"
         resistor.setNumberOfBands(5)
 
         // test multiplier
@@ -279,15 +280,15 @@ class ResistorFormatterTest {
 
         // test resistor
         val resistors = listOf(
-            Resistor(BLACK, BLACK, BROWN, SILVER, GOLD), // 0.01 Ohms
-            Resistor(BROWN, BLACK, BLACK, GOLD, GOLD), // 0.01 kOhms -> 10 Ohms
-            Resistor(BROWN, BLACK, BLACK, RED, GOLD), // 0.01 MOhms -> 10 kOhms
-            Resistor(BROWN, BLACK, BLACK, GREEN, GOLD), // 0.01 GOhms -> 10 MOhms
+            Resistor(C.BLACK, C.BLACK, C.BROWN, C.SILVER, C.GOLD), // 0.01 Ohms
+            Resistor(C.BROWN, C.BLACK, C.BLACK, C.GOLD, C.GOLD), // 0.01 kOhms -> 10 Ohms
+            Resistor(C.BROWN, C.BLACK, C.BLACK, C.RED, C.GOLD), // 0.01 MOhms -> 10 kOhms
+            Resistor(C.BROWN, C.BLACK, C.BLACK, C.GREEN, C.GOLD), // 0.01 GOhms -> 10 MOhms
         )
 
         resistor.resistance = "0.01"
-        resistor.toleranceBand = GOLD
-        units = listOf(OHMS, "k$OHMS", "M$OHMS", "G$OHMS")
+        resistor.toleranceBand = C.GOLD
+        units = listOf(S.Ohms, S.kOhms, S.MOhms, S.GOhms)
         for (i in resistors.indices) {
             resistor.units = units[i]
             ResistorFormatter.generateResistor(resistor)
@@ -301,6 +302,6 @@ class ResistorFormatterTest {
         resistor.resistance = "12"
         resistor.units = "notValid"
         ResistorFormatter.generateResistor(resistor)
-        assertEquals(BLACK, resistor.multiplierBand)
+        assertEquals(C.BLACK, resistor.multiplierBand)
     }
 }

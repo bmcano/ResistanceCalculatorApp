@@ -35,7 +35,7 @@ object ResistanceFormatter {
             C.BROWN to "1%", C.RED to "2%", C.GREEN to "0.5%", C.BLUE to "0.25%",
             C.VIOLET to "0.1%", C.GRAY to "0.05%", C.GOLD to "5%", C.SILVER to "10%"
         )
-        return S.PLUS_MINUS + if (colorToTolerance.containsKey(color)) {
+        return S.PM + if (colorToTolerance.containsKey(color)) {
             colorToTolerance.getValue(color)
         } else "20%"
     }
@@ -62,14 +62,14 @@ object ResistanceFormatter {
     }
 
     private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
-        if (resistor.allDigitsZero()) return "0 ${S.ohms}" // 0 Ohm resistor
+        if (resistor.allDigitsZero()) return "0 ${S.Ohms}" // 0 Ohm resistor
 
         val hasLeadingZero = sigFigOne == "0"
         val hasTwoLeadingZeros = sigFigOne == "0" && sigFigTwo == "0"
         val value: Int = if (resistor.getNumberOfBands() == 4) {
-            (sigFigOne + sigFigTwo).toIntOrNull() ?: return "0 ${S.ohms}"
+            (sigFigOne + sigFigTwo).toIntOrNull() ?: return "0 ${S.Ohms}"
         } else {
-            (sigFigOne + sigFigTwo + sigFigThree).toIntOrNull() ?: return "0 ${S.ohms}"
+            (sigFigOne + sigFigTwo + sigFigThree).toIntOrNull() ?: return "0 ${S.Ohms}"
         }
 
         val multiplier = getMultiplierValue(resistor.multiplierBand)
@@ -100,7 +100,7 @@ object ResistanceFormatter {
             value >= 1000000000 -> S.GOhms
             value >= 1000000 -> S.MOhms
             value >= 1000 -> S.kOhms
-            else -> S.ohms
+            else -> S.Ohms
         }
     }
 }

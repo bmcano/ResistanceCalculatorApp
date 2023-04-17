@@ -1,7 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.brandoncano.resistancecalculator.components.Resistor
-import com.brandoncano.resistancecalculator.constants.*
+import com.brandoncano.resistancecalculator.constants.Colors as C
+import com.brandoncano.resistancecalculator.constants.Symbols as S
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -16,28 +17,28 @@ class ResistanceFormatterTest {
     fun `four band resistors resistance text testing`() {
         val resistors = listOf(
             // general
-            Resistor(BLUE, GRAY, "", BLACK, GOLD),
-            Resistor(YELLOW, VIOLET, "", BROWN, GOLD),
-            Resistor(ORANGE, ORANGE, "", BROWN, GOLD),
-            Resistor(BROWN, BLACK, "", BROWN, GOLD),
-            Resistor(BROWN, RED, "", RED, GOLD),
-            Resistor(BROWN, BLACK, "", RED, GOLD),
-            Resistor(WHITE, BLACK, "", RED, GOLD),
+            Resistor(C.BLUE, C.GRAY, "", C.BLACK, C.GOLD),
+            Resistor(C.YELLOW, C.VIOLET, "", C.BROWN, C.GOLD),
+            Resistor(C.ORANGE, C.ORANGE, "", C.BROWN, C.GOLD),
+            Resistor(C.BROWN, C.BLACK, "", C.BROWN, C.GOLD),
+            Resistor(C.BROWN, C.RED, "", C.RED, C.GOLD),
+            Resistor(C.BROWN, C.BLACK, "", C.RED, C.GOLD),
+            Resistor(C.WHITE, C.BLACK, "", C.RED, C.GOLD),
             // leading zero
-            Resistor(BLACK, BLACK, "", BROWN, GOLD),
-            Resistor(BLACK, GREEN, "", RED, GOLD),
-            Resistor(BLACK, GREEN, "", GREEN, GOLD),
-            Resistor(BLACK, GREEN, "", GRAY, GOLD),
-            Resistor(BLACK, GREEN, "", SILVER, GOLD)
+            Resistor(C.BLACK, C.BLACK, "", C.BROWN, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, "", C.RED, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, "", C.GREEN, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, "", C.GRAY, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, "", C.SILVER, C.GOLD)
         )
 
         val answers = listOf(
-            "68 $OHMS ${PLUS_MINUS}5%", "470 $OHMS ${PLUS_MINUS}5%", "330 $OHMS ${PLUS_MINUS}5%",
-            "100 $OHMS ${PLUS_MINUS}5%", "1.2 k$OHMS ${PLUS_MINUS}5%", "1.0 k$OHMS ${PLUS_MINUS}5%",
-            "9.0 k$OHMS ${PLUS_MINUS}5%",
+            "68 ${S.Ohms} ${S.PM}5%", "470 ${S.Ohms} ${S.PM}5%", "330 ${S.Ohms} ${S.PM}5%",
+            "100 ${S.Ohms} ${S.PM}5%", "1.2 ${S.kOhms} ${S.PM}5%", "1.0 ${S.kOhms} ${S.PM}5%",
+            "9.0 ${S.kOhms} ${S.PM}5%",
 
-            "0 $OHMS ${PLUS_MINUS}5%", "500 $OHMS ${PLUS_MINUS}5%", "500 k$OHMS ${PLUS_MINUS}5%",
-            "500 M$OHMS ${PLUS_MINUS}5%", "0.05 $OHMS ${PLUS_MINUS}5%",
+            "0 ${S.Ohms} ${S.PM}5%", "500 ${S.Ohms} ${S.PM}5%", "500 ${S.kOhms} ${S.PM}5%",
+            "500 ${S.MOhms} ${S.PM}5%", "0.05 ${S.Ohms} ${S.PM}5%",
         )
 
         for (i in answers.indices) {
@@ -49,35 +50,35 @@ class ResistanceFormatterTest {
     fun `five band resistors resistance text testing`() {
         val resistors = listOf(
             // general
-            Resistor(GREEN, BROWN, BLACK, GOLD, BROWN),
-            Resistor(BROWN, GREEN, RED, BLUE, GOLD),
-            Resistor(ORANGE, BLACK, BLACK, BLUE, GOLD),
-            Resistor(VIOLET, GRAY, WHITE, BLUE, GOLD),
+            Resistor(C.GREEN, C.BROWN, C.BLACK, C.GOLD, C.BROWN),
+            Resistor(C.BROWN, C.GREEN, C.RED, C.BLUE, C.GOLD),
+            Resistor(C.ORANGE, C.BLACK, C.BLACK, C.BLUE, C.GOLD),
+            Resistor(C.VIOLET, C.GRAY, C.WHITE, C.BLUE, C.GOLD),
             // leading zero
-            Resistor(BLACK, BLACK, BLACK, BROWN, GOLD),
-            Resistor(BLACK, GREEN, GREEN, BROWN, GOLD), Resistor(BLACK, BLACK, GREEN, BROWN, GOLD),
-            Resistor(BLACK, GREEN, GREEN, RED, GOLD), Resistor(BLACK, BLACK, GREEN, RED, GOLD),
-            Resistor(BLACK, GREEN, GREEN, YELLOW, GOLD), Resistor(BLACK, BLACK, GREEN, YELLOW, GOLD),
-            Resistor(BLACK, GREEN, GREEN, GREEN, GOLD), Resistor(BLACK, BLACK, GREEN, GREEN, GOLD),
-            Resistor(BLACK, GREEN, GREEN, VIOLET, GOLD), Resistor(BLACK, BLACK, GREEN, VIOLET, GOLD),
-            Resistor(BLACK, GREEN, GREEN, GRAY, GOLD), Resistor(BLACK, BLACK, GREEN, GRAY, GOLD),
-            Resistor(BLACK, GREEN, GREEN, GOLD, GOLD), Resistor(BLACK, BLACK, GREEN, GOLD, GOLD),
-            Resistor(BLACK, GREEN, GREEN, SILVER, GOLD), Resistor(BLACK, BLACK, GREEN, SILVER, GOLD),
+            Resistor(C.BLACK, C.BLACK, C.BLACK, C.BROWN, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, C.GREEN, C.BROWN, C.GOLD), Resistor(C.BLACK, C.BLACK, C.GREEN, C.BROWN, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, C.GREEN, C.RED, C.GOLD), Resistor(C.BLACK, C.BLACK, C.GREEN, C.RED, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, C.GREEN, C.YELLOW, C.GOLD), Resistor(C.BLACK, C.BLACK, C.GREEN, C.YELLOW, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, C.GREEN, C.GREEN, C.GOLD), Resistor(C.BLACK, C.BLACK, C.GREEN, C.GREEN, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, C.GREEN, C.VIOLET, C.GOLD), Resistor(C.BLACK, C.BLACK, C.GREEN, C.VIOLET, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, C.GREEN, C.GRAY, C.GOLD), Resistor(C.BLACK, C.BLACK, C.GREEN, C.GRAY, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, C.GREEN, C.GOLD, C.GOLD), Resistor(C.BLACK, C.BLACK, C.GREEN, C.GOLD, C.GOLD),
+            Resistor(C.BLACK, C.GREEN, C.GREEN, C.SILVER, C.GOLD), Resistor(C.BLACK, C.BLACK, C.GREEN, C.SILVER, C.GOLD),
         )
 
         val answers = listOf(
-            "51.0 $OHMS ${PLUS_MINUS}1%", "152 M$OHMS ${PLUS_MINUS}5%", "300 M$OHMS ${PLUS_MINUS}5%",
-            "789 M$OHMS ${PLUS_MINUS}5%",
+            "51.0 ${S.Ohms} ${S.PM}1%", "152 ${S.MOhms} ${S.PM}5%", "300 ${S.MOhms} ${S.PM}5%",
+            "789 ${S.MOhms} ${S.PM}5%",
 
-            "0 $OHMS ${PLUS_MINUS}5%",
-            "550 $OHMS ${PLUS_MINUS}5%", "50 $OHMS ${PLUS_MINUS}5%",
-            "5.5 k$OHMS ${PLUS_MINUS}5%", "500 $OHMS ${PLUS_MINUS}5%",
-            "550 k$OHMS ${PLUS_MINUS}5%", "50 k$OHMS ${PLUS_MINUS}5%",
-            "5.5 M$OHMS ${PLUS_MINUS}5%", "500 k$OHMS ${PLUS_MINUS}5%",
-            "550 M$OHMS ${PLUS_MINUS}5%", "50 M$OHMS ${PLUS_MINUS}5%",
-            "5.5 G$OHMS ${PLUS_MINUS}5%", "500 M$OHMS ${PLUS_MINUS}5%",
-            "5.5 $OHMS ${PLUS_MINUS}5%", "0.5 $OHMS ${PLUS_MINUS}5%",
-            "0.55 $OHMS ${PLUS_MINUS}5%", "0.05 $OHMS ${PLUS_MINUS}5%"
+            "0 ${S.Ohms} ${S.PM}5%",
+            "550 ${S.Ohms} ${S.PM}5%", "50 ${S.Ohms} ${S.PM}5%",
+            "5.5 ${S.kOhms} ${S.PM}5%", "500 ${S.Ohms} ${S.PM}5%",
+            "550 ${S.kOhms} ${S.PM}5%", "50 ${S.kOhms} ${S.PM}5%",
+            "5.5 ${S.MOhms} ${S.PM}5%", "500 ${S.kOhms} ${S.PM}5%",
+            "550 ${S.MOhms} ${S.PM}5%", "50 ${S.MOhms} ${S.PM}5%",
+            "5.5 ${S.GOhms} ${S.PM}5%", "500 ${S.MOhms} ${S.PM}5%",
+            "5.5 ${S.Ohms} ${S.PM}5%", "0.5 ${S.Ohms} ${S.PM}5%",
+            "0.55 ${S.Ohms} ${S.PM}5%", "0.05 ${S.Ohms} ${S.PM}5%"
         )
 
         for (i in answers.indices) {
@@ -89,22 +90,22 @@ class ResistanceFormatterTest {
     @Test
     fun `six band resistors ppm bands`() {
         val ppmBands = listOf(
-            BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GRAY
+            C.BLACK, C.BROWN, C.RED, C.ORANGE, C.YELLOW, C.GREEN, C.BLUE, C.VIOLET, C.GRAY
         )
 
         val answers = listOf(
-            "12.5 k$OHMS ${PLUS_MINUS}5%\n250 $PPM_UNIT",
-            "12.5 k$OHMS ${PLUS_MINUS}5%\n100 $PPM_UNIT",
-            "12.5 k$OHMS ${PLUS_MINUS}5%\n50 $PPM_UNIT",
-            "12.5 k$OHMS ${PLUS_MINUS}5%\n15 $PPM_UNIT",
-            "12.5 k$OHMS ${PLUS_MINUS}5%\n25 $PPM_UNIT",
-            "12.5 k$OHMS ${PLUS_MINUS}5%\n20 $PPM_UNIT",
-            "12.5 k$OHMS ${PLUS_MINUS}5%\n10 $PPM_UNIT",
-            "12.5 k$OHMS ${PLUS_MINUS}5%\n5 $PPM_UNIT",
-            "12.5 k$OHMS ${PLUS_MINUS}5%\n1 $PPM_UNIT",
+            "12.5 ${S.kOhms} ${S.PM}5%\n250 ${S.PPM_UNIT}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n100 ${S.PPM_UNIT}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n50 ${S.PPM_UNIT}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n15 ${S.PPM_UNIT}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n25 ${S.PPM_UNIT}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n20 ${S.PPM_UNIT}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n10 ${S.PPM_UNIT}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n5 ${S.PPM_UNIT}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n1 ${S.PPM_UNIT}",
         )
 
-        val resistor = Resistor(BROWN, RED, GREEN, RED, GOLD, BLACK)
+        val resistor = Resistor(C.BROWN, C.RED, C.GREEN, C.RED, C.GOLD, C.BLACK)
         resistor.setNumberOfBands(6)
         for (i in answers.indices) {
             resistor.ppmBand = ppmBands[i]
@@ -115,17 +116,17 @@ class ResistanceFormatterTest {
     @Test
     fun `leading zeros for 4 bands`() {
         val multiplierBands = listOf(
-            BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GRAY, WHITE, GOLD, SILVER
+            C.BLACK, C.BROWN, C.RED, C.ORANGE, C.YELLOW, C.GREEN, C.BLUE, C.VIOLET, C.GRAY, C.WHITE, C.GOLD, C.SILVER
         )
 
         val answers = listOf(
-            "1 $OHMS ${PLUS_MINUS}5%", "10 $OHMS ${PLUS_MINUS}5%", "100 $OHMS ${PLUS_MINUS}5%",
-            "1 k$OHMS ${PLUS_MINUS}5%", "10 k$OHMS ${PLUS_MINUS}5%", "100 k$OHMS ${PLUS_MINUS}5%",
-            "1 M$OHMS ${PLUS_MINUS}5%", "10 M$OHMS ${PLUS_MINUS}5%", "100 M$OHMS ${PLUS_MINUS}5%",
-            "1 G$OHMS ${PLUS_MINUS}5%", "0.1 $OHMS ${PLUS_MINUS}5%", "0.01 $OHMS ${PLUS_MINUS}5%"
+            "1 ${S.Ohms} ${S.PM}5%", "10 ${S.Ohms} ${S.PM}5%", "100 ${S.Ohms} ${S.PM}5%",
+            "1 ${S.kOhms} ${S.PM}5%", "10 ${S.kOhms} ${S.PM}5%", "100 ${S.kOhms} ${S.PM}5%",
+            "1 ${S.MOhms} ${S.PM}5%", "10 ${S.MOhms} ${S.PM}5%", "100 ${S.MOhms} ${S.PM}5%",
+            "1 ${S.GOhms} ${S.PM}5%", "0.1 ${S.Ohms} ${S.PM}5%", "0.01 ${S.Ohms} ${S.PM}5%"
         )
 
-        val resistor = Resistor(BLACK, BROWN, "", BLACK, GOLD)
+        val resistor = Resistor(C.BLACK, C.BROWN, "", C.BLACK, C.GOLD)
         for (i in answers.indices) {
             resistor.multiplierBand = multiplierBands[i]
             assertEquals(answers[i], ResistanceFormatter.calculate(resistor))
@@ -135,17 +136,17 @@ class ResistanceFormatterTest {
     @Test
     fun `leading zeros for 5 bands`() {
         val multiplierBands = listOf(
-            BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GRAY, WHITE, GOLD, SILVER
+            C.BLACK, C.BROWN, C.RED, C.ORANGE, C.YELLOW, C.GREEN, C.BLUE, C.VIOLET, C.GRAY, C.WHITE, C.GOLD, C.SILVER
         )
 
         var answers = listOf(
-            "1 $OHMS ${PLUS_MINUS}5%", "10 $OHMS ${PLUS_MINUS}5%", "100 $OHMS ${PLUS_MINUS}5%",
-            "1 k$OHMS ${PLUS_MINUS}5%", "10 k$OHMS ${PLUS_MINUS}5%", "100 k$OHMS ${PLUS_MINUS}5%",
-            "1 M$OHMS ${PLUS_MINUS}5%", "10 M$OHMS ${PLUS_MINUS}5%", "100 M$OHMS ${PLUS_MINUS}5%",
-            "1 G$OHMS ${PLUS_MINUS}5%", "0.1 $OHMS ${PLUS_MINUS}5%", "0.01 $OHMS ${PLUS_MINUS}5%"
+            "1 ${S.Ohms} ${S.PM}5%", "10 ${S.Ohms} ${S.PM}5%", "100 ${S.Ohms} ${S.PM}5%",
+            "1 ${S.kOhms} ${S.PM}5%", "10 ${S.kOhms} ${S.PM}5%", "100 ${S.kOhms} ${S.PM}5%",
+            "1 ${S.MOhms} ${S.PM}5%", "10 ${S.MOhms} ${S.PM}5%", "100 ${S.MOhms} ${S.PM}5%",
+            "1 ${S.GOhms} ${S.PM}5%", "0.1 ${S.Ohms} ${S.PM}5%", "0.01 ${S.Ohms} ${S.PM}5%"
         )
 
-        var resistor = Resistor(BLACK, BLACK, BROWN, BLACK, GOLD)
+        var resistor = Resistor(C.BLACK, C.BLACK, C.BROWN, C.BLACK, C.GOLD)
         resistor.setNumberOfBands(5)
         for (i in answers.indices) {
             resistor.multiplierBand = multiplierBands[i]
@@ -153,14 +154,14 @@ class ResistanceFormatterTest {
         }
 
         answers = listOf(
-            "11 $OHMS ${PLUS_MINUS}5%", "110 $OHMS ${PLUS_MINUS}5%",
-            "1.1 k$OHMS ${PLUS_MINUS}5%", "11 k$OHMS ${PLUS_MINUS}5%", "110 k$OHMS ${PLUS_MINUS}5%",
-            "1.1 M$OHMS ${PLUS_MINUS}5%", "11 M$OHMS ${PLUS_MINUS}5%", "110 M$OHMS ${PLUS_MINUS}5%",
-            "1.1 G$OHMS ${PLUS_MINUS}5%", "11 G$OHMS ${PLUS_MINUS}5%",
-            "1.1 $OHMS ${PLUS_MINUS}5%", "0.11 $OHMS ${PLUS_MINUS}5%"
+            "11 ${S.Ohms} ${S.PM}5%", "110 ${S.Ohms} ${S.PM}5%",
+            "1.1 ${S.kOhms} ${S.PM}5%", "11 ${S.kOhms} ${S.PM}5%", "110 ${S.kOhms} ${S.PM}5%",
+            "1.1 ${S.MOhms} ${S.PM}5%", "11 ${S.MOhms} ${S.PM}5%", "110 ${S.MOhms} ${S.PM}5%",
+            "1.1 ${S.GOhms} ${S.PM}5%", "11 ${S.GOhms} ${S.PM}5%",
+            "1.1 ${S.Ohms} ${S.PM}5%", "0.11 ${S.Ohms} ${S.PM}5%"
         )
 
-        resistor = Resistor(BLACK, BROWN, BROWN, BLACK, GOLD)
+        resistor = Resistor(C.BLACK, C.BROWN, C.BROWN, C.BLACK, C.GOLD)
         resistor.setNumberOfBands(5)
         for (i in answers.indices) {
             resistor.multiplierBand = multiplierBands[i]

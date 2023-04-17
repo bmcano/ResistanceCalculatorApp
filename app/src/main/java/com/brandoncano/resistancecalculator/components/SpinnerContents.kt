@@ -34,15 +34,15 @@ object SpinnerContents {
         arrayOf(BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GRAY)
 
     val toleranceTextArray = arrayOf(
-        SpinnerItem("${S.PLUS_MINUS}1%", R.drawable.brown_square),
-        SpinnerItem("${S.PLUS_MINUS}2%", R.drawable.red_square),
-        SpinnerItem("${S.PLUS_MINUS}0.5%", R.drawable.green_square),
-        SpinnerItem("${S.PLUS_MINUS}0.25%", R.drawable.blue_square),
-        SpinnerItem("${S.PLUS_MINUS}0.1%", R.drawable.violet_square),
-        SpinnerItem("${S.PLUS_MINUS}0.05%", R.drawable.gray_square),
-        SpinnerItem("${S.PLUS_MINUS}5%", R.drawable.gold_square),
-        SpinnerItem("${S.PLUS_MINUS}10%", R.drawable.silver_square),
-        SpinnerItem("${S.PLUS_MINUS}20%", R.drawable.blank32),
+        SpinnerItem("${S.PM}1%", R.drawable.brown_square),
+        SpinnerItem("${S.PM}2%", R.drawable.red_square),
+        SpinnerItem("${S.PM}0.5%", R.drawable.green_square),
+        SpinnerItem("${S.PM}0.25%", R.drawable.blue_square),
+        SpinnerItem("${S.PM}0.1%", R.drawable.violet_square),
+        SpinnerItem("${S.PM}0.05%", R.drawable.gray_square),
+        SpinnerItem("${S.PM}5%", R.drawable.gold_square),
+        SpinnerItem("${S.PM}10%", R.drawable.silver_square),
+        SpinnerItem("${S.PM}20%", R.drawable.blank32),
     )
 
     val ppmTextArray = arrayOf(
@@ -57,5 +57,5 @@ object SpinnerContents {
         SpinnerItem("1 ${S.PPM_UNIT}", R.drawable.gray_square)
     )
 
-    val unitsArray = arrayOf(S.ohms, S.kOhms, S.MOhms, S.GOhms)
+    val unitsArray = arrayOf(S.Ohms, S.kOhms, S.MOhms, S.GOhms)
 }
