@@ -7,12 +7,11 @@ import android.graphics.drawable.ColorDrawable
 import com.brandoncano.resistancecalculator.R
 
 /**
- * Job: Will show a popup dialog of the resistor chart.
+ * Job: Will show a popup dialog of the corresponding resistor chart.
  */
 object ResistorChart {
 
-    // determines which chart to display
-    fun show(context: Context, imageSelection: Int): Boolean {
+    fun show(context: Context, imageSelection: Int) {
         val chartDialog = Dialog(context)
         chartDialog.setContentView(
             when (imageSelection) {
@@ -24,6 +23,5 @@ object ResistorChart {
         )
         chartDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         chartDialog.show()
-        return true
     }
 }

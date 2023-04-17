@@ -84,34 +84,30 @@ class ValueToColorActivity : AppCompatActivity() {
                 val intent = Intent(this, ColorToValueActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
                 startActivity(intent)
-                return true
             }
             R.id.show_resistor_charts -> {
-                return ResistorChart.show(this, resistor.getNumberOfBands())
+                ResistorChart.show(this, resistor.getNumberOfBands())
             }
             R.id.share_item -> {
                 val intent = ShareResistance.execute(resistor, resistanceText, isVtC = true)
                 startActivity(Intent.createChooser(intent, ""))
-                return true
             }
             R.id.feedback -> {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = EmailFeedback.execute()
                 startActivity(intent)
-                return true
             }
             R.id.clear_selections -> {
                 reset()
-                return true
             }
             R.id.about_item -> {
                 val intent = Intent(this, AboutActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
                 startActivity(intent)
-                return true
             }
             else -> return super.onOptionsItemSelected(item)
         }
+        return true
     }
 
     private fun generalSetup() {

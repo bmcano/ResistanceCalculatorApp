@@ -46,21 +46,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+        when (item.itemId) {
             R.id.feedback -> {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = EmailFeedback.execute()
                 startActivity(intent)
-                true
             }
             R.id.about_item -> {
                 val intent = Intent(this, AboutActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
                 startActivity(intent)
-                true
             }
             else -> super.onOptionsItemSelected(item)
         }
+        return true
     }
 
     private fun buttonSetup() {
