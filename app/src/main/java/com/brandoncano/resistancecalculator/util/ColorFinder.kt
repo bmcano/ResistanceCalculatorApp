@@ -12,15 +12,15 @@ object ColorFinder {
 
     fun textToColoredDrawable(color: String = ""): Int {
         return when (color) {
-            C.BLACK ,                 "250 ${S.PPM_UNIT}" -> R.drawable.black_square
-            C.BROWN , "${S.PM}1%"   , "100 ${S.PPM_UNIT}" -> R.drawable.brown_square
-            C.RED   , "${S.PM}2%"   , "50 ${S.PPM_UNIT}"  -> R.drawable.red_square
-            C.ORANGE,                 "15 ${S.PPM_UNIT}"  -> R.drawable.orange_square
-            C.YELLOW,                 "25 ${S.PPM_UNIT}"  -> R.drawable.yellow_square
-            C.GREEN , "${S.PM}0.5%" , "20 ${S.PPM_UNIT}"  -> R.drawable.green_square
-            C.BLUE  , "${S.PM}0.25%", "10 ${S.PPM_UNIT}"  -> R.drawable.blue_square
-            C.VIOLET, "${S.PM}0.1%" , "5 ${S.PPM_UNIT}"   -> R.drawable.violet_square
-            C.GRAY  , "${S.PM}0.05%", "1 ${S.PPM_UNIT}"   -> R.drawable.gray_square
+            C.BLACK ,                 "250 ${S.PPM}" -> R.drawable.black_square
+            C.BROWN , "${S.PM}1%"   , "100 ${S.PPM}" -> R.drawable.brown_square
+            C.RED   , "${S.PM}2%"   , "50 ${S.PPM}"  -> R.drawable.red_square
+            C.ORANGE,                 "15 ${S.PPM}"  -> R.drawable.orange_square
+            C.YELLOW,                 "25 ${S.PPM}"  -> R.drawable.yellow_square
+            C.GREEN , "${S.PM}0.5%" , "20 ${S.PPM}"  -> R.drawable.green_square
+            C.BLUE  , "${S.PM}0.25%", "10 ${S.PPM}"  -> R.drawable.blue_square
+            C.VIOLET, "${S.PM}0.1%" , "5 ${S.PPM}"   -> R.drawable.violet_square
+            C.GRAY  , "${S.PM}0.05%", "1 ${S.PPM}"   -> R.drawable.gray_square
             C.WHITE                                       -> R.drawable.white_square
             C.GOLD  , "${S.PM}5%"                         -> R.drawable.gold_square
             C.SILVER, "${S.PM}10%"                        -> R.drawable.silver_square
@@ -30,15 +30,15 @@ object ColorFinder {
 
     fun textToColor(color: String = ""): Int {
         return when (color) {
-            C.BLACK ,                 "250 ${S.PPM_UNIT}" -> R.color.black32
-            C.BROWN , "${S.PM}1%"   , "100 ${S.PPM_UNIT}" -> R.color.brown32
-            C.RED   , "${S.PM}2%"   , "50 ${S.PPM_UNIT}"  -> R.color.red32
-            C.ORANGE,                 "15 ${S.PPM_UNIT}"  -> R.color.orange32
-            C.YELLOW,                 "25 ${S.PPM_UNIT}"  -> R.color.yellow32
-            C.GREEN , "${S.PM}0.5%" , "20 ${S.PPM_UNIT}"  -> R.color.green32
-            C.BLUE  , "${S.PM}0.25%", "10 ${S.PPM_UNIT}"  -> R.color.blue32
-            C.VIOLET, "${S.PM}0.1%" , "5 ${S.PPM_UNIT}"   -> R.color.violet32
-            C.GRAY  , "${S.PM}0.05%", "1 ${S.PPM_UNIT}"   -> R.color.gray32
+            C.BLACK ,                 "250 ${S.PPM}" -> R.color.black32
+            C.BROWN , "${S.PM}1%"   , "100 ${S.PPM}" -> R.color.brown32
+            C.RED   , "${S.PM}2%"   , "50 ${S.PPM}"  -> R.color.red32
+            C.ORANGE,                 "15 ${S.PPM}"  -> R.color.orange32
+            C.YELLOW,                 "25 ${S.PPM}"  -> R.color.yellow32
+            C.GREEN , "${S.PM}0.5%" , "20 ${S.PPM}"  -> R.color.green32
+            C.BLUE  , "${S.PM}0.25%", "10 ${S.PPM}"  -> R.color.blue32
+            C.VIOLET, "${S.PM}0.1%" , "5 ${S.PPM}"   -> R.color.violet32
+            C.GRAY  , "${S.PM}0.05%", "1 ${S.PPM}"   -> R.color.gray32
             C.WHITE                                       -> R.color.white32
             C.GOLD  , "${S.PM}5%"                         -> R.color.gold32
             C.SILVER, "${S.PM}10%"                        -> R.color.silver32

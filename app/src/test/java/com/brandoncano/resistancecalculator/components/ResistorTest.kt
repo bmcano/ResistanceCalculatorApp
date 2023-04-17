@@ -29,7 +29,7 @@ class ResistorTest {
         assertEquals("[ ${C.BLACK}, ${C.BROWN}, ${C.RED}, ${C.ORANGE}, ${C.GOLD}, ${C.SILVER} ]", resistor.toColorBandString())
 
         resistor.toleranceValue = "${S.PM}5%"
-        resistor.ppmValue = "250 ${S.PPM_UNIT}"
+        resistor.ppmValue = "250 ${S.PPM}"
         assertEquals("[ ${C.BLACK}, ${C.BROWN}, ${C.RED}, ${C.ORANGE}, ${C.GOLD}, ${C.BLACK} ]", resistor.toColorBandString(true))
     }
 
@@ -39,12 +39,12 @@ class ResistorTest {
         resistor.resistance = "12"
         resistor.units = S.Ohms
         resistor.toleranceValue = "${S.PM}5%"
-        resistor.ppmValue = "250 ${S.PPM_UNIT}"
+        resistor.ppmValue = "250 ${S.PPM}"
         assertEquals("12 ${S.Ohms} ${S.PM}5%", resistor.getResistanceText())
         resistor.setNumberOfBands(5)
         assertEquals("12 ${S.Ohms} ${S.PM}5%", resistor.getResistanceText())
         resistor.setNumberOfBands(6)
-        assertEquals("12 ${S.Ohms} ${S.PM}5%\n250 ${S.PPM_UNIT}", resistor.getResistanceText())
+        assertEquals("12 ${S.Ohms} ${S.PM}5%\n250 ${S.PPM}", resistor.getResistanceText())
     }
 
     @Test

@@ -9,5 +9,5 @@ object Symbols {
     const val MOhms = "MΩ"
     const val GOhms = "GΩ"
     const val PM = "±"
-    const val PPM_UNIT = "ppm/°C"
+    const val PPM = "ppm/°C"
 }

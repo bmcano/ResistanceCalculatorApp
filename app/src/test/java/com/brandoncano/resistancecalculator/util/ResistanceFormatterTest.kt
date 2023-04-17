@@ -94,15 +94,15 @@ class ResistanceFormatterTest {
         )
 
         val answers = listOf(
-            "12.5 ${S.kOhms} ${S.PM}5%\n250 ${S.PPM_UNIT}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n100 ${S.PPM_UNIT}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n50 ${S.PPM_UNIT}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n15 ${S.PPM_UNIT}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n25 ${S.PPM_UNIT}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n20 ${S.PPM_UNIT}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n10 ${S.PPM_UNIT}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n5 ${S.PPM_UNIT}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n1 ${S.PPM_UNIT}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n250 ${S.PPM}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n100 ${S.PPM}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n50 ${S.PPM}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n15 ${S.PPM}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n25 ${S.PPM}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n20 ${S.PPM}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n10 ${S.PPM}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n5 ${S.PPM}",
+            "12.5 ${S.kOhms} ${S.PM}5%\n1 ${S.PPM}",
         )
 
         val resistor = Resistor(C.BROWN, C.RED, C.GREEN, C.RED, C.GOLD, C.BLACK)

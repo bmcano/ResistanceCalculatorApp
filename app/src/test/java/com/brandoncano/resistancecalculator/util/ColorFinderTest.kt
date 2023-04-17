@@ -12,37 +12,37 @@ class ColorFinderTest {
     @Test
     fun textToColorDrawableTest() {
         assertEquals(R.drawable.black_square, ColorFinder.textToColoredDrawable(C.BLACK))
-        assertEquals(R.drawable.black_square, ColorFinder.textToColoredDrawable("250 ${S.PPM_UNIT}"))
+        assertEquals(R.drawable.black_square, ColorFinder.textToColoredDrawable("250 ${S.PPM}"))
 
         assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable(C.BROWN))
         assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable("${S.PM}1%"))
-        assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable("100 ${S.PPM_UNIT}"))
+        assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable("100 ${S.PPM}"))
 
         assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable(C.RED))
         assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable("${S.PM}2%"))
-        assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable("50 ${S.PPM_UNIT}"))
+        assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable("50 ${S.PPM}"))
 
         assertEquals(R.drawable.orange_square, ColorFinder.textToColoredDrawable(C.ORANGE))
-        assertEquals(R.drawable.orange_square, ColorFinder.textToColoredDrawable("15 ${S.PPM_UNIT}"))
+        assertEquals(R.drawable.orange_square, ColorFinder.textToColoredDrawable("15 ${S.PPM}"))
 
         assertEquals(R.drawable.yellow_square, ColorFinder.textToColoredDrawable(C.YELLOW))
-        assertEquals(R.drawable.yellow_square, ColorFinder.textToColoredDrawable("25 ${S.PPM_UNIT}"))
+        assertEquals(R.drawable.yellow_square, ColorFinder.textToColoredDrawable("25 ${S.PPM}"))
 
         assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable(C.GREEN))
         assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable("${S.PM}0.5%"))
-        assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable("20 ${S.PPM_UNIT}"))
+        assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable("20 ${S.PPM}"))
 
         assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable(C.BLUE))
         assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable("${S.PM}0.25%"))
-        assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable("10 ${S.PPM_UNIT}"))
+        assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable("10 ${S.PPM}"))
 
         assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable(C.VIOLET))
         assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable("${S.PM}0.1%"))
-        assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable("5 ${S.PPM_UNIT}"))
+        assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable("5 ${S.PPM}"))
 
         assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable(C.GRAY))
         assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable("${S.PM}0.05%"))
-        assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable("1 ${S.PPM_UNIT}"))
+        assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable("1 ${S.PPM}"))
 
         assertEquals(R.drawable.white_square, ColorFinder.textToColoredDrawable(C.WHITE))
 
@@ -60,37 +60,37 @@ class ColorFinderTest {
     @Test
     fun textToColorTest() {
         assertEquals(R.color.black32, ColorFinder.textToColor(C.BLACK))
-        assertEquals(R.color.black32, ColorFinder.textToColor("250 ${S.PPM_UNIT}"))
+        assertEquals(R.color.black32, ColorFinder.textToColor("250 ${S.PPM}"))
 
         assertEquals(R.color.brown32, ColorFinder.textToColor(C.BROWN))
         assertEquals(R.color.brown32, ColorFinder.textToColor("${S.PM}1%"))
-        assertEquals(R.color.brown32, ColorFinder.textToColor("100 ${S.PPM_UNIT}"))
+        assertEquals(R.color.brown32, ColorFinder.textToColor("100 ${S.PPM}"))
 
         assertEquals(R.color.red32, ColorFinder.textToColor(C.RED))
         assertEquals(R.color.red32, ColorFinder.textToColor("${S.PM}2%"))
-        assertEquals(R.color.red32, ColorFinder.textToColor("50 ${S.PPM_UNIT}"))
+        assertEquals(R.color.red32, ColorFinder.textToColor("50 ${S.PPM}"))
 
         assertEquals(R.color.orange32, ColorFinder.textToColor(C.ORANGE))
-        assertEquals(R.color.orange32, ColorFinder.textToColor("15 ${S.PPM_UNIT}"))
+        assertEquals(R.color.orange32, ColorFinder.textToColor("15 ${S.PPM}"))
 
         assertEquals(R.color.yellow32, ColorFinder.textToColor(C.YELLOW))
-        assertEquals(R.color.yellow32, ColorFinder.textToColor("25 ${S.PPM_UNIT}"))
+        assertEquals(R.color.yellow32, ColorFinder.textToColor("25 ${S.PPM}"))
 
         assertEquals(R.color.green32, ColorFinder.textToColor(C.GREEN))
         assertEquals(R.color.green32, ColorFinder.textToColor("${S.PM}0.5%"))
-        assertEquals(R.color.green32, ColorFinder.textToColor("20 ${S.PPM_UNIT}"))
+        assertEquals(R.color.green32, ColorFinder.textToColor("20 ${S.PPM}"))
 
         assertEquals(R.color.blue32, ColorFinder.textToColor(C.BLUE))
         assertEquals(R.color.blue32, ColorFinder.textToColor("${S.PM}0.25%"))
-        assertEquals(R.color.blue32, ColorFinder.textToColor("10 ${S.PPM_UNIT}"))
+        assertEquals(R.color.blue32, ColorFinder.textToColor("10 ${S.PPM}"))
 
         assertEquals(R.color.violet32, ColorFinder.textToColor(C.VIOLET))
         assertEquals(R.color.violet32, ColorFinder.textToColor("${S.PM}0.1%"))
-        assertEquals(R.color.violet32, ColorFinder.textToColor("5 ${S.PPM_UNIT}"))
+        assertEquals(R.color.violet32, ColorFinder.textToColor("5 ${S.PPM}"))
 
         assertEquals(R.color.gray32, ColorFinder.textToColor(C.GRAY))
         assertEquals(R.color.gray32, ColorFinder.textToColor("${S.PM}0.05%"))
-        assertEquals(R.color.gray32, ColorFinder.textToColor("1 ${S.PPM_UNIT}"))
+        assertEquals(R.color.gray32, ColorFinder.textToColor("1 ${S.PPM}"))
 
         assertEquals(R.color.white32, ColorFinder.textToColor(C.WHITE))
 

@@ -46,15 +46,15 @@ object SpinnerContents {
     )
 
     val ppmTextArray = arrayOf(
-        SpinnerItem("250 ${S.PPM_UNIT}", R.drawable.black_square),
-        SpinnerItem("100 ${S.PPM_UNIT}", R.drawable.brown_square),
-        SpinnerItem("50 ${S.PPM_UNIT}", R.drawable.red_square),
-        SpinnerItem("15 ${S.PPM_UNIT}", R.drawable.orange_square),
-        SpinnerItem("25 ${S.PPM_UNIT}", R.drawable.yellow_square),
-        SpinnerItem("20 ${S.PPM_UNIT}", R.drawable.green_square),
-        SpinnerItem("10 ${S.PPM_UNIT}", R.drawable.blue_square),
-        SpinnerItem("5 ${S.PPM_UNIT}", R.drawable.violet_square),
-        SpinnerItem("1 ${S.PPM_UNIT}", R.drawable.gray_square)
+        SpinnerItem("250 ${S.PPM}", R.drawable.black_square),
+        SpinnerItem("100 ${S.PPM}", R.drawable.brown_square),
+        SpinnerItem("50 ${S.PPM}", R.drawable.red_square),
+        SpinnerItem("15 ${S.PPM}", R.drawable.orange_square),
+        SpinnerItem("25 ${S.PPM}", R.drawable.yellow_square),
+        SpinnerItem("20 ${S.PPM}", R.drawable.green_square),
+        SpinnerItem("10 ${S.PPM}", R.drawable.blue_square),
+        SpinnerItem("5 ${S.PPM}", R.drawable.violet_square),
+        SpinnerItem("1 ${S.PPM}", R.drawable.gray_square)
     )
 
     val unitsArray = arrayOf(S.Ohms, S.kOhms, S.MOhms, S.GOhms)

@@ -46,7 +46,7 @@ object ResistanceFormatter {
             C.YELLOW to "25", C.GREEN to "20", C.BLUE to "10", C.VIOLET to "5", C.GRAY to "1"
         )
         return if (colorToPPM.containsKey(color) && bands == 6) {
-            "\n${colorToPPM.getValue(color)} ${S.PPM_UNIT}"
+            "\n${colorToPPM.getValue(color)} ${S.PPM}"
         } else ""
     }
 
