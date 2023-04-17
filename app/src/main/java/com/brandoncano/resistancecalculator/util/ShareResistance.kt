@@ -9,20 +9,10 @@ import com.brandoncano.resistancecalculator.components.Resistor
  */
 object ShareResistance {
 
-    // generates to text to copy/share for CTV
-    fun shareCTV(resistor: Resistor, resistance: TextView): Intent {
+    fun execute(resistor: Resistor, resistance: TextView, isVtC: Boolean = false): Intent {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
-        val text = "${resistance.text}\n" + resistor.toColorBandString()
-        intent.putExtra(Intent.EXTRA_TEXT, text)
-        return intent
-    }
-
-    // generates to text to copy/share for VTC
-    fun shareVTC(resistor: Resistor, resistance: TextView): Intent {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "plain/text"
-        val text = "${resistance.text}\n" + resistor.toColorBandString(isVtC = true)
+        val text = "${resistance.text}\n" + resistor.toColorBandString(isVtC)
         intent.putExtra(Intent.EXTRA_TEXT, text)
         return intent
     }

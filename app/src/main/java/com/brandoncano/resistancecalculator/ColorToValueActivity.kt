@@ -81,7 +81,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 return ResistorChart.show(this, resistor.getNumberOfBands())
             }
             R.id.share_item -> {
-                val intent = ShareResistance.shareCTV(resistor, resistanceText)
+                val intent = ShareResistance.execute(resistor, resistanceText)
                 startActivity(Intent.createChooser(intent, ""))
                 return true
             }
