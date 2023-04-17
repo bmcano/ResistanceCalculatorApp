@@ -25,7 +25,7 @@ import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerContents
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.EmailFeedback
-import com.brandoncano.resistancecalculator.util.ResistorChart
+import com.brandoncano.resistancecalculator.util.ShowResistorChart
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
 import com.brandoncano.resistancecalculator.util.IsValidResistance
 import com.brandoncano.resistancecalculator.util.ShareResistance
@@ -86,7 +86,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.show_resistor_charts -> {
-                ResistorChart.show(this, resistor.getNumberOfBands())
+                ShowResistorChart.execute(this, resistor.getNumberOfBands())
             }
             R.id.share_item -> {
                 val intent = ShareResistance.execute(resistor, resistanceText, isVtC = true)

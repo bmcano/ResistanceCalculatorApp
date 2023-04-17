@@ -20,7 +20,7 @@ import com.brandoncano.resistancecalculator.components.SpinnerContents
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
-import com.brandoncano.resistancecalculator.util.ResistorChart
+import com.brandoncano.resistancecalculator.util.ShowResistorChart
 import com.brandoncano.resistancecalculator.util.ShareResistance
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
@@ -77,7 +77,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.show_resistor_charts -> {
-                ResistorChart.show(this, resistor.getNumberOfBands())
+                ShowResistorChart.execute(this, resistor.getNumberOfBands())
             }
             R.id.share_item -> {
                 val intent = ShareResistance.execute(resistor, resistanceText)
