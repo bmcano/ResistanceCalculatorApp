@@ -34,6 +34,12 @@ class AboutActivity : AppCompatActivity() {
 
     fun easterEgg(view: View) = makeRandomResistorImage()
 
+    fun rateApp(view: View) {
+        val uri = Uri.parse("https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator&pli=1")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
+    }
+
     private fun makeRandomResistorImage() {
         val numBand1: ImageView = findViewById(R.id.r_band_1)
         val numBand2: ImageView = findViewById(R.id.r_band_2)
@@ -42,28 +48,26 @@ class AboutActivity : AppCompatActivity() {
         val toleranceBand: ImageView = findViewById(R.id.r_band_5)
         val ppmBand: ImageView = findViewById(R.id.r_band_6)
 
-        numBand1.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
-        numBand2.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
-        multiplierBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
-        toleranceBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
+        setRandomColorFilter(numBand1)
+        setRandomColorFilter(numBand2)
+        setRandomColorFilter(multiplierBand)
+        setRandomColorFilter(toleranceBand)
 
         when ((4..6).random()) {
             4 -> {
-                numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
-                ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
+                setRandomColorFilter(numBand3, R.color.resistor_blank)
+                setRandomColorFilter(ppmBand, R.color.resistor_blank)
             } 5 -> {
-                numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
-                ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.textToColor()))
+                setRandomColorFilter(numBand3)
+                setRandomColorFilter(ppmBand, R.color.resistor_blank)
             } 6 -> {
-                numBand3.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
-                ppmBand.setColorFilter(ContextCompat.getColor(this, ColorFinder.randomColor()))
+                setRandomColorFilter(numBand3)
+                setRandomColorFilter(ppmBand)
             }
         }
     }
 
-    fun rateApp(view: View) {
-        val uri = Uri.parse("https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator&pli=1")
-        val intent = Intent(Intent.ACTION_VIEW, uri)
-        startActivity(intent)
+    private fun setRandomColorFilter(band: ImageView, color: Int = ColorFinder.randomColor()) {
+        band.setColorFilter(ContextCompat.getColor(this, color))
     }
 }
