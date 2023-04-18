@@ -5,158 +5,158 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/group"
+        android:id="@+id/resistor_group"
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/r_post_band_3"
+        app:layout_constraintBottom_toTopOf="@+id/r_p7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_left"
+        android:id="@+id/r_p1"
         android:layout_width="69dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_left"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_1"
-        app:layout_constraintStart_toStartOf="@+id/group"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p1"
+        app:layout_constraintEnd_toStartOf="@+id/r_p2_band_1"
+        app:layout_constraintStart_toStartOf="@+id/resistor_group"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_band_1"
+        android:id="@+id/r_p2_band_1"
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_band_1"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_1"
-        app:layout_constraintStart_toEndOf="@+id/r_left"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p2"
+        app:layout_constraintEnd_toStartOf="@+id/r_p3"
+        app:layout_constraintStart_toEndOf="@+id/r_p1"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_post_band_1"
+        android:id="@+id/r_p3"
         android:layout_width="10dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_post_band_1"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_2"
-        app:layout_constraintStart_toEndOf="@+id/r_band_1"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p3"
+        app:layout_constraintEnd_toStartOf="@+id/r_p4_band2"
+        app:layout_constraintStart_toEndOf="@+id/r_p2_band_1"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_band_2"
+        android:id="@+id/r_p4_band2"
         android:layout_width="11dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_band_2"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_2"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_1"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p4"
+        app:layout_constraintEnd_toStartOf="@+id/r_p5"
+        app:layout_constraintStart_toEndOf="@+id/r_p3"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_post_band_2"
+        android:id="@+id/r_p5"
         android:layout_width="9.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_post_band_2"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_3"
-        app:layout_constraintStart_toEndOf="@+id/r_band_2"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p5"
+        app:layout_constraintEnd_toStartOf="@+id/r_p6_band3"
+        app:layout_constraintStart_toEndOf="@+id/r_p4_band2"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_band_3"
+        android:id="@+id/r_p6_band3"
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_band_3"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_3"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_2"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p6"
+        app:layout_constraintEnd_toStartOf="@+id/r_p7"
+        app:layout_constraintStart_toEndOf="@+id/r_p5"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_post_band_3"
+        android:id="@+id/r_p7"
         android:layout_width="10.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_post_band_3"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_4"
-        app:layout_constraintStart_toEndOf="@+id/r_band_3"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p7"
+        app:layout_constraintEnd_toStartOf="@+id/r_p8_band4"
+        app:layout_constraintStart_toEndOf="@+id/r_p6_band3"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_band_4"
+        android:id="@+id/r_p8_band4"
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_band_4"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_4"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_3"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p8"
+        app:layout_constraintEnd_toStartOf="@+id/r_p9"
+        app:layout_constraintStart_toEndOf="@+id/r_p7"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_post_band_4"
+        android:id="@+id/r_p9"
         android:layout_width="16.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_post_band_4"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_5"
-        app:layout_constraintStart_toEndOf="@+id/r_band_4"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p9"
+        app:layout_constraintEnd_toStartOf="@+id/r_p10_band_5"
+        app:layout_constraintStart_toEndOf="@+id/r_p8_band4"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_band_5"
+        android:id="@+id/r_p10_band_5"
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_band_5"
-        app:layout_constraintEnd_toStartOf="@+id/r_post_band_5"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_4"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p10"
+        app:layout_constraintEnd_toStartOf="@+id/r_p11"
+        app:layout_constraintStart_toEndOf="@+id/r_p9"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_post_band_5"
+        android:id="@+id/r_p11"
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_post_band_5"
-        app:layout_constraintEnd_toStartOf="@+id/r_band_6"
-        app:layout_constraintStart_toEndOf="@+id/r_band_5"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p11"
+        app:layout_constraintEnd_toStartOf="@+id/r_p12_band_6"
+        app:layout_constraintStart_toEndOf="@+id/r_p10_band_5"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_band_6"
+        android:id="@+id/r_p12_band_6"
         android:layout_width="11.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_band_6"
-        app:layout_constraintEnd_toStartOf="@+id/r_right"
-        app:layout_constraintStart_toEndOf="@+id/r_post_band_5"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p12"
+        app:layout_constraintEnd_toStartOf="@+id/r_p13"
+        app:layout_constraintStart_toEndOf="@+id/r_p11"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_right"
+        android:id="@+id/r_p13"
         android:layout_width="52.5dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
-        android:src="@drawable/resistor_right"
-        app:layout_constraintEnd_toEndOf="@+id/group"
-        app:layout_constraintStart_toEndOf="@+id/r_band_6"
-        app:layout_constraintTop_toBottomOf="@id/group" />
+        android:src="@drawable/img_resistor_p13"
+        app:layout_constraintEnd_toEndOf="@+id/resistor_group"
+        app:layout_constraintStart_toEndOf="@+id/r_p12_band_6"
+        app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

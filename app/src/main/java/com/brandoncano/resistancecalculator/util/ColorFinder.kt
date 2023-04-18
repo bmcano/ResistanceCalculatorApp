@@ -12,19 +12,19 @@ object ColorFinder {
 
     fun textToColoredDrawable(color: String = ""): Int {
         return when (color) {
-            C.BLACK ,                 "250 ${S.PPM}" -> R.drawable.black_square
-            C.BROWN , "${S.PM}1%"   , "100 ${S.PPM}" -> R.drawable.brown_square
-            C.RED   , "${S.PM}2%"   , "50 ${S.PPM}"  -> R.drawable.red_square
-            C.ORANGE,                 "15 ${S.PPM}"  -> R.drawable.orange_square
-            C.YELLOW,                 "25 ${S.PPM}"  -> R.drawable.yellow_square
-            C.GREEN , "${S.PM}0.5%" , "20 ${S.PPM}"  -> R.drawable.green_square
-            C.BLUE  , "${S.PM}0.25%", "10 ${S.PPM}"  -> R.drawable.blue_square
-            C.VIOLET, "${S.PM}0.1%" , "5 ${S.PPM}"   -> R.drawable.violet_square
-            C.GRAY  , "${S.PM}0.05%", "1 ${S.PPM}"   -> R.drawable.gray_square
-            C.WHITE                                  -> R.drawable.white_square
-            C.GOLD  , "${S.PM}5%"                    -> R.drawable.gold_square
-            C.SILVER, "${S.PM}10%"                   -> R.drawable.silver_square
-            else                                     -> R.drawable.blank32
+            C.BLACK ,                 "250 ${S.PPM}" -> R.drawable.square_black
+            C.BROWN , "${S.PM}1%"   , "100 ${S.PPM}" -> R.drawable.square_brown
+            C.RED   , "${S.PM}2%"   , "50 ${S.PPM}"  -> R.drawable.square_red
+            C.ORANGE,                 "15 ${S.PPM}"  -> R.drawable.square_orange
+            C.YELLOW,                 "25 ${S.PPM}"  -> R.drawable.square_yellow
+            C.GREEN , "${S.PM}0.5%" , "20 ${S.PPM}"  -> R.drawable.square_green
+            C.BLUE  , "${S.PM}0.25%", "10 ${S.PPM}"  -> R.drawable.square_blue
+            C.VIOLET, "${S.PM}0.1%" , "5 ${S.PPM}"   -> R.drawable.square_violet
+            C.GRAY  , "${S.PM}0.05%", "1 ${S.PPM}"   -> R.drawable.square_gray
+            C.WHITE                                  -> R.drawable.square_white
+            C.GOLD  , "${S.PM}5%"                    -> R.drawable.square_gold
+            C.SILVER, "${S.PM}10%"                   -> R.drawable.square_silver
+            else                                     -> R.drawable.square_blank
         }
     }
 
@@ -64,18 +64,18 @@ object ColorFinder {
 
     fun idToColorText(colorId: Int): String {
         return when (colorId) {
-            R.color.black32,  R.drawable.black_square  -> C.BLACK
-            R.color.brown32,  R.drawable.brown_square  -> C.BROWN
-            R.color.red32,    R.drawable.red_square    -> C.RED
-            R.color.orange32, R.drawable.orange_square -> C.ORANGE
-            R.color.yellow32, R.drawable.yellow_square -> C.YELLOW
-            R.color.green32,  R.drawable.green_square  -> C.GREEN
-            R.color.blue32,   R.drawable.blue_square   -> C.BLUE
-            R.color.violet32, R.drawable.violet_square -> C.VIOLET
-            R.color.gray32,   R.drawable.gray_square   -> C.GRAY
-            R.color.white32,  R.drawable.white_square  -> C.WHITE
-            R.color.gold32,   R.drawable.gold_square   -> C.GOLD
-            R.color.silver32, R.drawable.silver_square -> C.SILVER
+            R.color.black32,  R.drawable.square_black  -> C.BLACK
+            R.color.brown32,  R.drawable.square_brown  -> C.BROWN
+            R.color.red32,    R.drawable.square_red    -> C.RED
+            R.color.orange32, R.drawable.square_orange -> C.ORANGE
+            R.color.yellow32, R.drawable.square_yellow -> C.YELLOW
+            R.color.green32,  R.drawable.square_green  -> C.GREEN
+            R.color.blue32,   R.drawable.square_blue   -> C.BLUE
+            R.color.violet32, R.drawable.square_violet -> C.VIOLET
+            R.color.gray32,   R.drawable.square_gray   -> C.GRAY
+            R.color.white32,  R.drawable.square_white  -> C.WHITE
+            R.color.gold32,   R.drawable.square_gold   -> C.GOLD
+            R.color.silver32, R.drawable.square_silver -> C.SILVER
             else -> ""
         }
     }

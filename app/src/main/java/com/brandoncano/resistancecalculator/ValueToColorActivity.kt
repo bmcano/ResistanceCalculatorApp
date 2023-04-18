@@ -113,12 +113,12 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun generalSetup() {
         resistanceText = findViewById(R.id.display_resistance)
         toggleDropDown = findViewById(R.id.dropDownSelectorPPM)
-        bandImage1 = findViewById(R.id.r_band_1)
-        bandImage2 = findViewById(R.id.r_band_2)
-        bandImage3 = findViewById(R.id.r_band_3)
-        bandImage4 = findViewById(R.id.r_band_4)
-        bandImage5 = findViewById(R.id.r_band_5)
-        bandImage6 = findViewById(R.id.r_band_6)
+        bandImage1 = findViewById(R.id.r_p2_band_1)
+        bandImage2 = findViewById(R.id.r_p4_band2)
+        bandImage3 = findViewById(R.id.r_p6_band3)
+        bandImage4 = findViewById(R.id.r_p8_band4)
+        bandImage5 = findViewById(R.id.r_p10_band_5)
+        bandImage6 = findViewById(R.id.r_p12_band_6)
 
         resistanceText.text = StateData.RESISTANCE_VTC.loadData(this)
         if (resistanceText.text.isEmpty()) resistanceText.text = getString(R.string.enter_value)

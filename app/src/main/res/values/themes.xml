@@ -46,7 +46,7 @@
     <style name="AutoCompleteTextViewColorTextDesign">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">56dp</item>
-        <item name="android:drawableStart">@drawable/blank32</item>
+        <item name="android:drawableStart">@drawable/square_blank</item>
         <item name="android:drawablePadding">16dp</item>
         <item name="android:inputType">none</item>
         <item name="android:textSize">16sp</item>

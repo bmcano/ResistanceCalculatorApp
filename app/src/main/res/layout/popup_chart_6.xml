@@ -9,6 +9,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/popup_background"
         android:contentDescription="@string/popup_chart_content_description"
-        android:src="@drawable/resistor_chart_6" />
+        android:src="@drawable/img_values_chart_6" />
 
 </RelativeLayout>

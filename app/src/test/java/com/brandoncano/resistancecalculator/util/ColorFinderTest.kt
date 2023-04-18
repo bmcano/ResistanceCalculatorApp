@@ -11,50 +11,50 @@ class ColorFinderTest {
 
     @Test
     fun textToColorDrawableTest() {
-        assertEquals(R.drawable.black_square, ColorFinder.textToColoredDrawable(C.BLACK))
-        assertEquals(R.drawable.black_square, ColorFinder.textToColoredDrawable("250 ${S.PPM}"))
+        assertEquals(R.drawable.square_black, ColorFinder.textToColoredDrawable(C.BLACK))
+        assertEquals(R.drawable.square_black, ColorFinder.textToColoredDrawable("250 ${S.PPM}"))
 
-        assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable(C.BROWN))
-        assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable("${S.PM}1%"))
-        assertEquals(R.drawable.brown_square, ColorFinder.textToColoredDrawable("100 ${S.PPM}"))
+        assertEquals(R.drawable.square_brown, ColorFinder.textToColoredDrawable(C.BROWN))
+        assertEquals(R.drawable.square_brown, ColorFinder.textToColoredDrawable("${S.PM}1%"))
+        assertEquals(R.drawable.square_brown, ColorFinder.textToColoredDrawable("100 ${S.PPM}"))
 
-        assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable(C.RED))
-        assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable("${S.PM}2%"))
-        assertEquals(R.drawable.red_square, ColorFinder.textToColoredDrawable("50 ${S.PPM}"))
+        assertEquals(R.drawable.square_red, ColorFinder.textToColoredDrawable(C.RED))
+        assertEquals(R.drawable.square_red, ColorFinder.textToColoredDrawable("${S.PM}2%"))
+        assertEquals(R.drawable.square_red, ColorFinder.textToColoredDrawable("50 ${S.PPM}"))
 
-        assertEquals(R.drawable.orange_square, ColorFinder.textToColoredDrawable(C.ORANGE))
-        assertEquals(R.drawable.orange_square, ColorFinder.textToColoredDrawable("15 ${S.PPM}"))
+        assertEquals(R.drawable.square_orange, ColorFinder.textToColoredDrawable(C.ORANGE))
+        assertEquals(R.drawable.square_orange, ColorFinder.textToColoredDrawable("15 ${S.PPM}"))
 
-        assertEquals(R.drawable.yellow_square, ColorFinder.textToColoredDrawable(C.YELLOW))
-        assertEquals(R.drawable.yellow_square, ColorFinder.textToColoredDrawable("25 ${S.PPM}"))
+        assertEquals(R.drawable.square_yellow, ColorFinder.textToColoredDrawable(C.YELLOW))
+        assertEquals(R.drawable.square_yellow, ColorFinder.textToColoredDrawable("25 ${S.PPM}"))
 
-        assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable(C.GREEN))
-        assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable("${S.PM}0.5%"))
-        assertEquals(R.drawable.green_square, ColorFinder.textToColoredDrawable("20 ${S.PPM}"))
+        assertEquals(R.drawable.square_green, ColorFinder.textToColoredDrawable(C.GREEN))
+        assertEquals(R.drawable.square_green, ColorFinder.textToColoredDrawable("${S.PM}0.5%"))
+        assertEquals(R.drawable.square_green, ColorFinder.textToColoredDrawable("20 ${S.PPM}"))
 
-        assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable(C.BLUE))
-        assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable("${S.PM}0.25%"))
-        assertEquals(R.drawable.blue_square, ColorFinder.textToColoredDrawable("10 ${S.PPM}"))
+        assertEquals(R.drawable.square_blue, ColorFinder.textToColoredDrawable(C.BLUE))
+        assertEquals(R.drawable.square_blue, ColorFinder.textToColoredDrawable("${S.PM}0.25%"))
+        assertEquals(R.drawable.square_blue, ColorFinder.textToColoredDrawable("10 ${S.PPM}"))
 
-        assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable(C.VIOLET))
-        assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable("${S.PM}0.1%"))
-        assertEquals(R.drawable.violet_square, ColorFinder.textToColoredDrawable("5 ${S.PPM}"))
+        assertEquals(R.drawable.square_violet, ColorFinder.textToColoredDrawable(C.VIOLET))
+        assertEquals(R.drawable.square_violet, ColorFinder.textToColoredDrawable("${S.PM}0.1%"))
+        assertEquals(R.drawable.square_violet, ColorFinder.textToColoredDrawable("5 ${S.PPM}"))
 
-        assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable(C.GRAY))
-        assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable("${S.PM}0.05%"))
-        assertEquals(R.drawable.gray_square, ColorFinder.textToColoredDrawable("1 ${S.PPM}"))
+        assertEquals(R.drawable.square_gray, ColorFinder.textToColoredDrawable(C.GRAY))
+        assertEquals(R.drawable.square_gray, ColorFinder.textToColoredDrawable("${S.PM}0.05%"))
+        assertEquals(R.drawable.square_gray, ColorFinder.textToColoredDrawable("1 ${S.PPM}"))
 
-        assertEquals(R.drawable.white_square, ColorFinder.textToColoredDrawable(C.WHITE))
+        assertEquals(R.drawable.square_white, ColorFinder.textToColoredDrawable(C.WHITE))
 
-        assertEquals(R.drawable.gold_square, ColorFinder.textToColoredDrawable(C.GOLD))
-        assertEquals(R.drawable.gold_square, ColorFinder.textToColoredDrawable("${S.PM}5%"))
+        assertEquals(R.drawable.square_gold, ColorFinder.textToColoredDrawable(C.GOLD))
+        assertEquals(R.drawable.square_gold, ColorFinder.textToColoredDrawable("${S.PM}5%"))
 
-        assertEquals(R.drawable.silver_square, ColorFinder.textToColoredDrawable(C.SILVER))
-        assertEquals(R.drawable.silver_square, ColorFinder.textToColoredDrawable("${S.PM}10%"))
+        assertEquals(R.drawable.square_silver, ColorFinder.textToColoredDrawable(C.SILVER))
+        assertEquals(R.drawable.square_silver, ColorFinder.textToColoredDrawable("${S.PM}10%"))
 
-        assertEquals(R.drawable.blank32, ColorFinder.textToColoredDrawable())
-        assertEquals(R.drawable.blank32, ColorFinder.textToColoredDrawable("Some String"))
-        assertEquals(R.drawable.blank32, ColorFinder.textToColoredDrawable("Not a color Red"))
+        assertEquals(R.drawable.square_blank, ColorFinder.textToColoredDrawable())
+        assertEquals(R.drawable.square_blank, ColorFinder.textToColoredDrawable("Some String"))
+        assertEquals(R.drawable.square_blank, ColorFinder.textToColoredDrawable("Not a color Red"))
     }
 
     @Test
@@ -125,43 +125,43 @@ class ColorFinderTest {
     @Test
     fun idToColorTextTest() {
         assertEquals(C.BLACK, ColorFinder.idToColorText(R.color.black32))
-        assertEquals(C.BLACK, ColorFinder.idToColorText(R.drawable.black_square))
+        assertEquals(C.BLACK, ColorFinder.idToColorText(R.drawable.square_black))
 
         assertEquals(C.BROWN, ColorFinder.idToColorText(R.color.brown32))
-        assertEquals(C.BROWN, ColorFinder.idToColorText(R.drawable.brown_square))
+        assertEquals(C.BROWN, ColorFinder.idToColorText(R.drawable.square_brown))
 
         assertEquals(C.RED, ColorFinder.idToColorText(R.color.red32))
-        assertEquals(C.RED, ColorFinder.idToColorText(R.drawable.red_square))
+        assertEquals(C.RED, ColorFinder.idToColorText(R.drawable.square_red))
 
         assertEquals(C.ORANGE, ColorFinder.idToColorText(R.color.orange32))
-        assertEquals(C.ORANGE, ColorFinder.idToColorText(R.drawable.orange_square))
+        assertEquals(C.ORANGE, ColorFinder.idToColorText(R.drawable.square_orange))
 
         assertEquals(C.YELLOW, ColorFinder.idToColorText(R.color.yellow32))
-        assertEquals(C.YELLOW, ColorFinder.idToColorText(R.drawable.yellow_square))
+        assertEquals(C.YELLOW, ColorFinder.idToColorText(R.drawable.square_yellow))
 
         assertEquals(C.GREEN, ColorFinder.idToColorText(R.color.green32))
-        assertEquals(C.GREEN, ColorFinder.idToColorText(R.drawable.green_square))
+        assertEquals(C.GREEN, ColorFinder.idToColorText(R.drawable.square_green))
 
         assertEquals(C.BLUE, ColorFinder.idToColorText(R.color.blue32))
-        assertEquals(C.BLUE, ColorFinder.idToColorText(R.drawable.blue_square))
+        assertEquals(C.BLUE, ColorFinder.idToColorText(R.drawable.square_blue))
 
         assertEquals(C.VIOLET, ColorFinder.idToColorText(R.color.violet32))
-        assertEquals(C.VIOLET, ColorFinder.idToColorText(R.drawable.violet_square))
+        assertEquals(C.VIOLET, ColorFinder.idToColorText(R.drawable.square_violet))
 
         assertEquals(C.GRAY, ColorFinder.idToColorText(R.color.gray32))
-        assertEquals(C.GRAY, ColorFinder.idToColorText(R.drawable.gray_square))
+        assertEquals(C.GRAY, ColorFinder.idToColorText(R.drawable.square_gray))
 
         assertEquals(C.WHITE, ColorFinder.idToColorText(R.color.white32))
-        assertEquals(C.WHITE, ColorFinder.idToColorText(R.drawable.white_square))
+        assertEquals(C.WHITE, ColorFinder.idToColorText(R.drawable.square_white))
 
         assertEquals(C.SILVER, ColorFinder.idToColorText(R.color.silver32))
-        assertEquals(C.SILVER, ColorFinder.idToColorText(R.drawable.silver_square))
+        assertEquals(C.SILVER, ColorFinder.idToColorText(R.drawable.square_silver))
 
         assertEquals(C.GOLD, ColorFinder.idToColorText(R.color.gold32))
-        assertEquals(C.GOLD, ColorFinder.idToColorText(R.drawable.gold_square))
+        assertEquals(C.GOLD, ColorFinder.idToColorText(R.drawable.square_gold))
 
         assertEquals("", ColorFinder.idToColorText(R.color.resistor_blank))
-        assertEquals("", ColorFinder.idToColorText(R.drawable.blank32))
+        assertEquals("", ColorFinder.idToColorText(R.drawable.square_blank))
     }
 
     @Test
