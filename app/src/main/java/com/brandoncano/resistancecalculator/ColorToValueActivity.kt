@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
-import com.brandoncano.resistancecalculator.components.SpinnerContents
+import com.brandoncano.resistancecalculator.components.SpinnerArrays
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
@@ -147,10 +147,10 @@ class ColorToValueActivity : AppCompatActivity() {
         setDropDownDrawable(dropDownPPM, resistor.ppmBand)
 
         // create and set dropdown adapters
-        val numberAdapter = ImageTextArrayAdapter(this, SpinnerContents.numberArray)
-        val multiplierAdapter = ImageTextArrayAdapter(this, SpinnerContents.multiplierArray)
-        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerContents.toleranceArray)
-        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerContents.ppmArray)
+        val numberAdapter = ImageTextArrayAdapter(this, SpinnerArrays.numberArray)
+        val multiplierAdapter = ImageTextArrayAdapter(this, SpinnerArrays.multiplierArray)
+        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerArrays.toleranceArray)
+        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerArrays.ppmArray)
 
         dropDownBand1.setAdapter(numberAdapter)
         dropDownBand2.setAdapter(numberAdapter)

@@ -6,32 +6,43 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
 /**
  * Job: Holds array information for the spinners.
  */
-object SpinnerContents {
+object SpinnerArrays {
 
-    private val BLACK = SpinnerItem("Black", R.drawable.square_black)
-    private val BROWN = SpinnerItem("Brown", R.drawable.square_brown)
-    private val RED = SpinnerItem("Red", R.drawable.square_red)
-    private val ORANGE = SpinnerItem("Orange", R.drawable.square_orange)
-    private val YELLOW = SpinnerItem("Yellow", R.drawable.square_yellow)
-    private val GREEN = SpinnerItem("Green", R.drawable.square_green)
-    private val BLUE = SpinnerItem("Blue", R.drawable.square_blue)
-    private val VIOLET = SpinnerItem("Violet", R.drawable.square_violet)
-    private val GRAY = SpinnerItem("Gray", R.drawable.square_gray)
-    private val WHITE = SpinnerItem("White", R.drawable.square_white)
-    private val GOLD = SpinnerItem("Gold", R.drawable.square_gold)
-    private val SILVER = SpinnerItem("Silver", R.drawable.square_silver)
+    val numberArray = arrayOf(
+        SpinnerItem("Black", R.drawable.square_black),
+        SpinnerItem("Brown", R.drawable.square_brown),
+        SpinnerItem("Red", R.drawable.square_red),
+        SpinnerItem("Orange", R.drawable.square_orange),
+        SpinnerItem("Yellow", R.drawable.square_yellow),
+        SpinnerItem("Green", R.drawable.square_green),
+        SpinnerItem("Blue", R.drawable.square_blue),
+        SpinnerItem("Violet", R.drawable.square_violet),
+        SpinnerItem("Gray", R.drawable.square_gray),
+        SpinnerItem("White", R.drawable.square_white)
+    )
 
-    val numberArray =
-        arrayOf(BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GRAY, WHITE)
+    val multiplierArray = arrayOf(
+        *numberArray,
+        SpinnerItem("Gold", R.drawable.square_gold),
+        SpinnerItem("Silver", R.drawable.square_silver)
+    )
 
-    val multiplierArray =
-        arrayOf(BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GRAY, WHITE, GOLD, SILVER)
+    val toleranceArray = arrayOf(
+        SpinnerItem("Brown", R.drawable.square_brown),
+        SpinnerItem("Red", R.drawable.square_red),
+        SpinnerItem("Green", R.drawable.square_green),
+        SpinnerItem("Blue", R.drawable.square_blue),
+        SpinnerItem("Violet", R.drawable.square_violet),
+        SpinnerItem("Gray", R.drawable.square_gray),
+        SpinnerItem("Gold", R.drawable.square_gold),
+        SpinnerItem("Silver", R.drawable.square_silver)
+    )
 
-    val toleranceArray =
-        arrayOf(BROWN, RED, GREEN, BLUE, VIOLET, GRAY, GOLD, SILVER)
-
-    val ppmArray =
-        arrayOf(BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, VIOLET, GRAY)
+    val ppmArray = arrayOf(
+        *numberArray,
+        SpinnerItem("Gold", R.drawable.square_gold),
+        SpinnerItem("Silver", R.drawable.square_silver)
+    )
 
     val toleranceTextArray = arrayOf(
         SpinnerItem("${S.PM}1%", R.drawable.square_brown),

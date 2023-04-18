@@ -78,4 +78,23 @@ class ResistorTest {
         resistor.setNumberOfBands(4)
         assertFalse(resistor.allDigitsZero())
     }
+
+    @Test
+    fun `only valid number of bands as an input`() {
+        val resistor = Resistor()
+        resistor.setNumberOfBands(4)
+        assertEquals(4, resistor.getNumberOfBands())
+
+        resistor.setNumberOfBands(5)
+        assertEquals(5, resistor.getNumberOfBands())
+
+        resistor.setNumberOfBands(6)
+        assertEquals(6, resistor.getNumberOfBands())
+
+        resistor.setNumberOfBands(3)
+        assertEquals(4, resistor.getNumberOfBands())
+
+        resistor.setNumberOfBands(7)
+        assertEquals(6, resistor.getNumberOfBands())
+    }
 }

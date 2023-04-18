@@ -12,7 +12,7 @@ import com.brandoncano.resistancecalculator.util.ColorFinder
  *   the parameters are specifically set for the value-to-color section.
  */
 data class Resistor(
-    // holds the color of each band
+    // constructor declares the colors of bands (CtV)
     var sigFigBandOne:   String = "",
     var sigFigBandTwo:   String = "",
     var sigFigBandThree: String = "",
@@ -20,13 +20,13 @@ data class Resistor(
     var toleranceBand:   String = "",
     var ppmBand:         String = ""
 ) {
-    // specific values of the resistor
-    var resistance:     String = ""
-    var units:          String = ""
-    var toleranceValue: String = ""
-    var ppmValue:       String = ""
+    // specific values of the resistor (VtC)
+    var resistance = ""
+    var units = ""
+    var toleranceValue = ""
+    var ppmValue = ""
 
-    private var numberOfBands: Int = 4
+    private var numberOfBands = 4
 
     fun toColorBandString(isVtC: Boolean = false): String {
         if (isVtC) {
@@ -53,10 +53,7 @@ data class Resistor(
     fun getNumberOfBands(): Int = numberOfBands
 
     fun setNumberOfBands(number: Int) {
-        numberOfBands = number
-        if (number !in 4..6) {
-            numberOfBands = 4 // reset if not 4, 5, or 6
-        }
+        numberOfBands = number.coerceIn(4..6)
     }
 
     fun isEmpty(): Boolean {

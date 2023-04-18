@@ -22,7 +22,7 @@ import androidx.core.widget.doOnTextChanged
 import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
-import com.brandoncano.resistancecalculator.components.SpinnerContents
+import com.brandoncano.resistancecalculator.components.SpinnerArrays
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.ShowResistorChart
@@ -151,16 +151,16 @@ class ValueToColorActivity : AppCompatActivity() {
 
         // create and set dropdown adapters
         ArrayAdapter(
-            this, R.layout.spinner_units_layout, SpinnerContents.unitsArray
+            this, R.layout.spinner_units_layout, SpinnerArrays.unitsArray
         ).also { adapter ->
             adapter.setDropDownViewResource(R.layout.spinner_units_layout)
             dropDownUnits.setAdapter(adapter)
         }
 
-        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerContents.toleranceTextArray)
+        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerArrays.toleranceTextArray)
         dropDownTolerance.setAdapter(toleranceAdapter)
 
-        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerContents.ppmTextArray)
+        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerArrays.ppmTextArray)
         dropDownPPM.setAdapter(ppmAdapter)
 
         // dropdown listeners
