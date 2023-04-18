@@ -8,7 +8,7 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
  */
 object SpinnerArrays {
 
-    val numberArray = arrayOf(
+    val ppmArray = arrayOf(
         SpinnerItem("Black", R.drawable.square_black),
         SpinnerItem("Brown", R.drawable.square_brown),
         SpinnerItem("Red", R.drawable.square_red),
@@ -17,7 +17,11 @@ object SpinnerArrays {
         SpinnerItem("Green", R.drawable.square_green),
         SpinnerItem("Blue", R.drawable.square_blue),
         SpinnerItem("Violet", R.drawable.square_violet),
-        SpinnerItem("Gray", R.drawable.square_gray),
+        SpinnerItem("Gray", R.drawable.square_gray)
+    )
+
+    val numberArray = arrayOf(
+        *ppmArray,
         SpinnerItem("White", R.drawable.square_white)
     )
 
@@ -34,12 +38,6 @@ object SpinnerArrays {
         SpinnerItem("Blue", R.drawable.square_blue),
         SpinnerItem("Violet", R.drawable.square_violet),
         SpinnerItem("Gray", R.drawable.square_gray),
-        SpinnerItem("Gold", R.drawable.square_gold),
-        SpinnerItem("Silver", R.drawable.square_silver)
-    )
-
-    val ppmArray = arrayOf(
-        *numberArray,
         SpinnerItem("Gold", R.drawable.square_gold),
         SpinnerItem("Silver", R.drawable.square_silver)
     )
