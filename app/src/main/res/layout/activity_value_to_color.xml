@@ -18,7 +18,7 @@
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:errorIconDrawable="@drawable/ic_error"
-        app:hintTextColor="?android:textColorPrimary"
+        app:hintTextColor="@color/selected_dropdown_color"
         app:layout_constraintStart_toStartOf="@+id/dropDownSelectorTolerance"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -44,7 +44,7 @@
         android:textColorHint="?hintTextColor"
         app:boxStrokeColor="@color/selected_dropdown_color"
         app:boxStrokeWidth="2dp"
-        app:hintTextColor="?android:textColorPrimary"
+        app:hintTextColor="@color/selected_dropdown_color"
         app:layout_constraintEnd_toEndOf="@+id/dropDownSelectorTolerance"
         app:layout_constraintTop_toTopOf="parent">
 
