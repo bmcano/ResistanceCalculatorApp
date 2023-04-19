@@ -62,19 +62,13 @@ object ResistorFormatter {
             index = 0
         }
         if (resistor.getNumberOfBands() != 4 && !res.startsWith("0.")) index--
-        if (colorsMap.containsKey(index)) {
-            return colorsMap.getValue(index)
-        }
-        return C.BLANK
+        return colorsMap[index] ?: C.BLANK
     }
 
     // find the value of the multiplier for any whole numbers
     private fun numericalInput(resistor: Resistor, resistance: Long): String {
         var length = resistance.toString().length
         if (resistor.getNumberOfBands() != 4) length--
-        if (colorsMap.containsKey(length)) {
-            return colorsMap.getValue(length)
-        }
-        return C.BLANK
+        return colorsMap[length] ?: C.BLANK
     }
 }

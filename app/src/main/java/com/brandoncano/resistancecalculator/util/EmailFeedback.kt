@@ -8,10 +8,9 @@ import android.net.Uri
 object EmailFeedback {
 
     fun execute(): Uri {
-        return Uri.parse(
-            "mailto:brandoncano.development@gmail.com?subject="
-                    + Uri.encode("[Feedback] - Resistance Calculator")
-                    + "&body=" + Uri.encode("")
+        return Uri.parse("mailto:brandoncano.development@gmail.com?subject="
+                + Uri.encode("[Feedback] - Resistance Calculator")
+                + "&body="
         )
     }
 }

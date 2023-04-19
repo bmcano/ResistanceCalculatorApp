@@ -24,29 +24,27 @@ object IsValidResistance {
 
         // check for specific conditions, priority matters
         return when {
-            // general invalid inputs
-            input.length > 1 && input[0] == '0' && input[1] != '.' -> false
+            input.length > 1 && input[0] == '0' && input[1] != '.' ||
             input.isNotEmpty() && input[0] == '.' -> false
 
-            // FOUR BAND
-            numberOfBands == 4 && input.startsWith("0.00") -> false
-            numberOfBands == 4 && sigFigs >= 2 && input.startsWith("0.0") -> false
-            numberOfBands == 4 && sigFigs == 3 && input.endsWith(".0") -> true
-            numberOfBands == 4 && sigFigs == 2 && input.startsWith("0.") -> true
-            numberOfBands == 4 && sigFigs <= 2 && '.' in input -> true
-            numberOfBands == 4 && sigFigs > 2 -> false
-            numberOfBands == 4 && units == GOhms && input.length > 2 -> false
-
-            // FIVE/SIX BAND
-            resistor.getNumberOfBands() != 4 && input.startsWith("0.00") -> false
-            resistor.getNumberOfBands() != 4 && sigFigs == 4 && input.endsWith(".0") -> true
-            resistor.getNumberOfBands() != 4 && sigFigs == 3 && input.startsWith("0") -> false
-            resistor.getNumberOfBands() != 4 && sigFigs == 2 && input.startsWith("0.0") -> false
-            resistor.getNumberOfBands() != 4 && sigFigs <= 3 && '.' in input -> true
-            resistor.getNumberOfBands() != 4 && sigFigs > 3 -> false
-            resistor.getNumberOfBands() != 4 && units == GOhms && input.length > 3 -> false
-
-            else -> true
+            numberOfBands == 4 -> when { /* FOUR BAND */
+                input.startsWith("0.00") ||
+                sigFigs >= 2 && input.startsWith("0.0") -> false
+                sigFigs == 3 && input.endsWith(".0") ||
+                sigFigs == 2 && input.startsWith("0.") ||
+                sigFigs <= 2 && '.' in input -> true
+                sigFigs > 2 || units == GOhms && input.length > 2 -> false
+                else -> true
+            }
+            else -> when { /* FIVE/SIX BAND */
+                input.startsWith("0.00") -> false
+                sigFigs == 4 && input.endsWith(".0") -> true
+                sigFigs == 3 && input.startsWith("0") ||
+                sigFigs == 2 && input.startsWith("0.0") -> false
+                sigFigs <= 3 && '.' in input -> true
+                sigFigs > 3 || units == GOhms && input.length > 3 -> false
+                else -> true
+            }
         }
     }
 }

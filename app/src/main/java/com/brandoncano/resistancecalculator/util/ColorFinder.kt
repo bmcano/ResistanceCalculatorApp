@@ -6,7 +6,7 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
 
 /**
  * Job: Find the correct color, string, or drawable based on the input.
- * Note: "${PLUS_MINUS}20%" -> blank - hidden in else conditions.
+ * Note: "${S.PM}20%" -> blank - hidden in else conditions.
  */
 object ColorFinder {
 

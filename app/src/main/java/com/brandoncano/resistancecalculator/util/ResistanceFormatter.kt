@@ -23,54 +23,36 @@ object ResistanceFormatter {
     }
 
     private fun formatSigFig(color: String): String {
-        return when (color) {
-            C.BLACK  -> "0"
-            C.BROWN  -> "1"
-            C.RED    -> "2"
-            C.ORANGE -> "3"
-            C.YELLOW -> "4"
-            C.GREEN  -> "5"
-            C.BLUE   -> "6"
-            C.VIOLET -> "7"
-            C.GRAY   -> "8"
-            C.WHITE  -> "9"
-            else     -> "0"
-        }
+        val colorMap = mapOf(
+            C.BLACK to "0", C.BROWN to "1", C.RED    to "2", C.ORANGE to "3", C.YELLOW to "4",
+            C.GREEN to "5", C.BLUE  to "6", C.VIOLET to "7", C.GRAY   to "8", C.WHITE  to "9"
+        )
+        return colorMap[color] ?: "0"
     }
 
     private fun formatTolerance(color: String): String {
-        return S.PM + when (color) {
-            C.BROWN  -> "1%"
-            C.RED    -> "2%"
-            C.GREEN  -> "0.5%"
-            C.BLUE   -> "0.25%"
-            C.VIOLET -> "0.1%"
-            C.GRAY   -> "0.05%"
-            C.GOLD   -> "5%"
-            C.SILVER -> "10%"
-            else     -> "20%"
-        }
+        val toleranceMap = mapOf(
+            C.BROWN  to "1%",   C.RED  to "2%",    C.GREEN to "0.5%", C.BLUE to "0.25%",
+            C.VIOLET to "0.1%", C.GRAY to "0.05%", C.GOLD  to "5%",   C.SILVER to "10%"
+        )
+        return S.PM + (toleranceMap[color] ?: "20%")
     }
 
     private fun formatPPM(color: String, bands: Int): String {
         val colorToPPM = mapOf(
-            C.BLACK to "250", C.BROWN to "100", C.RED to "50", C.ORANGE to "15",
-            C.YELLOW to "25", C.GREEN to "20", C.BLUE to "10", C.VIOLET to "5", C.GRAY to "1"
+            C.BLACK  to "250", C.BROWN to "100", C.RED  to "50", C.ORANGE to "15",
+            C.YELLOW to "25",  C.GREEN to "20",  C.BLUE to "10", C.VIOLET to "5", C.GRAY to "1"
         )
-        return if (colorToPPM.containsKey(color) && bands == 6) {
-            "\n${colorToPPM.getValue(color)} ${S.PPM}"
-        } else ""
+        return if (bands == 6) "\n${colorToPPM[color] ?: return ""} ${S.PPM}" else ""
     }
 
     private fun getMultiplierValue(color: String): Double {
         val colorToMultiplier = mapOf(
-            C.BLACK to 1.0, C.BROWN to 10.0, C.RED to 100.0, C.ORANGE to 1000.0, C.YELLOW to 10000.0,
-            C.GREEN to 100000.0, C.BLUE to 1000000.0, C.VIOLET to 10000000.0, C.GRAY to 100000000.0,
-            C.WHITE to 1000000000.0, C.GOLD to 0.1, C.SILVER to 0.01
+            C.BLACK  to 1.0, C.BROWN to 10.0, C.RED to 100.0, C.ORANGE to 1000.0,
+            C.YELLOW to 10000.0, C.GREEN to 100000.0, C.BLUE to 1000000.0, C.VIOLET to 10000000.0,
+            C.GRAY   to 100000000.0, C.WHITE to 1000000000.0, C.GOLD to 0.1, C.SILVER to 0.01
         )
-        return if (colorToMultiplier.containsKey(color)) {
-            colorToMultiplier.getValue(color)
-        } else 1.0
+        return colorToMultiplier[color] ?: 1.0
     }
 
     private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
@@ -99,11 +81,11 @@ object ResistanceFormatter {
                 (bands != 4 && hasTwoLeadingZeros && resistanceAsDecimal >= 1)
 
         return if (noDecimal) {
-            "${String.format("%.0f", resistanceAsDecimal)} $units"
+            "${"%.0f".format(resistanceAsDecimal)} $units"
         } else if (resistor.multiplierBand == C.SILVER) {
-            "${String.format("%.2f", resistanceAsDecimal)} $units"
+            "${"%.2f".format(resistanceAsDecimal)} $units"
         } else {
-            "${String.format("%.1f", resistanceAsDecimal)} $units"
+            "${"%.1f".format(resistanceAsDecimal)} $units"
         }
     }
 
