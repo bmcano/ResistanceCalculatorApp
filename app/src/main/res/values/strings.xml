@@ -31,8 +31,7 @@
     <string name="five_band_nav">Five Bands</string>
     <string name="six_band_nav">Six Bands</string>
 
-    <!-- Default/Blank text descriptions -->
-    <string name="dropdown_image_description">Color</string>
+    <!-- Default text -->
     <string name="default_text">Select Colors</string>
     <string name="enter_value">Enter Resistance</string>
     <string name="resistor_description">Resistor</string>
@@ -41,12 +40,13 @@
     <!-- About page text -->
     <string name="version">v2.4</string>
     <string name="created_by">Created By\n\nBrandon Cano</string>
-    <string name="description_one">In this app you are able to find the resistance of a resistor based on the color of its bands or you can type in a resistance and it will generate what the resistor will look like. This can be done for four, five, and six band resistors.</string>
-    <string name="description_two">You can also look at the color charts, under \"Show Chart\", for reference.</string>
+    <string name="description_one">In this app you are able to find the resistance of a resistor from the color of its bands or you can type in a resistance to generate a resistor. This can be done for four, five, and six band resistors.</string>
+    <string name="description_two">To see how values are calculated check under \"Show Chart\" found in the menu.</string>
     <string name="rate_us">Rate this app on Google Play</string>
     <string name="last_updated">Last Updated On: 3/18/2023</string>
 
     <!-- Content descriptions -->
     <string name="popup_chart_content_description">Resistor chart</string>
+    <string name="dropdown_image_description">Color</string>
 
 </resources>
