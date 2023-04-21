@@ -40,7 +40,7 @@
 
     <ImageView
         android:id="@+id/r_p3"
-        android:layout_width="10dp"
+        android:layout_width="10.2dp"
         android:layout_height="66dp"
         android:layout_marginTop="0dp"
         android:contentDescription="@string/resistor_description"
