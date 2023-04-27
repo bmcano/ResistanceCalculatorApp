@@ -135,8 +135,8 @@
     <include
         android:id="@+id/resistor"
         layout="@layout/resistor"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="251dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/resistance_display_ctv"
         app:layout_constraintEnd_toEndOf="parent"

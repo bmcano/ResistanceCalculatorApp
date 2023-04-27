@@ -15,27 +15,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/resistor_group" />
-
-    <!-- https://www.codrey.com/tools/resistor-color-code-calculator/ -->
-    <!-- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d -->
-    <!-- https://yqnn.github.io/svg-path-editor/ -->
-<!--    TODO - add black outline image and edit all images to be the correct sizes -->
-<!--    <ImageView-->
-<!--        android:id="@+id/r_outline"-->
-<!--        android:layout_width="249dp"-->
-<!--        android:layout_height="68dp"-->
-<!--        android:layout_marginTop="0dp"-->
-<!--        android:contentDescription="@string/resistor_description"-->
-<!--        android:src="@drawable/img_resistor_outline"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/resistor_group"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/resistor_group"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/resistor_group"/>-->
     
     <ImageView
         android:id="@+id/r_p1"
         android:layout_width="75dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p1"
         app:layout_constraintEnd_toStartOf="@+id/r_p2_band_1"
@@ -46,7 +31,7 @@
         android:id="@+id/r_p2_band_1"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p2"
         app:layout_constraintEnd_toStartOf="@+id/r_p3"
@@ -57,7 +42,7 @@
         android:id="@+id/r_p3"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p3"
         app:layout_constraintEnd_toStartOf="@+id/r_p4_band2"
@@ -68,7 +53,7 @@
         android:id="@+id/r_p4_band2"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p4"
         app:layout_constraintEnd_toStartOf="@+id/r_p5"
@@ -79,7 +64,7 @@
         android:id="@+id/r_p5"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p5"
         app:layout_constraintEnd_toStartOf="@+id/r_p6_band3"
@@ -90,7 +75,7 @@
         android:id="@+id/r_p6_band3"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p6"
         app:layout_constraintEnd_toStartOf="@+id/r_p7"
@@ -101,7 +86,7 @@
         android:id="@+id/r_p7"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p7"
         app:layout_constraintEnd_toStartOf="@+id/r_p8_band4"
@@ -112,7 +97,7 @@
         android:id="@+id/r_p8_band4"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p8"
         app:layout_constraintEnd_toStartOf="@+id/r_p9"
@@ -123,7 +108,7 @@
         android:id="@+id/r_p9"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p9"
         app:layout_constraintEnd_toStartOf="@+id/r_p10_band_5"
@@ -134,7 +119,7 @@
         android:id="@+id/r_p10_band_5"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p10"
         app:layout_constraintEnd_toStartOf="@+id/r_p11"
@@ -145,7 +130,7 @@
         android:id="@+id/r_p11"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p11"
         app:layout_constraintEnd_toStartOf="@+id/r_p12_band_6"
@@ -156,7 +141,7 @@
         android:id="@+id/r_p12_band_6"
         android:layout_width="10dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p12"
         app:layout_constraintEnd_toStartOf="@+id/r_p13"
@@ -167,7 +152,7 @@
         android:id="@+id/r_p13"
         android:layout_width="62dp"
         android:layout_height="66dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p13"
         app:layout_constraintEnd_toEndOf="@+id/resistor_group"

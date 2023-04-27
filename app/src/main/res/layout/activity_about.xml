@@ -115,7 +115,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/custom_button"
+                android:background="@drawable/outlined_box"
                 android:minWidth="320dp"
                 android:onClick="rateApp"
                 android:text="@string/rate_us"

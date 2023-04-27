@@ -104,7 +104,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/outlined_box"
         android:text="@string/calculate_btn"
         android:textAllCaps="false"
         android:textColor="@color/white"
