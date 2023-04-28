@@ -54,15 +54,15 @@ class ResistorTest {
         resistor.setNumberOfBands(5)
         assertTrue(resistor.isEmpty())
 
-        resistor.sigFigBandTwo = "Black"
+        resistor.sigFigBandTwo = C.BLACK
         assertTrue(resistor.isEmpty())
 
-        resistor = Resistor("Black", "Brown", "", "Red", "Gold")
+        resistor = Resistor(C.BLACK, C.BROWN, "", C.RED, C.GOLD)
         assertFalse(resistor.isEmpty())
 
         resistor.setNumberOfBands(5)
         assertTrue(resistor.isEmpty())
-        resistor.sigFigBandThree = "Orange"
+        resistor.sigFigBandThree = C.ORANGE
         assertFalse(resistor.isEmpty())
     }
 
