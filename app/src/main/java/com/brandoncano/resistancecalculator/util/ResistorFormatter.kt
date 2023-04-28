@@ -21,9 +21,9 @@ object ResistorFormatter {
         val resLong: Long? = resistance.toLongOrNull()?.times(multiplier)
         val resDouble: Double = resistance.toDoubleOrNull()?.times(multiplier) ?: return
         if (resLong == null) {
-            resistor.multiplierBand = decimalInput(resistor, resDouble)
+            resistor.multiplierBand = decimalInputMultiplier(resistor, resDouble)
         } else {
-            resistor.multiplierBand = numericalInput(resistor, resLong)
+            resistor.multiplierBand = numericalInputMultiplier(resistor, resLong)
         }
 
         // remove decimal and check leading zeros
@@ -42,7 +42,6 @@ object ResistorFormatter {
         } else ""
     }
 
-    // check leading zero inputs
     private fun checkLeadingZeros(bands: Int, value: String): String {
         val values = value.replace(".", "")
         val numbers = values.toCharArray()
@@ -53,8 +52,7 @@ object ResistorFormatter {
         return values
     }
 
-    // find the correct multiplier for an input with a decimal
-    private fun decimalInput(resistor: Resistor, resistance: Double): String {
+    private fun decimalInputMultiplier(resistor: Resistor, resistance: Double): String {
         val res = String.format("%.2f", resistance)
         var index = res.indexOf(".")
         if (index == -1) index = res.length
@@ -65,8 +63,7 @@ object ResistorFormatter {
         return colorsMap[index] ?: C.BLANK
     }
 
-    // find the value of the multiplier for any whole numbers
-    private fun numericalInput(resistor: Resistor, resistance: Long): String {
+    private fun numericalInputMultiplier(resistor: Resistor, resistance: Long): String {
         var length = resistance.toString().length
         if (resistor.getNumberOfBands() != 4) length--
         return colorsMap[length] ?: C.BLANK

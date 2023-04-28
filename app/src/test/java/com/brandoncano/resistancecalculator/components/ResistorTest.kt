@@ -45,6 +45,8 @@ class ResistorTest {
         assertEquals("12 ${S.Ohms} ${S.PM}5%", resistor.getResistanceText())
         resistor.setNumberOfBands(6)
         assertEquals("12 ${S.Ohms} ${S.PM}5%\n250 ${S.PPM}", resistor.getResistanceText())
+        resistor.ppmValue = ""
+        assertEquals("12 ${S.Ohms} ${S.PM}5%", resistor.getResistanceText())
     }
 
     @Test

@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.components
 
 /**
- * Job: Holds the drawable and the name of the color.
+ * Job: Holds the name and drawable resource for a color.
  */
 data class SpinnerItem(val name: String, val logo: Int) {
 

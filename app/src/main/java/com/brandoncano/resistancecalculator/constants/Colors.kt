@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.constants
 
 /**
- * Job: holds constants of the different colors
+ * Job: Holds constants of the different colors as strings.
  */
 object Colors {
     const val BLACK = "Black"

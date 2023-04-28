@@ -3,7 +3,7 @@ package com.brandoncano.resistancecalculator.util
 import android.net.Uri
 
 /**
- * Job: Takes the user to compose an email with default parameters set.
+ * Job: Takes the user to compose an email with a predefined subject and empty body.
  */
 object EmailFeedback {
 

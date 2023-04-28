@@ -3,7 +3,7 @@ package com.brandoncano.resistancecalculator.util
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 
 /**
- * Job: will get the proper value in relation to the units
+ * Job: Gives back the multiplier from the given unit.
  */
 object MultiplierFromUnits {
 

@@ -4,15 +4,14 @@ import com.brandoncano.resistancecalculator.constants.Colors.BLACK
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**
- * Job: Holds the colors for each band and performs certain task with the info.
+ * Job: Holds all information and logic related to the resistor for both CtV and VtC.
  *
  * Notes:
- *   The data values in the parameters are the 6 bands of the resistor.
+ *   The data values in the parameters are the 6 bands of the resistor (CtV).
  *   The number of bands will determine which resistor is selected, the public attributes not in
- *   the parameters are specifically set for the value-to-color section.
+ *   the parameters are used for the VtC section.
  */
 data class Resistor(
-    // constructor declares the colors of bands (CtV)
     var sigFigBandOne:   String = "",
     var sigFigBandTwo:   String = "",
     var sigFigBandThree: String = "",
@@ -20,7 +19,6 @@ data class Resistor(
     var toleranceBand:   String = "",
     var ppmBand:         String = ""
 ) {
-    // specific values of the resistor (VtC)
     var resistance = ""
     var units = ""
     var toleranceValue = ""
@@ -43,11 +41,9 @@ data class Resistor(
     }
 
     fun getResistanceText(): String {
-        return when (numberOfBands) {
-            4, 5 -> "$resistance $units $toleranceValue"
-            6 -> "$resistance $units $toleranceValue\n$ppmValue".trimEnd('\n')
-            else -> ""
-        }
+        var text = "$resistance $units $toleranceValue"
+        if (numberOfBands == 6) text += "\n$ppmValue".trimEnd('\n')
+        return text
     }
 
     fun getNumberOfBands(): Int = numberOfBands

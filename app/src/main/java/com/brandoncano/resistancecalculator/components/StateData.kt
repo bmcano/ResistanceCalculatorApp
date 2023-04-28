@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
 /**
- * Job: Holds the names and keys for all shared_prefs data.
+ * Job: Holds the names, keys, and methods for all shared_prefs data.
  *
  * Notes:
  *   Data is saved as xml files with mapping, where name_ -> file name; key_ -> key in map.
@@ -15,7 +15,6 @@ import java.lang.reflect.Type
  */
 enum class StateData(private val name_: String, private val key_: String) {
 
-    // color to value -> color_to_value
     RESISTANCE_CTV("color_to_value", "resistance"),
     BUTTON_SELECTION_CTV("color_to_value", "button_selection"),
     SIGFIG_BAND_ONE_CTV("color_to_value", "sig_fig_band_1"),
@@ -25,7 +24,6 @@ enum class StateData(private val name_: String, private val key_: String) {
     TOLERANCE_BAND_CTV("color_to_value", "tolerance_band"),
     PPM_BAND_CTV("color_to_value", "ppm_band"),
 
-    // value to color -> value_to_color
     RESISTANCE_VTC("value_to_color", "resistance"),
     BUTTON_SELECTION_VTC("value_to_color", "button_selection"),
     USER_INPUT_VTC("value_to_color", "user_input"),

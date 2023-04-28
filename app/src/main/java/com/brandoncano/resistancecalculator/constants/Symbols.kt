@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.constants
 
 /**
- * Job: holds constants that contains specific symbols
+ * Job: Holds constants that contains specific symbols.
  */
 object Symbols {
     const val Ohms = "Ω"

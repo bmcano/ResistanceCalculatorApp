@@ -5,7 +5,7 @@ import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 
 /**
- * Job: Holds array information for the spinners.
+ * Job: Holds array information for the spinners (dropdowns).
  */
 object SpinnerArrays {
 

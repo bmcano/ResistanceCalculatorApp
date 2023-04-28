@@ -5,9 +5,11 @@ import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.constants.Symbols.GOhms
 
 /**
+ * Job: Checks if a user inputted resistance is valid.
+ *
  * Notes:
  *   EditText already limits this to decimal and whole numbers and a max of 5 characters.
- *   Invalid inputs: where (x,y,z,w) are some number.
+ *   Invalid inputs (where [x,y,z,w] are some numeric digit):
  *    - 4 Bands: xyz, 0xy, 00x; .x, .xy, .xyz; 0.0, 0.00x, 0.0xy, x.0y, x.0yz; xy0 for GΩ
  *    - 5/6 Bands: xyzw, 0xy(z), 00x(y); .xy, .0x; 0.xyz, 0.0xyz, x.0yz, x.y0z, 0.00x; 1230 for GΩ
  *   Valid inputs (special cases):

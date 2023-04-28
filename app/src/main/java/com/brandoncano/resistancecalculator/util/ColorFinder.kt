@@ -5,8 +5,8 @@ import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 
 /**
- * Job: Find the correct color, string, or drawable based on the input.
- * Note: "${S.PM}20%" -> blank - hidden in else conditions.
+ * Job: Find the correct color, either as a string or resource based on the input.
+ * Note: "${S.PM}20%" -> resistor_blank -> hidden in else conditions.
  */
 object ColorFinder {
 

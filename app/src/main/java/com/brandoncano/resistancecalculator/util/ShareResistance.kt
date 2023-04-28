@@ -5,7 +5,7 @@ import android.widget.TextView
 import com.brandoncano.resistancecalculator.components.Resistor
 
 /**
- * Job: This will get the String built in order to share or copy it.
+ * Job: This will take teh string from the TextView so it can be shared/copied.
  */
 object ShareResistance {
 
