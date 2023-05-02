@@ -49,15 +49,34 @@ Bug Fixes:
 
 ## Version 1.3
 
+Bug Fixes:
+ - fixed bug where app was crashing when a user pressed 'Calculate' with an invalid input and left the screen only to return to a crash.
+ - Fixed a text sizing issue with the text edit box
+ 
 ## Version 2.0
+
+Changes:
+ - Updated UI Design!
+ - An updated look to the app has been added, same general design but with some overall improvements.
 
 ## Version 2.1
 
+ - general improvements
+ - bug fixes
+
 ## Version 2.2
 
+ - general improvements
+ - bug fixes
+ 
 ## Version 2.3
 
+ - bug fixes
+ 
 ## Version 2.4
+
+Bug Fixes:
+ - Crash fix for Android 7.0/7.1 users 
 
 Current version of the app is `v2.4`.
 
