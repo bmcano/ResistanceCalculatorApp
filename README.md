@@ -16,17 +16,17 @@ specific bands represent and their numerical values associated with it.
 
 Click [here](https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator) to view the Google Play store listing.
 
-| Version | Release Date | Release Summary |
-| ------- | ------------ | --------------- |
-| 1.0     | 6/19/22      | Initial Release |
-| 1.1     | 7/8/22       | [Click to View Release Notes](#version-11) |
-| 1.2     | 7/12/22      | [Click to View Release Notes](#version-12) |
-| 1.3     | 8/26/22      | [Click to View Release Notes](#version-13) |
-| 2.0     | 11/27/22     | [Click to View Release Notes](#version-20) |
-| 2.1     | 12/26/22     | [Click to View Release Notes](#version-21) |
-| 2.2     | 1/20/23      | [Click to View Release Notes](#version-22) |
-| 2.3     | 2/11/23      | [Click to View Release Notes](#version-23) |
-| 2.4     | 3/19/23      | [Click to View Release Notes](#version-24) |
+| Version | Release Date | Release Summary                             |
+|---------|--------------|---------------------------------------------|
+| 1.0     | 6/19/22      | Initial Release                             |
+| 1.1     | 7/8/22       | [Click to View Release Notes](#version-11)  |
+| 1.2     | 7/12/22      | [Click to View Release Notes](#version-12)  |
+| 1.3     | 8/26/22      | [Click to View Release Notes](#version-13)  |
+| 2.0     | 11/27/22     | [Click to View Release Notes](#version-20)  |
+| 2.1     | 12/26/22     | [Click to View Release Notes](#version-21)  |
+| 2.2     | 1/20/23      | [Click to View Release Notes](#version-22)  |
+| 2.3     | 2/11/23      | [Click to View Release Notes](#version-23)  |
+| 2.4     | 3/19/23      | [Click to View Release Notes](#version-24)  |
 
 ## Version 1.1
 
