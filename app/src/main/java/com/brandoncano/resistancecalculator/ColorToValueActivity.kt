@@ -12,16 +12,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
-import com.brandoncano.resistancecalculator.util.ColorFinder
-import com.brandoncano.resistancecalculator.util.EmailFeedback
-import com.brandoncano.resistancecalculator.util.ResistanceFormatter
-import com.brandoncano.resistancecalculator.util.ShowResistorChart
-import com.brandoncano.resistancecalculator.util.ShareResistance
+import com.brandoncano.resistancecalculator.util.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 
@@ -139,12 +134,12 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownTolerance.setText(resistor.toleranceBand)
         dropDownPPM.setText(resistor.ppmBand)
 
-        setDropDownDrawable(dropDownBand1, resistor.sigFigBandOne)
-        setDropDownDrawable(dropDownBand2, resistor.sigFigBandTwo)
-        setDropDownDrawable(dropDownBand3, resistor.sigFigBandThree)
-        setDropDownDrawable(dropDownMultiplier, resistor.multiplierBand)
-        setDropDownDrawable(dropDownTolerance, resistor.toleranceBand)
-        setDropDownDrawable(dropDownPPM, resistor.ppmBand)
+        dropDownBand1.setDropDownDrawable(resistor.sigFigBandOne)
+        dropDownBand2.setDropDownDrawable(resistor.sigFigBandTwo)
+        dropDownBand3.setDropDownDrawable(resistor.sigFigBandThree)
+        dropDownMultiplier.setDropDownDrawable(resistor.multiplierBand)
+        dropDownTolerance.setDropDownDrawable(resistor.toleranceBand)
+        dropDownPPM.setDropDownDrawable(resistor.ppmBand)
 
         // create and set dropdown adapters
         val numberAdapter = ImageTextArrayAdapter(this, SpinnerArrays.numberArray)
@@ -206,10 +201,10 @@ class ColorToValueActivity : AppCompatActivity() {
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_ctv)
 
-        setBandColor(bandImage1, resistor.sigFigBandOne)
-        setBandColor(bandImage2, resistor.sigFigBandTwo)
-        setBandColor(bandImage4, resistor.multiplierBand)
-        setBandColor(bandImage5, resistor.toleranceBand)
+        bandImage1.setBandColor(this, resistor.sigFigBandOne)
+        bandImage2.setBandColor(this, resistor.sigFigBandTwo)
+        bandImage4.setBandColor(this, resistor.multiplierBand)
+        bandImage5.setBandColor(this, resistor.toleranceBand)
 
         when (StateData.BUTTON_SELECTION_CTV.loadData(this)) {
             "4" -> {
@@ -242,20 +237,20 @@ class ColorToValueActivity : AppCompatActivity() {
             4 -> {
                 toggleDropDownNumberBand3.visibility = View.GONE
                 toggleDropDownPPM.visibility = View.GONE
-                setBandColor(bandImage3)
-                setBandColor(bandImage6)
+                bandImage3.setBandColor(this)
+                bandImage6.setBandColor(this)
             }
             5 -> {
                 toggleDropDownNumberBand3.visibility = View.VISIBLE
                 toggleDropDownPPM.visibility = View.GONE
-                setBandColor(bandImage3, resistor.sigFigBandThree)
-                setBandColor(bandImage6)
+                bandImage3.setBandColor(this, resistor.sigFigBandThree)
+                bandImage6.setBandColor(this)
             }
             6 -> {
                 toggleDropDownNumberBand3.visibility = View.VISIBLE
                 toggleDropDownPPM.visibility = View.VISIBLE
-                setBandColor(bandImage3, resistor.sigFigBandThree)
-                setBandColor(bandImage6, resistor.ppmBand)
+                bandImage3.setBandColor(this, resistor.sigFigBandThree)
+                bandImage6.setBandColor(this, resistor.ppmBand)
             }
         }
         StateData.BUTTON_SELECTION_CTV.saveData(this, "$numberOfBands")
@@ -265,8 +260,8 @@ class ColorToValueActivity : AppCompatActivity() {
 
     // update the dropdown with the current selection and update the text
     private fun updateDropDownSelection(dropDown: AutoCompleteTextView, color: String, band: ImageView) {
-        setDropDownDrawable(dropDown, color)
-        setBandColor(band, color)
+        dropDown.setDropDownDrawable(color)
+        band.setBandColor(this, color)
         updateResistance()
     }
 
@@ -277,29 +272,18 @@ class ColorToValueActivity : AppCompatActivity() {
     }
 
     // helper method to set the color of the band on screen
-    private fun setBandColor(band: ImageView, colorText: String = "") {
-        val color = ColorFinder.textToColor(colorText)
-        band.setColorFilter(ContextCompat.getColor(this, color))
-    }
-
-    // helper method to set the drawable that appears after a selection
-    private fun setDropDownDrawable(dropDown: AutoCompleteTextView, color: String) {
-        dropDown.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.textToColoredDrawable(color), 0, 0, 0
-        )
-    }
 
     // deletes all shared preferences and resets the screen
     private fun reset() {
         StateData.RESISTANCE_CTV.clearData(this)
         StateData.BUTTON_SELECTION_CTV.saveData(this, "${resistor.getNumberOfBands()}")
         resistanceText.text = getString(R.string.default_text)
-        setBandColor(bandImage1)
-        setBandColor(bandImage2)
-        setBandColor(bandImage3)
-        setBandColor(bandImage4)
-        setBandColor(bandImage5)
-        setBandColor(bandImage6)
+        bandImage1.setBandColor(this)
+        bandImage2.setBandColor(this)
+        bandImage3.setBandColor(this)
+        bandImage4.setBandColor(this)
+        bandImage5.setBandColor(this)
+        bandImage6.setBandColor(this)
         dropDownSetup() // resets dropdown and resistor info
     }
 }

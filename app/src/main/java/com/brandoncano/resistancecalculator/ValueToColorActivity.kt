@@ -17,18 +17,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
-import com.brandoncano.resistancecalculator.util.ColorFinder
-import com.brandoncano.resistancecalculator.util.EmailFeedback
-import com.brandoncano.resistancecalculator.util.ShowResistorChart
-import com.brandoncano.resistancecalculator.util.ResistorFormatter
-import com.brandoncano.resistancecalculator.util.IsValidResistance
-import com.brandoncano.resistancecalculator.util.ShareResistance
+import com.brandoncano.resistancecalculator.util.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 
@@ -146,8 +140,8 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownTolerance.setText(resistor.toleranceValue)
         dropDownPPM.setText(resistor.ppmValue)
 
-        setDropDownDrawable(dropDownTolerance, resistor.toleranceValue)
-        setDropDownDrawable(dropDownPPM, resistor.ppmValue)
+        dropDownTolerance.setDropDownDrawable(resistor.toleranceValue)
+        dropDownPPM.setDropDownDrawable(resistor.ppmValue)
 
         // create and set dropdown adapters
         ArrayAdapter(
@@ -175,7 +169,7 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.toleranceValue = dropDownTolerance.adapter.getItem(position).toString()
-                setDropDownDrawable(dropDownTolerance, resistor.toleranceValue)
+                dropDownTolerance.setDropDownDrawable(resistor.toleranceValue)
                 StateData.TOLERANCE_DROPDOWN_VTC.saveData(this, dropDownTolerance.text.toString())
                 updateResistorAndText()
             }
@@ -183,7 +177,7 @@ class ValueToColorActivity : AppCompatActivity() {
         dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.ppmValue = dropDownPPM.adapter.getItem(position).toString()
-                setDropDownDrawable(dropDownPPM, resistor.ppmValue)
+                dropDownPPM.setDropDownDrawable(resistor.ppmValue)
                 StateData.PPM_DROPDOWN_VTC.saveData(this, dropDownPPM.text.toString())
                 updateResistorAndText()
             }
@@ -192,10 +186,10 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_vtc)
 
-        setBandColor(bandImage1, resistor.sigFigBandOne)
-        setBandColor(bandImage2, resistor.sigFigBandTwo)
-        setBandColor(bandImage4, resistor.multiplierBand)
-        setBandColor(bandImage5, resistor.toleranceBand)
+        bandImage1.setBandColor(this, resistor.sigFigBandOne)
+        bandImage2.setBandColor(this, resistor.sigFigBandTwo)
+        bandImage4.setBandColor(this, resistor.multiplierBand)
+        bandImage5.setBandColor(this, resistor.toleranceBand)
 
         when (StateData.BUTTON_SELECTION_VTC.loadData(this)) {
             "4" -> {
@@ -265,19 +259,19 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun updateResistorAndText() {
         resistanceText.text = resistor.getResistanceText()
         ResistorFormatter.generateResistor(resistor)
-        setBandColor(bandImage1, resistor.sigFigBandOne)
-        setBandColor(bandImage2, resistor.sigFigBandTwo)
-        setBandColor(bandImage3, resistor.sigFigBandThree)
-        setBandColor(bandImage4, resistor.multiplierBand)
-        setBandColor(bandImage5, resistor.toleranceValue)
-        setBandColor(bandImage6, resistor.ppmValue)
+        bandImage1.setBandColor(this, resistor.sigFigBandOne)
+        bandImage2.setBandColor(this, resistor.sigFigBandTwo)
+        bandImage3.setBandColor(this, resistor.sigFigBandThree)
+        bandImage4.setBandColor(this, resistor.multiplierBand)
+        bandImage5.setBandColor(this, resistor.toleranceValue)
+        bandImage6.setBandColor(this, resistor.ppmValue)
 
         val number = resistor.getNumberOfBands()
         if (number == 4) {
-            setBandColor(bandImage3)
-            setBandColor(bandImage6)
+            bandImage3.setBandColor(this)
+            bandImage6.setBandColor(this)
         } else if (number == 5) {
-            setBandColor(bandImage6)
+            bandImage6.setBandColor(this)
         }
 
         // handle invalid input
@@ -306,25 +300,12 @@ class ValueToColorActivity : AppCompatActivity() {
         }
     }
 
-    // helper method to set the color of the band on screen
-    private fun setBandColor(band: ImageView, colorText: String = "") {
-        val color = ColorFinder.textToColor(colorText)
-        band.setColorFilter(ContextCompat.getColor(this, color))
-    }
-
-    // helper method to set the drawable that appears after a selection
-    private fun setDropDownDrawable(dropDown: AutoCompleteTextView, color: String) {
-        dropDown.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            ColorFinder.textToColoredDrawable(color), 0, 0, 0
-        )
-    }
-
     // clears the non-dropdown bands
     private fun clearResistor() {
-        setBandColor(bandImage1)
-        setBandColor(bandImage2)
-        setBandColor(bandImage3)
-        setBandColor(bandImage4)
+        bandImage1.setBandColor(this)
+        bandImage2.setBandColor(this)
+        bandImage3.setBandColor(this)
+        bandImage4.setBandColor(this)
     }
 
     // deletes all shared preferences and resets the screen
@@ -332,12 +313,12 @@ class ValueToColorActivity : AppCompatActivity() {
         StateData.RESISTANCE_VTC.clearData(this)
         StateData.BUTTON_SELECTION_VTC.saveData(this, "${resistor.getNumberOfBands()}")
         resistanceText.text = getString(R.string.default_text)
-        setBandColor(bandImage1)
-        setBandColor(bandImage2)
-        setBandColor(bandImage3)
-        setBandColor(bandImage4)
-        setBandColor(bandImage5)
-        setBandColor(bandImage6)
+        bandImage1.setBandColor(this)
+        bandImage2.setBandColor(this)
+        bandImage3.setBandColor(this)
+        bandImage4.setBandColor(this)
+        bandImage5.setBandColor(this)
+        bandImage6.setBandColor(this)
         dropDownSetup() // resets dropdown and resistor info
         calculateButtonSetup()
     }
