@@ -25,8 +25,8 @@ import com.google.android.material.textfield.TextInputLayout
  */
 class ColorToValueActivity : AppCompatActivity() {
 
-    private lateinit var resistanceText: TextView
-    private lateinit var toggleDropDownNumberBand3: TextInputLayout
+    private lateinit var resistanceTextView: TextView
+    private lateinit var toggleDropDownThree: TextInputLayout
     private lateinit var toggleDropDownPPM: TextInputLayout
     private lateinit var bandImage1: ImageView
     private lateinit var bandImage2: ImageView
@@ -75,7 +75,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 ShowResistorChart.execute(this, resistor.getNumberOfBands())
             }
             R.id.share_item -> {
-                val intent = ShareResistance.execute(resistor, resistanceText)
+                val intent = ShareResistance.execute(resistor, resistanceTextView)
                 startActivity(Intent.createChooser(intent, ""))
             }
             R.id.feedback -> {
@@ -91,14 +91,13 @@ class ColorToValueActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
                 startActivity(intent)
             }
-            else -> return super.onOptionsItemSelected(item)
         }
-        return true
+        return super.onOptionsItemSelected(item)
     }
 
     private fun generalSetup() {
-        resistanceText = findViewById(R.id.resistance_display_ctv)
-        toggleDropDownNumberBand3 = findViewById(R.id.dropDownSelector3)
+        resistanceTextView = findViewById(R.id.resistance_display_ctv)
+        toggleDropDownThree = findViewById(R.id.dropDownSelector3)
         toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
         bandImage1 = findViewById(R.id.r_p2_band_1)
         bandImage2 = findViewById(R.id.r_p4_band2)
@@ -107,8 +106,10 @@ class ColorToValueActivity : AppCompatActivity() {
         bandImage5 = findViewById(R.id.r_p10_band_5)
         bandImage6 = findViewById(R.id.r_p12_band_6)
 
-        resistanceText.text = StateData.RESISTANCE_CTV.loadData(this)
-        if (resistanceText.text.isEmpty()) resistanceText.text = getString(R.string.default_text)
+        resistanceTextView.text = StateData.RESISTANCE_CTV.loadData(this)
+        if (resistanceTextView.text.isEmpty()) {
+            resistanceTextView.text = getString(R.string.default_text)
+        }
     }
 
     private fun dropDownSetup() {
@@ -119,7 +120,6 @@ class ColorToValueActivity : AppCompatActivity() {
         val dropDownTolerance: AutoCompleteTextView = findViewById(R.id.spinner5)
         val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinner6)
 
-        // load and set saved data
         resistor.sigFigBandOne = StateData.SIGFIG_BAND_ONE_CTV.loadData(this)
         resistor.sigFigBandTwo = StateData.SIGFIG_BAND_TWO_CTV.loadData(this)
         resistor.sigFigBandThree = StateData.SIGFIG_BAND_THREE_CTV.loadData(this)
@@ -141,7 +141,6 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownTolerance.setDropDownDrawable(resistor.toleranceBand)
         dropDownPPM.setDropDownDrawable(resistor.ppmBand)
 
-        // create and set dropdown adapters
         val numberAdapter = ImageTextArrayAdapter(this, SpinnerArrays.numberArray)
         val multiplierAdapter = ImageTextArrayAdapter(this, SpinnerArrays.multiplierArray)
         val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerArrays.toleranceArray)
@@ -154,7 +153,6 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownTolerance.setAdapter(toleranceAdapter)
         dropDownPPM.setAdapter(ppmAdapter)
 
-        // dropdown listeners
         dropDownBand1.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.sigFigBandOne = dropDownBand1.adapter.getItem(position).toString()
@@ -235,19 +233,19 @@ class ColorToValueActivity : AppCompatActivity() {
     private fun updateNavigationSelection(numberOfBands: Int) {
         when (numberOfBands) {
             4 -> {
-                toggleDropDownNumberBand3.visibility = View.GONE
+                toggleDropDownThree.visibility = View.GONE
                 toggleDropDownPPM.visibility = View.GONE
                 bandImage3.setBandColor(this)
                 bandImage6.setBandColor(this)
             }
             5 -> {
-                toggleDropDownNumberBand3.visibility = View.VISIBLE
+                toggleDropDownThree.visibility = View.VISIBLE
                 toggleDropDownPPM.visibility = View.GONE
                 bandImage3.setBandColor(this, resistor.sigFigBandThree)
                 bandImage6.setBandColor(this)
             }
             6 -> {
-                toggleDropDownNumberBand3.visibility = View.VISIBLE
+                toggleDropDownThree.visibility = View.VISIBLE
                 toggleDropDownPPM.visibility = View.VISIBLE
                 bandImage3.setBandColor(this, resistor.sigFigBandThree)
                 bandImage6.setBandColor(this, resistor.ppmBand)
@@ -258,24 +256,22 @@ class ColorToValueActivity : AppCompatActivity() {
         updateResistance()
     }
 
-    // update the dropdown with the current selection and update the text
     private fun updateDropDownSelection(dropDown: AutoCompleteTextView, color: String, band: ImageView) {
         dropDown.setDropDownDrawable(color)
         band.setBandColor(this, color)
         updateResistance()
     }
 
-    // update the resistance that displays on the screen
     private fun updateResistance() {
-        resistanceText.text = ResistanceFormatter.calculate(resistor)
-        StateData.RESISTANCE_CTV.saveData(this, resistanceText.text.toString())
+        resistanceTextView.text = ResistanceFormatter.calculate(resistor)
+        StateData.RESISTANCE_CTV.saveData(this, resistanceTextView.text.toString())
     }
 
     // deletes all shared preferences and resets the screen
     private fun reset() {
         StateData.RESISTANCE_CTV.clearData(this)
         StateData.BUTTON_SELECTION_CTV.saveData(this, "${resistor.getNumberOfBands()}")
-        resistanceText.text = getString(R.string.default_text)
+        resistanceTextView.text = getString(R.string.default_text)
         bandImage1.setBandColor(this)
         bandImage2.setBandColor(this)
         bandImage3.setBandColor(this)
