@@ -271,8 +271,6 @@ class ColorToValueActivity : AppCompatActivity() {
         StateData.RESISTANCE_CTV.saveData(this, resistanceText.text.toString())
     }
 
-    // helper method to set the color of the band on screen
-
     // deletes all shared preferences and resets the screen
     private fun reset() {
         StateData.RESISTANCE_CTV.clearData(this)

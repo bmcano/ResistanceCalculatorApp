@@ -5,7 +5,9 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.util.EmailFeedback
@@ -17,13 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // if user is using android 7.1 or lower, then we use the old activity without the icon
-        if (android.os.Build.VERSION.SDK_INT < 26) {
-            setContentView(R.layout.activity_main_old_sdk)
-        } else {
-            setContentView(R.layout.activity_main)
-        }
+        setContentView(R.layout.activity_main)
 
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null) {
@@ -36,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        layoutSetup()
         buttonSetup()
     }
 
@@ -57,9 +54,16 @@ class MainActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
                 startActivity(intent)
             }
-            else -> super.onOptionsItemSelected(item)
         }
-        return true
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun layoutSetup() {
+        val appIconImageView: ImageView = findViewById(R.id.circular_app_icon_main_activity)
+        // if user is using android 7.1 or lower, then we hide the app icon to prevent crashing
+        if (android.os.Build.VERSION.SDK_INT < 26) {
+           appIconImageView.visibility = View.GONE
+        }
     }
 
     private fun buttonSetup() {
