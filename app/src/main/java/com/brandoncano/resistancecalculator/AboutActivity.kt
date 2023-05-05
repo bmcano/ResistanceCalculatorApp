@@ -41,28 +41,28 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun makeRandomResistorImage() {
-        val numBand1: ImageView = findViewById(R.id.r_p2_band1)
-        val numBand2: ImageView = findViewById(R.id.r_p4_band2)
-        val numBand3: ImageView = findViewById(R.id.r_p6_band3)
-        val multiplierBand: ImageView = findViewById(R.id.r_p8_band4)
-        val toleranceBand: ImageView = findViewById(R.id.r_p10_band5)
-        val ppmBand: ImageView = findViewById(R.id.r_p12_band6)
+        val band1: ImageView = findViewById(R.id.r_p2_band1)
+        val band2: ImageView = findViewById(R.id.r_p4_band2)
+        val band3: ImageView = findViewById(R.id.r_p6_band3)
+        val band4: ImageView = findViewById(R.id.r_p8_band4)
+        val band5: ImageView = findViewById(R.id.r_p10_band5)
+        val band6: ImageView = findViewById(R.id.r_p12_band6)
 
-        setRandomColorFilter(numBand1)
-        setRandomColorFilter(numBand2)
-        setRandomColorFilter(multiplierBand)
-        setRandomColorFilter(toleranceBand)
+        setRandomColorFilter(band1)
+        setRandomColorFilter(band2)
+        setRandomColorFilter(band4)
+        setRandomColorFilter(band5)
 
         when ((4..6).random()) {
             4 -> {
-                setRandomColorFilter(numBand3, R.color.resistor_blank)
-                setRandomColorFilter(ppmBand, R.color.resistor_blank)
+                setRandomColorFilter(band3, R.color.resistor_blank)
+                setRandomColorFilter(band6, R.color.resistor_blank)
             } 5 -> {
-                setRandomColorFilter(numBand3)
-                setRandomColorFilter(ppmBand, R.color.resistor_blank)
+                setRandomColorFilter(band3)
+                setRandomColorFilter(band6, R.color.resistor_blank)
             } 6 -> {
-                setRandomColorFilter(numBand3)
-                setRandomColorFilter(ppmBand)
+                setRandomColorFilter(band3)
+                setRandomColorFilter(band6)
             }
         }
     }
