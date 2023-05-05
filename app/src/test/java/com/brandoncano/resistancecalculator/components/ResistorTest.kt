@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator.components
 
+import com.brandoncano.resistancecalculator.resistor.Resistor
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 import org.junit.Assert.assertEquals

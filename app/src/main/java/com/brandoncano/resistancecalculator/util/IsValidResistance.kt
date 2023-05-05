@@ -1,8 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
-import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.constants.Symbols.GOhms
+import com.brandoncano.resistancecalculator.resistor.Resistor
 
 /**
  * Job: Checks if a user inputted resistance is valid.

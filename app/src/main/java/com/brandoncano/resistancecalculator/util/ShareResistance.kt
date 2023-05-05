@@ -2,7 +2,7 @@ package com.brandoncano.resistancecalculator.util
 
 import android.content.Intent
 import android.widget.TextView
-import com.brandoncano.resistancecalculator.components.Resistor
+import com.brandoncano.resistancecalculator.resistor.Resistor
 
 /**
  * Job: This will take teh string from the TextView so it can be shared/copied.

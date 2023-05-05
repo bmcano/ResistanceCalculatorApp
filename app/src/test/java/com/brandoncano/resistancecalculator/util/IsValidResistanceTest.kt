@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.util
 
-import com.brandoncano.resistancecalculator.components.Resistor
+import com.brandoncano.resistancecalculator.resistor.Resistor
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

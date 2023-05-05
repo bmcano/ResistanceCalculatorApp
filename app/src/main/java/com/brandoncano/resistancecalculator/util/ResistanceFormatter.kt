@@ -1,8 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
-import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
+import com.brandoncano.resistancecalculator.resistor.Resistor
 
 /**
  * Job: Formats the resistance based on the colors selected for the bands (CtV).

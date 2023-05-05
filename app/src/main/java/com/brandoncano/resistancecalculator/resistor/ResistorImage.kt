@@ -2,7 +2,6 @@ package com.brandoncano.resistancecalculator.resistor
 
 import android.content.Context
 import android.widget.ImageView
-import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.util.setBandColor
 
 /**

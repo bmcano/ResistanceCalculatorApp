@@ -17,10 +17,10 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
+import com.brandoncano.resistancecalculator.resistor.Resistor
 import com.brandoncano.resistancecalculator.resistor.ResistorImage
 import com.brandoncano.resistancecalculator.util.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
