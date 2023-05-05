@@ -180,12 +180,6 @@ class ValueToColorActivity : AppCompatActivity() {
 
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_vtc)
-
-        resistorImage.band1.setBandColor(this, resistor.sigFigBandOne)
-        resistorImage.band2.setBandColor(this, resistor.sigFigBandTwo)
-        resistorImage.band4.setBandColor(this, resistor.multiplierBand)
-        resistorImage.band5.setBandColor(this, resistor.toleranceBand)
-
         when (StateData.BUTTON_SELECTION_VTC.loadData(this)) {
             "4" -> {
                 bottomNavigationView.selectedItemId = R.id.selected_four_nav
@@ -252,20 +246,7 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun updateResistorAndText() {
         resistanceTextView.text = resistor.getResistanceText()
         ResistorFormatter.generateResistor(resistor)
-        resistorImage.band1.setBandColor(this, resistor.sigFigBandOne)
-        resistorImage.band2.setBandColor(this, resistor.sigFigBandTwo)
-        resistorImage.band3.setBandColor(this, resistor.sigFigBandThree)
-        resistorImage.band4.setBandColor(this, resistor.multiplierBand)
-        resistorImage.band5.setBandColor(this, resistor.toleranceValue)
-        resistorImage.band6.setBandColor(this, resistor.ppmValue)
-
-        val number = resistor.getNumberOfBands()
-        if (number == 4) {
-            resistorImage.band3.setBandColor(this)
-            resistorImage.band6.setBandColor(this)
-        } else if (number == 5) {
-            resistorImage.band6.setBandColor(this)
-        }
+        resistorImage.setImageColors(this, resistor, resistor.getNumberOfBands(), isVtC = true)
 
         // handle invalid input
         if (resistor.resistance == "NotValid") {
