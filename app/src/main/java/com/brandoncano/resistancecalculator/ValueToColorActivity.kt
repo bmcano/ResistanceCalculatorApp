@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +21,7 @@ import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
+import com.brandoncano.resistancecalculator.resistor.ResistorImage
 import com.brandoncano.resistancecalculator.util.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
@@ -31,17 +31,11 @@ import com.google.android.material.textfield.TextInputLayout
  */
 class ValueToColorActivity : AppCompatActivity() {
 
-    private lateinit var resistanceText: TextView
+    private lateinit var resistanceTextView: TextView
     private lateinit var inputResistance: EditText
-    private lateinit var toggleDropDown: TextInputLayout
+    private lateinit var toggleDropDownPPM: TextInputLayout
     private lateinit var textInputLayout: TextInputLayout
-    private lateinit var bandImage1: ImageView
-    private lateinit var bandImage2: ImageView
-    private lateinit var bandImage3: ImageView
-    private lateinit var bandImage4: ImageView
-    private lateinit var bandImage5: ImageView
-    private lateinit var bandImage6: ImageView
-
+    private lateinit var resistorImage: ResistorImage
     private val resistor: Resistor = Resistor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +77,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 ShowResistorChart.execute(this, resistor.getNumberOfBands())
             }
             R.id.share_item -> {
-                val intent = ShareResistance.execute(resistor, resistanceText, isVtC = true)
+                val intent = ShareResistance.execute(resistor, resistanceTextView, isVtC = true)
                 startActivity(Intent.createChooser(intent, ""))
             }
             R.id.feedback -> {
@@ -99,27 +93,29 @@ class ValueToColorActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
                 startActivity(intent)
             }
-            else -> return super.onOptionsItemSelected(item)
         }
-        return true
+        return super.onOptionsItemSelected(item)
     }
 
     private fun generalSetup() {
-        resistanceText = findViewById(R.id.display_resistance)
-        toggleDropDown = findViewById(R.id.dropDownSelectorPPM)
-        bandImage1 = findViewById(R.id.r_p2_band_1)
-        bandImage2 = findViewById(R.id.r_p4_band2)
-        bandImage3 = findViewById(R.id.r_p6_band3)
-        bandImage4 = findViewById(R.id.r_p8_band4)
-        bandImage5 = findViewById(R.id.r_p10_band_5)
-        bandImage6 = findViewById(R.id.r_p12_band_6)
+        resistanceTextView = findViewById(R.id.display_resistance)
+        toggleDropDownPPM = findViewById(R.id.dropDownSelectorPPM)
+        resistorImage = ResistorImage(
+            findViewById(R.id.r_p2_band1),
+            findViewById(R.id.r_p4_band2),
+            findViewById(R.id.r_p6_band3),
+            findViewById(R.id.r_p8_band4),
+            findViewById(R.id.r_p10_band5),
+            findViewById(R.id.r_p12_band6)
+        )
 
-        resistanceText.text = StateData.RESISTANCE_VTC.loadData(this)
-        if (resistanceText.text.isEmpty()) resistanceText.text = getString(R.string.enter_value)
+        resistanceTextView.text = StateData.RESISTANCE_VTC.loadData(this)
+        if (resistanceTextView.text.isEmpty()) {
+            resistanceTextView.text = getString(R.string.enter_value)
+        }
     }
 
     private fun dropDownSetup() {
-        // text input setup and listener
         textInputLayout = findViewById(R.id.edit_text_outline)
         inputResistance = findViewById(R.id.enter_resistance)
         inputResistance.setText(StateData.USER_INPUT_VTC.loadData(this))
@@ -157,7 +153,6 @@ class ValueToColorActivity : AppCompatActivity() {
         val ppmAdapter = ImageTextArrayAdapter(this, SpinnerArrays.ppmTextArray)
         dropDownPPM.setAdapter(ppmAdapter)
 
-        // dropdown listeners
         dropDownUnits.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.units = dropDownUnits.adapter.getItem(position).toString()
@@ -186,10 +181,10 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_vtc)
 
-        bandImage1.setBandColor(this, resistor.sigFigBandOne)
-        bandImage2.setBandColor(this, resistor.sigFigBandTwo)
-        bandImage4.setBandColor(this, resistor.multiplierBand)
-        bandImage5.setBandColor(this, resistor.toleranceBand)
+        resistorImage.band1.setBandColor(this, resistor.sigFigBandOne)
+        resistorImage.band2.setBandColor(this, resistor.sigFigBandTwo)
+        resistorImage.band4.setBandColor(this, resistor.multiplierBand)
+        resistorImage.band5.setBandColor(this, resistor.toleranceBand)
 
         when (StateData.BUTTON_SELECTION_VTC.loadData(this)) {
             "4" -> {
@@ -224,7 +219,7 @@ class ValueToColorActivity : AppCompatActivity() {
     }
 
     private fun updateNavigationSelection(numberOfBands: Int) {
-        toggleDropDown.visibility = if (numberOfBands == 6) View.VISIBLE else View.INVISIBLE
+        toggleDropDownPPM.visibility = if (numberOfBands == 6) View.VISIBLE else View.INVISIBLE
         StateData.BUTTON_SELECTION_VTC.saveData(this, "$numberOfBands")
         resistor.setNumberOfBands(numberOfBands)
         errorFinder(inputResistance.text.toString())
@@ -239,7 +234,6 @@ class ValueToColorActivity : AppCompatActivity() {
         }
     }
 
-    // finds any errors in the user input
     private fun errorFinder(text: String) {
         if (text.isEmpty() || text == ".") {
             textInputLayout.error = null
@@ -248,77 +242,61 @@ class ValueToColorActivity : AppCompatActivity() {
             textInputLayout.error = getString(R.string.invalid_input)
             resistor.resistance = "NotValid"
             StateData.USER_INPUT_VTC.saveData(this, "")
-            clearResistor()
+            resistorImage.clearResistor(this)
         } else {
             textInputLayout.error = null
             resistor.resistance = text
         }
     }
 
-    // updates the resistor on screen and the text
     private fun updateResistorAndText() {
-        resistanceText.text = resistor.getResistanceText()
+        resistanceTextView.text = resistor.getResistanceText()
         ResistorFormatter.generateResistor(resistor)
-        bandImage1.setBandColor(this, resistor.sigFigBandOne)
-        bandImage2.setBandColor(this, resistor.sigFigBandTwo)
-        bandImage3.setBandColor(this, resistor.sigFigBandThree)
-        bandImage4.setBandColor(this, resistor.multiplierBand)
-        bandImage5.setBandColor(this, resistor.toleranceValue)
-        bandImage6.setBandColor(this, resistor.ppmValue)
+        resistorImage.band1.setBandColor(this, resistor.sigFigBandOne)
+        resistorImage.band2.setBandColor(this, resistor.sigFigBandTwo)
+        resistorImage.band3.setBandColor(this, resistor.sigFigBandThree)
+        resistorImage.band4.setBandColor(this, resistor.multiplierBand)
+        resistorImage.band5.setBandColor(this, resistor.toleranceValue)
+        resistorImage.band6.setBandColor(this, resistor.ppmValue)
 
         val number = resistor.getNumberOfBands()
         if (number == 4) {
-            bandImage3.setBandColor(this)
-            bandImage6.setBandColor(this)
+            resistorImage.band3.setBandColor(this)
+            resistorImage.band6.setBandColor(this)
         } else if (number == 5) {
-            bandImage6.setBandColor(this)
+            resistorImage.band6.setBandColor(this)
         }
 
         // handle invalid input
         if (resistor.resistance == "NotValid") {
-            resistanceText.text = getString(R.string.invalid_input)
-            clearResistor()
+            resistanceTextView.text = getString(R.string.invalid_input)
+            resistorImage.clearResistor(this)
             return
         }
         // handle empty input (no input)
         if (resistor.resistance.isEmpty()) {
-            resistanceText.text = getString(R.string.enter_value)
-            clearResistor()
+            resistanceTextView.text = getString(R.string.enter_value)
+            resistorImage.clearResistor(this)
             return
         }
 
         StateData.USER_INPUT_VTC.saveData(this, resistor.resistance)
-        StateData.RESISTANCE_VTC.saveData(this, resistanceText.text.toString())
+        StateData.RESISTANCE_VTC.saveData(this, resistanceTextView.text.toString())
     }
 
-    // closes the keyboard
     private fun closeKeyboard() {
         val view = this.currentFocus
         if (view != null) {
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
+            val input = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            input.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 
-    // clears the non-dropdown bands
-    private fun clearResistor() {
-        bandImage1.setBandColor(this)
-        bandImage2.setBandColor(this)
-        bandImage3.setBandColor(this)
-        bandImage4.setBandColor(this)
-    }
-
-    // deletes all shared preferences and resets the screen
     private fun reset() {
         StateData.RESISTANCE_VTC.clearData(this)
         StateData.BUTTON_SELECTION_VTC.saveData(this, "${resistor.getNumberOfBands()}")
-        resistanceText.text = getString(R.string.default_text)
-        bandImage1.setBandColor(this)
-        bandImage2.setBandColor(this)
-        bandImage3.setBandColor(this)
-        bandImage4.setBandColor(this)
-        bandImage5.setBandColor(this)
-        bandImage6.setBandColor(this)
+        resistanceTextView.text = getString(R.string.default_text)
+        resistorImage.clearResistor(this)
         dropDownSetup() // resets dropdown and resistor info
         calculateButtonSetup()
     }

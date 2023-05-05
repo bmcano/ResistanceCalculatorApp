@@ -16,6 +16,7 @@ import com.brandoncano.resistancecalculator.components.Resistor
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
+import com.brandoncano.resistancecalculator.resistor.ResistorImage
 import com.brandoncano.resistancecalculator.util.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
@@ -28,13 +29,7 @@ class ColorToValueActivity : AppCompatActivity() {
     private lateinit var resistanceTextView: TextView
     private lateinit var toggleDropDownThree: TextInputLayout
     private lateinit var toggleDropDownPPM: TextInputLayout
-    private lateinit var bandImage1: ImageView
-    private lateinit var bandImage2: ImageView
-    private lateinit var bandImage3: ImageView
-    private lateinit var bandImage4: ImageView
-    private lateinit var bandImage5: ImageView
-    private lateinit var bandImage6: ImageView
-
+    private lateinit var resistorImage: ResistorImage
     private val resistor: Resistor = Resistor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,12 +94,14 @@ class ColorToValueActivity : AppCompatActivity() {
         resistanceTextView = findViewById(R.id.resistance_display_ctv)
         toggleDropDownThree = findViewById(R.id.dropDownSelector3)
         toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
-        bandImage1 = findViewById(R.id.r_p2_band_1)
-        bandImage2 = findViewById(R.id.r_p4_band2)
-        bandImage3 = findViewById(R.id.r_p6_band3)
-        bandImage4 = findViewById(R.id.r_p8_band4)
-        bandImage5 = findViewById(R.id.r_p10_band_5)
-        bandImage6 = findViewById(R.id.r_p12_band_6)
+        resistorImage = ResistorImage(
+            findViewById(R.id.r_p2_band1),
+            findViewById(R.id.r_p4_band2),
+            findViewById(R.id.r_p6_band3),
+            findViewById(R.id.r_p8_band4),
+            findViewById(R.id.r_p10_band5),
+            findViewById(R.id.r_p12_band6)
+        )
 
         resistanceTextView.text = StateData.RESISTANCE_CTV.loadData(this)
         if (resistanceTextView.text.isEmpty()) {
@@ -156,42 +153,42 @@ class ColorToValueActivity : AppCompatActivity() {
         dropDownBand1.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.sigFigBandOne = dropDownBand1.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownBand1, resistor.sigFigBandOne, bandImage1)
+                updateDropDownSelection(dropDownBand1, resistor.sigFigBandOne, resistorImage.band1)
                 StateData.SIGFIG_BAND_ONE_CTV.saveData(this, dropDownBand1.text.toString())
             }
 
         dropDownBand2.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.sigFigBandTwo = dropDownBand2.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownBand2, resistor.sigFigBandTwo, bandImage2)
+                updateDropDownSelection(dropDownBand2, resistor.sigFigBandTwo, resistorImage.band2)
                 StateData.SIGFIG_BAND_TWO_CTV.saveData(this, dropDownBand2.text.toString())
             }
 
         dropDownBand3.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.sigFigBandThree = dropDownBand3.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownBand3, resistor.sigFigBandThree, bandImage3)
+                updateDropDownSelection(dropDownBand3, resistor.sigFigBandThree, resistorImage.band3)
                 StateData.SIGFIG_BAND_THREE_CTV.saveData(this, dropDownBand3.text.toString())
             }
 
         dropDownMultiplier.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.multiplierBand = dropDownMultiplier.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownMultiplier, resistor.multiplierBand, bandImage4)
+                updateDropDownSelection(dropDownMultiplier, resistor.multiplierBand, resistorImage.band4)
                 StateData.MULTIPLIER_BAND_CTV.saveData(this, dropDownMultiplier.text.toString())
             }
 
         dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownTolerance, resistor.toleranceBand, bandImage5)
+                updateDropDownSelection(dropDownTolerance, resistor.toleranceBand, resistorImage.band5)
                 StateData.TOLERANCE_BAND_CTV.saveData(this, dropDownTolerance.text.toString())
             }
 
         dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 resistor.ppmBand = dropDownPPM.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownPPM, resistor.ppmBand, bandImage6)
+                updateDropDownSelection(dropDownPPM, resistor.ppmBand, resistorImage.band6)
                 StateData.PPM_BAND_CTV.saveData(this, dropDownPPM.text.toString())
             }
     }
@@ -199,10 +196,10 @@ class ColorToValueActivity : AppCompatActivity() {
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_ctv)
 
-        bandImage1.setBandColor(this, resistor.sigFigBandOne)
-        bandImage2.setBandColor(this, resistor.sigFigBandTwo)
-        bandImage4.setBandColor(this, resistor.multiplierBand)
-        bandImage5.setBandColor(this, resistor.toleranceBand)
+        resistorImage.band1.setBandColor(this, resistor.sigFigBandOne)
+        resistorImage.band2.setBandColor(this, resistor.sigFigBandTwo)
+        resistorImage.band4.setBandColor(this, resistor.multiplierBand)
+        resistorImage.band5.setBandColor(this, resistor.toleranceBand)
 
         when (StateData.BUTTON_SELECTION_CTV.loadData(this)) {
             "4" -> {
@@ -235,20 +232,20 @@ class ColorToValueActivity : AppCompatActivity() {
             4 -> {
                 toggleDropDownThree.visibility = View.GONE
                 toggleDropDownPPM.visibility = View.GONE
-                bandImage3.setBandColor(this)
-                bandImage6.setBandColor(this)
+                resistorImage.band3.setBandColor(this)
+                resistorImage.band6.setBandColor(this)
             }
             5 -> {
                 toggleDropDownThree.visibility = View.VISIBLE
                 toggleDropDownPPM.visibility = View.GONE
-                bandImage3.setBandColor(this, resistor.sigFigBandThree)
-                bandImage6.setBandColor(this)
+                resistorImage.band3.setBandColor(this, resistor.sigFigBandThree)
+                resistorImage.band6.setBandColor(this)
             }
             6 -> {
                 toggleDropDownThree.visibility = View.VISIBLE
                 toggleDropDownPPM.visibility = View.VISIBLE
-                bandImage3.setBandColor(this, resistor.sigFigBandThree)
-                bandImage6.setBandColor(this, resistor.ppmBand)
+                resistorImage.band3.setBandColor(this, resistor.sigFigBandThree)
+                resistorImage.band6.setBandColor(this, resistor.ppmBand)
             }
         }
         StateData.BUTTON_SELECTION_CTV.saveData(this, "$numberOfBands")
@@ -267,17 +264,11 @@ class ColorToValueActivity : AppCompatActivity() {
         StateData.RESISTANCE_CTV.saveData(this, resistanceTextView.text.toString())
     }
 
-    // deletes all shared preferences and resets the screen
     private fun reset() {
         StateData.RESISTANCE_CTV.clearData(this)
         StateData.BUTTON_SELECTION_CTV.saveData(this, "${resistor.getNumberOfBands()}")
         resistanceTextView.text = getString(R.string.default_text)
-        bandImage1.setBandColor(this)
-        bandImage2.setBandColor(this)
-        bandImage3.setBandColor(this)
-        bandImage4.setBandColor(this)
-        bandImage5.setBandColor(this)
-        bandImage6.setBandColor(this)
+        resistorImage.clearResistor(this)
         dropDownSetup() // resets dropdown and resistor info
     }
 }

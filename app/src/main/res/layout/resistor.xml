@@ -23,12 +23,12 @@
         android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p1"
-        app:layout_constraintEnd_toStartOf="@+id/r_p2_band_1"
+        app:layout_constraintEnd_toStartOf="@+id/r_p2_band1"
         app:layout_constraintStart_toStartOf="@+id/resistor_group"
         app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_p2_band_1"
+        android:id="@+id/r_p2_band1"
         android:layout_width="10dp"
         android:layout_height="66dp"
         android:layout_marginTop="2dp"
@@ -46,7 +46,7 @@
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p3"
         app:layout_constraintEnd_toStartOf="@+id/r_p4_band2"
-        app:layout_constraintStart_toEndOf="@+id/r_p2_band_1"
+        app:layout_constraintStart_toEndOf="@+id/r_p2_band1"
         app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
@@ -111,12 +111,12 @@
         android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p9"
-        app:layout_constraintEnd_toStartOf="@+id/r_p10_band_5"
+        app:layout_constraintEnd_toStartOf="@+id/r_p10_band5"
         app:layout_constraintStart_toEndOf="@+id/r_p8_band4"
         app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_p10_band_5"
+        android:id="@+id/r_p10_band5"
         android:layout_width="10dp"
         android:layout_height="66dp"
         android:layout_marginTop="2dp"
@@ -133,12 +133,12 @@
         android:layout_marginTop="2dp"
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p11"
-        app:layout_constraintEnd_toStartOf="@+id/r_p12_band_6"
-        app:layout_constraintStart_toEndOf="@+id/r_p10_band_5"
+        app:layout_constraintEnd_toStartOf="@+id/r_p12_band6"
+        app:layout_constraintStart_toEndOf="@+id/r_p10_band5"
         app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
     <ImageView
-        android:id="@+id/r_p12_band_6"
+        android:id="@+id/r_p12_band6"
         android:layout_width="10dp"
         android:layout_height="66dp"
         android:layout_marginTop="2dp"
@@ -156,7 +156,7 @@
         android:contentDescription="@string/resistor_description"
         android:src="@drawable/img_resistor_p13"
         app:layout_constraintEnd_toEndOf="@+id/resistor_group"
-        app:layout_constraintStart_toEndOf="@+id/r_p12_band_6"
+        app:layout_constraintStart_toEndOf="@+id/r_p12_band6"
         app:layout_constraintTop_toBottomOf="@id/resistor_group" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

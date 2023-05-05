@@ -41,12 +41,12 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun makeRandomResistorImage() {
-        val numBand1: ImageView = findViewById(R.id.r_p2_band_1)
+        val numBand1: ImageView = findViewById(R.id.r_p2_band1)
         val numBand2: ImageView = findViewById(R.id.r_p4_band2)
         val numBand3: ImageView = findViewById(R.id.r_p6_band3)
         val multiplierBand: ImageView = findViewById(R.id.r_p8_band4)
-        val toleranceBand: ImageView = findViewById(R.id.r_p10_band_5)
-        val ppmBand: ImageView = findViewById(R.id.r_p12_band_6)
+        val toleranceBand: ImageView = findViewById(R.id.r_p10_band5)
+        val ppmBand: ImageView = findViewById(R.id.r_p12_band6)
 
         setRandomColorFilter(numBand1)
         setRandomColorFilter(numBand2)
