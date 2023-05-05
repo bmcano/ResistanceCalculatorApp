@@ -36,10 +36,25 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/app_version_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/app_version"
+                android:textAlignment="center"
+                android:textColor="?android:textColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/app_name_text" />
+
+            <TextView
                 android:id="@+id/version_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:onClick="easterEgg"
                 android:text="@string/version"
                 android:textAlignment="center"
@@ -47,7 +62,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/app_name_text"
+                app:layout_constraintTop_toBottomOf="@+id/app_version_text"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
@@ -63,9 +78,20 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/version_number" />
+
+            <TextView
+                android:id="@+id/author_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/author"
+                android:textAlignment="center"
+                android:textColor="?android:textColor"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/created_by_text" />
 
             <include
                 android:id="@+id/resistor"
@@ -75,7 +101,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/created_by_text" />
+                app:layout_constraintTop_toBottomOf="@+id/author_text" />
 
             <TextView
                 android:id="@+id/description_text_one"
@@ -156,7 +182,7 @@
         android:text="@string/last_updated"
         android:textAlignment="center"
         android:textColor="?android:textColor"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -38,12 +38,12 @@
     <string name="invalid_input">Invalid Input</string>
 
     <!-- About page text -->
-    <string name="version">v2.4</string>
-    <string name="created_by">Created By\n\nBrandon Cano</string>
-    <string name="description_one">In this app you are able to find the resistance of a resistor from the color of its bands or you can type in a resistance to generate a resistor. This can be done for four, five, and six band resistors.</string>
+    <string name="app_version">App version</string>
+    <string name="created_by">Created by</string>
+    <string name="author">Brandon Cano</string>
+    <string name="description_one">In this app you can calculate the resistance of a resistor by entering its band colors or generating a resistor from a resistance value. Works for 4, 5, and 6 band resistors.</string>
     <string name="description_two">To see how values are calculated check under \"Show Chart\" found in the menu.</string>
     <string name="rate_us">Rate this app on Google Play</string>
-    <string name="last_updated">Last Updated On: 3/18/2023</string>
 
     <!-- Content descriptions -->
     <string name="popup_chart_content_description">Resistor chart</string>
