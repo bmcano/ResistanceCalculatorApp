@@ -195,12 +195,6 @@ class ColorToValueActivity : AppCompatActivity() {
 
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_ctv)
-
-        resistorImage.band1.setBandColor(this, resistor.sigFigBandOne)
-        resistorImage.band2.setBandColor(this, resistor.sigFigBandTwo)
-        resistorImage.band4.setBandColor(this, resistor.multiplierBand)
-        resistorImage.band5.setBandColor(this, resistor.toleranceBand)
-
         when (StateData.BUTTON_SELECTION_CTV.loadData(this)) {
             "4" -> {
                 bottomNavigationView.selectedItemId = R.id.selected_four_nav
@@ -228,24 +222,19 @@ class ColorToValueActivity : AppCompatActivity() {
     }
 
     private fun updateNavigationSelection(numberOfBands: Int) {
+        resistorImage.setImageColors(this, resistor, numberOfBands)
         when (numberOfBands) {
             4 -> {
                 toggleDropDownThree.visibility = View.GONE
                 toggleDropDownPPM.visibility = View.GONE
-                resistorImage.band3.setBandColor(this)
-                resistorImage.band6.setBandColor(this)
             }
             5 -> {
                 toggleDropDownThree.visibility = View.VISIBLE
                 toggleDropDownPPM.visibility = View.GONE
-                resistorImage.band3.setBandColor(this, resistor.sigFigBandThree)
-                resistorImage.band6.setBandColor(this)
             }
             6 -> {
                 toggleDropDownThree.visibility = View.VISIBLE
                 toggleDropDownPPM.visibility = View.VISIBLE
-                resistorImage.band3.setBandColor(this, resistor.sigFigBandThree)
-                resistorImage.band6.setBandColor(this, resistor.ppmBand)
             }
         }
         StateData.BUTTON_SELECTION_CTV.saveData(this, "$numberOfBands")
