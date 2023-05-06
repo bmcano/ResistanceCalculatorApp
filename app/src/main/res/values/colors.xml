@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Gray scale -->
-    <color name="white">#FFFFFFFF</color>
-    <color name="black">#FF000000</color>
-
     <!-- Theme colors -->
     <color name="yellow_primary">#E9C46A</color>
     <color name="orange_primary">#F4A261</color>
     <color name="mango_primary">#E76F51</color>
-    <!-- <color name="mango_dark">#B5553E</color> -->
+    <color name="beige">#F5F5DC</color> <!-- will eventually replace neutral -->
     <color name="neutral">#EBE7CD</color>
     <color name="neutral_night">#7B5E41</color>
+    <color name="white_theme">#FFFFFFFF</color>
+    <color name="black_theme">#FF000000</color>
 
     <!-- Colors that relate to the resistor bands -->
-    <color name="red32">#ED1C24</color>
-    <color name="orange32">#FF7F27</color>
-    <color name="yellow32">#FFF200</color>
-    <color name="gold32">#FFC90E</color>
-    <color name="green32">#22B14C</color>
-    <color name="blue32">#00A2E8</color>
-    <color name="violet32">#8F00FF</color>
-    <color name="white32">#FFFFFF</color>
-    <color name="silver32">#C0C0C0</color>
-    <color name="gray32">#7F7F7F</color>
-    <color name="black32">#000000</color>
-    <color name="brown32">#B97A57</color>
+    <color name="red">#ED1C24</color>
+    <color name="orange">#FF7F27</color>
+    <color name="yellow">#FFF200</color>
+    <color name="gold">#FFC90E</color>
+    <color name="green">#22B14C</color>
+    <color name="blue">#00A2E8</color>
+    <color name="violet">#8F00FF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="gray">#7F7F7F</color>
+    <color name="black">#000000</color>
+    <color name="brown">#B97A57</color>
     <color name="resistor_blank">#EFE4B0</color>
 
 </resources>

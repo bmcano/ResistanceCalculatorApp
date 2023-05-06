@@ -107,7 +107,7 @@
         android:background="@drawable/outlined_box"
         android:text="@string/calculate_btn"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textColor="@color/white_theme"
         android:textSize="24sp"
         android:textStyle="bold"
         app:backgroundTint="@color/mango_primary"

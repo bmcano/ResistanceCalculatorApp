@@ -59,46 +59,46 @@ class ColorFinderTest {
 
     @Test
     fun textToColorTest() {
-        assertEquals(R.color.black32, ColorFinder.textToColor(C.BLACK))
-        assertEquals(R.color.black32, ColorFinder.textToColor("250 ${S.PPM}"))
+        assertEquals(R.color.black, ColorFinder.textToColor(C.BLACK))
+        assertEquals(R.color.black, ColorFinder.textToColor("250 ${S.PPM}"))
 
-        assertEquals(R.color.brown32, ColorFinder.textToColor(C.BROWN))
-        assertEquals(R.color.brown32, ColorFinder.textToColor("${S.PM}1%"))
-        assertEquals(R.color.brown32, ColorFinder.textToColor("100 ${S.PPM}"))
+        assertEquals(R.color.brown, ColorFinder.textToColor(C.BROWN))
+        assertEquals(R.color.brown, ColorFinder.textToColor("${S.PM}1%"))
+        assertEquals(R.color.brown, ColorFinder.textToColor("100 ${S.PPM}"))
 
-        assertEquals(R.color.red32, ColorFinder.textToColor(C.RED))
-        assertEquals(R.color.red32, ColorFinder.textToColor("${S.PM}2%"))
-        assertEquals(R.color.red32, ColorFinder.textToColor("50 ${S.PPM}"))
+        assertEquals(R.color.red, ColorFinder.textToColor(C.RED))
+        assertEquals(R.color.red, ColorFinder.textToColor("${S.PM}2%"))
+        assertEquals(R.color.red, ColorFinder.textToColor("50 ${S.PPM}"))
 
-        assertEquals(R.color.orange32, ColorFinder.textToColor(C.ORANGE))
-        assertEquals(R.color.orange32, ColorFinder.textToColor("15 ${S.PPM}"))
+        assertEquals(R.color.orange, ColorFinder.textToColor(C.ORANGE))
+        assertEquals(R.color.orange, ColorFinder.textToColor("15 ${S.PPM}"))
 
-        assertEquals(R.color.yellow32, ColorFinder.textToColor(C.YELLOW))
-        assertEquals(R.color.yellow32, ColorFinder.textToColor("25 ${S.PPM}"))
+        assertEquals(R.color.yellow, ColorFinder.textToColor(C.YELLOW))
+        assertEquals(R.color.yellow, ColorFinder.textToColor("25 ${S.PPM}"))
 
-        assertEquals(R.color.green32, ColorFinder.textToColor(C.GREEN))
-        assertEquals(R.color.green32, ColorFinder.textToColor("${S.PM}0.5%"))
-        assertEquals(R.color.green32, ColorFinder.textToColor("20 ${S.PPM}"))
+        assertEquals(R.color.green, ColorFinder.textToColor(C.GREEN))
+        assertEquals(R.color.green, ColorFinder.textToColor("${S.PM}0.5%"))
+        assertEquals(R.color.green, ColorFinder.textToColor("20 ${S.PPM}"))
 
-        assertEquals(R.color.blue32, ColorFinder.textToColor(C.BLUE))
-        assertEquals(R.color.blue32, ColorFinder.textToColor("${S.PM}0.25%"))
-        assertEquals(R.color.blue32, ColorFinder.textToColor("10 ${S.PPM}"))
+        assertEquals(R.color.blue, ColorFinder.textToColor(C.BLUE))
+        assertEquals(R.color.blue, ColorFinder.textToColor("${S.PM}0.25%"))
+        assertEquals(R.color.blue, ColorFinder.textToColor("10 ${S.PPM}"))
 
-        assertEquals(R.color.violet32, ColorFinder.textToColor(C.VIOLET))
-        assertEquals(R.color.violet32, ColorFinder.textToColor("${S.PM}0.1%"))
-        assertEquals(R.color.violet32, ColorFinder.textToColor("5 ${S.PPM}"))
+        assertEquals(R.color.violet, ColorFinder.textToColor(C.VIOLET))
+        assertEquals(R.color.violet, ColorFinder.textToColor("${S.PM}0.1%"))
+        assertEquals(R.color.violet, ColorFinder.textToColor("5 ${S.PPM}"))
 
-        assertEquals(R.color.gray32, ColorFinder.textToColor(C.GRAY))
-        assertEquals(R.color.gray32, ColorFinder.textToColor("${S.PM}0.05%"))
-        assertEquals(R.color.gray32, ColorFinder.textToColor("1 ${S.PPM}"))
+        assertEquals(R.color.gray, ColorFinder.textToColor(C.GRAY))
+        assertEquals(R.color.gray, ColorFinder.textToColor("${S.PM}0.05%"))
+        assertEquals(R.color.gray, ColorFinder.textToColor("1 ${S.PPM}"))
 
-        assertEquals(R.color.white32, ColorFinder.textToColor(C.WHITE))
+        assertEquals(R.color.white, ColorFinder.textToColor(C.WHITE))
 
-        assertEquals(R.color.gold32, ColorFinder.textToColor(C.GOLD))
-        assertEquals(R.color.gold32, ColorFinder.textToColor("${S.PM}5%"))
+        assertEquals(R.color.gold, ColorFinder.textToColor(C.GOLD))
+        assertEquals(R.color.gold, ColorFinder.textToColor("${S.PM}5%"))
 
-        assertEquals(R.color.silver32, ColorFinder.textToColor(C.SILVER))
-        assertEquals(R.color.silver32, ColorFinder.textToColor("${S.PM}10%"))
+        assertEquals(R.color.silver, ColorFinder.textToColor(C.SILVER))
+        assertEquals(R.color.silver, ColorFinder.textToColor("${S.PM}10%"))
 
         assertEquals(R.color.resistor_blank, ColorFinder.textToColor())
         assertEquals(R.color.resistor_blank, ColorFinder.textToColor("Some String"))
@@ -124,40 +124,40 @@ class ColorFinderTest {
 
     @Test
     fun idToColorTextTest() {
-        assertEquals(C.BLACK, ColorFinder.idToColorText(R.color.black32))
+        assertEquals(C.BLACK, ColorFinder.idToColorText(R.color.black))
         assertEquals(C.BLACK, ColorFinder.idToColorText(R.drawable.square_black))
 
-        assertEquals(C.BROWN, ColorFinder.idToColorText(R.color.brown32))
+        assertEquals(C.BROWN, ColorFinder.idToColorText(R.color.brown))
         assertEquals(C.BROWN, ColorFinder.idToColorText(R.drawable.square_brown))
 
-        assertEquals(C.RED, ColorFinder.idToColorText(R.color.red32))
+        assertEquals(C.RED, ColorFinder.idToColorText(R.color.red))
         assertEquals(C.RED, ColorFinder.idToColorText(R.drawable.square_red))
 
-        assertEquals(C.ORANGE, ColorFinder.idToColorText(R.color.orange32))
+        assertEquals(C.ORANGE, ColorFinder.idToColorText(R.color.orange))
         assertEquals(C.ORANGE, ColorFinder.idToColorText(R.drawable.square_orange))
 
-        assertEquals(C.YELLOW, ColorFinder.idToColorText(R.color.yellow32))
+        assertEquals(C.YELLOW, ColorFinder.idToColorText(R.color.yellow))
         assertEquals(C.YELLOW, ColorFinder.idToColorText(R.drawable.square_yellow))
 
-        assertEquals(C.GREEN, ColorFinder.idToColorText(R.color.green32))
+        assertEquals(C.GREEN, ColorFinder.idToColorText(R.color.green))
         assertEquals(C.GREEN, ColorFinder.idToColorText(R.drawable.square_green))
 
-        assertEquals(C.BLUE, ColorFinder.idToColorText(R.color.blue32))
+        assertEquals(C.BLUE, ColorFinder.idToColorText(R.color.blue))
         assertEquals(C.BLUE, ColorFinder.idToColorText(R.drawable.square_blue))
 
-        assertEquals(C.VIOLET, ColorFinder.idToColorText(R.color.violet32))
+        assertEquals(C.VIOLET, ColorFinder.idToColorText(R.color.violet))
         assertEquals(C.VIOLET, ColorFinder.idToColorText(R.drawable.square_violet))
 
-        assertEquals(C.GRAY, ColorFinder.idToColorText(R.color.gray32))
+        assertEquals(C.GRAY, ColorFinder.idToColorText(R.color.gray))
         assertEquals(C.GRAY, ColorFinder.idToColorText(R.drawable.square_gray))
 
-        assertEquals(C.WHITE, ColorFinder.idToColorText(R.color.white32))
+        assertEquals(C.WHITE, ColorFinder.idToColorText(R.color.white))
         assertEquals(C.WHITE, ColorFinder.idToColorText(R.drawable.square_white))
 
-        assertEquals(C.SILVER, ColorFinder.idToColorText(R.color.silver32))
+        assertEquals(C.SILVER, ColorFinder.idToColorText(R.color.silver))
         assertEquals(C.SILVER, ColorFinder.idToColorText(R.drawable.square_silver))
 
-        assertEquals(C.GOLD, ColorFinder.idToColorText(R.color.gold32))
+        assertEquals(C.GOLD, ColorFinder.idToColorText(R.color.gold))
         assertEquals(C.GOLD, ColorFinder.idToColorText(R.drawable.square_gold))
 
         assertEquals("", ColorFinder.idToColorText(R.color.resistor_blank))
@@ -167,9 +167,9 @@ class ColorFinderTest {
     @Test
     fun randomColorTest() {
         val colors = arrayOf(
-            R.color.red32, R.color.orange32, R.color.yellow32, R.color.gold32, R.color.green32,
-            R.color.blue32, R.color.violet32, R.color.white32, R.color.silver32, R.color.gray32,
-            R.color.black32, R.color.brown32, R.color.resistor_blank
+            R.color.red, R.color.orange, R.color.yellow, R.color.gold, R.color.green,
+            R.color.blue, R.color.violet, R.color.white, R.color.silver, R.color.gray,
+            R.color.black, R.color.brown, R.color.resistor_blank
         )
         assertTrue(ColorFinder.randomColor() in colors)
     }
