@@ -246,7 +246,7 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun updateResistorAndText() {
         resistanceTextView.text = resistor.getResistanceText()
         ResistorFormatter.generateResistor(resistor)
-        resistorImage.setImageColors(this, resistor, resistor.getNumberOfBands(), isVtC = true)
+        resistorImage.setImageColors(this, resistor, isVtC = true)
 
         // handle invalid input
         if (resistor.resistance == "NotValid") {

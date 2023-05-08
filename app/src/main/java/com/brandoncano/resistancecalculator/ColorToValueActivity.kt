@@ -222,7 +222,8 @@ class ColorToValueActivity : AppCompatActivity() {
     }
 
     private fun updateNavigationSelection(numberOfBands: Int) {
-        resistorImage.setImageColors(this, resistor, numberOfBands)
+        resistor.setNumberOfBands(numberOfBands)
+        resistorImage.setImageColors(this, resistor)
         when (numberOfBands) {
             4 -> {
                 toggleDropDownThree.visibility = View.GONE
@@ -238,7 +239,6 @@ class ColorToValueActivity : AppCompatActivity() {
             }
         }
         StateData.BUTTON_SELECTION_CTV.saveData(this, "$numberOfBands")
-        resistor.setNumberOfBands(numberOfBands)
         updateResistance()
     }
 
