@@ -58,9 +58,10 @@ object ResistanceFormatter {
     private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
         if (resistor.allDigitsZero()) return "0 ${S.Ohms}" // 0 Ohm resistor
 
+        val bands = resistor.getNumberOfBands()
         val hasLeadingZero = sigFigOne == "0"
         val hasTwoLeadingZeros = sigFigOne == "0" && sigFigTwo == "0"
-        val value: Int = if (resistor.getNumberOfBands() == 4) {
+        val value: Int = if (bands == 4) {
             (sigFigOne + sigFigTwo).toIntOrNull() ?: return "0 ${S.Ohms}"
         } else {
             (sigFigOne + sigFigTwo + sigFigThree).toIntOrNull() ?: return "0 ${S.Ohms}"
@@ -73,20 +74,20 @@ object ResistanceFormatter {
             resistanceAsDecimal /= 1000
         }
 
-        val bands = resistor.getNumberOfBands()
         val noDecimal = (bands == 4 && resistanceAsDecimal >= 10) ||
                 (bands != 4 && resistanceAsDecimal >= 100) ||
                 (bands == 4 && hasLeadingZero && resistanceAsDecimal >= 1) ||
                 (bands != 4 && hasLeadingZero && resistanceAsDecimal >= 10) ||
                 (bands != 4 && hasTwoLeadingZeros && resistanceAsDecimal >= 1)
 
-        return if (noDecimal) {
-            "${"%.0f".format(resistanceAsDecimal)} $units"
-        } else if (resistor.multiplierBand == C.SILVER) {
-            "${"%.2f".format(resistanceAsDecimal)} $units"
-        } else {
-            "${"%.1f".format(resistanceAsDecimal)} $units"
+        val decimalPrecision = when {
+            noDecimal -> "%.0f"
+            resistor.multiplierBand == C.SILVER -> "%.2f"
+            bands == 4 || resistanceAsDecimal >= 10.0 -> "%.1f"
+            hasTwoLeadingZeros || hasLeadingZero  -> "%.1f"
+            else -> "%.2f"
         }
+        return "${decimalPrecision.format(resistanceAsDecimal)} $units"
     }
 
     private fun unitConversion(value: Double): String {
