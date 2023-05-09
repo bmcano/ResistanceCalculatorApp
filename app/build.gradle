@@ -11,13 +11,13 @@ android {
         minSdk 24
         targetSdk 33
         versionCode 10
-        versionName "3.0-Develop"
+        versionName "3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     applicationVariants.all { variant ->
         variant.resValue "string", "version", variant.versionName
-        variant.resValue "string", "last_updated", "Last Updated On: 5/5/2023"
+        variant.resValue "string", "last_updated", "Last Updated On: 5/8/2023"
     }
     buildTypes {
         release {
