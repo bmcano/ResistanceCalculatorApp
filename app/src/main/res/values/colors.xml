@@ -4,8 +4,7 @@
     <color name="yellow_primary">#E9C46A</color>
     <color name="orange_primary">#F4A261</color>
     <color name="mango_primary">#E76F51</color>
-    <color name="beige">#F5F5DC</color> <!-- will eventually replace neutral -->
-    <color name="neutral">#EBE7CD</color>
+    <color name="beige">#F5F5DC</color>
     <color name="neutral_night">#7B5E41</color>
     <color name="white_theme">#FFFFFFFF</color>
     <color name="black_theme">#FF000000</color>
