@@ -62,4 +62,11 @@ data class Resistor(
         val fiveBand = sigFigBandOne == BLACK && sigFigBandTwo == BLACK && sigFigBandThree == BLACK
         return fourBand || fiveBand
     }
+
+    fun clear() {
+        sigFigBandOne = ""
+        sigFigBandTwo = ""
+        sigFigBandThree = ""
+        multiplierBand = ""
+    }
 }

@@ -278,6 +278,7 @@ class ValueToColorActivity : AppCompatActivity() {
         StateData.BUTTON_SELECTION_VTC.saveData(this, "${resistor.getNumberOfBands()}")
         resistanceTextView.text = getString(R.string.default_text)
         resistorImage.clearResistor(this)
+        resistor.clear()
         dropDownSetup() // resets dropdown and resistor info
         calculateButtonSetup()
     }
