@@ -27,6 +27,7 @@ Click [here](https://play.google.com/store/apps/details?id=com.brandoncano.resis
 | 2.2     | 1/20/23      | [Click to View Release Notes](#version-22)  |
 | 2.3     | 2/11/23      | [Click to View Release Notes](#version-23)  |
 | 2.4     | 3/19/23      | [Click to View Release Notes](#version-24)  |
+| 3.0     | 5/8/23       | [Click to View Release Notes](#version-30)  |
 
 ## Version 1.1
 
@@ -78,6 +79,16 @@ Changes:
 Bug Fixes:
  - Crash fix for Android 7.0/7.1 users 
 
-Current version of the app is `v2.4`.
+## Version 3.0
 
-As of 4/16/23 the app has a 4.5 star review and over 2000 downloads on the Google Play Store.
+UI updates:
+ - replaced bottom buttons with a bottom tabs
+ - small changes to the colors used within the app
+
+Bug Fixes:
+ - some values for CTV on five or six band resistors would not show the correct value
+ - after clearing selections sometimes sharing would still show the previously stored colors
+
+Current version of the app is `v3.0`.
+
+As of 5/8/23 the app has a 4.6 star review and over 3000 downloads on the Google Play Store.
