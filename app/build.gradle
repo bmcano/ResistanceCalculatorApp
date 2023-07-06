@@ -40,13 +40,13 @@ android {
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.10.1' // 6-29-23
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // 6-19-22
     implementation 'androidx.appcompat:appcompat:1.6.1' // 2-18-23
     implementation 'com.google.android.material:material:1.9.0' // 5-4-23
     implementation 'com.google.code.gson:gson:2.8.9' // 4-2-23
-    implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1'
-    implementation files('libs/ostermillerutils_1_07_00.jar')
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1' // 6-19-22
+    implementation files('libs/ostermillerutils_1_07_00.jar') // 6-19-22
+    testImplementation 'junit:junit:4.13.2' // 6-19-22
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5' // 1-4-23
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // 1-4-23
 }
