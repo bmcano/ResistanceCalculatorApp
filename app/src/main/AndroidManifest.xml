@@ -13,19 +13,19 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="s">
         <activity
-            android:name=".ColorToValueActivity"
+            android:name=".ui.ColorToValueActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ValueToColorActivity"
+            android:name=".ui.ValueToColorActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AboutActivity"
+            android:name=".ui.AboutActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator
+package com.brandoncano.resistancecalculator.ui
 
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
+import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**

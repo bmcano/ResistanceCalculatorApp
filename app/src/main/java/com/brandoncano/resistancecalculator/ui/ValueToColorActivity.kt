@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator
+package com.brandoncano.resistancecalculator.ui
 
 import android.content.Context
 import android.content.Intent
@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
