@@ -10,13 +10,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -25,7 +22,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults.centerAlignedTopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,8 +42,6 @@ import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.Screen
 import com.brandoncano.resistancecalculator.ui.theme.MangoPrimary
-import com.brandoncano.resistancecalculator.ui.theme.OrangePrimary
-import com.brandoncano.resistancecalculator.ui.theme.WhiteTheme
 
 /**
  * Job: Hold different compose components to be reused
@@ -56,13 +50,12 @@ import com.brandoncano.resistancecalculator.ui.theme.WhiteTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeAppBar(navController: NavController) {
-    val colors = centerAlignedTopAppBarColors(
-        containerColor = OrangePrimary,
-//        scrolledContainerColor = ,
-        navigationIconContentColor = WhiteTheme,
-        titleContentColor = WhiteTheme,
-        actionIconContentColor = WhiteTheme
-    )
+//    val colors = centerAlignedTopAppBarColors(
+//        containerColor = OrangePrimary,
+//        navigationIconContentColor = WhiteTheme,
+//        titleContentColor = WhiteTheme,
+//        actionIconContentColor = WhiteTheme
+//    )
     CenterAlignedTopAppBar(
         title = {
             Text(
