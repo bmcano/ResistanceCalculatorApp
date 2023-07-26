@@ -15,6 +15,7 @@ output.json
 *.iml
 .idea/
 app/.idea/
+app/release
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
