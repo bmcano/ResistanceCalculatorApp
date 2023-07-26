@@ -135,7 +135,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/description_text_one" />
 
             <Button
-                android:id="@+id/color_to_value_button"
+                android:id="@+id/rate_us_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -155,6 +155,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description_text_two" />
+
+            <Button
+                android:id="@+id/view_capacitor_app_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/outlined_box"
+                android:minWidth="320dp"
+                android:onClick="viewCapacitorApp"
+                android:text="@string/view_capacitor_app"
+                android:textAllCaps="false"
+                android:textColor="@color/white_theme"
+                android:textSize="14sp"
+                android:textStyle="bold|italic"
+                app:backgroundTint="@color/mango_primary"
+                app:icon="@drawable/ic_add_to_home_screen"
+                app:iconTint="@color/white_theme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rate_us_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
