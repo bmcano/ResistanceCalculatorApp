@@ -51,5 +51,7 @@
     <string name="dropdown_image_description">Color</string>
     <string name="home_app_icon_content_description">App icon</string>
     <string name="title_activity_app">AppActivity</string>
+    <string name="content_description_more">More</string>
+    <string name="content_right_arrow">Right arrow</string>
 
 </resources>

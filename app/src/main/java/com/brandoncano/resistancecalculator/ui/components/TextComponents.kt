@@ -3,43 +3,42 @@ package com.brandoncano.resistancecalculator.ui.components
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import com.brandoncano.resistancecalculator.ui.theme.ResistanceCalculatorTheme
 
 /**
- * Job: Holds all the design for text within the app
+ * Job: Holds all the designs for text within the app
  */
-
-@Composable
-fun TextTitle(
-    modifier: Modifier = Modifier,
-    text: String,
-) {
-    val textStyle = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.Medium,
-        fontSize = 32.sp,
-    )
-    AppText(modifier, text, textStyle)
-}
 
 @Composable
 fun TextHeadline(
     modifier: Modifier = Modifier,
     text: String,
 ) {
-    val textStyle = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.Medium,
-        fontSize = 20.sp,
-    )
+    val textStyle = MaterialTheme.typography.headlineSmall
+    AppText(modifier, text, textStyle)
+}
+
+@Composable
+fun TextTitle(
+    modifier: Modifier = Modifier,
+    text: String,
+) {
+    val textStyle = MaterialTheme.typography.titleMedium
+    AppText(modifier, text, textStyle)
+}
+
+@Composable
+fun TextLabel(
+    modifier: Modifier = Modifier,
+    text: String,
+) {
+    val textStyle = MaterialTheme.typography.labelMedium
     AppText(modifier, text, textStyle)
 }
 
@@ -48,16 +47,12 @@ fun TextBody(
     modifier: Modifier = Modifier,
     text: String,
 ) {
-    val textStyle = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-    )
+    val textStyle = MaterialTheme.typography.bodyMedium
     AppText(modifier, text, textStyle)
 }
 
 @Composable
-fun AppText(modifier: Modifier, text: String, textStyle: TextStyle) {
+private fun AppText(modifier: Modifier, text: String, textStyle: TextStyle) {
     Text(
         modifier = modifier,
         text = text,
@@ -71,8 +66,9 @@ fun AppText(modifier: Modifier, text: String, textStyle: TextStyle) {
 private fun TextComponentsPreview() {
     ResistanceCalculatorTheme {
         Column {
-            TextTitle(text = "Title")
             TextHeadline(text = "Headline")
+            TextTitle(text = "Title")
+            TextLabel(text = "Label")
             TextBody(text = "Body")
         }
     }

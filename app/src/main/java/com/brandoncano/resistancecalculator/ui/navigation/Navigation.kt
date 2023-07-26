@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui
+package com.brandoncano.resistancecalculator.ui.navigation
 
 import android.content.Context
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.brandoncano.resistancecalculator.ui.AppActivity
 import com.brandoncano.resistancecalculator.ui.screens.AboutScreen
 import com.brandoncano.resistancecalculator.ui.screens.HomeScreen
 
