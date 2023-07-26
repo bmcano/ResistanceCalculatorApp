@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens
 
 import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,11 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.ColorToValueActivity
-import com.brandoncano.resistancecalculator.ui.ValueToColorActivity
 import com.brandoncano.resistancecalculator.ui.components.ArrowButtonCard
 import com.brandoncano.resistancecalculator.ui.components.MenuAppBar
 import com.brandoncano.resistancecalculator.ui.navigation.Screen
