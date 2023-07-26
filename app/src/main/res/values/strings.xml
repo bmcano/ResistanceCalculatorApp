@@ -49,5 +49,7 @@
     <!-- Content descriptions -->
     <string name="popup_chart_content_description">Resistor chart</string>
     <string name="dropdown_image_description">Color</string>
+    <string name="home_app_icon_content_description">App icon</string>
+    <string name="title_activity_app">AppActivity</string>
 
 </resources>
