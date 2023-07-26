@@ -44,6 +44,7 @@
     <string name="description_one">In this app you can calculate the resistance of a resistor by entering its band colors or generating a resistor from a resistance value. Works for 4, 5, and 6 band resistors.</string>
     <string name="description_two">To see how values are calculated check under \"Show Chart\" found in the menu.</string>
     <string name="rate_us">Rate this app on Google Play</string>
+    <string name="view_capacitor_app">Check out our Capacitor app</string>
 
     <!-- Content descriptions -->
     <string name="popup_chart_content_description">Resistor chart</string>

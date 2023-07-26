@@ -36,7 +36,13 @@ class AboutActivity : AppCompatActivity() {
     fun easterEgg(view: View) = makeRandomResistorImage()
 
     fun rateApp(view: View) {
-        val uri = Uri.parse("https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator&pli=1")
+        val uri = Uri.parse("https://play.google.com/store/apps/details?id=com.brandoncano.capacitorcalculator")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
+    }
+
+    fun viewCapacitorApp(view: View) {
+        val uri = Uri.parse("https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator")
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
     }

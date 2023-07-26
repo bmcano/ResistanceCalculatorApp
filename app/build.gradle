@@ -10,8 +10,8 @@ android {
         applicationId "com.brandoncano.resistancecalculator"
         minSdk 24
         targetSdk 34
-        versionCode 10
-        versionName "3.1.0-Develop"
+        versionCode 11
+        versionName "3.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -20,7 +20,7 @@ android {
     }
     applicationVariants.all { variant ->
         variant.resValue "string", "version", variant.versionName
-        variant.resValue "string", "last_updated", "Last Updated On: 5/8/2023"
+        variant.resValue "string", "last_updated", "Last Updated On: 7/25/2023"
     }
     buildFeatures {
         compose true
