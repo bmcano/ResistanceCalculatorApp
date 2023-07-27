@@ -11,10 +11,13 @@ It can also work with three band resistor since the fourth band is tolerance and
 This app also has a few extra small features associated with it. The user can share their resistor values (or copy) and send to someone or themselves. The user can also 
 send feedback directly to my email that I had setup for this. The main thing is that they can popup a window that displays a chart to show what each color on the 
 specific bands represent and their numerical values associated with it.
+# 
+<a href="https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator" target="_blank">
+  <img alt="Get it on Google Play"
+       src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="60"/>
+</a>
 
-### Play Store and Releases
-
-Click [here](https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator) to view the Google Play store listing.
+### Play Store Releases
 
 | Version | Release Date | Release Summary                             |
 |---------|--------------|---------------------------------------------|
