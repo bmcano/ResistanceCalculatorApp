@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.brandoncano.resistancecalculator.ui.AppActivity
 import com.brandoncano.resistancecalculator.ui.screens.AboutScreen
+import com.brandoncano.resistancecalculator.ui.screens.ColorToValueScreen
 import com.brandoncano.resistancecalculator.ui.screens.HomeScreen
 
 @Composable
@@ -21,7 +22,7 @@ fun Navigation(context: Context) {
             HomeScreen(context, navController)
         }
         composable(route = Screen.ColorToValue.route) {
-
+            ColorToValueScreen(context, navController)
         }
         composable(route = Screen.ValueToColor.route) {
 
