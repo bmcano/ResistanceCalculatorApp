@@ -2,13 +2,16 @@ package com.brandoncano.resistancecalculator.ui.screens
 
 import android.content.Context
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.components.DropDownLists
 import com.brandoncano.resistancecalculator.ui.components.DefaultCard
@@ -31,10 +34,9 @@ private fun Content(context: Context, navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         DefaultCard {
-            OutlinedDropDownMenu(DropDownLists.numberItems)
-            OutlinedDropDownMenu(DropDownLists.numberItems)
-            OutlinedDropDownMenu(DropDownLists.numberItems)
-            OutlinedDropDownMenu(DropDownLists.numberItems)
+            OutlinedDropDownMenu("First Number", DropDownLists.numberItems)
+            OutlinedDropDownMenu("Second Number", DropDownLists.numberItems)
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

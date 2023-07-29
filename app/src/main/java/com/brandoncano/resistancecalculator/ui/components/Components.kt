@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropDownItem
+import com.brandoncano.resistancecalculator.ui.theme.Black
 import com.brandoncano.resistancecalculator.ui.theme.MangoPrimary
 
 /**
@@ -65,10 +66,11 @@ fun HomeScreenAppIcon() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OutlinedDropDownMenu(items: List<DropDownItem>) {
+fun OutlinedDropDownMenu(label: String, items: List<DropDownItem>) {
     val interactionSource = remember { MutableInteractionSource() }
     var expanded by remember { mutableStateOf(false) }
     var selectedText by remember { mutableStateOf("") }
+    var selectedIcon by remember { mutableStateOf(Black) }
     var textFieldSize by remember { mutableStateOf(Size.Zero) }
     val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
     LaunchedEffect(interactionSource) {
@@ -78,7 +80,7 @@ fun OutlinedDropDownMenu(items: List<DropDownItem>) {
             }
         }
     }
-    Column(Modifier.padding(16.dp)) {
+    Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)) {
         OutlinedTextField(
             value = selectedText,
             readOnly = true,
@@ -87,9 +89,16 @@ fun OutlinedDropDownMenu(items: List<DropDownItem>) {
                 .fillMaxSize()
                 .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
-            label = { Text("Label") },
+            label = { Text(label) },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.square_black),
+                    contentDescription = "Color",
+                    tint = selectedIcon
+                )
+            },
             trailingIcon = {
-                Icon(icon, "contentDescription", Modifier.clickable { expanded = !expanded })
+                Icon(icon, "", Modifier.clickable { expanded = !expanded })
             },
             interactionSource = interactionSource
         )
@@ -112,6 +121,7 @@ fun OutlinedDropDownMenu(items: List<DropDownItem>) {
                     text = { Text(it.name) },
                     onClick = {
                         selectedText = it.name
+                        selectedIcon = it.color
                         expanded = false
                     },
                 )
