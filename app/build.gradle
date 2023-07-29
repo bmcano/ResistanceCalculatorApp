@@ -11,7 +11,7 @@ android {
         minSdk 24
         targetSdk 34
         versionCode 11
-        versionName "3.0.1"
+        versionName "3.1.0-Develop"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -20,7 +20,7 @@ android {
     }
     applicationVariants.all { variant ->
         variant.resValue "string", "version", variant.versionName
-        variant.resValue "string", "last_updated", "Last Updated On: 7/25/2023"
+        variant.resValue "string", "last_updated", "7/28/2023"
     }
     buildFeatures {
         compose true

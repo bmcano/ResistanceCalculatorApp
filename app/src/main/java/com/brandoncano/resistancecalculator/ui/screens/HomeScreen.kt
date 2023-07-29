@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Square
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -40,7 +40,7 @@ fun HomeScreen(context: Context, navController: NavController) {
                 Spacer(modifier = Modifier.height(32.dp))
                 //HomeScreenAppIcon()
                 ArrowButtonCard(
-                    listOf(Icons.Filled.KeyboardArrowRight, Icons.Filled.KeyboardArrowRight),
+                    listOf(Icons.Filled.Square, Icons.Filled.Square),
                     listOf("Color to Value", "Value to Color"),
                     listOf(
                         { navController.navigate(Screen.ColorToValue.route) },
