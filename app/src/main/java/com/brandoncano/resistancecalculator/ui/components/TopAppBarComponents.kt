@@ -117,10 +117,37 @@ fun BottomShadow(alpha: Float = 0.1f, height: Dp = 4.dp) {
 }
 
 @Composable
+fun ShowChartMenuItem(interactionSource: MutableInteractionSource) {
+    DropdownMenuItem(
+        text = { TextBody(text = stringResource(R.string.menu_show_chart)) },
+        onClick = {  },
+        interactionSource = interactionSource,
+    )
+}
+
+@Composable
+fun ShareMenuItem(interactionSource: MutableInteractionSource) {
+    DropdownMenuItem(
+        text = { TextBody(text = stringResource(R.string.menu_share)) },
+        onClick = {  },
+        interactionSource = interactionSource,
+    )
+}
+
+@Composable
 fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
         text = { TextBody(text = stringResource(R.string.menu_feedback)) },
         onClick = { EmailFeedback.execute(context) },
+        interactionSource = interactionSource,
+    )
+}
+
+@Composable
+fun ClearSelectionsMenuItem(interactionSource: MutableInteractionSource) {
+    DropdownMenuItem(
+        text = { TextBody(text = stringResource(R.string.menu_clear_selections)) },
+        onClick = {  },
         interactionSource = interactionSource,
     )
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -40,7 +42,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropDownItem
-import com.brandoncano.resistancecalculator.ui.theme.Black
 import com.brandoncano.resistancecalculator.ui.theme.MangoPrimary
 
 /**
@@ -70,7 +71,7 @@ fun OutlinedDropDownMenu(label: String, items: List<DropDownItem>) {
     val interactionSource = remember { MutableInteractionSource() }
     var expanded by remember { mutableStateOf(false) }
     var selectedText by remember { mutableStateOf("") }
-    var selectedIcon by remember { mutableStateOf(Black) }
+    var selectedIcon: Color? by remember { mutableStateOf(null) }
     var textFieldSize by remember { mutableStateOf(Size.Zero) }
     val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
     LaunchedEffect(interactionSource) {
@@ -91,11 +92,13 @@ fun OutlinedDropDownMenu(label: String, items: List<DropDownItem>) {
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(label) },
             leadingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.square_black),
-                    contentDescription = "Color",
-                    tint = selectedIcon
-                )
+                if (selectedIcon != null) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.square_black),
+                        contentDescription = "Color",
+                        tint = selectedIcon as Color
+                    )
+                }
             },
             trailingIcon = {
                 Icon(icon, "", Modifier.clickable { expanded = !expanded })
@@ -127,5 +130,30 @@ fun OutlinedDropDownMenu(label: String, items: List<DropDownItem>) {
                 )
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun Resistor() {
+    Row(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Image(painter = painterResource(id = R.drawable.img_resistor_p1), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p2), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p3), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p4), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p5), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p6_7), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p6_7), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p8), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p9), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p10), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p11), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p12), contentDescription = null)
+        Image(painter = painterResource(id = R.drawable.img_resistor_p13), contentDescription = null)
     }
 }

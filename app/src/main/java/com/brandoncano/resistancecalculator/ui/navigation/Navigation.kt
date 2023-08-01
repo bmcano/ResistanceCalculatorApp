@@ -44,6 +44,14 @@ private fun HomePreview() {
 @Preview(uiMode = UI_MODE_NIGHT_NO)
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
+private fun ColorToValuePreview() {
+    val app = AppActivity()
+    ColorToValueScreen(app, NavController(app))
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_NO)
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
 private fun AboutPreview() {
     val app = AppActivity()
     AboutScreen(app)
