@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.ui
 
-import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
@@ -13,12 +12,18 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
+import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.resistor.Resistor
 import com.brandoncano.resistancecalculator.resistor.ResistorImage
-import com.brandoncano.resistancecalculator.util.*
+import com.brandoncano.resistancecalculator.util.ActivityNavigation
+import com.brandoncano.resistancecalculator.util.EmailFeedback
+import com.brandoncano.resistancecalculator.util.ResistanceFormatter
+import com.brandoncano.resistancecalculator.util.ShareResistance
+import com.brandoncano.resistancecalculator.util.ShowResistorChart
+import com.brandoncano.resistancecalculator.util.setBandColor
+import com.brandoncano.resistancecalculator.util.setDropDownDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 
@@ -63,30 +68,13 @@ class ColorToValueActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.value_to_color -> {
                 super.finish()
-                val intent = Intent(this, ValueToColorActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-                startActivity(intent)
+                ActivityNavigation.toValueToColor(this)
             }
-            R.id.show_resistor_charts -> {
-                ShowResistorChart.execute(this, resistor.getNumberOfBands())
-            }
-            R.id.share_item -> {
-                val intent = ShareResistance.execute(resistor, resistanceTextView)
-                startActivity(Intent.createChooser(intent, ""))
-            }
-            R.id.feedback -> {
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = EmailFeedback.execute()
-                startActivity(intent)
-            }
-            R.id.clear_selections -> {
-                reset()
-            }
-            R.id.about_item -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-                startActivity(intent)
-            }
+            R.id.show_resistor_charts -> ShowResistorChart.execute(this, resistor.getNumberOfBands())
+            R.id.share_item -> ShareResistance.execute(this, resistor, resistanceTextView)
+            R.id.feedback -> EmailFeedback.execute(this)
+            R.id.clear_selections -> reset()
+            R.id.about_item -> ActivityNavigation.toAbout(this)
         }
         return super.onOptionsItemSelected(item)
     }

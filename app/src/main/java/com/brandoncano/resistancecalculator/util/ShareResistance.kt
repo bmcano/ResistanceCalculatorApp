@@ -1,7 +1,9 @@
 package com.brandoncano.resistancecalculator.util
 
+import android.content.Context
 import android.content.Intent
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import com.brandoncano.resistancecalculator.resistor.Resistor
 
 /**
@@ -9,11 +11,11 @@ import com.brandoncano.resistancecalculator.resistor.Resistor
  */
 object ShareResistance {
 
-    fun execute(resistor: Resistor, resistance: TextView, isVtC: Boolean = false): Intent {
+    fun execute(context: Context, resistor: Resistor, resistance: TextView, isVtC: Boolean = false) {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
         val text = "${resistance.text}\n" + resistor.toColorBandString(isVtC)
         intent.putExtra(Intent.EXTRA_TEXT, text)
-        return intent
+        startActivity(context, Intent.createChooser(intent, ""), null)
     }
 }
