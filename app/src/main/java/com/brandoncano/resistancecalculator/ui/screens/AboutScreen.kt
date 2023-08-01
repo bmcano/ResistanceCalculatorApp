@@ -42,7 +42,7 @@ private fun Content(context: Context) {
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TitleAppBar(stringResource(R.string.about))
+        TitleAppBar(stringResource(R.string.menu_about))
         val textModifierBody = Modifier
             .align(Alignment.CenterHorizontally)
             .padding(start = 16.dp, end = 16.dp)

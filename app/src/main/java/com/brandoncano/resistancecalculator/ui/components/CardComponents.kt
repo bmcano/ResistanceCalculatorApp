@@ -57,7 +57,7 @@ fun DefaultCard(
 
 @Composable
 fun ArrowButtonCard(
-    imageVector: ImageVector,
+    imageVector: ImageVector? = null,
     cardText: String,
     onClick: (() -> Unit),
 ) {
@@ -72,7 +72,7 @@ fun ArrowButtonCard(
 
 @Composable
 fun ArrowButtonCard(
-    imageVectors: List<ImageVector>,
+    imageVectors: List<ImageVector?>,
     cardTexts: List<String>,
     onClicks: List<(() -> Unit)>,
 ) {
@@ -94,19 +94,21 @@ fun ArrowButtonCard(
 @Composable
 private fun CardRowView(
     onClick: (() -> Unit),
-    imageVector: ImageVector,
+    imageVector: ImageVector?,
     cardText: String,
 ) {
     Row(
         modifier = Modifier.clickable(role = Role.Button, onClick = onClick),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Image(
-            modifier = Modifier.padding(16.dp),
-            imageVector = imageVector,
-            contentDescription = null,
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
-        )
+        if (imageVector != null) {
+            Image(
+                modifier = Modifier.padding(16.dp),
+                imageVector = imageVector,
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
+            )
+        }
         Text(
             modifier = Modifier
                 .padding(16.dp)

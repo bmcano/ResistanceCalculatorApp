@@ -74,11 +74,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 val intent = ShareResistance.execute(resistor, resistanceTextView)
                 startActivity(Intent.createChooser(intent, ""))
             }
-            R.id.feedback -> {
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = EmailFeedback.execute()
-                startActivity(intent)
-            }
+            R.id.feedback -> EmailFeedback.execute(this)
             R.id.clear_selections -> {
                 reset()
             }
