@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.ui
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -9,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
@@ -24,6 +22,7 @@ import com.brandoncano.resistancecalculator.util.ShareResistance
 import com.brandoncano.resistancecalculator.util.ShowResistorChart
 import com.brandoncano.resistancecalculator.util.setBandColor
 import com.brandoncano.resistancecalculator.util.setDropDownDrawable
+import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 
@@ -41,14 +40,7 @@ class ColorToValueActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_to_value)
-
-        val actionBar: ActionBar? = supportActionBar
-        if (actionBar != null) {
-            val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
-            actionBar.setBackgroundDrawable(colorDrawable)
-            actionBar.title = getString(R.string.color_to_value)
-            actionBar.elevation = 4F
-        }
+        setupActionBar(R.string.color_to_value)
     }
 
     override fun onResume() {

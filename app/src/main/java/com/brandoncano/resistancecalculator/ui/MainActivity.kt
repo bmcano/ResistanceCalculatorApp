@@ -1,17 +1,16 @@
 package com.brandoncano.resistancecalculator.ui
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.util.ActivityNavigation
 import com.brandoncano.resistancecalculator.util.EmailFeedback
+import com.brandoncano.resistancecalculator.util.setupActionBar
 
 /**
  * Job: Activity for starting screen of the app.
@@ -21,14 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val actionBar: ActionBar? = supportActionBar
-        if (actionBar != null) {
-            val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
-            actionBar.setBackgroundDrawable(colorDrawable)
-            actionBar.title = getString(R.string.app_name)
-            actionBar.elevation = 4F
-        }
+        setupActionBar(R.string.app_name)
     }
 
     override fun onResume() {

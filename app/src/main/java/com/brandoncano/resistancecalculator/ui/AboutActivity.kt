@@ -1,16 +1,15 @@
 package com.brandoncano.resistancecalculator.ui
 
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.util.ColorFinder
+import com.brandoncano.resistancecalculator.util.setupActionBar
 
 /**
  * Job: Activity for about page of the app.
@@ -21,15 +20,7 @@ class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-
-        val actionBar: ActionBar? = supportActionBar
-        if (actionBar != null) {
-            val colorDrawable = ColorDrawable(getColor(R.color.orange_primary))
-            actionBar.setBackgroundDrawable(colorDrawable)
-            actionBar.title = getString(R.string.about)
-            actionBar.elevation = 4F
-        }
-
+        setupActionBar(R.string.about)
         makeRandomResistorImage()
     }
 
