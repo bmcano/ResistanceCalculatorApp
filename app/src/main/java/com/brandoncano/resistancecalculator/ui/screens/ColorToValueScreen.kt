@@ -5,7 +5,9 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
@@ -27,6 +29,7 @@ import com.brandoncano.resistancecalculator.ui.components.OutlinedDropDownMenu
 import com.brandoncano.resistancecalculator.ui.components.Resistor
 import com.brandoncano.resistancecalculator.ui.components.ShareMenuItem
 import com.brandoncano.resistancecalculator.ui.components.ShowChartMenuItem
+import com.brandoncano.resistancecalculator.ui.components.TextResistance
 import com.brandoncano.resistancecalculator.ui.theme.ResistanceCalculatorTheme
 
 @Composable
@@ -69,10 +72,16 @@ private fun Content(context: Context, navController: NavController) {
 
         DefaultCard {
             Resistor()
-            // resistance text
+            TextResistance(
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                    .fillMaxWidth(),
+                text = "Select Color",
+            )
             Spacer(modifier = Modifier.height(16.dp))
         }
 
-        // bottom navigation
+        // bottom navigation - for reference
+        // https://github.com/stevdza-san/BottomNavBarDemo/tree/master/app/src/main/java/com/example/bottomnavbardemo
     }
 }

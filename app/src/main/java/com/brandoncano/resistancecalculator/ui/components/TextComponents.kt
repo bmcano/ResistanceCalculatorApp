@@ -8,12 +8,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.brandoncano.resistancecalculator.ui.theme.ResistanceCalculatorTheme
 
 /**
  * Job: Holds all the designs for text within the app
  */
+
+@Composable
+fun TextResistance(
+    modifier: Modifier = Modifier,
+    text: String,
+) {
+    val textStyle = MaterialTheme.typography.headlineMedium
+    val textAlign = TextAlign.Center
+    AppText(modifier, text, textStyle, textAlign)
+}
 
 @Composable
 fun TextHeadline(
@@ -52,11 +63,12 @@ fun TextBody(
 }
 
 @Composable
-private fun AppText(modifier: Modifier, text: String, textStyle: TextStyle) {
+private fun AppText(modifier: Modifier, text: String, textStyle: TextStyle, textAlign: TextAlign? = null) {
     Text(
         modifier = modifier,
         text = text,
         style = textStyle,
+        textAlign = textAlign
     )
 }
 
