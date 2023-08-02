@@ -94,11 +94,11 @@ Bug Fixes:
  - some values for CTV on five or six band resistors would not show the correct value
  - after clearing selections sometimes sharing would still show the previously stored colors
 
-# Version 3.0.1
+## Version 3.0.1
  - added a button to link to my capacitor app
  - targeted android 14
 
-# Version 3.0.2
+## Version 3.0.2
  - buttons to link to play store were swaped
 
 Current version of the app is `v3.0.2`.
