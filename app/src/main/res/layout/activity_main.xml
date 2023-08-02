@@ -23,20 +23,21 @@
 
     <Button
         android:id="@+id/color_to_value_button"
-        style="@style/calculatorButtonSelectionDesign"
+        style="@style/rcvButtonDesign"
+        android:layout_marginTop="32dp"
         android:text="@string/color_to_value_btn"
         app:backgroundTint="@color/mango_primary"
-        app:layout_constraintEnd_toStartOf="@+id/value_to_color_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circular_app_icon_main_activity" />
 
     <Button
         android:id="@+id/value_to_color_button"
-        style="@style/calculatorButtonSelectionDesign"
+        style="@style/rcvButtonDesign"
         android:text="@string/value_to_color_btn"
         app:backgroundTint="@color/mango_primary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/color_to_value_button"
-        app:layout_constraintTop_toBottomOf="@+id/circular_app_icon_main_activity" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/color_to_value_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
