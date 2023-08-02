@@ -20,7 +20,6 @@
     <!-- Menu items -->
     <string name="value_to_color">Value to Color</string>
     <string name="color_to_value">Color to Value</string>
-    <string name="show_chart">Show Chart</string>
     <string name="clear_selections">Clear Selections</string>
     <string name="share">Share</string>
     <string name="feedback_tab">Feedback</string>
@@ -48,7 +47,6 @@
     <string name="view_capacitor_app">Check out our Capacitor app</string>
 
     <!-- Content descriptions -->
-    <string name="popup_chart_content_description">Resistor chart</string>
     <string name="dropdown_image_description">Color</string>
     <string name="home_app_icon_content_description">App icon</string>
 

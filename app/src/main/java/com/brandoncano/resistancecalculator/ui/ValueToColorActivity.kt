@@ -26,7 +26,6 @@ import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.IsValidResistance
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
 import com.brandoncano.resistancecalculator.util.ShareResistance
-import com.brandoncano.resistancecalculator.util.ShowResistorChart
 import com.brandoncano.resistancecalculator.util.setDropDownDrawable
 import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -70,7 +69,6 @@ class ValueToColorActivity : AppCompatActivity() {
                 super.finish()
                 ActivityNavigation.toColorToValue(this)
             }
-            R.id.show_resistor_charts -> ShowResistorChart.execute(this, resistor.getNumberOfBands())
             R.id.share_item -> ShareResistance.execute(this, resistor, resistanceTextView, true)
             R.id.feedback -> EmailFeedback.execute(this)
             R.id.clear_selections -> reset()
