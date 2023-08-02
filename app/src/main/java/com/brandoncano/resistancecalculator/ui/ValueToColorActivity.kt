@@ -194,6 +194,7 @@ class ValueToColorActivity : AppCompatActivity() {
         calculateButton.setOnClickListener {
             updateResistorAndText()
             closeKeyboard()
+            textInputLayout.clearFocus()
         }
     }
 
