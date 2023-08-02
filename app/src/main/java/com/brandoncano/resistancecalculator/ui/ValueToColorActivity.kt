@@ -165,20 +165,13 @@ class ValueToColorActivity : AppCompatActivity() {
 
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_vtc)
-        when (StateData.BUTTON_SELECTION_VTC.loadData(this)) {
-            "4" -> {
-                bottomNavigationView.selectedItemId = R.id.selected_four_nav
-                updateNavigationSelection(4)
-            }
-            "5" -> {
-                bottomNavigationView.selectedItemId = R.id.selected_five_nav
-                updateNavigationSelection(5)
-            }
-            "6" -> {
-                bottomNavigationView.selectedItemId = R.id.selected_six_nav
-                updateNavigationSelection(6)
-            }
+        val buttonSelection = StateData.BUTTON_SELECTION_VTC.loadData(this)
+        when (buttonSelection) {
+            "4" -> bottomNavigationView.selectedItemId = R.id.selected_four_nav
+            "5" -> bottomNavigationView.selectedItemId = R.id.selected_five_nav
+            "6" -> bottomNavigationView.selectedItemId = R.id.selected_six_nav
         }
+        updateNavigationSelection(buttonSelection.toInt())
 
         resistor.resistance = StateData.USER_INPUT_VTC.loadData(this)
         // crash fix - leaving this activity with invalid input would cause a crash

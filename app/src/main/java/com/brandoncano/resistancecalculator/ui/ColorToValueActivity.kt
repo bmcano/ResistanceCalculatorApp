@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
+import com.brandoncano.resistancecalculator.components.SpinnerItem
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.resistor.Resistor
 import com.brandoncano.resistancecalculator.resistor.ResistorImage
@@ -103,97 +104,73 @@ class ColorToValueActivity : AppCompatActivity() {
         resistor.toleranceBand = StateData.TOLERANCE_BAND_CTV.loadData(this)
         resistor.ppmBand = StateData.PPM_BAND_CTV.loadData(this)
 
-        dropDownBand1.setText(resistor.sigFigBandOne)
-        dropDownBand2.setText(resistor.sigFigBandTwo)
-        dropDownBand3.setText(resistor.sigFigBandThree)
-        dropDownMultiplier.setText(resistor.multiplierBand)
-        dropDownTolerance.setText(resistor.toleranceBand)
-        dropDownPPM.setText(resistor.ppmBand)
+        dropDownBand1.onItemClickListener = dropDownOnClickListener(
+            dropDownBand1, SpinnerArrays.numberArray,
+            resistor.sigFigBandOne, resistorImage.band1, StateData.SIGFIG_BAND_ONE_CTV
+        )
 
-        dropDownBand1.setDropDownDrawable(resistor.sigFigBandOne)
-        dropDownBand2.setDropDownDrawable(resistor.sigFigBandTwo)
-        dropDownBand3.setDropDownDrawable(resistor.sigFigBandThree)
-        dropDownMultiplier.setDropDownDrawable(resistor.multiplierBand)
-        dropDownTolerance.setDropDownDrawable(resistor.toleranceBand)
-        dropDownPPM.setDropDownDrawable(resistor.ppmBand)
+        dropDownBand2.onItemClickListener = dropDownOnClickListener(
+            dropDownBand2, SpinnerArrays.numberArray,
+            resistor.sigFigBandTwo, resistorImage.band2, StateData.SIGFIG_BAND_TWO_CTV
+        )
 
-        val numberAdapter = ImageTextArrayAdapter(this, SpinnerArrays.numberArray)
-        val multiplierAdapter = ImageTextArrayAdapter(this, SpinnerArrays.multiplierArray)
-        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerArrays.getToleranceArray())
-        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerArrays.getPpmArray())
+        dropDownBand3.onItemClickListener = dropDownOnClickListener(
+            dropDownBand3, SpinnerArrays.numberArray,
+            resistor.sigFigBandThree, resistorImage.band3, StateData.SIGFIG_BAND_THREE_CTV
+        )
 
-        dropDownBand1.setAdapter(numberAdapter)
-        dropDownBand2.setAdapter(numberAdapter)
-        dropDownBand3.setAdapter(numberAdapter)
-        dropDownMultiplier.setAdapter(multiplierAdapter)
-        dropDownTolerance.setAdapter(toleranceAdapter)
-        dropDownPPM.setAdapter(ppmAdapter)
+        dropDownMultiplier.onItemClickListener = dropDownOnClickListener(
+            dropDownMultiplier, SpinnerArrays.multiplierArray,
+            resistor.multiplierBand, resistorImage.band4, StateData.MULTIPLIER_BAND_CTV
+        )
 
-        dropDownBand1.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                resistor.sigFigBandOne = dropDownBand1.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownBand1, resistor.sigFigBandOne, resistorImage.band1)
-                StateData.SIGFIG_BAND_ONE_CTV.saveData(this, dropDownBand1.text.toString())
-                dropDownBand1.clearFocus()
-            }
+        dropDownTolerance.onItemClickListener = dropDownOnClickListener(
+            dropDownTolerance, SpinnerArrays.getToleranceArray(),
+            resistor.toleranceBand, resistorImage.band5, StateData.TOLERANCE_BAND_CTV
+        )
 
-        dropDownBand2.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                resistor.sigFigBandTwo = dropDownBand2.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownBand2, resistor.sigFigBandTwo, resistorImage.band2)
-                StateData.SIGFIG_BAND_TWO_CTV.saveData(this, dropDownBand2.text.toString())
-                dropDownBand2.clearFocus()
-            }
+        dropDownPPM.onItemClickListener = dropDownOnClickListener(
+            dropDownPPM, SpinnerArrays.getPpmArray(),
+            resistor.ppmBand, resistorImage.band6, StateData.PPM_BAND_CTV
+        )
+    }
 
-        dropDownBand3.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                resistor.sigFigBandThree = dropDownBand3.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownBand3, resistor.sigFigBandThree, resistorImage.band3)
-                StateData.SIGFIG_BAND_THREE_CTV.saveData(this, dropDownBand3.text.toString())
-                dropDownBand3.clearFocus()
-            }
-
-        dropDownMultiplier.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                resistor.multiplierBand = dropDownMultiplier.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownMultiplier, resistor.multiplierBand, resistorImage.band4)
-                StateData.MULTIPLIER_BAND_CTV.saveData(this, dropDownMultiplier.text.toString())
-                dropDownMultiplier.clearFocus()
-            }
-
-        dropDownTolerance.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                resistor.toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownTolerance, resistor.toleranceBand, resistorImage.band5)
-                StateData.TOLERANCE_BAND_CTV.saveData(this, dropDownTolerance.text.toString())
-                dropDownTolerance.clearFocus()
-            }
-
-        dropDownPPM.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                resistor.ppmBand = dropDownPPM.adapter.getItem(position).toString()
-                updateDropDownSelection(dropDownPPM, resistor.ppmBand, resistorImage.band6)
-                StateData.PPM_BAND_CTV.saveData(this, dropDownPPM.text.toString())
-                dropDownPPM.clearFocus()
+    private fun dropDownOnClickListener(
+        dropDown: AutoCompleteTextView,
+        spinnerItemArray: Array<SpinnerItem>,
+        dropDownBand: String,
+        dropDownImage: ImageView,
+        stateData: StateData
+    ): AdapterView.OnItemClickListener {
+        dropDown.setText(dropDownBand)
+        dropDown.setDropDownDrawable(dropDownBand)
+        val adapter = ImageTextArrayAdapter(this, spinnerItemArray)
+        dropDown.setAdapter(adapter)
+        return AdapterView.OnItemClickListener { _, _, position, _ ->
+                val selection = dropDown.adapter.getItem(position).toString()
+                when (dropDownImage) {
+                    resistorImage.band1 -> resistor.sigFigBandOne = selection
+                    resistorImage.band2 -> resistor.sigFigBandTwo = selection
+                    resistorImage.band3 -> resistor.sigFigBandThree = selection
+                    resistorImage.band4 -> resistor.multiplierBand = selection
+                    resistorImage.band5 -> resistor.toleranceBand = selection
+                    resistorImage.band6 -> resistor.ppmBand = selection
+                }
+                updateDropDownSelection(dropDown, selection, dropDownImage)
+                stateData.saveData(this, dropDown.text.toString())
+                dropDown.clearFocus()
             }
     }
 
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_ctv)
-        when (StateData.BUTTON_SELECTION_CTV.loadData(this)) {
-            "4" -> {
-                bottomNavigationView.selectedItemId = R.id.selected_four_nav
-                updateNavigationSelection(4)
-            }
-            "5" -> {
-                bottomNavigationView.selectedItemId = R.id.selected_five_nav
-                updateNavigationSelection(5)
-            }
-            "6" -> {
-                bottomNavigationView.selectedItemId = R.id.selected_six_nav
-                updateNavigationSelection(6)
-            }
+        val buttonSelection = StateData.BUTTON_SELECTION_CTV.loadData(this)
+        when (buttonSelection) {
+            "4" -> bottomNavigationView.selectedItemId = R.id.selected_four_nav
+            "5" -> bottomNavigationView.selectedItemId = R.id.selected_five_nav
+            "6" -> bottomNavigationView.selectedItemId = R.id.selected_six_nav
         }
+        updateNavigationSelection(buttonSelection.toInt())
 
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
