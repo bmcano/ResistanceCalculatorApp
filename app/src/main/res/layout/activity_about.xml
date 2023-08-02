@@ -13,7 +13,6 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toTopOf="@+id/last_updated_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,12 +23,9 @@
 
             <TextView
                 android:id="@+id/app_name_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                style="@style/aboutPageTextDesign"
                 android:text="@string/app_name"
-                android:textColor="?android:textColor"
-                android:textSize="30sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,15 +33,9 @@
 
             <TextView
                 android:id="@+id/app_version_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                style="@style/aboutPageTextDesign"
                 android:text="@string/app_version"
-                android:textAlignment="center"
-                android:textColor="?android:textColor"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,29 +43,19 @@
 
             <TextView
                 android:id="@+id/version_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="easterEgg"
+                style="@style/aboutPageTextDesign"
+                android:layout_marginTop="0dp"
                 android:text="@string/version"
-                android:textAlignment="center"
-                android:textColor="?android:textColor"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/app_version_text"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:layout_constraintTop_toBottomOf="@+id/app_version_text" />
 
             <TextView
                 android:id="@+id/created_by_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                style="@style/aboutPageTextDesign"
                 android:text="@string/created_by"
-                android:textAlignment="center"
-                android:textColor="?android:textColor"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,53 +63,55 @@
 
             <TextView
                 android:id="@+id/author_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/aboutPageTextDesign"
+                android:layout_marginTop="0dp"
                 android:text="@string/author"
-                android:textAlignment="center"
-                android:textColor="?android:textColor"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/created_by_text" />
 
-            <include
-                android:id="@+id/resistor"
-                layout="@layout/resistor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+            <TextView
+                android:id="@+id/last_updated_on_text"
+                style="@style/aboutPageTextDesign"
+                android:text="@string/last_updated_on"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/author_text" />
 
             <TextView
-                android:id="@+id/description_text_one"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:padding="16dp"
-                android:text="@string/description_one"
-                android:textAlignment="textStart"
-                android:textColor="?android:textColor"
-                android:textSize="16sp"
+                android:id="@+id/last_updated_text"
+                style="@style/aboutPageTextDesign"
+                android:layout_marginTop="0dp"
+                android:text="@string/last_updated"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/resistor"
+                app:layout_constraintTop_toBottomOf="@+id/last_updated_on_text" />
+
+            <TextView
+                android:id="@+id/description_text_one"
+                style="@style/aboutPageTextDesign"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/description_one"
+                android:textAlignment="textStart"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/last_updated_text"
                 tools:ignore="VisualLintLongText" />
 
             <TextView
                 android:id="@+id/description_text_two"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:padding="16dp"
+                style="@style/aboutPageTextDesign"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 android:text="@string/description_two"
                 android:textAlignment="textStart"
-                android:textColor="?android:textColor"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description_text_one" />
@@ -137,6 +119,7 @@
             <Button
                 android:id="@+id/rate_us_button"
                 style="@style/rcvButtonDesign"
+                android:layout_marginTop="32dp"
                 android:onClick="rateApp"
                 android:text="@string/rate_us"
                 app:backgroundTint="@color/mango_primary"
@@ -161,33 +144,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:background="?android:textColor"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/last_updated_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/last_updated_text"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/last_updated"
-        android:textAlignment="center"
-        android:textColor="?android:textColor"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

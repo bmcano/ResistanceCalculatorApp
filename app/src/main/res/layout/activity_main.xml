@@ -16,10 +16,11 @@
         android:elevation="4dp"
         android:padding="2dp"
         android:src="@mipmap/ic_launcher_round"
+        android:contentDescription="@string/home_app_icon_content_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription,ImageContrastCheck" />
+        tools:ignore="ImageContrastCheck" />
 
     <Button
         android:id="@+id/color_to_value_button"

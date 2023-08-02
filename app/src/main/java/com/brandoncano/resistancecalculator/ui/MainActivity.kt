@@ -25,8 +25,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        layoutSetup()
-        buttonSetup()
+        // if using android 7.1 or lower, then hide the app icon to prevent crashing
+        val appIconImageView: ImageView = findViewById(R.id.circular_app_icon_main_activity)
+        if (android.os.Build.VERSION.SDK_INT < 26) {
+            appIconImageView.visibility = View.GONE
+        }
+
+        val colorToValueButton: Button = findViewById(R.id.color_to_value_button)
+        val valueToColorButton: Button = findViewById(R.id.value_to_color_button)
+        colorToValueButton.setOnClickListener { ActivityNavigation.toColorToValue(this) }
+        valueToColorButton.setOnClickListener { ActivityNavigation.toValueToColor(this) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -41,20 +49,5 @@ class MainActivity : AppCompatActivity() {
             R.id.about_item -> ActivityNavigation.toAbout(this)
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun layoutSetup() {
-        val appIconImageView: ImageView = findViewById(R.id.circular_app_icon_main_activity)
-        // if user is using android 7.1 or lower, then we hide the app icon to prevent crashing
-        if (android.os.Build.VERSION.SDK_INT < 26) {
-            appIconImageView.visibility = View.GONE
-        }
-    }
-
-    private fun buttonSetup() {
-        val colorToValueButton: Button = findViewById(R.id.color_to_value_button)
-        val valueToColorButton: Button = findViewById(R.id.value_to_color_button)
-        colorToValueButton.setOnClickListener { ActivityNavigation.toColorToValue(this) }
-        valueToColorButton.setOnClickListener { ActivityNavigation.toValueToColor(this) }
     }
 }
