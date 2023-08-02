@@ -31,6 +31,8 @@ specific bands represent and their numerical values associated with it.
 | 2.3     | 2/11/23      | [Click to View Release Notes](#version-23)  |
 | 2.4     | 3/19/23      | [Click to View Release Notes](#version-24)  |
 | 3.0     | 5/8/23       | [Click to View Release Notes](#version-30)  |
+| 3.0.1   | 7/28/23      | [Click to View Release Notes](#version-301) | 
+| 3.0.2   | 7/31/23      | [Click to View Release Notes](#version-302) | 
 
 ## Version 1.1
 
@@ -92,6 +94,13 @@ Bug Fixes:
  - some values for CTV on five or six band resistors would not show the correct value
  - after clearing selections sometimes sharing would still show the previously stored colors
 
-Current version of the app is `v3.0`.
+# Version 3.0.1
+ - added a button to link to my capacitor app
+ - targeted android 14
 
-As of 5/8/23 the app has a 4.6 star review and over 3000 downloads on the Google Play Store.
+# Version 3.0.2
+ - buttons to link to play store were swaped
+
+Current version of the app is `v3.0.2`.
+
+As of 8/2/23 the app has a 4.5 star review and over 10000 downloads on the Google Play Store.
