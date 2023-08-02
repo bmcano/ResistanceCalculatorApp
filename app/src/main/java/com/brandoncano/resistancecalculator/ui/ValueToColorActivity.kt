@@ -15,18 +15,18 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
 import com.brandoncano.resistancecalculator.components.SpinnerItem
+import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.resistor.Resistor
-import com.brandoncano.resistancecalculator.resistor.ResistorImage
 import com.brandoncano.resistancecalculator.util.ActivityNavigation
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.IsValidResistance
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
 import com.brandoncano.resistancecalculator.util.ShareResistance
 import com.brandoncano.resistancecalculator.util.setDropDownDrawable
+import com.brandoncano.resistancecalculator.util.createResistorImage
 import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
@@ -40,7 +40,7 @@ class ValueToColorActivity : AppCompatActivity() {
     private lateinit var inputResistance: EditText
     private lateinit var toggleDropDownPPM: TextInputLayout
     private lateinit var textInputLayout: TextInputLayout
-    private lateinit var resistorImage: ResistorImage
+    private val resistorImage by lazy { createResistorImage() }
     private val resistor: Resistor = Resistor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,15 +80,6 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun generalSetup() {
         resistanceTextView = findViewById(R.id.display_resistance)
         toggleDropDownPPM = findViewById(R.id.dropDownSelectorPPM)
-        resistorImage = ResistorImage(
-            findViewById(R.id.r_p2_band1),
-            findViewById(R.id.r_p4_band2),
-            findViewById(R.id.r_p6_band3),
-            findViewById(R.id.r_p8_band4),
-            findViewById(R.id.r_p10_band5),
-            findViewById(R.id.r_p12_band6)
-        )
-
         resistanceTextView.text = StateData.RESISTANCE_VTC.loadData(this)
         if (resistanceTextView.text.isEmpty()) {
             resistanceTextView.text = getString(R.string.enter_value)

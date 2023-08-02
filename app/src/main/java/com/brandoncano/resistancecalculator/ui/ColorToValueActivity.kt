@@ -15,13 +15,13 @@ import com.brandoncano.resistancecalculator.components.SpinnerArrays
 import com.brandoncano.resistancecalculator.components.SpinnerItem
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.resistor.Resistor
-import com.brandoncano.resistancecalculator.resistor.ResistorImage
 import com.brandoncano.resistancecalculator.util.ActivityNavigation
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
 import com.brandoncano.resistancecalculator.util.ShareResistance
 import com.brandoncano.resistancecalculator.util.setBandColor
 import com.brandoncano.resistancecalculator.util.setDropDownDrawable
+import com.brandoncano.resistancecalculator.util.createResistorImage
 import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
@@ -34,7 +34,7 @@ class ColorToValueActivity : AppCompatActivity() {
     private lateinit var resistanceTextView: TextView
     private lateinit var toggleDropDownThree: TextInputLayout
     private lateinit var toggleDropDownPPM: TextInputLayout
-    private lateinit var resistorImage: ResistorImage
+    private val resistorImage by lazy { createResistorImage() }
     private val resistor: Resistor = Resistor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,15 +74,6 @@ class ColorToValueActivity : AppCompatActivity() {
         resistanceTextView = findViewById(R.id.resistance_display_ctv)
         toggleDropDownThree = findViewById(R.id.dropDownSelector3)
         toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
-        resistorImage = ResistorImage(
-            findViewById(R.id.r_p2_band1),
-            findViewById(R.id.r_p4_band2),
-            findViewById(R.id.r_p6_band3),
-            findViewById(R.id.r_p8_band4),
-            findViewById(R.id.r_p10_band5),
-            findViewById(R.id.r_p12_band6)
-        )
-
         resistanceTextView.text = StateData.RESISTANCE_CTV.loadData(this)
         if (resistanceTextView.text.isEmpty()) {
             resistanceTextView.text = getString(R.string.default_text)
@@ -97,12 +88,7 @@ class ColorToValueActivity : AppCompatActivity() {
         val dropDownTolerance: AutoCompleteTextView = findViewById(R.id.spinner5)
         val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinner6)
 
-        resistor.sigFigBandOne = StateData.SIGFIG_BAND_ONE_CTV.loadData(this)
-        resistor.sigFigBandTwo = StateData.SIGFIG_BAND_TWO_CTV.loadData(this)
-        resistor.sigFigBandThree = StateData.SIGFIG_BAND_THREE_CTV.loadData(this)
-        resistor.multiplierBand = StateData.MULTIPLIER_BAND_CTV.loadData(this)
-        resistor.toleranceBand = StateData.TOLERANCE_BAND_CTV.loadData(this)
-        resistor.ppmBand = StateData.PPM_BAND_CTV.loadData(this)
+        resistor.loadData(this)
 
         dropDownBand1.onItemClickListener = dropDownOnClickListener(
             dropDownBand1, SpinnerArrays.numberArray,
@@ -186,20 +172,8 @@ class ColorToValueActivity : AppCompatActivity() {
     private fun updateNavigationSelection(numberOfBands: Int) {
         resistor.setNumberOfBands(numberOfBands)
         resistorImage.setImageColors(this, resistor)
-        when (numberOfBands) {
-            4 -> {
-                toggleDropDownThree.visibility = View.GONE
-                toggleDropDownPPM.visibility = View.GONE
-            }
-            5 -> {
-                toggleDropDownThree.visibility = View.VISIBLE
-                toggleDropDownPPM.visibility = View.GONE
-            }
-            6 -> {
-                toggleDropDownThree.visibility = View.VISIBLE
-                toggleDropDownPPM.visibility = View.VISIBLE
-            }
-        }
+        toggleDropDownThree.visibility = if (numberOfBands == 4) View.GONE else View.VISIBLE
+        toggleDropDownPPM.visibility = if (numberOfBands == 6) View.VISIBLE else View.GONE
         StateData.BUTTON_SELECTION_CTV.saveData(this, "$numberOfBands")
         updateResistance()
     }
