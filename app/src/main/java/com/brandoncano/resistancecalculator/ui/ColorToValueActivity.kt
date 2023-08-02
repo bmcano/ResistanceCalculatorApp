@@ -121,8 +121,8 @@ class ColorToValueActivity : AppCompatActivity() {
 
         val numberAdapter = ImageTextArrayAdapter(this, SpinnerArrays.numberArray)
         val multiplierAdapter = ImageTextArrayAdapter(this, SpinnerArrays.multiplierArray)
-        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerArrays.toleranceArray)
-        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerArrays.ppmArray)
+        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerArrays.getToleranceArray())
+        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerArrays.getPpmArray())
 
         dropDownBand1.setAdapter(numberAdapter)
         dropDownBand2.setAdapter(numberAdapter)
@@ -136,6 +136,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 resistor.sigFigBandOne = dropDownBand1.adapter.getItem(position).toString()
                 updateDropDownSelection(dropDownBand1, resistor.sigFigBandOne, resistorImage.band1)
                 StateData.SIGFIG_BAND_ONE_CTV.saveData(this, dropDownBand1.text.toString())
+                dropDownBand1.clearFocus()
             }
 
         dropDownBand2.onItemClickListener =
@@ -143,6 +144,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 resistor.sigFigBandTwo = dropDownBand2.adapter.getItem(position).toString()
                 updateDropDownSelection(dropDownBand2, resistor.sigFigBandTwo, resistorImage.band2)
                 StateData.SIGFIG_BAND_TWO_CTV.saveData(this, dropDownBand2.text.toString())
+                dropDownBand2.clearFocus()
             }
 
         dropDownBand3.onItemClickListener =
@@ -150,6 +152,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 resistor.sigFigBandThree = dropDownBand3.adapter.getItem(position).toString()
                 updateDropDownSelection(dropDownBand3, resistor.sigFigBandThree, resistorImage.band3)
                 StateData.SIGFIG_BAND_THREE_CTV.saveData(this, dropDownBand3.text.toString())
+                dropDownBand3.clearFocus()
             }
 
         dropDownMultiplier.onItemClickListener =
@@ -157,6 +160,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 resistor.multiplierBand = dropDownMultiplier.adapter.getItem(position).toString()
                 updateDropDownSelection(dropDownMultiplier, resistor.multiplierBand, resistorImage.band4)
                 StateData.MULTIPLIER_BAND_CTV.saveData(this, dropDownMultiplier.text.toString())
+                dropDownMultiplier.clearFocus()
             }
 
         dropDownTolerance.onItemClickListener =
@@ -164,6 +168,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 resistor.toleranceBand = dropDownTolerance.adapter.getItem(position).toString()
                 updateDropDownSelection(dropDownTolerance, resistor.toleranceBand, resistorImage.band5)
                 StateData.TOLERANCE_BAND_CTV.saveData(this, dropDownTolerance.text.toString())
+                dropDownTolerance.clearFocus()
             }
 
         dropDownPPM.onItemClickListener =
@@ -171,6 +176,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 resistor.ppmBand = dropDownPPM.adapter.getItem(position).toString()
                 updateDropDownSelection(dropDownPPM, resistor.ppmBand, resistorImage.band6)
                 StateData.PPM_BAND_CTV.saveData(this, dropDownPPM.text.toString())
+                dropDownPPM.clearFocus()
             }
     }
 

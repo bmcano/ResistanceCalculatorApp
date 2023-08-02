@@ -27,16 +27,18 @@ class ImageTextArrayAdapter(context: Context, private val items: Array<SpinnerIt
     }
 
     private fun getCustomView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val (name, logo) = items[position]
+        val (name, logo, value) = items[position]
         val row = convertView ?: inflater.inflate(R.layout.spinner_value_layout, parent, false)
         val holder = row.tag as? ViewHolder ?: ViewHolder(
             row.findViewById(R.id.spinner_name),
-            row.findViewById(R.id.spinner_img)
+            row.findViewById(R.id.spinner_img),
+            row.findViewById(R.id.spinner_value)
         )
         holder.name?.text = name
         holder.img?.setBackgroundResource(logo)
+        holder.value?.text = value
         return row
     }
 
-    data class ViewHolder(val name: TextView?, val img: ImageView?)
+    data class ViewHolder(val name: TextView?, val img: ImageView?, val value: TextView?)
 }

@@ -15,9 +15,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
-import com.brandoncano.resistancecalculator.components.StateData
+import com.brandoncano.resistancecalculator.components.SpinnerItem
 import com.brandoncano.resistancecalculator.resistor.Resistor
 import com.brandoncano.resistancecalculator.resistor.ResistorImage
 import com.brandoncano.resistancecalculator.util.ActivityNavigation
@@ -128,10 +129,10 @@ class ValueToColorActivity : AppCompatActivity() {
             dropDownUnits.setAdapter(adapter)
         }
 
-        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerArrays.toleranceTextArray)
+        val toleranceAdapter = ImageTextArrayAdapter(this, SpinnerArrays.getToleranceArray(true))
         dropDownTolerance.setAdapter(toleranceAdapter)
 
-        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerArrays.ppmTextArray)
+        val ppmAdapter = ImageTextArrayAdapter(this, SpinnerArrays.getPpmArray(true))
         dropDownPPM.setAdapter(ppmAdapter)
 
         dropDownUnits.onItemClickListener =
@@ -140,22 +141,27 @@ class ValueToColorActivity : AppCompatActivity() {
                 StateData.UNITS_DROPDOWN_VTC.saveData(this, dropDownUnits.text.toString())
                 errorFinder(inputResistance.text.toString())
                 updateResistorAndText()
+                dropDownUnits.clearFocus()
             }
 
         dropDownTolerance.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                resistor.toleranceValue = dropDownTolerance.adapter.getItem(position).toString()
+                val spinnerItem = dropDownTolerance.adapter.getItem(position) as SpinnerItem
+                resistor.toleranceValue = spinnerItem.toString()
                 dropDownTolerance.setDropDownDrawable(resistor.toleranceValue)
-                StateData.TOLERANCE_DROPDOWN_VTC.saveData(this, dropDownTolerance.text.toString())
+                StateData.TOLERANCE_DROPDOWN_VTC.saveData(this, resistor.toleranceValue)
                 updateResistorAndText()
+                dropDownTolerance.clearFocus()
             }
 
         dropDownPPM.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                resistor.ppmValue = dropDownPPM.adapter.getItem(position).toString()
+                val spinnerItem = dropDownPPM.adapter.getItem(position) as SpinnerItem
+                resistor.ppmValue = spinnerItem.toString()
                 dropDownPPM.setDropDownDrawable(resistor.ppmValue)
-                StateData.PPM_DROPDOWN_VTC.saveData(this, dropDownPPM.text.toString())
+                StateData.PPM_DROPDOWN_VTC.saveData(this, resistor.ppmValue)
                 updateResistorAndText()
+                dropDownPPM.clearFocus()
             }
     }
 

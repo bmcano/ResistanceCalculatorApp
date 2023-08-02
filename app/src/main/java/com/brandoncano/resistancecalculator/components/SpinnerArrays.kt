@@ -9,63 +9,60 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
  */
 object SpinnerArrays {
 
-    val ppmArray = arrayOf(
-        SpinnerItem(C.BLACK, R.drawable.square_black),
-        SpinnerItem(C.BROWN, R.drawable.square_brown),
-        SpinnerItem(C.RED, R.drawable.square_red),
-        SpinnerItem(C.ORANGE, R.drawable.square_orange),
-        SpinnerItem(C.YELLOW, R.drawable.square_yellow),
-        SpinnerItem(C.GREEN, R.drawable.square_green),
-        SpinnerItem(C.BLUE, R.drawable.square_blue),
-        SpinnerItem(C.VIOLET, R.drawable.square_violet),
-        SpinnerItem(C.GRAY, R.drawable.square_gray)
-    )
-
     val numberArray = arrayOf(
-        *ppmArray,
-        SpinnerItem(C.WHITE, R.drawable.square_white)
+        SpinnerItem(C.BLACK, R.drawable.square_black, "0"),
+        SpinnerItem(C.BROWN, R.drawable.square_brown, "1"),
+        SpinnerItem(C.RED, R.drawable.square_red, "2"),
+        SpinnerItem(C.ORANGE, R.drawable.square_orange, "3"),
+        SpinnerItem(C.YELLOW, R.drawable.square_yellow, "4"),
+        SpinnerItem(C.GREEN, R.drawable.square_green, "5"),
+        SpinnerItem(C.BLUE, R.drawable.square_blue, "6"),
+        SpinnerItem(C.VIOLET, R.drawable.square_violet, "7"),
+        SpinnerItem(C.GRAY, R.drawable.square_gray, "8"),
+        SpinnerItem(C.WHITE, R.drawable.square_white, "9"),
     )
 
     val multiplierArray = arrayOf(
-        *numberArray,
-        SpinnerItem(C.GOLD, R.drawable.square_gold),
-        SpinnerItem(C.SILVER, R.drawable.square_silver)
+        SpinnerItem(C.BLACK, R.drawable.square_black, "x1 ${S.Ohms}"),
+        SpinnerItem(C.BROWN, R.drawable.square_brown, "x10 ${S.Ohms}"),
+        SpinnerItem(C.RED, R.drawable.square_red, "x100 ${S.Ohms}"),
+        SpinnerItem(C.ORANGE, R.drawable.square_orange, "x1 k${S.Ohms}"),
+        SpinnerItem(C.YELLOW, R.drawable.square_yellow, "x10 k${S.Ohms}"),
+        SpinnerItem(C.GREEN, R.drawable.square_green, "x100 k${S.Ohms}"),
+        SpinnerItem(C.BLUE, R.drawable.square_blue, "x1 M${S.Ohms}"),
+        SpinnerItem(C.VIOLET, R.drawable.square_violet, "x10 M${S.Ohms}"),
+        SpinnerItem(C.GRAY, R.drawable.square_gray, "x100 M${S.Ohms}"),
+        SpinnerItem(C.WHITE, R.drawable.square_white, "x1 G${S.Ohms}"),
+        SpinnerItem(C.GOLD, R.drawable.square_gold, "x0.1 ${S.Ohms}"),
+        SpinnerItem(C.SILVER, R.drawable.square_silver, "x0.01 ${S.Ohms}"),
     )
 
-    val toleranceArray = arrayOf(
-        SpinnerItem(C.BROWN, R.drawable.square_brown),
-        SpinnerItem(C.RED, R.drawable.square_red),
-        SpinnerItem(C.GREEN, R.drawable.square_green),
-        SpinnerItem(C.BLUE, R.drawable.square_blue),
-        SpinnerItem(C.VIOLET, R.drawable.square_violet),
-        SpinnerItem(C.GRAY, R.drawable.square_gray),
-        SpinnerItem(C.GOLD, R.drawable.square_gold),
-        SpinnerItem(C.SILVER, R.drawable.square_silver)
-    )
+    fun getToleranceArray(isVtC: Boolean = false): Array<SpinnerItem> {
+        return arrayOf(
+            SpinnerItem(C.BROWN, R.drawable.square_brown, "${S.PM}1%", isVtC),
+            SpinnerItem(C.RED, R.drawable.square_red, "${S.PM}2%", isVtC),
+            SpinnerItem(C.GREEN, R.drawable.square_green, "${S.PM}0.5%", isVtC),
+            SpinnerItem(C.BLUE, R.drawable.square_blue, "${S.PM}0.25%", isVtC),
+            SpinnerItem(C.VIOLET, R.drawable.square_violet, "${S.PM}0.1%", isVtC),
+            SpinnerItem(C.GRAY, R.drawable.square_gray, "${S.PM}0.05%", isVtC),
+            SpinnerItem(C.GOLD, R.drawable.square_gold, "${S.PM}5%", isVtC),
+            SpinnerItem(C.SILVER, R.drawable.square_silver, "${S.PM}10%", isVtC),
+        )
+    }
 
-    val toleranceTextArray = arrayOf(
-        SpinnerItem("${S.PM}1%", R.drawable.square_brown),
-        SpinnerItem("${S.PM}2%", R.drawable.square_red),
-        SpinnerItem("${S.PM}0.5%", R.drawable.square_green),
-        SpinnerItem("${S.PM}0.25%", R.drawable.square_blue),
-        SpinnerItem("${S.PM}0.1%", R.drawable.square_violet),
-        SpinnerItem("${S.PM}0.05%", R.drawable.square_gray),
-        SpinnerItem("${S.PM}5%", R.drawable.square_gold),
-        SpinnerItem("${S.PM}10%", R.drawable.square_silver),
-        SpinnerItem("${S.PM}20%", R.drawable.square_blank),
-    )
-
-    val ppmTextArray = arrayOf(
-        SpinnerItem("250 ${S.PPM}", R.drawable.square_black),
-        SpinnerItem("100 ${S.PPM}", R.drawable.square_brown),
-        SpinnerItem("50 ${S.PPM}", R.drawable.square_red),
-        SpinnerItem("15 ${S.PPM}", R.drawable.square_orange),
-        SpinnerItem("25 ${S.PPM}", R.drawable.square_yellow),
-        SpinnerItem("20 ${S.PPM}", R.drawable.square_green),
-        SpinnerItem("10 ${S.PPM}", R.drawable.square_blue),
-        SpinnerItem("5 ${S.PPM}", R.drawable.square_violet),
-        SpinnerItem("1 ${S.PPM}", R.drawable.square_gray)
-    )
+    fun getPpmArray(isVtC: Boolean = false): Array<SpinnerItem> {
+        return arrayOf(
+            SpinnerItem(C.BLACK, R.drawable.square_black, "250 ${S.PPM}", isVtC),
+            SpinnerItem(C.BROWN, R.drawable.square_brown, "100 ${S.PPM}", isVtC),
+            SpinnerItem(C.RED, R.drawable.square_red, "50 ${S.PPM}", isVtC),
+            SpinnerItem(C.ORANGE, R.drawable.square_orange, "15 ${S.PPM}", isVtC),
+            SpinnerItem(C.YELLOW, R.drawable.square_yellow, "25 ${S.PPM}", isVtC),
+            SpinnerItem(C.GREEN, R.drawable.square_green, "20 ${S.PPM}", isVtC),
+            SpinnerItem(C.BLUE, R.drawable.square_blue, "10 ${S.PPM}", isVtC),
+            SpinnerItem(C.VIOLET, R.drawable.square_violet, "5 ${S.PPM}", isVtC),
+            SpinnerItem(C.GRAY, R.drawable.square_gray, "1 ${S.PPM}", isVtC),
+        )
+    }
 
     val unitsArray = arrayOf(S.Ohms, S.kOhms, S.MOhms, S.GOhms)
 }
