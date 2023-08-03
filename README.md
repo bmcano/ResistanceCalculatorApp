@@ -1,4 +1,6 @@
-# Resistance Color and Value Calculator App
+<p align="center">
+  <img src="https://github.com/BranCann15/ResistanceCalculatorApp/blob/main/app/src/main/ic_feature_graphic-playstore.webp" title="feature graphic">
+</p>
 
 ### Features
 
@@ -16,6 +18,10 @@ specific bands represent and their numerical values associated with it.
   <img alt="Get it on Google Play"
        src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="60"/>
 </a>
+
+Current version of the app is `v3.0.2`.
+
+As of 8/2/23 the app has a 4.5 star review and over 10000 downloads on the Google Play Store.
 
 ### Play Store Releases
 
@@ -99,8 +105,4 @@ Bug Fixes:
  - targeted android 14
 
 ## Version 3.0.2
- - buttons to link to play store were swaped
-
-Current version of the app is `v3.0.2`.
-
-As of 8/2/23 the app has a 4.5 star review and over 10000 downloads on the Google Play Store.
+ - buttons to link to play store were swapped
