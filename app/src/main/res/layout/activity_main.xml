@@ -28,7 +28,7 @@
                 android:background="@drawable/circle"
                 android:elevation="4dp"
                 android:padding="2dp"
-                android:src="@mipmap/ic_launcher_round"
+                android:src="@mipmap/ic_launcher"
                 android:contentDescription="@string/home_app_icon_content_description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
