@@ -10,11 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.util.ActivityNavigation
 import com.brandoncano.resistancecalculator.util.EmailFeedback
+import com.brandoncano.resistancecalculator.util.PlayStore
 import com.brandoncano.resistancecalculator.util.setupActionBar
 
 /**
  * Job: Activity for starting screen of the app.
  */
+@Suppress("UNUSED_PARAMETER")
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,5 +51,13 @@ class MainActivity : AppCompatActivity() {
             R.id.about_item -> ActivityNavigation.toAbout(this)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun rateApp(view: View) {
+        PlayStore.openResistorApp(this)
+    }
+
+    fun viewCapacitorApp(view: View) {
+        PlayStore.openCapacitorApp(this)
     }
 }

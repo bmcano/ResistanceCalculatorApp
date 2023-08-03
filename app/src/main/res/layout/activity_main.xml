@@ -5,40 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/circular_app_icon_main_activity"
-        android:layout_width="256dp"
-        android:layout_height="256dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/circle"
-        android:elevation="4dp"
-        android:padding="2dp"
-        android:src="@mipmap/ic_launcher_round"
-        android:contentDescription="@string/home_app_icon_content_description"
+    <ScrollView
+        android:id="@+id/about_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ImageContrastCheck" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/color_to_value_button"
-        style="@style/rcvButtonDesign"
-        android:layout_marginTop="32dp"
-        android:text="@string/color_to_value_btn"
-        app:backgroundTint="@color/mango_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circular_app_icon_main_activity" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/value_to_color_button"
-        style="@style/rcvButtonDesign"
-        android:text="@string/value_to_color_btn"
-        app:backgroundTint="@color/mango_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/color_to_value_button" />
+            <ImageView
+                android:id="@+id/circular_app_icon_main_activity"
+                android:layout_width="256dp"
+                android:layout_height="256dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/circle"
+                android:elevation="4dp"
+                android:padding="2dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:contentDescription="@string/home_app_icon_content_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck" />
+
+            <Button
+                android:id="@+id/color_to_value_button"
+                style="@style/rcvButtonDesign"
+                android:layout_marginTop="32dp"
+                android:text="@string/color_to_value_btn"
+                app:backgroundTint="@color/mango_primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/circular_app_icon_main_activity" />
+
+            <Button
+                android:id="@+id/value_to_color_button"
+                style="@style/rcvButtonDesign"
+                android:text="@string/value_to_color_btn"
+                app:backgroundTint="@color/mango_primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/color_to_value_button" />
+
+            <Button
+                android:id="@+id/rate_us_button"
+                style="@style/rcvButtonDesign"
+                android:layout_marginTop="32dp"
+                android:onClick="rateApp"
+                android:text="@string/rate_us"
+                app:backgroundTint="@color/mango_primary"
+                app:icon="@drawable/ic_star"
+                app:iconTint="@color/white_theme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/value_to_color_button" />
+
+            <Button
+                android:id="@+id/view_capacitor_app_button"
+                style="@style/rcvButtonDesign"
+                android:onClick="viewCapacitorApp"
+                android:text="@string/view_capacitor_app"
+                app:backgroundTint="@color/mango_primary"
+                app:icon="@drawable/ic_add_to_home_screen"
+                app:iconTint="@color/white_theme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rate_us_button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

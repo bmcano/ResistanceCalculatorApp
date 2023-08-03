@@ -43,7 +43,7 @@
     <string name="last_updated_on">Last updated on</string>
     <string name="description_one">In this app you can calculate the resistance of a resistor by entering its band colors or generating a resistor from a resistance value. Works for 4, 5, and 6 band resistors.</string>
     <string name="rate_us">Rate this app on Google Play</string>
-    <string name="view_capacitor_app">Check out our Capacitor app</string>
+    <string name="view_capacitor_app">Check out our capacitor app</string>
 
     <!-- Content descriptions -->
     <string name="dropdown_image_description">Color</string>

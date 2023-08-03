@@ -78,6 +78,7 @@ class ColorToValueActivity : AppCompatActivity() {
         if (resistanceTextView.text.isEmpty()) {
             resistanceTextView.text = getString(R.string.default_text)
         }
+        resistor.loadData(this)
     }
 
     private fun dropDownSetup() {
@@ -87,8 +88,6 @@ class ColorToValueActivity : AppCompatActivity() {
         val dropDownMultiplier: AutoCompleteTextView = findViewById(R.id.spinner4)
         val dropDownTolerance: AutoCompleteTextView = findViewById(R.id.spinner5)
         val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinner6)
-
-        resistor.loadData(this)
 
         dropDownBand1.onItemClickListener = dropDownOnClickListener(
             dropDownBand1, SpinnerArrays.numberArray,
