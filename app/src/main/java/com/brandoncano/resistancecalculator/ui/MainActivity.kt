@@ -8,15 +8,16 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.util.ActivityNavigation
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.PlayStore
 import com.brandoncano.resistancecalculator.util.setupActionBar
+import com.brandoncano.resistancecalculator.util.toAboutActivity
+import com.brandoncano.resistancecalculator.util.toColorToValueActivity
+import com.brandoncano.resistancecalculator.util.toValueToColorActivity
 
 /**
  * Job: Activity for starting screen of the app.
  */
-@Suppress("UNUSED_PARAMETER")
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +35,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         val colorToValueButton: Button = findViewById(R.id.color_to_value_button)
+        colorToValueButton.setOnClickListener { toColorToValueActivity() }
         val valueToColorButton: Button = findViewById(R.id.value_to_color_button)
-        colorToValueButton.setOnClickListener { ActivityNavigation.toColorToValue(this) }
-        valueToColorButton.setOnClickListener { ActivityNavigation.toValueToColor(this) }
+        valueToColorButton.setOnClickListener { toValueToColorActivity() }
+        val rateUsButton: Button = findViewById(R.id.rate_us_button)
+        rateUsButton.setOnClickListener { PlayStore.openResistorApp(this) }
+        val viewCapacitorAppButton: Button = findViewById(R.id.view_capacitor_app_button)
+        viewCapacitorAppButton.setOnClickListener { PlayStore.openCapacitorApp(this) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -48,16 +53,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.feedback -> EmailFeedback.execute(this)
-            R.id.about_item -> ActivityNavigation.toAbout(this)
+            R.id.about_item -> toAboutActivity()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    fun rateApp(view: View) {
-        PlayStore.openResistorApp(this)
-    }
-
-    fun viewCapacitorApp(view: View) {
-        PlayStore.openCapacitorApp(this)
     }
 }

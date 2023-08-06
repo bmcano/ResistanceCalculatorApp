@@ -15,7 +15,6 @@ import com.brandoncano.resistancecalculator.components.SpinnerArrays
 import com.brandoncano.resistancecalculator.components.SpinnerItem
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.resistor.Resistor
-import com.brandoncano.resistancecalculator.util.ActivityNavigation
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
 import com.brandoncano.resistancecalculator.util.ShareResistance
@@ -23,6 +22,8 @@ import com.brandoncano.resistancecalculator.util.setBandColor
 import com.brandoncano.resistancecalculator.util.setDropDownDrawable
 import com.brandoncano.resistancecalculator.util.createResistorImage
 import com.brandoncano.resistancecalculator.util.setupActionBar
+import com.brandoncano.resistancecalculator.util.toAboutActivity
+import com.brandoncano.resistancecalculator.util.toValueToColorActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 
@@ -60,12 +61,12 @@ class ColorToValueActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.value_to_color -> {
                 super.finish()
-                ActivityNavigation.toValueToColor(this)
+                toValueToColorActivity()
             }
             R.id.share_item -> ShareResistance.execute(this, resistor, resistanceTextView)
             R.id.feedback -> EmailFeedback.execute(this)
             R.id.clear_selections -> reset()
-            R.id.about_item -> ActivityNavigation.toAbout(this)
+            R.id.about_item -> toAboutActivity()
         }
         return super.onOptionsItemSelected(item)
     }

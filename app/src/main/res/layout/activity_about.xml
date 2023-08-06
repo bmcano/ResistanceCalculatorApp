@@ -107,7 +107,6 @@
                 android:id="@+id/rate_us_button"
                 style="@style/rcvButtonDesign"
                 android:layout_marginTop="32dp"
-                android:onClick="rateApp"
                 android:text="@string/rate_us"
                 app:backgroundTint="@color/mango_primary"
                 app:icon="@drawable/ic_star"
@@ -119,7 +118,6 @@
             <Button
                 android:id="@+id/view_capacitor_app_button"
                 style="@style/rcvButtonDesign"
-                android:onClick="viewCapacitorApp"
                 android:text="@string/view_capacitor_app"
                 app:backgroundTint="@color/mango_primary"
                 app:icon="@drawable/ic_add_to_home_screen"

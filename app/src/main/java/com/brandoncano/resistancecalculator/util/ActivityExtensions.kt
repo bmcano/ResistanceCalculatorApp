@@ -1,10 +1,14 @@
 package com.brandoncano.resistancecalculator.util
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.resistor.ResistorImage
+import com.brandoncano.resistancecalculator.ui.AboutActivity
+import com.brandoncano.resistancecalculator.ui.ColorToValueActivity
+import com.brandoncano.resistancecalculator.ui.ValueToColorActivity
 
 /**
  * Job: Extension functions for the activities.
@@ -28,4 +32,23 @@ fun AppCompatActivity.createResistorImage(): ResistorImage {
         findViewById(R.id.r_p10_band5),
         findViewById(R.id.r_p12_band6)
     )
+}
+
+fun AppCompatActivity.toAboutActivity() {
+    val intent = Intent(this, AboutActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+    startActivity(intent)
+    // val bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
+}
+
+fun AppCompatActivity.toColorToValueActivity() {
+    val intent = Intent(this, ColorToValueActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+   startActivity(intent)
+}
+
+fun AppCompatActivity.toValueToColorActivity() {
+    val intent = Intent(this, ValueToColorActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+    startActivity(intent)
 }
