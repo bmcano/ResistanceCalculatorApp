@@ -24,8 +24,8 @@ import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.IsValidResistance
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
 import com.brandoncano.resistancecalculator.util.ShareResistance
-import com.brandoncano.resistancecalculator.util.setDropDownDrawable
 import com.brandoncano.resistancecalculator.util.createResistorImage
+import com.brandoncano.resistancecalculator.util.setDropDownDrawable
 import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.brandoncano.resistancecalculator.util.toAboutActivity
 import com.brandoncano.resistancecalculator.util.toColorToValueActivity
@@ -163,7 +163,8 @@ class ValueToColorActivity : AppCompatActivity() {
             "5" -> bottomNavigationView.selectedItemId = R.id.selected_five_nav
             "6" -> bottomNavigationView.selectedItemId = R.id.selected_six_nav
         }
-        updateNavigationSelection(buttonSelection.toInt())
+        val buttonNumber = buttonSelection.toIntOrNull() ?: 4
+        updateNavigationSelection(buttonNumber)
 
         resistor.resistance = StateData.USER_INPUT_VTC.loadData(this)
         // crash fix - leaving this activity with invalid input would cause a crash

@@ -156,7 +156,8 @@ class ColorToValueActivity : AppCompatActivity() {
             "5" -> bottomNavigationView.selectedItemId = R.id.selected_five_nav
             "6" -> bottomNavigationView.selectedItemId = R.id.selected_six_nav
         }
-        updateNavigationSelection(buttonSelection.toInt())
+        val buttonNumber = buttonSelection.toIntOrNull() ?: 4
+        updateNavigationSelection(buttonNumber)
 
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
