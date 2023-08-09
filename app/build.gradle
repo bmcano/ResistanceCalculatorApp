@@ -18,7 +18,7 @@ android {
             useSupportLibrary true
         }
     }
-    applicationVariants.all { variant ->
+    applicationVariants.configureEach { variant ->
         variant.resValue "string", "version", variant.versionName
         variant.resValue "string", "last_updated", "7/28/2023"
     }
@@ -35,7 +35,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    task prepareKotlinBuildScriptModel {
+    tasks.register('prepareKotlinBuildScriptModel') {
 
     }
     namespace 'com.brandoncano.resistancecalculator'

@@ -13,7 +13,7 @@ import java.lang.reflect.Type
  *   Data is saved as xml files with mapping, where name_ -> file name; key_ -> key in map.
  *   Device File Explorer -> data -> data -> com.brandoncano.resistancecalculator -> shared_prefs
  */
-enum class StateData(private val name_: String, private val key_: String) {
+enum class StateData(private val _name: String, private val _key: String) {
 
     RESISTANCE_CTV("color_to_value", "resistance"),
     BUTTON_SELECTION_CTV("color_to_value", "button_selection"),
@@ -34,24 +34,24 @@ enum class StateData(private val name_: String, private val key_: String) {
     ; // methods to save, load, or clear the data as strings
 
     fun saveData(context: Context, input: String) {
-        val sharedPreferences = context.getSharedPreferences(name_, AppCompatActivity.MODE_PRIVATE)
+        val sharedPreferences = context.getSharedPreferences(_name, AppCompatActivity.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val gson = Gson()
         val json: String = gson.toJson(input)
-        editor.putString(key_, json)
+        editor.putString(_key, json)
         editor.apply()
     }
 
     fun loadData(context: Context): String {
-        val sharedPreferences = context.getSharedPreferences(name_, AppCompatActivity.MODE_PRIVATE)
+        val sharedPreferences = context.getSharedPreferences(_name, AppCompatActivity.MODE_PRIVATE)
         val gson = Gson()
-        val json = sharedPreferences.getString(key_, null)
+        val json = sharedPreferences.getString(_key, null)
         val type: Type = object : TypeToken<String?>() {}.type
         return gson.fromJson<String?>(json, type) ?: return ""
     }
 
     fun clearData(context: Context) {
-        val sharedPreferences = context.getSharedPreferences(name_, AppCompatActivity.MODE_PRIVATE)
+        val sharedPreferences = context.getSharedPreferences(_name, AppCompatActivity.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.clear().apply()
     }
