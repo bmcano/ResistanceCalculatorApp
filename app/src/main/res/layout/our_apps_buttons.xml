@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/text_our_apps_header"
+        style="@style/aboutPageTextDesign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/our_apps_header_text"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/rate_us_button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/rate_us_button"
+        style="@style/rcvButtonDesign"
+        android:layout_marginTop="8dp"
+        android:text="@string/rate_us"
+        app:backgroundTint="@color/mango_primary"
+        app:icon="@drawable/ic_star"
+        app:iconTint="@color/white_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_our_apps_header" />
+
+    <Button
+        android:id="@+id/view_capacitor_app_button"
+        style="@style/rcvButtonDesign"
+        android:text="@string/view_capacitor_app"
+        app:backgroundTint="@color/mango_primary"
+        app:icon="@drawable/ic_add_to_home_screen"
+        app:iconTint="@color/white_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rate_us_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
