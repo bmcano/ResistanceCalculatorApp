@@ -163,14 +163,4 @@ class ColorFinderTest {
         assertEquals("", ColorFinder.idToColorText(R.color.resistor_blank))
         assertEquals("", ColorFinder.idToColorText(R.drawable.square_blank))
     }
-
-    @Test
-    fun randomColorTest() {
-        val colors = arrayOf(
-            R.color.red, R.color.orange, R.color.yellow, R.color.gold, R.color.green,
-            R.color.blue, R.color.violet, R.color.white, R.color.silver, R.color.gray,
-            R.color.black, R.color.brown, R.color.resistor_blank
-        )
-        assertTrue(ColorFinder.randomColor() in colors)
-    }
 }

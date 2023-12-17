@@ -65,22 +65,4 @@ object ColorFinder {
             else -> ""
         }
     }
-
-    fun randomColor(): Int {
-        return when ((1..12).random()) {
-            1 -> R.color.red
-            2 -> R.color.orange
-            3 -> R.color.yellow
-            4 -> R.color.gold
-            5 -> R.color.green
-            6 -> R.color.blue
-            7 -> R.color.violet
-            8 -> R.color.white
-            9 -> R.color.silver
-            10 -> R.color.gray
-            11 -> R.color.black
-            12 -> R.color.brown
-            else -> R.color.resistor_blank
-        }
-    }
 }
