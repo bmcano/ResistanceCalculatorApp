@@ -91,7 +91,7 @@ class ColorToValueActivity : AppCompatActivity() {
         val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinner6)
 
         dropDownBand1.onItemClickListener = dropDownOnClickListener(
-            dropDownBand1, SpinnerArrays.numberArray,
+            dropDownBand1, SpinnerArrays.numberArray.drop(1).toTypedArray(),
             resistor.sigFigBandOne, resistorImage.band1, StateData.SIGFIG_BAND_ONE_CTV
         )
 
