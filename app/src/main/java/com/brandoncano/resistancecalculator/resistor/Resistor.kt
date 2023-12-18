@@ -68,10 +68,8 @@ data class Resistor(
         return (numberOfBands == 4 && isMissingBands) || (numberOfBands != 4 && (isMissingBands || sigFigBandThree.isEmpty()))
     }
 
-    fun allDigitsZero(): Boolean {
-        val fourBand = numberOfBands == 4 && sigFigBandOne == BLACK && sigFigBandTwo == BLACK
-        val fiveBand = sigFigBandOne == BLACK && sigFigBandTwo == BLACK && sigFigBandThree == BLACK
-        return fourBand || fiveBand
+    fun isFirstDigitZero(): Boolean {
+        return sigFigBandOne == BLACK
     }
 
     fun clear() {
