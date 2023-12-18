@@ -23,18 +23,18 @@ object SpinnerArrays {
     )
 
     val multiplierArray = arrayOf(
-        SpinnerItem(C.BLACK, R.drawable.square_black, "x1 ${S.Ohms}"),
-        SpinnerItem(C.BROWN, R.drawable.square_brown, "x10 ${S.Ohms}"),
-        SpinnerItem(C.RED, R.drawable.square_red, "x100 ${S.Ohms}"),
-        SpinnerItem(C.ORANGE, R.drawable.square_orange, "x1 k${S.Ohms}"),
-        SpinnerItem(C.YELLOW, R.drawable.square_yellow, "x10 k${S.Ohms}"),
-        SpinnerItem(C.GREEN, R.drawable.square_green, "x100 k${S.Ohms}"),
-        SpinnerItem(C.BLUE, R.drawable.square_blue, "x1 M${S.Ohms}"),
-        SpinnerItem(C.VIOLET, R.drawable.square_violet, "x10 M${S.Ohms}"),
-        SpinnerItem(C.GRAY, R.drawable.square_gray, "x100 M${S.Ohms}"),
-        SpinnerItem(C.WHITE, R.drawable.square_white, "x1 G${S.Ohms}"),
-        SpinnerItem(C.GOLD, R.drawable.square_gold, "x0.1 ${S.Ohms}"),
-        SpinnerItem(C.SILVER, R.drawable.square_silver, "x0.01 ${S.Ohms}"),
+        SpinnerItem(C.BLACK, R.drawable.square_black, "x 1"),
+        SpinnerItem(C.BROWN, R.drawable.square_brown, "x 10"),
+        SpinnerItem(C.RED, R.drawable.square_red, "x 100"),
+        SpinnerItem(C.ORANGE, R.drawable.square_orange, "x 1k"),
+        SpinnerItem(C.YELLOW, R.drawable.square_yellow, "x 10k"),
+        SpinnerItem(C.GREEN, R.drawable.square_green, "x 100k"),
+        SpinnerItem(C.BLUE, R.drawable.square_blue, "x 1M"),
+        SpinnerItem(C.VIOLET, R.drawable.square_violet, "x 10M"),
+        SpinnerItem(C.GRAY, R.drawable.square_gray, "x 100M"),
+        SpinnerItem(C.WHITE, R.drawable.square_white, "x 1G"),
+        SpinnerItem(C.GOLD, R.drawable.square_gold, "x 0.1"),
+        SpinnerItem(C.SILVER, R.drawable.square_silver, "x 0.01"),
     )
 
     fun getToleranceArray(isVtC: Boolean = false): Array<SpinnerItem> {
