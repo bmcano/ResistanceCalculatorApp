@@ -195,6 +195,7 @@ class ColorToValueActivity : AppCompatActivity() {
         StateData.BUTTON_SELECTION_CTV.saveData(this, "${resistor.getNumberOfBands()}")
         resistanceTextView.text = getString(R.string.default_text)
         resistorImage.clearResistor(this)
+        resistor.clear()
         dropDownSetup() // resets dropdown and resistor info
     }
 }

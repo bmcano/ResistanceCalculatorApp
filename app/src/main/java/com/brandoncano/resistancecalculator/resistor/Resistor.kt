@@ -77,5 +77,7 @@ data class Resistor(
         sigFigBandTwo = ""
         sigFigBandThree = ""
         multiplierBand = ""
+        toleranceBand = ""
+        ppmBand = ""
     }
 }
