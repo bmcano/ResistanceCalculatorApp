@@ -6,7 +6,7 @@
 ## Home Activity
 - Verify that the buttons under "Calculators" direct to the appropriate activity
 - Verify that the buttons under "Our apps" redirect to the correct Playstore listings
-- Verify that all the menu options direct to their correct actions (see #Menu-Items for more)
+- Verify that all the menu options direct to their correct actions (see [Menu Items](#menu-items) for more)
 ## Color to Value Activity
 - Ensure that the "Four Bands" options shows these dropdowns: First Number, Second Number, Multiplier, Tolerance
 - Ensure that the "Five Bands" options shows these dropdowns: First Number, Second Number, Third Number, Multiplier, Tolerance 
