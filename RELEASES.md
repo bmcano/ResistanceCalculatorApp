@@ -14,7 +14,7 @@
 | 3.0     | 5/8/23       | [Click to View Release Notes](#version-30)                                                           |
 | 3.0.1   | 7/28/23      | [Click to View Release Notes](#version-301)                                                          | 
 | 3.0.2   | 7/31/23      | [Click to View Release Notes](#version-302)                                                          | 
-| 3.0.2   | 12/21/23     | [Click to View Release Notes](https://github.com/bmcano/ResistanceCalculatorApp/releases/tag/v3.0.3) |
+| 3.0.3   | 12/21/23     | [Click to View Release Notes](https://github.com/bmcano/ResistanceCalculatorApp/releases/tag/v3.0.3) |
 
 ## Version 1.1
 
