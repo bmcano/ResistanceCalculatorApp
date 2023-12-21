@@ -79,4 +79,13 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <!-- Divider -->
+    <style name="divideDesign">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:background">?android:textColor</item>
+        <item name="android:visibility">visible</item>
+    </style>
+
 </resources>
