@@ -5,10 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/resistor"
+        layout="@layout/resistor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/display_resistance"
+        style="@style/resistanceDisplayTextDesign"
+        android:text="@string/enter_value"
+        app:layout_constraintTop_toBottomOf="@+id/resistor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/calculate"
+        style="@style/rcvButtonDesign"
+        android:layout_width="256dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/calculate_btn"
+        android:textSize="24sp"
+        app:backgroundTint="@color/mango_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/display_resistance" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_text_outline"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="132dp"
+        android:layout_width="120dp"
         android:layout_height="64dp"
         android:layout_marginTop="16dp"
         android:hint="@string/type_resistance_hint"
@@ -20,7 +50,7 @@
         app:errorIconDrawable="@drawable/ic_error"
         app:hintTextColor="@color/selected_dropdown_color"
         app:layout_constraintStart_toStartOf="@+id/dropDownSelectorTolerance"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/calculate">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/enter_resistance"
@@ -37,7 +67,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dropDownSelectorUnits"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="108dp"
+        android:layout_width="120dp"
         android:layout_height="64dp"
         android:layout_marginTop="16dp"
         android:hint="@string/units_hint"
@@ -46,7 +76,7 @@
         app:boxStrokeWidth="2dp"
         app:hintTextColor="@color/selected_dropdown_color"
         app:layout_constraintEnd_toEndOf="@+id/dropDownSelectorTolerance"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/calculate">
 
         <AutoCompleteTextView
             android:id="@+id/spinnerUnits"
@@ -96,36 +126,6 @@
         </AutoCompleteTextView>
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/calculate"
-        style="@style/rcvButtonDesign"
-        android:layout_width="256dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/calculate_btn"
-        android:textSize="24sp"
-        app:backgroundTint="@color/mango_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropDownSelectorPPM" />
-
-    <include
-        android:id="@+id/resistor"
-        layout="@layout/resistor"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/display_resistance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/display_resistance"
-        style="@style/resistanceDisplayTextDesign"
-        android:text="@string/enter_value"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_vtc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_vtc"
