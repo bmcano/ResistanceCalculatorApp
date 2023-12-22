@@ -42,6 +42,7 @@
     <string name="author">Brandon Cano</string>
     <string name="last_updated_on">Last updated on</string>
     <string name="description_one">In this app you can calculate the resistance of a resistor by entering its band colors or generating a resistor from a resistance value. Works for 4, 5, and 6 band resistors.</string>
+    <string name="description_two">Our app follows the IEC 60062 standard for resistor color coding. This international convention assigns specific colors to represent different values for resistors. For more detailed information, you can refer to the IEC 60062 standard <a href="https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-color-code/#">here</a>.</string>
     <string name="rate_us">Rate this app on Google Play</string>
     <string name="view_capacitor_app">Check out our capacitor app</string>
     <string name="calculators_header_text">Calculators</string>
