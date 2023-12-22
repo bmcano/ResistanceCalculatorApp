@@ -19,7 +19,7 @@ object ResistanceFormatter {
         val sigFigThree = ValueFinder.getSigFig(resistor.sigFigBandThree)
         val resistance = formatResistance(resistor, sigFigOne, sigFigTwo, sigFigThree)
         val tolerance = ValueFinder.getTolerance(resistor.toleranceBand)
-        val ppm = ValueFinder.getPPM(resistor.ppmBand, resistor.getNumberOfBands())
+        val ppm = ValueFinder.getPPM(resistor.ppmBand, resistor.isSixBand())
 
         return "$resistance $tolerance$ppm"
     }
@@ -27,8 +27,8 @@ object ResistanceFormatter {
     private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
         if (resistor.isFirstDigitZero()) return zeroOhms // we no longer have the option for the first digit to be zero
 
-        val bands = resistor.getNumberOfBands()
-        val value: Int = if (bands == 4) {
+        val threeFourBands = resistor.isThreeFourBand()
+        val value: Int = if (threeFourBands) {
             (sigFigOne + sigFigTwo).toIntOrNull()
         } else {
             (sigFigOne + sigFigTwo + sigFigThree).toIntOrNull()
@@ -41,11 +41,11 @@ object ResistanceFormatter {
             resistanceAsDecimal /= 1000
         }
 
-        val noDecimal = (bands == 4 && resistanceAsDecimal >= 10) || (bands != 4 && resistanceAsDecimal >= 100)
+        val noDecimal = (threeFourBands && resistanceAsDecimal >= 10) || (!threeFourBands && resistanceAsDecimal >= 100)
         val decimalPrecision = when {
             noDecimal -> "%.0f"
             resistor.multiplierBand == C.SILVER -> "%.2f"
-            bands == 4 || resistanceAsDecimal >= 10.0 -> "%.1f"
+            threeFourBands || resistanceAsDecimal >= 10.0 -> "%.1f"
             else -> "%.2f"
         }
         return "${decimalPrecision.format(resistanceAsDecimal)} $units"

@@ -60,7 +60,19 @@ data class Resistor(
     fun getNumberOfBands(): Int = numberOfBands
 
     fun setNumberOfBands(number: Int) {
-        numberOfBands = number.coerceIn(4..6)
+        numberOfBands = number.coerceIn(3..6)
+    }
+
+    fun isThreeFourBand(): Boolean {
+        return numberOfBands == 3 || numberOfBands == 4
+    }
+
+    fun isFiveSixBand(): Boolean {
+        return numberOfBands == 5 || numberOfBands == 6
+    }
+
+    fun isSixBand(): Boolean {
+        return numberOfBands == 6
     }
 
     fun isEmpty(): Boolean {

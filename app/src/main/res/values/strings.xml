@@ -26,6 +26,7 @@
     <string name="about">About This App</string>
 
     <!-- Bottom navigation -->
+    <string name="three_band_nav">Three Bands</string>
     <string name="four_band_nav">Four Bands</string>
     <string name="five_band_nav">Five Bands</string>
     <string name="six_band_nav">Six Bands</string>

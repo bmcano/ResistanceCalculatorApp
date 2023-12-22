@@ -28,8 +28,8 @@ object ResistorFormatter {
 
         // remove decimal and check leading zeros
         val numberBands = arrayOf(0, 0, 0)
-        val numberOfBands = resistor.getNumberOfBands()
-        val formattedResistance = checkLeadingZeros(numberOfBands, String.format("%.2f", resDouble))
+        val isThreeFourBand = resistor.isThreeFourBand()
+        val formattedResistance = checkLeadingZeros(isThreeFourBand, String.format("%.2f", resDouble))
         formattedResistance.forEachIndexed { index, digit ->
             // if a invalid character makes its way through, set to -1 for a blank band
             if (index < 3) numberBands[index] = digit.digitToIntOrNull() ?: -1
@@ -37,16 +37,16 @@ object ResistorFormatter {
 
         resistor.sigFigBandOne = ColorFinder.numberToText(numberBands[0])
         resistor.sigFigBandTwo = ColorFinder.numberToText(numberBands[1])
-        resistor.sigFigBandThree = if (numberOfBands != 4) {
+        resistor.sigFigBandThree = if (!isThreeFourBand) {
             ColorFinder.numberToText(numberBands[2])
         } else ""
     }
 
-    private fun checkLeadingZeros(bands: Int, value: String): String {
+    private fun checkLeadingZeros(isThreeFourBand: Boolean, value: String): String {
         val values = value.replace(".", "")
         val numbers = values.toCharArray()
         val validSize = numbers.size == 2 || numbers.size == 3 || numbers.size == 4
-        if (bands == 4 && validSize && numbers[0] == '0') {
+        if (isThreeFourBand && validSize && numbers[0] == '0') {
             return values.substring(1, values.length)
         }
         return values
@@ -59,13 +59,13 @@ object ResistorFormatter {
         if (res.startsWith("0")) {
             index = 0
         }
-        if (resistor.getNumberOfBands() != 4 && !res.startsWith("0.")) index--
+        if (!resistor.isThreeFourBand() && !res.startsWith("0.")) index--
         return colorsMap[index] ?: C.BLANK
     }
 
     private fun numericalInputMultiplier(resistor: Resistor, resistance: Long): String {
         var length = resistance.toString().length
-        if (resistor.getNumberOfBands() != 4) length--
+        if (!resistor.isThreeFourBand()) length--
         return colorsMap[length] ?: C.BLANK
     }
 }
