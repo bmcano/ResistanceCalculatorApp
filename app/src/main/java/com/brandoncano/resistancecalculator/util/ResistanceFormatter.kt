@@ -1,10 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
-import android.provider.Settings.Global.getString
-import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.resistor.Resistor
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
-import com.brandoncano.resistancecalculator.resistor.Resistor
 
 /**
  * Job: Formats the resistance based on the colors selected for the bands (CtV).
