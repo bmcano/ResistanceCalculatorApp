@@ -3,12 +3,12 @@
     <string name="app_name">RCV - Calculator</string>
 
     <!-- TextInputLayouts hint text -->
-    <string name="number_band_hint1">First Number</string>
-    <string name="number_band_hint2">Second Number</string>
-    <string name="number_band_hint3">Third Number</string>
+    <string name="number_band_hint1">First band</string>
+    <string name="number_band_hint2">Second band</string>
+    <string name="number_band_hint3">Third band</string>
     <string name="multiplier_band_hint">Multiplier</string>
     <string name="tolerance_band_hint">Tolerance</string>
-    <string name="ppm_band_hint">Temp Coefficient</string>
+    <string name="ppm_band_hint">Temp coefficient</string>
     <string name="type_resistance_hint">Resistance</string>
     <string name="units_hint">Units</string>
 
@@ -31,10 +31,10 @@
     <string name="six_band_nav">Six Bands</string>
 
     <!-- Default text -->
-    <string name="default_text">Select Colors</string>
-    <string name="enter_value">Enter Resistance</string>
+    <string name="default_text">Select colors</string>
+    <string name="enter_value">Enter resistance</string>
     <string name="resistor_description">Resistor</string>
-    <string name="invalid_input">Invalid Input</string>
+    <string name="invalid_input">Invalid input</string>
 
     <!-- About page text -->
     <string name="app_version">App version</string>

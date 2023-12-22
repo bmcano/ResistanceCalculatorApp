@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
+import android.provider.Settings.Global.getString
+import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 import com.brandoncano.resistancecalculator.resistor.Resistor
@@ -12,7 +14,7 @@ object ResistanceFormatter {
     private const val zeroOhms = "0 ${S.Ohms}"
 
     fun calculate(resistor: Resistor): String {
-        if (resistor.isEmpty()) return "Select Colors"
+        if (resistor.isEmpty()) return "Select colors"
 
         val sigFigOne = ValueFinder.getSigFig(resistor.sigFigBandOne)
         val sigFigTwo = ValueFinder.getSigFig(resistor.sigFigBandTwo)
