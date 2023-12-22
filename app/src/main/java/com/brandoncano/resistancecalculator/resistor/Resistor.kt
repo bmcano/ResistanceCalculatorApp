@@ -65,26 +65,16 @@ data class Resistor(
         numberOfBands = number.coerceIn(3..6)
     }
 
-    fun isThreeBand(): Boolean {
-        return numberOfBands == 3
-    }
-
-    fun isThreeFourBand(): Boolean {
-        return numberOfBands == 3 || numberOfBands == 4
-    }
-
-    fun isSixBand(): Boolean {
-        return numberOfBands == 6
-    }
+    fun isThreeBand() = numberOfBands == 3
+    fun isThreeFourBand() = numberOfBands == 3 || numberOfBands == 4
+    fun isSixBand() = numberOfBands == 6
 
     fun isEmpty(): Boolean {
         val isMissingBands = sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || multiplierBand.isEmpty()
         return (isThreeFourBand() && isMissingBands) || (!isThreeFourBand() && (isMissingBands || sigFigBandThree.isEmpty()))
     }
 
-    fun isFirstDigitZero(): Boolean {
-        return sigFigBandOne == BLACK
-    }
+    fun isFirstDigitZero() = sigFigBandOne == BLACK
 
     fun clear() {
         sigFigBandOne = ""
