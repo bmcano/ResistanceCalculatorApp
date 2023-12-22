@@ -18,7 +18,7 @@ object ResistanceFormatter {
         val sigFigTwo = ValueFinder.getSigFig(resistor.sigFigBandTwo)
         val sigFigThree = ValueFinder.getSigFig(resistor.sigFigBandThree)
         val resistance = formatResistance(resistor, sigFigOne, sigFigTwo, sigFigThree)
-        val tolerance = ValueFinder.getTolerance(resistor.toleranceBand)
+        val tolerance = ValueFinder.getTolerance(resistor.toleranceBand, resistor.isThreeBand())
         val ppm = ValueFinder.getPPM(resistor.ppmBand, resistor.isSixBand())
 
         return "$resistance $tolerance$ppm"

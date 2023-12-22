@@ -35,6 +35,7 @@ class ColorToValueActivity : AppCompatActivity() {
     private lateinit var resistanceTextView: TextView
     private lateinit var toggleDropDownThree: TextInputLayout
     private lateinit var toggleDropDownPPM: TextInputLayout
+    private lateinit var toggleDropDownTolerance: TextInputLayout
     private val resistorImage by lazy { createResistorImage() }
     private val resistor: Resistor = Resistor()
 
@@ -75,6 +76,7 @@ class ColorToValueActivity : AppCompatActivity() {
         resistanceTextView = findViewById(R.id.resistance_display_ctv)
         toggleDropDownThree = findViewById(R.id.dropDownSelector3)
         toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
+        toggleDropDownTolerance = findViewById(R.id.dropDownSelector5)
         resistanceTextView.text = StateData.RESISTANCE_CTV.loadData(this)
         if (resistanceTextView.text.isEmpty()) {
             resistanceTextView.text = getString(R.string.default_text)
@@ -176,6 +178,7 @@ class ColorToValueActivity : AppCompatActivity() {
         resistorImage.setImageColors(this, resistor)
         toggleDropDownThree.visibility = if (resistor.isThreeFourBand()) View.GONE else View.VISIBLE
         toggleDropDownPPM.visibility = if (resistor.isSixBand()) View.VISIBLE else View.GONE
+        toggleDropDownTolerance.visibility = if (resistor.isThreeBand()) View.INVISIBLE else View.VISIBLE
         StateData.BUTTON_SELECTION_CTV.saveData(this, "$numberOfBands")
         updateResistance()
     }

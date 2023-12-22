@@ -25,8 +25,9 @@ object ValueFinder {
 
     fun getSigFig(color: String) = getValue(color).first
 
-    fun getTolerance(color: String): String {
-        val tolerance = getValue(color).second
+    fun getTolerance(color: String, isThreeBand: Boolean): String {
+        val param = if (isThreeBand) C.BLANK else color
+        val tolerance = getValue(param).second
         return if (tolerance.isNotEmpty()) "${S.PM}$tolerance" else ""
     }
 
