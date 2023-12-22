@@ -26,7 +26,7 @@ data class Resistor(
     var toleranceValue = ""
     var ppmValue = ""
 
-    private var numberOfBands = 4
+    private var numberOfBands = 4 // this is the default value used since its the most common
 
     fun loadData(context: Context) {
         sigFigBandOne = StateData.SIGFIG_BAND_ONE_CTV.loadData(context)

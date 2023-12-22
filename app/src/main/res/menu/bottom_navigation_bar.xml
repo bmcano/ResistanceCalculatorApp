@@ -3,7 +3,7 @@
     <item
         android:id="@+id/selected_three_nav"
         android:icon="@drawable/img_icon_four_band"
-        android:title="@string/four_band_nav" />
+        android:title="@string/three_band_nav" />
     <item
         android:id="@+id/selected_four_nav"
         android:icon="@drawable/img_icon_four_band"

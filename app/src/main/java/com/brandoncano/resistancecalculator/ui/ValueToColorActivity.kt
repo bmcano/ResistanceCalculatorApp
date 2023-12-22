@@ -159,6 +159,7 @@ class ValueToColorActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_vtc)
         val buttonSelection = StateData.BUTTON_SELECTION_VTC.loadData(this)
         when (buttonSelection) {
+            "3" -> bottomNavigationView.selectedItemId = R.id.selected_three_nav
             "4" -> bottomNavigationView.selectedItemId = R.id.selected_four_nav
             "5" -> bottomNavigationView.selectedItemId = R.id.selected_five_nav
             "6" -> bottomNavigationView.selectedItemId = R.id.selected_six_nav
@@ -174,7 +175,7 @@ class ValueToColorActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.selected_four_nav -> updateNavigationSelection(4)
+                R.id.selected_three_nav -> updateNavigationSelection(3)
                 R.id.selected_five_nav -> updateNavigationSelection(5)
                 R.id.selected_six_nav -> updateNavigationSelection(6)
                 else -> updateNavigationSelection(4)
@@ -184,9 +185,9 @@ class ValueToColorActivity : AppCompatActivity() {
     }
 
     private fun updateNavigationSelection(numberOfBands: Int) {
-        toggleDropDownPPM.visibility = if (numberOfBands == 6) View.VISIBLE else View.INVISIBLE
         StateData.BUTTON_SELECTION_VTC.saveData(this, "$numberOfBands")
         resistor.setNumberOfBands(numberOfBands)
+        toggleDropDownPPM.visibility = if (resistor.isSixBand()) View.VISIBLE else View.INVISIBLE
         errorFinder(inputResistance.text.toString())
         updateResistorAndText()
     }
