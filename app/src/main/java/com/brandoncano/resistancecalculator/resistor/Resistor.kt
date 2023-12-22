@@ -3,6 +3,7 @@ package com.brandoncano.resistancecalculator.resistor
 import android.content.Context
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.constants.Colors.BLACK
+import com.brandoncano.resistancecalculator.constants.Symbols.PM
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**
@@ -52,7 +53,8 @@ data class Resistor(
     }
 
     fun getResistanceText(): String {
-        var text = "$resistance $units $toleranceValue"
+        var text = "$resistance $units "
+        text += if (numberOfBands == 3) "${PM}20%" else toleranceValue
         if (numberOfBands == 6) text += "\n$ppmValue".trimEnd('\n')
         return text
     }
@@ -63,12 +65,12 @@ data class Resistor(
         numberOfBands = number.coerceIn(3..6)
     }
 
-    fun isThreeFourBand(): Boolean {
-        return numberOfBands == 3 || numberOfBands == 4
+    fun isThreeBand(): Boolean {
+        return numberOfBands == 3
     }
 
-    fun isFiveSixBand(): Boolean {
-        return numberOfBands == 5 || numberOfBands == 6
+    fun isThreeFourBand(): Boolean {
+        return numberOfBands == 3 || numberOfBands == 4
     }
 
     fun isSixBand(): Boolean {

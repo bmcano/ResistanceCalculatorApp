@@ -25,6 +25,7 @@ data class ResistorImage(
         }
         if (!resistor.isSixBand()) ppm = ""
         if (resistor.isThreeFourBand()) sigFigThree = ""
+        if (resistor.isThreeBand()) tolerance = ""
         band1.setBandColor(context, resistor.sigFigBandOne)
         band2.setBandColor(context, resistor.sigFigBandTwo)
         band3.setBandColor(context, sigFigThree)
