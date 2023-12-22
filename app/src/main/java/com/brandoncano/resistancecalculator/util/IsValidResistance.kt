@@ -21,7 +21,7 @@ object IsValidResistance {
     fun execute(resistor: Resistor, input: String): Boolean {
         input.toDoubleOrNull() ?: return false
         val sigFigs = SignificantFigures(input).numberSignificantFigures
-        val numberOfBands = resistor.getNumberOfBands()
+        val isThreeFourBand = resistor.isThreeFourBand()
         val units = resistor.units
 
         // check for specific conditions, priority matters
@@ -29,7 +29,7 @@ object IsValidResistance {
             input.length > 1 && input[0] == '0' && input[1] != '.' ||
             input.isNotEmpty() && input[0] == '.' -> false
 
-            numberOfBands == 4 -> when { /* FOUR BAND */
+            isThreeFourBand -> when { /* FOUR BAND */
                 input.startsWith("0.00") ||
                 sigFigs >= 2 && input.startsWith("0.0") -> false
                 sigFigs == 3 && input.endsWith(".0") ||

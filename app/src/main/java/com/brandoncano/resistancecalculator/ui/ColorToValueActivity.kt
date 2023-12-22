@@ -35,6 +35,7 @@ class ColorToValueActivity : AppCompatActivity() {
     private lateinit var resistanceTextView: TextView
     private lateinit var toggleDropDownThree: TextInputLayout
     private lateinit var toggleDropDownPPM: TextInputLayout
+    private lateinit var toggleDropDownTolerance: TextInputLayout
     private val resistorImage by lazy { createResistorImage() }
     private val resistor: Resistor = Resistor()
 
@@ -75,6 +76,7 @@ class ColorToValueActivity : AppCompatActivity() {
         resistanceTextView = findViewById(R.id.resistance_display_ctv)
         toggleDropDownThree = findViewById(R.id.dropDownSelector3)
         toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
+        toggleDropDownTolerance = findViewById(R.id.dropDownSelector5)
         resistanceTextView.text = StateData.RESISTANCE_CTV.loadData(this)
         if (resistanceTextView.text.isEmpty()) {
             resistanceTextView.text = getString(R.string.default_text)
@@ -152,6 +154,7 @@ class ColorToValueActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_ctv)
         val buttonSelection = StateData.BUTTON_SELECTION_CTV.loadData(this)
         when (buttonSelection) {
+            "3" -> bottomNavigationView.selectedItemId = R.id.selected_three_nav
             "4" -> bottomNavigationView.selectedItemId = R.id.selected_four_nav
             "5" -> bottomNavigationView.selectedItemId = R.id.selected_five_nav
             "6" -> bottomNavigationView.selectedItemId = R.id.selected_six_nav
@@ -161,7 +164,7 @@ class ColorToValueActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.selected_four_nav -> updateNavigationSelection(4)
+                R.id.selected_three_nav -> updateNavigationSelection(3)
                 R.id.selected_five_nav -> updateNavigationSelection(5)
                 R.id.selected_six_nav -> updateNavigationSelection(6)
                 else -> updateNavigationSelection(4)
@@ -173,8 +176,9 @@ class ColorToValueActivity : AppCompatActivity() {
     private fun updateNavigationSelection(numberOfBands: Int) {
         resistor.setNumberOfBands(numberOfBands)
         resistorImage.setImageColors(this, resistor)
-        toggleDropDownThree.visibility = if (numberOfBands == 4) View.GONE else View.VISIBLE
-        toggleDropDownPPM.visibility = if (numberOfBands == 6) View.VISIBLE else View.GONE
+        toggleDropDownThree.visibility = if (resistor.isThreeFourBand()) View.GONE else View.VISIBLE
+        toggleDropDownPPM.visibility = if (resistor.isSixBand()) View.VISIBLE else View.GONE
+        toggleDropDownTolerance.visibility = if (resistor.isThreeBand()) View.INVISIBLE else View.VISIBLE
         StateData.BUTTON_SELECTION_CTV.saveData(this, "$numberOfBands")
         updateResistance()
     }

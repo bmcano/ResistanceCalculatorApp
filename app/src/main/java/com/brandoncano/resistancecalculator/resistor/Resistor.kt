@@ -3,6 +3,7 @@ package com.brandoncano.resistancecalculator.resistor
 import android.content.Context
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.constants.Colors.BLACK
+import com.brandoncano.resistancecalculator.constants.Symbols.PM
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**
@@ -26,7 +27,7 @@ data class Resistor(
     var toleranceValue = ""
     var ppmValue = ""
 
-    private var numberOfBands = 4
+    private var numberOfBands = 4 // this is the default value used since its the most common
 
     fun loadData(context: Context) {
         sigFigBandOne = StateData.SIGFIG_BAND_ONE_CTV.loadData(context)
@@ -52,7 +53,8 @@ data class Resistor(
     }
 
     fun getResistanceText(): String {
-        var text = "$resistance $units $toleranceValue"
+        var text = "$resistance $units "
+        text += if (numberOfBands == 3) "${PM}20%" else toleranceValue
         if (numberOfBands == 6) text += "\n$ppmValue".trimEnd('\n')
         return text
     }
@@ -60,17 +62,19 @@ data class Resistor(
     fun getNumberOfBands(): Int = numberOfBands
 
     fun setNumberOfBands(number: Int) {
-        numberOfBands = number.coerceIn(4..6)
+        numberOfBands = number.coerceIn(3..6)
     }
+
+    fun isThreeBand() = numberOfBands == 3
+    fun isThreeFourBand() = numberOfBands == 3 || numberOfBands == 4
+    fun isSixBand() = numberOfBands == 6
 
     fun isEmpty(): Boolean {
-        val isMissingBands = sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || multiplierBand.isEmpty() || toleranceBand.isEmpty()
-        return (numberOfBands == 4 && isMissingBands) || (numberOfBands != 4 && (isMissingBands || sigFigBandThree.isEmpty()))
+        val isMissingBands = sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || multiplierBand.isEmpty()
+        return (isThreeFourBand() && isMissingBands) || (!isThreeFourBand() && (isMissingBands || sigFigBandThree.isEmpty()))
     }
 
-    fun isFirstDigitZero(): Boolean {
-        return sigFigBandOne == BLACK
-    }
+    fun isFirstDigitZero() = sigFigBandOne == BLACK
 
     fun clear() {
         sigFigBandOne = ""

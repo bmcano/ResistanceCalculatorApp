@@ -23,9 +23,9 @@ data class ResistorImage(
             tolerance = resistor.toleranceValue
             ppm = resistor.ppmValue
         }
-        val numberOfBands = resistor.getNumberOfBands()
-        if (numberOfBands != 6) ppm = ""
-        if (numberOfBands == 4) sigFigThree = ""
+        if (!resistor.isSixBand()) ppm = ""
+        if (resistor.isThreeFourBand()) sigFigThree = ""
+        if (resistor.isThreeBand()) tolerance = ""
         band1.setBandColor(context, resistor.sigFigBandOne)
         band2.setBandColor(context, resistor.sigFigBandTwo)
         band3.setBandColor(context, sigFigThree)
