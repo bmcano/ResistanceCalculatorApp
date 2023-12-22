@@ -1,8 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
+import com.brandoncano.resistancecalculator.resistor.Resistor
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
-import com.brandoncano.resistancecalculator.resistor.Resistor
 
 /**
  * Job: Formats the resistance based on the colors selected for the bands (CtV).
@@ -12,7 +12,7 @@ object ResistanceFormatter {
     private const val zeroOhms = "0 ${S.Ohms}"
 
     fun calculate(resistor: Resistor): String {
-        if (resistor.isEmpty()) return "Select Colors"
+        if (resistor.isEmpty()) return "Select colors"
 
         val sigFigOne = ValueFinder.getSigFig(resistor.sigFigBandOne)
         val sigFigTwo = ValueFinder.getSigFig(resistor.sigFigBandTwo)
