@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/selected_three_nav"
-        android:icon="@drawable/img_icon_four_band"
+        android:icon="@drawable/img_icon_three_band"
         android:title="@string/three_band_nav" />
     <item
         android:id="@+id/selected_four_nav"
