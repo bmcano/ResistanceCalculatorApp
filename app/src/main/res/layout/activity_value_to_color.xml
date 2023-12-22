@@ -39,7 +39,7 @@
         android:id="@+id/edit_text_outline"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="120dp"
-        android:layout_height="64dp"
+        android:layout_height="72dp"
         android:layout_marginTop="16dp"
         android:hint="@string/type_resistance_hint"
         android:textColorHint="?hintTextColor"
@@ -68,7 +68,7 @@
         android:id="@+id/dropDownSelectorUnits"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
         android:layout_width="120dp"
-        android:layout_height="64dp"
+        android:layout_height="72dp"
         android:layout_marginTop="16dp"
         android:hint="@string/units_hint"
         android:textColorHint="?hintTextColor"
@@ -93,7 +93,6 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dropDownSelectorTolerance"
         style="@style/textInputLayoutColorTextDesign"
-        android:layout_marginTop="16dp"
         android:hint="@string/tolerance_band_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +110,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dropDownSelectorPPM"
         style="@style/textInputLayoutColorTextDesign"
-        android:layout_marginTop="16dp"
+
         android:hint="@string/ppm_band_hint"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
