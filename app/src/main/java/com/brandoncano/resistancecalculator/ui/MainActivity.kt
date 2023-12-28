@@ -9,7 +9,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.util.EmailFeedback
-import com.brandoncano.resistancecalculator.util.PlayStore
+import com.brandoncano.resistancecalculator.util.OpenLink
 import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.brandoncano.resistancecalculator.util.toAboutActivity
 import com.brandoncano.resistancecalculator.util.toColorToValueActivity
@@ -39,9 +39,9 @@ class MainActivity : AppCompatActivity() {
         val valueToColorButton: Button = findViewById(R.id.value_to_color_button)
         valueToColorButton.setOnClickListener { toValueToColorActivity() }
         val rateUsButton: Button = findViewById(R.id.rate_us_button)
-        rateUsButton.setOnClickListener { PlayStore.openResistorApp(this) }
+        rateUsButton.setOnClickListener { OpenLink.openResistorApp(this) }
         val viewCapacitorAppButton: Button = findViewById(R.id.view_capacitor_app_button)
-        viewCapacitorAppButton.setOnClickListener { PlayStore.openCapacitorApp(this) }
+        viewCapacitorAppButton.setOnClickListener { OpenLink.openCapacitorApp(this) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
