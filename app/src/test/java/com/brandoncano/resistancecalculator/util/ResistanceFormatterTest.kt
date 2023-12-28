@@ -10,7 +10,7 @@ class ResistanceFormatterTest {
 
     @Test
     fun `empty resistor`() {
-        assertEquals("Select Colors", ResistanceFormatter.calculate(Resistor()))
+        assertEquals("Select colors", ResistanceFormatter.calculate(Resistor()))
     }
 
     @Test
@@ -90,7 +90,5 @@ class ResistanceFormatterTest {
         val resistor = Resistor(C.GOLD, C.GOLD, "", C.RED, C.GOLD)
         val answer = "0 ${S.Ohms} ${S.PM}5%"
         assertEquals(answer, ResistanceFormatter.calculate(resistor))
-
-
     }
 }

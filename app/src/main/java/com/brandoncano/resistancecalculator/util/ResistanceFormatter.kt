@@ -21,7 +21,7 @@ object ResistanceFormatter {
         val tolerance = ValueFinder.getTolerance(resistor.toleranceBand, resistor.isThreeBand())
         val ppm = ValueFinder.getPPM(resistor.ppmBand, resistor.isSixBand())
 
-        return "$resistance $tolerance$ppm"
+        return "$resistance $tolerance\n$ppm".trimEnd('\n')
     }
 
     private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {

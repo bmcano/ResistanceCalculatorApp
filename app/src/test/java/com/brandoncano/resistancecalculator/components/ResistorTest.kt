@@ -95,7 +95,7 @@ class ResistorTest {
         assertEquals(6, resistor.getNumberOfBands())
 
         resistor.setNumberOfBands(3)
-        assertEquals(4, resistor.getNumberOfBands())
+        assertEquals(3, resistor.getNumberOfBands())
 
         resistor.setNumberOfBands(7)
         assertEquals(6, resistor.getNumberOfBands())
