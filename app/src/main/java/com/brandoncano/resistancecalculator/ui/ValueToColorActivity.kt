@@ -160,11 +160,11 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_vtc)
         val buttonSelection = StateData.BUTTON_SELECTION_VTC.loadData(this)
-        when (buttonSelection) {
-            "3" -> bottomNavigationView.selectedItemId = R.id.selected_three_nav
-            "4" -> bottomNavigationView.selectedItemId = R.id.selected_four_nav
-            "5" -> bottomNavigationView.selectedItemId = R.id.selected_five_nav
-            "6" -> bottomNavigationView.selectedItemId = R.id.selected_six_nav
+        bottomNavigationView.selectedItemId = when (buttonSelection) {
+            "3" -> R.id.selected_three_nav
+            "5" -> R.id.selected_five_nav
+            "6" -> R.id.selected_six_nav
+            else -> R.id.selected_four_nav
         }
         val buttonNumber = buttonSelection.toIntOrNull() ?: 4
         updateNavigationSelection(buttonNumber)
