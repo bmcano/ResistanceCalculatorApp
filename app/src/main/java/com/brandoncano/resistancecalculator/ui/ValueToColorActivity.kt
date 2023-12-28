@@ -199,7 +199,8 @@ class ValueToColorActivity : AppCompatActivity() {
         val calculateButton: Button = findViewById(R.id.calculate)
         calculateButton.setOnClickListener {
             updateResistorAndText()
-            closeKeyboard()
+            val rootView: View = findViewById(android.R.id.content)
+            closeKeyboard(rootView)
             textInputLayout.clearFocus()
         }
     }
@@ -241,12 +242,9 @@ class ValueToColorActivity : AppCompatActivity() {
         StateData.RESISTANCE_VTC.saveData(this, resistanceTextView.text.toString())
     }
 
-    private fun closeKeyboard() {
-        val view = this.currentFocus
-        if (view != null) {
-            val input = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            input.hideSoftInputFromWindow(view.windowToken, 0)
-        }
+    private fun closeKeyboard(view: View) {
+        val input = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        input.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun reset() {
