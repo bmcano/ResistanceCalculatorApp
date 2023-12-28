@@ -10,7 +10,7 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
  */
 object ColorFinder {
 
-    private fun textToColorPair(color: String = ""): Pair<Int, Int> {
+    private fun textToColorPair(color: String): Pair<Int, Int> {
         return when (color) {
             C.BLACK ,                 "250 ${S.PPM}" -> R.drawable.square_black  to R.color.black
             C.BROWN , "${S.PM}1%"   , "100 ${S.PPM}" -> R.drawable.square_brown  to R.color.brown

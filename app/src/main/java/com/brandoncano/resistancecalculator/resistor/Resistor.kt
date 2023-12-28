@@ -48,7 +48,7 @@ data class Resistor(
             4 -> "[ $sigFigBandOne, $sigFigBandTwo, $multiplierBand, $toleranceBand ]"
             5 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree, $multiplierBand, $toleranceBand ]"
             6 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree, $multiplierBand, $toleranceBand, $ppmBand ]"
-            else -> ""
+            else -> "[ $sigFigBandOne, $sigFigBandTwo, $multiplierBand ]"
         }
     }
 

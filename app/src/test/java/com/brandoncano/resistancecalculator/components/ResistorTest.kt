@@ -24,6 +24,8 @@ class ResistorTest {
     fun `resistors as a string`() {
         val resistor = Resistor(C.BLACK, C.BROWN, C.RED, C.ORANGE, C.GOLD, C.SILVER)
         assertEquals("[ ${C.BLACK}, ${C.BROWN}, ${C.ORANGE}, ${C.GOLD} ]", resistor.toColorBandString())
+        resistor.setNumberOfBands(3)
+        assertEquals("[ ${C.BLACK}, ${C.BROWN}, ${C.ORANGE} ]", resistor.toColorBandString())
         resistor.setNumberOfBands(5)
         assertEquals("[ ${C.BLACK}, ${C.BROWN}, ${C.RED}, ${C.ORANGE}, ${C.GOLD} ]", resistor.toColorBandString())
         resistor.setNumberOfBands(6)
@@ -32,6 +34,9 @@ class ResistorTest {
         resistor.toleranceValue = "${S.PM}5%"
         resistor.ppmValue = "250 ${S.PPM}"
         assertEquals("[ ${C.BLACK}, ${C.BROWN}, ${C.RED}, ${C.ORANGE}, ${C.GOLD}, ${C.BLACK} ]", resistor.toColorBandString(true))
+
+        resistor.clear()
+        assertEquals("[ , , , , ,  ]", resistor.toColorBandString())
     }
 
     @Test
@@ -68,19 +73,6 @@ class ResistorTest {
         resistor.sigFigBandThree = C.ORANGE
         assertFalse(resistor.isEmpty())
     }
-
-//    @Test
-//    fun `all sig figs are zero`() {
-//        val resistor = Resistor(C.BLACK, C.BLACK, C.BLACK)
-//        assertTrue(resistor.isFirstDigitZero())
-//        resistor.setNumberOfBands(5)
-//        assertTrue(resistor.isFirstDigitZero())
-//
-//        resistor.sigFigBandTwo = C.BROWN
-//        assertFalse(resistor.isFirstDigitZero())
-//        resistor.setNumberOfBands(4)
-//        assertFalse(resistor.isFirstDigitZero())
-//    }
 
     @Test
     fun `only valid number of bands as an input`() {
