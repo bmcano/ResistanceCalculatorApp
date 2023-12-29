@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Theme colors -->
-    <color name="yellow_primary">#E9C46A</color>
+    <color name="yellow_primary">#FFCF9E</color>
     <color name="orange_primary">#F4A261</color>
     <color name="mango_primary">#E76F51</color>
     <color name="beige">#F5F5DC</color>
