@@ -2,7 +2,7 @@
     <!-- Base application theme (Dark Mode) -->
     <style name="Theme.ResistanceCalculator" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color -->
-        <item name="colorPrimary">@color/yellow_primary</item>
+        <item name="colorPrimary">@color/light_orange</item>
         <item name="colorPrimaryVariant">@color/mango_primary</item>
         <item name="colorOnPrimary">@color/beige</item>
         <!-- Status bar color -->
@@ -17,7 +17,7 @@
 
     <!-- Default colors for dropdowns -->
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/beige</color>
-    <color name="selected_dropdown_color">@color/yellow_primary</color>
-    <color name="text_outline_color">@color/yellow_primary</color>
+    <color name="selected_dropdown_color">@color/light_orange</color>
+    <color name="text_outline_color">@color/light_orange</color>
 
 </resources>
