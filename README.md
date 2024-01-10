@@ -1,5 +1,5 @@
-<p align="center">
-  <img src="https://github.com/BranCann15/ResistanceCalculatorApp/blob/main/app/src/main/ic_feature_graphic-playstore.webp" title="feature graphic">
+<p>
+  <img src="https://github.com/BranCann15/ResistanceCalculatorApp/blob/main/app/src/main/ic_feature_graphic-playstore.webp" title="feature graphic" alt="feature graphic">
 </p>
 
 ### Features
