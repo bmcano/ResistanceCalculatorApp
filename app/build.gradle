@@ -10,8 +10,8 @@ android {
         applicationId "com.brandoncano.resistancecalculator"
         minSdk 24
         targetSdk 34
-        versionCode 13
-        versionName "3.0.4-Develop"
+        versionCode 14
+        versionName "3.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -20,7 +20,7 @@ android {
     }
     applicationVariants.configureEach { variant ->
         variant.resValue "string", "version", variant.versionName
-        variant.resValue "string", "last_updated", "12/21/2023"
+        variant.resValue "string", "last_updated", "1/10/2023"
     }
     buildTypes {
         release {
@@ -46,7 +46,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // 6-19-22
     implementation 'androidx.appcompat:appcompat:1.6.1' // 2-18-23
     implementation 'com.google.android.material:material:1.11.0' // 12-28-23
-    implementation 'com.google.code.gson:gson:2.8.9' // 4-2-23
+    implementation 'com.google.code.gson:gson:2.10' // 4-2-23
     implementation files('libs/ostermillerutils_1_07_00.jar')
     implementation platform('androidx.compose:compose-bom:2022.10.00') // 6-19-22
     testImplementation 'junit:junit:4.13.2' // 6-19-22
