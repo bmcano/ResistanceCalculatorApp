@@ -11,6 +11,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
 import com.brandoncano.resistancecalculator.resistor.ResistorCtV
 import com.brandoncano.resistancecalculator.util.EmailFeedback
+import com.brandoncano.resistancecalculator.util.ShareResistance
 import com.brandoncano.resistancecalculator.util.createResistorImage
 import com.brandoncano.resistancecalculator.util.setDropdownOnClickListener
 import com.brandoncano.resistancecalculator.util.setupActionBar
@@ -58,7 +59,7 @@ class ColorToValueActivity : AppCompatActivity() {
                 super.finish()
                 toValueToColorActivity()
             }
-//            R.id.share_item -> ShareResistance.execute(this, resistor, resistanceTextView)
+            R.id.share_item -> ShareResistance.execute(this, resistor, resistanceTextView)
             R.id.feedback -> EmailFeedback.execute(this)
             R.id.clear_selections -> reset()
             R.id.about_item -> toAboutActivity()

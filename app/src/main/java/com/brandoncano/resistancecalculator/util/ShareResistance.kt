@@ -11,10 +11,10 @@ import com.brandoncano.resistancecalculator.resistor.Resistor
  */
 object ShareResistance {
 
-    fun execute(context: Context, resistor: Resistor, resistance: TextView, isVtC: Boolean = false) {
+    fun execute(context: Context, resistor: Resistor, resistance: TextView) {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
-        val text = "${resistance.text}\n" + resistor.toColorBandString(isVtC)
+        val text = "${resistance.text}\n" + resistor.toString()
         intent.putExtra(Intent.EXTRA_TEXT, text)
         startActivity(context, Intent.createChooser(intent, ""), null)
     }

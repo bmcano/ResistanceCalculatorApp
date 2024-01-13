@@ -5,17 +5,11 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.constants.Colors
 
-class ResistorCtV(val context: Context) {
-    var sigFigBandOne = ""
-    var sigFigBandTwo = ""
-    var sigFigBandThree = ""
-    var multiplierBand = ""
+class ResistorCtV(val context: Context) : Resistor() {
     var toleranceBand = ""
     var ppmBand = ""
-    var resistance = ""
-    var numberOfBands = 4 // this is the default value used since its the most common
 
-    fun loadData() {
+    override fun loadData() {
         sigFigBandOne = StateData.SIGFIG_BAND_ONE_CTV.loadData(context)
         sigFigBandTwo = StateData.SIGFIG_BAND_TWO_CTV.loadData(context)
         sigFigBandThree = StateData.SIGFIG_BAND_THREE_CTV.loadData(context)
@@ -28,11 +22,11 @@ class ResistorCtV(val context: Context) {
         }
     }
 
-    fun loadNumberOfBands(): String {
+    override fun loadNumberOfBands(): String {
         return StateData.BUTTON_SELECTION_CTV.loadData(context)
     }
 
-    fun clear() {
+    override fun clear() {
         StateData.SIGFIG_BAND_ONE_CTV.clearData(context)
         StateData.SIGFIG_BAND_TWO_CTV.clearData(context)
         StateData.SIGFIG_BAND_THREE_CTV.clearData(context)
@@ -43,19 +37,15 @@ class ResistorCtV(val context: Context) {
         loadData() // after clearing we want to reload the blank data
     }
 
-    fun updateResistance(resistance: String) {
+    override fun updateResistance(resistance: String) {
         this.resistance = resistance
         StateData.RESISTANCE_CTV.saveData(context, resistance)
     }
 
-    fun updateNumberOfBands(number: Int) {
+    override fun updateNumberOfBands(number: Int) {
         numberOfBands = number.coerceIn(3..6)
         StateData.BUTTON_SELECTION_CTV.saveData(context, "$numberOfBands")
     }
-
-    fun isThreeBand() = numberOfBands == 3
-    fun isThreeFourBand() = numberOfBands == 3 || numberOfBands == 4
-    fun isSixBand() = numberOfBands == 6
 
     override fun toString(): String {
         return when (numberOfBands) {

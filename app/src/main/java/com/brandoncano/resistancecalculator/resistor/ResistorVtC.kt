@@ -4,21 +4,15 @@ import android.content.Context
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.constants.Symbols
+import com.brandoncano.resistancecalculator.util.ColorFinder
 
-class ResistorVtC(val context: Context) {
+class ResistorVtC(val context: Context) : Resistor() {
     var userInput = ""
-    var resistance = ""
     var units = ""
     var toleranceValue = ""
     var ppmValue = ""
-    var numberOfBands = 4 // this is the default value used since its the most common
-    // misc band values needed
-    var sigFigBandOne = ""
-    var sigFigBandTwo = ""
-    var sigFigBandThree = ""
-    var multiplierBand = ""
 
-    fun loadData() {
+    override fun loadData() {
         userInput = StateData.USER_INPUT_VTC.loadData(context)
         units = StateData.UNITS_DROPDOWN_VTC.loadData(context)
         toleranceValue = StateData.TOLERANCE_DROPDOWN_VTC.loadData(context)
@@ -29,11 +23,11 @@ class ResistorVtC(val context: Context) {
         }
     }
 
-    fun loadNumberOfBands(): String {
+    override fun loadNumberOfBands(): String {
         return StateData.BUTTON_SELECTION_VTC.loadData(context)
     }
 
-    fun clear() {
+    override fun clear() {
         StateData.USER_INPUT_VTC.clearData(context)
         StateData.UNITS_DROPDOWN_VTC.clearData(context)
         StateData.TOLERANCE_DROPDOWN_VTC.clearData(context)
@@ -42,18 +36,29 @@ class ResistorVtC(val context: Context) {
         loadData() // after clearing we want to reload the blank data
     }
 
-    fun updateUserInput(input: String) {
-        StateData.USER_INPUT_VTC.saveData(context, input)
-    }
-
-    fun updateResistance(resistance: String) {
+    override fun updateResistance(resistance: String) {
         this.resistance = resistance
         StateData.RESISTANCE_VTC.saveData(context, resistance)
     }
 
-    fun updateNumberOfBands(number: Int) {
+    override fun updateNumberOfBands(number: Int) {
         numberOfBands = number.coerceIn(3..6)
         StateData.BUTTON_SELECTION_VTC.saveData(context, "$numberOfBands")
+    }
+
+    override fun toString(): String {
+        val toleranceBand = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(toleranceValue))
+        val ppmBand = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(ppmValue))
+        return when (numberOfBands) {
+            4 -> "[ $sigFigBandOne, $sigFigBandTwo, $multiplierBand, $toleranceBand ]"
+            5 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree, $multiplierBand, $toleranceBand ]"
+            6 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree, $multiplierBand, $toleranceBand, $ppmBand ]"
+            else -> "[ $sigFigBandOne, $sigFigBandTwo, $multiplierBand ]"
+        }
+    }
+
+    fun updateUserInput(input: String) {
+        StateData.USER_INPUT_VTC.saveData(context, input)
     }
 
     fun getResistanceText(): String {
@@ -62,8 +67,4 @@ class ResistorVtC(val context: Context) {
         if (numberOfBands == 6) text += "\n$ppmValue".trimEnd('\n')
         return text
     }
-
-    fun isThreeBand() = numberOfBands == 3
-    fun isThreeFourBand() = numberOfBands == 3 || numberOfBands == 4
-    fun isSixBand() = numberOfBands == 6
 }
