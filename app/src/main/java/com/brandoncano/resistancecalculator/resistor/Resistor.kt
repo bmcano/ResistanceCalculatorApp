@@ -16,8 +16,9 @@ abstract class Resistor {
     abstract fun loadNumberOfBands(): String
     abstract fun clear()
     abstract fun isEmpty(): Boolean
-    abstract fun updateResistance(resistance: String)
-    abstract fun updateNumberOfBands(number: Int)
+    abstract fun saveResistance(resistance: String)
+    abstract fun saveNumberOfBands(number: Int)
+    abstract fun saveDropdownSelections()
 
     fun isThreeBand() = numberOfBands == 3
     fun isThreeFourBand() = numberOfBands == 3 || numberOfBands == 4

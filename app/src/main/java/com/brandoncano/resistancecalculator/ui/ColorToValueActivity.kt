@@ -121,7 +121,7 @@ class ColorToValueActivity : AppCompatActivity() {
     }
 
     private fun updateNavigationSelection(numberOfBands: Int) {
-        resistor.updateNumberOfBands(numberOfBands)
+        resistor.saveNumberOfBands(numberOfBands)
         resistorImage.setImageColors(this, resistor)
         toggleDropDownThree.visibility = if (resistor.isThreeFourBand()) View.GONE else View.VISIBLE
         toggleDropDownPPM.visibility = if (resistor.isSixBand()) View.VISIBLE else View.GONE
@@ -130,7 +130,7 @@ class ColorToValueActivity : AppCompatActivity() {
     }
 
     private fun reset() {
-        resistor.updateNumberOfBands(resistor.numberOfBands)
+        resistor.saveNumberOfBands(resistor.numberOfBands)
         resistanceTextView.text = getString(R.string.default_text)
         resistorImage.clearResistor(this)
         resistor.clear()

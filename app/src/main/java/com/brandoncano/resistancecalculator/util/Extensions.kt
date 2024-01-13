@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerItem
-import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.resistor.ResistorCtV
 import com.brandoncano.resistancecalculator.resistor.ResistorImage
 import com.brandoncano.resistancecalculator.resistor.ResistorVtC
@@ -25,13 +24,13 @@ fun ImageView.setBandColor(context: Context, colorText: String = "") {
 
 fun TextView.updateResistance(resistor: ResistorCtV) {
     this.text = ResistanceFormatter.calculate(resistor)
-    resistor.updateResistance(this.text.toString())
+    resistor.saveResistance(this.text.toString())
 }
 
 fun TextView.updateResistance(resistor: ResistorVtC) {
     ResistorFormatter.generateResistor(resistor)
     this.text = resistor.getResistanceText()
-    resistor.updateResistance(this.text.toString())
+    resistor.saveResistance(this.text.toString())
 }
 
 fun AutoCompleteTextView.setDropDownDrawable(color: String) {
@@ -47,14 +46,14 @@ fun AutoCompleteTextView.setDropdownOnClickListener(
     resistorImage: ResistorImage,
     textView: TextView,
 ) {
-    val (band: String, image: ImageView, stateData: StateData) = when (this.id) {
-        R.id.spinner1 -> Triple(resistor.sigFigBandOne, resistorImage.band1, StateData.SIGFIG_BAND_ONE_CTV)
-        R.id.spinner2 -> Triple(resistor.sigFigBandTwo, resistorImage.band2, StateData.SIGFIG_BAND_TWO_CTV)
-        R.id.spinner3 -> Triple(resistor.sigFigBandThree, resistorImage.band3, StateData.SIGFIG_BAND_THREE_CTV)
-        R.id.spinner4 -> Triple(resistor.multiplierBand, resistorImage.band4, StateData.MULTIPLIER_BAND_CTV)
-        R.id.spinner5 -> Triple(resistor.toleranceBand, resistorImage.band5, StateData.TOLERANCE_BAND_CTV)
-        R.id.spinner6 -> Triple(resistor.ppmBand, resistorImage.band6, StateData.PPM_BAND_CTV)
-        else -> Triple(resistor.sigFigBandOne, resistorImage.band1, StateData.SIGFIG_BAND_ONE_CTV)
+    val (band: String, image: ImageView) = when (this.id) {
+        R.id.spinner1 -> Pair(resistor.sigFigBandOne, resistorImage.band1)
+        R.id.spinner2 -> Pair(resistor.sigFigBandTwo, resistorImage.band2)
+        R.id.spinner3 -> Pair(resistor.sigFigBandThree, resistorImage.band3)
+        R.id.spinner4 -> Pair(resistor.multiplierBand, resistorImage.band4)
+        R.id.spinner5 -> Pair(resistor.toleranceBand, resistorImage.band5)
+        R.id.spinner6 -> Pair(resistor.ppmBand, resistorImage.band6)
+        else -> Pair(resistor.sigFigBandOne, resistorImage.band1)
     }
 
     this.setText(band)
@@ -74,7 +73,7 @@ fun AutoCompleteTextView.setDropdownOnClickListener(
         this.setDropDownDrawable(selection)
         image.setBandColor(context, selection)
         textView.updateResistance(resistor)
-        stateData.saveData(context, this.text.toString())
+        resistor.saveDropdownSelections()
         this.clearFocus()
     }
 }

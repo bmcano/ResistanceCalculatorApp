@@ -43,14 +43,20 @@ class ResistorVtC(val context: Context) : Resistor() {
         return resistance == "NotValid" || resistance.isEmpty() || units.isEmpty()
     }
 
-    override fun updateResistance(resistance: String) {
+    override fun saveResistance(resistance: String) {
         this.resistance = resistance
         StateData.RESISTANCE_VTC.saveData(context, resistance)
     }
 
-    override fun updateNumberOfBands(number: Int) {
+    override fun saveNumberOfBands(number: Int) {
         numberOfBands = number.coerceIn(3..6)
         StateData.BUTTON_SELECTION_VTC.saveData(context, "$numberOfBands")
+    }
+
+    override fun saveDropdownSelections() {
+        StateData.UNITS_DROPDOWN_VTC.saveData(context, units)
+        StateData.TOLERANCE_DROPDOWN_VTC.saveData(context, toleranceValue)
+        StateData.PPM_DROPDOWN_VTC.saveData(context, ppmValue)
     }
 
     override fun toString(): String {
@@ -64,7 +70,7 @@ class ResistorVtC(val context: Context) : Resistor() {
         }
     }
 
-    fun updateUserInput(input: String) {
+    fun saveUserInput(input: String) {
         StateData.USER_INPUT_VTC.saveData(context, input)
     }
 

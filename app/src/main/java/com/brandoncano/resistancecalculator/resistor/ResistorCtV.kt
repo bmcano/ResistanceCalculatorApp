@@ -44,14 +44,23 @@ class ResistorCtV(val context: Context) : Resistor() {
         return (isThreeFourBand() && isMissingBands) || (!isThreeFourBand() && (isMissingBands || sigFigBandThree.isEmpty()))
     }
 
-    override fun updateResistance(resistance: String) {
+    override fun saveResistance(resistance: String) {
         this.resistance = resistance
         StateData.RESISTANCE_CTV.saveData(context, resistance)
     }
 
-    override fun updateNumberOfBands(number: Int) {
+    override fun saveNumberOfBands(number: Int) {
         numberOfBands = number.coerceIn(3..6)
         StateData.BUTTON_SELECTION_CTV.saveData(context, "$numberOfBands")
+    }
+
+    override fun saveDropdownSelections() {
+        StateData.SIGFIG_BAND_ONE_CTV.saveData(context, sigFigBandOne)
+        StateData.SIGFIG_BAND_TWO_CTV.saveData(context, sigFigBandTwo)
+        StateData.SIGFIG_BAND_THREE_CTV.saveData(context, sigFigBandThree)
+        StateData.MULTIPLIER_BAND_CTV.saveData(context, multiplierBand)
+        StateData.TOLERANCE_BAND_CTV.saveData(context, toleranceBand)
+        StateData.PPM_BAND_CTV.saveData(context, ppmBand)
     }
 
     override fun toString(): String {
