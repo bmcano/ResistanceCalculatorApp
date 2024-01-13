@@ -5,7 +5,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.constants.Colors
 
-class ResistorCtV(var context: Context) {
+class ResistorCtV(val context: Context) {
     var sigFigBandOne = ""
     var sigFigBandTwo = ""
     var sigFigBandThree = ""

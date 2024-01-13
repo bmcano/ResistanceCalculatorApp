@@ -19,16 +19,17 @@ import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
 import com.brandoncano.resistancecalculator.components.SpinnerItem
 import com.brandoncano.resistancecalculator.components.StateData
-import com.brandoncano.resistancecalculator.resistor.Resistor
+import com.brandoncano.resistancecalculator.resistor.ResistorVtC
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.IsValidResistance
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
-import com.brandoncano.resistancecalculator.util.ShareResistance
 import com.brandoncano.resistancecalculator.util.createResistorImage
 import com.brandoncano.resistancecalculator.util.setDropDownDrawable
 import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.brandoncano.resistancecalculator.util.toAboutActivity
 import com.brandoncano.resistancecalculator.util.toColorToValueActivity
+import com.brandoncano.resistancecalculator.util.updateNavigationView
+import com.brandoncano.resistancecalculator.util.updateResistance
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 
@@ -43,7 +44,7 @@ class ValueToColorActivity : AppCompatActivity() {
     private lateinit var toggleDropDownTolerance: TextInputLayout
     private lateinit var textInputLayout: TextInputLayout
     private val resistorImage by lazy { createResistorImage() }
-    private val resistor: Resistor = Resistor()
+    private val resistor: ResistorVtC = ResistorVtC(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +72,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 super.finish()
                 toColorToValueActivity()
             }
-            R.id.share_item -> ShareResistance.execute(this, resistor, resistanceTextView, true)
+//            R.id.share_item -> ShareResistance.execute(this, resistor, resistanceTextView, true)
             R.id.feedback -> EmailFeedback.execute(this)
             R.id.clear_selections -> reset()
             R.id.about_item -> toAboutActivity()
@@ -83,16 +84,14 @@ class ValueToColorActivity : AppCompatActivity() {
         resistanceTextView = findViewById(R.id.display_resistance)
         toggleDropDownPPM = findViewById(R.id.dropDownSelectorPPM)
         toggleDropDownTolerance = findViewById(R.id.dropDownSelectorTolerance)
-        resistanceTextView.text = StateData.RESISTANCE_VTC.loadData(this)
-        if (resistanceTextView.text.isEmpty()) {
-            resistanceTextView.text = getString(R.string.enter_value)
-        }
+        resistor.loadData()
+        resistanceTextView.updateResistance(resistor)
     }
 
     private fun dropDownSetup() {
         textInputLayout = findViewById(R.id.edit_text_outline)
         inputResistance = findViewById(R.id.enter_resistance)
-        inputResistance.setText(StateData.USER_INPUT_VTC.loadData(this))
+        inputResistance.setText(resistor.userInput)
         inputResistance.doOnTextChanged { text, _, _, _ ->
             errorFinder(text.toString())
         }
@@ -100,16 +99,9 @@ class ValueToColorActivity : AppCompatActivity() {
         val dropDownUnits: AutoCompleteTextView = findViewById(R.id.spinnerUnits)
         val dropDownTolerance: AutoCompleteTextView = findViewById(R.id.spinnerTolerance)
         val dropDownPPM: AutoCompleteTextView = findViewById(R.id.spinnerPPM)
-
-        // load and set saved data
-        resistor.units = StateData.UNITS_DROPDOWN_VTC.loadData(this)
-        resistor.toleranceValue = StateData.TOLERANCE_DROPDOWN_VTC.loadData(this)
-        resistor.ppmValue = StateData.PPM_DROPDOWN_VTC.loadData(this)
-
         dropDownUnits.setText(resistor.units)
         dropDownTolerance.setText(resistor.toleranceValue)
         dropDownPPM.setText(resistor.ppmValue)
-
         dropDownTolerance.setDropDownDrawable(resistor.toleranceValue)
         dropDownPPM.setDropDownDrawable(resistor.ppmValue)
 
@@ -159,19 +151,12 @@ class ValueToColorActivity : AppCompatActivity() {
 
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_vtc)
-        val buttonSelection = StateData.BUTTON_SELECTION_VTC.loadData(this)
-        bottomNavigationView.selectedItemId = when (buttonSelection) {
-            "3" -> R.id.selected_three_nav
-            "5" -> R.id.selected_five_nav
-            "6" -> R.id.selected_six_nav
-            else -> R.id.selected_four_nav
-        }
+        val buttonSelection = resistor.loadNumberOfBands()
+        bottomNavigationView.updateNavigationView(buttonSelection)
         val buttonNumber = buttonSelection.toIntOrNull() ?: 4
         updateNavigationSelection(buttonNumber)
-
-        resistor.resistance = StateData.USER_INPUT_VTC.loadData(this)
         // crash fix - leaving this activity with invalid input would cause a crash
-        if (!(resistor.resistance == "NotValid" || resistor.resistance.isEmpty())) {
+        if (!(resistor.userInput == "NotValid" || resistor.userInput.isEmpty())) {
             updateResistorAndText()
         }
 
@@ -187,8 +172,7 @@ class ValueToColorActivity : AppCompatActivity() {
     }
 
     private fun updateNavigationSelection(numberOfBands: Int) {
-        StateData.BUTTON_SELECTION_VTC.saveData(this, "$numberOfBands")
-        resistor.setNumberOfBands(numberOfBands)
+        resistor.updateNumberOfBands(numberOfBands)
         toggleDropDownPPM.visibility = if (resistor.isSixBand()) View.VISIBLE else View.INVISIBLE
         toggleDropDownTolerance.visibility = if (resistor.isThreeBand()) View.INVISIBLE else View.VISIBLE
         errorFinder(inputResistance.text.toString())
@@ -208,38 +192,38 @@ class ValueToColorActivity : AppCompatActivity() {
     private fun errorFinder(text: String) {
         if (text.isEmpty() || text == ".") {
             textInputLayout.error = null
-            resistor.resistance = ""
+            resistor.userInput = ""
         } else if (!IsValidResistance.execute(resistor, text)) {
             textInputLayout.error = getString(R.string.invalid_input)
-            resistor.resistance = "NotValid"
-            StateData.USER_INPUT_VTC.saveData(this, "")
+            resistor.userInput = "NotValid"
+            resistor.updateUserInput("")
             resistorImage.clearResistor(this)
         } else {
             textInputLayout.error = null
-            resistor.resistance = text
+            resistor.userInput = text
         }
     }
 
     private fun updateResistorAndText() {
         resistanceTextView.text = resistor.getResistanceText()
         ResistorFormatter.generateResistor(resistor)
-        resistorImage.setImageColors(this, resistor, isVtC = true)
+        resistorImage.setImageColors(this, resistor)
 
         // handle invalid input
-        if (resistor.resistance == "NotValid") {
+        if (resistor.userInput == "NotValid") {
             resistanceTextView.text = getString(R.string.invalid_input)
             resistorImage.clearResistor(this)
             return
         }
         // handle empty input (no input)
-        if (resistor.resistance.isEmpty()) {
+        if (resistor.userInput.isEmpty()) {
             resistanceTextView.text = getString(R.string.enter_value)
             resistorImage.clearResistor(this)
             return
         }
 
-        StateData.USER_INPUT_VTC.saveData(this, resistor.resistance)
-        StateData.RESISTANCE_VTC.saveData(this, resistanceTextView.text.toString())
+        resistor.updateUserInput(resistor.userInput)
+        resistor.updateResistance(resistanceTextView.text.toString())
     }
 
     private fun closeKeyboard(view: View) {
@@ -248,12 +232,10 @@ class ValueToColorActivity : AppCompatActivity() {
     }
 
     private fun reset() {
-        StateData.RESISTANCE_VTC.clearData(this)
-        StateData.BUTTON_SELECTION_VTC.saveData(this, "${resistor.getNumberOfBands()}")
+        resistor.updateNumberOfBands(resistor.numberOfBands)
         resistanceTextView.text = getString(R.string.enter_value)
         resistorImage.clearResistor(this)
         resistor.clear()
         dropDownSetup() // resets dropdown and resistor info
-        calculateButtonSetup()
     }
 }

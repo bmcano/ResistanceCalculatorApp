@@ -15,14 +15,10 @@ data class ResistorImage(
     val band5: ImageView,
     val band6: ImageView
 ) {
-    fun setImageColors(context: Context, resistor: Resistor, isVtC: Boolean = false) {
+    fun setImageColors(context: Context, resistor: ResistorVtC) {
         var sigFigThree = resistor.sigFigBandThree
-        var tolerance = resistor.toleranceBand
-        var ppm = resistor.ppmBand
-        if (isVtC) {
-            tolerance = resistor.toleranceValue
-            ppm = resistor.ppmValue
-        }
+        var tolerance = resistor.toleranceValue
+        var ppm = resistor.ppmValue
         if (!resistor.isSixBand()) ppm = ""
         if (resistor.isThreeFourBand()) sigFigThree = ""
         if (resistor.isThreeBand()) tolerance = ""
