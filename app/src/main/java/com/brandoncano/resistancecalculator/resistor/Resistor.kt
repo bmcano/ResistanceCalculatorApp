@@ -1,8 +1,5 @@
 package com.brandoncano.resistancecalculator.resistor
 
-import android.content.Context
-import com.brandoncano.resistancecalculator.components.StateData
-import com.brandoncano.resistancecalculator.constants.Colors.BLACK
 import com.brandoncano.resistancecalculator.constants.Symbols.PM
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
@@ -28,15 +25,6 @@ data class Resistor(
     var ppmValue = ""
 
     private var numberOfBands = 4 // this is the default value used since its the most common
-
-    fun loadData(context: Context) {
-        sigFigBandOne = StateData.SIGFIG_BAND_ONE_CTV.loadData(context)
-        sigFigBandTwo = StateData.SIGFIG_BAND_TWO_CTV.loadData(context)
-        sigFigBandThree = StateData.SIGFIG_BAND_THREE_CTV.loadData(context)
-        multiplierBand = StateData.MULTIPLIER_BAND_CTV.loadData(context)
-        toleranceBand = StateData.TOLERANCE_BAND_CTV.loadData(context)
-        ppmBand = StateData.PPM_BAND_CTV.loadData(context)
-    }
 
     fun toColorBandString(isVtC: Boolean = false): String {
         if (isVtC) {
@@ -73,8 +61,6 @@ data class Resistor(
         val isMissingBands = sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || multiplierBand.isEmpty()
         return (isThreeFourBand() && isMissingBands) || (!isThreeFourBand() && (isMissingBands || sigFigBandThree.isEmpty()))
     }
-
-    fun isFirstDigitZero() = sigFigBandOne == BLACK
 
     fun clear() {
         sigFigBandOne = ""

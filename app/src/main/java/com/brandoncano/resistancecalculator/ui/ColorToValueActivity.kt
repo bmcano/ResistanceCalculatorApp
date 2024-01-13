@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.SpinnerArrays
-import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.resistor.ResistorCtV
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.createResistorImage
@@ -32,7 +31,7 @@ class ColorToValueActivity : AppCompatActivity() {
     private lateinit var toggleDropDownPPM: TextInputLayout
     private lateinit var toggleDropDownTolerance: TextInputLayout
     private val resistorImage by lazy { createResistorImage() }
-    private val resistor: ResistorCtV = ResistorCtV()
+    private val resistor: ResistorCtV = ResistorCtV(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,8 +71,8 @@ class ColorToValueActivity : AppCompatActivity() {
         toggleDropDownThree = findViewById(R.id.dropDownSelector3)
         toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
         toggleDropDownTolerance = findViewById(R.id.dropDownSelector5)
-        resistor.loadData(this)
-        resistanceTextView.updateResistance(this, resistor)
+        resistor.loadData()
+        resistanceTextView.updateResistance(resistor)
     }
 
     private fun dropDownSetup() {
@@ -105,7 +104,7 @@ class ColorToValueActivity : AppCompatActivity() {
 
     private fun bottomNavigationSetup() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_ctv)
-        val buttonSelection = resistor.loadNumberOfBands(this)
+        val buttonSelection = resistor.loadNumberOfBands()
         bottomNavigationView.updateNavigationView(buttonSelection)
         val buttonNumber = buttonSelection.toIntOrNull() ?: 4
         updateNavigationSelection(buttonNumber)
@@ -121,19 +120,19 @@ class ColorToValueActivity : AppCompatActivity() {
     }
 
     private fun updateNavigationSelection(numberOfBands: Int) {
-        resistor.updateNumberOfBands(this, numberOfBands)
+        resistor.updateNumberOfBands(numberOfBands)
         resistorImage.setImageColors(this, resistor)
         toggleDropDownThree.visibility = if (resistor.isThreeFourBand()) View.GONE else View.VISIBLE
         toggleDropDownPPM.visibility = if (resistor.isSixBand()) View.VISIBLE else View.GONE
         toggleDropDownTolerance.visibility = if (resistor.isThreeBand()) View.INVISIBLE else View.VISIBLE
-        resistanceTextView.updateResistance(this, resistor)
+        resistanceTextView.updateResistance(resistor)
     }
 
     private fun reset() {
-        resistor.updateNumberOfBands(this, resistor.numberOfBands)
+        resistor.updateNumberOfBands(resistor.numberOfBands)
         resistanceTextView.text = getString(R.string.default_text)
         resistorImage.clearResistor(this)
-        resistor.clear(this)
+        resistor.clear()
         dropDownSetup() // resets dropdown and resistor info
     }
 }

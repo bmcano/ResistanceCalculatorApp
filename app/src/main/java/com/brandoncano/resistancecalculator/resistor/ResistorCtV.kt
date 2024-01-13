@@ -5,18 +5,17 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.constants.Colors
 
-class ResistorCtV(
-    var sigFigBandOne: String = "",
-    var sigFigBandTwo: String = "",
-    var sigFigBandThree: String = "",
-    var multiplierBand: String = "",
-    var toleranceBand: String = "",
-    var ppmBand: String = ""
-) {
-    var numberOfBands = 4 // this is the default value used since its the most common
+class ResistorCtV(var context: Context) {
+    var sigFigBandOne = ""
+    var sigFigBandTwo = ""
+    var sigFigBandThree = ""
+    var multiplierBand = ""
+    var toleranceBand = ""
+    var ppmBand = ""
     var resistance = ""
+    var numberOfBands = 4 // this is the default value used since its the most common
 
-    fun loadData(context: Context) {
+    fun loadData() {
         sigFigBandOne = StateData.SIGFIG_BAND_ONE_CTV.loadData(context)
         sigFigBandTwo = StateData.SIGFIG_BAND_TWO_CTV.loadData(context)
         sigFigBandThree = StateData.SIGFIG_BAND_THREE_CTV.loadData(context)
@@ -29,11 +28,11 @@ class ResistorCtV(
         }
     }
 
-    fun loadNumberOfBands(context: Context): String {
+    fun loadNumberOfBands(): String {
         return StateData.BUTTON_SELECTION_CTV.loadData(context)
     }
 
-    fun clear(context: Context) {
+    fun clear() {
         StateData.SIGFIG_BAND_ONE_CTV.clearData(context)
         StateData.SIGFIG_BAND_TWO_CTV.clearData(context)
         StateData.SIGFIG_BAND_THREE_CTV.clearData(context)
@@ -41,17 +40,17 @@ class ResistorCtV(
         StateData.TOLERANCE_BAND_CTV.clearData(context)
         StateData.PPM_BAND_CTV.clearData(context)
         StateData.RESISTANCE_CTV.clearData(context)
-        loadData(context) // after clearing we want to reload the blank data
+        loadData() // after clearing we want to reload the blank data
     }
 
-    fun updateNumberOfBands(context: Context, number: Int) {
-        numberOfBands = number.coerceIn(3..6)
-        StateData.BUTTON_SELECTION_CTV.saveData(context, "$numberOfBands")
-    }
-
-    fun updateResistance(resistance: String, context: Context) {
+    fun updateResistance(resistance: String) {
         this.resistance = resistance
         StateData.RESISTANCE_CTV.saveData(context, resistance)
+    }
+
+    fun updateNumberOfBands(number: Int) {
+        numberOfBands = number.coerceIn(3..6)
+        StateData.BUTTON_SELECTION_CTV.saveData(context, "$numberOfBands")
     }
 
     fun isThreeBand() = numberOfBands == 3

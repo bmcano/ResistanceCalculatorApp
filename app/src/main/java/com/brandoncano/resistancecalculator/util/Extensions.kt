@@ -22,9 +22,9 @@ fun ImageView.setBandColor(context: Context, colorText: String = "") {
     this.setColorFilter(ContextCompat.getColor(context, color))
 }
 
-fun TextView.updateResistance(context: Context, resistorCtV: ResistorCtV) {
+fun TextView.updateResistance(resistorCtV: ResistorCtV) {
     this.text = ResistanceFormatter.calculate(resistorCtV)
-    resistorCtV.updateResistance(this.text.toString(), context)
+    resistorCtV.updateResistance(this.text.toString())
 }
 
 fun AutoCompleteTextView.setDropDownDrawable(color: String) {
@@ -66,7 +66,7 @@ fun AutoCompleteTextView.setDropdownOnClickListener(
         }
         this.setDropDownDrawable(selection)
         image.setBandColor(context, selection)
-        textView.updateResistance(context, resistor)
+        textView.updateResistance(resistor)
         stateData.saveData(context, this.text.toString())
         this.clearFocus()
     }
