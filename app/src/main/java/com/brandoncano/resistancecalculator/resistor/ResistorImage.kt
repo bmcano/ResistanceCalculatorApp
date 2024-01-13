@@ -34,6 +34,21 @@ data class ResistorImage(
         band6.setBandColor(context, ppm)
     }
 
+    fun setImageColors(context: Context, resistor: ResistorCtV) {
+        var sigFigThree = resistor.sigFigBandThree
+        var tolerance = resistor.toleranceBand
+        var ppm = resistor.ppmBand
+        if (!resistor.isSixBand()) ppm = ""
+        if (resistor.isThreeFourBand()) sigFigThree = ""
+        if (resistor.isThreeBand()) tolerance = ""
+        band1.setBandColor(context, resistor.sigFigBandOne)
+        band2.setBandColor(context, resistor.sigFigBandTwo)
+        band3.setBandColor(context, sigFigThree)
+        band4.setBandColor(context, resistor.multiplierBand)
+        band5.setBandColor(context, tolerance)
+        band6.setBandColor(context, ppm)
+    }
+
     fun clearResistor(context: Context) {
         band1.setBandColor(context)
         band2.setBandColor(context)
