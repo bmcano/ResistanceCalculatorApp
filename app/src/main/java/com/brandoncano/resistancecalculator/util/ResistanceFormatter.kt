@@ -25,8 +25,6 @@ object ResistanceFormatter {
     }
 
     private fun formatResistance(resistor: ResistorCtV, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
-        if (resistor.isFirstDigitZero()) return zeroOhms // we no longer have the option for the first digit to be zero
-
         val threeFourBands = resistor.isThreeFourBand()
         val value: Int = if (threeFourBands) {
             (sigFigOne + sigFigTwo).toIntOrNull()

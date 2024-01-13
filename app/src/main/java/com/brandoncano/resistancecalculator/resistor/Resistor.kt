@@ -15,6 +15,7 @@ abstract class Resistor {
     abstract fun loadData()
     abstract fun loadNumberOfBands(): String
     abstract fun clear()
+    abstract fun isEmpty(): Boolean
     abstract fun updateResistance(resistance: String)
     abstract fun updateNumberOfBands(number: Int)
 

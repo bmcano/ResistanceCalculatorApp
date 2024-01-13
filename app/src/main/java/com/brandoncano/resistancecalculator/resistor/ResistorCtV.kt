@@ -3,8 +3,10 @@ package com.brandoncano.resistancecalculator.resistor
 import android.content.Context
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.StateData
-import com.brandoncano.resistancecalculator.constants.Colors
 
+/**
+ * Job: Holds the implementation of the resistor for CtV.
+ */
 class ResistorCtV(val context: Context) : Resistor() {
     var toleranceBand = ""
     var ppmBand = ""
@@ -37,6 +39,11 @@ class ResistorCtV(val context: Context) : Resistor() {
         loadData() // after clearing we want to reload the blank data
     }
 
+    override fun isEmpty(): Boolean {
+        val isMissingBands = sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || multiplierBand.isEmpty()
+        return (isThreeFourBand() && isMissingBands) || (!isThreeFourBand() && (isMissingBands || sigFigBandThree.isEmpty()))
+    }
+
     override fun updateResistance(resistance: String) {
         this.resistance = resistance
         StateData.RESISTANCE_CTV.saveData(context, resistance)
@@ -55,11 +62,4 @@ class ResistorCtV(val context: Context) : Resistor() {
             else -> "[ $sigFigBandOne, $sigFigBandTwo, $multiplierBand ]"
         }
     }
-
-    fun isEmpty(): Boolean {
-        val isMissingBands = sigFigBandOne.isEmpty() || sigFigBandTwo.isEmpty() || multiplierBand.isEmpty()
-        return (isThreeFourBand() && isMissingBands) || (!isThreeFourBand() && (isMissingBands || sigFigBandThree.isEmpty()))
-    }
-
-    fun isFirstDigitZero() = sigFigBandOne == Colors.BLACK
 }

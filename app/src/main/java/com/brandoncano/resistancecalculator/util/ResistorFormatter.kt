@@ -14,9 +14,8 @@ object ResistorFormatter {
     )
 
     fun generateResistor(resistor: ResistorVtC) {
+        if (resistor.isEmpty()) return
         val resistance = resistor.userInput
-        if (resistance == "NotValid" || resistance.isEmpty()) return
-
         val multiplier = MultiplierFromUnits.execute(resistor.units)
         val resLong: Long? = resistance.toLongOrNull()?.times(multiplier)
         val resDouble: Double = resistance.toDoubleOrNull()?.times(multiplier) ?: return

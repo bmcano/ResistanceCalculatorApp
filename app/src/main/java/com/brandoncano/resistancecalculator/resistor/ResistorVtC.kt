@@ -6,6 +6,9 @@ import com.brandoncano.resistancecalculator.components.StateData
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
+/**
+ * Job: Holds the implementation of the resistor for VtC.
+ */
 class ResistorVtC(val context: Context) : Resistor() {
     var userInput = ""
     var units = ""
@@ -34,6 +37,10 @@ class ResistorVtC(val context: Context) : Resistor() {
         StateData.PPM_DROPDOWN_VTC.clearData(context)
         StateData.RESISTANCE_VTC.clearData(context)
         loadData() // after clearing we want to reload the blank data
+    }
+
+    override fun isEmpty(): Boolean {
+        return resistance == "NotValid" || resistance.isEmpty() || units.isEmpty()
     }
 
     override fun updateResistance(resistance: String) {
