@@ -42,7 +42,12 @@ class ColorToValueActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        generalSetup()
+        resistanceTextView = findViewById(R.id.resistance_display_ctv)
+        toggleDropDownThree = findViewById(R.id.dropDownSelector3)
+        toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
+        toggleDropDownTolerance = findViewById(R.id.dropDownSelector5)
+        resistor.loadData()
+        resistanceTextView.text = resistor.resistance
         dropDownSetup()
         bottomNavigationSetup()
     }
@@ -59,21 +64,12 @@ class ColorToValueActivity : AppCompatActivity() {
                 super.finish()
                 toValueToColorActivity()
             }
-            R.id.share_item -> ShareResistance.execute(this, resistor, resistanceTextView)
+            R.id.share_item -> ShareResistance.execute(this, resistor)
             R.id.feedback -> EmailFeedback.execute(this)
             R.id.clear_selections -> reset()
             R.id.about_item -> toAboutActivity()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun generalSetup() {
-        resistanceTextView = findViewById(R.id.resistance_display_ctv)
-        toggleDropDownThree = findViewById(R.id.dropDownSelector3)
-        toggleDropDownPPM = findViewById(R.id.dropDownSelector6)
-        toggleDropDownTolerance = findViewById(R.id.dropDownSelector5)
-        resistor.loadData()
-        resistanceTextView.updateResistance(resistor)
     }
 
     private fun dropDownSetup() {

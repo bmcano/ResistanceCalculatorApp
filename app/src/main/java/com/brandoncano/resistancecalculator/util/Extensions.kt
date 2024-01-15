@@ -11,7 +11,6 @@ import com.brandoncano.resistancecalculator.components.ImageTextArrayAdapter
 import com.brandoncano.resistancecalculator.components.SpinnerItem
 import com.brandoncano.resistancecalculator.resistor.ResistorCtV
 import com.brandoncano.resistancecalculator.resistor.ResistorImage
-import com.brandoncano.resistancecalculator.resistor.ResistorVtC
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
@@ -24,12 +23,6 @@ fun ImageView.setBandColor(context: Context, colorText: String = "") {
 
 fun TextView.updateResistance(resistor: ResistorCtV) {
     this.text = ResistanceFormatter.calculate(resistor)
-    resistor.saveResistance(this.text.toString())
-}
-
-fun TextView.updateResistance(resistor: ResistorVtC) {
-    ResistorFormatter.generateResistor(resistor)
-    this.text = resistor.getResistanceText()
     resistor.saveResistance(this.text.toString())
 }
 

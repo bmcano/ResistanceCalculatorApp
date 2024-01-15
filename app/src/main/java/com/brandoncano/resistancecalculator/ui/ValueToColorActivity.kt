@@ -29,7 +29,6 @@ import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.brandoncano.resistancecalculator.util.toAboutActivity
 import com.brandoncano.resistancecalculator.util.toColorToValueActivity
 import com.brandoncano.resistancecalculator.util.updateNavigationView
-import com.brandoncano.resistancecalculator.util.updateResistance
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputLayout
 
@@ -72,7 +71,7 @@ class ValueToColorActivity : AppCompatActivity() {
                 super.finish()
                 toColorToValueActivity()
             }
-            R.id.share_item -> ShareResistance.execute(this, resistor, resistanceTextView)
+            R.id.share_item -> ShareResistance.execute(this, resistor)
             R.id.feedback -> EmailFeedback.execute(this)
             R.id.clear_selections -> reset()
             R.id.about_item -> toAboutActivity()
@@ -85,7 +84,7 @@ class ValueToColorActivity : AppCompatActivity() {
         toggleDropDownPPM = findViewById(R.id.dropDownSelectorPPM)
         toggleDropDownTolerance = findViewById(R.id.dropDownSelectorTolerance)
         resistor.loadData()
-        resistanceTextView.updateResistance(resistor)
+        resistanceTextView.text = resistor.resistance
     }
 
     private fun dropDownSetup() {

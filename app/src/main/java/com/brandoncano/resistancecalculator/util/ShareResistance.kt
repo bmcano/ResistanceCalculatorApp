@@ -11,10 +11,10 @@ import com.brandoncano.resistancecalculator.resistor.Resistor
  */
 object ShareResistance {
 
-    fun execute(context: Context, resistor: Resistor, resistance: TextView) {
+    fun execute(context: Context, resistor: Resistor) {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
-        val text = "${resistance.text}\n" + resistor.toString()
+        val text = "${resistor.resistance}\n" + resistor.toString()
         intent.putExtra(Intent.EXTRA_TEXT, text)
         startActivity(context, Intent.createChooser(intent, ""), null)
     }
