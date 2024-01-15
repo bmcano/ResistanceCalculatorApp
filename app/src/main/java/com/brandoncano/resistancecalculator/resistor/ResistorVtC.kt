@@ -41,7 +41,7 @@ class ResistorVtC(val context: Context) : Resistor() {
     }
 
     override fun isEmpty(): Boolean {
-        return resistance == "NotValid" || resistance.isEmpty() || units.isEmpty()
+        return resistance.isEmpty() || units.isEmpty()
     }
 
     override fun saveResistance(resistance: String) {

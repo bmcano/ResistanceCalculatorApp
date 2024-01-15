@@ -19,6 +19,7 @@ import com.brandoncano.resistancecalculator.resistor.ResistorVtC
 object IsValidResistance {
 
     fun execute(resistor: ResistorVtC, input: String): Boolean {
+        if (input.isEmpty()) return true
         input.toDoubleOrNull() ?: return false
         val sigFigs = SignificantFigures(input).numberSignificantFigures
         val isThreeFourBand = resistor.isThreeFourBand()

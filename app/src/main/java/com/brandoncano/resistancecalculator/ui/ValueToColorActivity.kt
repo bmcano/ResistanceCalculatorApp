@@ -42,7 +42,7 @@ class ValueToColorActivity : AppCompatActivity() {
     private lateinit var inputResistance: EditText
     private lateinit var toggleDropDownPPM: TextInputLayout
     private lateinit var toggleDropDownTolerance: TextInputLayout
-    private lateinit var textInputLayout: TextInputLayout
+    private lateinit var userInputLayout: TextInputLayout
     private val resistorImage by lazy { createResistorImage() }
     private val resistor: ResistorVtC = ResistorVtC(this)
 
@@ -54,10 +54,23 @@ class ValueToColorActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        generalSetup()
+        resistanceTextView = findViewById(R.id.display_resistance)
+        toggleDropDownPPM = findViewById(R.id.dropDownSelectorPPM)
+        toggleDropDownTolerance = findViewById(R.id.dropDownSelectorTolerance)
+        userInputLayout = findViewById(R.id.edit_text_outline)
+        resistor.loadData()
+        resistanceTextView.text = resistor.resistance
+
+        val calculateButton: Button = findViewById(R.id.calculate)
+        calculateButton.setOnClickListener {
+            updateResistorAndText()
+            val rootView: View = findViewById(android.R.id.content)
+            closeKeyboard(rootView)
+            userInputLayout.clearFocus()
+        }
+
         dropDownSetup()
         bottomNavigationSetup()
-        calculateButtonSetup()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -80,20 +93,11 @@ class ValueToColorActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun generalSetup() {
-        resistanceTextView = findViewById(R.id.display_resistance)
-        toggleDropDownPPM = findViewById(R.id.dropDownSelectorPPM)
-        toggleDropDownTolerance = findViewById(R.id.dropDownSelectorTolerance)
-        resistor.loadData()
-        resistanceTextView.text = resistor.resistance
-    }
-
     private fun dropDownSetup() {
-        textInputLayout = findViewById(R.id.edit_text_outline)
         inputResistance = findViewById(R.id.enter_resistance)
         inputResistance.setText(resistor.userInput)
         inputResistance.doOnTextChanged { text, _, _, _ ->
-            errorFinder(text.toString())
+            validateUserInput(text.toString())
         }
 
         val dropDownUnits: AutoCompleteTextView = findViewById(R.id.spinnerUnits)
@@ -153,11 +157,6 @@ class ValueToColorActivity : AppCompatActivity() {
         val buttonSelection = resistor.loadNumberOfBands()
         bottomNavigationView.updateNavigationView(buttonSelection)
         updateNavigationSelection(buttonSelection)
-        // crash fix - leaving this activity with invalid input would cause a crash
-        if (!(resistor.userInput == "NotValid" || resistor.userInput.isEmpty())) {
-            updateResistorAndText()
-        }
-
         bottomNavigationView.setOnItemSelectedListener {
             updateNavigationSelection(it.getNavigationValue())
             true
@@ -168,32 +167,17 @@ class ValueToColorActivity : AppCompatActivity() {
         resistor.saveNumberOfBands(numberOfBands)
         toggleDropDownPPM.visibility = if (resistor.isSixBand()) View.VISIBLE else View.INVISIBLE
         toggleDropDownTolerance.visibility = if (resistor.isThreeBand()) View.INVISIBLE else View.VISIBLE
-        errorFinder(inputResistance.text.toString())
+        validateUserInput(inputResistance.text.toString())
         updateResistorAndText()
     }
 
-    private fun calculateButtonSetup() {
-        val calculateButton: Button = findViewById(R.id.calculate)
-        calculateButton.setOnClickListener {
-            updateResistorAndText()
-            val rootView: View = findViewById(android.R.id.content)
-            closeKeyboard(rootView)
-            textInputLayout.clearFocus()
-        }
-    }
-
-    private fun errorFinder(text: String) {
-        if (text.isEmpty() || text == ".") {
-            textInputLayout.error = null
-            resistor.userInput = ""
-        } else if (!IsValidResistance.execute(resistor, text)) {
-            textInputLayout.error = getString(R.string.invalid_input)
-            resistor.userInput = "NotValid"
-            resistor.saveUserInput("")
-            resistorImage.clearResistor(this)
-        } else {
-            textInputLayout.error = null
+    private fun validateUserInput(text: String) {
+        if (IsValidResistance.execute(resistor, text)) {
+            userInputLayout.error = null
             resistor.userInput = text
+        } else {
+            userInputLayout.error = getString(R.string.invalid_input)
+            resistor.userInput = ""
         }
     }
 
@@ -201,18 +185,9 @@ class ValueToColorActivity : AppCompatActivity() {
         resistanceTextView.text = resistor.getResistanceText()
         ResistorFormatter.generateResistor(resistor)
         resistorImage.setImageColors(this, resistor)
-
-        // handle invalid input
-        if (resistor.userInput == "NotValid") {
-            resistanceTextView.text = getString(R.string.invalid_input)
-            resistorImage.clearResistor(this)
-            return
-        }
-        // handle empty input (no input)
         if (resistor.userInput.isEmpty()) {
             resistanceTextView.text = getString(R.string.enter_value)
             resistorImage.clearResistor(this)
-            return
         }
 
         resistor.saveUserInput(resistor.userInput)
