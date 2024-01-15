@@ -13,6 +13,7 @@ import com.brandoncano.resistancecalculator.resistor.ResistorCtV
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.ShareResistance
 import com.brandoncano.resistancecalculator.util.createResistorImage
+import com.brandoncano.resistancecalculator.util.getNavigationValue
 import com.brandoncano.resistancecalculator.util.setDropdownOnClickListener
 import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.brandoncano.resistancecalculator.util.toAboutActivity
@@ -103,15 +104,9 @@ class ColorToValueActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_ctv)
         val buttonSelection = resistor.loadNumberOfBands()
         bottomNavigationView.updateNavigationView(buttonSelection)
-        val buttonNumber = buttonSelection.toIntOrNull() ?: 4
-        updateNavigationSelection(buttonNumber)
+        updateNavigationSelection(buttonSelection)
         bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.selected_three_nav -> updateNavigationSelection(3)
-                R.id.selected_five_nav -> updateNavigationSelection(5)
-                R.id.selected_six_nav -> updateNavigationSelection(6)
-                else -> updateNavigationSelection(4)
-            }
+            updateNavigationSelection(it.getNavigationValue())
             true
         }
     }

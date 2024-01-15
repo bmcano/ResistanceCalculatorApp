@@ -24,6 +24,7 @@ import com.brandoncano.resistancecalculator.util.IsValidResistance
 import com.brandoncano.resistancecalculator.util.ResistorFormatter
 import com.brandoncano.resistancecalculator.util.ShareResistance
 import com.brandoncano.resistancecalculator.util.createResistorImage
+import com.brandoncano.resistancecalculator.util.getNavigationValue
 import com.brandoncano.resistancecalculator.util.setDropDownDrawable
 import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.brandoncano.resistancecalculator.util.toAboutActivity
@@ -151,20 +152,14 @@ class ValueToColorActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_nav_vtc)
         val buttonSelection = resistor.loadNumberOfBands()
         bottomNavigationView.updateNavigationView(buttonSelection)
-        val buttonNumber = buttonSelection.toIntOrNull() ?: 4
-        updateNavigationSelection(buttonNumber)
+        updateNavigationSelection(buttonSelection)
         // crash fix - leaving this activity with invalid input would cause a crash
         if (!(resistor.userInput == "NotValid" || resistor.userInput.isEmpty())) {
             updateResistorAndText()
         }
 
         bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.selected_three_nav -> updateNavigationSelection(3)
-                R.id.selected_five_nav -> updateNavigationSelection(5)
-                R.id.selected_six_nav -> updateNavigationSelection(6)
-                else -> updateNavigationSelection(4)
-            }
+            updateNavigationSelection(it.getNavigationValue())
             true
         }
     }

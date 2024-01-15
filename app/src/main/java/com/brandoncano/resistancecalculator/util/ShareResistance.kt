@@ -2,7 +2,6 @@ package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
 import android.content.Intent
-import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import com.brandoncano.resistancecalculator.resistor.Resistor
 

@@ -22,8 +22,9 @@ class ResistorCtV(val context: Context) : Resistor() {
         }
     }
 
-    override fun loadNumberOfBands(): String {
-        return StateData.BUTTON_SELECTION_CTV.loadData(context)
+    override fun loadNumberOfBands(): Int {
+        numberOfBands = StateData.BUTTON_SELECTION_CTV.loadData(context).toIntOrNull() ?: 4
+        return numberOfBands
     }
 
     override fun clear() {

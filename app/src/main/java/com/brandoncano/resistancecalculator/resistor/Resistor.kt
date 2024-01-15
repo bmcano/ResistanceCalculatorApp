@@ -16,7 +16,7 @@ abstract class Resistor {
     var resistance = ""
 
     abstract fun loadData()
-    abstract fun loadNumberOfBands(): String
+    abstract fun loadNumberOfBands(): Int
     abstract fun clear()
     abstract fun isEmpty(): Boolean
     abstract fun saveResistance(resistance: String)

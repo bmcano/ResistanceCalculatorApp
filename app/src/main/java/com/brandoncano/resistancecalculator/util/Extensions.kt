@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
+import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
@@ -71,11 +72,21 @@ fun AutoCompleteTextView.setDropdownOnClickListener(
     }
 }
 
-fun BottomNavigationView.updateNavigationView(buttonSelection: String) {
+fun BottomNavigationView.updateNavigationView(buttonSelection: Int) {
     this.selectedItemId = when (buttonSelection) {
-        "3" -> R.id.selected_three_nav
-        "5" -> R.id.selected_five_nav
-        "6" -> R.id.selected_six_nav
+        3 -> R.id.selected_three_nav
+        5 -> R.id.selected_five_nav
+        6 -> R.id.selected_six_nav
         else -> R.id.selected_four_nav
     }
 }
+
+fun MenuItem.getNavigationValue(): Int {
+    return when (this.itemId) {
+        R.id.selected_three_nav -> 3
+        R.id.selected_five_nav -> 5
+        R.id.selected_six_nav -> 6
+        else -> 4
+    }
+}
+

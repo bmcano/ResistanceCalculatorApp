@@ -26,8 +26,9 @@ class ResistorVtC(val context: Context) : Resistor() {
         }
     }
 
-    override fun loadNumberOfBands(): String {
-        return StateData.BUTTON_SELECTION_VTC.loadData(context)
+    override fun loadNumberOfBands(): Int {
+        numberOfBands = StateData.BUTTON_SELECTION_VTC.loadData(context).toIntOrNull() ?: 4
+        return numberOfBands
     }
 
     override fun clear() {
