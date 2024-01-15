@@ -60,8 +60,8 @@ class ResistorVtC(val context: Context) : Resistor() {
     }
 
     override fun toString(): String {
-        val toleranceBand = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(toleranceValue))
-        val ppmBand = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(ppmValue))
+        toleranceBand = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(toleranceValue))
+        ppmBand = ColorFinder.idToColorText(ColorFinder.textToColoredDrawable(ppmValue))
         return when (numberOfBands) {
             4 -> "[ $sigFigBandOne, $sigFigBandTwo, $multiplierBand, $toleranceBand ]"
             5 -> "[ $sigFigBandOne, $sigFigBandTwo, $sigFigBandThree, $multiplierBand, $toleranceBand ]"

@@ -6,10 +6,13 @@ package com.brandoncano.resistancecalculator.resistor
 abstract class Resistor {
     // these are the common attributes used in both
     var numberOfBands = 4
+        protected set
     var sigFigBandOne = ""
     var sigFigBandTwo = ""
     var sigFigBandThree = ""
     var multiplierBand = ""
+    var toleranceBand = ""
+    var ppmBand = ""
     var resistance = ""
 
     abstract fun loadData()

@@ -8,8 +8,6 @@ import com.brandoncano.resistancecalculator.components.StateData
  * Job: Holds the implementation of the resistor for CtV.
  */
 class ResistorCtV(val context: Context) : Resistor() {
-    var toleranceBand = ""
-    var ppmBand = ""
 
     override fun loadData() {
         sigFigBandOne = StateData.SIGFIG_BAND_ONE_CTV.loadData(context)
