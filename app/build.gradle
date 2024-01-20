@@ -39,6 +39,9 @@ android {
 
     }
     namespace 'com.brandoncano.resistancecalculator'
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
