@@ -10,8 +10,8 @@ android {
         applicationId "com.brandoncano.resistancecalculator"
         minSdk 24
         targetSdk 34
-        versionCode 15
-        versionName "3.0.5"
+        versionCode 16
+        versionName "3.0.6-Develop"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

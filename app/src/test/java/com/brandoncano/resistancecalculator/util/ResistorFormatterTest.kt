@@ -1,4 +1,4 @@
-//package com.brandoncano.resistancecalculator.util
+package com.brandoncano.resistancecalculator.util
 //
 //import com.brandoncano.resistancecalculator.resistor.Resistor
 //import com.brandoncano.resistancecalculator.constants.Colors as C
@@ -6,10 +6,10 @@
 //import org.junit.Assert.assertEquals
 //import org.junit.Test
 //
-///**
-// * Note: This will only test valid number inputs, since only valid inputs are allowed through this.
-// */
-//class ResistorFormatterTest {
+/**
+ * Note: This will only test valid number inputs, since only valid inputs are allowed through this.
+ */
+class ResistorFormatterTest {
 //
 //    @Test
 //    fun `non number resistance values`() {
@@ -304,4 +304,4 @@
 //        ResistorFormatter.generateResistor(resistor)
 //        assertEquals(C.BLACK, resistor.multiplierBand)
 //    }
-//}
+}
