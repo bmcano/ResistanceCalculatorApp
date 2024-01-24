@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/circular_app_icon_main_activity"
-                android:layout_width="256dp"
-                android:layout_height="256dp"
+                android:layout_width="192dp"
+                android:layout_height="192dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
