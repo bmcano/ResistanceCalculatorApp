@@ -30,7 +30,7 @@ object IsValidResistance {
             input.length > 1 && input[0] == '0' && input[1] != '.' ||
             input.isNotEmpty() && input[0] == '.' -> false
 
-            isThreeFourBand -> when { /* FOUR BAND */
+            isThreeFourBand -> when { /* THREE/FOUR BAND */
                 input.startsWith("0.00") ||
                 sigFigs >= 2 && input.startsWith("0.0") -> false
                 sigFigs == 3 && input.endsWith(".0") ||
