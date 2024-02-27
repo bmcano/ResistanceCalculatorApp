@@ -15,23 +15,21 @@ data class ResistorImage(
     val band5: ImageView,
     val band6: ImageView
 ) {
-    fun setImageColors(context: Context, resistor: Resistor, isVtC: Boolean = false) {
-        var sigFigThree = resistor.sigFigBandThree
-        var tolerance = resistor.toleranceBand
-        var ppm = resistor.ppmBand
-        if (isVtC) {
-            tolerance = resistor.toleranceValue
-            ppm = resistor.ppmValue
-        }
-        if (!resistor.isSixBand()) ppm = ""
-        if (resistor.isThreeFourBand()) sigFigThree = ""
-        if (resistor.isThreeBand()) tolerance = ""
+    fun setImageColors(context: Context, resistor: ResistorVtC) {
+        setBands(context, resistor, resistor.toleranceValue, resistor.ppmValue)
+    }
+
+    fun setImageColors(context: Context, resistor: ResistorCtV) {
+        setBands(context, resistor, resistor.toleranceBand, resistor.ppmBand)
+    }
+
+    private fun setBands(context: Context, resistor: Resistor, tolerance: String, ppm: String) {
         band1.setBandColor(context, resistor.sigFigBandOne)
         band2.setBandColor(context, resistor.sigFigBandTwo)
-        band3.setBandColor(context, sigFigThree)
+        band3.setBandColor(context, if (resistor.isThreeFourBand()) "" else resistor.sigFigBandThree)
         band4.setBandColor(context, resistor.multiplierBand)
-        band5.setBandColor(context, tolerance)
-        band6.setBandColor(context, ppm)
+        band5.setBandColor(context, if (resistor.isThreeBand()) "" else tolerance)
+        band6.setBandColor(context, if (resistor.isSixBand()) ppm else "")
     }
 
     fun clearResistor(context: Context) {

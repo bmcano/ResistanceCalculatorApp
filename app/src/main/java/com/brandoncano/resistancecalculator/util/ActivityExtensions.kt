@@ -38,7 +38,6 @@ fun AppCompatActivity.toAboutActivity() {
     val intent = Intent(this, AboutActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
     startActivity(intent)
-    // val bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
 }
 
 fun AppCompatActivity.toColorToValueActivity() {
