@@ -11,7 +11,7 @@ android {
         minSdk 24
         targetSdk 34
         versionCode 16
-        versionName "3.0.6-Develop"
+        versionName "3.0.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -20,7 +20,7 @@ android {
     }
     applicationVariants.configureEach { variant ->
         variant.resValue "string", "version", variant.versionName
-        variant.resValue "string", "last_updated", "1/10/2023"
+        variant.resValue "string", "last_updated", "5/14/2024"
     }
     buildTypes {
         release {
@@ -45,14 +45,14 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.12.0' // 12-28-23
+    implementation 'androidx.core:core-ktx:1.13.1' // 5-14-24
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // 6-19-22
     implementation 'androidx.appcompat:appcompat:1.6.1' // 2-18-23
-    implementation 'com.google.android.material:material:1.11.0' // 12-28-23
-    implementation 'com.google.code.gson:gson:2.10' // 4-2-23
-    implementation 'androidx.browser:browser:1.7.0' // 1-23-24
+    implementation 'com.google.android.material:material:1.12.0' // 5-14-24
+    implementation 'com.google.code.gson:gson:2.10.1' // 5-14-24
+    implementation 'androidx.browser:browser:1.8.0' // 5-14-24
     implementation files('libs/ostermillerutils_1_07_00.jar')
-    implementation platform('androidx.compose:compose-bom:2022.10.00') // 6-19-22
+    implementation platform('androidx.compose:compose-bom:2024.05.00') // 5-14-24
     testImplementation 'junit:junit:4.13.2' // 6-19-22
     testImplementation 'io.mockk:mockk:1.13.9' // 1-15-24
     androidTestImplementation 'androidx.test.ext:junit:1.1.5' // 1-4-23
