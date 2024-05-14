@@ -2,7 +2,7 @@ package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
 import com.brandoncano.resistancecalculator.constants.Symbols.GOhms
-import com.brandoncano.resistancecalculator.resistor.Resistor
+import com.brandoncano.resistancecalculator.resistor.ResistorVtC
 
 /**
  * Job: Checks if a user inputted resistance is valid.
@@ -18,7 +18,8 @@ import com.brandoncano.resistancecalculator.resistor.Resistor
  */
 object IsValidResistance {
 
-    fun execute(resistor: Resistor, input: String): Boolean {
+    fun execute(resistor: ResistorVtC, input: String): Boolean {
+        if (input.isEmpty()) return true
         input.toDoubleOrNull() ?: return false
         val sigFigs = SignificantFigures(input).numberSignificantFigures
         val isThreeFourBand = resistor.isThreeFourBand()
@@ -29,7 +30,7 @@ object IsValidResistance {
             input.length > 1 && input[0] == '0' && input[1] != '.' ||
             input.isNotEmpty() && input[0] == '.' -> false
 
-            isThreeFourBand -> when { /* FOUR BAND */
+            isThreeFourBand -> when { /* THREE/FOUR BAND */
                 input.startsWith("0.00") ||
                 sigFigs >= 2 && input.startsWith("0.0") -> false
                 sigFigs == 3 && input.endsWith(".0") ||

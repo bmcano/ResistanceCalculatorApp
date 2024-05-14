@@ -10,8 +10,8 @@ android {
         applicationId "com.brandoncano.resistancecalculator"
         minSdk 24
         targetSdk 34
-        versionCode 15
-        versionName "3.0.5"
+        versionCode 16
+        versionName "3.0.6-Develop"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -39,6 +39,9 @@ android {
 
     }
     namespace 'com.brandoncano.resistancecalculator'
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -51,6 +54,7 @@ dependencies {
     implementation files('libs/ostermillerutils_1_07_00.jar')
     implementation platform('androidx.compose:compose-bom:2022.10.00') // 6-19-22
     testImplementation 'junit:junit:4.13.2' // 6-19-22
+    testImplementation 'io.mockk:mockk:1.13.9' // 1-15-24
     androidTestImplementation 'androidx.test.ext:junit:1.1.5' // 1-4-23
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // 1-4-23
 }

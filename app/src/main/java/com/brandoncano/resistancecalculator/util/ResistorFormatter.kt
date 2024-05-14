@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
+import com.brandoncano.resistancecalculator.resistor.ResistorVtC
 import com.brandoncano.resistancecalculator.constants.Colors as C
-import com.brandoncano.resistancecalculator.resistor.Resistor
 
 /**
  * Job: Formats the resistor based resistance that has been entered (VtC).
@@ -13,10 +13,9 @@ object ResistorFormatter {
         6 to C.YELLOW, 7 to C.GREEN, 8 to C.BLUE, 9 to C.VIOLET, 10 to C.GRAY, 11 to C.WHITE,
     )
 
-    fun generateResistor(resistor: Resistor) {
-        val resistance = resistor.resistance
-        if (resistance == "NotValid" || resistance.isEmpty()) return
-
+    fun generateResistor(resistor: ResistorVtC) {
+        if (resistor.isEmpty()) return
+        val resistance = resistor.userInput
         val multiplier = MultiplierFromUnits.execute(resistor.units)
         val resLong: Long? = resistance.toLongOrNull()?.times(multiplier)
         val resDouble: Double = resistance.toDoubleOrNull()?.times(multiplier) ?: return
@@ -52,7 +51,7 @@ object ResistorFormatter {
         return values
     }
 
-    private fun decimalInputMultiplier(resistor: Resistor, resistance: Double): String {
+    private fun decimalInputMultiplier(resistor: ResistorVtC, resistance: Double): String {
         val res = String.format("%.2f", resistance)
         var index = res.indexOf(".")
         if (index == -1) index = res.length
@@ -63,7 +62,7 @@ object ResistorFormatter {
         return colorsMap[index] ?: C.BLANK
     }
 
-    private fun numericalInputMultiplier(resistor: Resistor, resistance: Long): String {
+    private fun numericalInputMultiplier(resistor: ResistorVtC, resistance: Long): String {
         var length = resistance.toString().length
         if (!resistor.isThreeFourBand()) length--
         return colorsMap[length] ?: C.BLANK

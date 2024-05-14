@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.util
 
-import com.brandoncano.resistancecalculator.resistor.Resistor
+import com.brandoncano.resistancecalculator.resistor.ResistorCtV
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 
@@ -11,7 +11,7 @@ object ResistanceFormatter {
 
     private const val zeroOhms = "0 ${S.Ohms}"
 
-    fun calculate(resistor: Resistor): String {
+    fun calculate(resistor: ResistorCtV): String {
         if (resistor.isEmpty()) return "Select colors"
 
         val sigFigOne = ValueFinder.getSigFig(resistor.sigFigBandOne)
@@ -24,9 +24,7 @@ object ResistanceFormatter {
         return "$resistance $tolerance\n$ppm".trimEnd('\n')
     }
 
-    private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
-        if (resistor.isFirstDigitZero()) return zeroOhms // we no longer have the option for the first digit to be zero
-
+    private fun formatResistance(resistor: ResistorCtV, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
         val threeFourBands = resistor.isThreeFourBand()
         val value: Int = if (threeFourBands) {
             (sigFigOne + sigFigTwo).toIntOrNull()

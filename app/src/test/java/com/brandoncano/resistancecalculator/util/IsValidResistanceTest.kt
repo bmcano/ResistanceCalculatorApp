@@ -1,10 +1,17 @@
 package com.brandoncano.resistancecalculator.util
 
-import com.brandoncano.resistancecalculator.resistor.Resistor
-import com.brandoncano.resistancecalculator.constants.Symbols as S
+import android.content.Context
+import com.brandoncano.resistancecalculator.components.StateData
+import com.brandoncano.resistancecalculator.resistor.ResistorVtC
+import io.mockk.clearAllMocks
+import io.mockk.every
+import io.mockk.mockk
+import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
+import com.brandoncano.resistancecalculator.constants.Symbols as S
 
 /**
  * Notes:
@@ -12,9 +19,17 @@ import org.junit.Test
  */
 class IsValidResistanceTest {
 
+    private val context: Context = mockk<Context>()
+
+    @Before
+    fun setup() {
+        every { StateData.BUTTON_SELECTION_VTC.saveData(context, "5") } answers { }
+        every { StateData.BUTTON_SELECTION_VTC.saveData(context, "6") } answers { }
+    }
+
     @Test
     fun invalidInputs() {
-        val resistor = Resistor()
+        val resistor = ResistorVtC(context)
         // four band
         resistor.units = S.Ohms
         assertFalse(IsValidResistance.execute(resistor, "InValid"))
@@ -38,7 +53,8 @@ class IsValidResistanceTest {
 
         // five/six band
         resistor.units = S.Ohms
-        resistor.setNumberOfBands(5)
+        resistor.saveNumberOfBands(5)
+
         assertFalse(IsValidResistance.execute(resistor, "1234"))
         assertFalse(IsValidResistance.execute(resistor, "0123"))
         assertFalse(IsValidResistance.execute(resistor, "0012"))
@@ -60,7 +76,7 @@ class IsValidResistanceTest {
 
     @Test
     fun validInputs() {
-        val resistor = Resistor()
+        val resistor = ResistorVtC(context)
         // four band
         resistor.units = S.Ohms
         assertTrue(IsValidResistance.execute(resistor, "0"))
@@ -80,7 +96,7 @@ class IsValidResistanceTest {
 
         // five band
         resistor.units = S.Ohms
-        resistor.setNumberOfBands(5)
+        resistor.saveNumberOfBands(5)
         assertTrue(IsValidResistance.execute(resistor, "0"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
@@ -89,10 +105,15 @@ class IsValidResistanceTest {
         assertTrue(IsValidResistance.execute(resistor, "0.01"))
 
         resistor.units = S.GOhms
-        resistor.setNumberOfBands(5)
+        resistor.saveNumberOfBands(5)
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
         assertTrue(IsValidResistance.execute(resistor, "63.2"))
         assertTrue(IsValidResistance.execute(resistor, "663.0"))
+    }
+
+    @After
+    fun tearDown() {
+        clearAllMocks()
     }
 }
