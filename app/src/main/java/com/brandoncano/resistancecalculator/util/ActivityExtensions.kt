@@ -45,7 +45,7 @@ fun AppCompatActivity.toAboutActivity() {
 fun AppCompatActivity.toColorToValueActivity() {
     val intent = Intent(this, ColorToValueActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-   startActivity(intent)
+    startActivity(intent)
 }
 
 fun AppCompatActivity.toValueToColorActivity() {
@@ -56,12 +56,6 @@ fun AppCompatActivity.toValueToColorActivity() {
 
 fun AppCompatActivity.toNewUI() {
     val intent = Intent(this, HomeActivity::class.java)
-    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-    startActivity(intent)
-}
-
-fun AppCompatActivity.toLegacyUI() {
-    val intent = Intent(this, MainActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
     startActivity(intent)
 }

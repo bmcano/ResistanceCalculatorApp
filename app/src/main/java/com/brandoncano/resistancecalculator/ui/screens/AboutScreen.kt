@@ -17,10 +17,12 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.composables.DefaultCard
 import com.brandoncano.resistancecalculator.ui.composables.LabelBodyTextStack
+import com.brandoncano.resistancecalculator.ui.composables.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.composables.TextBody
 import com.brandoncano.resistancecalculator.ui.composables.TextHeadline
 import com.brandoncano.resistancecalculator.ui.composables.TextLabel
 import com.brandoncano.resistancecalculator.ui.composables.TitleAppBar
+import com.brandoncano.resistancecalculator.ui.composables.ViewIecStandard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 @Composable
@@ -45,7 +47,6 @@ private fun Content(context: Context) {
             .align(Alignment.CenterHorizontally)
             .padding(start = 16.dp, end = 16.dp)
         val textModifier = textModifierBody.padding(top = 16.dp)
-
         DefaultCard {
             TextHeadline(
                 modifier = textModifier,
@@ -56,33 +57,23 @@ private fun Content(context: Context) {
             LabelBodyTextStack(label = R.string.about_last_updated_on, body = R.string.last_updated)
             Spacer(modifier = Modifier.height(16.dp))
         }
+        DefaultCard {
+            TextLabel(
+                modifier = textModifier,
+                text = stringResource(id = R.string.about_description)
+            )
+            TextBody(
+                modifier = textModifier,
+                text = stringResource(id = R.string.description_one)
+            )
+            TextBody(
+                modifier = textModifier,
+                text = stringResource(id = R.string.description_two)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+        }
 
-//        DefaultCard {
-//            TextLabel(
-//                modifier = textModifier,
-//                text = stringResource(id = R.string.about_description)
-//            )
-//            TextBody(
-//                modifier = textModifier,
-//                text = stringResource(id = R.string.about_description_part_01)
-//            )
-//            TextBody(
-//                modifier = textModifier,
-//                text = stringResource(id = R.string.about_description_part_02)
-//            )
-//            Spacer(modifier = Modifier.height(16.dp))
-//        }
-//
-//        ArrowButtonCard(
-//            listOf(Icons.Outlined.Star, Icons.AutoMirrored.Outlined.AddToHomeScreen),
-//            listOf(
-//                stringResource(id = R.string.about_rate_this_app),
-//                stringResource(id = R.string.about_view_resistor_app)
-//            ),
-//            listOf(
-//                { PlayStore.openCapacitorApp(context) },
-//                { PlayStore.openResistorApp(context) }
-//            ),
-//        )
+        ViewIecStandard(context)
+        OurAppsButtons(context)
     }
 }
