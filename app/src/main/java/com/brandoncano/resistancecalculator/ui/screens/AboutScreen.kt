@@ -25,6 +25,10 @@ import com.brandoncano.resistancecalculator.ui.composables.TitleAppBar
 import com.brandoncano.resistancecalculator.ui.composables.ViewIecStandard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
+/**
+ * Job: Hold all the UI interaction and components for the about scren
+ */
+
 @Composable
 fun AboutScreen(context: Context) {
     ResistorCalculatorTheme {
@@ -42,38 +46,38 @@ private fun Content(context: Context) {
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TitleAppBar(stringResource(R.string.about_title))
-        val textModifierBody = Modifier
+        val modifier = Modifier
             .align(Alignment.CenterHorizontally)
-            .padding(start = 16.dp, end = 16.dp)
-        val textModifier = textModifierBody.padding(top = 16.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+
+        TitleAppBar(stringResource(R.string.about_title))
         DefaultCard {
             TextHeadline(
-                modifier = textModifier,
+                modifier = modifier,
                 text = stringResource(id = R.string.app_name)
             )
-            LabelBodyTextStack(label = R.string.about_app_version, body = R.string.version)
             LabelBodyTextStack(label = R.string.about_created_by, body = R.string.about_author)
+            LabelBodyTextStack(label = R.string.about_app_version, body = R.string.version)
             LabelBodyTextStack(label = R.string.about_last_updated_on, body = R.string.last_updated)
             Spacer(modifier = Modifier.height(16.dp))
         }
         DefaultCard {
             TextLabel(
-                modifier = textModifier,
+                modifier = modifier,
                 text = stringResource(id = R.string.about_description)
             )
             TextBody(
-                modifier = textModifier,
+                modifier = modifier,
                 text = stringResource(id = R.string.description_one)
             )
             TextBody(
-                modifier = textModifier,
+                modifier = modifier,
                 text = stringResource(id = R.string.description_two)
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
-
         ViewIecStandard(context)
         OurAppsButtons(context)
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
