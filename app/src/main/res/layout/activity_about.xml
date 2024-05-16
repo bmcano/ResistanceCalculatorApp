@@ -30,7 +30,7 @@
             <TextView
                 android:id="@+id/app_version_text"
                 style="@style/headerTextDesign"
-                android:text="@string/app_version"
+                android:text="@string/about_app_version"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/app_name_text" />
@@ -48,7 +48,7 @@
             <TextView
                 android:id="@+id/created_by_text"
                 style="@style/headerTextDesign"
-                android:text="@string/created_by"
+                android:text="@string/about_created_by"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/version_number" />
@@ -57,7 +57,7 @@
                 android:id="@+id/author_text"
                 style="@style/descriptionTextDesign"
                 android:layout_marginTop="0dp"
-                android:text="@string/author"
+                android:text="@string/about_author"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
             <TextView
                 android:id="@+id/last_updated_on_text"
                 style="@style/headerTextDesign"
-                android:text="@string/last_updated_on"
+                android:text="@string/about_last_updated_on"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/author_text" />

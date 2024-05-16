@@ -38,10 +38,11 @@
     <string name="invalid_input">Invalid input</string>
 
     <!-- About page text -->
-    <string name="app_version">App version</string>
-    <string name="created_by">Created by</string>
-    <string name="author">Brandon Cano</string>
-    <string name="last_updated_on">Last updated on</string>
+    <string name="about_title">About this app</string>
+    <string name="about_app_version">App version</string>
+    <string name="about_created_by">Created by</string>
+    <string name="about_author">Brandon Cano</string>
+    <string name="about_last_updated_on">Last updated on</string>
     <string name="description_one">In this app you can calculate the resistance of a resistor by entering its band colors or generating a resistor from a resistance value. Works for 4, 5, and 6 band resistors.</string>
     <string name="description_two">Our app follows the IEC 60062 standard for resistor color coding. This international convention assigns specific colors to represent different values for resistors. For more detailed information, you can refer to the IEC 60062 standard.</string>
     <string name="iec_button_text">View the IEC 60062 standard</string>
