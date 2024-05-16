@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.composeables
+package com.brandoncano.resistancecalculator.ui.composables
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text

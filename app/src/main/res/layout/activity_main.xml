@@ -72,6 +72,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/value_to_color_button" />
 
+            <Button
+                android:id="@+id/switch_to_new_ui_button"
+                style="@style/rcvButtonDesign"
+                android:text="@string/new_ui"
+                android:layout_marginTop="32dp"
+                app:backgroundTint="@color/mango_primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/our_apps_layout" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

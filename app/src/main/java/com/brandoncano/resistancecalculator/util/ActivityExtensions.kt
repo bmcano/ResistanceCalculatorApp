@@ -8,6 +8,8 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.resistor.ResistorImage
 import com.brandoncano.resistancecalculator.ui.AboutActivity
 import com.brandoncano.resistancecalculator.ui.ColorToValueActivity
+import com.brandoncano.resistancecalculator.ui.HomeActivity
+import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.ValueToColorActivity
 
 /**
@@ -48,6 +50,18 @@ fun AppCompatActivity.toColorToValueActivity() {
 
 fun AppCompatActivity.toValueToColorActivity() {
     val intent = Intent(this, ValueToColorActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+    startActivity(intent)
+}
+
+fun AppCompatActivity.toNewUI() {
+    val intent = Intent(this, HomeActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+    startActivity(intent)
+}
+
+fun AppCompatActivity.toLegacyUI() {
+    val intent = Intent(this, MainActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
     startActivity(intent)
 }

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.composeables
+package com.brandoncano.resistancecalculator.ui.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -17,11 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.brandoncano.resistancecalculator.R
 
 /**
  * Job: Holds all the designs for cards and dividers within the app

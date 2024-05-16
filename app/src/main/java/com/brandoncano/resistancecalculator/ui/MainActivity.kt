@@ -13,6 +13,7 @@ import com.brandoncano.resistancecalculator.util.OpenLink
 import com.brandoncano.resistancecalculator.util.setupActionBar
 import com.brandoncano.resistancecalculator.util.toAboutActivity
 import com.brandoncano.resistancecalculator.util.toColorToValueActivity
+import com.brandoncano.resistancecalculator.util.toNewUI
 import com.brandoncano.resistancecalculator.util.toValueToColorActivity
 
 /**
@@ -42,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         rateUsButton.setOnClickListener { OpenLink.openResistorApp(this) }
         val viewCapacitorAppButton: Button = findViewById(R.id.view_capacitor_app_button)
         viewCapacitorAppButton.setOnClickListener { OpenLink.openCapacitorApp(this) }
+        val newUiButton: Button = findViewById(R.id.switch_to_new_ui_button)
+        newUiButton.setOnClickListener { toNewUI() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

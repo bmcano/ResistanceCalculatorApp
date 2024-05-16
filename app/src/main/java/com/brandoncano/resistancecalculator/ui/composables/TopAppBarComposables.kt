@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.composeables
+package com.brandoncano.resistancecalculator.ui.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
