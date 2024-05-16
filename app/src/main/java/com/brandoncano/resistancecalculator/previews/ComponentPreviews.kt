@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 /**
@@ -16,7 +17,7 @@ import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 private fun TextComponentsPreview() {
     ResistorCalculatorTheme {
         Column {
-
+            ResistorLayout()
         }
     }
 }
