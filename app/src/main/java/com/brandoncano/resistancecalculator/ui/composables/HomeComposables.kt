@@ -33,7 +33,7 @@ fun CircularAppIcon() {
 fun CalculatorButtons(navController: NavController) {
     Column {
         val modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 32.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
             .align(Alignment.Start)
         TextLabel(modifier = modifier, text = "Calculators")
         ArrowButtonCard(
@@ -46,7 +46,7 @@ fun CalculatorButtons(navController: NavController) {
                 stringResource(id = R.string.value_to_color_btn)
             ),
             listOf(
-                { navController.navigate(Screen.About.route) },
+                { navController.navigate(Screen.ColorToValue.route) },
                 { navController.navigate(Screen.ValueToColor.route) }
             ),
         )
@@ -57,7 +57,7 @@ fun CalculatorButtons(navController: NavController) {
 fun OurAppsButtons(context: Context) {
     Column {
         val modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 32.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
             .align(Alignment.Start)
         TextLabel(modifier = modifier, text = "Our apps")
         ArrowButtonCard(

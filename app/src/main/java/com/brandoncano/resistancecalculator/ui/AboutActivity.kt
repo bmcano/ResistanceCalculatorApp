@@ -15,7 +15,7 @@ class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        setupActionBar(R.string.about)
+        setupActionBar(R.string.menu_about)
 
         val rateUsButton: Button = findViewById(R.id.rate_us_button)
         rateUsButton.setOnClickListener { OpenLink.openResistorApp(this) }

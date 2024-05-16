@@ -22,8 +22,8 @@
     <string name="color_to_value">Color to Value</string>
     <string name="clear_selections">Clear Selections</string>
     <string name="share">Share</string>
-    <string name="feedback_tab">Feedback</string>
-    <string name="about">About This App</string>
+    <string name="menu_feedback">Feedback</string>
+    <string name="menu_about">About this app</string>
 
     <!-- Bottom navigation -->
     <string name="three_band_nav">Three Bands</string>

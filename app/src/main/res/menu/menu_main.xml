@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/feedback"
-        android:title="@string/feedback_tab" />
+        android:title="@string/menu_feedback" />
     <item
         android:id="@+id/about_item"
-        android:title="@string/about" />
+        android:title="@string/menu_about" />
 </menu>
