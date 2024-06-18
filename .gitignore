@@ -16,6 +16,7 @@ output.json
 .idea/
 app/.idea/
 app/release
+app/build
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
