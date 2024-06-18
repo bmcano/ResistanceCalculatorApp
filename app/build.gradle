@@ -20,7 +20,7 @@ android {
     }
     applicationVariants.configureEach { variant ->
         variant.resValue "string", "version", variant.versionName
-        variant.resValue "string", "last_updated", "5/14/2024"
+        variant.resValue "string", "last_updated", "6/17/2024"
     }
     buildTypes {
         release {
