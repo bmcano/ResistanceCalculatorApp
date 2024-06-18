@@ -10,7 +10,7 @@ android {
         applicationId "com.brandoncano.resistancecalculator"
         minSdk 24
         targetSdk 34
-        versionCode 16
+        versionCode 17
         versionName "3.0.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
