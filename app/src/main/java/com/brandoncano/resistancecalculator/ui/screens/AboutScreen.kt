@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens
 
 import android.content.Context
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,54 +14,70 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.ui.HomeActivity
+import com.brandoncano.resistancecalculator.ui.composables.AppDivider
+import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.DefaultCard
-import com.brandoncano.resistancecalculator.ui.composables.LabelBodyTextStack
+import com.brandoncano.resistancecalculator.ui.composables.LabelBodyText
+import com.brandoncano.resistancecalculator.ui.composables.LabelBodyTextCard
 import com.brandoncano.resistancecalculator.ui.composables.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.composables.TextBody
-import com.brandoncano.resistancecalculator.ui.composables.TextHeadline
 import com.brandoncano.resistancecalculator.ui.composables.TextLabel
 import com.brandoncano.resistancecalculator.ui.composables.TitleAppBar
 import com.brandoncano.resistancecalculator.ui.composables.ViewIecStandard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 /**
- * Job: Hold all the UI interaction and components for the about scren
+ * Job: Hold all the UI interaction and components for the about screen
  */
 
 @Composable
 fun AboutScreen(context: Context) {
     ResistorCalculatorTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            Content(context)
+            ContentView(context)
         }
     }
 }
 
 @Composable
-private fun Content(context: Context) {
+private fun ContentView(context: Context) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.Start
     ) {
+        TitleAppBar(stringResource(R.string.about_title))
+
         val modifier = Modifier
-            .align(Alignment.CenterHorizontally)
+            .align(Alignment.Start)
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
 
-        TitleAppBar(stringResource(R.string.about_title))
+        LabelBodyTextCard(
+            label = R.string.about_created_by,
+            body = R.string.about_author,
+        )
+
         DefaultCard {
-            TextHeadline(
-                modifier = modifier,
-                text = stringResource(id = R.string.app_name)
+            LabelBodyText(
+                label = R.string.about_app_version,
+                body = R.string.version,
             )
-            LabelBodyTextStack(label = R.string.about_created_by, body = R.string.about_author)
-            LabelBodyTextStack(label = R.string.about_app_version, body = R.string.version)
-            LabelBodyTextStack(label = R.string.about_last_updated_on, body = R.string.last_updated)
+            AppDivider(
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+            )
+            LabelBodyText(
+                label = R.string.about_last_updated_on,
+                body = R.string.last_updated,
+            )
             Spacer(modifier = Modifier.height(16.dp))
         }
+
         DefaultCard {
             TextLabel(
                 modifier = modifier,
@@ -76,8 +93,16 @@ private fun Content(context: Context) {
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
+
         ViewIecStandard(context)
         OurAppsButtons(context)
         Spacer(modifier = Modifier.height(16.dp))
     }
+}
+
+@AppScreenPreviews
+@Composable
+private fun AboutPreview() {
+    val app = HomeActivity()
+    AboutScreen(app)
 }

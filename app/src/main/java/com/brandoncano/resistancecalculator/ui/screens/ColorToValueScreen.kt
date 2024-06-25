@@ -16,13 +16,13 @@ import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 fun ColorToValueScreen(context: Context, navController: NavController) {
     ResistorCalculatorTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            Content(context, navController)
+            ContentView(context, navController)
         }
     }
 }
 
 @Composable
-private fun Content(context: Context, navController: NavController) {
+private fun ContentView(context: Context, navController: NavController) {
     Column {
         val item1 = DropdownItem(imageResId = R.drawable.square_red, name = "Item 1", value = "Value 1")
         val item2 = DropdownItem(imageResId = R.drawable.square_orange, name = "Item 2", value = "Value 2")

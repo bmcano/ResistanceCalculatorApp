@@ -12,12 +12,12 @@ import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 fun ValueToColorScreen(context: Context, navController: NavController) {
     ResistorCalculatorTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            Content(context, navController)
+            ContentView(context, navController)
         }
     }
 }
 
 @Composable
-private fun Content(context: Context, navController: NavController) {
+private fun ContentView(context: Context, navController: NavController) {
 
 }
