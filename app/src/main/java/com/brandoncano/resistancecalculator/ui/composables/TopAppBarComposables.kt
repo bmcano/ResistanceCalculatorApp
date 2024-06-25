@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,10 +37,18 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.resistor.ResistorCtV
+import com.brandoncano.resistancecalculator.ui.HomeActivity
+import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.EmailFeedback
+import com.brandoncano.resistancecalculator.util.ShareResistance
+
+/**
+ * Job: Hold all composables for the top app bars and menu items
+ */
 
 @Composable
-fun MenuAppBar(
+fun MenuTopAppBar(
     titleText: String,
     interactionSource: MutableInteractionSource,
     content: @Composable (ColumnScope.() -> Unit)
@@ -58,8 +67,7 @@ fun MenuAppBar(
         ) {
             Icon(
                 imageVector = Icons.Filled.MoreVert,
-                contentDescription = "More"
-//                contentDescription = stringResource(R.string.content_description_more)
+                contentDescription = stringResource(R.string.content_description_menu_more)
             )
         }
         DropdownMenu(
@@ -71,7 +79,7 @@ fun MenuAppBar(
 }
 
 @Composable
-fun TitleAppBar(
+fun TitleTopAppBar(
     titleText: String,
 ) {
     DefaultAppBar(titleText)
@@ -117,24 +125,34 @@ fun BottomShadow(alpha: Float = 0.1f, height: Dp = 4.dp) {
     )
 }
 
-//@Composable
-//fun ClearMenuItem(interactionSource: MutableInteractionSource, onClick: (() -> Unit)) {
-//    DropdownMenuItem(
-//        text = { TextBody(text = stringResource(R.string.menu_clear)) },
-//        onClick = onClick,
-//        interactionSource = interactionSource,
-//    )
-//}
-//
-//@Composable
-//fun ShareMenuItem(viewModel: CapacitorViewModel, context: Context, interactionSource: MutableInteractionSource) {
-//    DropdownMenuItem(
-//        text = { TextBody(text = stringResource(R.string.menu_share)) },
-//        onClick = { ShareCapacitance.execute(viewModel.capacitor, context) },
-//        interactionSource = interactionSource,
-//    )
-//}
-//
+// menu items are in alphabetical order
+@Composable
+fun AboutAppMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
+    DropdownMenuItem(
+        text = { TextBody(text = stringResource(R.string.menu_about)) },
+        onClick = { navController.navigate(Screen.About.route) },
+        interactionSource = interactionSource,
+    )
+}
+
+@Composable
+fun ClearSelectionsMenuItem(interactionSource: MutableInteractionSource, onClick: (() -> Unit)) {
+    DropdownMenuItem(
+        text = { TextBody(text = stringResource(R.string.clear_selections)) },
+        onClick = onClick,
+        interactionSource = interactionSource,
+    )
+}
+
+@Composable
+fun ColorToValueMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
+    DropdownMenuItem(
+        text = { TextBody(text = stringResource(R.string.color_to_value)) },
+        onClick = { navController.navigate(Screen.ColorToValue.route) },
+        interactionSource = interactionSource,
+    )
+}
+
 @Composable
 fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
@@ -145,10 +163,55 @@ fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSour
 }
 
 @Composable
-fun AboutAppMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
+fun ShareMenuItem(context: Context, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.menu_about)) },
-        onClick = { navController.navigate(Screen.About.route) },
+        text = { TextBody(text = stringResource(R.string.share)) },
+        onClick = { ShareResistance.execute(context, ResistorCtV(context)) },
         interactionSource = interactionSource,
     )
+}
+
+@Composable
+fun ValueToColorMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
+    DropdownMenuItem(
+        text = { TextBody(text = stringResource(R.string.value_to_color)) },
+        onClick = { navController.navigate(Screen.ValueToColor.route) },
+        interactionSource = interactionSource,
+    )
+}
+
+@AppScreenPreviews
+@Composable
+fun TitleTopAppBarPreview() {
+    ResistorCalculatorTheme {
+        TitleTopAppBar("TitleTopAppBar")
+    }
+}
+
+@AppScreenPreviews
+@Composable
+fun MenuTopAppBarPreview() {
+    val interactionSource = remember { MutableInteractionSource() }
+    ResistorCalculatorTheme {
+        MenuTopAppBar("TitleTopAppBar", interactionSource) {
+            ClearSelectionsMenuItem(interactionSource) { }
+        }
+    }
+}
+
+@AppScreenPreviews
+@Composable
+fun MenuItemsPreview() {
+    val interactionSource = remember { MutableInteractionSource() }
+    val app = HomeActivity()
+    ResistorCalculatorTheme {
+        Column {
+            AboutAppMenuItem(NavController(app), interactionSource)
+            ClearSelectionsMenuItem(interactionSource) { }
+            ColorToValueMenuItem(NavController(app), interactionSource)
+            FeedbackMenuItem(app, interactionSource)
+            ShareMenuItem(app, interactionSource)
+            ValueToColorMenuItem(NavController(app), interactionSource)
+        }
+    }
 }

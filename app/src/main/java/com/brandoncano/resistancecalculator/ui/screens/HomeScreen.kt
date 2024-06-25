@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens
 
 import android.content.Context
-import android.content.res.Configuration
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.HomeActivity
@@ -21,7 +19,7 @@ import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorButtons
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.MenuAppBar
+import com.brandoncano.resistancecalculator.ui.composables.MenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.composables.RevertToLegacyUI
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -45,7 +43,7 @@ private fun ContentView(context: Context, navController: NavController) {
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        MenuAppBar(stringResource(R.string.app_name), interactionSource) {
+        MenuTopAppBar(stringResource(R.string.app_name), interactionSource) {
             FeedbackMenuItem(context, interactionSource)
             AboutAppMenuItem(navController, interactionSource)
         }

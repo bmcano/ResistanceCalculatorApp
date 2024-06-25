@@ -57,5 +57,6 @@
     <string name="home_app_icon_content_description">App icon</string>
     <string name="new_ui">Try out our new experimental user interface</string>
     <string name="old_ui">Revert back to the old UI</string>
+    <string name="content_description_menu_more">More</string>
 
 </resources>

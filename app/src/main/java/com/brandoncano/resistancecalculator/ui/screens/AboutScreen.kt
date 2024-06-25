@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens
 
 import android.content.Context
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.HomeActivity
@@ -26,7 +24,7 @@ import com.brandoncano.resistancecalculator.ui.composables.LabelBodyTextCard
 import com.brandoncano.resistancecalculator.ui.composables.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.composables.TextBody
 import com.brandoncano.resistancecalculator.ui.composables.TextLabel
-import com.brandoncano.resistancecalculator.ui.composables.TitleAppBar
+import com.brandoncano.resistancecalculator.ui.composables.TitleTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.ViewIecStandard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
@@ -51,7 +49,7 @@ private fun ContentView(context: Context) {
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.Start
     ) {
-        TitleAppBar(stringResource(R.string.about_title))
+        TitleTopAppBar(stringResource(R.string.about_title))
 
         val modifier = Modifier
             .align(Alignment.Start)

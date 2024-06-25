@@ -90,6 +90,14 @@ private fun ResistorImage(@DrawableRes drawableRes: Int, @ColorRes colorRes: Int
     )
 }
 
+// TODO - WIP
+@Composable
+private fun ResistanceText(resistance: String) {
+    DefaultCard {
+        TextHeadline(text = resistance)
+    }
+}
+
 @AppScreenPreviews
 @Composable
 private fun ResistorLayoutsPreview() {
