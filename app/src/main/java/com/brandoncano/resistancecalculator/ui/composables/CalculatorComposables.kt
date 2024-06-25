@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -33,43 +34,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownItem
+import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
-// TODO - Find a good way to modify the colors of the different bands, this will be the last component we build.
-@Composable
-fun ResistorLayout() {
-    Column(
-        modifier = Modifier
-            .padding(start = 32.dp, end = 32.dp)
-    ) {
-        Spacer(modifier = Modifier.height(1.dp)) // Spacer to replace the Group
 
-        ResistorRow(
-            R.drawable.img_resistor_p1, R.drawable.img_resistor_p2, R.drawable.img_resistor_p3,
-            R.drawable.img_resistor_p4, R.drawable.img_resistor_p5, R.drawable.img_resistor_p6_7,
-            R.drawable.img_resistor_p6_7, R.drawable.img_resistor_p8, R.drawable.img_resistor_p9,
-            R.drawable.img_resistor_p10, R.drawable.img_resistor_p11, R.drawable.img_resistor_p12,
-            R.drawable.img_resistor_p13
-        )
-    }
-}
 
-@Composable
-fun ResistorRow(vararg resistorImages: Int) {
-    Row(
-        horizontalArrangement = Arrangement.Center
-    ) {
-        for (resistorImage in resistorImages) {
-            Image(
-                painter = painterResource(id = resistorImage),
-                contentDescription = null,
-            )
-        }
-    }
-}
 
 @Composable
 fun OutlinedDropDownMenu(

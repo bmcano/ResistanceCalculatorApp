@@ -2,6 +2,7 @@ package com.brandoncano.resistancecalculator.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+// m3 light theme colors
 val primaryLight = Color(0xFF8F4B3A)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFFFDAD2)
@@ -37,7 +38,7 @@ val surfaceContainerLowLight = Color(0xFFFFF1ED)
 val surfaceContainerLight = Color(0xFFFCEAE6)
 val surfaceContainerHighLight = Color(0xFFF7E4E0)
 val surfaceContainerHighestLight = Color(0xFFF1DFDA)
-
+// m3 dark theme colors
 val primaryDark = Color(0xFFFFB4A2)
 val onPrimaryDark = Color(0xFF561F11)
 val primaryContainerDark = Color(0xFF723425)
@@ -73,3 +74,16 @@ val surfaceContainerLowDark = Color(0xFF231917)
 val surfaceContainerDark = Color(0xFF271D1B)
 val surfaceContainerHighDark = Color(0xFF322825)
 val surfaceContainerHighestDark = Color(0xFF3D3230)
+// resistor colors - currently placeholders as they may not be fully extracted from colors.xml
+val red = Color(0xFFED1C24)
+val orange = Color(0xFFFF7F27)
+val yellow = Color(0xFFFFF200)
+val gold = Color(0xFFFFC90E)
+val green = Color(0xFF22B14C)
+val blue = Color(0xFF00A2E8)
+val violet = Color(0xFF8F00FF)
+val white = Color(0xFFFFFFFF)
+val silver = Color(0xFFC0C0C0)
+val gray = Color(0xFF7F7F7F)
+val black = Color(0xFF00000F)
+val brown = Color(0xFFB97A57)
