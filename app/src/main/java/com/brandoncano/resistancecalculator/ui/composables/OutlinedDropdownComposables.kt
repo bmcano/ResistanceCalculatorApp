@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -38,19 +37,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownItem
+import com.brandoncano.resistancecalculator.util.ColorFinder
 
+/**
+ * Job: Holds all the pieces for the custom dropdowns
+ */
 
 @Composable
 fun OutlinedDropDownMenu(
     @StringRes label: Int,
-    @DrawableRes leadingIcon: Int = -1,
+    selectedOption: String = "",
     items: List<DropdownItem>,
-    onValueChange: (String) -> Unit
+    onOptionSelected: (String) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf("") }
-    var selectedLeadingIcon by remember { mutableIntStateOf(leadingIcon) }
+    var selectedText by remember { mutableStateOf(selectedOption) }
+    var selectedLeadingIcon by remember {
+        val drawable = ColorFinder.textToColoredDrawable(selectedOption)
+        mutableIntStateOf(drawable)
+    }
     var textFieldSize by remember { mutableStateOf(Size.Zero) }
     val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
     LaunchedEffect(interactionSource) {
@@ -63,10 +69,7 @@ fun OutlinedDropDownMenu(
     Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
         OutlinedTextField(
             value = selectedText,
-            onValueChange = {
-                selectedText = it
-                onValueChange(it)
-            },
+            onValueChange = { selectedText = it },
             readOnly = true,
             modifier = Modifier
                 .fillMaxWidth()
@@ -74,7 +77,7 @@ fun OutlinedDropDownMenu(
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(stringResource(label)) },
             leadingIcon = {
-                if (selectedLeadingIcon != -1)
+                if (selectedLeadingIcon != R.drawable.square_blank)
                     Image(
                         painter = painterResource(selectedLeadingIcon),
                         contentDescription = null,
@@ -104,6 +107,7 @@ fun OutlinedDropDownMenu(
                     selectedText = it.name
                     selectedLeadingIcon = it.imageResId
                     expanded = false
+                    onOptionSelected(it.name)
                 }
             }
         }
@@ -158,7 +162,8 @@ fun CustomDropdownPreview() {
     val item5 = DropdownItem(imageResId = R.drawable.square_blue, name = "Item 5", value = "Value 5")
     val item6 = DropdownItem(imageResId = R.drawable.square_violet, name = "Item 6", value = "Value 6")
     val list = listOf(item1, item2, item3, item4, item5, item6)
-    OutlinedDropDownMenu(R.string.number_band_hint1, -1, list) {
-        // do nothing
+    Column {
+        OutlinedDropDownMenu(R.string.number_band_hint1, "", list) { }
+        OutlinedDropDownMenu(R.string.number_band_hint1, "Red", list) { }
     }
 }

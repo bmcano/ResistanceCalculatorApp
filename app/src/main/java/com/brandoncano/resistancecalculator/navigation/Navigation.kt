@@ -6,9 +6,11 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.brandoncano.resistancecalculator.model.ResistorViewModel
 import com.brandoncano.resistancecalculator.ui.screens.AboutScreen
 import com.brandoncano.resistancecalculator.ui.screens.ColorToValueScreen
 import com.brandoncano.resistancecalculator.ui.screens.HomeScreen
@@ -44,7 +46,10 @@ fun Navigation(context: Context) {
             enterTransition = { slideInVertically(initialOffsetY = { it }) },
             exitTransition = { slideOutVertically(targetOffsetY = { it }) },
         ) {
-            ColorToValueScreen(context, navController)
+            // might need a VM factory for context
+            val viewModel = ResistorViewModel(context)
+            viewModel.loadResistorColors()
+            ColorToValueScreen(context, navController, viewModel)
         }
         composable(
             route = Screen.ValueToColor.route,
