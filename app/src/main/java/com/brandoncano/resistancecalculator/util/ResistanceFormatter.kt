@@ -9,7 +9,7 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
  */
 object ResistanceFormatter {
 
-    private const val zeroOhms = "0 ${S.Ohms}"
+    private const val ZERO_OHMS = "0 ${S.Ohms}"
 
     fun calculate(resistor: ResistorCtV): String {
         if (resistor.isEmpty()) return "Select colors"
@@ -30,7 +30,7 @@ object ResistanceFormatter {
             (sigFigOne + sigFigTwo).toIntOrNull()
         } else {
             (sigFigOne + sigFigTwo + sigFigThree).toIntOrNull()
-        } ?: return zeroOhms
+        } ?: return ZERO_OHMS
 
         val multiplier = ValueFinder.getMultiplier(resistor.multiplierBand)
         var resistanceAsDecimal = value.times(multiplier)

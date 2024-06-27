@@ -61,6 +61,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
     Scaffold(
         bottomBar = {
             CalculatorNavigationBar(navBarSelection) {
+                resistor.numberOfBands = it + 3
                 navBarSelection = it
                 // temp adding +3 until new logic is written to account for navbar
                 viewModel.saveNumberOfBands(it + 3)
@@ -78,12 +79,13 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                 ValueToColorMenuItem(navController, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
-                    // will add later
+                    // will add later - doesn't update screen unless the user leaves and comes back
+                    viewModel.clear()
                 }
                 AboutAppMenuItem(navController, interactionSource)
             }
 
-            ResistorLayout(band1, band2, band3, band4, band5, band6)
+            ResistorLayout(resistor)
 
             OutlinedDropDownMenu(
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
@@ -132,7 +134,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                     modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
                     label = R.string.tolerance_band_hint,
                     selectedOption = band5,
-                    items = DropdownLists.NUMBER_LIST
+                    items = DropdownLists.TOLERANCE_LIST
                 ) {
                     resistor.band5 = it
                     band5 = it
@@ -144,7 +146,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                     modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
                     label = R.string.ppm_band_hint,
                     selectedOption = band6,
-                    items = DropdownLists.NUMBER_LIST
+                    items = DropdownLists.PPM_LIST
                 ) {
                     resistor.band6 = it
                     band6 = it

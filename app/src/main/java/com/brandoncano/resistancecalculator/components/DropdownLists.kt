@@ -39,32 +39,28 @@ object DropdownLists {
         DropdownItem(R.drawable.square_silver, Colors.SILVER, "x 0.01"),
     )
 
-    fun getToleranceArray(isVtC: Boolean = false): Array<SpinnerItem> {
-        return arrayOf(
-            SpinnerItem(Colors.BROWN, R.drawable.square_brown, "${Symbols.PM}1%", isVtC),
-            SpinnerItem(Colors.RED, R.drawable.square_red, "${Symbols.PM}2%", isVtC),
-            SpinnerItem(Colors.GREEN, R.drawable.square_green, "${Symbols.PM}0.5%", isVtC),
-            SpinnerItem(Colors.BLUE, R.drawable.square_blue, "${Symbols.PM}0.25%", isVtC),
-            SpinnerItem(Colors.VIOLET, R.drawable.square_violet, "${Symbols.PM}0.1%", isVtC),
-            SpinnerItem(Colors.GRAY, R.drawable.square_gray, "${Symbols.PM}0.05%", isVtC),
-            SpinnerItem(Colors.GOLD, R.drawable.square_gold, "${Symbols.PM}5%", isVtC),
-            SpinnerItem(Colors.SILVER, R.drawable.square_silver, "${Symbols.PM}10%", isVtC),
-        )
-    }
+    val TOLERANCE_LIST = listOf(
+        DropdownItem(R.drawable.square_brown, Colors.BROWN, "${Symbols.PM}1%"),
+        DropdownItem(R.drawable.square_red, Colors.RED, "${Symbols.PM}2%"),
+        DropdownItem(R.drawable.square_green, Colors.GREEN, "${Symbols.PM}0.5%"),
+        DropdownItem(R.drawable.square_blue, Colors.BLUE, "${Symbols.PM}0.25%"),
+        DropdownItem(R.drawable.square_violet, Colors.VIOLET, "${Symbols.PM}0.1%"),
+        DropdownItem(R.drawable.square_gray, Colors.GRAY, "${Symbols.PM}0.05%"),
+        DropdownItem(R.drawable.square_gold, Colors.GOLD, "${Symbols.PM}5%"),
+        DropdownItem(R.drawable.square_silver, Colors.SILVER, "${Symbols.PM}10%"),
+    )
 
-    fun getPpmArray(isVtC: Boolean = false): Array<SpinnerItem> {
-        return arrayOf(
-            SpinnerItem(Colors.BLACK, R.drawable.square_black, "250 ${Symbols.PPM}", isVtC),
-            SpinnerItem(Colors.BROWN, R.drawable.square_brown, "100 ${Symbols.PPM}", isVtC),
-            SpinnerItem(Colors.RED, R.drawable.square_red, "50 ${Symbols.PPM}", isVtC),
-            SpinnerItem(Colors.ORANGE, R.drawable.square_orange, "15 ${Symbols.PPM}", isVtC),
-            SpinnerItem(Colors.YELLOW, R.drawable.square_yellow, "25 ${Symbols.PPM}", isVtC),
-            SpinnerItem(Colors.GREEN, R.drawable.square_green, "20 ${Symbols.PPM}", isVtC),
-            SpinnerItem(Colors.BLUE, R.drawable.square_blue, "10 ${Symbols.PPM}", isVtC),
-            SpinnerItem(Colors.VIOLET, R.drawable.square_violet, "5 ${Symbols.PPM}", isVtC),
-            SpinnerItem(Colors.GRAY, R.drawable.square_gray, "1 ${Symbols.PPM}", isVtC),
-        )
-    }
+    val PPM_LIST = listOf(
+        DropdownItem(R.drawable.square_black, Colors.BLACK, "250 ${Symbols.PPM}"),
+        DropdownItem(R.drawable.square_brown, Colors.BROWN, "100 ${Symbols.PPM}"),
+        DropdownItem(R.drawable.square_red, Colors.RED, "50 ${Symbols.PPM}"),
+        DropdownItem(R.drawable.square_orange, Colors.ORANGE, "15 ${Symbols.PPM}"),
+        DropdownItem(R.drawable.square_yellow, Colors.YELLOW, "25 ${Symbols.PPM}"),
+        DropdownItem(R.drawable.square_green, Colors.GREEN, "20 ${Symbols.PPM}"),
+        DropdownItem(R.drawable.square_blue, Colors.BLUE, "10 ${Symbols.PPM}"),
+        DropdownItem(R.drawable.square_violet, Colors.VIOLET, "5 ${Symbols.PPM}"),
+        DropdownItem(R.drawable.square_gray, Colors.GRAY, "1 ${Symbols.PPM}"),
+    )
 
     val UNITS_LIST = listOf(Symbols.Ohms, Symbols.kOhms, Symbols.MOhms, Symbols.GOhms)
 }

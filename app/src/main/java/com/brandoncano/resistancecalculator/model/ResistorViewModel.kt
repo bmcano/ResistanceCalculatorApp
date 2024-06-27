@@ -16,9 +16,14 @@ class ResistorViewModel(context: Context): ViewModel() {
         resistor.clear()
     }
 
+    fun clear() {
+        resistor.clear()
+        repository.clear()
+    }
+
     fun saveNumberOfBands(number: Int) {
-        resistor.numberOfBands = number.coerceIn(3..6)
-        repository.saveNumberOfBands(resistor.numberOfBands)
+        val numberOfBands = number.coerceIn(3..6)
+        repository.saveNumberOfBands(numberOfBands)
     }
 
     fun loadNumberOfBands(): Int {

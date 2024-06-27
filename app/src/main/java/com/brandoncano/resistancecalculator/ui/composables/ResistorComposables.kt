@@ -17,6 +17,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.model.Resistor
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
@@ -26,28 +27,27 @@ import com.brandoncano.resistancecalculator.util.ColorFinder
 
 @Composable
 fun ResistorLayout(
-    band1: String,
-    band2: String,
-    band3: String,
-    band4: String,
-    band5: String,
-    band6: String
+    resistor: Resistor
 ) {
     Column(
         modifier = Modifier
             .padding(top = 12.dp, start = 32.dp, end = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        // might make these as extension functions instead
+        val band3 = if (resistor.isFiveSixBand()) resistor.band3 else ""
+        val band5 = if (!resistor.isThreeBand()) resistor.band5 else ""
+        val band6 = if (resistor.isSixBand()) resistor.band6 else ""
         Spacer(modifier = Modifier.height(1.dp)) // Spacer to replace the Group
         ResistorRow(
             ResistorImagePair(R.drawable.img_resistor_p1),
-            ResistorImagePair(R.drawable.img_resistor_p2, band1),
+            ResistorImagePair(R.drawable.img_resistor_p2, resistor.band1),
             ResistorImagePair(R.drawable.img_resistor_p3),
-            ResistorImagePair(R.drawable.img_resistor_p4, band2),
+            ResistorImagePair(R.drawable.img_resistor_p4, resistor.band2),
             ResistorImagePair(R.drawable.img_resistor_p5),
             ResistorImagePair(R.drawable.img_resistor_p6_7, band3),
             ResistorImagePair(R.drawable.img_resistor_p6_7),
-            ResistorImagePair(R.drawable.img_resistor_p8, band4),
+            ResistorImagePair(R.drawable.img_resistor_p8, resistor.band4),
             ResistorImagePair(R.drawable.img_resistor_p9),
             ResistorImagePair(R.drawable.img_resistor_p10, band5),
             ResistorImagePair(R.drawable.img_resistor_p11),
@@ -114,11 +114,11 @@ private fun ResistanceText(resistance: String) {
 private fun ResistorLayoutsPreview() {
     ResistorCalculatorTheme {
         Column {
-            ResistorLayout("", "", "", "", "", "")
-            ResistorLayout("Red", "Orange", "", "Yellow", "", "")
-            ResistorLayout("Red", "Orange", "", "Yellow", "Green", "")
-            ResistorLayout("Red", "Orange", "Black", "Yellow", "Green", "")
-            ResistorLayout("Red", "Orange", "Black", "Yellow", "Green", "Blue")
+//            ResistorLayout("", "", "", "", "", "")
+//            ResistorLayout("Red", "Orange", "", "Yellow", "", "")
+//            ResistorLayout("Red", "Orange", "", "Yellow", "Green", "")
+//            ResistorLayout("Red", "Orange", "Black", "Yellow", "Green", "")
+//            ResistorLayout("Red", "Orange", "Black", "Yellow", "Green", "Blue")
         }
     }
 }

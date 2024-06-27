@@ -23,6 +23,7 @@ data class Resistor(
 
     fun isThreeBand() = numberOfBands == 3
     fun isThreeFourBand() = numberOfBands == 3 || numberOfBands == 4
+    fun isFiveSixBand() = numberOfBands == 5 || numberOfBands == 6
     fun isSixBand() = numberOfBands == 6
 
     fun isEmpty(): Boolean {
