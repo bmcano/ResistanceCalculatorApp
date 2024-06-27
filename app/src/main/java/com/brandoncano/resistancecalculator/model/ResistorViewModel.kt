@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.model
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 
 /**
@@ -32,7 +31,6 @@ class ResistorViewModel(context: Context): ViewModel() {
     }
 
     fun saveResistorColors(resistor: Resistor) {
-        Log.e("BRANDON123", resistor.toString())
         repository.saveResistor(resistor)
     }
 
