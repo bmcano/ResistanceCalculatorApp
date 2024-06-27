@@ -9,7 +9,7 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
  */
 object ResistanceFormatter {
 
-    private const val ZERO_OHMS = "0 ${S.Ohms}"
+    private const val ZERO_OHMS = "0 ${S.OHMS}"
 
     fun calculate(resistor: ResistorCtV): String {
         if (resistor.isEmpty()) return "Select colors"

@@ -1,6 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
+
 import com.brandoncano.resistancecalculator.resistor.ResistorVtC
+import java.util.Locale
 import com.brandoncano.resistancecalculator.constants.Colors as C
 
 /**
@@ -8,6 +10,7 @@ import com.brandoncano.resistancecalculator.constants.Colors as C
  */
 object ResistorFormatter {
 
+    private val LOCALE = Locale.US
     private val colorsMap = mapOf(
         0 to C.SILVER, 1 to C.GOLD, 2 to C.BLACK, 3 to C.BROWN, 4 to C.RED, 5 to C.ORANGE,
         6 to C.YELLOW, 7 to C.GREEN, 8 to C.BLUE, 9 to C.VIOLET, 10 to C.GRAY, 11 to C.WHITE,
@@ -28,7 +31,7 @@ object ResistorFormatter {
         // remove decimal and check leading zeros
         val numberBands = arrayOf(0, 0, 0)
         val isThreeFourBand = resistor.isThreeFourBand()
-        val formattedResistance = checkLeadingZeros(isThreeFourBand, String.format("%.2f", resDouble))
+        val formattedResistance = checkLeadingZeros(isThreeFourBand, String.format(LOCALE, "%.2f", resDouble))
         formattedResistance.forEachIndexed { index, digit ->
             // if a invalid character makes its way through, set to -1 for a blank band
             if (index < 3) numberBands[index] = digit.digitToIntOrNull() ?: -1
@@ -52,7 +55,7 @@ object ResistorFormatter {
     }
 
     private fun decimalInputMultiplier(resistor: ResistorVtC, resistance: Double): String {
-        val res = String.format("%.2f", resistance)
+        val res = String.format(LOCALE, "%.2f", resistance)
         var index = res.indexOf(".")
         if (index == -1) index = res.length
         if (res.startsWith("0")) {

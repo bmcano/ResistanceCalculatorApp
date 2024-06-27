@@ -62,5 +62,5 @@ object DropdownLists {
         DropdownItem(R.drawable.square_gray, Colors.GRAY, "1 ${Symbols.PPM}"),
     )
 
-    val UNITS_LIST = listOf(Symbols.Ohms, Symbols.kOhms, Symbols.MOhms, Symbols.GOhms)
+    val UNITS_LIST = listOf(Symbols.OHMS, Symbols.KOHMS, Symbols.MOHMS, Symbols.GOHMS)
 }

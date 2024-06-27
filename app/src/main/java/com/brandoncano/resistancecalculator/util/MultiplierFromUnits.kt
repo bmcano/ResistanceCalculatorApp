@@ -9,9 +9,9 @@ object MultiplierFromUnits {
 
     fun execute(units: String): Int {
         return when (units) {
-            S.kOhms -> 1000
-            S.MOhms -> 1000000
-            S.GOhms -> 1000000000
+            S.KOHMS -> 1000
+            S.MOHMS -> 1000000
+            S.GOHMS -> 1000000000
             else -> 1 // Ohms
         }
     }

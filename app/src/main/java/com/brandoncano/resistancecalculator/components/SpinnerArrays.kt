@@ -64,5 +64,5 @@ object SpinnerArrays {
         )
     }
 
-    val unitsArray = arrayOf(S.Ohms, S.kOhms, S.MOhms, S.GOhms)
+    val unitsArray = arrayOf(S.OHMS, S.KOHMS, S.MOHMS, S.GOHMS)
 }

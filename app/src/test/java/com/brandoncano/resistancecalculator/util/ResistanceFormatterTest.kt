@@ -51,9 +51,9 @@ class ResistanceFormatterTest {
         }
 
         val answers = listOf(
-            "68 ${S.Ohms} ${S.PM}5%", "470 ${S.Ohms} ${S.PM}5%", "330 ${S.Ohms} ${S.PM}5%",
-            "100 ${S.Ohms} ${S.PM}5%", "1.2 ${S.kOhms} ${S.PM}5%", "1.0 ${S.kOhms} ${S.PM}5%",
-            "9.0 ${S.kOhms} ${S.PM}5%",
+            "68 ${S.OHMS} ${S.PM}5%", "470 ${S.OHMS} ${S.PM}5%", "330 ${S.OHMS} ${S.PM}5%",
+            "100 ${S.OHMS} ${S.PM}5%", "1.2 ${S.KOHMS} ${S.PM}5%", "1.0 ${S.KOHMS} ${S.PM}5%",
+            "9.0 ${S.KOHMS} ${S.PM}5%",
         )
 
         for (i in answers.indices) {
@@ -88,8 +88,8 @@ class ResistanceFormatterTest {
         }
 
         val answers = listOf(
-            "51.0 ${S.Ohms} ${S.PM}1%", "152 ${S.MOhms} ${S.PM}5%", "300 ${S.MOhms} ${S.PM}5%",
-            "789 ${S.MOhms} ${S.PM}5%",
+            "51.0 ${S.OHMS} ${S.PM}1%", "152 ${S.MOHMS} ${S.PM}5%", "300 ${S.MOHMS} ${S.PM}5%",
+            "789 ${S.MOHMS} ${S.PM}5%",
         )
 
         every { StateData.BUTTON_SELECTION_CTV.saveData(context, "5") } answers { }
@@ -108,15 +108,15 @@ class ResistanceFormatterTest {
         )
 
         val answers = listOf(
-            "12.5 ${S.kOhms} ${S.PM}5%\n250 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n100 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n50 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n15 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n25 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n20 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n10 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n5 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n1 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%\n250 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%\n100 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%\n50 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%\n15 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%\n25 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%\n20 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%\n10 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%\n5 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%\n1 ${S.PPM}",
         )
 
         every { StateData.BUTTON_SELECTION_CTV.saveData(context, "6") } answers { }
@@ -144,7 +144,7 @@ class ResistanceFormatterTest {
         resistor.sigFigBandTwo = C.GOLD
         resistor.multiplierBand = C.RED
         resistor.toleranceBand = C.GOLD
-        val answer = "0 ${S.Ohms} ${S.PM}5%"
+        val answer = "0 ${S.OHMS} ${S.PM}5%"
         assertEquals(answer, ResistanceFormatter.calculate(resistor))
     }
 

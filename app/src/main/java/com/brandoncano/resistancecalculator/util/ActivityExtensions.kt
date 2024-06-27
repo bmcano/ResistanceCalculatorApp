@@ -9,7 +9,6 @@ import com.brandoncano.resistancecalculator.resistor.ResistorImage
 import com.brandoncano.resistancecalculator.ui.AboutActivity
 import com.brandoncano.resistancecalculator.ui.ColorToValueActivity
 import com.brandoncano.resistancecalculator.ui.HomeActivity
-import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.ValueToColorActivity
 
 /**
