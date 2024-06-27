@@ -45,6 +45,7 @@ import com.brandoncano.resistancecalculator.util.ColorFinder
 
 @Composable
 fun OutlinedDropDownMenu(
+    modifier: Modifier = Modifier,
     @StringRes label: Int,
     selectedOption: String = "",
     items: List<DropdownItem>,
@@ -71,7 +72,7 @@ fun OutlinedDropDownMenu(
             value = selectedText,
             onValueChange = { selectedText = it },
             readOnly = true,
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
@@ -163,7 +164,7 @@ fun CustomDropdownPreview() {
     val item6 = DropdownItem(imageResId = R.drawable.square_violet, name = "Item 6", value = "Value 6")
     val list = listOf(item1, item2, item3, item4, item5, item6)
     Column {
-        OutlinedDropDownMenu(R.string.number_band_hint1, "", list) { }
-        OutlinedDropDownMenu(R.string.number_band_hint1, "Red", list) { }
+        OutlinedDropDownMenu(Modifier, R.string.number_band_hint1, "", list) { }
+        OutlinedDropDownMenu(Modifier, R.string.number_band_hint1, "Red", list) { }
     }
 }

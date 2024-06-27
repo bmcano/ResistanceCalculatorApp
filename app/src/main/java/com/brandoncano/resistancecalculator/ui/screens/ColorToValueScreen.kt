@@ -18,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
@@ -85,6 +86,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
             ResistorLayout(band1, band2, band3, band4, band5, band6)
 
             OutlinedDropDownMenu(
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
                 label = R.string.number_band_hint1,
                 selectedOption = band1,
                 items = DropdownLists.NUMBER_LIST_NO_BLACK
@@ -94,6 +96,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                 viewModel.saveResistorColors(resistor)
             }
             OutlinedDropDownMenu(
+                modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
                 label = R.string.number_band_hint2,
                 selectedOption = band2,
                 items = DropdownLists.NUMBER_LIST
@@ -104,6 +107,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
             }
             if (navBarSelection == 2 || navBarSelection == 3) {
                 OutlinedDropDownMenu(
+                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
                     label = R.string.number_band_hint3,
                     selectedOption = band3,
                     items = DropdownLists.NUMBER_LIST
@@ -114,6 +118,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                 }
             }
             OutlinedDropDownMenu(
+                modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
                 label = R.string.multiplier_band_hint,
                 selectedOption = band4,
                 items = DropdownLists.MULTIPLIER_LIST
@@ -124,6 +129,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
             }
             if (navBarSelection != 0) {
                 OutlinedDropDownMenu(
+                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
                     label = R.string.tolerance_band_hint,
                     selectedOption = band5,
                     items = DropdownLists.NUMBER_LIST
@@ -135,6 +141,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
             }
             if (navBarSelection == 3) {
                 OutlinedDropDownMenu(
+                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
                     label = R.string.ppm_band_hint,
                     selectedOption = band6,
                     items = DropdownLists.NUMBER_LIST

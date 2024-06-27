@@ -58,5 +58,6 @@
     <string name="new_ui">Try out our new experimental user interface</string>
     <string name="old_ui">Revert back to the old UI</string>
     <string name="content_description_menu_more">More</string>
+    <string name="content_description_right_arrow">Right arrow</string>
 
 </resources>

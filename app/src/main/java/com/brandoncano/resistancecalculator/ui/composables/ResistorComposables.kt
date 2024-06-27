@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.colorResource
@@ -34,7 +35,8 @@ fun ResistorLayout(
 ) {
     Column(
         modifier = Modifier
-            .padding(start = 32.dp, end = 32.dp)
+            .padding(top = 12.dp, start = 32.dp, end = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.height(1.dp)) // Spacer to replace the Group
         ResistorRow(
@@ -52,6 +54,8 @@ fun ResistorLayout(
             ResistorImagePair(R.drawable.img_resistor_p12, band6),
             ResistorImagePair(R.drawable.img_resistor_p13),
         )
+        val resistance = "100k 20%" // temp until i modify function for formatting/calculating string
+        ResistanceText(resistance)
     }
 }
 
@@ -93,8 +97,15 @@ private fun ResistorImage(@DrawableRes drawableRes: Int, @ColorRes colorRes: Int
 // TODO - WIP
 @Composable
 private fun ResistanceText(resistance: String) {
-    DefaultCard {
-        TextHeadline(text = resistance)
+    ContentCard(
+        modifier = Modifier.padding(top = 12.dp)
+    ) {
+        TextHeadline(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = 6.dp, bottom = 6.dp, start = 12.dp, end = 12.dp),
+            text = resistance
+        )
     }
 }
 

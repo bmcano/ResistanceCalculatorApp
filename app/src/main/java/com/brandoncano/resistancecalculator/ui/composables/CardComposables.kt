@@ -17,9 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.brandoncano.resistancecalculator.R
 
 /**
  * Job: Holds all the designs for cards and dividers within the app
@@ -49,6 +51,16 @@ fun DefaultCard(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
             .fillMaxWidth(),
+        content = content,
+    )
+}
+@Composable
+fun ContentCard(
+    modifier: Modifier = Modifier,
+    content: @Composable (ColumnScope.() -> Unit)
+) {
+    Card(
+        modifier = modifier,
         content = content,
     )
 }
@@ -117,8 +129,7 @@ private fun CardRowView(
         Image(
             modifier = Modifier.padding(16.dp),
             imageVector = Icons.AutoMirrored.Filled.ArrowForwardIos,
-            contentDescription = "Right arrow",
-//            contentDescription = stringResource(id = R.string.content_right_arrow),
+            contentDescription = stringResource(id = R.string.content_description_right_arrow),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
         )
     }

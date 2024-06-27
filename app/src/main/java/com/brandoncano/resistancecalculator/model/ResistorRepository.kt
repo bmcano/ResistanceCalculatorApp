@@ -3,6 +3,9 @@ package com.brandoncano.resistancecalculator.model
 import android.content.Context
 import com.brandoncano.resistancecalculator.components.StateData
 
+/**
+ * Job: Repository to the color to value resistor model, handles shared preferences.
+ */
 class ResistorRepository(context: Context) {
 
     private val application = context
