@@ -18,10 +18,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ResistorViewModel
+import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
@@ -46,7 +48,7 @@ fun ColorToValueScreen(context: Context, navController: NavController, viewModel
 @Composable
 private fun ContentView(context: Context, navController: NavController, viewModel: ResistorViewModel) {
     val interactionSource = remember { MutableInteractionSource() }
-    var navBarSelection by remember { mutableIntStateOf(viewModel.loadNumberOfBands() - 3) }
+    var navBarSelection by remember { mutableIntStateOf(viewModel.getNavBarSelection()) }
     val resistor by remember { mutableStateOf(viewModel.resistor) }
     var band1 by remember { mutableStateOf(resistor.band1) }
     var band2 by remember { mutableStateOf(resistor.band2) }
@@ -150,7 +152,6 @@ private fun ContentView(context: Context, navController: NavController, viewMode
 @Composable
 fun ColorToValueScreenPreview() {
     val app = HomeActivity()
-    val viewModel = ResistorViewModel(app)
-    viewModel.loadResistorColors()
+    val viewModel = viewModel<ResistorViewModel>(factory = ResistorViewModelFactory(app))
     ColorToValueScreen(app, NavController(app), viewModel)
 }

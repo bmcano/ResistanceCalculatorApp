@@ -27,6 +27,10 @@ class ResistorViewModel(context: Context): ViewModel() {
         return resistor.numberOfBands
     }
 
+    fun getNavBarSelection(): Int {
+        return resistor.numberOfBands - 3
+    }
+
     fun saveResistorColors(resistor: Resistor) {
         Log.e("BRANDON123", resistor.toString())
         repository.saveResistor(resistor)
