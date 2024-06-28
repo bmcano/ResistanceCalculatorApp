@@ -10,7 +10,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.brandoncano.resistancecalculator.model.ResistorViewModel
+import com.brandoncano.resistancecalculator.model.ctv.ResistorViewModel
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.ui.screens.AboutScreen
 import com.brandoncano.resistancecalculator.ui.screens.ColorToValueScreen
@@ -55,7 +55,8 @@ fun Navigation(context: Context) {
             enterTransition = { slideInVertically(initialOffsetY = { it }) },
             exitTransition = { slideOutVertically(targetOffsetY = { it }) },
         ) {
-            ValueToColorScreen(context, navController)
+            val viewModel = viewModel<ResistorViewModel>(factory = ResistorViewModelFactory(context))
+            ValueToColorScreen(context, navController, viewModel)
         }
     }
 }

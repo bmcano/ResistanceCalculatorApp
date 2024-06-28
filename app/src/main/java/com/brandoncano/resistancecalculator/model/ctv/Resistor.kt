@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.model
+package com.brandoncano.resistancecalculator.model.ctv
 
 /**
  * Job: Model class for the color to value resistor calculator

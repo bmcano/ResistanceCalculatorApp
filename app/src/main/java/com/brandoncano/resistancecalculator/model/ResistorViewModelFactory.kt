@@ -3,6 +3,7 @@ package com.brandoncano.resistancecalculator.model
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.brandoncano.resistancecalculator.model.ctv.ResistorViewModel
 
 /**
  * Job: ViewModel factory for the resistor ViewModels

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.model
+package com.brandoncano.resistancecalculator.model.ctv
 
 import android.content.Context
 import androidx.lifecycle.LiveData

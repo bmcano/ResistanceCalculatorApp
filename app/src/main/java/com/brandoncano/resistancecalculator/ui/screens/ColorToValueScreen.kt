@@ -25,8 +25,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownLists
-import com.brandoncano.resistancecalculator.model.Resistor
-import com.brandoncano.resistancecalculator.model.ResistorViewModel
+import com.brandoncano.resistancecalculator.model.ctv.Resistor
+import com.brandoncano.resistancecalculator.model.ctv.ResistorViewModel
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
@@ -59,7 +59,6 @@ private fun ContentView(context: Context, navController: NavController, viewMode
     val interactionSource = remember { MutableInteractionSource() }
     var navBarSelection by remember { mutableIntStateOf(viewModel.getNavBarSelection()) }
     var resetDropdown by remember { mutableStateOf(false) }
-
     val resistor by viewModel.getResistorLiveData().observeAsState(Resistor())
     var band1 by remember { mutableStateOf(resistor.band1) }
     var band2 by remember { mutableStateOf(resistor.band2) }
@@ -71,9 +70,9 @@ private fun ContentView(context: Context, navController: NavController, viewMode
     Scaffold(
         bottomBar = {
             CalculatorNavigationBar(navBarSelection) {
-                resistor.numberOfBands = it + 3
                 navBarSelection = it
                 // temp adding +3 until new logic is written to account for navbar
+                resistor.numberOfBands = it + 3
                 viewModel.saveNumberOfBands(it + 3)
             }
         }
@@ -89,7 +88,6 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                 ValueToColorMenuItem(navController, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
-                    // will add later - doesn't update screen unless the user leaves and comes back
                     viewModel.clear()
                     resetDropdown = true
                     focusManager.clearFocus()
