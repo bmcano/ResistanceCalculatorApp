@@ -48,8 +48,6 @@ fun Navigation(context: Context) {
             exitTransition = { slideOutVertically(targetOffsetY = { it }) },
         ) {
             val viewModel = viewModel<ResistorViewModel>(factory = ResistorViewModelFactory(context))
-            viewModel.loadResistorColors()
-            viewModel.loadNumberOfBands()
             ColorToValueScreen(context, navController, viewModel)
         }
         composable(

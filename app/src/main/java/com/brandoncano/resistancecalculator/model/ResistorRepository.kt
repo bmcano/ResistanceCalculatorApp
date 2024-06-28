@@ -30,13 +30,19 @@ class ResistorRepository(context: Context) {
         StateData.RESISTANCE_CTV.clearData(application)
     }
 
-    fun saveNumberOfBands(number: Int) {
-        StateData.BUTTON_SELECTION_CTV.saveData(application, "$number")
+    fun loadResistor(): Resistor {
+        val band1 = StateData.SIGFIG_BAND_ONE_CTV.loadData(application)
+        val band2 = StateData.SIGFIG_BAND_TWO_CTV.loadData(application)
+        val band3 = StateData.SIGFIG_BAND_THREE_CTV.loadData(application)
+        val band4 = StateData.MULTIPLIER_BAND_CTV.loadData(application)
+        val band5 = StateData.TOLERANCE_BAND_CTV.loadData(application)
+        val band6 = StateData.PPM_BAND_CTV.loadData(application)
+        val number = StateData.BUTTON_SELECTION_CTV.loadData(application)
+        return Resistor(band1, band2, band3, band4, band5, band6, number.toIntOrNull() ?: 4)
     }
 
-    fun loadNumberOfBands(): Int {
-        val number = StateData.BUTTON_SELECTION_CTV.loadData(application)
-        return number.toIntOrNull() ?: 4
+    fun saveNumberOfBands(number: Int) {
+        StateData.BUTTON_SELECTION_CTV.saveData(application, "$number")
     }
 
     fun saveResistor(resistor: Resistor) {
@@ -46,15 +52,5 @@ class ResistorRepository(context: Context) {
         StateData.MULTIPLIER_BAND_CTV.saveData(application, resistor.band4)
         StateData.TOLERANCE_BAND_CTV.saveData(application, resistor.band5)
         StateData.PPM_BAND_CTV.saveData(application, resistor.band6)
-    }
-
-    fun loadResistor(): Resistor {
-        val band1 = StateData.SIGFIG_BAND_ONE_CTV.loadData(application)
-        val band2 = StateData.SIGFIG_BAND_TWO_CTV.loadData(application)
-        val band3 = StateData.SIGFIG_BAND_THREE_CTV.loadData(application)
-        val band4 = StateData.MULTIPLIER_BAND_CTV.loadData(application)
-        val band5 = StateData.TOLERANCE_BAND_CTV.loadData(application)
-        val band6 = StateData.PPM_BAND_CTV.loadData(application)
-        return Resistor(band1, band2, band3, band4, band5, band6)
     }
 }

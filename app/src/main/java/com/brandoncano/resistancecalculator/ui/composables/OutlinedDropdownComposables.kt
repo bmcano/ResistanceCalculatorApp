@@ -49,7 +49,8 @@ fun OutlinedDropDownMenu(
     @StringRes label: Int,
     selectedOption: String = "",
     items: List<DropdownItem>,
-    onOptionSelected: (String) -> Unit
+    reset: Boolean = false,
+    onOptionSelected: (String) -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     var expanded by remember { mutableStateOf(false) }
@@ -65,6 +66,12 @@ fun OutlinedDropDownMenu(
             if (interaction is PressInteraction.Release) {
                 expanded = !expanded
             }
+        }
+    }
+    LaunchedEffect(reset) {
+        if (reset) {
+            selectedText = ""
+            selectedLeadingIcon = R.drawable.square_blank
         }
     }
     Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
@@ -116,7 +123,7 @@ fun OutlinedDropDownMenu(
 }
 
 @Composable
-fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
+private fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()

@@ -1,6 +1,8 @@
 package com.brandoncano.resistancecalculator.model
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 /**
@@ -9,16 +11,30 @@ import androidx.lifecycle.ViewModel
 class ResistorViewModel(context: Context): ViewModel() {
 
     private val repository = ResistorRepository.getInstance(context)
-    var resistor = Resistor()
+    private var resistor = MutableLiveData<Resistor>()
     var resistance = ""
 
+    init {
+        resistor.value = Resistor()
+    }
+
     override fun onCleared() {
-        resistor.clear()
+        resistor.value = null
     }
 
     fun clear() {
-        resistor.clear()
+        resistor.value = Resistor()
         repository.clear()
+    }
+
+    fun getResistorLiveData(): LiveData<Resistor> {
+        resistor.value = repository.loadResistor()
+        return resistor
+    }
+
+    fun getNavBarSelection(): Int {
+        val resistor = repository.loadResistor()
+        return resistor.numberOfBands - 3
     }
 
     fun saveNumberOfBands(number: Int) {
@@ -26,22 +42,8 @@ class ResistorViewModel(context: Context): ViewModel() {
         repository.saveNumberOfBands(numberOfBands)
     }
 
-    fun loadNumberOfBands(): Int {
-        resistor.numberOfBands = repository.loadNumberOfBands()
-        return resistor.numberOfBands
-    }
-
-    fun getNavBarSelection(): Int {
-        return resistor.numberOfBands - 3
-    }
-
     fun saveResistorColors(resistor: Resistor) {
         repository.saveResistor(resistor)
-    }
-
-    fun loadResistorColors(): Resistor {
-        resistor = repository.loadResistor()
-        return resistor
     }
 
 //    fun getResistance(): String {
