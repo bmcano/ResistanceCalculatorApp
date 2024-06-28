@@ -53,27 +53,27 @@ android {
 dependencies {
     implementation 'androidx.core:core-ktx:1.13.1' // 5-14-24
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // 6-19-22
-    implementation 'androidx.appcompat:appcompat:1.6.1' // 2-18-23
+    implementation 'androidx.appcompat:appcompat:1.7.0' // 6-28-24
     implementation 'com.google.android.material:material:1.12.0' // 5-14-24
     implementation 'com.google.code.gson:gson:2.10.1' // 5-14-24
     implementation 'androidx.browser:browser:1.8.0' // 5-14-24
     implementation files('libs/ostermillerutils_1_07_00.jar')
     testImplementation 'junit:junit:4.13.2' // 6-19-22
     testImplementation 'io.mockk:mockk:1.13.9' // 1-15-24
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5' // 1-4-23
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // 1-4-23
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1' // 6-28-24
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1' // 6-28-24
     // compose libraries
     implementation 'androidx.activity:activity-compose:1.9.0' // 5-16-24
-    implementation 'androidx.compose.ui:ui:1.6.7' // 5-16-24
-    implementation 'androidx.compose.ui:ui-graphics:1.6.7' // 5-16-24
+    implementation 'androidx.compose.ui:ui:1.6.8' // 6-28-24
+    implementation 'androidx.compose.ui:ui-graphics:1.6.8' // 6-28-24
     implementation 'androidx.compose.material3:material3:1.2.1' // 5-16-24
-    implementation 'androidx.compose.material:material-icons-extended:1.6.7' // 5-16-24
+    implementation 'androidx.compose.material:material-icons-extended:1.6.8' // 6-28-24
     implementation 'androidx.compose.runtime:runtime-livedata:1.6.8'
     implementation 'androidx.navigation:navigation-compose:2.7.7' // 5-16-24
     // compose testing
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.6.7' // 5-16-24
-    debugImplementation 'androidx.compose.ui:ui-test-manifest:1.6.7' // 5-16-24
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.6.8' // 6-28-24
+    debugImplementation 'androidx.compose.ui:ui-test-manifest:1.6.8' // 6-28-24
     // compose previews
-    implementation 'androidx.compose.ui:ui-tooling-preview:1.6.7' // 5-16-24
-    debugImplementation 'androidx.compose.ui:ui-tooling:1.6.7' // 5-16-24
+    implementation 'androidx.compose.ui:ui-tooling-preview:1.6.8' // 6-28-24
+    debugImplementation 'androidx.compose.ui:ui-tooling:1.6.8' // 6-28-24
 }
