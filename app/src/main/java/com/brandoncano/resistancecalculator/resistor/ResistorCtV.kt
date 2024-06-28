@@ -53,6 +53,11 @@ class ResistorCtV(val context: Context) : Resistor() {
         StateData.BUTTON_SELECTION_CTV.saveData(context, "$numberOfBands")
     }
 
+    // This is only for the compose version
+    fun setBands(number: Int) {
+        numberOfBands = number.coerceIn(3..6)
+    }
+
     override fun saveDropdownSelections() {
         StateData.SIGFIG_BAND_ONE_CTV.saveData(context, sigFigBandOne)
         StateData.SIGFIG_BAND_TWO_CTV.saveData(context, sigFigBandTwo)

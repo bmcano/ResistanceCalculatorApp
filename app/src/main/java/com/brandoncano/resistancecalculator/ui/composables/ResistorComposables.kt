@@ -18,8 +18,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.ctv.Resistor
+import com.brandoncano.resistancecalculator.resistor.ResistorCtV
+import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.ColorFinder
+import com.brandoncano.resistancecalculator.util.ResistanceFormatter
 
 /**
  * Job: Holds all the parts for the resistor layout.
@@ -54,7 +57,17 @@ fun ResistorLayout(
             ResistorImagePair(R.drawable.img_resistor_p12, band6),
             ResistorImagePair(R.drawable.img_resistor_p13),
         )
-        val resistance = "100k 20%" // temp until i modify function for formatting/calculating string
+
+        // NOTE: this is temporary translation until logic is adjusted to handle new models
+        val resistorCtV = ResistorCtV(HomeActivity())
+        resistorCtV.sigFigBandOne = resistor.band1
+        resistorCtV.sigFigBandTwo = resistor.band2
+        resistorCtV.sigFigBandThree = resistor.band3
+        resistorCtV.multiplierBand = resistor.band4
+        resistorCtV.toleranceBand = resistor.band5
+        resistorCtV.ppmBand = resistor.band6
+        resistorCtV.setBands(resistor.numberOfBands)
+        val resistance = ResistanceFormatter.calculate(resistorCtV)
         ResistanceText(resistance)
     }
 }
