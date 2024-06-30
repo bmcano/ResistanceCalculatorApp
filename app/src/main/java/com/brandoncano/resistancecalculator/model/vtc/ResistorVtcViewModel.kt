@@ -41,7 +41,7 @@ class ResistorVtcViewModel(context: Context): ViewModel() {
         repository.saveNumberOfBands(numberOfBands)
     }
 
-    fun saveResistorColors(resistor: ResistorVtc) {
+    fun saveResistorValues(resistor: ResistorVtc) {
         repository.saveResistor(resistor)
     }
 }

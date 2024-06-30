@@ -17,4 +17,8 @@ data class ResistorVtc(
     fun isThreeFourBand() = numberOfBands == 3 || numberOfBands == 4
     fun isFiveSixBand() = numberOfBands == 5 || numberOfBands == 6
     fun isSixBand() = numberOfBands == 6
+
+    fun isEmpty(): Boolean {
+        return resistance.isEmpty() || units.isEmpty()
+    }
 }

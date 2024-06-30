@@ -42,6 +42,7 @@ import com.brandoncano.resistancecalculator.ui.composables.OutlinedDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.util.formatResistor
 
 @Composable
 fun ValueToColorScreen(context: Context, navController: NavController, viewModel: ResistorVtcViewModel) {
@@ -56,14 +57,19 @@ fun ValueToColorScreen(context: Context, navController: NavController, viewModel
 private fun ContentView(context: Context, navController: NavController, viewModel: ResistorVtcViewModel) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
-    var navBarSelection by remember { mutableIntStateOf(1) }
+    var navBarSelection by remember { mutableIntStateOf(viewModel.getNavBarSelection()) }
     var resetDropdown by remember { mutableStateOf(false) }
     val resistor by viewModel.getResistorLiveData().observeAsState(ResistorVtc())
+    var resistance by remember { mutableStateOf(resistor.resistance) }
+    var units by remember { mutableStateOf(resistor.units) }
+    var band5 by remember { mutableStateOf(resistor.band5) }
+    var band6 by remember { mutableStateOf(resistor.band6) }
 
     Scaffold(
         bottomBar = {
             CalculatorNavigationBar(navBarSelection) {
                 navBarSelection = it
+                resistor.numberOfBands = it + 3
             }
         }
     ) { paddingValues ->
@@ -78,7 +84,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                 ColorToValueMenuItem(navController, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
-//                    viewModel.clear()
+                    viewModel.clear()
                     resetDropdown = true
                     focusManager.clearFocus()
                 }
@@ -92,47 +98,62 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                 text = "",
                 reset = resetDropdown,
             ) {
-                
+                resistor.resistance = it
+                resistance = it
+                viewModel.saveResistorValues(resistor)
+                resetDropdown = false
             }
 
             AppButton(
                 modifier = Modifier.padding(top = 16.dp, start = 32.dp, end = 32.dp),
                 text = stringResource(id = R.string.calculate_btn)
             ) {
-
+                resistor.formatResistor()
+                viewModel.saveResistorValues(resistor)
+                resetDropdown = false
             }
 
             TextDropDownMenu(
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
                 label = R.string.units_hint,
-                selectedOption = "",
+                selectedOption = units,
                 items = DropdownLists.UNITS_LIST,
                 reset = resetDropdown,
             ) {
-
+                resistor.units = it
+                units = it
+                resistor.formatResistor()
+                viewModel.saveResistorValues(resistor)
+                resetDropdown = false
             }
-            // TODO - units dropdown
-
-            OutlinedDropDownMenu(
-                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
-                label = R.string.tolerance_band_hint,
-                selectedOption = "",
-                items = DropdownLists.TOLERANCE_LIST,
-                reset = resetDropdown,
-            ) {
-
+            if (navBarSelection != 0) {
+                OutlinedDropDownMenu(
+                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                    label = R.string.tolerance_band_hint,
+                    selectedOption = band5,
+                    items = DropdownLists.TOLERANCE_LIST,
+                    reset = resetDropdown,
+                ) {
+                    resistor.band5 = it
+                    band5 = it
+                    viewModel.saveResistorValues(resistor)
+                    resetDropdown = false
+                }
             }
-
-            OutlinedDropDownMenu(
-                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
-                label = R.string.ppm_band_hint,
-                selectedOption = "",
-                items = DropdownLists.PPM_LIST,
-                reset = resetDropdown,
-            ) {
-
+            if (navBarSelection == 3) {
+                OutlinedDropDownMenu(
+                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                    label = R.string.ppm_band_hint,
+                    selectedOption = band6,
+                    items = DropdownLists.PPM_LIST,
+                    reset = resetDropdown,
+                ) {
+                    resistor.band6 = it
+                    band6 = it
+                    viewModel.saveResistorValues(resistor)
+                    resetDropdown = false
+                }
             }
-
         }
     }
 }

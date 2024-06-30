@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.resistor.ResistorVtC
 import java.util.Locale
 import com.brandoncano.resistancecalculator.constants.Colors as C
@@ -66,6 +67,54 @@ object ResistorFormatter {
     }
 
     private fun numericalInputMultiplier(resistor: ResistorVtC, resistance: Long): String {
+        var length = resistance.toString().length
+        if (!resistor.isThreeFourBand()) length--
+        return colorsMap[length] ?: C.BLANK
+    }
+
+    /**
+     * Note: these are needed for the compose ui - code above will eventually be removed
+     */
+    fun generateResistor(resistor: ResistorVtc) {
+        if (resistor.isEmpty()) return
+        val resistance = resistor.resistance
+        val multiplier = MultiplierFromUnits.execute(resistor.units)
+        val resLong: Long? = resistance.toLongOrNull()?.times(multiplier)
+        val resDouble: Double = resistance.toDoubleOrNull()?.times(multiplier) ?: return
+        if (resLong == null) {
+            resistor.band4 = decimalInputMultiplier(resistor, resDouble)
+        } else {
+            resistor.band4 = numericalInputMultiplier(resistor, resLong)
+        }
+
+        // remove decimal and check leading zeros
+        val numberBands = arrayOf(0, 0, 0)
+        val isThreeFourBand = resistor.isThreeFourBand()
+        val formattedResistance = checkLeadingZeros(isThreeFourBand, String.format(LOCALE, "%.2f", resDouble))
+        formattedResistance.forEachIndexed { index, digit ->
+            // if a invalid character makes its way through, set to -1 for a blank band
+            if (index < 3) numberBands[index] = digit.digitToIntOrNull() ?: -1
+        }
+
+        resistor.band1 = ColorFinder.numberToText(numberBands[0])
+        resistor.band2 = ColorFinder.numberToText(numberBands[1])
+        resistor.band3 = if (!isThreeFourBand) {
+            ColorFinder.numberToText(numberBands[2])
+        } else ""
+    }
+
+    private fun decimalInputMultiplier(resistor: ResistorVtc, resistance: Double): String {
+        val res = String.format(LOCALE, "%.2f", resistance)
+        var index = res.indexOf(".")
+        if (index == -1) index = res.length
+        if (res.startsWith("0")) {
+            index = 0
+        }
+        if (!resistor.isThreeFourBand() && !res.startsWith("0.")) index--
+        return colorsMap[index] ?: C.BLANK
+    }
+
+    private fun numericalInputMultiplier(resistor: ResistorVtc, resistance: Long): String {
         var length = resistance.toString().length
         if (!resistor.isThreeFourBand()) length--
         return colorsMap[length] ?: C.BLANK

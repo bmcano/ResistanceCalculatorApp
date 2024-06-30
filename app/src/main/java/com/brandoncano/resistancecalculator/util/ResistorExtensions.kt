@@ -33,6 +33,6 @@ fun ResistorVtc.bandSixForDisplay(): String {
     return if (this.isSixBand()) this.band6 else ""
 }
 
-//fun ResistorVtc.formatResistance(): String {
-//    return ResistanceFormatter.calculate(this)
-//}
+fun ResistorVtc.formatResistor() {
+    ResistorFormatter.generateResistor(this)
+}
