@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.bandFiveForDisplay
@@ -57,6 +58,37 @@ fun ResistorLayout(
         )
 
         ResistanceText(resistor.formatResistance())
+    }
+}
+
+@Composable
+fun ResistorLayout(
+    resistor: ResistorVtc
+) {
+    Column(
+        modifier = Modifier
+            .padding(top = 12.dp, start = 32.dp, end = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        // might make these as extension functions instead
+        Spacer(modifier = Modifier.height(1.dp)) // Spacer to replace the Group
+        ResistorRow(
+            ResistorImagePair(R.drawable.img_resistor_p1),
+            ResistorImagePair(R.drawable.img_resistor_p2, resistor.band1),
+            ResistorImagePair(R.drawable.img_resistor_p3),
+            ResistorImagePair(R.drawable.img_resistor_p4, resistor.band2),
+            ResistorImagePair(R.drawable.img_resistor_p5),
+            ResistorImagePair(R.drawable.img_resistor_p6_7, resistor.bandThreeForDisplay()),
+            ResistorImagePair(R.drawable.img_resistor_p6_7),
+            ResistorImagePair(R.drawable.img_resistor_p8, resistor.band4),
+            ResistorImagePair(R.drawable.img_resistor_p9),
+            ResistorImagePair(R.drawable.img_resistor_p10, resistor.bandFiveForDisplay()),
+            ResistorImagePair(R.drawable.img_resistor_p11),
+            ResistorImagePair(R.drawable.img_resistor_p12, resistor.bandSixForDisplay()),
+            ResistorImagePair(R.drawable.img_resistor_p13),
+        )
+
+        ResistanceText("resistor.formatResistance()")
     }
 }
 

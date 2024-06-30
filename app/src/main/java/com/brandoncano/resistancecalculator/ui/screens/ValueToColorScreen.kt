@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,20 +20,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppButton
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
+import com.brandoncano.resistancecalculator.ui.composables.AppTextField
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.MenuTopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.OutlinedDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
+import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 @Composable
@@ -50,6 +58,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
     val interactionSource = remember { MutableInteractionSource() }
     var navBarSelection by remember { mutableIntStateOf(1) }
     var resetDropdown by remember { mutableStateOf(false) }
+    val resistor by viewModel.getResistorLiveData().observeAsState(ResistorVtc())
 
     Scaffold(
         bottomBar = {
@@ -76,14 +85,54 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                 AboutAppMenuItem(navController, interactionSource)
             }
 
-            val resistor = ResistorVtc() // will eventually remove
-//            ResistorLayout(resistor)
-            // TODO
-            // calculate button
-            // outlined text field - resistance
-            // units dropdown
-            // tolerance dropdown
-            // ppm dropdown
+            ResistorLayout(resistor)
+            AppTextField(
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                label = R.string.type_resistance_hint,
+                text = "",
+                reset = resetDropdown,
+            ) {
+                
+            }
+
+            AppButton(
+                modifier = Modifier.padding(top = 16.dp, start = 32.dp, end = 32.dp),
+                text = stringResource(id = R.string.calculate_btn)
+            ) {
+
+            }
+
+            TextDropDownMenu(
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                label = R.string.units_hint,
+                selectedOption = "",
+                items = DropdownLists.UNITS_LIST,
+                reset = resetDropdown,
+            ) {
+
+            }
+            // TODO - units dropdown
+
+            OutlinedDropDownMenu(
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                label = R.string.tolerance_band_hint,
+                selectedOption = "",
+                items = DropdownLists.TOLERANCE_LIST,
+                reset = resetDropdown,
+            ) {
+
+            }
+
+            OutlinedDropDownMenu(
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                label = R.string.ppm_band_hint,
+                selectedOption = "",
+                items = DropdownLists.PPM_LIST,
+                reset = resetDropdown,
+            ) {
+
+            }
+
         }
     }
 }

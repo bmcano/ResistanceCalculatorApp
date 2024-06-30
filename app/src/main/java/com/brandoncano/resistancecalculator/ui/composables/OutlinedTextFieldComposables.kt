@@ -6,6 +6,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,11 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 
 @Composable
-fun TextField(
+fun AppTextField(
     modifier: Modifier = Modifier,
     @StringRes label: Int,
     text: String = "",
@@ -47,13 +49,14 @@ fun TextField(
                 selectedText = it
                 // TODO - error check
             },
-            readOnly = true,
             modifier = modifier
                 .fillMaxWidth()
                 .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(stringResource(label)) },
             isError = isError,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            singleLine = true,
             interactionSource = interactionSource
         )
 

@@ -37,11 +37,94 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownItem
+import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**
  * Job: Holds all the pieces for the custom dropdowns
  */
+
+@Composable
+fun TextDropDownMenu(
+    modifier: Modifier = Modifier,
+    @StringRes label: Int,
+    selectedOption: String = "",
+    items: List<String>,
+    reset: Boolean = false,
+    onOptionSelected: (String) -> Unit,
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    var expanded by remember { mutableStateOf(false) }
+    var selectedText by remember { mutableStateOf(selectedOption) }
+    var textFieldSize by remember { mutableStateOf(Size.Zero) }
+    val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
+    LaunchedEffect(interactionSource) {
+        interactionSource.interactions.collect { interaction ->
+            if (interaction is PressInteraction.Release) {
+                expanded = !expanded
+            }
+        }
+    }
+    LaunchedEffect(reset) {
+        if (reset) {
+            selectedText = ""
+        }
+    }
+    Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
+        OutlinedTextField(
+            value = selectedText,
+            onValueChange = { selectedText = it },
+            readOnly = true,
+            modifier = modifier
+                .fillMaxWidth()
+                .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
+                .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
+            label = { Text(stringResource(label)) },
+            leadingIcon = { /* left empty to match spacing */ },
+            trailingIcon = {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.clickable { expanded = !expanded }
+                )
+            },
+            interactionSource = interactionSource
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier
+                .width(with(LocalDensity.current) { textFieldSize.width.toDp() })
+                .clickable(interactionSource, null, enabled = true) { expanded = !expanded }
+        ) {
+            items.forEach {
+                TextDropDownItemView(it) {
+                    selectedText = it
+                    expanded = false
+                    onOptionSelected(it)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TextDropDownItemView(item: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+            .clickable { onClick() }
+    ) {
+        Column {
+            Text(
+                text = item,
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 12.dp, bottom = 12.dp)
+            )
+        }
+    }
+}
 
 @Composable
 fun OutlinedDropDownMenu(
@@ -156,8 +239,13 @@ private fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
 @AppScreenPreviews
 @Composable
 fun CustomDropdownRowPreview() {
-    val item1 = DropdownItem(imageResId = R.drawable.square_red, name = "Item 1", value = "Value 1")
-    DropdownItemView(item1) { }
+    ResistorCalculatorTheme {
+        val item1 = DropdownItem(imageResId = R.drawable.square_red, name = "Item 1", value = "Value 1")
+        Column {
+            DropdownItemView(item1) { }
+            DropdownItemView(item1) { }
+        }
+    }
 }
 
 @AppScreenPreviews
@@ -170,8 +258,34 @@ fun CustomDropdownPreview() {
     val item5 = DropdownItem(imageResId = R.drawable.square_blue, name = "Item 5", value = "Value 5")
     val item6 = DropdownItem(imageResId = R.drawable.square_violet, name = "Item 6", value = "Value 6")
     val list = listOf(item1, item2, item3, item4, item5, item6)
-    Column {
-        OutlinedDropDownMenu(Modifier, R.string.number_band_hint1, "", list) { }
-        OutlinedDropDownMenu(Modifier, R.string.number_band_hint1, "Red", list) { }
+    ResistorCalculatorTheme {
+        Column {
+            OutlinedDropDownMenu(Modifier, R.string.number_band_hint1, "", list) { }
+            OutlinedDropDownMenu(Modifier, R.string.number_band_hint1, "Red", list) { }
+        }
+    }
+}
+
+@AppScreenPreviews
+@Composable
+fun TextDropdownRowPreview() {
+    ResistorCalculatorTheme {
+        val item1 = "unit"
+        Column {
+            TextDropDownItemView(item1) { }
+            TextDropDownItemView(item1) { }
+        }
+    }
+}
+
+@AppScreenPreviews
+@Composable
+fun TextDropdownPreview() {
+    ResistorCalculatorTheme {
+        val list = listOf("item1", "item2", "item3", "item4", "item5", "item6")
+        Column {
+            TextDropDownMenu(Modifier, R.string.units_hint, "", list) { }
+            TextDropDownMenu(Modifier, R.string.units_hint, "Red", list) { }
+        }
     }
 }
