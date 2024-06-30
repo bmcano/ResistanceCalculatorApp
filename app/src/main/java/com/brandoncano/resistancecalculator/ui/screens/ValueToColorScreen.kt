@@ -97,6 +97,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                 label = R.string.type_resistance_hint,
                 text = "",
                 reset = resetDropdown,
+                resistor = resistor,
             ) {
                 resistor.resistance = it
                 resistance = it

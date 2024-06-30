@@ -1,12 +1,10 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
 import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.AddToHomeScreen
-import androidx.compose.material.icons.automirrored.outlined.Undo
 import androidx.compose.material.icons.outlined.Calculate
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.Composable
@@ -17,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
-import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.util.OpenLink
 
 /**
@@ -74,21 +71,5 @@ fun OurAppsButtons(context: Context) {
                 { OpenLink.openCapacitorApp(context) }
             ),
         )
-    }
-}
-
-// NOTE: This will eventually be removed when we are only using Jetpack Compose
-@Composable
-fun RevertToLegacyUI(context: Context) {
-    val modifier = Modifier.padding(top = 16.dp)
-    Column(modifier) {
-        ArrowButtonCard(
-            Icons.AutoMirrored.Outlined.Undo,
-            stringResource(id = R.string.old_ui)
-        ) {
-            val intent = Intent(context, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-            context.startActivity(intent)
-        }
     }
 }

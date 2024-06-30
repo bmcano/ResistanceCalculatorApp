@@ -22,6 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
+import com.brandoncano.resistancecalculator.util.IsValidResistance
 
 /**
  * Job: Outlined text field components
@@ -33,6 +35,7 @@ fun AppTextField(
     @StringRes label: Int,
     text: String = "",
     reset: Boolean = false,
+    resistor: ResistorVtc,
     onOptionSelected: (String) -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -51,7 +54,7 @@ fun AppTextField(
             value = selectedText,
             onValueChange = {
                 selectedText = it
-                // TODO - error check
+                isError = IsValidResistance.execute(resistor, it)
                 onOptionSelected(it)
             },
             modifier = modifier

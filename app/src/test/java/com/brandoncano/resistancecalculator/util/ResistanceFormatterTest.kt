@@ -2,7 +2,7 @@ package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
 import com.brandoncano.resistancecalculator.components.StateData
-import com.brandoncano.resistancecalculator.resistor.ResistorCtV
+import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -16,21 +16,19 @@ class ResistanceFormatterTest {
 
     @Test
     fun `empty resistor`() {
-        val context: Context = mockk<Context>()
-        assertEquals("Select colors", ResistanceFormatter.calculate(ResistorCtV(context)))
+        assertEquals("Select colors", ResistanceFormatter.calculate(ResistorCtv()))
     }
 
     @Test
     fun `four band resistors resistance text testing`() {
-        val context: Context = mockk<Context>()
         val resistors = listOf(
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
         )
 
         val bands = listOf(
@@ -44,10 +42,10 @@ class ResistanceFormatterTest {
         )
 
         resistors.forEachIndexed { index, resistorCtV ->
-            resistorCtV.sigFigBandOne = bands[index][0]
-            resistorCtV.sigFigBandTwo = bands[index][1]
-            resistorCtV.multiplierBand = bands[index][2]
-            resistorCtV.toleranceBand = bands[index][3]
+            resistorCtV.band1 = bands[index][0]
+            resistorCtV.band2 = bands[index][1]
+            resistorCtV.band4 = bands[index][2]
+            resistorCtV.band5 = bands[index][3]
         }
 
         val answers = listOf(
@@ -66,10 +64,10 @@ class ResistanceFormatterTest {
         val context: Context = mockk<Context>()
         val resistors = listOf(
             // general
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
         )
 
         val bands = listOf(
@@ -80,11 +78,11 @@ class ResistanceFormatterTest {
         )
 
         resistors.forEachIndexed { index, resistorCtV ->
-            resistorCtV.sigFigBandOne = bands[index][0]
-            resistorCtV.sigFigBandTwo = bands[index][1]
-            resistorCtV.sigFigBandThree = bands[index][2]
-            resistorCtV.multiplierBand = bands[index][3]
-            resistorCtV.toleranceBand = bands[index][4]
+            resistorCtV.band1 = bands[index][0]
+            resistorCtV.band2 = bands[index][1]
+            resistorCtV.band3 = bands[index][2]
+            resistorCtV.band4 = bands[index][3]
+            resistorCtV.band5 = bands[index][4]
         }
 
         val answers = listOf(
@@ -95,7 +93,7 @@ class ResistanceFormatterTest {
         every { StateData.BUTTON_SELECTION_CTV.saveData(context, "5") } answers { }
 
         for (i in answers.indices) {
-            resistors[i].saveNumberOfBands(5)
+            resistors[i].numberOfBands = 5
             assertEquals(answers[i], ResistanceFormatter.calculate(resistors[i]))
         }
     }
@@ -121,29 +119,16 @@ class ResistanceFormatterTest {
 
         every { StateData.BUTTON_SELECTION_CTV.saveData(context, "6") } answers { }
 
-        val resistor = ResistorCtV(context)
-        resistor.sigFigBandOne = C.BROWN
-        resistor.sigFigBandTwo = C.RED
-        resistor.sigFigBandThree = C.GREEN
-        resistor.multiplierBand = C.RED
-        resistor.toleranceBand = C.GOLD
-        resistor.ppmBand = C.BLACK
-
-        resistor.saveNumberOfBands(6)
+        val resistor = ResistorCtv(C.BROWN, C.RED, C.GREEN, C.RED, C.GOLD, C.BLACK, 6)
         for (i in answers.indices) {
-            resistor.ppmBand = ppmBands[i]
+            resistor.band6 = ppmBands[i]
             assertEquals(answers[i], ResistanceFormatter.calculate(resistor))
         }
     }
 
     @Test
     fun `code coverage`() {
-        val context: Context = mockk<Context>()
-        val resistor = ResistorCtV(context)
-        resistor.sigFigBandOne = C.GOLD
-        resistor.sigFigBandTwo = C.GOLD
-        resistor.multiplierBand = C.RED
-        resistor.toleranceBand = C.GOLD
+        val resistor = ResistorCtv(C.GOLD, C.GOLD, "", C.GOLD, C.GOLD)
         val answer = "0 ${S.OHMS} ${S.PM}5%"
         assertEquals(answer, ResistanceFormatter.calculate(resistor))
     }

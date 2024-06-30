@@ -21,8 +21,11 @@ import com.brandoncano.resistancecalculator.ui.composables.CalculatorButtons
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.MenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.OurAppsButtons
-import com.brandoncano.resistancecalculator.ui.composables.RevertToLegacyUI
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+
+/**
+ * Job: Controls the ui components and interactions of the home screen
+ */
 
 @Composable
 fun HomeScreen(context: Context, navController: NavController) {
@@ -50,8 +53,6 @@ private fun ContentView(context: Context, navController: NavController) {
 //        CircularAppIcon()
         CalculatorButtons(navController)
         OurAppsButtons(context)
-
-        RevertToLegacyUI(context)
     }
 }
 

@@ -37,11 +37,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
-import com.brandoncano.resistancecalculator.resistor.ResistorCtV
 import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.EmailFeedback
-import com.brandoncano.resistancecalculator.util.ShareResistance
 
 /**
  * Job: Hold all composables for the top app bars and menu items
@@ -166,7 +164,7 @@ fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSour
 fun ShareMenuItem(context: Context, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
         text = { TextBody(text = stringResource(R.string.share)) },
-        onClick = { ShareResistance.execute(context, ResistorCtV(context)) },
+        onClick = { /* ShareResistance.execute(context, ResistorCtv()) */ },
         interactionSource = interactionSource,
     )
 }

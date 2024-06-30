@@ -2,7 +2,7 @@ package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
 import com.brandoncano.resistancecalculator.components.StateData
-import com.brandoncano.resistancecalculator.resistor.ResistorVtC
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -29,7 +29,7 @@ class IsValidResistanceTest {
 
     @Test
     fun invalidInputs() {
-        val resistor = ResistorVtC(context)
+        val resistor = ResistorVtc()
         // four band
         resistor.units = S.OHMS
         assertFalse(IsValidResistance.execute(resistor, "InValid"))
@@ -53,7 +53,7 @@ class IsValidResistanceTest {
 
         // five/six band
         resistor.units = S.OHMS
-        resistor.saveNumberOfBands(5)
+        resistor.numberOfBands = 5
 
         assertFalse(IsValidResistance.execute(resistor, "1234"))
         assertFalse(IsValidResistance.execute(resistor, "0123"))
@@ -76,7 +76,7 @@ class IsValidResistanceTest {
 
     @Test
     fun validInputs() {
-        val resistor = ResistorVtC(context)
+        val resistor = ResistorVtc()
         // four band
         resistor.units = S.OHMS
         assertTrue(IsValidResistance.execute(resistor, "0"))
@@ -96,7 +96,7 @@ class IsValidResistanceTest {
 
         // five band
         resistor.units = S.OHMS
-        resistor.saveNumberOfBands(5)
+        resistor.numberOfBands = 5
         assertTrue(IsValidResistance.execute(resistor, "0"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
@@ -105,7 +105,7 @@ class IsValidResistanceTest {
         assertTrue(IsValidResistance.execute(resistor, "0.01"))
 
         resistor.units = S.GOHMS
-        resistor.saveNumberOfBands(5)
+        resistor.numberOfBands = 5
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
         assertTrue(IsValidResistance.execute(resistor, "63.2"))

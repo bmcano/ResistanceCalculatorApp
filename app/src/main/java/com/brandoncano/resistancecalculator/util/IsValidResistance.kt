@@ -2,7 +2,7 @@ package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
 import com.brandoncano.resistancecalculator.constants.Symbols.GOHMS
-import com.brandoncano.resistancecalculator.resistor.ResistorVtC
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 
 /**
  * Job: Checks if a user inputted resistance is valid.
@@ -18,7 +18,7 @@ import com.brandoncano.resistancecalculator.resistor.ResistorVtC
  */
 object IsValidResistance {
 
-    fun execute(resistor: ResistorVtC, input: String): Boolean {
+    fun execute(resistor: ResistorVtc, input: String): Boolean {
         if (input.isEmpty()) return true
         input.toDoubleOrNull() ?: return false
         val sigFigs = SignificantFigures(input).numberSignificantFigures
