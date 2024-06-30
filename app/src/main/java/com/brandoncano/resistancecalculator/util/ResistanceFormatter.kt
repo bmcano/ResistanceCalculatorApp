@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.util
 
-import com.brandoncano.resistancecalculator.model.ctv.Resistor
+import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.resistor.ResistorCtV
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
@@ -51,7 +51,7 @@ object ResistanceFormatter {
     }
 
     // NOTE: this is for the compose iteration of the app code above will eventually be removed
-    fun calculate(resistor: Resistor): String {
+    fun calculate(resistor: ResistorCtv): String {
         if (resistor.isEmpty()) return "Select colors"
 
         val sigFigOne = ValueFinder.getSigFig(resistor.band1)
@@ -64,7 +64,7 @@ object ResistanceFormatter {
         return "$resistance $tolerance\n$ppm".trimEnd('\n')
     }
 
-    private fun formatResistance(resistor: Resistor, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
+    private fun formatResistance(resistor: ResistorCtv, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
         val threeFourBands = resistor.isThreeFourBand()
         val value: Int = if (threeFourBands) {
             (sigFigOne + sigFigTwo).toIntOrNull()

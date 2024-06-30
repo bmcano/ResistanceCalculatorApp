@@ -17,12 +17,9 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.model.ctv.Resistor
-import com.brandoncano.resistancecalculator.resistor.ResistorCtV
-import com.brandoncano.resistancecalculator.ui.HomeActivity
+import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.ColorFinder
-import com.brandoncano.resistancecalculator.util.ResistanceFormatter
 import com.brandoncano.resistancecalculator.util.bandFiveForDisplay
 import com.brandoncano.resistancecalculator.util.bandSixForDisplay
 import com.brandoncano.resistancecalculator.util.bandThreeForDisplay
@@ -34,7 +31,7 @@ import com.brandoncano.resistancecalculator.util.formatResistance
 
 @Composable
 fun ResistorLayout(
-    resistor: Resistor
+    resistor: ResistorCtv
 ) {
     Column(
         modifier = Modifier

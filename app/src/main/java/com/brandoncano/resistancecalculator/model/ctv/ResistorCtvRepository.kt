@@ -6,15 +6,15 @@ import com.brandoncano.resistancecalculator.components.StateData
 /**
  * Job: Repository to the color to value resistor model, handles shared preferences.
  */
-class ResistorRepository(context: Context) {
+class ResistorCtvRepository(context: Context) {
 
     private val application = context
 
     companion object {
-        private var instance: ResistorRepository? = null
-        fun getInstance(context: Context): ResistorRepository = instance
+        private var instance: ResistorCtvRepository? = null
+        fun getInstance(context: Context): ResistorCtvRepository = instance
             ?: synchronized(this) {
-                ResistorRepository(context).also {
+                ResistorCtvRepository(context).also {
                     instance = it
                 }
             }
@@ -30,7 +30,7 @@ class ResistorRepository(context: Context) {
         StateData.RESISTANCE_CTV.clearData(application)
     }
 
-    fun loadResistor(): Resistor {
+    fun loadResistor(): ResistorCtv {
         val band1 = StateData.SIGFIG_BAND_ONE_CTV.loadData(application)
         val band2 = StateData.SIGFIG_BAND_TWO_CTV.loadData(application)
         val band3 = StateData.SIGFIG_BAND_THREE_CTV.loadData(application)
@@ -38,14 +38,14 @@ class ResistorRepository(context: Context) {
         val band5 = StateData.TOLERANCE_BAND_CTV.loadData(application)
         val band6 = StateData.PPM_BAND_CTV.loadData(application)
         val number = StateData.BUTTON_SELECTION_CTV.loadData(application)
-        return Resistor(band1, band2, band3, band4, band5, band6, number.toIntOrNull() ?: 4)
+        return ResistorCtv(band1, band2, band3, band4, band5, band6, number.toIntOrNull() ?: 4)
     }
 
     fun saveNumberOfBands(number: Int) {
         StateData.BUTTON_SELECTION_CTV.saveData(application, "$number")
     }
 
-    fun saveResistor(resistor: Resistor) {
+    fun saveResistor(resistor: ResistorCtv) {
         StateData.SIGFIG_BAND_ONE_CTV.saveData(application, resistor.band1)
         StateData.SIGFIG_BAND_TWO_CTV.saveData(application, resistor.band2)
         StateData.SIGFIG_BAND_THREE_CTV.saveData(application, resistor.band3)

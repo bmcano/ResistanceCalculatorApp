@@ -22,9 +22,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.model.vtc.Resistor
-import com.brandoncano.resistancecalculator.model.vtc.ResistorViewModel
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
@@ -33,20 +33,19 @@ import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuIt
 import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.MenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 @Composable
-fun ValueToColorScreen(context: Context, navController: NavController, ) {
+fun ValueToColorScreen(context: Context, navController: NavController, viewModel: ResistorVtcViewModel) {
     ResistorCalculatorTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            ContentView(context, navController, )
+            ContentView(context, navController, viewModel)
         }
     }
 }
 
 @Composable
-private fun ContentView(context: Context, navController: NavController, ) {
+private fun ContentView(context: Context, navController: NavController, viewModel: ResistorVtcViewModel) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
     var navBarSelection by remember { mutableIntStateOf(1) }
@@ -77,7 +76,7 @@ private fun ContentView(context: Context, navController: NavController, ) {
                 AboutAppMenuItem(navController, interactionSource)
             }
 
-            val resistor = Resistor() // will eventually remove
+            val resistor = ResistorVtc() // will eventually remove
 //            ResistorLayout(resistor)
             // TODO
             // calculate button
@@ -93,6 +92,6 @@ private fun ContentView(context: Context, navController: NavController, ) {
 @Composable
 fun ValueToColorScreenPreview() {
     val app = HomeActivity()
-//    val viewModel = viewModel<ResistorViewModel>(factory = ResistorViewModelFactory(app))
-    ValueToColorScreen(app, NavController(app))
+    val viewModel = viewModel<ResistorVtcViewModel>(factory = ResistorViewModelFactory(app))
+    ValueToColorScreen(app, NavController(app), viewModel)
 }

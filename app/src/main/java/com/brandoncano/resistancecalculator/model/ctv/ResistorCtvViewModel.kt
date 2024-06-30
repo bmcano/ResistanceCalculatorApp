@@ -8,14 +8,14 @@ import androidx.lifecycle.ViewModel
 /**
  * Job: ViewModel for the color to value calculator
  */
-class ResistorViewModel(context: Context): ViewModel() {
+class ResistorCtvViewModel(context: Context): ViewModel() {
 
-    private val repository = ResistorRepository.getInstance(context)
-    private var resistor = MutableLiveData<Resistor>()
+    private val repository = ResistorCtvRepository.getInstance(context)
+    private var resistor = MutableLiveData<ResistorCtv>()
     var resistance = ""
 
     init {
-        resistor.value = Resistor()
+        resistor.value = ResistorCtv()
     }
 
     override fun onCleared() {
@@ -23,11 +23,11 @@ class ResistorViewModel(context: Context): ViewModel() {
     }
 
     fun clear() {
-        resistor.value = Resistor()
+        resistor.value = ResistorCtv()
         repository.clear()
     }
 
-    fun getResistorLiveData(): LiveData<Resistor> {
+    fun getResistorLiveData(): LiveData<ResistorCtv> {
         resistor.value = repository.loadResistor()
         return resistor
     }
@@ -42,7 +42,7 @@ class ResistorViewModel(context: Context): ViewModel() {
         repository.saveNumberOfBands(numberOfBands)
     }
 
-    fun saveResistorColors(resistor: Resistor) {
+    fun saveResistorColors(resistor: ResistorCtv) {
         repository.saveResistor(resistor)
     }
 

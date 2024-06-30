@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.model.vtc
 
-data class Resistor(
+data class ResistorVtc(
     var resistance: String = "",
     var units: String = "",
     var band5: String = "",
