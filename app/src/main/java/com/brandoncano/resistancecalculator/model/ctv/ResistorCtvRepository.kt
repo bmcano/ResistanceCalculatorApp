@@ -27,7 +27,7 @@ class ResistorCtvRepository(context: Context) {
         StateData.MULTIPLIER_BAND_CTV.clearData(application)
         StateData.TOLERANCE_BAND_CTV.clearData(application)
         StateData.PPM_BAND_CTV.clearData(application)
-        StateData.RESISTANCE_CTV.clearData(application)
+        StateData.RESISTANCE_CTV.clearData(application) // TODO - check on this - might need it for sharing?
     }
 
     fun loadResistor(): ResistorCtv {
@@ -41,10 +41,6 @@ class ResistorCtvRepository(context: Context) {
         return ResistorCtv(band1, band2, band3, band4, band5, band6, number.toIntOrNull() ?: 4)
     }
 
-    fun saveNumberOfBands(number: Int) {
-        StateData.BUTTON_SELECTION_CTV.saveData(application, "$number")
-    }
-
     fun saveResistor(resistor: ResistorCtv) {
         StateData.SIGFIG_BAND_ONE_CTV.saveData(application, resistor.band1)
         StateData.SIGFIG_BAND_TWO_CTV.saveData(application, resistor.band2)
@@ -52,5 +48,9 @@ class ResistorCtvRepository(context: Context) {
         StateData.MULTIPLIER_BAND_CTV.saveData(application, resistor.band4)
         StateData.TOLERANCE_BAND_CTV.saveData(application, resistor.band5)
         StateData.PPM_BAND_CTV.saveData(application, resistor.band6)
+    }
+
+    fun saveNumberOfBands(number: Int) {
+        StateData.BUTTON_SELECTION_CTV.saveData(application, "$number")
     }
 }
