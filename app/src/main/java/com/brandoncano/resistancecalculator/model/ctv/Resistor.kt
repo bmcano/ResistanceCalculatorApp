@@ -12,15 +12,6 @@ data class Resistor(
     var band6: String = "",
     var numberOfBands: Int = 4,
 ) {
-    fun clear() {
-        band1 = ""
-        band2 = ""
-        band3 = ""
-        band4 = ""
-        band5 = ""
-        band6 = ""
-    }
-
     fun isThreeBand() = numberOfBands == 3
     fun isThreeFourBand() = numberOfBands == 3 || numberOfBands == 4
     fun isFiveSixBand() = numberOfBands == 5 || numberOfBands == 6

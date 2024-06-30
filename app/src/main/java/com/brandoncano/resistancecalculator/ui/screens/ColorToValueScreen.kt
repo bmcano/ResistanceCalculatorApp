@@ -91,6 +91,10 @@ private fun ContentView(context: Context, navController: NavController, viewMode
                     viewModel.clear()
                     resetDropdown = true
                     focusManager.clearFocus()
+                    // these are needed since the viewModel doesn't update them automatically
+                    band3 = ""
+                    band5 = ""
+                    band6 = ""
                 }
                 AboutAppMenuItem(navController, interactionSource)
             }
