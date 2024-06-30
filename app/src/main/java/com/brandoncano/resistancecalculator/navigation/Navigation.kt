@@ -55,8 +55,8 @@ fun Navigation(context: Context) {
             enterTransition = { slideInVertically(initialOffsetY = { it }) },
             exitTransition = { slideOutVertically(targetOffsetY = { it }) },
         ) {
-            val viewModel = viewModel<ResistorViewModel>(factory = ResistorViewModelFactory(context))
-            ValueToColorScreen(context, navController, viewModel)
+//            val viewModel = viewModel<ResistorViewModel>(factory = ResistorViewModelFactory(context))
+            ValueToColorScreen(context, navController )
         }
     }
 }

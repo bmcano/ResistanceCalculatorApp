@@ -22,8 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.model.ctv.Resistor
-import com.brandoncano.resistancecalculator.model.ctv.ResistorViewModel
+import com.brandoncano.resistancecalculator.model.vtc.Resistor
+import com.brandoncano.resistancecalculator.model.vtc.ResistorViewModel
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
@@ -37,16 +37,16 @@ import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 @Composable
-fun ValueToColorScreen(context: Context, navController: NavController, viewModel: ResistorViewModel) {
+fun ValueToColorScreen(context: Context, navController: NavController, ) {
     ResistorCalculatorTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            ContentView(context, navController, viewModel)
+            ContentView(context, navController, )
         }
     }
 }
 
 @Composable
-private fun ContentView(context: Context, navController: NavController, viewModel: ResistorViewModel) {
+private fun ContentView(context: Context, navController: NavController, ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
     var navBarSelection by remember { mutableIntStateOf(1) }
@@ -78,7 +78,7 @@ private fun ContentView(context: Context, navController: NavController, viewMode
             }
 
             val resistor = Resistor() // will eventually remove
-            ResistorLayout(resistor)
+//            ResistorLayout(resistor)
             // TODO
             // calculate button
             // outlined text field - resistance
@@ -93,6 +93,6 @@ private fun ContentView(context: Context, navController: NavController, viewMode
 @Composable
 fun ValueToColorScreenPreview() {
     val app = HomeActivity()
-    val viewModel = viewModel<ResistorViewModel>(factory = ResistorViewModelFactory(app))
-    ValueToColorScreen(app, NavController(app), viewModel)
+//    val viewModel = viewModel<ResistorViewModel>(factory = ResistorViewModelFactory(app))
+    ValueToColorScreen(app, NavController(app))
 }

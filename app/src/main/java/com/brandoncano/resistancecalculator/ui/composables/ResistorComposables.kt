@@ -23,6 +23,10 @@ import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.ResistanceFormatter
+import com.brandoncano.resistancecalculator.util.bandFiveForDisplay
+import com.brandoncano.resistancecalculator.util.bandSixForDisplay
+import com.brandoncano.resistancecalculator.util.bandThreeForDisplay
+import com.brandoncano.resistancecalculator.util.formatResistance
 
 /**
  * Job: Holds all the parts for the resistor layout.
@@ -38,9 +42,6 @@ fun ResistorLayout(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         // might make these as extension functions instead
-        val band3 = if (resistor.isFiveSixBand()) resistor.band3 else ""
-        val band5 = if (!resistor.isThreeBand()) resistor.band5 else ""
-        val band6 = if (resistor.isSixBand()) resistor.band6 else ""
         Spacer(modifier = Modifier.height(1.dp)) // Spacer to replace the Group
         ResistorRow(
             ResistorImagePair(R.drawable.img_resistor_p1),
@@ -48,27 +49,17 @@ fun ResistorLayout(
             ResistorImagePair(R.drawable.img_resistor_p3),
             ResistorImagePair(R.drawable.img_resistor_p4, resistor.band2),
             ResistorImagePair(R.drawable.img_resistor_p5),
-            ResistorImagePair(R.drawable.img_resistor_p6_7, band3),
+            ResistorImagePair(R.drawable.img_resistor_p6_7, resistor.bandThreeForDisplay()),
             ResistorImagePair(R.drawable.img_resistor_p6_7),
             ResistorImagePair(R.drawable.img_resistor_p8, resistor.band4),
             ResistorImagePair(R.drawable.img_resistor_p9),
-            ResistorImagePair(R.drawable.img_resistor_p10, band5),
+            ResistorImagePair(R.drawable.img_resistor_p10, resistor.bandFiveForDisplay()),
             ResistorImagePair(R.drawable.img_resistor_p11),
-            ResistorImagePair(R.drawable.img_resistor_p12, band6),
+            ResistorImagePair(R.drawable.img_resistor_p12, resistor.bandSixForDisplay()),
             ResistorImagePair(R.drawable.img_resistor_p13),
         )
 
-        // NOTE: this is temporary translation until logic is adjusted to handle new models
-        val resistorCtV = ResistorCtV(HomeActivity())
-        resistorCtV.sigFigBandOne = resistor.band1
-        resistorCtV.sigFigBandTwo = resistor.band2
-        resistorCtV.sigFigBandThree = resistor.band3
-        resistorCtV.multiplierBand = resistor.band4
-        resistorCtV.toleranceBand = resistor.band5
-        resistorCtV.ppmBand = resistor.band6
-        resistorCtV.setBands(resistor.numberOfBands)
-        val resistance = ResistanceFormatter.calculate(resistorCtV)
-        ResistanceText(resistance)
+        ResistanceText(resistor.formatResistance())
     }
 }
 
