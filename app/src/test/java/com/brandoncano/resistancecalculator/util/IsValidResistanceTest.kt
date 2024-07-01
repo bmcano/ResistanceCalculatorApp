@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
-import com.brandoncano.resistancecalculator.components.StateData
+import com.brandoncano.resistancecalculator.components.SharedPreferences
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import io.mockk.clearAllMocks
 import io.mockk.every
@@ -23,8 +23,8 @@ class IsValidResistanceTest {
 
     @Before
     fun setup() {
-        every { StateData.BUTTON_SELECTION_VTC.saveData(context, "5") } answers { }
-        every { StateData.BUTTON_SELECTION_VTC.saveData(context, "6") } answers { }
+        every { SharedPreferences.BUTTON_SELECTION_VTC.saveData(context, "5") } answers { }
+        every { SharedPreferences.BUTTON_SELECTION_VTC.saveData(context, "6") } answers { }
     }
 
     @Test

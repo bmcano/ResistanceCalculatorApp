@@ -13,7 +13,7 @@ import java.lang.reflect.Type
  *   Data is saved as xml files with mapping, where name_ -> file name; key_ -> key in map.
  *   Device File Explorer -> data -> data -> com.brandoncano.resistancecalculator -> shared_prefs
  */
-enum class StateData(private val _name: String, private val _key: String) {
+enum class SharedPreferences(private val _name: String, private val _key: String) {
 
     RESISTANCE_CTV("color_to_value", "resistance"),
     BUTTON_SELECTION_CTV("color_to_value", "button_selection"),

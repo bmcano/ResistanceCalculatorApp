@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
-import com.brandoncano.resistancecalculator.components.StateData
+import com.brandoncano.resistancecalculator.components.SharedPreferences
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import io.mockk.clearAllMocks
 import io.mockk.every
@@ -90,7 +90,7 @@ class ResistanceFormatterTest {
             "789 ${S.MOHMS} ${S.PM}5%",
         )
 
-        every { StateData.BUTTON_SELECTION_CTV.saveData(context, "5") } answers { }
+        every { SharedPreferences.BUTTON_SELECTION_CTV.saveData(context, "5") } answers { }
 
         for (i in answers.indices) {
             resistors[i].numberOfBands = 5
@@ -117,7 +117,7 @@ class ResistanceFormatterTest {
             "12.5 ${S.KOHMS} ${S.PM}5%\n1 ${S.PPM}",
         )
 
-        every { StateData.BUTTON_SELECTION_CTV.saveData(context, "6") } answers { }
+        every { SharedPreferences.BUTTON_SELECTION_CTV.saveData(context, "6") } answers { }
 
         val resistor = ResistorCtv(C.BROWN, C.RED, C.GREEN, C.RED, C.GOLD, C.BLACK, 6)
         for (i in answers.indices) {

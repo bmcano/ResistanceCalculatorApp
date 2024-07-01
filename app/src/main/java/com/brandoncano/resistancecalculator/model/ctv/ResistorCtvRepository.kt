@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.model.ctv
 
 import android.content.Context
-import com.brandoncano.resistancecalculator.components.StateData
+import com.brandoncano.resistancecalculator.components.SharedPreferences
 
 /**
  * Job: Repository to the color to value resistor model, handles shared preferences.
@@ -21,36 +21,36 @@ class ResistorCtvRepository(context: Context) {
     }
 
     fun clear() {
-        StateData.SIGFIG_BAND_ONE_CTV.clearData(application)
-        StateData.SIGFIG_BAND_TWO_CTV.clearData(application)
-        StateData.SIGFIG_BAND_THREE_CTV.clearData(application)
-        StateData.MULTIPLIER_BAND_CTV.clearData(application)
-        StateData.TOLERANCE_BAND_CTV.clearData(application)
-        StateData.PPM_BAND_CTV.clearData(application)
-        StateData.RESISTANCE_CTV.clearData(application) // TODO - check on this - might need it for sharing?
+        SharedPreferences.SIGFIG_BAND_ONE_CTV.clearData(application)
+        SharedPreferences.SIGFIG_BAND_TWO_CTV.clearData(application)
+        SharedPreferences.SIGFIG_BAND_THREE_CTV.clearData(application)
+        SharedPreferences.MULTIPLIER_BAND_CTV.clearData(application)
+        SharedPreferences.TOLERANCE_BAND_CTV.clearData(application)
+        SharedPreferences.PPM_BAND_CTV.clearData(application)
+        SharedPreferences.RESISTANCE_CTV.clearData(application) // TODO - check on this - might need it for sharing?
     }
 
     fun loadResistor(): ResistorCtv {
-        val band1 = StateData.SIGFIG_BAND_ONE_CTV.loadData(application)
-        val band2 = StateData.SIGFIG_BAND_TWO_CTV.loadData(application)
-        val band3 = StateData.SIGFIG_BAND_THREE_CTV.loadData(application)
-        val band4 = StateData.MULTIPLIER_BAND_CTV.loadData(application)
-        val band5 = StateData.TOLERANCE_BAND_CTV.loadData(application)
-        val band6 = StateData.PPM_BAND_CTV.loadData(application)
-        val number = StateData.BUTTON_SELECTION_CTV.loadData(application)
+        val band1 = SharedPreferences.SIGFIG_BAND_ONE_CTV.loadData(application)
+        val band2 = SharedPreferences.SIGFIG_BAND_TWO_CTV.loadData(application)
+        val band3 = SharedPreferences.SIGFIG_BAND_THREE_CTV.loadData(application)
+        val band4 = SharedPreferences.MULTIPLIER_BAND_CTV.loadData(application)
+        val band5 = SharedPreferences.TOLERANCE_BAND_CTV.loadData(application)
+        val band6 = SharedPreferences.PPM_BAND_CTV.loadData(application)
+        val number = SharedPreferences.BUTTON_SELECTION_CTV.loadData(application)
         return ResistorCtv(band1, band2, band3, band4, band5, band6, number.toIntOrNull() ?: 4)
     }
 
     fun saveResistor(resistor: ResistorCtv) {
-        StateData.SIGFIG_BAND_ONE_CTV.saveData(application, resistor.band1)
-        StateData.SIGFIG_BAND_TWO_CTV.saveData(application, resistor.band2)
-        StateData.SIGFIG_BAND_THREE_CTV.saveData(application, resistor.band3)
-        StateData.MULTIPLIER_BAND_CTV.saveData(application, resistor.band4)
-        StateData.TOLERANCE_BAND_CTV.saveData(application, resistor.band5)
-        StateData.PPM_BAND_CTV.saveData(application, resistor.band6)
+        SharedPreferences.SIGFIG_BAND_ONE_CTV.saveData(application, resistor.band1)
+        SharedPreferences.SIGFIG_BAND_TWO_CTV.saveData(application, resistor.band2)
+        SharedPreferences.SIGFIG_BAND_THREE_CTV.saveData(application, resistor.band3)
+        SharedPreferences.MULTIPLIER_BAND_CTV.saveData(application, resistor.band4)
+        SharedPreferences.TOLERANCE_BAND_CTV.saveData(application, resistor.band5)
+        SharedPreferences.PPM_BAND_CTV.saveData(application, resistor.band6)
     }
 
     fun saveNumberOfBands(number: Int) {
-        StateData.BUTTON_SELECTION_CTV.saveData(application, "$number")
+        SharedPreferences.BUTTON_SELECTION_CTV.saveData(application, "$number")
     }
 }

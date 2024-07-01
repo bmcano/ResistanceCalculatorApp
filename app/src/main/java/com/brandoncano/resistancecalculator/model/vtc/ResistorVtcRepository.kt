@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.model.vtc
 
 import android.content.Context
-import com.brandoncano.resistancecalculator.components.StateData
+import com.brandoncano.resistancecalculator.components.SharedPreferences
 
 /**
  * Job: Repository to the value to color resistor model, handles shared preferences.
@@ -21,31 +21,31 @@ class ResistorVtcRepository(context: Context) {
     }
 
     fun clear() {
-        StateData.USER_INPUT_VTC.clearData(application)
-        StateData.UNITS_DROPDOWN_VTC.clearData(application)
-        StateData.TOLERANCE_DROPDOWN_VTC.clearData(application)
-        StateData.PPM_DROPDOWN_VTC.clearData(application)
-        StateData.RESISTANCE_VTC.clearData(application)
+        SharedPreferences.USER_INPUT_VTC.clearData(application)
+        SharedPreferences.UNITS_DROPDOWN_VTC.clearData(application)
+        SharedPreferences.TOLERANCE_DROPDOWN_VTC.clearData(application)
+        SharedPreferences.PPM_DROPDOWN_VTC.clearData(application)
+        SharedPreferences.RESISTANCE_VTC.clearData(application)
     }
 
     fun loadResistor(): ResistorVtc {
-        val input = StateData.USER_INPUT_VTC.loadData(application)
-        val units = StateData.UNITS_DROPDOWN_VTC.loadData(application)
-        val band5 = StateData.TOLERANCE_DROPDOWN_VTC.loadData(application)
-        val band6 = StateData.PPM_DROPDOWN_VTC.loadData(application)
+        val input = SharedPreferences.USER_INPUT_VTC.loadData(application)
+        val units = SharedPreferences.UNITS_DROPDOWN_VTC.loadData(application)
+        val band5 = SharedPreferences.TOLERANCE_DROPDOWN_VTC.loadData(application)
+        val band6 = SharedPreferences.PPM_DROPDOWN_VTC.loadData(application)
 //        val resistance = StateData.RESISTANCE_VTC.loadData(application) // TODO - check if we need this
-        val number = StateData.BUTTON_SELECTION_VTC.loadData(application)
+        val number = SharedPreferences.BUTTON_SELECTION_VTC.loadData(application)
         return ResistorVtc(input, units, band5, band6, number.toIntOrNull() ?: 4)
     }
 
     fun saveResistor(resistor: ResistorVtc) {
-        StateData.USER_INPUT_VTC.saveData(application, resistor.resistance)
-        StateData.UNITS_DROPDOWN_VTC.saveData(application, resistor.units)
-        StateData.TOLERANCE_DROPDOWN_VTC.saveData(application, resistor.band5)
-        StateData.PPM_DROPDOWN_VTC.saveData(application, resistor.band6)
+        SharedPreferences.USER_INPUT_VTC.saveData(application, resistor.resistance)
+        SharedPreferences.UNITS_DROPDOWN_VTC.saveData(application, resistor.units)
+        SharedPreferences.TOLERANCE_DROPDOWN_VTC.saveData(application, resistor.band5)
+        SharedPreferences.PPM_DROPDOWN_VTC.saveData(application, resistor.band6)
     }
 
     fun saveNumberOfBands(number: Int) {
-        StateData.BUTTON_SELECTION_VTC.saveData(application, "$number")
+        SharedPreferences.BUTTON_SELECTION_VTC.saveData(application, "$number")
     }
 }
