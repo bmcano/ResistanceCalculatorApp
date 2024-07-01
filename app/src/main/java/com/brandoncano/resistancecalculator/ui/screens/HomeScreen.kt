@@ -21,6 +21,7 @@ import com.brandoncano.resistancecalculator.ui.composables.CalculatorButtons
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.MenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.OurAppsButtons
+import com.brandoncano.resistancecalculator.ui.composables.RoundAppIcon
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 /**
@@ -50,7 +51,7 @@ private fun ContentView(context: Context, navController: NavController) {
             FeedbackMenuItem(context, interactionSource)
             AboutAppMenuItem(navController, interactionSource)
         }
-//        CircularAppIcon()
+        RoundAppIcon()
         CalculatorButtons(navController)
         OurAppsButtons(context)
     }
