@@ -21,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
@@ -45,21 +47,33 @@ import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistor
 
 @Composable
-fun ValueToColorScreen(context: Context, navController: NavController, viewModel: ResistorVtcViewModel) {
+fun ValueToColorScreen(
+    context: Context,
+    navController: NavController,
+    viewModel: ResistorVtcViewModel,
+    navBarPosition: Int,
+    resistorVtc: LiveData<ResistorVtc>
+) {
     ResistorCalculatorTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            ContentView(context, navController, viewModel)
+            ContentView(context, navController, viewModel, navBarPosition, resistorVtc)
         }
     }
 }
 
 @Composable
-private fun ContentView(context: Context, navController: NavController, viewModel: ResistorVtcViewModel) {
+private fun ContentView(
+    context: Context,
+    navController: NavController,
+    viewModel: ResistorVtcViewModel,
+    navBarPosition: Int,
+    resistorVtc: LiveData<ResistorVtc>
+) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
-    var navBarSelection by remember { mutableIntStateOf(viewModel.getNavBarSelection()) }
+    var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     var resetDropdown by remember { mutableStateOf(false) }
-    val resistor by viewModel.getResistorLiveData().observeAsState(ResistorVtc())
+    val resistor by resistorVtc.observeAsState(ResistorVtc())
     var resistance by remember { mutableStateOf(resistor.resistance) }
     var units by remember { mutableStateOf(resistor.units) }
     var band5 by remember { mutableStateOf(resistor.band5) }
@@ -164,5 +178,6 @@ private fun ContentView(context: Context, navController: NavController, viewMode
 fun ValueToColorScreenPreview() {
     val app = HomeActivity()
     val viewModel = viewModel<ResistorVtcViewModel>(factory = ResistorViewModelFactory(app))
-    ValueToColorScreen(app, NavController(app), viewModel)
+    val resistor = MutableLiveData<ResistorVtc>()
+    ValueToColorScreen(app, NavController(app), viewModel, 1, resistor)
 }

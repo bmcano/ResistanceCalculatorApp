@@ -23,7 +23,7 @@ class ResistorCtvViewModel(context: Context): ViewModel() {
     }
 
     fun clear() {
-        resistor.value = ResistorCtv()
+        resistor.value = ResistorCtv(numberOfBands = getNavBarSelection() + 3)
         repository.clear()
     }
 

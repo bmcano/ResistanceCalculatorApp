@@ -22,11 +22,6 @@ import com.brandoncano.resistancecalculator.util.OpenLink
  */
 
 @Composable
-fun CircularAppIcon() {
-
-}
-
-@Composable
 fun CalculatorButtons(navController: NavController) {
     Column {
         val modifier = Modifier
