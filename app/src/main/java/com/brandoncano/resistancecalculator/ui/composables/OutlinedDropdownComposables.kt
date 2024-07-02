@@ -133,6 +133,7 @@ fun OutlinedDropDownMenu(
     selectedOption: String = "",
     items: List<DropdownItem>,
     reset: Boolean = false,
+    isVtC: Boolean = false,
     onOptionSelected: (String) -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -195,10 +196,10 @@ fun OutlinedDropDownMenu(
         ) {
             items.forEach {
                 DropdownItemView(it) {
-                    selectedText = it.name
+                    selectedText = if (isVtC) it.value else it.name
                     selectedLeadingIcon = it.imageResId
                     expanded = false
-                    onOptionSelected(it.name)
+                    onOptionSelected(if (isVtC) it.value else it.name)
                 }
             }
         }

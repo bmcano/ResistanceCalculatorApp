@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
+import android.content.Context
+import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 
@@ -35,4 +37,9 @@ fun ResistorVtc.bandSixForDisplay(): String {
 
 fun ResistorVtc.formatResistor() {
     ResistorFormatter.generateResistor(this)
+}
+
+fun ResistorVtc.getDisplayableValue(context: Context): String {
+    if (this.isEmpty()) return context.getString(R.string.enter_value)
+    return this.getResistorValue()
 }

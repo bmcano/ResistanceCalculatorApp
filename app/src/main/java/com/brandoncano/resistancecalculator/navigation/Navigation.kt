@@ -6,19 +6,18 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
-import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
+import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.screens.AboutScreen
 import com.brandoncano.resistancecalculator.ui.screens.ColorToValueScreen
 import com.brandoncano.resistancecalculator.ui.screens.HomeScreen
 import com.brandoncano.resistancecalculator.ui.screens.ValueToColorScreen
+import com.brandoncano.resistancecalculator.util.formatResistor
 
 /**
  * Job: Holds all the navigation information
@@ -63,6 +62,7 @@ fun Navigation(context: Context) {
             val viewModel = viewModel<ResistorVtcViewModel>(factory = ResistorViewModelFactory(context))
             val navBarPosition = viewModel.getNavBarSelection()
             val resistor = viewModel.getResistorLiveData()
+            resistor.value?.formatResistor()
             ValueToColorScreen(context, navController, viewModel, navBarPosition, resistor)
         }
     }

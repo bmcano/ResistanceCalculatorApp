@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator.model.vtc
 
+import com.brandoncano.resistancecalculator.constants.Symbols
+
 data class ResistorVtc(
     var resistance: String = "",
     var units: String = "",
@@ -20,5 +22,12 @@ data class ResistorVtc(
 
     fun isEmpty(): Boolean {
         return resistance.isEmpty() || units.isEmpty()
+    }
+
+    fun getResistorValue(): String {
+        var text = "$resistance $units "
+        text += if (numberOfBands == 3) "${Symbols.PM}20%" else band5
+        if (numberOfBands == 6) text += ", $band6"
+        return text
     }
 }

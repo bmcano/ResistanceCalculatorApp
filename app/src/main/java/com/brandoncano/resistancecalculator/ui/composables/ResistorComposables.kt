@@ -25,6 +25,7 @@ import com.brandoncano.resistancecalculator.util.bandFiveForDisplay
 import com.brandoncano.resistancecalculator.util.bandSixForDisplay
 import com.brandoncano.resistancecalculator.util.bandThreeForDisplay
 import com.brandoncano.resistancecalculator.util.formatResistance
+import com.brandoncano.resistancecalculator.util.getDisplayableValue
 
 /**
  * Job: Holds all the parts for the resistor layout.
@@ -63,7 +64,8 @@ fun ResistorLayout(
 
 @Composable
 fun ResistorLayout(
-    resistor: ResistorVtc
+    resistor: ResistorVtc,
+    resistance: String
 ) {
     Column(
         modifier = Modifier
@@ -88,7 +90,7 @@ fun ResistorLayout(
             ResistorImagePair(R.drawable.img_resistor_p13),
         )
 
-        ResistanceText("resistor.formatResistance()")
+        ResistanceText(resistance)
     }
 }
 

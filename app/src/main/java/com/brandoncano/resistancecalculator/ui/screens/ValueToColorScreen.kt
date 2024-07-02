@@ -32,7 +32,6 @@ import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppButton
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.AppTextField
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
@@ -44,7 +43,9 @@ import com.brandoncano.resistancecalculator.ui.composables.OutlinedDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.util.IsValidResistance
 import com.brandoncano.resistancecalculator.util.formatResistor
+import com.brandoncano.resistancecalculator.util.getDisplayableValue
 
 @Composable
 fun ValueToColorScreen(
@@ -72,7 +73,8 @@ private fun ContentView(
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
-    var resetDropdown by remember { mutableStateOf(false) }
+    var reset by remember { mutableStateOf(false) }
+    var isError by remember { mutableStateOf(false) }
     val resistor by resistorVtc.observeAsState(ResistorVtc())
     var resistance by remember { mutableStateOf(resistor.resistance) }
     var units by remember { mutableStateOf(resistor.units) }
@@ -84,6 +86,11 @@ private fun ContentView(
             CalculatorNavigationBar(navBarSelection) {
                 navBarSelection = it
                 resistor.numberOfBands = it + 3
+                viewModel.saveNumberOfBands(it + 3)
+                isError = !IsValidResistance.execute(resistor, resistance)
+                if (isError) return@CalculatorNavigationBar
+                resistor.formatResistor()
+                viewModel.saveResistorValues(resistor)
             }
         }
     ) { paddingValues ->
@@ -94,52 +101,47 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MenuTopAppBar(stringResource(R.string.color_to_value), interactionSource) {
+            MenuTopAppBar(stringResource(R.string.value_to_color), interactionSource) {
                 ColorToValueMenuItem(navController, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
                     viewModel.clear()
-                    resetDropdown = true
+                    reset = true
                     focusManager.clearFocus()
+                    band5 = ""
+                    band6 = ""
                 }
                 AboutAppMenuItem(navController, interactionSource)
             }
 
-            ResistorLayout(resistor)
+            ResistorLayout(resistor, resistor.getDisplayableValue(context))
             AppTextField(
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
                 label = R.string.type_resistance_hint,
-                text = "",
-                reset = resetDropdown,
-                resistor = resistor,
+                text = resistance,
+                reset = reset,
+                isError = isError,
             ) {
+                reset = false
                 resistor.resistance = it
                 resistance = it
-                viewModel.saveResistorValues(resistor)
-                resetDropdown = false
-            }
-
-            AppButton(
-                modifier = Modifier.padding(top = 16.dp, start = 32.dp, end = 32.dp),
-                text = stringResource(id = R.string.calculate_btn)
-            ) {
+                isError = !IsValidResistance.execute(resistor, resistance)
+                if (isError) return@AppTextField
                 resistor.formatResistor()
                 viewModel.saveResistorValues(resistor)
-                resetDropdown = false
             }
-
             TextDropDownMenu(
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
                 label = R.string.units_hint,
                 selectedOption = units,
                 items = DropdownLists.UNITS_LIST,
-                reset = resetDropdown,
+                reset = reset,
             ) {
                 resistor.units = it
                 units = it
                 resistor.formatResistor()
                 viewModel.saveResistorValues(resistor)
-                resetDropdown = false
+                reset = false
             }
             if (navBarSelection != 0) {
                 OutlinedDropDownMenu(
@@ -147,12 +149,13 @@ private fun ContentView(
                     label = R.string.tolerance_band_hint,
                     selectedOption = band5,
                     items = DropdownLists.TOLERANCE_LIST,
-                    reset = resetDropdown,
+                    reset = reset,
+                    isVtC = true
                 ) {
                     resistor.band5 = it
                     band5 = it
                     viewModel.saveResistorValues(resistor)
-                    resetDropdown = false
+                    reset = false
                 }
             }
             if (navBarSelection == 3) {
@@ -161,12 +164,13 @@ private fun ContentView(
                     label = R.string.ppm_band_hint,
                     selectedOption = band6,
                     items = DropdownLists.PPM_LIST,
-                    reset = resetDropdown,
+                    reset = reset,
+                    isVtC = true,
                 ) {
                     resistor.band6 = it
                     band6 = it
                     viewModel.saveResistorValues(resistor)
-                    resetDropdown = false
+                    reset = false
                 }
             }
         }
