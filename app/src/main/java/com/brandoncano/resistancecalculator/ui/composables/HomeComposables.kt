@@ -44,7 +44,7 @@ fun RoundAppIcon() {
         ) {
             Image(
                 painter = painterResource(id = R.mipmap.ic_launcher_foreground),
-                contentDescription = "App icon",
+                contentDescription = stringResource(id = R.string.content_description_app_icon),
                 modifier = Modifier.size(196.dp)
             )
         }
@@ -57,15 +57,15 @@ fun CalculatorButtons(navController: NavController) {
         val modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
             .align(Alignment.Start)
-        TextLabel(modifier = modifier, text = "Calculators")
+        TextLabel(modifier = modifier, text = stringResource(id = R.string.home_calculators_header_text))
         ArrowButtonCard(
             listOf(
                 Icons.Outlined.Calculate,
                 Icons.Outlined.Calculate
             ),
             listOf(
-                stringResource(id = R.string.color_to_value_btn),
-                stringResource(id = R.string.value_to_color_btn)
+                stringResource(id = R.string.home_button_color_to_value),
+                stringResource(id = R.string.home_button_value_to_color)
             ),
             listOf(
                 { navController.navigate(Screen.ColorToValue.route) },
@@ -81,15 +81,15 @@ fun OurAppsButtons(context: Context) {
         val modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
             .align(Alignment.Start)
-        TextLabel(modifier = modifier, text = "Our apps")
+        TextLabel(modifier = modifier, text = stringResource(id = R.string.home_our_apps_header_text))
         ArrowButtonCard(
             listOf(
                 Icons.Outlined.Star,
                 Icons.AutoMirrored.Outlined.AddToHomeScreen
             ),
             listOf(
-                stringResource(id = R.string.rate_us),
-                stringResource(id = R.string.view_capacitor_app)
+                stringResource(id = R.string.home_button_rate_us),
+                stringResource(id = R.string.home_button_view_capacitor_app)
             ),
             listOf(
                 { OpenLink.openResistorApp(context) },

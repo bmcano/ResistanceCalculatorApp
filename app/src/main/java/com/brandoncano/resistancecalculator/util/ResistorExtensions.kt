@@ -40,6 +40,6 @@ fun ResistorVtc.formatResistor() {
 }
 
 fun ResistorVtc.getDisplayableValue(context: Context): String {
-    if (this.isEmpty()) return context.getString(R.string.enter_value)
+    if (this.isEmpty()) return context.getString(R.string.default_vtc_value)
     return this.getResistorValue()
 }

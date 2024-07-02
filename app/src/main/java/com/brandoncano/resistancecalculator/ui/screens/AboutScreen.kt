@@ -83,11 +83,11 @@ private fun ContentView(context: Context) {
             )
             TextBody(
                 modifier = modifier,
-                text = stringResource(id = R.string.description_one)
+                text = stringResource(id = R.string.about_description_one)
             )
             TextBody(
                 modifier = modifier,
-                text = stringResource(id = R.string.description_two)
+                text = stringResource(id = R.string.about_description_two)
             )
             Spacer(modifier = Modifier.height(16.dp))
         }

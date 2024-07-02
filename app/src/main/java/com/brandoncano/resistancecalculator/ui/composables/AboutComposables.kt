@@ -53,7 +53,7 @@ fun LabelBodyTextCard(@StringRes label: Int, @StringRes body: Int) {
 fun ViewIecStandard(context: Context) {
     ArrowButtonCard(
         Icons.Filled.Link,
-        stringResource(id = R.string.iec_button_text)
+        stringResource(id = R.string.about_button_iec)
     ) {
         OpenLink.openIECWebpage(context)
     }

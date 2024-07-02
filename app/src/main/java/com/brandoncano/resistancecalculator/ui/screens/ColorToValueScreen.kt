@@ -98,7 +98,7 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MenuTopAppBar(stringResource(R.string.color_to_value), interactionSource) {
+            MenuTopAppBar(stringResource(R.string.menu_color_to_value), interactionSource) {
                 ValueToColorMenuItem(navController, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {

@@ -28,10 +28,10 @@ fun CalculatorNavigationBar(
 ) {
     var selectedItem by remember { mutableIntStateOf(selection) }
     val labels = listOf(
-        R.string.three_band_nav,
-        R.string.four_band_nav,
-        R.string.five_band_nav,
-        R.string.six_band_nav
+        R.string.navbar_three_band,
+        R.string.navbar_four_band,
+        R.string.navbar_five_band,
+        R.string.navbar_six_band
     )
     val icons = listOf(
         R.drawable.img_icon_three_band,

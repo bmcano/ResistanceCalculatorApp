@@ -25,7 +25,6 @@ import com.brandoncano.resistancecalculator.util.bandFiveForDisplay
 import com.brandoncano.resistancecalculator.util.bandSixForDisplay
 import com.brandoncano.resistancecalculator.util.bandThreeForDisplay
 import com.brandoncano.resistancecalculator.util.formatResistance
-import com.brandoncano.resistancecalculator.util.getDisplayableValue
 
 /**
  * Job: Holds all the parts for the resistor layout.

@@ -40,7 +40,6 @@ fun HomeScreen(context: Context, navController: NavController) {
 @Composable
 private fun ContentView(context: Context, navController: NavController) {
     val interactionSource = remember { MutableInteractionSource() }
-
     Column(
         modifier = Modifier
             .fillMaxSize()

@@ -136,7 +136,7 @@ fun AboutAppMenuItem(navController: NavController, interactionSource: MutableInt
 @Composable
 fun ClearSelectionsMenuItem(interactionSource: MutableInteractionSource, onClick: (() -> Unit)) {
     DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.clear_selections)) },
+        text = { TextBody(text = stringResource(R.string.menu_clear_selections)) },
         onClick = onClick,
         interactionSource = interactionSource,
     )
@@ -145,7 +145,7 @@ fun ClearSelectionsMenuItem(interactionSource: MutableInteractionSource, onClick
 @Composable
 fun ColorToValueMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.color_to_value)) },
+        text = { TextBody(text = stringResource(R.string.menu_color_to_value)) },
         onClick = { navController.navigate(Screen.ColorToValue.route) },
         interactionSource = interactionSource,
     )
@@ -163,7 +163,7 @@ fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSour
 @Composable
 fun ShareMenuItem(context: Context, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.share)) },
+        text = { TextBody(text = stringResource(R.string.menu_share)) },
         onClick = { /* ShareResistance.execute(context, ResistorCtv()) */ },
         interactionSource = interactionSource,
     )
@@ -172,7 +172,7 @@ fun ShareMenuItem(context: Context, interactionSource: MutableInteractionSource)
 @Composable
 fun ValueToColorMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.value_to_color)) },
+        text = { TextBody(text = stringResource(R.string.manu_value_to_color)) },
         onClick = { navController.navigate(Screen.ValueToColor.route) },
         interactionSource = interactionSource,
     )
