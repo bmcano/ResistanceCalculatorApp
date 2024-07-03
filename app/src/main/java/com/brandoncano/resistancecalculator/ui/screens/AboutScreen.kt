@@ -20,10 +20,10 @@ import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.composables.AppDivider
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.DefaultCard
-import com.brandoncano.resistancecalculator.ui.composables.HeadlineBodyStack
-import com.brandoncano.resistancecalculator.ui.composables.OurAppsButtons
+import com.brandoncano.resistancecalculator.ui.components.HeadlineBodyStack
+import com.brandoncano.resistancecalculator.ui.components.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.composables.RcvTopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.ViewIecStandard
+import com.brandoncano.resistancecalculator.ui.components.ViewIecStandard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
 import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
