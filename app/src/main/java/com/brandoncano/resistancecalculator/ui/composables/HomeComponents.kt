@@ -3,6 +3,8 @@ package com.brandoncano.resistancecalculator.ui.composables
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -37,12 +39,17 @@ fun RoundAppIcon() {
     Column(
         modifier = Modifier.padding(top = 16.dp)
     ) {
+        val backgroundColor = if (isSystemInDarkTheme()) {
+            MaterialTheme.colorScheme.surfaceVariant
+        } else {
+            MaterialTheme.colorScheme.primary
+        }
         Box(
             modifier = Modifier
                 .size(196.dp)
                 .clip(CircleShape)
-                .background(color = MaterialTheme.colorScheme.surfaceVariant),
-            contentAlignment = Alignment.Center
+                .background(color = backgroundColor),
+            contentAlignment = Alignment.Center,
         ) {
             Image(
                 painter = painterResource(id = R.mipmap.ic_launcher_foreground),
