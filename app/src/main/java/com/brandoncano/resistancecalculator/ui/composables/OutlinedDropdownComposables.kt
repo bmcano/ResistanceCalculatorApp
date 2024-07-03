@@ -39,7 +39,6 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleCaption
-import com.brandoncano.resistancecalculator.ui.theme.textStyleFootnote
 import com.brandoncano.resistancecalculator.ui.theme.textStyleSubhead
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
