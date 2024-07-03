@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.HomeActivity
+import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorButtons
@@ -59,6 +59,6 @@ private fun ContentView(context: Context, navController: NavController) {
 @AppScreenPreviews
 @Composable
 private fun HomePreview() {
-    val app = HomeActivity()
+    val app = RcvActivity()
     HomeScreen(app, NavController(app))
 }

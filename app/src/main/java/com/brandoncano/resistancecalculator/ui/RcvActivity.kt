@@ -6,9 +6,9 @@ import androidx.activity.compose.setContent
 import com.brandoncano.resistancecalculator.navigation.Navigation
 
 /**
- * Job: Activity for the compose ui, will be renamed later
+ * Job: Activity for the RCV calculator app.
  */
-class HomeActivity : ComponentActivity() {
+class RcvActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

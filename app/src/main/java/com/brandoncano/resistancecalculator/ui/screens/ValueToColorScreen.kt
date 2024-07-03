@@ -30,7 +30,7 @@ import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
-import com.brandoncano.resistancecalculator.ui.HomeActivity
+import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.AppTextField
@@ -180,7 +180,7 @@ private fun ContentView(
 @AppScreenPreviews
 @Composable
 fun ValueToColorScreenPreview() {
-    val app = HomeActivity()
+    val app = RcvActivity()
     val viewModel = viewModel<ResistorVtcViewModel>(factory = ResistorViewModelFactory(app))
     val resistor = MutableLiveData<ResistorVtc>()
     ValueToColorScreen(app, NavController(app), viewModel, 1, resistor)

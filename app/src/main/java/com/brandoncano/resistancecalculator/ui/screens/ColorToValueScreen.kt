@@ -30,7 +30,7 @@ import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
-import com.brandoncano.resistancecalculator.ui.HomeActivity
+import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
@@ -200,7 +200,7 @@ private fun ContentView(
 @AppScreenPreviews
 @Composable
 fun ColorToValueScreen4BandPreview() {
-    val app = HomeActivity()
+    val app = RcvActivity()
     val viewModel = viewModel<ResistorCtvViewModel>(factory = ResistorViewModelFactory(app))
     val resistor = MutableLiveData<ResistorCtv>()
     ColorToValueScreen(app, NavController(app), viewModel, 1, resistor)

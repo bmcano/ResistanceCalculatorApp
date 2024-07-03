@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.HomeActivity
+import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.composables.AppDivider
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.DefaultCard
@@ -110,6 +110,6 @@ private fun DescriptionCard() {
 @AppScreenPreviews
 @Composable
 private fun AboutPreview() {
-    val app = HomeActivity()
+    val app = RcvActivity()
     AboutScreen(app)
 }
