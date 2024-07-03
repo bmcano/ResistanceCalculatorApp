@@ -13,6 +13,7 @@ import androidx.compose.material.icons.automirrored.outlined.AddToHomeScreen
 import androidx.compose.material.icons.outlined.Calculate
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +25,7 @@ import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
 import com.brandoncano.resistancecalculator.util.OpenLink
 
 /**
@@ -54,10 +56,13 @@ fun RoundAppIcon() {
 @Composable
 fun CalculatorButtons(navController: NavController) {
     Column {
-        val modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
-            .align(Alignment.Start)
-        TextLabel(modifier = modifier, text = stringResource(id = R.string.home_calculators_header_text))
+        Text(
+            text = stringResource(id = R.string.home_calculators_header_text),
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                .align(Alignment.Start),
+            style = textStyleHeadline(),
+        )
         ArrowButtonCard(
             listOf(
                 Icons.Outlined.Calculate,
@@ -81,7 +86,11 @@ fun OurAppsButtons(context: Context) {
         val modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
             .align(Alignment.Start)
-        TextLabel(modifier = modifier, text = stringResource(id = R.string.home_our_apps_header_text))
+        Text(
+            text = stringResource(id = R.string.home_our_apps_header_text),
+            modifier = modifier,
+            style = textStyleHeadline(),
+        )
         ArrowButtonCard(
             listOf(
                 Icons.Outlined.Star,

@@ -19,7 +19,7 @@ import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorButtons
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.MenuTopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.composables.RoundAppIcon
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -46,7 +46,7 @@ private fun ContentView(context: Context, navController: NavController) {
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        MenuTopAppBar(stringResource(R.string.app_name), interactionSource) {
+        RcvMenuTopAppBar(stringResource(R.string.app_name), interactionSource) {
             FeedbackMenuItem(context, interactionSource)
             AboutAppMenuItem(navController, interactionSource)
         }

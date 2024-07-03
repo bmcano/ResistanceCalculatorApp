@@ -1,11 +1,9 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +12,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,19 +31,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.navigation.Screen
-import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.util.EmailFeedback
-
-/**
- * Job: Hold all composables for the top app bars and menu items
- */
+import com.brandoncano.resistancecalculator.ui.theme.textStyleLargeTitle
 
 @Composable
-fun MenuTopAppBar(
+fun RcvMenuTopAppBar(
     titleText: String,
     interactionSource: MutableInteractionSource,
     content: @Composable (ColumnScope.() -> Unit)
@@ -59,7 +49,7 @@ fun MenuTopAppBar(
             }
         }
     }
-    DefaultAppBar(titleText) {
+    RcvTopAppBar(titleText) {
         IconButton(
             onClick = { expanded = !expanded },
         ) {
@@ -76,41 +66,34 @@ fun MenuTopAppBar(
     }
 }
 
-@Composable
-fun TitleTopAppBar(
-    titleText: String,
-) {
-    DefaultAppBar(titleText)
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun DefaultAppBar(
+fun RcvTopAppBar(
     titleText: String,
     actions: @Composable (RowScope.() -> Unit) = { }
 ) {
-    val colors = centerAlignedTopAppBarColors(
-        containerColor = colorScheme.primary,
-        navigationIconContentColor = colorScheme.onPrimary,
-        titleContentColor = colorScheme.onPrimary,
-        actionIconContentColor = colorScheme.onPrimary
-    )
     CenterAlignedTopAppBar(
         title = {
             Text(
                 text = titleText,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                style = textStyleLargeTitle(),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
             )
         },
         actions = actions,
-        colors = colors,
+        colors = centerAlignedTopAppBarColors(
+            containerColor = colorScheme.primary,
+            navigationIconContentColor = colorScheme.onPrimary,
+            titleContentColor = colorScheme.onPrimary,
+            actionIconContentColor = colorScheme.onPrimary
+        ),
     )
     BottomShadow()
 }
 
 @Composable
-fun BottomShadow(alpha: Float = 0.1f, height: Dp = 4.dp) {
+private fun BottomShadow(alpha: Float = 0.1f, height: Dp = 4.dp) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -123,66 +106,11 @@ fun BottomShadow(alpha: Float = 0.1f, height: Dp = 4.dp) {
     )
 }
 
-// menu items are in alphabetical order
-@Composable
-fun AboutAppMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
-    DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.menu_about)) },
-        onClick = { navController.navigate(Screen.About.route) },
-        interactionSource = interactionSource,
-    )
-}
-
-@Composable
-fun ClearSelectionsMenuItem(interactionSource: MutableInteractionSource, onClick: (() -> Unit)) {
-    DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.menu_clear_selections)) },
-        onClick = onClick,
-        interactionSource = interactionSource,
-    )
-}
-
-@Composable
-fun ColorToValueMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
-    DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.menu_color_to_value)) },
-        onClick = { navController.navigate(Screen.ColorToValue.route) },
-        interactionSource = interactionSource,
-    )
-}
-
-@Composable
-fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSource) {
-    DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.menu_feedback)) },
-        onClick = { EmailFeedback.execute(context) },
-        interactionSource = interactionSource,
-    )
-}
-
-@Composable
-fun ShareMenuItem(context: Context, interactionSource: MutableInteractionSource) {
-    DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.menu_share)) },
-        onClick = { /* ShareResistance.execute(context, ResistorCtv()) */ },
-        interactionSource = interactionSource,
-    )
-}
-
-@Composable
-fun ValueToColorMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
-    DropdownMenuItem(
-        text = { TextBody(text = stringResource(R.string.manu_value_to_color)) },
-        onClick = { navController.navigate(Screen.ValueToColor.route) },
-        interactionSource = interactionSource,
-    )
-}
-
 @AppScreenPreviews
 @Composable
 fun TitleTopAppBarPreview() {
     ResistorCalculatorTheme {
-        TitleTopAppBar("TitleTopAppBar")
+        RcvTopAppBar("TopAppBar")
     }
 }
 
@@ -191,25 +119,8 @@ fun TitleTopAppBarPreview() {
 fun MenuTopAppBarPreview() {
     val interactionSource = remember { MutableInteractionSource() }
     ResistorCalculatorTheme {
-        MenuTopAppBar("TitleTopAppBar", interactionSource) {
+        RcvMenuTopAppBar("MenuTopAppBar", interactionSource) {
             ClearSelectionsMenuItem(interactionSource) { }
-        }
-    }
-}
-
-@AppScreenPreviews
-@Composable
-fun MenuItemsPreview() {
-    val interactionSource = remember { MutableInteractionSource() }
-    val app = HomeActivity()
-    ResistorCalculatorTheme {
-        Column {
-            AboutAppMenuItem(NavController(app), interactionSource)
-            ClearSelectionsMenuItem(interactionSource) { }
-            ColorToValueMenuItem(NavController(app), interactionSource)
-            FeedbackMenuItem(app, interactionSource)
-            ShareMenuItem(app, interactionSource)
-            ValueToColorMenuItem(NavController(app), interactionSource)
         }
     }
 }

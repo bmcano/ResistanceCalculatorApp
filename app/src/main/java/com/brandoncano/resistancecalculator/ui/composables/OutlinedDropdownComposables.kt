@@ -38,6 +38,9 @@ import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.textStyleCaption
+import com.brandoncano.resistancecalculator.ui.theme.textStyleFootnote
+import com.brandoncano.resistancecalculator.ui.theme.textStyleSubhead
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
 /**
@@ -225,12 +228,12 @@ private fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
         Column {
             Text(
                 text = item.name,
-                style = MaterialTheme.typography.bodyMedium,
+                style = textStyleSubhead(),
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 2.dp)
             )
             Text(
                 text = item.value,
-                style = MaterialTheme.typography.bodySmall,
+                style = textStyleCaption(),
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp)
             )
         }

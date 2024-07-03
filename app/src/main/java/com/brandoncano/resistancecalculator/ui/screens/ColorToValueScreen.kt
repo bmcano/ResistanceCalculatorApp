@@ -36,7 +36,7 @@ import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.MenuTopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.OutlinedDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
@@ -98,7 +98,7 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MenuTopAppBar(stringResource(R.string.menu_color_to_value), interactionSource) {
+            RcvMenuTopAppBar(stringResource(R.string.menu_color_to_value), interactionSource) {
                 ValueToColorMenuItem(navController, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {

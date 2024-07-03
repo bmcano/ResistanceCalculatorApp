@@ -5,10 +5,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
+import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
 
 /**
  * Job: Holds composables for buttons
@@ -27,7 +30,10 @@ fun AppButton(modifier: Modifier, text: String, onClick: () -> Unit) {
             disabledElevation = 0.dp
         )
     ) {
-        TextLabel(text = text)
+        Text(
+            text = text,
+            style = textStyleHeadline(),
+        )
     }
 }
 

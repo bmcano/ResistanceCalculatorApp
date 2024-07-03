@@ -3,12 +3,12 @@ package com.brandoncano.resistancecalculator.ui.composables
 import android.content.Context
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Link
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
+import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
 import com.brandoncano.resistancecalculator.util.OpenLink
 
 /**
@@ -24,28 +26,22 @@ import com.brandoncano.resistancecalculator.util.OpenLink
  */
 
 @Composable
-fun LabelBodyText(@StringRes label: Int, @StringRes body: Int) {
+fun HeadlineBodyStack(@StringRes label: Int, @StringRes body: Int) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.Start
     ) {
         val modifier = Modifier.padding(start = 16.dp, end = 16.dp)
-        TextLabel(
-            modifier = modifier.padding(top = 16.dp),
-            text = stringResource(id = label)
+        Text(
+            text = stringResource(id = label),
+            modifier = modifier.padding(top = 12.dp),
+            style = textStyleHeadline(),
         )
-        TextBody(
+        Text(
+            text = stringResource(id = body),
             modifier = modifier.padding(top = 4.dp),
-            text = stringResource(id = body)
+            style = textStyleBody(),
         )
-    }
-}
-
-@Composable
-fun LabelBodyTextCard(@StringRes label: Int, @StringRes body: Int) {
-    DefaultCard {
-        LabelBodyText(label, body)
-        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
@@ -61,27 +57,12 @@ fun ViewIecStandard(context: Context) {
 
 @AppScreenPreviews
 @Composable
-private fun LabelBodyTextPreview() {
+private fun HeadlineBodyStackPreview() {
     ResistorCalculatorTheme {
         Column(
             modifier = Modifier.height(64.dp)
         ) {
-            LabelBodyText(
-                label = R.string.about_created_by,
-                body = R.string.about_author,
-            )
-        }
-    }
-}
-
-@AppScreenPreviews
-@Composable
-private fun LabelBodyTextCardPreview() {
-    ResistorCalculatorTheme {
-        Column(
-            modifier = Modifier.height(82.dp)
-        ) {
-            LabelBodyTextCard(
+            HeadlineBodyStack(
                 label = R.string.about_created_by,
                 body = R.string.about_author,
             )

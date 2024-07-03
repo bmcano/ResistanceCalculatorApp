@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +21,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.bandFiveForDisplay
 import com.brandoncano.resistancecalculator.util.bandSixForDisplay
@@ -134,11 +136,12 @@ private fun ResistanceText(resistance: String) {
     ContentCard(
         modifier = Modifier.padding(top = 12.dp)
     ) {
-        TextHeadline(
+        Text(
+            text = resistance,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(top = 6.dp, bottom = 6.dp, start = 12.dp, end = 12.dp),
-            text = resistance
+            style = textStyleTitle(),
         )
     }
 }

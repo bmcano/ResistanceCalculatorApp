@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,18 +20,13 @@ import com.brandoncano.resistancecalculator.ui.HomeActivity
 import com.brandoncano.resistancecalculator.ui.composables.AppDivider
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.DefaultCard
-import com.brandoncano.resistancecalculator.ui.composables.LabelBodyText
-import com.brandoncano.resistancecalculator.ui.composables.LabelBodyTextCard
+import com.brandoncano.resistancecalculator.ui.composables.HeadlineBodyStack
 import com.brandoncano.resistancecalculator.ui.composables.OurAppsButtons
-import com.brandoncano.resistancecalculator.ui.composables.TextBody
-import com.brandoncano.resistancecalculator.ui.composables.TextLabel
-import com.brandoncano.resistancecalculator.ui.composables.TitleTopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.RcvTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.ViewIecStandard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-
-/**
- * Job: Hold all the UI interaction and components for the about screen
- */
+import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
+import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
 
 @Composable
 fun AboutScreen(context: Context) {
@@ -49,52 +45,65 @@ private fun ContentView(context: Context) {
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.Start
     ) {
-        TitleTopAppBar(stringResource(R.string.about_title))
-
-        val modifier = Modifier
-            .align(Alignment.Start)
-            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
-
-        LabelBodyTextCard(
-            label = R.string.about_created_by,
-            body = R.string.about_author,
-        )
-
-        DefaultCard {
-            LabelBodyText(
-                label = R.string.about_app_version,
-                body = R.string.version,
-            )
-            AppDivider(
-                modifier = Modifier
-                    .padding(start = 16.dp, end = 16.dp, top = 16.dp)
-            )
-            LabelBodyText(
-                label = R.string.about_last_updated_on,
-                body = R.string.last_updated,
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-
-        DefaultCard {
-            TextLabel(
-                modifier = modifier,
-                text = stringResource(id = R.string.about_description)
-            )
-            TextBody(
-                modifier = modifier,
-                text = stringResource(id = R.string.about_description_one)
-            )
-            TextBody(
-                modifier = modifier,
-                text = stringResource(id = R.string.about_description_two)
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-
+        RcvTopAppBar(stringResource(R.string.about_title))
+        AuthorCard()
+        AppInfoCard()
+        DescriptionCard()
         ViewIecStandard(context)
         OurAppsButtons(context)
         Spacer(modifier = Modifier.height(16.dp))
+    }
+}
+
+@Composable
+private fun AuthorCard() {
+    DefaultCard {
+        HeadlineBodyStack(
+            label = R.string.about_created_by,
+            body = R.string.about_author,
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+    }
+}
+
+@Composable
+private fun AppInfoCard() {
+    DefaultCard {
+        HeadlineBodyStack(
+            label = R.string.about_app_version,
+            body = R.string.version,
+        )
+        AppDivider(
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+        )
+        HeadlineBodyStack(
+            label = R.string.about_last_updated_on,
+            body = R.string.last_updated,
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+    }
+}
+
+@Composable
+private fun DescriptionCard() {
+    val modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp)
+    DefaultCard {
+        Text(
+            text = stringResource(id = R.string.about_description),
+            modifier = modifier,
+            style = textStyleHeadline(),
+        )
+        Text(
+            text = stringResource(id = R.string.about_description_one),
+            modifier = modifier,
+            style = textStyleBody(),
+        )
+        Text(
+            text = stringResource(id = R.string.about_description_two),
+            modifier = modifier.padding(bottom = 12.dp),
+            style = textStyleBody(),
+        )
     }
 }
 
