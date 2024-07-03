@@ -22,6 +22,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 /**
  * Job: Holds all the designs for cards and dividers within the app
@@ -132,5 +133,29 @@ private fun CardRowView(
             contentDescription = stringResource(id = R.string.content_description_right_arrow),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
         )
+    }
+}
+
+@AppScreenPreviews
+@Composable
+fun DefaultCardPreviews() {
+    ResistorCalculatorTheme {
+        DefaultCard {
+            Text(text = "Text1", modifier = Modifier.padding(4.dp))
+            AppDivider(onCard = true)
+            Text(text = "Text2", modifier = Modifier.padding(4.dp))
+            AppDivider(modifier = Modifier.padding(4.dp))
+            Text(text = "Text3", modifier = Modifier.padding(4.dp))
+        }
+    }
+}
+
+@AppScreenPreviews
+@Composable
+fun ContentCardPreviews() {
+    ResistorCalculatorTheme {
+        ContentCard {
+            Text(text = "Text1extended", modifier = Modifier.padding(4.dp))
+        }
     }
 }
