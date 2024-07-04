@@ -30,30 +30,30 @@ class OpenLinkTest {
     fun `verify openCapacitorApp`() {
         every { anyConstructed<Intent>().action = Intent.ACTION_VIEW } just Runs
         every { Uri.parse("https://play.google.com/store/apps/details?id=com.brandoncano.capacitorcalculator") } returns uri
-        every { context.startActivity(any()) } returns Unit
+        every { context.startActivity(any(), null) } returns Unit
 
         OpenLink.openCapacitorApp(context)
-        verify { context.startActivity(any()) }
+        verify { context.startActivity(any(), null) }
     }
 
     @Test
     fun `verify openResistorApp`() {
         every { anyConstructed<Intent>().action = Intent.ACTION_VIEW } just Runs
         every { Uri.parse("https://play.google.com/store/apps/details?id=com.brandoncano.resistancecalculator") } returns uri
-        every { context.startActivity(any()) } returns Unit
+        every { context.startActivity(any(), null) } returns Unit
 
         OpenLink.openResistorApp(context)
-        verify { context.startActivity(any()) }
+        verify { context.startActivity(any(), null) }
     }
 
     @Test
     fun `verify openIECWebpage`() {
         every { anyConstructed<Intent>().action = Intent.ACTION_VIEW } just Runs
         every { Uri.parse("https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-color-code/#") } returns uri
-        every { context.startActivity(any()) } returns Unit
+        every { context.startActivity(any(), null) } returns Unit
 
         OpenLink.openIECWebpage(context)
-        verify { context.startActivity(any()) }
+        verify { context.startActivity(any(), null) }
     }
 
     @After

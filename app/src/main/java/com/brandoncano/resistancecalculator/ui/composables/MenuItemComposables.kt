@@ -15,6 +15,7 @@ import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
 import com.brandoncano.resistancecalculator.util.EmailFeedback
+import com.brandoncano.resistancecalculator.util.ShareResistance
 
 /**
  * Note: Menu items are in alphabetical order
@@ -69,13 +70,13 @@ fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSour
 }
 
 @Composable
-fun ShareMenuItem(context: Context, interactionSource: MutableInteractionSource) {
+fun ShareMenuItem(context: Context, text: String, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
         text = { Text(
             text = stringResource(R.string.menu_share),
             style = textStyleBody(),
         ) },
-        onClick = { /* ShareResistance.execute(context, ResistorCtv()) */ },
+        onClick = { ShareResistance.execute(context, text)  },
         interactionSource = interactionSource,
     )
 }
@@ -103,7 +104,7 @@ fun MenuItemsPreview() {
             ClearSelectionsMenuItem(interactionSource) { }
             ColorToValueMenuItem(NavController(app), interactionSource)
             FeedbackMenuItem(app, interactionSource)
-            ShareMenuItem(app, interactionSource)
+            ShareMenuItem(app, "text", interactionSource)
             ValueToColorMenuItem(NavController(app), interactionSource)
         }
     }

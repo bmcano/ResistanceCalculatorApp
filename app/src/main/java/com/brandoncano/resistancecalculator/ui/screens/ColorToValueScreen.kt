@@ -39,8 +39,10 @@ import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.OutlinedDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
+import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.util.formatResistance
 
 /**
  * Job: Holds all the interactions of the CtV screen
@@ -100,6 +102,8 @@ private fun ContentView(
         ) {
             RcvMenuTopAppBar(stringResource(R.string.menu_color_to_value), interactionSource) {
                 ValueToColorMenuItem(navController, interactionSource)
+                val shareableText = "${resistor.formatResistance()}\n$resistor"
+                ShareMenuItem(context, shareableText, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
                     viewModel.clear()
