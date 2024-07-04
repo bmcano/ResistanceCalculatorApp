@@ -74,7 +74,7 @@ val surfaceContainerLowDark = Color(0xFF171C1F)
 val surfaceContainerDark = Color(0xFF1B2023)
 val surfaceContainerHighDark = Color(0xFF252B2D)
 val surfaceContainerHighestDark = Color(0xFF303638)
-// resistor colors - currently placeholders as they may not be fully extracted from colors.xml
+// resistor colors
 val red = Color(0xFFED1C24)
 val orange = Color(0xFFFF7F27)
 val yellow = Color(0xFFFFF200)
@@ -87,3 +87,4 @@ val silver = Color(0xFFC0C0C0)
 val gray = Color(0xFF7F7F7F)
 val black = Color(0xFF00000F)
 val brown = Color(0xFFB97A57)
+val resistor_blank = Color(0xFFEFE4B0)

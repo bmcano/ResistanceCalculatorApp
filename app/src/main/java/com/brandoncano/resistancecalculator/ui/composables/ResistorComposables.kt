@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
-import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -13,8 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
@@ -122,11 +121,11 @@ private fun ResistorImage(@DrawableRes drawableRes: Int) {
 }
 
 @Composable
-private fun ResistorImage(@DrawableRes drawableRes: Int, @ColorRes colorRes: Int) {
+private fun ResistorImage(@DrawableRes drawableRes: Int, color: Color) {
     Image(
         painter = painterResource(id = drawableRes),
         contentDescription = null,
-        colorFilter = ColorFilter.tint(colorResource(colorRes)),
+        colorFilter = ColorFilter.tint(color),
     )
 }
 

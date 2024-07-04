@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -22,22 +20,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.RoundedSquare
+import com.brandoncano.resistancecalculator.ui.theme.resistor_blank
 import com.brandoncano.resistancecalculator.ui.theme.textStyleCaption
 import com.brandoncano.resistancecalculator.ui.theme.textStyleSubhead
 import com.brandoncano.resistancecalculator.util.ColorFinder
@@ -142,8 +139,8 @@ fun OutlinedDropDownMenu(
     var expanded by remember { mutableStateOf(false) }
     var selectedText by remember { mutableStateOf(selectedOption) }
     var selectedLeadingIcon by remember {
-        val drawable = ColorFinder.textToColoredDrawable(selectedOption)
-        mutableIntStateOf(drawable)
+        val color = ColorFinder.textToColor(selectedOption)
+        mutableStateOf(color)
     }
     var textFieldSize by remember { mutableStateOf(Size.Zero) }
     val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
@@ -157,7 +154,7 @@ fun OutlinedDropDownMenu(
     LaunchedEffect(reset) {
         if (reset) {
             selectedText = ""
-            selectedLeadingIcon = R.drawable.square_blank
+            selectedLeadingIcon = resistor_blank
         }
     }
     Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
@@ -171,14 +168,9 @@ fun OutlinedDropDownMenu(
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(stringResource(label)) },
             leadingIcon = {
-                if (selectedLeadingIcon != R.drawable.square_blank)
-                    Image(
-                        painter = painterResource(selectedLeadingIcon),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .size(32.dp)
-                    )
+                if (selectedLeadingIcon != resistor_blank) {
+                    RoundedSquare(color = selectedLeadingIcon, size = 24.dp)
+                }
             },
             trailingIcon = {
                 Icon(
@@ -199,7 +191,7 @@ fun OutlinedDropDownMenu(
             items.forEach {
                 DropdownItemView(it) {
                     selectedText = if (isVtC) it.value else it.name
-                    selectedLeadingIcon = it.imageResId
+                    selectedLeadingIcon = ColorFinder.textToColor(it.name)
                     expanded = false
                     onOptionSelected(if (isVtC) it.value else it.name)
                 }
@@ -216,14 +208,8 @@ private fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
             .padding(horizontal = 16.dp, vertical = 4.dp)
             .clickable { onClick() }
     ) {
-        Image(
-            painter = painterResource(id = item.imageResId),
-            contentDescription = null,
-            modifier = Modifier
-                .size(40.dp)
-                .padding(end = 8.dp),
-            contentScale = ContentScale.Crop
-        )
+        val color = ColorFinder.textToColor(item.name)
+        RoundedSquare(color = color, size = 36.dp)
         Column {
             Text(
                 text = item.name,
@@ -243,7 +229,7 @@ private fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
 @Composable
 fun CustomDropdownRowPreview() {
     ResistorCalculatorTheme {
-        val item1 = DropdownItem(imageResId = R.drawable.square_red, name = "Item 1", value = "Value 1")
+        val item1 = DropdownItem(name = "Item 1", value = "Value 1")
         Column {
             DropdownItemView(item1) { }
             DropdownItemView(item1) { }
@@ -254,12 +240,12 @@ fun CustomDropdownRowPreview() {
 @AppScreenPreviews
 @Composable
 fun CustomDropdownPreview() {
-    val item1 = DropdownItem(imageResId = R.drawable.square_red, name = "Item 1", value = "Value 1")
-    val item2 = DropdownItem(imageResId = R.drawable.square_orange, name = "Item 2", value = "Value 2")
-    val item3 = DropdownItem(imageResId = R.drawable.square_yellow, name = "Item 3", value = "Value 3")
-    val item4 = DropdownItem(imageResId = R.drawable.square_green, name = "Item 4", value = "Value 4")
-    val item5 = DropdownItem(imageResId = R.drawable.square_blue, name = "Item 5", value = "Value 5")
-    val item6 = DropdownItem(imageResId = R.drawable.square_violet, name = "Item 6", value = "Value 6")
+    val item1 = DropdownItem(name = "Item 1", value = "Value 1")
+    val item2 = DropdownItem(name = "Item 2", value = "Value 2")
+    val item3 = DropdownItem(name = "Item 3", value = "Value 3")
+    val item4 = DropdownItem(name = "Item 4", value = "Value 4")
+    val item5 = DropdownItem(name = "Item 5", value = "Value 5")
+    val item6 = DropdownItem(name = "Item 6", value = "Value 6")
     val list = listOf(item1, item2, item3, item4, item5, item6)
     ResistorCalculatorTheme {
         Column {
