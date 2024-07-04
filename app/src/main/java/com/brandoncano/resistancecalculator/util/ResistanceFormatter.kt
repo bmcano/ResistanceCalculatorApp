@@ -11,7 +11,6 @@ object ResistanceFormatter {
 
     private const val ZERO_OHMS = "0 ${S.OHMS}"
 
-    // NOTE: this is for the compose iteration of the app code above will eventually be removed
     fun calculate(resistor: ResistorCtv): String {
         if (resistor.isEmpty()) return "Select colors"
 
@@ -22,7 +21,7 @@ object ResistanceFormatter {
         val tolerance = ValueFinder.getTolerance(resistor.band5, resistor.isThreeBand())
         val ppm = ValueFinder.getPPM(resistor.band6, resistor.isSixBand())
 
-        return "$resistance $tolerance\n$ppm".trimEnd('\n')
+        return "$resistance $tolerance, $ppm".trimEnd(',', ' ')
     }
 
     private fun formatResistance(resistor: ResistorCtv, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {

@@ -5,8 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,17 +29,14 @@ import com.brandoncano.resistancecalculator.util.formatResistance
  * Job: Holds all the parts for the resistor layout.
  */
 
+private data class ResistorImagePair(@DrawableRes val drawableRes: Int, val color: String? = null)
+
 @Composable
-fun ResistorLayout(
-    resistor: ResistorCtv
-) {
+fun ResistorLayout(resistor: ResistorCtv) {
     Column(
-        modifier = Modifier
-            .padding(top = 12.dp, start = 32.dp, end = 32.dp),
+        modifier = Modifier.padding(top = 12.dp, start = 32.dp, end = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        // might make these as extension functions instead
-        Spacer(modifier = Modifier.height(1.dp)) // Spacer to replace the Group
         ResistorRow(
             ResistorImagePair(R.drawable.img_resistor_p1),
             ResistorImagePair(R.drawable.img_resistor_p2, resistor.band1),
@@ -57,23 +52,16 @@ fun ResistorLayout(
             ResistorImagePair(R.drawable.img_resistor_p12, resistor.bandSixForDisplay()),
             ResistorImagePair(R.drawable.img_resistor_p13),
         )
-
         ResistanceText(resistor.formatResistance())
     }
 }
 
 @Composable
-fun ResistorLayout(
-    resistor: ResistorVtc,
-    resistance: String
-) {
+fun ResistorLayout(resistor: ResistorVtc, resistance: String) {
     Column(
-        modifier = Modifier
-            .padding(top = 12.dp, start = 32.dp, end = 32.dp),
+        modifier = Modifier.padding(top = 12.dp, start = 32.dp, end = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        // might make these as extension functions instead
-        Spacer(modifier = Modifier.height(1.dp)) // Spacer to replace the Group
         ResistorRow(
             ResistorImagePair(R.drawable.img_resistor_p1),
             ResistorImagePair(R.drawable.img_resistor_p2, resistor.band1),
@@ -89,12 +77,9 @@ fun ResistorLayout(
             ResistorImagePair(R.drawable.img_resistor_p12, resistor.bandSixForDisplay()),
             ResistorImagePair(R.drawable.img_resistor_p13),
         )
-
         ResistanceText(resistance)
     }
 }
-
-private data class ResistorImagePair(@DrawableRes val drawableRes: Int, val color: String? = null)
 
 @Composable
 private fun ResistorRow(vararg resistorImages: ResistorImagePair) {
@@ -105,8 +90,8 @@ private fun ResistorRow(vararg resistorImages: ResistorImagePair) {
             if (resistorImage.color.isNullOrEmpty()) {
                 ResistorImage(resistorImage.drawableRes)
             } else {
-                val colorRes = ColorFinder.textToColor(resistorImage.color)
-                ResistorImage(resistorImage.drawableRes, colorRes)
+                val color = ColorFinder.textToColor(resistorImage.color)
+                ResistorImage(resistorImage.drawableRes, color)
             }
         }
     }
@@ -129,7 +114,6 @@ private fun ResistorImage(@DrawableRes drawableRes: Int, color: Color) {
     )
 }
 
-// TODO - WIP
 @Composable
 private fun ResistanceText(resistance: String) {
     ContentCard(
@@ -150,11 +134,11 @@ private fun ResistanceText(resistance: String) {
 private fun ResistorLayoutsPreview() {
     ResistorCalculatorTheme {
         Column {
-//            ResistorLayout("", "", "", "", "", "")
-//            ResistorLayout("Red", "Orange", "", "Yellow", "", "")
-//            ResistorLayout("Red", "Orange", "", "Yellow", "Green", "")
-//            ResistorLayout("Red", "Orange", "Black", "Yellow", "Green", "")
-//            ResistorLayout("Red", "Orange", "Black", "Yellow", "Green", "Blue")
+            ResistorLayout(ResistorCtv())
+            ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "", "", 3))
+            ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "Green", "", 4))
+            ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "", 5))
+            ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "Blue", 6))
         }
     }
 }

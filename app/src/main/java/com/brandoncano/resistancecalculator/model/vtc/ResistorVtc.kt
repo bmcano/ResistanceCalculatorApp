@@ -20,14 +20,23 @@ data class ResistorVtc(
     fun isFiveSixBand() = numberOfBands == 5 || numberOfBands == 6
     fun isSixBand() = numberOfBands == 6
 
+    fun getResistorValue(): String {
+        var text = "$resistance $units "
+        text += if (isThreeBand()) "${Symbols.PM}20%" else band5
+        if (isSixBand()) text += ", $band6"
+        return text
+    }
+
     fun isEmpty(): Boolean {
         return resistance.isEmpty() || units.isEmpty()
     }
 
-    fun getResistorValue(): String {
-        var text = "$resistance $units "
-        text += if (numberOfBands == 3) "${Symbols.PM}20%" else band5
-        if (numberOfBands == 6) text += ", $band6"
-        return text
+    override fun toString(): String {
+        return when (numberOfBands) {
+            4 -> "[ $band1, $band2, $band4, $band5 ]"
+            5 -> "[ $band1, $band2, $band3, $band4, $band5 ]"
+            6 -> "[ $band1, $band2, $band3, $band4, $band5, $band6 ]"
+            else -> "[ $band1, $band2, $band4 ]"
+        }
     }
 }
