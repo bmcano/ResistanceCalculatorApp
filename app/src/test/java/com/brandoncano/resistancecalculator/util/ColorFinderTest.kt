@@ -7,6 +7,7 @@ import com.brandoncano.resistancecalculator.ui.theme.gold
 import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.resistancecalculator.ui.theme.green
 import com.brandoncano.resistancecalculator.ui.theme.orange
+import com.brandoncano.resistancecalculator.ui.theme.primaryLight
 import com.brandoncano.resistancecalculator.ui.theme.red
 import com.brandoncano.resistancecalculator.ui.theme.resistor_blank
 import com.brandoncano.resistancecalculator.ui.theme.silver
@@ -65,6 +66,25 @@ class ColorFinderTest {
 
         assertEquals(resistor_blank, ColorFinder.textToColor("Some String"))
         assertEquals(resistor_blank, ColorFinder.textToColor("Not a color Red"))
+    }
+
+    @Test
+    fun colorToTextTest() {
+        assertEquals(C.BLACK, ColorFinder.colorToText(black))
+        assertEquals(C.BROWN, ColorFinder.colorToText(brown))
+        assertEquals(C.RED, ColorFinder.colorToText(red))
+        assertEquals(C.ORANGE, ColorFinder.colorToText(orange))
+        assertEquals(C.YELLOW, ColorFinder.colorToText(yellow))
+        assertEquals(C.GREEN, ColorFinder.colorToText(green))
+        assertEquals(C.BLUE, ColorFinder.colorToText(blue))
+        assertEquals(C.VIOLET, ColorFinder.colorToText(violet))
+        assertEquals(C.GRAY, ColorFinder.colorToText(gray))
+        assertEquals(C.WHITE, ColorFinder.colorToText(white))
+        assertEquals(C.GOLD, ColorFinder.colorToText(gold))
+        assertEquals(C.SILVER, ColorFinder.colorToText(silver))
+
+        assertEquals(C.BLANK, ColorFinder.colorToText(resistor_blank))
+        assertEquals(C.BLANK, ColorFinder.colorToText(primaryLight))
     }
 
     @Test

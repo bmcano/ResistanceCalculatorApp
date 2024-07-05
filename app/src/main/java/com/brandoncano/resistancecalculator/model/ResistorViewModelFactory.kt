@@ -13,10 +13,10 @@ class ResistorViewModelFactory(private val context: Context): ViewModelProvider.
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
-        return when (modelClass.simpleName) {
-            "ResistorCtvViewModel" -> ResistorCtvViewModel(context) as T
-            "ResistorVtcViewModel" -> ResistorVtcViewModel(context) as T
-            else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+        return when (modelClass.canonicalName) {
+            ResistorCtvViewModel::class.java.canonicalName -> ResistorCtvViewModel(context) as T
+            ResistorVtcViewModel::class.java.canonicalName -> ResistorVtcViewModel(context) as T
+            else -> throw IllegalArgumentException("Unknown ViewModel class: $modelClass")
         }
     }
 }

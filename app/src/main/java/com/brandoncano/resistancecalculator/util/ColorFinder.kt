@@ -23,8 +23,8 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
  */
 object ColorFinder {
 
-    fun textToColor(color: String): Color {
-        return when (color) {
+    fun textToColor(text: String): Color {
+        return when (text) {
             C.BLACK ,                 "250 ${S.PPM}" -> black
             C.BROWN , "${S.PM}1%"   , "100 ${S.PPM}" -> brown
             C.RED   , "${S.PM}2%"   , "50 ${S.PPM}"  -> red
@@ -38,6 +38,24 @@ object ColorFinder {
             C.GOLD  , "${S.PM}5%"                    -> gold
             C.SILVER, "${S.PM}10%"                   -> silver
             else                                     -> resistor_blank
+        }
+    }
+
+    fun colorToText(color: Color): String {
+        return when (color) {
+            black -> C.BLACK
+            brown -> C.BROWN
+            red -> C.RED
+            orange -> C.ORANGE
+            yellow -> C.YELLOW
+            green -> C.GREEN
+            blue -> C.BLUE
+            violet -> C.VIOLET
+            gray -> C.GRAY
+            white -> C.WHITE
+            gold -> C.GOLD
+            silver -> C.SILVER
+            else -> C.BLANK
         }
     }
 
