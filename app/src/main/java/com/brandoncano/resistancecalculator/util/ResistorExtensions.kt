@@ -43,3 +43,8 @@ fun ResistorVtc.getDisplayableValue(context: Context): String {
     if (this.isEmpty()) return context.getString(R.string.default_vtc_value)
     return this.getResistorValue()
 }
+
+fun String.adjustValueForSharing(): String {
+    val color = ColorFinder.textToColor(this)
+    return ColorFinder.colorToColorText(color)
+}

@@ -22,7 +22,7 @@ class ResistorVtcViewModel(context: Context): ViewModel() {
     }
 
     fun clear() {
-        resistor.value = ResistorVtc()
+        resistor.value = ResistorVtc(navBarSelection = getNavBarSelection())
         repository.clear()
     }
 

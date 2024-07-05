@@ -2,6 +2,7 @@ package com.brandoncano.resistancecalculator.model.vtc
 
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.util.ColorFinder
+import com.brandoncano.resistancecalculator.util.adjustValueForSharing
 
 data class ResistorVtc(
     var resistance: String = "",
@@ -33,12 +34,12 @@ data class ResistorVtc(
     }
 
     override fun toString(): String {
-        val tolerance = ColorFinder.colorToText(ColorFinder.textToColor(band5))
-        val ppm = ColorFinder.colorToText(ColorFinder.textToColor(band6))
+        val tolerance = band5.adjustValueForSharing()
+        val ppm = band6.adjustValueForSharing()
         return when (navBarSelection) {
-            4 -> "[ $band1, $band2, $band4, $band5 ]"
-            5 -> "[ $band1, $band2, $band3, $band4, $tolerance ]"
-            6 -> "[ $band1, $band2, $band3, $band4, $tolerance, $ppm ]"
+            1 -> "[ $band1, $band2, $band4, $band5 ]"
+            2 -> "[ $band1, $band2, $band3, $band4, $tolerance ]"
+            3 -> "[ $band1, $band2, $band3, $band4, $tolerance, $ppm ]"
             else -> "[ $band1, $band2, $band4 ]"
         }
     }

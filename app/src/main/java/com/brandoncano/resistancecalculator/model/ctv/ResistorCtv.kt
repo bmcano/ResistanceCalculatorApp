@@ -25,9 +25,9 @@ data class ResistorCtv(
 
     override fun toString(): String {
         return when (navBarSelection) {
-            4 -> "[ $band1, $band2, $band4, $band5 ]"
-            5 -> "[ $band1, $band2, $band3, $band4, $band5 ]"
-            6 -> "[ $band1, $band2, $band3, $band4, $band5, $band6 ]"
+            1 -> "[ $band1, $band2, $band4, $band5 ]"
+            2 -> "[ $band1, $band2, $band3, $band4, $band5 ]"
+            3 -> "[ $band1, $band2, $band3, $band4, $band5, $band6 ]"
             else -> "[ $band1, $band2, $band4 ]"
         }
     }

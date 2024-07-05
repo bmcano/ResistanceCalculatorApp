@@ -69,22 +69,22 @@ class ColorFinderTest {
     }
 
     @Test
-    fun colorToTextTest() {
-        assertEquals(C.BLACK, ColorFinder.colorToText(black))
-        assertEquals(C.BROWN, ColorFinder.colorToText(brown))
-        assertEquals(C.RED, ColorFinder.colorToText(red))
-        assertEquals(C.ORANGE, ColorFinder.colorToText(orange))
-        assertEquals(C.YELLOW, ColorFinder.colorToText(yellow))
-        assertEquals(C.GREEN, ColorFinder.colorToText(green))
-        assertEquals(C.BLUE, ColorFinder.colorToText(blue))
-        assertEquals(C.VIOLET, ColorFinder.colorToText(violet))
-        assertEquals(C.GRAY, ColorFinder.colorToText(gray))
-        assertEquals(C.WHITE, ColorFinder.colorToText(white))
-        assertEquals(C.GOLD, ColorFinder.colorToText(gold))
-        assertEquals(C.SILVER, ColorFinder.colorToText(silver))
+    fun colorToColorTextTest() {
+        assertEquals(C.BLACK, ColorFinder.colorToColorText(black))
+        assertEquals(C.BROWN, ColorFinder.colorToColorText(brown))
+        assertEquals(C.RED, ColorFinder.colorToColorText(red))
+        assertEquals(C.ORANGE, ColorFinder.colorToColorText(orange))
+        assertEquals(C.YELLOW, ColorFinder.colorToColorText(yellow))
+        assertEquals(C.GREEN, ColorFinder.colorToColorText(green))
+        assertEquals(C.BLUE, ColorFinder.colorToColorText(blue))
+        assertEquals(C.VIOLET, ColorFinder.colorToColorText(violet))
+        assertEquals(C.GRAY, ColorFinder.colorToColorText(gray))
+        assertEquals(C.WHITE, ColorFinder.colorToColorText(white))
+        assertEquals(C.GOLD, ColorFinder.colorToColorText(gold))
+        assertEquals(C.SILVER, ColorFinder.colorToColorText(silver))
 
-        assertEquals(C.BLANK, ColorFinder.colorToText(resistor_blank))
-        assertEquals(C.BLANK, ColorFinder.colorToText(primaryLight))
+        assertEquals(C.BLANK, ColorFinder.colorToColorText(resistor_blank))
+        assertEquals(C.BLANK, ColorFinder.colorToColorText(primaryLight))
     }
 
     @Test

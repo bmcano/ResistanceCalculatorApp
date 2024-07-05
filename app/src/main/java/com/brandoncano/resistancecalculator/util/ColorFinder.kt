@@ -41,7 +41,7 @@ object ColorFinder {
         }
     }
 
-    fun colorToText(color: Color): String {
+    fun colorToColorText(color: Color): String {
         return when (color) {
             black -> C.BLACK
             brown -> C.BROWN
