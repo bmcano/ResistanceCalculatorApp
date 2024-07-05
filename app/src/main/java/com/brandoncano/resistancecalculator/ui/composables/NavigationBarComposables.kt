@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.textStyleCaption
 
 /**
  * Job: Components for the bottom navigation bar
@@ -55,7 +56,7 @@ fun CalculatorNavigationBar(
                 label = {
                     Text(
                         text = stringResource(item),
-                        style = MaterialTheme.typography.bodySmall,
+                        style = textStyleCaption(),
                     )
                 },
                 selected = selectedItem == index,

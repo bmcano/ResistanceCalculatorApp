@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.model.vtc
 
 import com.brandoncano.resistancecalculator.constants.Symbols
-import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.resistancecalculator.util.adjustValueForSharing
 
 data class ResistorVtc(

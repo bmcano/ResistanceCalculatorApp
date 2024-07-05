@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import com.brandoncano.resistancecalculator.R
 
 /**
  * Job: Outlined text field components
@@ -67,7 +68,7 @@ fun AppTextField(
                 if (isError)
                     Image(
                        imageVector = Icons.Outlined.Error,
-                       contentDescription = "Error",
+                       contentDescription = stringResource(id = R.string.content_description_error),
                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error)
                     )
             },

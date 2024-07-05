@@ -79,7 +79,7 @@ private fun TextStylePreview() {
                 style = textStyleLargeTitle(),
             )
             Text(
-                text = "Title1",
+                text = "Title",
                 style = textStyleTitle(),
             )
             Text(

@@ -9,7 +9,6 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.After
-import org.junit.Ignore
 import org.junit.Test
 
 class ShareResistanceTest {

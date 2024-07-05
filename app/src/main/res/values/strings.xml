@@ -43,9 +43,9 @@
     <string name="home_button_rate_us">Rate this app on Google Play</string>
     <string name="home_button_view_capacitor_app">Check out our capacitor app</string>
     <!-- Content descriptions -->
-    <string name="dropdown_image_description">Color</string>
     <string name="content_description_app_icon">App icon</string>
     <string name="content_description_menu_more">More</string>
     <string name="content_description_right_arrow">Right arrow</string>
+    <string name="content_description_error">Error</string>
 
 </resources>
