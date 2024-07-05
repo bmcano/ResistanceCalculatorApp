@@ -17,9 +17,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.RcvActivity
-import com.brandoncano.resistancecalculator.ui.composables.AppDivider
+import com.brandoncano.resistancecalculator.ui.composables.RcvDivider
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.DefaultCard
+import com.brandoncano.resistancecalculator.ui.composables.RcvCard
 import com.brandoncano.resistancecalculator.ui.components.HeadlineBodyStack
 import com.brandoncano.resistancecalculator.ui.components.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.composables.RcvTopAppBar
@@ -57,7 +57,7 @@ private fun ContentView(context: Context) {
 
 @Composable
 private fun AuthorCard() {
-    DefaultCard {
+    RcvCard {
         HeadlineBodyStack(
             label = R.string.about_created_by,
             body = R.string.about_author,
@@ -68,12 +68,12 @@ private fun AuthorCard() {
 
 @Composable
 private fun AppInfoCard() {
-    DefaultCard {
+    RcvCard {
         HeadlineBodyStack(
             label = R.string.about_app_version,
             body = R.string.version,
         )
-        AppDivider(
+        RcvDivider(
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, top = 16.dp)
         )
@@ -88,7 +88,7 @@ private fun AppInfoCard() {
 @Composable
 private fun DescriptionCard() {
     val modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp)
-    DefaultCard {
+    RcvCard {
         Text(
             text = stringResource(id = R.string.about_description),
             modifier = modifier,

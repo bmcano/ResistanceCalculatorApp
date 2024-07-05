@@ -116,7 +116,7 @@ private fun ResistorImage(@DrawableRes drawableRes: Int, color: Color) {
 
 @Composable
 private fun ResistanceText(resistance: String) {
-    ContentCard(
+    RcvCustomCard(
         modifier = Modifier.padding(top = 12.dp)
     ) {
         Text(

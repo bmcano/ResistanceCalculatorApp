@@ -2,6 +2,7 @@ package com.brandoncano.resistancecalculator.ui.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -31,23 +32,23 @@ import com.brandoncano.resistancecalculator.ui.theme.textStyleCallout
  */
 
 @Composable
-fun AppDivider(
+fun RcvDivider(
     modifier: Modifier = Modifier,
     onCard: Boolean = true
 ) {
     HorizontalDivider(
         modifier = modifier,
         thickness = 1.dp,
-        color = if (onCard) {
-            MaterialTheme.colorScheme.onSurfaceVariant
+        color = if (onCard && isSystemInDarkTheme()) {
+            MaterialTheme.colorScheme.outline
         } else {
-            MaterialTheme.colorScheme.onSurface
+            MaterialTheme.colorScheme.outlineVariant
         }
     )
 }
 
 @Composable
-fun DefaultCard(
+fun RcvCard(
     content: @Composable (ColumnScope.() -> Unit)
 ) {
     Card(
@@ -58,7 +59,7 @@ fun DefaultCard(
     )
 }
 @Composable
-fun ContentCard(
+fun RcvCustomCard(
     modifier: Modifier = Modifier,
     content: @Composable (ColumnScope.() -> Unit)
 ) {
@@ -98,7 +99,7 @@ fun ArrowButtonCard(
         onClicks.forEachIndexed { index, onClick ->
             CardRowView(onClick, imageVectors[index], cardTexts[index])
             if (onClicks.size - 1 != index) {
-                AppDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp))
+                RcvDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp))
             }
         }
     }
@@ -143,13 +144,14 @@ private fun CardRowView(
 @Composable
 fun DefaultCardPreviews() {
     ResistorCalculatorTheme {
-        DefaultCard {
+        RcvCard {
             Text(text = "Text1", modifier = Modifier.padding(4.dp))
-            AppDivider(onCard = true)
+            RcvDivider(onCard = true)
             Text(text = "Text2", modifier = Modifier.padding(4.dp))
-            AppDivider(modifier = Modifier.padding(4.dp))
+            RcvDivider(modifier = Modifier.padding(4.dp))
             Text(text = "Text3", modifier = Modifier.padding(4.dp))
         }
+        RcvDivider(modifier = Modifier.padding(4.dp), false)
     }
 }
 
@@ -157,7 +159,7 @@ fun DefaultCardPreviews() {
 @Composable
 fun ContentCardPreviews() {
     ResistorCalculatorTheme {
-        ContentCard {
+        RcvCustomCard {
             Text(text = "Text1extended", modifier = Modifier.padding(4.dp))
         }
     }
