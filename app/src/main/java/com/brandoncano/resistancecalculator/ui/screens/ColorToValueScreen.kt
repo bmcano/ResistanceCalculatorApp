@@ -87,9 +87,8 @@ private fun ContentView(
         bottomBar = {
             CalculatorNavigationBar(navBarSelection) {
                 navBarSelection = it
-                // temp adding +3 until new logic is written to account for navbar
-                resistor.numberOfBands = it + 3
-                viewModel.saveNumberOfBands(it + 3)
+                resistor.navBarSelection = it
+                viewModel.saveNavBarSelection(it)
             }
         }
     ) { paddingValues ->

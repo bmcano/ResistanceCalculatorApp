@@ -33,12 +33,12 @@ class ResistorVtcViewModel(context: Context): ViewModel() {
 
     fun getNavBarSelection(): Int {
         val resistor = repository.loadResistor()
-        return resistor.numberOfBands - 3
+        return resistor.navBarSelection
     }
 
-    fun saveNumberOfBands(number: Int) {
-        val numberOfBands = number.coerceIn(3..6)
-        repository.saveNumberOfBands(numberOfBands)
+    fun saveNavBarSelection(number: Int) {
+        val navBarSelection = number.coerceIn(0..3)
+        repository.saveNavBarSelection(navBarSelection)
     }
 
     fun saveResistorValues(resistor: ResistorVtc) {

@@ -50,7 +50,7 @@ class ResistorCtvRepository(context: Context) {
         SharedPreferences.PPM_BAND_CTV.saveData(application, resistor.band6)
     }
 
-    fun saveNumberOfBands(number: Int) {
+    fun saveNavBarSelection(number: Int) {
         SharedPreferences.BUTTON_SELECTION_CTV.saveData(application, "$number")
     }
 }

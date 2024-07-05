@@ -10,12 +10,12 @@ data class ResistorCtv(
     var band4: String = "",
     var band5: String = "",
     var band6: String = "",
-    var numberOfBands: Int = 4,
+    var navBarSelection: Int = 1,
 ) {
-    fun isThreeBand() = numberOfBands == 3
-    fun isThreeFourBand() = numberOfBands == 3 || numberOfBands == 4
-    fun isFiveSixBand() = numberOfBands == 5 || numberOfBands == 6
-    fun isSixBand() = numberOfBands == 6
+    fun isThreeBand() = navBarSelection == 0
+    fun isThreeFourBand() = navBarSelection == 0 || navBarSelection == 1
+    fun isFiveSixBand() = navBarSelection == 2 || navBarSelection == 3
+    fun isSixBand() = navBarSelection == 3
 
     fun isEmpty(): Boolean {
         val isMissingBands = band1.isEmpty() || band2.isEmpty() || band4.isEmpty()
@@ -24,7 +24,7 @@ data class ResistorCtv(
     }
 
     override fun toString(): String {
-        return when (numberOfBands) {
+        return when (navBarSelection) {
             4 -> "[ $band1, $band2, $band4, $band5 ]"
             5 -> "[ $band1, $band2, $band3, $band4, $band5 ]"
             6 -> "[ $band1, $band2, $band3, $band4, $band5, $band6 ]"

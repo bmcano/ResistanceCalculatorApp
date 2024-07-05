@@ -53,7 +53,7 @@ class IsValidResistanceTest {
 
         // five/six band
         resistor.units = S.OHMS
-        resistor.numberOfBands = 5
+        resistor.navBarSelection = 5
 
         assertFalse(IsValidResistance.execute(resistor, "1234"))
         assertFalse(IsValidResistance.execute(resistor, "0123"))
@@ -96,7 +96,7 @@ class IsValidResistanceTest {
 
         // five band
         resistor.units = S.OHMS
-        resistor.numberOfBands = 5
+        resistor.navBarSelection = 5
         assertTrue(IsValidResistance.execute(resistor, "0"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
@@ -105,7 +105,7 @@ class IsValidResistanceTest {
         assertTrue(IsValidResistance.execute(resistor, "0.01"))
 
         resistor.units = S.GOHMS
-        resistor.numberOfBands = 5
+        resistor.navBarSelection = 5
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
         assertTrue(IsValidResistance.execute(resistor, "63.2"))

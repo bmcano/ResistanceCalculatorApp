@@ -93,7 +93,7 @@ class ResistanceFormatterTest {
         every { SharedPreferences.BUTTON_SELECTION_CTV.saveData(context, "5") } answers { }
 
         for (i in answers.indices) {
-            resistors[i].numberOfBands = 5
+            resistors[i].navBarSelection = 5
             assertEquals(answers[i], ResistanceFormatter.calculate(resistors[i]))
         }
     }

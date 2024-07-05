@@ -86,8 +86,8 @@ private fun ContentView(
         bottomBar = {
             CalculatorNavigationBar(navBarSelection) {
                 navBarSelection = it
-                resistor.numberOfBands = it + 3
-                viewModel.saveNumberOfBands(it + 3)
+                resistor.navBarSelection = it
+                viewModel.saveNavBarSelection(it)
                 isError = !IsValidResistance.execute(resistor, resistance)
                 if (isError) return@CalculatorNavigationBar
                 resistor.formatResistor()

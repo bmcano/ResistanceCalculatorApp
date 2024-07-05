@@ -33,7 +33,6 @@ class ResistorVtcRepository(context: Context) {
         val units = SharedPreferences.UNITS_DROPDOWN_VTC.loadData(application)
         val band5 = SharedPreferences.TOLERANCE_DROPDOWN_VTC.loadData(application)
         val band6 = SharedPreferences.PPM_DROPDOWN_VTC.loadData(application)
-//        val resistance = StateData.RESISTANCE_VTC.loadData(application) // TODO - check if we need this
         val number = SharedPreferences.BUTTON_SELECTION_VTC.loadData(application)
         return ResistorVtc(input, units, band5, band6, number.toIntOrNull() ?: 4)
     }
@@ -45,7 +44,7 @@ class ResistorVtcRepository(context: Context) {
         SharedPreferences.PPM_DROPDOWN_VTC.saveData(application, resistor.band6)
     }
 
-    fun saveNumberOfBands(number: Int) {
+    fun saveNavBarSelection(number: Int) {
         SharedPreferences.BUTTON_SELECTION_VTC.saveData(application, "$number")
     }
 }
