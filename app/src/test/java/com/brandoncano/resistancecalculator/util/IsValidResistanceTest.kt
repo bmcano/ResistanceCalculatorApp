@@ -23,8 +23,8 @@ class IsValidResistanceTest {
 
     @Before
     fun setup() {
-        every { SharedPreferences.BUTTON_SELECTION_VTC.saveData(context, "5") } answers { }
-        every { SharedPreferences.BUTTON_SELECTION_VTC.saveData(context, "6") } answers { }
+        every { SharedPreferences.NAVBAR_SELECTION_VTC.saveData(context, "5") } answers { }
+        every { SharedPreferences.NAVBAR_SELECTION_VTC.saveData(context, "6") } answers { }
     }
 
     @Test

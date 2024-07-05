@@ -15,8 +15,7 @@ import java.lang.reflect.Type
  */
 enum class SharedPreferences(private val _name: String, private val _key: String) {
 
-    RESISTANCE_CTV("color_to_value", "resistance"),
-    BUTTON_SELECTION_CTV("color_to_value", "button_selection"),
+    NAVBAR_SELECTION_CTV("color_to_value", "navbar_selection"),
     SIGFIG_BAND_ONE_CTV("color_to_value", "sig_fig_band_1"),
     SIGFIG_BAND_TWO_CTV("color_to_value", "sig_fig_band_2"),
     SIGFIG_BAND_THREE_CTV("color_to_value", "sig_fig_band_3"),
@@ -24,8 +23,7 @@ enum class SharedPreferences(private val _name: String, private val _key: String
     TOLERANCE_BAND_CTV("color_to_value", "tolerance_band"),
     PPM_BAND_CTV("color_to_value", "ppm_band"),
 
-    RESISTANCE_VTC("value_to_color", "resistance"),
-    BUTTON_SELECTION_VTC("value_to_color", "button_selection"),
+    NAVBAR_SELECTION_VTC("value_to_color", "navbar_selection"),
     USER_INPUT_VTC("value_to_color", "user_input"),
     UNITS_DROPDOWN_VTC("value_to_color", "units_dropdown"),
     TOLERANCE_DROPDOWN_VTC("value_to_color", "tolerance_dropdown"),

@@ -27,7 +27,6 @@ class ResistorCtvRepository(context: Context) {
         SharedPreferences.MULTIPLIER_BAND_CTV.clearData(application)
         SharedPreferences.TOLERANCE_BAND_CTV.clearData(application)
         SharedPreferences.PPM_BAND_CTV.clearData(application)
-        SharedPreferences.RESISTANCE_CTV.clearData(application) // TODO - check on this - might need it for sharing?
     }
 
     fun loadResistor(): ResistorCtv {
@@ -37,8 +36,8 @@ class ResistorCtvRepository(context: Context) {
         val band4 = SharedPreferences.MULTIPLIER_BAND_CTV.loadData(application)
         val band5 = SharedPreferences.TOLERANCE_BAND_CTV.loadData(application)
         val band6 = SharedPreferences.PPM_BAND_CTV.loadData(application)
-        val number = SharedPreferences.BUTTON_SELECTION_CTV.loadData(application)
-        return ResistorCtv(band1, band2, band3, band4, band5, band6, number.toIntOrNull() ?: 4)
+        val number = SharedPreferences.NAVBAR_SELECTION_CTV.loadData(application)
+        return ResistorCtv(band1, band2, band3, band4, band5, band6, number.toIntOrNull() ?: 1)
     }
 
     fun saveResistor(resistor: ResistorCtv) {
@@ -51,6 +50,6 @@ class ResistorCtvRepository(context: Context) {
     }
 
     fun saveNavBarSelection(number: Int) {
-        SharedPreferences.BUTTON_SELECTION_CTV.saveData(application, "$number")
+        SharedPreferences.NAVBAR_SELECTION_CTV.saveData(application, "$number")
     }
 }

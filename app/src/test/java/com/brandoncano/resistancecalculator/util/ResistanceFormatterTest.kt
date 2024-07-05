@@ -90,7 +90,7 @@ class ResistanceFormatterTest {
             "789 ${S.MOHMS} ${S.PM}5%",
         )
 
-        every { SharedPreferences.BUTTON_SELECTION_CTV.saveData(context, "5") } answers { }
+        every { SharedPreferences.NAVBAR_SELECTION_CTV.saveData(context, "5") } answers { }
 
         for (i in answers.indices) {
             resistors[i].navBarSelection = 5
@@ -117,7 +117,7 @@ class ResistanceFormatterTest {
             "12.5 ${S.KOHMS} ${S.PM}5%, 1 ${S.PPM}",
         )
 
-        every { SharedPreferences.BUTTON_SELECTION_CTV.saveData(context, "6") } answers { }
+        every { SharedPreferences.NAVBAR_SELECTION_CTV.saveData(context, "6") } answers { }
 
         val resistor = ResistorCtv(C.BROWN, C.RED, C.GREEN, C.RED, C.GOLD, C.BLACK, 6)
         for (i in answers.indices) {
