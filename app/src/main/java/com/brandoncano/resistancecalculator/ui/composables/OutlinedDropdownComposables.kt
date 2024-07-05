@@ -186,7 +186,6 @@ fun OutlinedDropDownMenu(
             onDismissRequest = { expanded = false },
             modifier = Modifier
                 .width(with(LocalDensity.current) { textFieldSize.width.toDp() })
-                .clickable(interactionSource, null, enabled = true) { expanded = !expanded }
         ) {
             items.forEach {
                 DropdownItemView(it) {
