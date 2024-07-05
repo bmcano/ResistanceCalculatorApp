@@ -39,6 +39,10 @@ fun ResistorVtc.formatResistor() {
     ResistorFormatter.generateResistor(this)
 }
 
+fun ResistorVtc.isInputInvalid(): Boolean {
+    return !IsValidResistance.execute(this, this.resistance)
+}
+
 fun ResistorVtc.getDisplayableValue(context: Context): String {
     if (this.isEmpty()) return context.getString(R.string.default_vtc_value)
     return this.getResistorValue()

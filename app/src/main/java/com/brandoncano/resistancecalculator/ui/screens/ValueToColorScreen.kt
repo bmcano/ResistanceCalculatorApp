@@ -44,9 +44,9 @@ import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.util.IsValidResistance
 import com.brandoncano.resistancecalculator.util.formatResistor
 import com.brandoncano.resistancecalculator.util.getDisplayableValue
+import com.brandoncano.resistancecalculator.util.isInputInvalid
 
 @Composable
 fun ValueToColorScreen(
@@ -74,13 +74,13 @@ private fun ContentView(
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
-    var reset by remember { mutableStateOf(false) }
-    var isError by remember { mutableStateOf(false) }
     val resistor by resistorVtc.observeAsState(ResistorVtc())
     var resistance by remember { mutableStateOf(resistor.resistance) }
     var units by remember { mutableStateOf(resistor.units) }
     var band5 by remember { mutableStateOf(resistor.band5) }
     var band6 by remember { mutableStateOf(resistor.band6) }
+    var reset by remember { mutableStateOf(false) }
+    var isError by remember { mutableStateOf(resistor.isInputInvalid()) }
 
     Scaffold(
         bottomBar = {
@@ -88,7 +88,7 @@ private fun ContentView(
                 navBarSelection = it
                 resistor.navBarSelection = it
                 viewModel.saveNavBarSelection(it)
-                isError = !IsValidResistance.execute(resistor, resistance)
+                isError = resistor.isInputInvalid()
                 if (isError) return@CalculatorNavigationBar
                 resistor.formatResistor()
                 viewModel.saveResistorValues(resistor)
@@ -128,7 +128,7 @@ private fun ContentView(
                 reset = false
                 resistor.resistance = it
                 resistance = it
-                isError = !IsValidResistance.execute(resistor, resistance)
+                isError = resistor.isInputInvalid()
                 if (isError) return@AppTextField
                 resistor.formatResistor()
                 viewModel.saveResistorValues(resistor)
