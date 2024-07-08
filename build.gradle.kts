@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 // https://stackoverflow.com/questions/67497019/failed-to-upgrade-agp-version
 plugins {
-    id 'com.android.application' version '8.5.0' apply false
-    id 'com.android.library' version '8.5.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.9.22' apply false
+    alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.jetbrainsKotlin) apply false
 }
