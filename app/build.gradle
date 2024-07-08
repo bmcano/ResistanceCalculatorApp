@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'com.brandoncano.resistancecalculator'
     compileSdk 34
 
     defaultConfig {
@@ -44,7 +45,6 @@ android {
     tasks.register('prepareKotlinBuildScriptModel') {
 
     }
-    namespace 'com.brandoncano.resistancecalculator'
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -58,7 +58,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1' // 5-14-24
     implementation 'androidx.browser:browser:1.8.0' // 5-14-24
     implementation files('libs/ostermillerutils_1_07_00.jar')
-    testImplementation 'io.mockk:mockk:1.13.9' // 1-15-24
+    testImplementation 'io.mockk:mockk:1.13.11' // 7-7-24
     testImplementation 'junit:junit:4.13.2' // 6-19-22
     androidTestImplementation 'androidx.test.ext:junit:1.2.1' // 6-28-24
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1' // 6-28-24
