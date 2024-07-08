@@ -26,6 +26,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.components.BandKey
 import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
@@ -87,7 +88,6 @@ private fun ContentView(
         bottomBar = {
             CalculatorNavigationBar(navBarSelection) {
                 navBarSelection = it
-                resistor.navBarSelection = it
                 viewModel.saveNavBarSelection(it)
             }
         }
@@ -125,8 +125,8 @@ private fun ContentView(
                 items = DropdownLists.NUMBER_LIST_NO_BLACK,
                 reset = resetDropdown,
             ) {
-                resistor.band1 = it
                 band1 = it
+                viewModel.updateBand(BandKey.Band1, it)
                 viewModel.saveResistorColors(resistor)
                 resetDropdown = false
             }
@@ -137,8 +137,8 @@ private fun ContentView(
                 items = DropdownLists.NUMBER_LIST,
                 reset = resetDropdown,
             ) {
-                resistor.band2 = it
                 band2 = it
+                viewModel.updateBand(BandKey.Band2, it)
                 viewModel.saveResistorColors(resistor)
                 resetDropdown = false
             }
@@ -150,8 +150,8 @@ private fun ContentView(
                     items = DropdownLists.NUMBER_LIST,
                     reset = resetDropdown,
                 ) {
-                    resistor.band3 = it
                     band3 = it
+                    viewModel.updateBand(BandKey.Band3, it)
                     viewModel.saveResistorColors(resistor)
                     resetDropdown = false
                 }
@@ -163,8 +163,8 @@ private fun ContentView(
                 items = DropdownLists.MULTIPLIER_LIST,
                 reset = resetDropdown,
             ) {
-                resistor.band4 = it
                 band4 = it
+                viewModel.updateBand(BandKey.Band4, it)
                 viewModel.saveResistorColors(resistor)
                 resetDropdown = false
             }
@@ -176,8 +176,8 @@ private fun ContentView(
                     items = DropdownLists.TOLERANCE_LIST,
                     reset = resetDropdown,
                 ) {
-                    resistor.band5 = it
                     band5 = it
+                    viewModel.updateBand(BandKey.Band5, it)
                     viewModel.saveResistorColors(resistor)
                     resetDropdown = false
                 }
@@ -190,8 +190,8 @@ private fun ContentView(
                     items = DropdownLists.PPM_LIST,
                     reset = resetDropdown,
                 ) {
-                    resistor.band6 = it
                     band6 = it
+                    viewModel.updateBand(BandKey.Band6, it)
                     viewModel.saveResistorColors(resistor)
                     resetDropdown = false
                 }
