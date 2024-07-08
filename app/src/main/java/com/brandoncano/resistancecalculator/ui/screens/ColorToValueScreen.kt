@@ -28,17 +28,17 @@ import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.BandKey
 import com.brandoncano.resistancecalculator.components.DropdownLists
+import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
-import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.OutlinedDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
@@ -92,6 +92,11 @@ private fun ContentView(
             }
         }
     ) { paddingValues ->
+        fun postSelectionActions() {
+            resetDropdown = false
+            focusManager.clearFocus()
+            viewModel.saveResistorColors(resistor)
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -127,8 +132,7 @@ private fun ContentView(
             ) {
                 band1 = it
                 viewModel.updateBand(BandKey.Band1, it)
-                viewModel.saveResistorColors(resistor)
-                resetDropdown = false
+                postSelectionActions()
             }
             OutlinedDropDownMenu(
                 modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
@@ -139,8 +143,7 @@ private fun ContentView(
             ) {
                 band2 = it
                 viewModel.updateBand(BandKey.Band2, it)
-                viewModel.saveResistorColors(resistor)
-                resetDropdown = false
+                postSelectionActions()
             }
             if (navBarSelection == 2 || navBarSelection == 3) {
                 OutlinedDropDownMenu(
@@ -152,8 +155,7 @@ private fun ContentView(
                 ) {
                     band3 = it
                     viewModel.updateBand(BandKey.Band3, it)
-                    viewModel.saveResistorColors(resistor)
-                    resetDropdown = false
+                    postSelectionActions()
                 }
             }
             OutlinedDropDownMenu(
@@ -165,8 +167,7 @@ private fun ContentView(
             ) {
                 band4 = it
                 viewModel.updateBand(BandKey.Band4, it)
-                viewModel.saveResistorColors(resistor)
-                resetDropdown = false
+                postSelectionActions()
             }
             if (navBarSelection != 0) {
                 OutlinedDropDownMenu(
@@ -178,8 +179,7 @@ private fun ContentView(
                 ) {
                     band5 = it
                     viewModel.updateBand(BandKey.Band5, it)
-                    viewModel.saveResistorColors(resistor)
-                    resetDropdown = false
+                    postSelectionActions()
                 }
             }
             if (navBarSelection == 3) {
@@ -192,8 +192,7 @@ private fun ContentView(
                 ) {
                     band6 = it
                     viewModel.updateBand(BandKey.Band6, it)
-                    viewModel.saveResistorColors(resistor)
-                    resetDropdown = false
+                    postSelectionActions()
                 }
             }
         }
