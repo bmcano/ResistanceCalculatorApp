@@ -81,7 +81,7 @@ private fun AppInfoCard() {
             label = R.string.about_last_updated_on,
             body = R.string.last_updated,
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 

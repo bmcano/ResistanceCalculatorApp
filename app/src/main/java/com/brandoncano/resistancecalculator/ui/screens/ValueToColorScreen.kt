@@ -3,7 +3,9 @@ package com.brandoncano.resistancecalculator.ui.screens
 import android.content.Context
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -118,8 +120,9 @@ private fun ContentView(
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
                     viewModel.clear()
-                    reset = true
                     focusManager.clearFocus()
+                    isError = false
+                    reset = true
                     band5 = ""
                     band6 = ""
                 }
@@ -128,7 +131,7 @@ private fun ContentView(
 
             ResistorLayout(resistor, resistor.getDisplayableValue(context))
             AppTextField(
-                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
                 label = R.string.type_resistance_hint,
                 text = resistance,
                 reset = reset,
@@ -182,6 +185,7 @@ private fun ContentView(
                     postSelectionActions()
                 }
             }
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }

@@ -34,7 +34,7 @@ private data class ResistorImagePair(@DrawableRes val drawableRes: Int, val colo
 @Composable
 fun ResistorLayout(resistor: ResistorCtv) {
     Column(
-        modifier = Modifier.padding(top = 12.dp, start = 32.dp, end = 32.dp),
+        modifier = Modifier.padding(top = 24.dp, start = 32.dp, end = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ResistorRow(
@@ -59,7 +59,7 @@ fun ResistorLayout(resistor: ResistorCtv) {
 @Composable
 fun ResistorLayout(resistor: ResistorVtc, resistance: String) {
     Column(
-        modifier = Modifier.padding(top = 12.dp, start = 32.dp, end = 32.dp),
+        modifier = Modifier.padding(top = 24.dp, start = 32.dp, end = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ResistorRow(

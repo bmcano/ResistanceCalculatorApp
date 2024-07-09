@@ -9,4 +9,5 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, widthDp = 720, heightDp = 360)
 annotation class AppScreenPreviews
