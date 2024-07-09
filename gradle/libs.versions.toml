@@ -13,6 +13,7 @@ navigation-compose = "2.7.7" # 7/7/24
 # gradle/language
 agp = "8.5.0" # 7/7/24
 kotlin = "2.0.0" # 7/7/24
+ktlint = "11.3.1"
 
 [libraries]
 # androidx
@@ -41,3 +42,4 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsKotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrainsKotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+gradleKtlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
