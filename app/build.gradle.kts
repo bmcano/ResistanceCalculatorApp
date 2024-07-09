@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlin)
-    alias(libs.plugins.jetbrainsKotlinCompose)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin)
+    alias(libs.plugins.jetbrains.kotlin.compose)
 }
 
 android {
@@ -42,7 +42,7 @@ android {
     buildFeatures {
         compose = true
     }
-    tasks.register("prepareKotlinBuildScriptModel")
+//    tasks.register("prepareKotlinBuildScriptModel")
     @Suppress("UnstableApiUsage")
     testOptions {
         unitTests.isReturnDefaultValues = true
@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
     // androidx.compose.ui
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
