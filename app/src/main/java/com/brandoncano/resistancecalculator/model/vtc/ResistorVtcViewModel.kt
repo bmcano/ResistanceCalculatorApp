@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.brandoncano.resistancecalculator.components.BandKey
 
 /**
  * Job: ViewModel for the value to color calculator
@@ -31,6 +32,22 @@ class ResistorVtcViewModel(context: Context): ViewModel() {
         return resistor
     }
 
+    fun updateBand(bandKey: BandKey, value: String) {
+        resistor.value = when (bandKey) {
+            BandKey.Band5 -> resistor.value?.copy(band5 = value)
+            BandKey.Band6 -> resistor.value?.copy(band6 = value)
+            else -> resistor.value
+        }
+    }
+
+    fun updateUnits(value: String) {
+        resistor.value = resistor.value?.copy(units = value)
+    }
+
+    fun updateResistance(value: String) {
+        resistor.value = resistor.value?.copy(resistance = value)
+    }
+
     fun getNavBarSelection(): Int {
         val resistor = repository.loadResistor()
         return resistor.navBarSelection
@@ -38,6 +55,7 @@ class ResistorVtcViewModel(context: Context): ViewModel() {
 
     fun saveNavBarSelection(number: Int) {
         val navBarSelection = number.coerceIn(0..3)
+        resistor.value = resistor.value?.copy(navBarSelection = navBarSelection)
         repository.saveNavBarSelection(navBarSelection)
     }
 

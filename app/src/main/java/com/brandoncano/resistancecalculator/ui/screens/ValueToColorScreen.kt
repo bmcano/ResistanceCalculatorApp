@@ -26,6 +26,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.components.BandKey
 import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
@@ -86,15 +87,23 @@ private fun ContentView(
         bottomBar = {
             CalculatorNavigationBar(navBarSelection) {
                 navBarSelection = it
-                resistor.navBarSelection = it
                 viewModel.saveNavBarSelection(it)
                 isError = resistor.isInputInvalid()
-                if (isError) return@CalculatorNavigationBar
-                resistor.formatResistor()
-                viewModel.saveResistorValues(resistor)
+                if (!isError) {
+                    viewModel.saveResistorValues(resistor)
+                    resistor.formatResistor()
+                }
             }
         }
     ) { paddingValues ->
+        fun postSelectionActions() {
+            reset = false
+            focusManager.clearFocus()
+            viewModel.saveResistorValues(resistor)
+            if (!isError) {
+                resistor.formatResistor()
+            }
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -126,12 +135,13 @@ private fun ContentView(
                 isError = isError,
             ) {
                 reset = false
-                resistor.resistance = it
                 resistance = it
+                viewModel.updateResistance(it)
                 isError = resistor.isInputInvalid()
-                if (isError) return@AppTextField
-                resistor.formatResistor()
-                viewModel.saveResistorValues(resistor)
+                if (!isError) {
+                    viewModel.saveResistorValues(resistor)
+                    resistor.formatResistor()
+                }
             }
             TextDropDownMenu(
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
@@ -140,11 +150,9 @@ private fun ContentView(
                 items = DropdownLists.UNITS_LIST,
                 reset = reset,
             ) {
-                resistor.units = it
                 units = it
-                resistor.formatResistor()
-                viewModel.saveResistorValues(resistor)
-                reset = false
+                viewModel.updateUnits(it)
+                postSelectionActions()
             }
             if (navBarSelection != 0) {
                 OutlinedDropDownMenu(
@@ -155,10 +163,9 @@ private fun ContentView(
                     reset = reset,
                     isVtC = true
                 ) {
-                    resistor.band5 = it
                     band5 = it
-                    viewModel.saveResistorValues(resistor)
-                    reset = false
+                    viewModel.updateBand(BandKey.Band5, it)
+                    postSelectionActions()
                 }
             }
             if (navBarSelection == 3) {
@@ -170,10 +177,9 @@ private fun ContentView(
                     reset = reset,
                     isVtC = true,
                 ) {
-                    resistor.band6 = it
                     band6 = it
-                    viewModel.saveResistorValues(resistor)
-                    reset = false
+                    viewModel.updateBand(BandKey.Band6, it)
+                    postSelectionActions()
                 }
             }
         }

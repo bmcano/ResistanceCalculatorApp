@@ -24,7 +24,7 @@ data class ResistorVtc(
     fun getResistorValue(): String {
         var text = "$resistance $units "
         text += if (isThreeBand()) "${Symbols.PM}20%" else band5
-        if (isSixBand()) text += ", $band6"
+        if (isSixBand()) text += ", $band6".trimEnd(',', ' ')
         return text
     }
 
