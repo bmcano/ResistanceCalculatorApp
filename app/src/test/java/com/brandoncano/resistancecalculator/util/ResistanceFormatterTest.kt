@@ -119,7 +119,7 @@ class ResistanceFormatterTest {
 
         every { SharedPreferences.NAVBAR_SELECTION_CTV.saveData(context, "6") } answers { }
 
-        val resistor = ResistorCtv(C.BROWN, C.RED, C.GREEN, C.RED, C.GOLD, C.BLACK, 6)
+        val resistor = ResistorCtv(C.BROWN, C.RED, C.GREEN, C.RED, C.GOLD, C.BLACK, 3)
         for (i in answers.indices) {
             resistor.band6 = ppmBands[i]
             assertEquals(answers[i], ResistanceFormatter.calculate(resistor))

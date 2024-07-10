@@ -202,99 +202,145 @@ class ResistorFormatterTest {
         }
     }
 
-//    @Test
-//    fun `leading zeros as inputs for four band resistors`() {
-//        val resistances = listOf(
-//            "0.1", "0.10", "0.12", "0.1", "0.10", "0.12", "0.1", "0.10", "0.12", "0.1", "0.10", "0.12",
-//            "0.01", "0.01", "0.01", "0.01"
-//        )
-//
-//        var units = listOf(
-//            S.OHMS, S.OHMS, S.OHMS, S.KOHMS, S.KOHMS, S.KOHMS, S.MOHMS, S.MOHMS, S.MOHMS, S.GOHMS, S.GOHMS, S.GOHMS,
-//            S.OHMS, S.KOHMS, S.MOHMS, S.GOHMS
-//        )
-//
-//        val answers = listOf(
-//            C.SILVER, C.SILVER, C.SILVER, C.BROWN, C.BROWN, C.BROWN, C.YELLOW, C.YELLOW, C.YELLOW, C.VIOLET, C.VIOLET, C.VIOLET,
-//            C.SILVER, C.BLACK, C.ORANGE, C.BLUE
-//        )
-//
-//        val resistor = ResistorVtc()
-//        resistor.band5 = "${S.PM}5%"
-//        resistor.navBarSelection = 1
-//
-//        // test multiplier
-//        for (i in answers.indices) {
-//            resistor.units = units[i]
-//            resistor.resistance = resistances[i]
-//            ResistorFormatter.generateResistor(resistor)
-//            assertEquals(answers[i], resistor.band4)
-//        }
-//
-//        // test resistor
-//        val resistors = listOf(
-//            ResistorVtc(C.BLACK, C.BROWN, "", C.SILVER, C.GOLD), // 0.01 OHMS
-//            ResistorVtc(C.BROWN, C.BLACK, "", C.BLACK, C.GOLD), // 0.01 KOHMS -> 10 OHMS
-//            ResistorVtc(C.BROWN, C.BLACK, "", C.ORANGE, C.GOLD), // 0.01 MOHMS -> 10 KOHMS
-//            ResistorVtc(C.BROWN, C.BLACK, "", C.BLUE, C.GOLD), // 0.01 GOHMS -> 10 MOHMS
-//        )
-//
-//        resistor.resistance = "0.01"
-//        resistor.band5 = C.GOLD
-//        units = listOf(S.OHMS, S.KOHMS, S.MOHMS, S.GOHMS)
-//        for (i in resistors.indices) {
-//            resistor.units = units[i]
-//            ResistorFormatter.generateResistor(resistor)
-//            assertEquals(resistors[i], resistor)
-//        }
-//    }
-//
-//    @Test
-//    fun `leading zeros as inputs for five band resistors`() {
-//        val resistances = listOf(
-//            "0.10", "0.12", "0.10", "0.12", "0.10", "0.12", "0.10", "0.12",
-//            "0.01", "0.01", "0.01", "0.01"
-//        )
-//
-//        var units = listOf(
-//            S.OHMS, S.OHMS, S.KOHMS, S.KOHMS, S.MOHMS, S.MOHMS, S.GOHMS, S.GOHMS,
-//            S.OHMS, S.KOHMS, S.MOHMS, S.GOHMS,
-//        )
-//
-//        val answers = listOf(
-//            C.SILVER, C.SILVER, C.BLACK, C.BLACK, C.ORANGE, C.ORANGE, C.BLUE, C.BLUE,
-//            C.SILVER, C.GOLD, C.RED, C.GREEN
-//        )
-//
-//        val resistor = ResistorVtc()
-//        resistor.band5 = "${S.PM}5%"
-//        resistor.navBarSelection = 2
-//
-//        // test multiplier
-//        for (i in answers.indices) {
-//            resistor.units = units[i]
-//            resistor.resistance = resistances[i]
-//            ResistorFormatter.generateResistor(resistor)
-//            assertEquals(answers[i], resistor.band4)
-//        }
-//
-//        // test resistor
-//        val resistors = listOf(
-//            ResistorVtc(C.BLACK, C.BLACK, C.BROWN, C.SILVER, C.GOLD), // 0.01 OHMS
-//            ResistorVtc(C.BROWN, C.BLACK, C.BLACK, C.GOLD, C.GOLD), // 0.01 KOHMS -> 10 OHMS
-//            ResistorVtc(C.BROWN, C.BLACK, C.BLACK, C.RED, C.GOLD), // 0.01 MOHMS -> 10 KOHMS
-//            ResistorVtc(C.BROWN, C.BLACK, C.BLACK, C.GREEN, C.GOLD), // 0.01 GOHMS -> 10 MOHMS
-//        )
-//
-//        resistor.resistance = "0.01"
-//        resistor.band5 = C.GOLD
-//        units = listOf(S.OHMS, S.KOHMS, S.MOHMS, S.GOHMS)
-//        for (i in resistors.indices) {
-//            resistor.units = units[i]
-//            ResistorFormatter.generateResistor(resistor)
-//            assertEquals(resistors[i], resistor)
-//        }
-//    }
+    @Test
+    fun `leading zeros as inputs for four band resistors`() {
+        val resistances = listOf(
+            "0.1", "0.10", "0.12", "0.1", "0.10", "0.12", "0.1", "0.10", "0.12", "0.1", "0.10", "0.12",
+            "0.01", "0.01", "0.01", "0.01"
+        )
+
+        var units = listOf(
+            S.OHMS, S.OHMS, S.OHMS, S.KOHMS, S.KOHMS, S.KOHMS, S.MOHMS, S.MOHMS, S.MOHMS, S.GOHMS, S.GOHMS, S.GOHMS,
+            S.OHMS, S.KOHMS, S.MOHMS, S.GOHMS
+        )
+
+        val answers = listOf(
+            C.SILVER, C.SILVER, C.SILVER, C.BROWN, C.BROWN, C.BROWN, C.YELLOW, C.YELLOW, C.YELLOW, C.VIOLET, C.VIOLET, C.VIOLET,
+            C.SILVER, C.BLACK, C.ORANGE, C.BLUE
+        )
+
+        val resistor = ResistorVtc()
+        resistor.band5 = "${S.PM}5%"
+        resistor.navBarSelection = 1
+
+        // test multiplier
+        for (i in answers.indices) {
+            resistor.units = units[i]
+            resistor.resistance = resistances[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(answers[i], resistor.band4)
+        }
+
+        val resistor1 = ResistorVtc("0.01", S.OHMS, C.GOLD, "").apply {
+            this.band1 = C.BLACK
+            this.band2 = C.BROWN
+            this.band4 = C.SILVER
+        }
+        val resistor2 = ResistorVtc("0.01", S.KOHMS, C.GOLD, "").apply {
+            this.band1 = C.BROWN
+            this.band2 = C.BLACK
+            this.band4 = C.BLACK
+        }
+        val resistor3 = ResistorVtc("0.01", S.MOHMS, C.GOLD, "").apply {
+            this.band1 = C.BROWN
+            this.band2 = C.BLACK
+            this.band4 = C.ORANGE
+        }
+        val resistor4 = ResistorVtc("0.01", S.GOHMS, C.GOLD, "").apply {
+            this.band1 = C.BROWN
+            this.band2 = C.BLACK
+            this.band4 = C.BLUE
+        }
+
+        // test resistor
+        val resistors = listOf(
+            resistor1, // 0.01 OHMS
+            resistor2, // 0.01 KOHMS -> 10 OHMS
+            resistor3, // 0.01 MOHMS -> 10 KOHMS
+            resistor4, // 0.01 GOHMS -> 10 MOHMS
+        )
+
+        resistor.resistance = "0.01"
+        resistor.band5 = C.GOLD
+        units = listOf(S.OHMS, S.KOHMS, S.MOHMS, S.GOHMS)
+        for (i in resistors.indices) {
+            resistor.units = units[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(resistors[i], resistor)
+        }
+    }
+
+    @Test
+    fun `leading zeros as inputs for five band resistors`() {
+        val resistances = listOf(
+            "0.10", "0.12", "0.10", "0.12", "0.10", "0.12", "0.10", "0.12",
+            "0.01", "0.01", "0.01", "0.01"
+        )
+
+        var units = listOf(
+            S.OHMS, S.OHMS, S.KOHMS, S.KOHMS, S.MOHMS, S.MOHMS, S.GOHMS, S.GOHMS,
+            S.OHMS, S.KOHMS, S.MOHMS, S.GOHMS,
+        )
+
+        val answers = listOf(
+            C.SILVER, C.SILVER, C.BLACK, C.BLACK, C.ORANGE, C.ORANGE, C.BLUE, C.BLUE,
+            C.SILVER, C.GOLD, C.RED, C.GREEN
+        )
+
+        val resistor = ResistorVtc()
+        resistor.band5 = "${S.PM}5%"
+        resistor.navBarSelection = 2
+
+        // test multiplier
+        for (i in answers.indices) {
+            resistor.units = units[i]
+            resistor.resistance = resistances[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(answers[i], resistor.band4)
+        }
+
+        val resistor1 = ResistorVtc("0.01", S.OHMS, C.GOLD, "", 2).apply {
+            this.band1 = C.BLACK
+            this.band2 = C.BLACK
+            this.band3 = C.BROWN
+            this.band4 = C.SILVER
+        }
+        val resistor2 = ResistorVtc("0.01", S.KOHMS, C.GOLD, "", 2).apply {
+            this.band1 = C.BROWN
+            this.band2 = C.BLACK
+            this.band3 = C.BLACK
+            this.band4 = C.GOLD
+        }
+        val resistor3 = ResistorVtc("0.01", S.MOHMS, C.GOLD, "", 2).apply {
+            this.band1 = C.BROWN
+            this.band2 = C.BLACK
+            this.band3 = C.BLACK
+            this.band4 = C.RED
+        }
+        val resistor4 = ResistorVtc("0.01", S.GOHMS, C.GOLD, "", 2).apply {
+            this.band1 = C.BROWN
+            this.band2 = C.BLACK
+            this.band3 = C.BLACK
+            this.band4 = C.GREEN
+        }
+
+        // test resistor
+        val resistors = listOf(
+            resistor1, // 0.01 OHMS
+            resistor2, // 0.01 KOHMS -> 10 OHMS
+            resistor3, // 0.01 MOHMS -> 10 KOHMS
+            resistor4, // 0.01 GOHMS -> 10 MOHMS
+        )
+
+        resistor.resistance = "0.01"
+        resistor.band5 = C.GOLD
+        units = listOf(S.OHMS, S.KOHMS, S.MOHMS, S.GOHMS)
+        for (i in resistors.indices) {
+            resistor.units = units[i]
+            ResistorFormatter.generateResistor(resistor)
+            assertEquals(resistors[i], resistor)
+        }
+    }
 
     @Test
     fun `not valid unit string`() {
