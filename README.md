@@ -19,6 +19,4 @@ specific bands represent and their numerical values associated with it.
        src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="60"/>
 </a>
 
-Current version of the app is `v3.0.3`.
-
-As of 12/21/23 the app has a 4.2 star review and over 25000 downloads on the Google Play Store.
+To see the most up-to-date releases info refer to our [wiki page](https://github.com/bmcano/ResistanceCalculatorApp/wiki/Releases)
