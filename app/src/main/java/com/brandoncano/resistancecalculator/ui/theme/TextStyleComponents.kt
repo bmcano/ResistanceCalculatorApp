@@ -106,8 +106,7 @@ private fun TextStylePreview() {
     }
 }
 
-// for reference if we want different text colors
-// @Composable
-// fun TextStyle.white() = this.merge(
-//     color = white
-// )
+@Composable
+fun TextStyle.white() = this.merge(
+    color = white
+)

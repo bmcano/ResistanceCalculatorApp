@@ -80,6 +80,7 @@ fun SmdNavigationBar(
         R.string.navbar_four_eia,
         R.string.navbar_eia_96,
     )
+    // potentially using material icons "Looks 3", "Looks 4", then something similar for 96
 //    val icons = listOf() // TODO - find icons
     NavigationBar {
         labels.forEachIndexed { index, item ->

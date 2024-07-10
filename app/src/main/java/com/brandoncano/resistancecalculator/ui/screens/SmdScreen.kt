@@ -26,6 +26,7 @@ import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
 import com.brandoncano.resistancecalculator.ui.RcvActivity
+import com.brandoncano.resistancecalculator.ui.components.SmdResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.AppTextField
@@ -89,11 +90,8 @@ private fun ContentView(
                 AboutAppMenuItem(navController, interactionSource)
             }
 
-
             // components plan (wip)
-            // SMD resistor that shows code text - probably uses a box
-            // - right below have resistance text, similar to CtV and VtC
-
+            SmdResistorLayout()
             // text field for code - will validate similar to VtC
             AppTextField(
                 modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
