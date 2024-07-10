@@ -69,10 +69,52 @@ fun CalculatorNavigationBar(
     }
 }
 
-@AppScreenPreviews
 @Composable
-fun MyBottomNavigationBarPreview() {
+fun SmdNavigationBar(
+    selection: Int = 1,
+    onClick: (Int) -> Unit
+) {
+    var selectedItem by remember { mutableIntStateOf(selection) }
+    val labels = listOf(
+        R.string.navbar_three_eia,
+        R.string.navbar_four_eia,
+        R.string.navbar_eia_96,
+    )
+//    val icons = listOf() // TODO - find icons
+    NavigationBar {
+        labels.forEachIndexed { index, item ->
+            NavigationBarItem(
+                icon = {
+
+                },
+                label = {
+                    Text(
+                        text = stringResource(item),
+                        style = textStyleCaption(),
+                    )
+                },
+                selected = selectedItem == index,
+                onClick = {
+                    selectedItem = index
+                    onClick(selectedItem)
+                }
+            )
+        }
+    }
+}
+
+@AppComponentPreviews
+@Composable
+private fun CalculatorNavigationBarPreview() {
     ResistorCalculatorTheme {
         CalculatorNavigationBar { }
+    }
+}
+
+@AppComponentPreviews
+@Composable
+private fun SmdNavigationBarPreview() {
+    ResistorCalculatorTheme {
+        SmdNavigationBar { }
     }
 }

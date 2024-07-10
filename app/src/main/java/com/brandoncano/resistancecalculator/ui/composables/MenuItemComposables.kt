@@ -85,7 +85,7 @@ fun ShareMenuItem(context: Context, text: String, interactionSource: MutableInte
 fun ValueToColorMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
         text = { Text(
-            text = stringResource(R.string.manu_value_to_color),
+            text = stringResource(R.string.menu_value_to_color),
             style = textStyleBody(),
         ) },
         onClick = { navController.navigate(Screen.ValueToColor.route) },

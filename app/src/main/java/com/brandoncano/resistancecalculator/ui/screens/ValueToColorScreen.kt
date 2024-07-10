@@ -113,7 +113,7 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            RcvMenuTopAppBar(stringResource(R.string.manu_value_to_color), interactionSource) {
+            RcvMenuTopAppBar(stringResource(R.string.menu_value_to_color), interactionSource) {
                 ColorToValueMenuItem(navController, interactionSource)
                 val shareableText = "${resistor.getDisplayableValue(context)}\n$resistor"
                 ShareMenuItem(context, shareableText, interactionSource)
