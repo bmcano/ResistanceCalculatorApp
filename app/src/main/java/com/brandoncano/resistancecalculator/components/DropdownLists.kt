@@ -1,0 +1,65 @@
+package com.brandoncano.resistancecalculator.components
+
+import com.brandoncano.resistancecalculator.constants.Colors
+import com.brandoncano.resistancecalculator.constants.Symbols
+
+/**
+ * Job: Holds the list of items for each dropdown
+ */
+object DropdownLists {
+
+    val NUMBER_LIST = listOf(
+        DropdownItem(Colors.BLACK, "0"),
+        DropdownItem(Colors.BROWN, "1"),
+        DropdownItem(Colors.RED, "2"),
+        DropdownItem(Colors.ORANGE, "3"),
+        DropdownItem(Colors.YELLOW, "4"),
+        DropdownItem(Colors.GREEN, "5"),
+        DropdownItem(Colors.BLUE, "6"),
+        DropdownItem(Colors.VIOLET, "7"),
+        DropdownItem(Colors.GRAY, "8"),
+        DropdownItem(Colors.WHITE, "9"),
+    )
+
+    val NUMBER_LIST_NO_BLACK = NUMBER_LIST.drop(1)
+
+    val MULTIPLIER_LIST = listOf(
+        DropdownItem(Colors.BLACK, "x 1"),
+        DropdownItem(Colors.BROWN, "x 10"),
+        DropdownItem(Colors.RED, "x 100"),
+        DropdownItem(Colors.ORANGE, "x 1k"),
+        DropdownItem(Colors.YELLOW, "x 10k"),
+        DropdownItem(Colors.GREEN, "x 100k"),
+        DropdownItem(Colors.BLUE, "x 1M"),
+        DropdownItem(Colors.VIOLET, "x 10M"),
+        DropdownItem(Colors.GRAY, "x 100M"),
+        DropdownItem(Colors.WHITE, "x 1G"),
+        DropdownItem(Colors.GOLD, "x 0.1"),
+        DropdownItem(Colors.SILVER, "x 0.01"),
+    )
+
+    val TOLERANCE_LIST = listOf(
+        DropdownItem(Colors.BROWN, "${Symbols.PM}1%"),
+        DropdownItem(Colors.RED, "${Symbols.PM}2%"),
+        DropdownItem(Colors.GREEN, "${Symbols.PM}0.5%"),
+        DropdownItem(Colors.BLUE, "${Symbols.PM}0.25%"),
+        DropdownItem(Colors.VIOLET, "${Symbols.PM}0.1%"),
+        DropdownItem(Colors.GRAY, "${Symbols.PM}0.05%"),
+        DropdownItem(Colors.GOLD, "${Symbols.PM}5%"),
+        DropdownItem(Colors.SILVER, "${Symbols.PM}10%"),
+    )
+
+    val PPM_LIST = listOf(
+        DropdownItem(Colors.BLACK, "250 ${Symbols.PPM}"),
+        DropdownItem(Colors.BROWN, "100 ${Symbols.PPM}"),
+        DropdownItem(Colors.RED, "50 ${Symbols.PPM}"),
+        DropdownItem(Colors.ORANGE, "15 ${Symbols.PPM}"),
+        DropdownItem(Colors.YELLOW, "25 ${Symbols.PPM}"),
+        DropdownItem(Colors.GREEN, "20 ${Symbols.PPM}"),
+        DropdownItem(Colors.BLUE, "10 ${Symbols.PPM}"),
+        DropdownItem(Colors.VIOLET, "5 ${Symbols.PPM}"),
+        DropdownItem(Colors.GRAY, "1 ${Symbols.PPM}"),
+    )
+
+    val UNITS_LIST = listOf(Symbols.OHMS, Symbols.KOHMS, Symbols.MOHMS, Symbols.GOHMS)
+}

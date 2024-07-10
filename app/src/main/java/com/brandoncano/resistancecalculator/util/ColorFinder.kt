@@ -1,6 +1,19 @@
 package com.brandoncano.resistancecalculator.util
 
-import com.brandoncano.resistancecalculator.R
+import androidx.compose.ui.graphics.Color
+import com.brandoncano.resistancecalculator.ui.theme.black
+import com.brandoncano.resistancecalculator.ui.theme.blue
+import com.brandoncano.resistancecalculator.ui.theme.brown
+import com.brandoncano.resistancecalculator.ui.theme.gold
+import com.brandoncano.resistancecalculator.ui.theme.gray
+import com.brandoncano.resistancecalculator.ui.theme.green
+import com.brandoncano.resistancecalculator.ui.theme.orange
+import com.brandoncano.resistancecalculator.ui.theme.red
+import com.brandoncano.resistancecalculator.ui.theme.resistor_blank
+import com.brandoncano.resistancecalculator.ui.theme.silver
+import com.brandoncano.resistancecalculator.ui.theme.violet
+import com.brandoncano.resistancecalculator.ui.theme.white
+import com.brandoncano.resistancecalculator.ui.theme.yellow
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 
@@ -10,27 +23,41 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
  */
 object ColorFinder {
 
-    private fun textToColorPair(color: String): Pair<Int, Int> {
-        return when (color) {
-            C.BLACK ,                 "250 ${S.PPM}" -> R.drawable.square_black  to R.color.black
-            C.BROWN , "${S.PM}1%"   , "100 ${S.PPM}" -> R.drawable.square_brown  to R.color.brown
-            C.RED   , "${S.PM}2%"   , "50 ${S.PPM}"  -> R.drawable.square_red    to R.color.red
-            C.ORANGE,                 "15 ${S.PPM}"  -> R.drawable.square_orange to R.color.orange
-            C.YELLOW,                 "25 ${S.PPM}"  -> R.drawable.square_yellow to R.color.yellow
-            C.GREEN , "${S.PM}0.5%" , "20 ${S.PPM}"  -> R.drawable.square_green  to R.color.green
-            C.BLUE  , "${S.PM}0.25%", "10 ${S.PPM}"  -> R.drawable.square_blue   to R.color.blue
-            C.VIOLET, "${S.PM}0.1%" , "5 ${S.PPM}"   -> R.drawable.square_violet to R.color.violet
-            C.GRAY  , "${S.PM}0.05%", "1 ${S.PPM}"   -> R.drawable.square_gray   to R.color.gray
-            C.WHITE                                  -> R.drawable.square_white  to R.color.white
-            C.GOLD  , "${S.PM}5%"                    -> R.drawable.square_gold   to R.color.gold
-            C.SILVER, "${S.PM}10%"                   -> R.drawable.square_silver to R.color.silver
-            else                                     -> R.drawable.square_blank  to R.color.resistor_blank
+    fun textToColor(text: String): Color {
+        return when (text) {
+            C.BLACK ,                 "250 ${S.PPM}" -> black
+            C.BROWN , "${S.PM}1%"   , "100 ${S.PPM}" -> brown
+            C.RED   , "${S.PM}2%"   , "50 ${S.PPM}"  -> red
+            C.ORANGE,                 "15 ${S.PPM}"  -> orange
+            C.YELLOW,                 "25 ${S.PPM}"  -> yellow
+            C.GREEN , "${S.PM}0.5%" , "20 ${S.PPM}"  -> green
+            C.BLUE  , "${S.PM}0.25%", "10 ${S.PPM}"  -> blue
+            C.VIOLET, "${S.PM}0.1%" , "5 ${S.PPM}"   -> violet
+            C.GRAY  , "${S.PM}0.05%", "1 ${S.PPM}"   -> gray
+            C.WHITE                                  -> white
+            C.GOLD  , "${S.PM}5%"                    -> gold
+            C.SILVER, "${S.PM}10%"                   -> silver
+            else                                     -> resistor_blank
         }
     }
 
-    fun textToColoredDrawable(color: String = ""): Int = textToColorPair(color).first
-
-    fun textToColor(color: String = ""): Int = textToColorPair(color).second
+    fun colorToColorText(color: Color): String {
+        return when (color) {
+            black -> C.BLACK
+            brown -> C.BROWN
+            red -> C.RED
+            orange -> C.ORANGE
+            yellow -> C.YELLOW
+            green -> C.GREEN
+            blue -> C.BLUE
+            violet -> C.VIOLET
+            gray -> C.GRAY
+            white -> C.WHITE
+            gold -> C.GOLD
+            silver -> C.SILVER
+            else -> C.BLANK
+        }
+    }
 
     fun numberToText(color: Int = -1): String {
         return when (color) {
@@ -45,24 +72,6 @@ object ColorFinder {
             8 -> C.GRAY
             9 -> C.WHITE
             else -> C.BLANK
-        }
-    }
-
-    fun idToColorText(colorId: Int): String {
-        return when (colorId) {
-            R.color.black,  R.drawable.square_black  -> C.BLACK
-            R.color.brown,  R.drawable.square_brown  -> C.BROWN
-            R.color.red,    R.drawable.square_red    -> C.RED
-            R.color.orange, R.drawable.square_orange -> C.ORANGE
-            R.color.yellow, R.drawable.square_yellow -> C.YELLOW
-            R.color.green,  R.drawable.square_green  -> C.GREEN
-            R.color.blue,   R.drawable.square_blue   -> C.BLUE
-            R.color.violet, R.drawable.square_violet -> C.VIOLET
-            R.color.gray,   R.drawable.square_gray   -> C.GRAY
-            R.color.white,  R.drawable.square_white  -> C.WHITE
-            R.color.gold,   R.drawable.square_gold   -> C.GOLD
-            R.color.silver, R.drawable.square_silver -> C.SILVER
-            else -> ""
         }
     }
 }

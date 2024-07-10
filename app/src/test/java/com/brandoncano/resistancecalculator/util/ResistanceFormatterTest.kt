@@ -1,8 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
-import com.brandoncano.resistancecalculator.components.StateData
-import com.brandoncano.resistancecalculator.resistor.ResistorCtV
+import com.brandoncano.resistancecalculator.components.SharedPreferences
+import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -16,21 +16,19 @@ class ResistanceFormatterTest {
 
     @Test
     fun `empty resistor`() {
-        val context: Context = mockk<Context>()
-        assertEquals("Select colors", ResistanceFormatter.calculate(ResistorCtV(context)))
+        assertEquals("Select colors", ResistanceFormatter.calculate(ResistorCtv()))
     }
 
     @Test
     fun `four band resistors resistance text testing`() {
-        val context: Context = mockk<Context>()
         val resistors = listOf(
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
         )
 
         val bands = listOf(
@@ -44,16 +42,16 @@ class ResistanceFormatterTest {
         )
 
         resistors.forEachIndexed { index, resistorCtV ->
-            resistorCtV.sigFigBandOne = bands[index][0]
-            resistorCtV.sigFigBandTwo = bands[index][1]
-            resistorCtV.multiplierBand = bands[index][2]
-            resistorCtV.toleranceBand = bands[index][3]
+            resistorCtV.band1 = bands[index][0]
+            resistorCtV.band2 = bands[index][1]
+            resistorCtV.band4 = bands[index][2]
+            resistorCtV.band5 = bands[index][3]
         }
 
         val answers = listOf(
-            "68 ${S.Ohms} ${S.PM}5%", "470 ${S.Ohms} ${S.PM}5%", "330 ${S.Ohms} ${S.PM}5%",
-            "100 ${S.Ohms} ${S.PM}5%", "1.2 ${S.kOhms} ${S.PM}5%", "1.0 ${S.kOhms} ${S.PM}5%",
-            "9.0 ${S.kOhms} ${S.PM}5%",
+            "68 ${S.OHMS} ${S.PM}5%", "470 ${S.OHMS} ${S.PM}5%", "330 ${S.OHMS} ${S.PM}5%",
+            "100 ${S.OHMS} ${S.PM}5%", "1.2 ${S.KOHMS} ${S.PM}5%", "1.0 ${S.KOHMS} ${S.PM}5%",
+            "9.0 ${S.KOHMS} ${S.PM}5%",
         )
 
         for (i in answers.indices) {
@@ -66,10 +64,10 @@ class ResistanceFormatterTest {
         val context: Context = mockk<Context>()
         val resistors = listOf(
             // general
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
-            ResistorCtV(context),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
+            ResistorCtv(),
         )
 
         val bands = listOf(
@@ -80,22 +78,22 @@ class ResistanceFormatterTest {
         )
 
         resistors.forEachIndexed { index, resistorCtV ->
-            resistorCtV.sigFigBandOne = bands[index][0]
-            resistorCtV.sigFigBandTwo = bands[index][1]
-            resistorCtV.sigFigBandThree = bands[index][2]
-            resistorCtV.multiplierBand = bands[index][3]
-            resistorCtV.toleranceBand = bands[index][4]
+            resistorCtV.band1 = bands[index][0]
+            resistorCtV.band2 = bands[index][1]
+            resistorCtV.band3 = bands[index][2]
+            resistorCtV.band4 = bands[index][3]
+            resistorCtV.band5 = bands[index][4]
         }
 
         val answers = listOf(
-            "51.0 ${S.Ohms} ${S.PM}1%", "152 ${S.MOhms} ${S.PM}5%", "300 ${S.MOhms} ${S.PM}5%",
-            "789 ${S.MOhms} ${S.PM}5%",
+            "51.0 ${S.OHMS} ${S.PM}1%", "152 ${S.MOHMS} ${S.PM}5%", "300 ${S.MOHMS} ${S.PM}5%",
+            "789 ${S.MOHMS} ${S.PM}5%",
         )
 
-        every { StateData.BUTTON_SELECTION_CTV.saveData(context, "5") } answers { }
+        every { SharedPreferences.NAVBAR_SELECTION_CTV.saveData(context, "5") } answers { }
 
         for (i in answers.indices) {
-            resistors[i].saveNumberOfBands(5)
+            resistors[i].navBarSelection = 5
             assertEquals(answers[i], ResistanceFormatter.calculate(resistors[i]))
         }
     }
@@ -108,43 +106,30 @@ class ResistanceFormatterTest {
         )
 
         val answers = listOf(
-            "12.5 ${S.kOhms} ${S.PM}5%\n250 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n100 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n50 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n15 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n25 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n20 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n10 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n5 ${S.PPM}",
-            "12.5 ${S.kOhms} ${S.PM}5%\n1 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 250 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 100 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 50 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 15 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 25 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 20 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 10 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 5 ${S.PPM}",
+            "12.5 ${S.KOHMS} ${S.PM}5%, 1 ${S.PPM}",
         )
 
-        every { StateData.BUTTON_SELECTION_CTV.saveData(context, "6") } answers { }
+        every { SharedPreferences.NAVBAR_SELECTION_CTV.saveData(context, "6") } answers { }
 
-        val resistor = ResistorCtV(context)
-        resistor.sigFigBandOne = C.BROWN
-        resistor.sigFigBandTwo = C.RED
-        resistor.sigFigBandThree = C.GREEN
-        resistor.multiplierBand = C.RED
-        resistor.toleranceBand = C.GOLD
-        resistor.ppmBand = C.BLACK
-
-        resistor.saveNumberOfBands(6)
+        val resistor = ResistorCtv(C.BROWN, C.RED, C.GREEN, C.RED, C.GOLD, C.BLACK, 3)
         for (i in answers.indices) {
-            resistor.ppmBand = ppmBands[i]
+            resistor.band6 = ppmBands[i]
             assertEquals(answers[i], ResistanceFormatter.calculate(resistor))
         }
     }
 
     @Test
     fun `code coverage`() {
-        val context: Context = mockk<Context>()
-        val resistor = ResistorCtV(context)
-        resistor.sigFigBandOne = C.GOLD
-        resistor.sigFigBandTwo = C.GOLD
-        resistor.multiplierBand = C.RED
-        resistor.toleranceBand = C.GOLD
-        val answer = "0 ${S.Ohms} ${S.PM}5%"
+        val resistor = ResistorCtv(C.GOLD, C.GOLD, "", C.GOLD, C.GOLD)
+        val answer = "0 ${S.OHMS} ${S.PM}5%"
         assertEquals(answer, ResistanceFormatter.calculate(resistor))
     }
 

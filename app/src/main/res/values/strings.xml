@@ -1,8 +1,7 @@
 <resources>
-    <!-- Activity titles -->
+    <!-- Activity title -->
     <string name="app_name">RCV - Calculator</string>
-
-    <!-- TextInputLayouts hint text -->
+    <!-- OutlinedTextField hints -->
     <string name="number_band_hint1">First band</string>
     <string name="number_band_hint2">Second band</string>
     <string name="number_band_hint3">Third band</string>
@@ -11,47 +10,42 @@
     <string name="ppm_band_hint">Temp coefficient</string>
     <string name="type_resistance_hint">Resistance</string>
     <string name="units_hint">Units</string>
-
-    <!-- Button text -->
-    <string name="value_to_color_btn">Value to Color</string>
-    <string name="color_to_value_btn">Color to Value</string>
-    <string name="calculate_btn">Calculate</string>
-
     <!-- Menu items -->
-    <string name="value_to_color">Value to Color</string>
-    <string name="color_to_value">Color to Value</string>
-    <string name="clear_selections">Clear Selections</string>
-    <string name="share">Share</string>
-    <string name="feedback_tab">Feedback</string>
-    <string name="about">About This App</string>
-
-    <!-- Bottom navigation -->
-    <string name="three_band_nav">Three Bands</string>
-    <string name="four_band_nav">Four Bands</string>
-    <string name="five_band_nav">Five Bands</string>
-    <string name="six_band_nav">Six Bands</string>
-
+    <string name="manu_value_to_color">Value to Color</string>
+    <string name="menu_color_to_value">Color to Value</string>
+    <string name="menu_clear_selections">Clear Selections</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_feedback">Feedback</string>
+    <string name="menu_about">About this app</string>
     <!-- Default text -->
-    <string name="default_text">Select colors</string>
-    <string name="enter_value">Enter resistance</string>
-    <string name="resistor_description">Resistor</string>
-    <string name="invalid_input">Invalid input</string>
-
-    <!-- About page text -->
-    <string name="app_version">App version</string>
-    <string name="created_by">Created by</string>
-    <string name="author">Brandon Cano</string>
-    <string name="last_updated_on">Last updated on</string>
-    <string name="description_one">In this app you can calculate the resistance of a resistor by entering its band colors or generating a resistor from a resistance value. Works for 4, 5, and 6 band resistors.</string>
-    <string name="description_two">Our app follows the IEC 60062 standard for resistor color coding. This international convention assigns specific colors to represent different values for resistors. For more detailed information, you can refer to the IEC 60062 standard.</string>
-    <string name="iec_button_text">View the IEC 60062 standard</string>
-    <string name="rate_us">Rate this app on Google Play</string>
-    <string name="view_capacitor_app">Check out our capacitor app</string>
-    <string name="calculators_header_text">Calculators</string>
-    <string name="our_apps_header_text">Our apps</string>
-
+    <string name="default_ctv_value">Select colors</string>
+    <string name="default_vtc_value">Enter resistance</string>
+    <!-- Bottom navigation -->
+    <string name="navbar_three_band">Three Bands</string>
+    <string name="navbar_four_band">Four Bands</string>
+    <string name="navbar_five_band">Five Bands</string>
+    <string name="navbar_six_band">Six Bands</string>
+    <!-- About screen/components text -->
+    <string name="about_title">About this app</string>
+    <string name="about_app_version">App version</string>
+    <string name="about_created_by">Created by</string>
+    <string name="about_author">Brandon Cano</string>
+    <string name="about_last_updated_on">Last updated on</string>
+    <string name="about_description">Description</string>
+    <string name="about_description_one">In this app you can calculate the resistance of a resistor by entering its band colors or generating a resistor from a resistance value. Works for 3, 4, 5, and 6 band resistors.</string>
+    <string name="about_description_two">Our app follows the IEC 60062 standard for resistor color coding. This international convention assigns specific colors to represent different values for resistors. For more detailed information, you can refer to the IEC 60062 standard.</string>
+    <string name="about_button_iec">View the IEC 60062 standard</string>
+    <!-- Home screen/components text -->
+    <string name="home_calculators_header_text">Calculators</string>
+    <string name="home_button_value_to_color">Value to Color</string>
+    <string name="home_button_color_to_value">Color to Value</string>
+    <string name="home_our_apps_header_text">Our apps</string>
+    <string name="home_button_rate_us">Rate this app on Google Play</string>
+    <string name="home_button_view_capacitor_app">Check out our capacitor app</string>
     <!-- Content descriptions -->
-    <string name="dropdown_image_description">Color</string>
-    <string name="home_app_icon_content_description">App icon</string>
+    <string name="content_description_app_icon">App icon</string>
+    <string name="content_description_menu_more">More</string>
+    <string name="content_description_right_arrow">Right arrow</string>
+    <string name="content_description_error">Error</string>
 
 </resources>

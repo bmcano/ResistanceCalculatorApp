@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.util
 
-import com.brandoncano.resistancecalculator.resistor.ResistorCtV
+import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 
@@ -9,30 +9,30 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
  */
 object ResistanceFormatter {
 
-    private const val zeroOhms = "0 ${S.Ohms}"
+    private const val ZERO_OHMS = "0 ${S.OHMS}"
 
-    fun calculate(resistor: ResistorCtV): String {
+    fun calculate(resistor: ResistorCtv): String {
         if (resistor.isEmpty()) return "Select colors"
 
-        val sigFigOne = ValueFinder.getSigFig(resistor.sigFigBandOne)
-        val sigFigTwo = ValueFinder.getSigFig(resistor.sigFigBandTwo)
-        val sigFigThree = ValueFinder.getSigFig(resistor.sigFigBandThree)
+        val sigFigOne = ValueFinder.getSigFig(resistor.band1)
+        val sigFigTwo = ValueFinder.getSigFig(resistor.band2)
+        val sigFigThree = ValueFinder.getSigFig(resistor.band3)
         val resistance = formatResistance(resistor, sigFigOne, sigFigTwo, sigFigThree)
-        val tolerance = ValueFinder.getTolerance(resistor.toleranceBand, resistor.isThreeBand())
-        val ppm = ValueFinder.getPPM(resistor.ppmBand, resistor.isSixBand())
+        val tolerance = ValueFinder.getTolerance(resistor.band5, resistor.isThreeBand())
+        val ppm = ValueFinder.getPPM(resistor.band6, resistor.isSixBand())
 
-        return "$resistance $tolerance\n$ppm".trimEnd('\n')
+        return "$resistance $tolerance, $ppm".trimEnd(',', ' ')
     }
 
-    private fun formatResistance(resistor: ResistorCtV, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
+    private fun formatResistance(resistor: ResistorCtv, sigFigOne: String, sigFigTwo: String, sigFigThree: String): String {
         val threeFourBands = resistor.isThreeFourBand()
         val value: Int = if (threeFourBands) {
             (sigFigOne + sigFigTwo).toIntOrNull()
         } else {
             (sigFigOne + sigFigTwo + sigFigThree).toIntOrNull()
-        } ?: return zeroOhms
+        } ?: return ZERO_OHMS
 
-        val multiplier = ValueFinder.getMultiplier(resistor.multiplierBand)
+        val multiplier = ValueFinder.getMultiplier(resistor.band4)
         var resistanceAsDecimal = value.times(multiplier)
         val units = UnitsFromMultiplier.execute(resistanceAsDecimal)
         while (resistanceAsDecimal >= 1000) {
@@ -42,7 +42,7 @@ object ResistanceFormatter {
         val noDecimal = (threeFourBands && resistanceAsDecimal >= 10) || (!threeFourBands && resistanceAsDecimal >= 100)
         val decimalPrecision = when {
             noDecimal -> "%.0f"
-            resistor.multiplierBand == C.SILVER -> "%.2f"
+            resistor.band4 == C.SILVER -> "%.2f"
             threeFourBands || resistanceAsDecimal >= 10.0 -> "%.1f"
             else -> "%.2f"
         }

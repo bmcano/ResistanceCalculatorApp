@@ -1,8 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
-import com.brandoncano.resistancecalculator.constants.Symbols.GOhms
-import com.brandoncano.resistancecalculator.resistor.ResistorVtC
+import com.brandoncano.resistancecalculator.constants.Symbols.GOHMS
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 
 /**
  * Job: Checks if a user inputted resistance is valid.
@@ -18,7 +18,7 @@ import com.brandoncano.resistancecalculator.resistor.ResistorVtC
  */
 object IsValidResistance {
 
-    fun execute(resistor: ResistorVtC, input: String): Boolean {
+    fun execute(resistor: ResistorVtc, input: String): Boolean {
         if (input.isEmpty()) return true
         input.toDoubleOrNull() ?: return false
         val sigFigs = SignificantFigures(input).numberSignificantFigures
@@ -36,7 +36,7 @@ object IsValidResistance {
                 sigFigs == 3 && input.endsWith(".0") ||
                 sigFigs == 2 && input.startsWith("0.") ||
                 sigFigs <= 2 && '.' in input -> true
-                sigFigs > 2 || units == GOhms && input.length > 2 -> false
+                sigFigs > 2 || units == GOHMS && input.length > 2 -> false
                 else -> true
             }
             else -> when { /* FIVE/SIX BAND */
@@ -45,7 +45,7 @@ object IsValidResistance {
                 sigFigs == 3 && input.startsWith("0") ||
                 sigFigs == 2 && input.startsWith("0.0") -> false
                 sigFigs <= 3 && '.' in input -> true
-                sigFigs > 3 || units == GOhms && input.length > 3 -> false
+                sigFigs > 3 || units == GOHMS && input.length > 3 -> false
                 else -> true
             }
         }

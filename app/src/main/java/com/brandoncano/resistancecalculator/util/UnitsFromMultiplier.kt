@@ -6,10 +6,10 @@ object UnitsFromMultiplier {
 
     fun execute(value: Double): String {
         return when {
-            value >= 1000000000 -> S.GOhms
-            value >= 1000000 -> S.MOhms
-            value >= 1000 -> S.kOhms
-            else -> S.Ohms
+            value >= 1000000000 -> S.GOHMS
+            value >= 1000000 -> S.MOHMS
+            value >= 1000 -> S.KOHMS
+            else -> S.OHMS
         }
     }
 }

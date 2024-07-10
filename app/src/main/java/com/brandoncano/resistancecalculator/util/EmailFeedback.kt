@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import java.lang.Exception
 
 /**
  * Job: Takes the user to compose an email with a predefined subject and empty body.

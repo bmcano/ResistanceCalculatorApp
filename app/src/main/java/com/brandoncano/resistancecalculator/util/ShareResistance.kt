@@ -2,17 +2,16 @@ package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
 import android.content.Intent
-import com.brandoncano.resistancecalculator.resistor.Resistor
 
 /**
- * Job: This will take the information of the resistor and make it shareable text.
+ * Job: This will take the supplied text make it shareable.
  */
 object ShareResistance {
 
-    fun execute(context: Context, resistor: Resistor) {
+    fun execute(context: Context, text: String) {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
-        intent.putExtra(Intent.EXTRA_TEXT, "${resistor.resistance}\n$resistor")
+        intent.putExtra(Intent.EXTRA_TEXT, text)
         context.startActivity(Intent.createChooser(intent, ""))
     }
 }

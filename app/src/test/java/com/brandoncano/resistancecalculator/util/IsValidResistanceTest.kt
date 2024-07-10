@@ -1,8 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
-import com.brandoncano.resistancecalculator.components.StateData
-import com.brandoncano.resistancecalculator.resistor.ResistorVtC
+import com.brandoncano.resistancecalculator.components.SharedPreferences
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -23,15 +23,15 @@ class IsValidResistanceTest {
 
     @Before
     fun setup() {
-        every { StateData.BUTTON_SELECTION_VTC.saveData(context, "5") } answers { }
-        every { StateData.BUTTON_SELECTION_VTC.saveData(context, "6") } answers { }
+        every { SharedPreferences.NAVBAR_SELECTION_VTC.saveData(context, "5") } answers { }
+        every { SharedPreferences.NAVBAR_SELECTION_VTC.saveData(context, "6") } answers { }
     }
 
     @Test
     fun invalidInputs() {
-        val resistor = ResistorVtC(context)
+        val resistor = ResistorVtc()
         // four band
-        resistor.units = S.Ohms
+        resistor.units = S.OHMS
         assertFalse(IsValidResistance.execute(resistor, "InValid"))
 
         assertFalse(IsValidResistance.execute(resistor, "133"))
@@ -48,12 +48,12 @@ class IsValidResistanceTest {
         assertFalse(IsValidResistance.execute(resistor, "1.02"))
         assertFalse(IsValidResistance.execute(resistor, "1.023"))
 
-        resistor.units = S.GOhms
+        resistor.units = S.GOHMS
         assertFalse(IsValidResistance.execute(resistor, "130"))
 
         // five/six band
-        resistor.units = S.Ohms
-        resistor.saveNumberOfBands(5)
+        resistor.units = S.OHMS
+        resistor.navBarSelection = 5
 
         assertFalse(IsValidResistance.execute(resistor, "1234"))
         assertFalse(IsValidResistance.execute(resistor, "0123"))
@@ -69,16 +69,16 @@ class IsValidResistanceTest {
         assertFalse(IsValidResistance.execute(resistor, "1.023"))
         assertFalse(IsValidResistance.execute(resistor, "1.203"))
         assertFalse(IsValidResistance.execute(resistor, "0.001"))
-        resistor.units = S.GOhms
+        resistor.units = S.GOHMS
         assertFalse(IsValidResistance.execute(resistor, "1230"))
         assertFalse(IsValidResistance.execute(resistor, "0.001"))
     }
 
     @Test
     fun validInputs() {
-        val resistor = ResistorVtC(context)
+        val resistor = ResistorVtc()
         // four band
-        resistor.units = S.Ohms
+        resistor.units = S.OHMS
         assertTrue(IsValidResistance.execute(resistor, "0"))
         assertTrue(IsValidResistance.execute(resistor, "12"))
         assertTrue(IsValidResistance.execute(resistor, "10"))
@@ -88,15 +88,15 @@ class IsValidResistanceTest {
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "0.05"))
 
-        resistor.units = S.GOhms
+        resistor.units = S.GOHMS
         assertTrue(IsValidResistance.execute(resistor, "13.0"))
         assertTrue(IsValidResistance.execute(resistor, "0.67"))
         assertTrue(IsValidResistance.execute(resistor, "0.6"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
 
         // five band
-        resistor.units = S.Ohms
-        resistor.saveNumberOfBands(5)
+        resistor.units = S.OHMS
+        resistor.navBarSelection = 5
         assertTrue(IsValidResistance.execute(resistor, "0"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
@@ -104,8 +104,8 @@ class IsValidResistanceTest {
         assertTrue(IsValidResistance.execute(resistor, "663.0"))
         assertTrue(IsValidResistance.execute(resistor, "0.01"))
 
-        resistor.units = S.GOhms
-        resistor.saveNumberOfBands(5)
+        resistor.units = S.GOHMS
+        resistor.navBarSelection = 5
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
         assertTrue(IsValidResistance.execute(resistor, "63.2"))
