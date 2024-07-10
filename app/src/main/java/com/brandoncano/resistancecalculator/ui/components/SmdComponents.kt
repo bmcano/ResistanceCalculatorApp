@@ -1,14 +1,10 @@
 package com.brandoncano.resistancecalculator.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,6 +17,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.RcvCustomCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.textStyleLargeTitle
 import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 import com.brandoncano.resistancecalculator.ui.theme.white
 
@@ -36,16 +33,16 @@ fun SmdResistorLayout() {
     ) {
         // will worry about size later
         Box(
+            modifier = Modifier.clip(RoundedCornerShape(4.dp)),
             contentAlignment = Alignment.Center,
         ) {
             Image(
-                // TODO - for the image itself - will want start/end edges thicker and rounded
-                painter = painterResource(id = R.drawable.smd_draft),
+                painter = painterResource(id = R.drawable.img_smd_resistor),
                 contentDescription = stringResource(id = R.string.content_description_app_icon),
             )
             Text(
-                text = "Test",
-                style = textStyleTitle().white()
+                text = "1R4",
+                style = textStyleLargeTitle().white()
             )
         }
         ResistanceText("resistance")

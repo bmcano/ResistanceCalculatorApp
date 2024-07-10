@@ -106,17 +106,17 @@ private fun BottomShadow(alpha: Float = 0.1f, height: Dp = 4.dp) {
     )
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun TitleTopAppBarPreview() {
+private fun TitleTopAppBarPreview() {
     ResistorCalculatorTheme {
         RcvTopAppBar("TopAppBar")
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun MenuTopAppBarPreview() {
+private fun MenuTopAppBarPreview() {
     val interactionSource = remember { MutableInteractionSource() }
     ResistorCalculatorTheme {
         RcvMenuTopAppBar("MenuTopAppBar", interactionSource) {

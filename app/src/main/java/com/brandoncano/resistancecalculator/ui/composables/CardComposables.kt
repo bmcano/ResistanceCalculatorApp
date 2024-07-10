@@ -140,9 +140,9 @@ private fun CardRowView(
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun DefaultCardPreviews() {
+private fun RcvCardPreviews() {
     ResistorCalculatorTheme {
         RcvCard {
             Text(text = "Text1", modifier = Modifier.padding(4.dp))
@@ -155,9 +155,9 @@ fun DefaultCardPreviews() {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun ContentCardPreviews() {
+private fun RcvContentCardPreviews() {
     ResistorCalculatorTheme {
         RcvCustomCard {
             Text(text = "Text1extended", modifier = Modifier.padding(4.dp))

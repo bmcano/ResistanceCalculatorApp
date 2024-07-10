@@ -76,7 +76,19 @@ fun ShareMenuItem(context: Context, text: String, interactionSource: MutableInte
             text = stringResource(R.string.menu_share),
             style = textStyleBody(),
         ) },
-        onClick = { ShareResistance.execute(context, text)  },
+        onClick = { ShareResistance.execute(context, text) },
+        interactionSource = interactionSource,
+    )
+}
+
+@Composable
+fun SmdMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
+    DropdownMenuItem(
+        text = { Text(
+            text = stringResource(R.string.menu_smd),
+            style = textStyleBody(),
+        ) },
+        onClick = { navController.navigate(Screen.Smd.route) },
         interactionSource = interactionSource,
     )
 }
@@ -93,9 +105,9 @@ fun ValueToColorMenuItem(navController: NavController, interactionSource: Mutabl
     )
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun MenuItemsPreview() {
+private fun MenuItemsPreview() {
     val interactionSource = remember { MutableInteractionSource() }
     val app = RcvActivity()
     ResistorCalculatorTheme {
@@ -105,6 +117,7 @@ fun MenuItemsPreview() {
             ColorToValueMenuItem(NavController(app), interactionSource)
             FeedbackMenuItem(app, interactionSource)
             ShareMenuItem(app, "text", interactionSource)
+            SmdMenuItem(NavController(app), interactionSource)
             ValueToColorMenuItem(NavController(app), interactionSource)
         }
     }

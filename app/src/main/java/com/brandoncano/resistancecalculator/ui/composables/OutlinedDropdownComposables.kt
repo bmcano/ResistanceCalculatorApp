@@ -224,9 +224,9 @@ private fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun CustomDropdownRowPreview() {
+private fun CustomDropdownRowPreview() {
     ResistorCalculatorTheme {
         val item1 = DropdownItem(name = "Item 1", value = "Value 1")
         Column {
@@ -236,9 +236,9 @@ fun CustomDropdownRowPreview() {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun CustomDropdownPreview() {
+private fun CustomDropdownPreview() {
     val item1 = DropdownItem(name = "Item 1", value = "Value 1")
     val item2 = DropdownItem(name = "Item 2", value = "Value 2")
     val item3 = DropdownItem(name = "Item 3", value = "Value 3")
@@ -254,9 +254,9 @@ fun CustomDropdownPreview() {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun TextDropdownRowPreview() {
+private fun TextDropdownRowPreview() {
     ResistorCalculatorTheme {
         val item1 = "unit"
         Column {
@@ -266,9 +266,9 @@ fun TextDropdownRowPreview() {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun TextDropdownPreview() {
+private fun TextDropdownPreview() {
     ResistorCalculatorTheme {
         val list = listOf("item1", "item2", "item3", "item4", "item5", "item6")
         Column {

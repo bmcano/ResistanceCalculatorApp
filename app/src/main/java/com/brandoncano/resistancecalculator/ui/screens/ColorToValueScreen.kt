@@ -41,7 +41,7 @@ import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuIt
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.OutlinedDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.ResistorLayout
+import com.brandoncano.resistancecalculator.ui.components.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -204,7 +204,7 @@ private fun ContentView(
 
 @AppScreenPreviews
 @Composable
-fun ColorToValueScreen4BandPreview() {
+private fun ColorToValueScreen4BandPreview() {
     val app = RcvActivity()
     val viewModel = viewModel<ResistorCtvViewModel>(factory = ResistorViewModelFactory(app))
     val resistor = MutableLiveData<ResistorCtv>()

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.composables
+package com.brandoncano.resistancecalculator.ui.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
+import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
+import com.brandoncano.resistancecalculator.ui.composables.RcvCustomCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 import com.brandoncano.resistancecalculator.util.ColorFinder
@@ -129,16 +131,18 @@ private fun ResistanceText(resistance: String) {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
 private fun ResistorLayoutsPreview() {
     ResistorCalculatorTheme {
-        Column {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             ResistorLayout(ResistorCtv())
-            ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "", "", 3))
-            ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "Green", "", 4))
-            ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "", 5))
-            ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "Blue", 6))
+            ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "", "",0))
+            ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "Green", "", 1))
+            ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "", 2))
+            ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "Blue", 3))
         }
     }
 }

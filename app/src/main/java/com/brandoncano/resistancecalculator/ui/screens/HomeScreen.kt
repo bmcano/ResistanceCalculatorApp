@@ -20,7 +20,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.components.CalculatorButtons
+import com.brandoncano.resistancecalculator.ui.components.StandardCalculatorButtons
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.components.OurAppsButtons
@@ -51,7 +51,7 @@ private fun ContentView(context: Context, navController: NavController) {
             AboutAppMenuItem(navController, interactionSource)
         }
         RoundAppIcon()
-        CalculatorButtons(navController)
+        StandardCalculatorButtons(navController)
         SmdCalculatorButton(navController)
         OurAppsButtons(context)
         Spacer(modifier = Modifier.height(16.dp))

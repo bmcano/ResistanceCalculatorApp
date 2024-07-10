@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 /**
  * Job: Outlined text field components
@@ -77,5 +78,17 @@ fun AppTextField(
             singleLine = true,
             interactionSource = interactionSource
         )
+    }
+}
+
+@AppComponentPreviews
+@Composable
+private fun AppTextFieldPreview() {
+    ResistorCalculatorTheme {
+        Column {
+            AppTextField(label = R.string.units_hint) { }
+            AppTextField(label = R.string.units_hint, text = "Example") { }
+            AppTextField(label = R.string.units_hint, isError = true) { }
+        }
     }
 }

@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.RcvActivity
+import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.ArrowButtonCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -57,7 +58,7 @@ fun ViewIecStandard(context: Context) {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
 private fun HeadlineBodyStackPreview() {
     ResistorCalculatorTheme {
@@ -72,7 +73,7 @@ private fun HeadlineBodyStackPreview() {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
 private fun IecStandardPreview() {
     ResistorCalculatorTheme {
