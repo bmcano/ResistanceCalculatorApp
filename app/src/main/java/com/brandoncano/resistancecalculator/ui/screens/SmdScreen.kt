@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
@@ -24,8 +25,6 @@ import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
@@ -36,6 +35,7 @@ import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.SmdNavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 @Composable
@@ -80,6 +80,7 @@ private fun ContentView(
         ) {
             RcvMenuTopAppBar(stringResource(R.string.menu_smd), interactionSource) {
                 ColorToValueMenuItem(navController, interactionSource)
+                ValueToColorMenuItem(navController, interactionSource)
                 // ShareMenuItem(context, shareableText, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
@@ -132,6 +133,6 @@ private fun ContentView(
 private fun SmdScreenPreview() {
     val app = RcvActivity()
     val viewModel = viewModel<SmdResistorViewModel>(factory = ResistorViewModelFactory(app))
-    val resistor = viewModel.getResistorLiveData()
+    val resistor = MutableLiveData<SmdResistor>()
     SmdScreen(app, NavController(app), viewModel, 0, resistor)
 }

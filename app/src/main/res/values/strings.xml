@@ -44,6 +44,7 @@
     <string name="home_calculators_header_text">Calculators</string>
     <string name="home_button_value_to_color">Value to Color</string>
     <string name="home_button_color_to_value">Color to Value</string>
+    <string name="home_button_smd">SMD Resistor</string>
     <string name="home_our_apps_header_text">Our apps</string>
     <string name="home_button_rate_us">Rate this app on Google Play</string>
     <string name="home_button_view_capacitor_app">Check out our capacitor app</string>

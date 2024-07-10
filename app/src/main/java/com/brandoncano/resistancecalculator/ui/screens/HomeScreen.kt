@@ -25,6 +25,7 @@ import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.components.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.components.RoundAppIcon
+import com.brandoncano.resistancecalculator.ui.components.SmdCalculatorButton
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 @Composable
@@ -51,6 +52,7 @@ private fun ContentView(context: Context, navController: NavController) {
         }
         RoundAppIcon()
         CalculatorButtons(navController)
+        SmdCalculatorButton(navController)
         OurAppsButtons(context)
         Spacer(modifier = Modifier.height(16.dp))
     }

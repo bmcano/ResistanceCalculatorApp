@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
+import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.ArrowButtonCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
@@ -89,6 +89,18 @@ fun CalculatorButtons(navController: NavController) {
 }
 
 @Composable
+fun SmdCalculatorButton(navController: NavController) {
+    Column {
+        ArrowButtonCard(
+            Icons.Outlined.Calculate,
+            stringResource(id = R.string.home_button_smd),
+        ) {
+            navController.navigate(Screen.Smd.route)
+        }
+    }
+}
+
+@Composable
 fun OurAppsButtons(context: Context) {
     Column {
         val modifier = Modifier
@@ -116,7 +128,7 @@ fun OurAppsButtons(context: Context) {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
 fun AppIconPreview() {
     ResistorCalculatorTheme {
