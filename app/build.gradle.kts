@@ -13,7 +13,7 @@ android {
         minSdk = 24
         targetSdk = 34
         versionCode = 18
-        versionName = "3.1.0"
+        versionName = "3.1.1"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -21,7 +21,7 @@ android {
     }
     applicationVariants.configureEach {
         resValue("string", "version", versionName)
-        resValue("string", "last_updated", "7/9/2024")
+        resValue("string", "last_updated", "7/11/2024")
     }
     buildTypes {
         release {
@@ -42,7 +42,7 @@ android {
     buildFeatures {
         compose = true
     }
-//    tasks.register("prepareKotlinBuildScriptModel")
+
     @Suppress("UnstableApiUsage")
     testOptions {
         unitTests.isReturnDefaultValues = true
@@ -77,7 +77,6 @@ dependencies {
     // unit testing
     testImplementation(libs.mockk)
     testImplementation(libs.junit)
-    // androidTestImplementation("androidx.test.ext:junit:1.2.1")
     // external libraries
     implementation(files("libs/ostermillerutils_1_07_00.jar"))
 }
