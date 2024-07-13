@@ -71,7 +71,7 @@ fun CalculatorNavigationBar(
 
 @Composable
 fun SmdNavigationBar(
-    selection: Int = 1,
+    selection: Int = 0,
     onClick: (Int) -> Unit
 ) {
     var selectedItem by remember { mutableIntStateOf(selection) }

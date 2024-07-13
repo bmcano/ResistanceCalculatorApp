@@ -19,7 +19,7 @@ import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 object IsValidResistance {
 
     fun execute(resistor: ResistorVtc, input: String): Boolean {
-        if (input.isEmpty()) return true
+        input.ifEmpty { return true }
         if (input.contains(" ")) return false
         val sigFigs: Int
         try {

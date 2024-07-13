@@ -10,7 +10,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -25,6 +30,7 @@ import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.components.SmdResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
@@ -38,6 +44,9 @@ import com.brandoncano.resistancecalculator.ui.composables.SmdNavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.util.formatResistance
+import com.brandoncano.resistancecalculator.util.formatResistor
+import com.brandoncano.resistancecalculator.util.isInputInvalid
 
 @Composable
 fun SmdScreen(
@@ -45,11 +54,11 @@ fun SmdScreen(
     navController: NavController,
     viewModel: SmdResistorViewModel,
     navBarPosition: Int,
-    resistorVtc: LiveData<SmdResistor>
+    smdResistor: LiveData<SmdResistor>
 ) {
     ResistorCalculatorTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            ContentView(context, navController, viewModel, navBarPosition, resistorVtc)
+            ContentView(context, navController, viewModel, navBarPosition, smdResistor)
         }
     }
 }
@@ -60,15 +69,27 @@ private fun ContentView(
     navController: NavController,
     viewModel: SmdResistorViewModel,
     navBarPosition: Int,
-    resistorVtc: LiveData<SmdResistor>
+    smdResistor: LiveData<SmdResistor>
 ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
+    var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
+    var reset by remember { mutableStateOf(false) }
+    val resistor by smdResistor.observeAsState(SmdResistor())
+    var code by remember { mutableStateOf(resistor.code) }
+    var units by remember { mutableStateOf(resistor.units) }
+    var isError by remember { mutableStateOf(false) }
 
     Scaffold(
         bottomBar = {
-            SmdNavigationBar {
-
+            SmdNavigationBar(navBarSelection) {
+                navBarSelection = it
+                viewModel.saveNavBarSelection(it)
+                isError = resistor.isInputInvalid()
+                if (!isError) {
+                    viewModel.saveResistorValues(resistor)
+                    resistor.formatResistance()
+                }
             }
         }
     ) { paddingValues ->
@@ -85,42 +106,42 @@ private fun ContentView(
                 // ShareMenuItem(context, shareableText, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
-                    // TODO - will add later
+                    viewModel.clear()
+                    reset = true
+                    focusManager.clearFocus()
                 }
                 AboutAppMenuItem(navController, interactionSource)
             }
 
-            // components plan (wip)
-            SmdResistorLayout()
-            // text field for code - will validate similar to VtC
+            SmdResistorLayout(resistor)
             AppTextField(
                 modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
                 label = R.string.hint_smd_code,
-                text = "", // will add with VM
-                reset = false,
-                isError = false,
+                text = code,
+                reset = reset,
+                isError = isError,
             ) {
-                // validation done here
+                reset = false
+                code = it
+                viewModel.updateCode(it)
+                isError = resistor.isInputInvalid()
+                if (!isError) {
+                    viewModel.saveResistorValues(resistor)
+                    resistor.formatResistance()
+                }
             }
-            // text field for resistance (?)
-            AppTextField(
-                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
-                label = R.string.type_resistance_hint,
-                text = "", // will add with VM
-                reset = false,
-                isError = false,
-            ) {
-                // validation done here
-            }
-            // dropdown for units
             TextDropDownMenu(
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
                 label = R.string.units_hint,
-                selectedOption = "",
+                selectedOption = resistor.units,
                 items = DropdownLists.UNITS_LIST,
-                reset = false,
+                reset = reset,
             ) {
-
+                units = it
+                viewModel.updateUnits(it)
+                reset = false
+                focusManager.clearFocus()
+                viewModel.saveResistorValues(resistor)
             }
         }
     }

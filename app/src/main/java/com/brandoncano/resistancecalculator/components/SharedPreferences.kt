@@ -31,7 +31,6 @@ enum class SharedPreferences(private val _name: String, private val _key: String
 
     NAVBAR_SELECTION_SMD("smd", "navbar_selection"),
     CODE_INPUT_SMD("smd", "code_input"),
-    RESISTANCE_INPUT_SMD("smd", "resistance_input"),
     UNITS_DROPDOWN_SMD("smd", "units_dropdown"),
 
     ; // methods to save, load, or clear the data as strings

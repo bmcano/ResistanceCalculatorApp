@@ -14,19 +14,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.RcvCustomCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleLargeTitle
 import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 import com.brandoncano.resistancecalculator.ui.theme.white
+import com.brandoncano.resistancecalculator.util.formatResistance
 
 /**
  * Job: Hold custom components for the SMD screen
  */
 
 @Composable
-fun SmdResistorLayout() {
+fun SmdResistorLayout(resistor: SmdResistor) {
     Column(
         modifier = Modifier.padding(top = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -41,11 +43,11 @@ fun SmdResistorLayout() {
                 contentDescription = stringResource(id = R.string.content_description_app_icon),
             )
             Text(
-                text = "1R4",
+                text = resistor.code,
                 style = textStyleLargeTitle().white()
             )
         }
-        ResistanceText("resistance")
+        ResistanceText(resistor.formatResistance())
     }
 }
 
@@ -68,6 +70,7 @@ private fun ResistanceText(resistance: String) {
 @Composable
 private fun SmdResistorLayoutPreview() {
     ResistorCalculatorTheme {
-        SmdResistorLayout()
+        val resistor = SmdResistor(code = "1R4")
+        SmdResistorLayout(resistor)
     }
 }

@@ -32,10 +32,6 @@ class SmdResistorViewModel(context: Context): ViewModel() {
         resistor.value = resistor.value?.copy(code = value)
     }
 
-    fun updateResistance(value: String) {
-        resistor.value = resistor.value?.copy(resistance = value)
-    }
-
     fun updateUnits(value: String) {
         resistor.value = resistor.value?.copy(units = value)
     }

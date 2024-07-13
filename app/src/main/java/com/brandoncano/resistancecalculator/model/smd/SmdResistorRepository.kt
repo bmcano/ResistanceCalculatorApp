@@ -19,21 +19,18 @@ class SmdResistorRepository(context: Context) {
 
     fun clear() {
         SharedPreferences.CODE_INPUT_SMD.clearData(application)
-        SharedPreferences.RESISTANCE_INPUT_SMD.clearData(application)
         SharedPreferences.UNITS_DROPDOWN_SMD.clearData(application)
     }
 
     fun loadResistor(): SmdResistor {
         val code = SharedPreferences.CODE_INPUT_SMD.loadData(application)
-        val resistance = SharedPreferences.RESISTANCE_INPUT_SMD.loadData(application)
         val units = SharedPreferences.UNITS_DROPDOWN_SMD.loadData(application)
         val number = SharedPreferences.NAVBAR_SELECTION_SMD.loadData(application)
-        return SmdResistor(code, resistance, units, number.toIntOrNull() ?: 0)
+        return SmdResistor(code, units, number.toIntOrNull() ?: 0)
     }
 
     fun saveResistor(resistor: SmdResistor) {
         SharedPreferences.CODE_INPUT_SMD.saveData(application, resistor.code)
-        SharedPreferences.RESISTANCE_INPUT_SMD.saveData(application, resistor.resistance)
         SharedPreferences.UNITS_DROPDOWN_SMD.saveData(application, resistor.units)
     }
 

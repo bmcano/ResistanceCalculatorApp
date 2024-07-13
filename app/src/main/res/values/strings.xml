@@ -22,6 +22,7 @@
     <!-- Default text -->
     <string name="default_ctv_value">Select colors</string>
     <string name="default_vtc_value">Enter resistance</string>
+    <string name="default_smd_value">Enter code</string>
     <!-- Bottom navigation -->
     <string name="navbar_three_band">Three Bands</string>
     <string name="navbar_four_band">Four Bands</string>
