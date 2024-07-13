@@ -79,7 +79,6 @@ fun TextDropDownMenu(
                 .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(stringResource(label)) },
-            leadingIcon = { /* left empty to match spacing */ },
             trailingIcon = {
                 Icon(
                     imageVector = icon,
@@ -167,11 +166,9 @@ fun OutlinedDropDownMenu(
                 .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(stringResource(label)) },
-            leadingIcon = {
-                if (selectedLeadingIcon != resistor_blank) {
-                    RoundedSquare(color = selectedLeadingIcon, size = 24.dp)
-                }
-            },
+            leadingIcon = if (selectedLeadingIcon != resistor_blank) {
+                { RoundedSquare(color = selectedLeadingIcon, size = 24.dp) }
+            } else null,
             trailingIcon = {
                 Icon(
                     imageVector = icon,
