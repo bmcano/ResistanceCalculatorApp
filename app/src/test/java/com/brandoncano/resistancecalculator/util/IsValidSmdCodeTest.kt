@@ -35,8 +35,31 @@ class IsValidSmdCodeTest {
     }
 
     @Test
-    fun `4 digit EIA regex test`() {
+    fun `valid 4 digit EIA regex test`() {
+        assertTrue(IsValidSmdCode.execute("0632", 4))
+        assertTrue(IsValidSmdCode.execute("1743", 4))
+        assertTrue(IsValidSmdCode.execute("2854", 4))
+        assertTrue(IsValidSmdCode.execute("3965", 4))
+        assertTrue(IsValidSmdCode.execute("4076", 4))
+        assertTrue(IsValidSmdCode.execute("5187", 4))
+        assertTrue(IsValidSmdCode.execute("6298", 4))
+        assertTrue(IsValidSmdCode.execute("7309", 4))
+        assertTrue(IsValidSmdCode.execute("8410", 4))
+        assertTrue(IsValidSmdCode.execute("9521", 4))
 
+        assertTrue(IsValidSmdCode.execute("0R34", 4))
+        assertTrue(IsValidSmdCode.execute("12R5", 4))
+        assertTrue(IsValidSmdCode.execute("27R6", 4))
+        assertTrue(IsValidSmdCode.execute("3R77", 4))
+    }
+
+    @Test
+    fun `invalid 4 digit EIA regex test`() {
+        assertFalse(IsValidSmdCode.execute("1RR3", 4))
+        assertFalse(IsValidSmdCode.execute("1R", 4))
+        assertFalse(IsValidSmdCode.execute("2RRR", 4))
+        assertFalse(IsValidSmdCode.execute("", 4))
+        assertFalse(IsValidSmdCode.execute("random_string", 4))
     }
 
     @Test
