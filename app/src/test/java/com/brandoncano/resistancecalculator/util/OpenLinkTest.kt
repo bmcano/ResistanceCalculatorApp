@@ -47,12 +47,22 @@ class OpenLinkTest {
     }
 
     @Test
-    fun `verify openIECWebpage`() {
+    fun `verify openColorIECWebpage`() {
         every { anyConstructed<Intent>().action = Intent.ACTION_VIEW } just Runs
-        every { Uri.parse("https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-color-code/#") } returns uri
+        every { Uri.parse("https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-color-code/") } returns uri
         every { context.startActivity(any(), null) } returns Unit
 
-        OpenLink.openIECWebpage(context)
+        OpenLink.openColorIECWebpage(context)
+        verify { context.startActivity(any(), null) }
+    }
+
+    @Test
+    fun `verify openSmdIECWebpage`() {
+        every { anyConstructed<Intent>().action = Intent.ACTION_VIEW } just Runs
+        every { Uri.parse("https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-smd-code/") } returns uri
+        every { context.startActivity(any(), null) } returns Unit
+
+        OpenLink.openSmdIECWebpage(context)
         verify { context.startActivity(any(), null) }
     }
 

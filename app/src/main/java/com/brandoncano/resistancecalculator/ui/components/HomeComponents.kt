@@ -104,12 +104,11 @@ fun SmdCalculatorButton(navController: NavController) {
 @Composable
 fun OurAppsButtons(context: Context) {
     Column {
-        val modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 24.dp)
-            .align(Alignment.Start)
         Text(
             text = stringResource(id = R.string.home_our_apps_header_text),
-            modifier = modifier,
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, top = 24.dp)
+                .align(Alignment.Start),
             style = textStyleHeadline(),
         )
         ArrowButtonCard(
