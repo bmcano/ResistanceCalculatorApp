@@ -71,7 +71,6 @@ class IsValidSmdCodeTest {
         assertTrue(IsValidSmdCode.execute("39D", SmdMode.EIA96))
         assertTrue(IsValidSmdCode.execute("40E", SmdMode.EIA96))
         assertTrue(IsValidSmdCode.execute("51F", SmdMode.EIA96))
-        assertTrue(IsValidSmdCode.execute("62G", SmdMode.EIA96))
         assertTrue(IsValidSmdCode.execute("73H", SmdMode.EIA96))
         assertTrue(IsValidSmdCode.execute("84R", SmdMode.EIA96))
         assertTrue(IsValidSmdCode.execute("95S", SmdMode.EIA96))
@@ -82,6 +81,7 @@ class IsValidSmdCodeTest {
 
     @Test
     fun `invalid EIA-96 regex test`() {
+        assertFalse(IsValidSmdCode.execute("12G", SmdMode.EIA96))
         assertFalse(IsValidSmdCode.execute("12I", SmdMode.EIA96))
         assertFalse(IsValidSmdCode.execute("12J", SmdMode.EIA96))
         assertFalse(IsValidSmdCode.execute("12K", SmdMode.EIA96))

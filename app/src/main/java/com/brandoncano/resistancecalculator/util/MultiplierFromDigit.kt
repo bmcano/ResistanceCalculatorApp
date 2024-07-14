@@ -1,5 +1,8 @@
 package com.brandoncano.resistancecalculator.util
 
+/**
+ * Job: Get a multiplier value from a character
+ */
 object MultiplierFromDigit {
 
     fun execute(digit: Char): Double {

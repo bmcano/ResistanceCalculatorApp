@@ -14,7 +14,7 @@
     <!-- Menu items -->
     <string name="menu_value_to_color">Value to Color</string>
     <string name="menu_color_to_value">Color to Value</string>
-    <string name="menu_smd">SMD</string>
+    <string name="menu_smd">SMD Resistor</string>
     <string name="menu_clear_selections">Clear Selections</string>
     <string name="menu_share">Share</string>
     <string name="menu_feedback">Feedback</string>

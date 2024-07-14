@@ -45,6 +45,7 @@ import com.brandoncano.resistancecalculator.ui.composables.OutlinedDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.components.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.SmdMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistor
@@ -115,6 +116,7 @@ private fun ContentView(
         ) {
             RcvMenuTopAppBar(stringResource(R.string.menu_value_to_color), interactionSource) {
                 ColorToValueMenuItem(navController, interactionSource)
+                SmdMenuItem(navController, interactionSource)
                 val shareableText = "${resistor.getDisplayableValue(context)}\n$resistor"
                 ShareMenuItem(context, shareableText, interactionSource)
                 FeedbackMenuItem(context, interactionSource)

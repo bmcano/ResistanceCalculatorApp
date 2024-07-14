@@ -4,6 +4,9 @@ import com.brandoncano.resistancecalculator.components.SmdMode
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 
+/**
+ * Job: Format the resistance text depending on the mode and code
+ */
 object ResistanceSmdFormatter {
 
     fun execute(resistor: SmdResistor): String {
@@ -54,7 +57,9 @@ object ResistanceSmdFormatter {
     }
 
     private fun eia96(code: String): Double {
-        // TODO - understand what each value means
-        return 0.0
+        val lookupValue = code.substring(0, 2)
+        val baseValue = FindEIA96Value.execute(lookupValue)
+        val multiplier = MultiplierFromDigit.execute(code[2])
+        return baseValue * multiplier
     }
 }

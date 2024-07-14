@@ -30,7 +30,6 @@ import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.RcvActivity
 import com.brandoncano.resistancecalculator.ui.components.SmdResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
@@ -40,12 +39,12 @@ import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuIt
 import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.SmdNavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistance
-import com.brandoncano.resistancecalculator.util.formatResistor
 import com.brandoncano.resistancecalculator.util.isInputInvalid
 
 @Composable
@@ -103,7 +102,7 @@ private fun ContentView(
             RcvMenuTopAppBar(stringResource(R.string.menu_smd), interactionSource) {
                 ColorToValueMenuItem(navController, interactionSource)
                 ValueToColorMenuItem(navController, interactionSource)
-                // ShareMenuItem(context, shareableText, interactionSource)
+                ShareMenuItem(context, resistor.toString(), interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
                     viewModel.clear()

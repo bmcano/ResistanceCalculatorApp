@@ -33,7 +33,6 @@ fun SmdResistorLayout(resistor: SmdResistor) {
         modifier = Modifier.padding(top = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        // will worry about size later
         Box(
             modifier = Modifier.clip(RoundedCornerShape(4.dp)),
             contentAlignment = Alignment.Center,

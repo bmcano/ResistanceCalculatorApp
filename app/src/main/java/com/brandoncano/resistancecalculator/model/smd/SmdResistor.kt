@@ -19,6 +19,6 @@ data class SmdResistor(
 
     override fun toString(): String {
         val resistance = this.formatResistance()
-        return "$code\n $resistance $units"
+        return "SMD Resistor Code: $code\nResistance: $resistance"
     }
 }

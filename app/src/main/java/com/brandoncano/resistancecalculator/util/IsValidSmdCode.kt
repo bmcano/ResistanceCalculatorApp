@@ -16,7 +16,7 @@ object IsValidSmdCode {
         if (code.length < 4) return true
         val regex3 = Regex("^[0-9][0-9R][0-9]$")
         val regex4 = Regex("^[0-9][0-9R][0-9R][0-9]$")
-        val regex96 = Regex("^[0-9][0-9][A-HRSXYZ]$")
+        val regex96 = Regex("^[0-9][0-9][A-FHRSXYZ]$")
         val isValidRCount = code.count { it == 'R'} < 2
         return when (mode) {
             SmdMode.ThreeDigit -> regex3.matches(code)
