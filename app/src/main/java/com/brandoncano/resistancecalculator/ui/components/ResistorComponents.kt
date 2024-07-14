@@ -18,7 +18,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
-import com.brandoncano.resistancecalculator.ui.composables.RcvCustomCard
+import com.brandoncano.resistancecalculator.ui.composables.AppCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 import com.brandoncano.resistancecalculator.util.ColorFinder
@@ -118,7 +118,7 @@ private fun ResistorImage(@DrawableRes drawableRes: Int, color: Color) {
 
 @Composable
 private fun ResistanceText(resistance: String) {
-    RcvCustomCard(
+    AppCard(
         modifier = Modifier.padding(top = 12.dp)
     ) {
         Text(

@@ -33,7 +33,7 @@ import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
-import com.brandoncano.resistancecalculator.ui.RcvActivity
+import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.AppTextField
@@ -41,12 +41,12 @@ import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationB
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.OutlinedDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.components.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.SmdMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.TextDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.AppTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistor
 import com.brandoncano.resistancecalculator.util.getDisplayableValue
@@ -114,7 +114,7 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            RcvMenuTopAppBar(stringResource(R.string.menu_value_to_color), interactionSource) {
+            AppMenuTopAppBar(stringResource(R.string.menu_value_to_color), interactionSource) {
                 ColorToValueMenuItem(navController, interactionSource)
                 SmdMenuItem(navController, interactionSource)
                 val shareableText = "${resistor.getDisplayableValue(context)}\n$resistor"
@@ -148,7 +148,7 @@ private fun ContentView(
                     resistor.formatResistor()
                 }
             }
-            TextDropDownMenu(
+            AppTextDropDownMenu(
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
                 label = R.string.units_hint,
                 selectedOption = units,
@@ -160,7 +160,7 @@ private fun ContentView(
                 postSelectionActions()
             }
             if (navBarSelection != 0) {
-                OutlinedDropDownMenu(
+                ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
                     label = R.string.tolerance_band_hint,
                     selectedOption = band5,
@@ -174,7 +174,7 @@ private fun ContentView(
                 }
             }
             if (navBarSelection == 3) {
-                OutlinedDropDownMenu(
+                ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
                     label = R.string.ppm_band_hint,
                     selectedOption = band6,
@@ -195,7 +195,7 @@ private fun ContentView(
 @AppScreenPreviews
 @Composable
 private fun ValueToColorScreenPreview() {
-    val app = RcvActivity()
+    val app = MainActivity()
     val viewModel = viewModel<ResistorVtcViewModel>(factory = ResistorViewModelFactory(app))
     val resistor = MutableLiveData<ResistorVtc>()
     ValueToColorScreen(app, NavController(app), viewModel, 1, resistor)

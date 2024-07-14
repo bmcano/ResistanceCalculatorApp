@@ -17,12 +17,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.RcvActivity
+import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.components.StandardCalculatorButtons
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.RcvMenuTopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.components.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.components.RoundAppIcon
 import com.brandoncano.resistancecalculator.ui.components.SmdCalculatorButton
@@ -46,7 +46,7 @@ private fun ContentView(context: Context, navController: NavController) {
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        RcvMenuTopAppBar(stringResource(R.string.app_name), interactionSource) {
+        AppMenuTopAppBar(stringResource(R.string.app_name), interactionSource) {
             FeedbackMenuItem(context, interactionSource)
             AboutAppMenuItem(navController, interactionSource)
         }
@@ -61,6 +61,6 @@ private fun ContentView(context: Context, navController: NavController) {
 @AppScreenPreviews
 @Composable
 private fun HomePreview() {
-    val app = RcvActivity()
+    val app = MainActivity()
     HomeScreen(app, NavController(app))
 }

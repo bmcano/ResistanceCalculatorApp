@@ -44,7 +44,7 @@ import com.brandoncano.resistancecalculator.util.ColorFinder
  */
 
 @Composable
-fun TextDropDownMenu(
+fun AppTextDropDownMenu(
     modifier: Modifier = Modifier,
     @StringRes label: Int,
     selectedOption: String = "",
@@ -125,7 +125,7 @@ private fun TextDropDownItemView(item: String, onClick: () -> Unit) {
 }
 
 @Composable
-fun OutlinedDropDownMenu(
+fun ImageTextDropDownMenu(
     modifier: Modifier = Modifier,
     @StringRes label: Int,
     selectedOption: String = "",
@@ -245,8 +245,8 @@ private fun CustomDropdownPreview() {
     val list = listOf(item1, item2, item3, item4, item5, item6)
     ResistorCalculatorTheme {
         Column {
-            OutlinedDropDownMenu(Modifier, R.string.number_band_hint1, "", list) { }
-            OutlinedDropDownMenu(Modifier, R.string.number_band_hint1, "Red", list) { }
+            ImageTextDropDownMenu(Modifier, R.string.number_band_hint1, "", list) { }
+            ImageTextDropDownMenu(Modifier, R.string.number_band_hint1, "Red", list) { }
         }
     }
 }
@@ -269,8 +269,8 @@ private fun TextDropdownPreview() {
     ResistorCalculatorTheme {
         val list = listOf("item1", "item2", "item3", "item4", "item5", "item6")
         Column {
-            TextDropDownMenu(Modifier, R.string.units_hint, "", list) { }
-            TextDropDownMenu(Modifier, R.string.units_hint, "Red", list) { }
+            AppTextDropDownMenu(Modifier, R.string.units_hint, "", list) { }
+            AppTextDropDownMenu(Modifier, R.string.units_hint, "Red", list) { }
         }
     }
 }

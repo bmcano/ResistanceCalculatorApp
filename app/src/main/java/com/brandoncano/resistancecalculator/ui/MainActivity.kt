@@ -8,7 +8,7 @@ import com.brandoncano.resistancecalculator.navigation.Navigation
 /**
  * Job: Activity for the RCV calculator app.
  */
-class RcvActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

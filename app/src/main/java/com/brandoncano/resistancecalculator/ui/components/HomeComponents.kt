@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
-import com.brandoncano.resistancecalculator.ui.RcvActivity
+import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.ArrowButtonCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -141,7 +141,7 @@ private fun AppIconPreview() {
 @Composable
 private fun StandardCalculatorButtonsPreview() {
     ResistorCalculatorTheme {
-        val app = RcvActivity()
+        val app = MainActivity()
         StandardCalculatorButtons(NavController(app))
     }
 }
@@ -150,7 +150,7 @@ private fun StandardCalculatorButtonsPreview() {
 @Composable
 private fun SmdCalculatorButtonsPreview() {
     ResistorCalculatorTheme {
-        val app = RcvActivity()
+        val app = MainActivity()
         SmdCalculatorButton(NavController(app))
     }
 }
@@ -159,7 +159,7 @@ private fun SmdCalculatorButtonsPreview() {
 @Composable
 private fun OurAppsButtonsPreview() {
     ResistorCalculatorTheme {
-        val app = RcvActivity()
+        val app = MainActivity()
         OurAppsButtons(app)
     }
 }

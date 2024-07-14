@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
-import com.brandoncano.resistancecalculator.ui.RcvActivity
+import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
 import com.brandoncano.resistancecalculator.util.EmailFeedback
@@ -109,7 +109,7 @@ fun ValueToColorMenuItem(navController: NavController, interactionSource: Mutabl
 @Composable
 private fun MenuItemsPreview() {
     val interactionSource = remember { MutableInteractionSource() }
-    val app = RcvActivity()
+    val app = MainActivity()
     ResistorCalculatorTheme {
         Column {
             AboutAppMenuItem(NavController(app), interactionSource)

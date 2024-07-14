@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
-import com.brandoncano.resistancecalculator.ui.composables.RcvCustomCard
+import com.brandoncano.resistancecalculator.ui.composables.AppCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleLargeTitle
 import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
@@ -52,7 +52,7 @@ fun SmdResistorLayout(resistor: SmdResistor) {
 
 @Composable
 private fun ResistanceText(resistance: String) {
-    RcvCustomCard(
+    AppCard(
         modifier = Modifier.padding(top = 12.dp)
     ) {
         Text(

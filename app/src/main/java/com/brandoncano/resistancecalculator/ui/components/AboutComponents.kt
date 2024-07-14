@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.RcvActivity
+import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.ArrowButtonCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -79,7 +79,7 @@ private fun IecStandardPreview() {
         Column(
             modifier = Modifier.height(64.dp)
         ) {
-            val context = RcvActivity()
+            val context = MainActivity()
             ViewIecStandard(context)
         }
     }
