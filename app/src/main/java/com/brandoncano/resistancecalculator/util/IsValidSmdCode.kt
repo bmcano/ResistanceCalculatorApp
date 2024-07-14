@@ -13,7 +13,10 @@ object IsValidSmdCode {
 
     fun execute(code: String, mode: SmdMode): Boolean {
         // we return true here since the calculation for resistance won't unless proper length
-        if (code.length < 4) return true
+        val length = code.length
+        if (length < 3 || (mode is SmdMode.FourDigit && length < 4)) {
+            return true
+        }
         val regex3 = Regex("^[0-9][0-9R][0-9]$")
         val regex4 = Regex("^[0-9][0-9R][0-9R][0-9]$")
         val regex96 = Regex("^[0-9][0-9][A-FHRSXYZ]$")

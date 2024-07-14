@@ -23,8 +23,11 @@ object ResistanceSmdFormatter {
         }
         val units = resistor.units.ifEmpty { Symbols.OHMS }
         val unitsConversion = MultiplierFromUnits.execute(units)
-        // TODO - check for weird floating point repeating patterns
+        if (resistance.isNaN()) {
+            return "$resistance"
+        }
         val convertedResistance = resistance / unitsConversion
+        // TODO - check for weird floating point repeating patterns
         return "$convertedResistance $units"
     }
 
@@ -33,10 +36,10 @@ object ResistanceSmdFormatter {
         val second = code[1]
         return if (second == 'R') {
             val third = code[2]
-            "$first.$third".toDouble()
+            "$first.$third".toDoubleOrNull() ?: Double.NaN
         } else {
             val multiplier = MultiplierFromDigit.execute(code[2])
-            return "$first$second".toInt() * multiplier
+            return ("$first$second".toDoubleOrNull() ?: Double.NaN) * multiplier
         }
     }
 
@@ -46,13 +49,13 @@ object ResistanceSmdFormatter {
         val third = code[2]
         return if (second == 'R') {
             val fourth = code[3]
-            "$first.$third$fourth".toDouble()
+            "$first.$third$fourth".toDoubleOrNull() ?: Double.NaN
         } else if (third == 'R') {
             val fourth = code[3]
-            "$first$second.$fourth".toDouble()
+            "$first$second.$fourth".toDoubleOrNull() ?: Double.NaN
         } else {
             val multiplier = MultiplierFromDigit.execute(code[2])
-            return "$first$second$third".toInt() * multiplier
+            return ("$first$second$third".toDoubleOrNull() ?: Double.NaN) * multiplier
         }
     }
 
