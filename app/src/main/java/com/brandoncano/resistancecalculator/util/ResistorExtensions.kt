@@ -42,11 +42,6 @@ fun ResistorVtc.isInputInvalid(): Boolean {
     return !IsValidResistance.execute(this, this.resistance)
 }
 
-fun ResistorVtc.getDisplayableValue(): String {
-    if (this.isEmpty()) return "Enter resistance"
-    return this.getResistorValue()
-}
-
 fun String.adjustValueForSharing(): String {
     val color = ColorFinder.textToColor(this)
     return ColorFinder.colorToColorText(color)

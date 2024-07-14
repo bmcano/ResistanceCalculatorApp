@@ -8,6 +8,11 @@ data class SmdResistor(
     var units: String = "",
     var navBarSelection: Int = 0,
 ) {
+    fun isEmpty(): Boolean {
+        val length = code.length
+        return length < 3 || (getSmdMode() is SmdMode.FourDigit && length < 4)
+    }
+
     fun getSmdMode(): SmdMode {
         return when (navBarSelection) {
             0 -> SmdMode.ThreeDigit

@@ -46,7 +46,13 @@ fun SmdResistorLayout(resistor: SmdResistor) {
                 style = textStyleLargeTitle().white()
             )
         }
-        ResistanceText(resistor.formatResistance())
+        ResistanceText(
+            if (resistor.isEmpty()) {
+                stringResource(id = R.string.default_smd_value)
+            } else {
+                resistor.formatResistance()
+            }
+        )
     }
 }
 

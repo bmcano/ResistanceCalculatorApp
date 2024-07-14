@@ -36,7 +36,7 @@ data class ResistorVtc(
         val tolerance = band5.adjustValueForSharing()
         val ppm = band6.adjustValueForSharing()
         return when (navBarSelection) {
-            1 -> "[ $band1, $band2, $band4, $band5 ]"
+            1 -> "[ $band1, $band2, $band4, $tolerance ]"
             2 -> "[ $band1, $band2, $band3, $band4, $tolerance ]"
             3 -> "[ $band1, $band2, $band3, $band4, $tolerance, $ppm ]"
             else -> "[ $band1, $band2, $band4 ]"

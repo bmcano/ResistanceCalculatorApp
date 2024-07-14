@@ -10,11 +10,8 @@ import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 object ResistanceSmdFormatter {
 
     fun execute(resistor: SmdResistor): String {
+        if (resistor.isEmpty()) return "Enter code"
         val smdMode = resistor.getSmdMode()
-        val length = resistor.code.length
-        if (length < 3 || (smdMode is SmdMode.FourDigit && length < 4)) {
-            return "Enter code"
-        }
         val code = resistor.code
         val resistance = when(smdMode) {
             SmdMode.ThreeDigit -> threeDigit(code)

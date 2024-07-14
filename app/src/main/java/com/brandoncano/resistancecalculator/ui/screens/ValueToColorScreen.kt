@@ -34,22 +34,21 @@ import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.MainActivity
+import com.brandoncano.resistancecalculator.ui.components.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
+import com.brandoncano.resistancecalculator.ui.composables.AppTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.AppTextField
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.components.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.SmdMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistor
-import com.brandoncano.resistancecalculator.util.getDisplayableValue
 import com.brandoncano.resistancecalculator.util.isInputInvalid
 
 @Composable
@@ -117,7 +116,7 @@ private fun ContentView(
             AppMenuTopAppBar(stringResource(R.string.menu_value_to_color), interactionSource) {
                 ColorToValueMenuItem(navController, interactionSource)
                 SmdMenuItem(navController, interactionSource)
-                val shareableText = "${resistor.getDisplayableValue()}\n$resistor"
+                val shareableText = "${resistor.getResistorValue()}\n$resistor"
                 ShareMenuItem(context, shareableText, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
@@ -131,7 +130,7 @@ private fun ContentView(
                 AboutAppMenuItem(navController, interactionSource)
             }
 
-            ResistorLayout(resistor, resistor.getDisplayableValue())
+            ResistorLayout(resistor)
             AppTextField(
                 modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
                 label = R.string.type_resistance_hint,
