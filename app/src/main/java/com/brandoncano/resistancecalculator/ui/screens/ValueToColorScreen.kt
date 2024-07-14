@@ -117,7 +117,7 @@ private fun ContentView(
             AppMenuTopAppBar(stringResource(R.string.menu_value_to_color), interactionSource) {
                 ColorToValueMenuItem(navController, interactionSource)
                 SmdMenuItem(navController, interactionSource)
-                val shareableText = "${resistor.getDisplayableValue(context)}\n$resistor"
+                val shareableText = "${resistor.getDisplayableValue()}\n$resistor"
                 ShareMenuItem(context, shareableText, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
@@ -131,7 +131,7 @@ private fun ContentView(
                 AboutAppMenuItem(navController, interactionSource)
             }
 
-            ResistorLayout(resistor, resistor.getDisplayableValue(context))
+            ResistorLayout(resistor, resistor.getDisplayableValue())
             AppTextField(
                 modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
                 label = R.string.type_resistance_hint,

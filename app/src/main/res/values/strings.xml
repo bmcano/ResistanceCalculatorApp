@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Activity title -->
     <string name="app_name">RCV - Calculator</string>
     <!-- OutlinedTextField hints -->
@@ -20,9 +20,9 @@
     <string name="menu_feedback">Feedback</string>
     <string name="menu_about">About this app</string>
     <!-- Default text -->
-    <string name="default_ctv_value">Select colors</string>
-    <string name="default_vtc_value">Enter resistance</string>
-    <string name="default_smd_value">Enter code</string>
+    <string name="default_ctv_value" tools:keep="@string/default_ctv_value">Select colors</string>
+    <string name="default_vtc_value" tools:keep="@string/default_vtc_value">Enter resistance</string>
+    <string name="default_smd_value" tools:keep="@string/default_smd_value">Enter code</string>
     <!-- Bottom navigation -->
     <string name="navbar_three_band">Three Bands</string>
     <string name="navbar_four_band">Four Bands</string>

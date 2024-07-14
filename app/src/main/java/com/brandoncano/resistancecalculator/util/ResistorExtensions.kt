@@ -1,7 +1,5 @@
 package com.brandoncano.resistancecalculator.util
 
-import android.content.Context
-import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
@@ -44,8 +42,8 @@ fun ResistorVtc.isInputInvalid(): Boolean {
     return !IsValidResistance.execute(this, this.resistance)
 }
 
-fun ResistorVtc.getDisplayableValue(context: Context): String {
-    if (this.isEmpty()) return context.getString(R.string.default_vtc_value)
+fun ResistorVtc.getDisplayableValue(): String {
+    if (this.isEmpty()) return "Enter resistance"
     return this.getResistorValue()
 }
 
