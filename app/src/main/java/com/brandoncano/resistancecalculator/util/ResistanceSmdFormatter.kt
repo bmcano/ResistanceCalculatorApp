@@ -51,7 +51,7 @@ object ResistanceSmdFormatter {
             val fourth = code[3]
             "$first$second.$fourth".toDoubleOrNull() ?: Double.NaN
         } else {
-            val multiplier = MultiplierFromDigit.execute(code[2])
+            val multiplier = MultiplierFromDigit.execute(code[3])
             return ("$first$second$third".toDoubleOrNull() ?: Double.NaN) * multiplier
         }
     }

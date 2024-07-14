@@ -27,11 +27,16 @@ class IsValidSmdCodeTest {
     }
 
     @Test
+    fun `3 digit EIA less than full amount test`() {
+        assertTrue(IsValidSmdCode.execute("1R", SmdMode.ThreeDigit))
+        assertTrue(IsValidSmdCode.execute("1", SmdMode.ThreeDigit))
+        assertTrue(IsValidSmdCode.execute("", SmdMode.ThreeDigit))
+    }
+
+    @Test
     fun `invalid 3 digit EIA regex test`() {
         assertFalse(IsValidSmdCode.execute("0RR", SmdMode.ThreeDigit))
-        assertFalse(IsValidSmdCode.execute("1R", SmdMode.ThreeDigit))
         assertFalse(IsValidSmdCode.execute("2R64", SmdMode.ThreeDigit))
-        assertFalse(IsValidSmdCode.execute("", SmdMode.ThreeDigit))
         assertFalse(IsValidSmdCode.execute("random_string", SmdMode.ThreeDigit))
     }
 
@@ -55,11 +60,17 @@ class IsValidSmdCodeTest {
     }
 
     @Test
+    fun `4 digit EIA less than full amount test`() {
+        assertTrue(IsValidSmdCode.execute("1R2", SmdMode.FourDigit))
+        assertTrue(IsValidSmdCode.execute("1R", SmdMode.FourDigit))
+        assertTrue(IsValidSmdCode.execute("1", SmdMode.FourDigit))
+        assertTrue(IsValidSmdCode.execute("", SmdMode.FourDigit))
+    }
+
+    @Test
     fun `invalid 4 digit EIA regex test`() {
         assertFalse(IsValidSmdCode.execute("1RR3", SmdMode.FourDigit))
-        assertFalse(IsValidSmdCode.execute("1R", SmdMode.FourDigit))
         assertFalse(IsValidSmdCode.execute("2RRR", SmdMode.FourDigit))
-        assertFalse(IsValidSmdCode.execute("", SmdMode.FourDigit))
         assertFalse(IsValidSmdCode.execute("random_string", SmdMode.FourDigit))
     }
 
@@ -80,6 +91,13 @@ class IsValidSmdCodeTest {
     }
 
     @Test
+    fun `EIA-96 less than full code regex test`() {
+        assertTrue(IsValidSmdCode.execute("06", SmdMode.EIA96))
+        assertTrue(IsValidSmdCode.execute("1", SmdMode.EIA96))
+        assertTrue(IsValidSmdCode.execute("", SmdMode.EIA96))
+    }
+
+    @Test
     fun `invalid EIA-96 regex test`() {
         assertFalse(IsValidSmdCode.execute("12G", SmdMode.EIA96))
         assertFalse(IsValidSmdCode.execute("12I", SmdMode.EIA96))
@@ -96,9 +114,7 @@ class IsValidSmdCodeTest {
         assertFalse(IsValidSmdCode.execute("12V", SmdMode.EIA96))
         assertFalse(IsValidSmdCode.execute("12W", SmdMode.EIA96))
         assertFalse(IsValidSmdCode.execute("1RR3", SmdMode.EIA96))
-        assertFalse(IsValidSmdCode.execute("1R", SmdMode.EIA96))
         assertFalse(IsValidSmdCode.execute("2RRR", SmdMode.EIA96))
-        assertFalse(IsValidSmdCode.execute("", SmdMode.EIA96))
         assertFalse(IsValidSmdCode.execute("random_string", SmdMode.EIA96))
     }
 }
