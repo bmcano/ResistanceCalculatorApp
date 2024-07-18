@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator.util
 
+import com.Ostermiller.util.SignificantFigures
 import com.brandoncano.resistancecalculator.components.SmdMode
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
@@ -23,9 +24,9 @@ object ResistanceSmdFormatter {
         if (resistance.isNaN()) {
             return "$resistance"
         }
-        val convertedResistance = resistance / unitsConversion
-        // TODO - check for weird floating point repeating patterns
-        return "$convertedResistance $units"
+        val convertedResistance = (resistance / unitsConversion).toString()
+        val formattedResistance = formatResistance(convertedResistance)
+        return "$formattedResistance $units"
     }
 
     private fun threeDigit(code: String): Double {
@@ -61,5 +62,23 @@ object ResistanceSmdFormatter {
         val baseValue = FindEIA96Value.execute(lookupValue)
         val multiplier = MultiplierFromDigit.execute(code[2])
         return baseValue * multiplier
+    }
+
+    private fun formatResistance(resistance: String): String {
+        if (resistance.endsWith(".0")) {
+            return resistance.removeSuffix(".0")
+        }
+
+        try {
+            val sigFigs = SignificantFigures(resistance)
+            if (sigFigs.numberSignificantFigures > 3) {
+                val value = sigFigs.setNumberSignificantFigures(3)
+                return value.toString()
+            }
+        } catch (e: NumberFormatException) {
+            return resistance
+        }
+
+        return resistance
     }
 }
