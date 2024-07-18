@@ -39,7 +39,7 @@
     <string name="about_last_updated_on">Last updated on</string>
     <string name="about_description">Description</string>
     <string name="about_description_one">In this app you can calculate the resistance of a resistor by selecting its band colors or generating a resistor from a resistance value. Works for 3, 4, 5, and 6 band resistors.</string>
-    <string name="about_description_two">Additionally, our app includes an SMD code calculator that allows you to determine their resistance value based on their alphanumeric codes.</string>
+    <string name="about_description_two">Additionally, our app includes an SMD code calculator that allows you to determine the resistance based on a alphanumeric code.</string>
     <string name="about_description_three">Our app follows the IEC 60062 international standard for resistor coding. For more detailed information, you can refer to the IEC 60062 links below.</string>
     <string name="about_iec_header_text">International standard IEC 60062</string>
     <string name="about_standard_iec_button">View resistor color code</string>
