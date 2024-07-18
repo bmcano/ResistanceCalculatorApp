@@ -25,7 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
+import com.brandoncano.resistancecalculator.ui.MainActivity
+import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.ArrowButtonCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
@@ -62,7 +63,7 @@ fun RoundAppIcon() {
 }
 
 @Composable
-fun CalculatorButtons(navController: NavController) {
+fun StandardCalculatorButtons(navController: NavController) {
     Column {
         Text(
             text = stringResource(id = R.string.home_calculators_header_text),
@@ -89,14 +90,25 @@ fun CalculatorButtons(navController: NavController) {
 }
 
 @Composable
+fun SmdCalculatorButton(navController: NavController) {
+    Column {
+        ArrowButtonCard(
+            Icons.Outlined.Calculate,
+            stringResource(id = R.string.home_button_smd),
+        ) {
+            navController.navigate(Screen.Smd.route)
+        }
+    }
+}
+
+@Composable
 fun OurAppsButtons(context: Context) {
     Column {
-        val modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 24.dp)
-            .align(Alignment.Start)
         Text(
             text = stringResource(id = R.string.home_our_apps_header_text),
-            modifier = modifier,
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, top = 24.dp)
+                .align(Alignment.Start),
             style = textStyleHeadline(),
         )
         ArrowButtonCard(
@@ -116,10 +128,37 @@ fun OurAppsButtons(context: Context) {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun AppIconPreview() {
+private fun AppIconPreview() {
     ResistorCalculatorTheme {
         RoundAppIcon()
+    }
+}
+
+@AppComponentPreviews
+@Composable
+private fun StandardCalculatorButtonsPreview() {
+    ResistorCalculatorTheme {
+        val app = MainActivity()
+        StandardCalculatorButtons(NavController(app))
+    }
+}
+
+@AppComponentPreviews
+@Composable
+private fun SmdCalculatorButtonsPreview() {
+    ResistorCalculatorTheme {
+        val app = MainActivity()
+        SmdCalculatorButton(NavController(app))
+    }
+}
+
+@AppComponentPreviews
+@Composable
+private fun OurAppsButtonsPreview() {
+    ResistorCalculatorTheme {
+        val app = MainActivity()
+        OurAppsButtons(app)
     }
 }

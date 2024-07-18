@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Link
+import androidx.compose.material.icons.outlined.FileOpen
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.RcvActivity
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
+import com.brandoncano.resistancecalculator.ui.MainActivity
+import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.ArrowButtonCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
@@ -48,16 +49,43 @@ fun HeadlineBodyStack(@StringRes label: Int, @StringRes body: Int) {
 }
 
 @Composable
-fun ViewIecStandard(context: Context) {
+fun ViewPrivacyPolicy(context: Context) {
     ArrowButtonCard(
-        Icons.Filled.Link,
-        stringResource(id = R.string.about_button_iec)
+        Icons.Outlined.FileOpen,
+        stringResource(id = R.string.about_view_privacy_policy),
     ) {
-        OpenLink.openIECWebpage(context)
+        OpenLink.openPrivacyPolicy(context)
     }
 }
 
-@AppScreenPreviews
+@Composable
+fun ViewIecStandard(context: Context) {
+    Column {
+        Text(
+            text = stringResource(id = R.string.about_iec_header_text),
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                .align(Alignment.Start),
+            style = textStyleHeadline(),
+        )
+        ArrowButtonCard(
+            listOf(
+                Icons.Filled.Link,
+                Icons.Filled.Link
+            ),
+            listOf(
+                stringResource(id = R.string.about_standard_iec_button),
+                stringResource(id = R.string.about_smd_iec_button)
+            ),
+            listOf(
+                { OpenLink.openColorIECWebpage(context) },
+                { OpenLink.openSmdIECWebpage(context) }
+            ),
+        )
+    }
+}
+
+@AppComponentPreviews
 @Composable
 private fun HeadlineBodyStackPreview() {
     ResistorCalculatorTheme {
@@ -72,14 +100,12 @@ private fun HeadlineBodyStackPreview() {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
 private fun IecStandardPreview() {
     ResistorCalculatorTheme {
-        Column(
-            modifier = Modifier.height(64.dp)
-        ) {
-            val context = RcvActivity()
+        Column {
+            val context = MainActivity()
             ViewIecStandard(context)
         }
     }

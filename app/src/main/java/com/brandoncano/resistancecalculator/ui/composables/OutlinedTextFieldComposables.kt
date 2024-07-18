@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 /**
  * Job: Outlined text field components
@@ -40,6 +41,7 @@ fun AppTextField(
     text: String = "",
     reset: Boolean = false,
     isError: Boolean = false,
+    keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
     onOptionSelected: (String) -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -73,9 +75,21 @@ fun AppTextField(
                     )
             },
             isError = isError,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = keyboardOptions,
             singleLine = true,
             interactionSource = interactionSource
         )
+    }
+}
+
+@AppComponentPreviews
+@Composable
+private fun AppTextFieldPreview() {
+    ResistorCalculatorTheme {
+        Column {
+            AppTextField(label = R.string.units_hint) { }
+            AppTextField(label = R.string.units_hint, text = "Example") { }
+            AppTextField(label = R.string.units_hint, isError = true) { }
+        }
     }
 }

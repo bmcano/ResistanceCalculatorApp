@@ -36,7 +36,7 @@ import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleLargeTitle
 
 @Composable
-fun RcvMenuTopAppBar(
+fun AppMenuTopAppBar(
     titleText: String,
     interactionSource: MutableInteractionSource,
     content: @Composable (ColumnScope.() -> Unit)
@@ -49,7 +49,7 @@ fun RcvMenuTopAppBar(
             }
         }
     }
-    RcvTopAppBar(titleText) {
+    AppTopAppBar(titleText) {
         IconButton(
             onClick = { expanded = !expanded },
         ) {
@@ -68,7 +68,7 @@ fun RcvMenuTopAppBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RcvTopAppBar(
+fun AppTopAppBar(
     titleText: String,
     actions: @Composable (RowScope.() -> Unit) = { }
 ) {
@@ -106,20 +106,20 @@ private fun BottomShadow(alpha: Float = 0.1f, height: Dp = 4.dp) {
     )
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun TitleTopAppBarPreview() {
+private fun TitleTopAppBarPreview() {
     ResistorCalculatorTheme {
-        RcvTopAppBar("TopAppBar")
+        AppTopAppBar("TopAppBar")
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun MenuTopAppBarPreview() {
+private fun MenuTopAppBarPreview() {
     val interactionSource = remember { MutableInteractionSource() }
     ResistorCalculatorTheme {
-        RcvMenuTopAppBar("MenuTopAppBar", interactionSource) {
+        AppMenuTopAppBar("MenuTopAppBar", interactionSource) {
             ClearSelectionsMenuItem(interactionSource) { }
         }
     }

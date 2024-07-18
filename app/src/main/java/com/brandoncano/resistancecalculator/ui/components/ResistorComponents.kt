@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.composables
+package com.brandoncano.resistancecalculator.ui.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -13,10 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
+import com.brandoncano.resistancecalculator.ui.composables.AppCard
+import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 import com.brandoncano.resistancecalculator.util.ColorFinder
@@ -52,12 +55,19 @@ fun ResistorLayout(resistor: ResistorCtv) {
             ResistorImagePair(R.drawable.img_resistor_p12, resistor.bandSixForDisplay()),
             ResistorImagePair(R.drawable.img_resistor_p13),
         )
-        ResistanceText(resistor.formatResistance())
+
+        ResistanceText(
+            if (resistor.isEmpty()) {
+                stringResource(id = R.string.default_ctv_value)
+            } else {
+                resistor.formatResistance()
+            }
+        )
     }
 }
 
 @Composable
-fun ResistorLayout(resistor: ResistorVtc, resistance: String) {
+fun ResistorLayout(resistor: ResistorVtc) {
     Column(
         modifier = Modifier.padding(top = 24.dp, start = 32.dp, end = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -77,7 +87,14 @@ fun ResistorLayout(resistor: ResistorVtc, resistance: String) {
             ResistorImagePair(R.drawable.img_resistor_p12, resistor.bandSixForDisplay()),
             ResistorImagePair(R.drawable.img_resistor_p13),
         )
-        ResistanceText(resistance)
+
+        ResistanceText(
+            if (resistor.isEmpty()) {
+                stringResource(id = R.string.default_vtc_value)
+            } else {
+                resistor.getResistorValue()
+            }
+        )
     }
 }
 
@@ -116,7 +133,7 @@ private fun ResistorImage(@DrawableRes drawableRes: Int, color: Color) {
 
 @Composable
 private fun ResistanceText(resistance: String) {
-    RcvCustomCard(
+    AppCard(
         modifier = Modifier.padding(top = 12.dp)
     ) {
         Text(
@@ -129,16 +146,18 @@ private fun ResistanceText(resistance: String) {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
 private fun ResistorLayoutsPreview() {
     ResistorCalculatorTheme {
-        Column {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             ResistorLayout(ResistorCtv())
-            ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "", "", 3))
-            ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "Green", "", 4))
-            ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "", 5))
-            ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "Blue", 6))
+            ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "", "",0))
+            ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "Green", "", 1))
+            ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "", 2))
+            ResistorLayout(ResistorCtv("Red", "Orange", "Black", "Yellow", "Green", "Blue", 3))
         }
     }
 }

@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
-import com.brandoncano.resistancecalculator.ui.RcvActivity
+import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
 import com.brandoncano.resistancecalculator.util.EmailFeedback
@@ -24,10 +24,12 @@ import com.brandoncano.resistancecalculator.util.ShareResistance
 @Composable
 fun AboutAppMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = { Text(
-            text = stringResource(R.string.menu_about),
-            style = textStyleBody(),
-        ) },
+        text = {
+            Text(
+                text = stringResource(R.string.menu_about),
+                style = textStyleBody(),
+            )
+        },
         onClick = { navController.navigate(Screen.About.route) },
         interactionSource = interactionSource,
     )
@@ -36,23 +38,34 @@ fun AboutAppMenuItem(navController: NavController, interactionSource: MutableInt
 @Composable
 fun ClearSelectionsMenuItem(interactionSource: MutableInteractionSource, onClick: (() -> Unit)) {
     DropdownMenuItem(
-        text = { Text(
-            text = stringResource(R.string.menu_clear_selections),
-            style = textStyleBody(),
-        ) },
+        text = {
+            Text(
+                text = stringResource(R.string.menu_clear_selections),
+                style = textStyleBody(),
+            )
+        },
         onClick = onClick,
         interactionSource = interactionSource,
     )
 }
 
 @Composable
-fun ColorToValueMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
+fun ColorToValueMenuItem(
+    navController: NavController,
+    interactionSource: MutableInteractionSource
+) {
     DropdownMenuItem(
-        text = { Text(
-            text = stringResource(R.string.menu_color_to_value),
-            style = textStyleBody(),
-        ) },
-        onClick = { navController.navigate(Screen.ColorToValue.route) },
+        text = {
+            Text(
+                text = stringResource(R.string.menu_color_to_value),
+                style = textStyleBody(),
+            )
+        },
+        onClick = {
+            navController.navigate(Screen.ColorToValue.route) {
+                popUpTo(Screen.Home.route)
+            }
+        },
         interactionSource = interactionSource,
     )
 }
@@ -60,10 +73,12 @@ fun ColorToValueMenuItem(navController: NavController, interactionSource: Mutabl
 @Composable
 fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = { Text(
-            text = stringResource(R.string.menu_feedback),
-            style = textStyleBody(),
-        ) },
+        text = {
+            Text(
+                text = stringResource(R.string.menu_feedback),
+                style = textStyleBody(),
+            )
+        },
         onClick = { EmailFeedback.execute(context) },
         interactionSource = interactionSource,
     )
@@ -72,32 +87,61 @@ fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSour
 @Composable
 fun ShareMenuItem(context: Context, text: String, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = { Text(
-            text = stringResource(R.string.menu_share),
-            style = textStyleBody(),
-        ) },
-        onClick = { ShareResistance.execute(context, text)  },
+        text = {
+            Text(
+                text = stringResource(R.string.menu_share),
+                style = textStyleBody(),
+            )
+        },
+        onClick = { ShareResistance.execute(context, text) },
         interactionSource = interactionSource,
     )
 }
 
 @Composable
-fun ValueToColorMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
+fun SmdMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = { Text(
-            text = stringResource(R.string.manu_value_to_color),
-            style = textStyleBody(),
-        ) },
-        onClick = { navController.navigate(Screen.ValueToColor.route) },
+        text = {
+            Text(
+                text = stringResource(R.string.menu_smd),
+                style = textStyleBody(),
+            )
+        },
+        onClick = {
+            navController.navigate(Screen.Smd.route) {
+                popUpTo(Screen.Home.route)
+            }
+        },
         interactionSource = interactionSource,
     )
 }
 
-@AppScreenPreviews
 @Composable
-fun MenuItemsPreview() {
+fun ValueToColorMenuItem(
+    navController: NavController,
+    interactionSource: MutableInteractionSource
+) {
+    DropdownMenuItem(
+        text = {
+            Text(
+                text = stringResource(R.string.menu_value_to_color),
+                style = textStyleBody(),
+            )
+        },
+        onClick = {
+            navController.navigate(Screen.ValueToColor.route) {
+                popUpTo(Screen.Home.route)
+            }
+        },
+        interactionSource = interactionSource,
+    )
+}
+
+@AppComponentPreviews
+@Composable
+private fun MenuItemsPreview() {
     val interactionSource = remember { MutableInteractionSource() }
-    val app = RcvActivity()
+    val app = MainActivity()
     ResistorCalculatorTheme {
         Column {
             AboutAppMenuItem(NavController(app), interactionSource)
@@ -105,6 +149,7 @@ fun MenuItemsPreview() {
             ColorToValueMenuItem(NavController(app), interactionSource)
             FeedbackMenuItem(app, interactionSource)
             ShareMenuItem(app, "text", interactionSource)
+            SmdMenuItem(NavController(app), interactionSource)
             ValueToColorMenuItem(NavController(app), interactionSource)
         }
     }

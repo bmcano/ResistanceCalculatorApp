@@ -112,6 +112,14 @@ class IsValidResistanceTest {
         assertTrue(IsValidResistance.execute(resistor, "663.0"))
     }
 
+    @Test
+    fun `code coverage inputs`() {
+        val resistor = ResistorVtc()
+        assertTrue(IsValidResistance.execute(resistor, ""))
+        assertFalse(IsValidResistance.execute(resistor, " "))
+        assertFalse(IsValidResistance.execute(resistor, ".0"))
+    }
+
     @After
     fun tearDown() {
         clearAllMocks()

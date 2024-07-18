@@ -16,8 +16,16 @@ object OpenLink {
         open(context, Links.RESISTOR_PLAYSTORE)
     }
 
-    fun openIECWebpage(context: Context) {
-        open(context, Links.IEC)
+    fun openColorIECWebpage(context: Context) {
+        open(context, Links.COLOR_IEC)
+    }
+
+    fun openSmdIECWebpage(context: Context) {
+        open(context, Links.SMD_IEC)
+    }
+
+    fun openPrivacyPolicy(context: Context) {
+        open(context, Links.PRIVACY_POLICY)
     }
 
     private fun open(context: Context, link: String) {

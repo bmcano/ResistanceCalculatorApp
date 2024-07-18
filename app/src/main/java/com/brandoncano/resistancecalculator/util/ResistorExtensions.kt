@@ -1,8 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
-import android.content.Context
-import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
+import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 
 // color to value
@@ -43,12 +42,16 @@ fun ResistorVtc.isInputInvalid(): Boolean {
     return !IsValidResistance.execute(this, this.resistance)
 }
 
-fun ResistorVtc.getDisplayableValue(context: Context): String {
-    if (this.isEmpty()) return context.getString(R.string.default_vtc_value)
-    return this.getResistorValue()
-}
-
 fun String.adjustValueForSharing(): String {
     val color = ColorFinder.textToColor(this)
     return ColorFinder.colorToColorText(color)
+}
+
+// smd
+fun SmdResistor.isInputInvalid(): Boolean {
+    return !IsValidSmdCode.execute(this.code, this.getSmdMode())
+}
+
+fun SmdResistor.formatResistance(): String {
+    return ResistanceSmdFormatter.execute(this)
 }

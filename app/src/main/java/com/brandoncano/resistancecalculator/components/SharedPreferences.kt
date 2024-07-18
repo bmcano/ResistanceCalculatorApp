@@ -29,6 +29,10 @@ enum class SharedPreferences(private val _name: String, private val _key: String
     TOLERANCE_DROPDOWN_VTC("value_to_color", "tolerance_dropdown"),
     PPM_DROPDOWN_VTC("value_to_color", "ppm_dropdown"),
 
+    NAVBAR_SELECTION_SMD("smd", "navbar_selection"),
+    CODE_INPUT_SMD("smd", "code_input"),
+    UNITS_DROPDOWN_SMD("smd", "units_dropdown"),
+
     ; // methods to save, load, or clear the data as strings
 
     fun saveData(context: Context, input: String) {

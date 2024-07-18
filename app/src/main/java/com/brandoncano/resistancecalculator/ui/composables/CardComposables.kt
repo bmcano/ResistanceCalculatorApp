@@ -32,7 +32,7 @@ import com.brandoncano.resistancecalculator.ui.theme.textStyleCallout
  */
 
 @Composable
-fun RcvDivider(
+fun AppDivider(
     modifier: Modifier = Modifier,
     onCard: Boolean = true
 ) {
@@ -48,7 +48,7 @@ fun RcvDivider(
 }
 
 @Composable
-fun RcvCard(
+fun AppStandardCard(
     content: @Composable (ColumnScope.() -> Unit)
 ) {
     Card(
@@ -59,7 +59,7 @@ fun RcvCard(
     )
 }
 @Composable
-fun RcvCustomCard(
+fun AppCard(
     modifier: Modifier = Modifier,
     content: @Composable (ColumnScope.() -> Unit)
 ) {
@@ -99,7 +99,7 @@ fun ArrowButtonCard(
         onClicks.forEachIndexed { index, onClick ->
             CardRowView(onClick, imageVectors[index], cardTexts[index])
             if (onClicks.size - 1 != index) {
-                RcvDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp))
+                AppDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp))
             }
         }
     }
@@ -140,26 +140,26 @@ private fun CardRowView(
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun DefaultCardPreviews() {
+private fun AppStandardCardPreview() {
     ResistorCalculatorTheme {
-        RcvCard {
+        AppStandardCard {
             Text(text = "Text1", modifier = Modifier.padding(4.dp))
-            RcvDivider(onCard = true)
+            AppDivider(onCard = true)
             Text(text = "Text2", modifier = Modifier.padding(4.dp))
-            RcvDivider(modifier = Modifier.padding(4.dp))
+            AppDivider(modifier = Modifier.padding(4.dp))
             Text(text = "Text3", modifier = Modifier.padding(4.dp))
         }
-        RcvDivider(modifier = Modifier.padding(4.dp), false)
+        AppDivider(modifier = Modifier.padding(4.dp), false)
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun ContentCardPreviews() {
+private fun AppCardPreview() {
     ResistorCalculatorTheme {
-        RcvCustomCard {
+        AppCard {
             Text(text = "Text1extended", modifier = Modifier.padding(4.dp))
         }
     }

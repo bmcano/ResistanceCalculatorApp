@@ -8,7 +8,6 @@ import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
  * Job: Checks if a user inputted resistance is valid.
  *
  * Notes:
- *
  *   Invalid inputs (where [x,y,z,w] are some numeric digit):
  *    - 4 Bands: xyz, 0xy, 00x; .x, .xy, .xyz; 0.0, 0.00x, 0.0xy, x.0y, x.0yz; xy0 for GΩ
  *    - 5/6 Bands: xyzw, 0xy(z), 00x(y); .xy, .0x; 0.xyz, 0.0xyz, x.0yz, x.y0z, 0.00x; 1230 for GΩ
@@ -19,7 +18,7 @@ import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 object IsValidResistance {
 
     fun execute(resistor: ResistorVtc, input: String): Boolean {
-        if (input.isEmpty()) return true
+        input.ifEmpty { return true }
         if (input.contains(" ")) return false
         val sigFigs: Int
         try {

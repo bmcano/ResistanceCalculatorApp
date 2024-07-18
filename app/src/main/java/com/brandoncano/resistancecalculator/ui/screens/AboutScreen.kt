@@ -16,14 +16,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.RcvActivity
-import com.brandoncano.resistancecalculator.ui.composables.RcvDivider
+import com.brandoncano.resistancecalculator.ui.MainActivity
+import com.brandoncano.resistancecalculator.ui.composables.AppDivider
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.RcvCard
+import com.brandoncano.resistancecalculator.ui.composables.AppStandardCard
 import com.brandoncano.resistancecalculator.ui.components.HeadlineBodyStack
 import com.brandoncano.resistancecalculator.ui.components.OurAppsButtons
-import com.brandoncano.resistancecalculator.ui.composables.RcvTopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.AppTopAppBar
 import com.brandoncano.resistancecalculator.ui.components.ViewIecStandard
+import com.brandoncano.resistancecalculator.ui.components.ViewPrivacyPolicy
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
 import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
@@ -45,9 +46,10 @@ private fun ContentView(context: Context) {
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.Start
     ) {
-        RcvTopAppBar(stringResource(R.string.about_title))
+        AppTopAppBar(stringResource(R.string.about_title))
         AuthorCard()
         AppInfoCard()
+        ViewPrivacyPolicy(context)
         DescriptionCard()
         ViewIecStandard(context)
         OurAppsButtons(context)
@@ -57,7 +59,7 @@ private fun ContentView(context: Context) {
 
 @Composable
 private fun AuthorCard() {
-    RcvCard {
+    AppStandardCard {
         HeadlineBodyStack(
             label = R.string.about_created_by,
             body = R.string.about_author,
@@ -68,12 +70,12 @@ private fun AuthorCard() {
 
 @Composable
 private fun AppInfoCard() {
-    RcvCard {
+    AppStandardCard {
         HeadlineBodyStack(
             label = R.string.about_app_version,
             body = R.string.version,
         )
-        RcvDivider(
+        AppDivider(
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, top = 16.dp)
         )
@@ -88,7 +90,7 @@ private fun AppInfoCard() {
 @Composable
 private fun DescriptionCard() {
     val modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp)
-    RcvCard {
+    AppStandardCard {
         Text(
             text = stringResource(id = R.string.about_description),
             modifier = modifier,
@@ -101,6 +103,11 @@ private fun DescriptionCard() {
         )
         Text(
             text = stringResource(id = R.string.about_description_two),
+            modifier = modifier,
+            style = textStyleBody(),
+        )
+        Text(
+            text = stringResource(id = R.string.about_description_three),
             modifier = modifier.padding(bottom = 12.dp),
             style = textStyleBody(),
         )
@@ -110,6 +117,6 @@ private fun DescriptionCard() {
 @AppScreenPreviews
 @Composable
 private fun AboutPreview() {
-    val app = RcvActivity()
+    val app = MainActivity()
     AboutScreen(app)
 }

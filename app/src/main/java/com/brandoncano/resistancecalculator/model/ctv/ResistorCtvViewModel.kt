@@ -13,7 +13,6 @@ class ResistorCtvViewModel(context: Context): ViewModel() {
 
     private val repository = ResistorCtvRepository.getInstance(context)
     private var resistor = MutableLiveData<ResistorCtv>()
-    var resistance = ""
 
     init {
         resistor.value = ResistorCtv()

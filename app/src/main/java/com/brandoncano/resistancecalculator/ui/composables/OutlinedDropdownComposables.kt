@@ -44,7 +44,7 @@ import com.brandoncano.resistancecalculator.util.ColorFinder
  */
 
 @Composable
-fun TextDropDownMenu(
+fun AppTextDropDownMenu(
     modifier: Modifier = Modifier,
     @StringRes label: Int,
     selectedOption: String = "",
@@ -79,7 +79,6 @@ fun TextDropDownMenu(
                 .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(stringResource(label)) },
-            leadingIcon = { /* left empty to match spacing */ },
             trailingIcon = {
                 Icon(
                     imageVector = icon,
@@ -126,7 +125,7 @@ private fun TextDropDownItemView(item: String, onClick: () -> Unit) {
 }
 
 @Composable
-fun OutlinedDropDownMenu(
+fun ImageTextDropDownMenu(
     modifier: Modifier = Modifier,
     @StringRes label: Int,
     selectedOption: String = "",
@@ -167,11 +166,9 @@ fun OutlinedDropDownMenu(
                 .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(stringResource(label)) },
-            leadingIcon = {
-                if (selectedLeadingIcon != resistor_blank) {
-                    RoundedSquare(color = selectedLeadingIcon, size = 24.dp)
-                }
-            },
+            leadingIcon = if (selectedLeadingIcon != resistor_blank) {
+                { RoundedSquare(color = selectedLeadingIcon, size = 24.dp) }
+            } else null,
             trailingIcon = {
                 Icon(
                     imageVector = icon,
@@ -224,9 +221,9 @@ private fun DropdownItemView(item: DropdownItem, onClick: () -> Unit) {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun CustomDropdownRowPreview() {
+private fun CustomDropdownRowPreview() {
     ResistorCalculatorTheme {
         val item1 = DropdownItem(name = "Item 1", value = "Value 1")
         Column {
@@ -236,9 +233,9 @@ fun CustomDropdownRowPreview() {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun CustomDropdownPreview() {
+private fun CustomDropdownPreview() {
     val item1 = DropdownItem(name = "Item 1", value = "Value 1")
     val item2 = DropdownItem(name = "Item 2", value = "Value 2")
     val item3 = DropdownItem(name = "Item 3", value = "Value 3")
@@ -248,15 +245,15 @@ fun CustomDropdownPreview() {
     val list = listOf(item1, item2, item3, item4, item5, item6)
     ResistorCalculatorTheme {
         Column {
-            OutlinedDropDownMenu(Modifier, R.string.number_band_hint1, "", list) { }
-            OutlinedDropDownMenu(Modifier, R.string.number_band_hint1, "Red", list) { }
+            ImageTextDropDownMenu(Modifier, R.string.number_band_hint1, "", list) { }
+            ImageTextDropDownMenu(Modifier, R.string.number_band_hint1, "Red", list) { }
         }
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun TextDropdownRowPreview() {
+private fun TextDropdownRowPreview() {
     ResistorCalculatorTheme {
         val item1 = "unit"
         Column {
@@ -266,14 +263,14 @@ fun TextDropdownRowPreview() {
     }
 }
 
-@AppScreenPreviews
+@AppComponentPreviews
 @Composable
-fun TextDropdownPreview() {
+private fun TextDropdownPreview() {
     ResistorCalculatorTheme {
         val list = listOf("item1", "item2", "item3", "item4", "item5", "item6")
         Column {
-            TextDropDownMenu(Modifier, R.string.units_hint, "", list) { }
-            TextDropDownMenu(Modifier, R.string.units_hint, "Red", list) { }
+            AppTextDropDownMenu(Modifier, R.string.units_hint, "", list) { }
+            AppTextDropDownMenu(Modifier, R.string.units_hint, "Red", list) { }
         }
     }
 }
