@@ -44,6 +44,7 @@
     <string name="about_iec_header_text">International standard IEC 60062</string>
     <string name="about_standard_iec_button">View resistor color code</string>
     <string name="about_smd_iec_button">View resistor SMD code</string>
+    <string name="about_view_privacy_policy">View privacy policy</string>
     <!-- Home screen/components text -->
     <string name="home_calculators_header_text">Calculators</string>
     <string name="home_button_value_to_color">Value to Color</string>

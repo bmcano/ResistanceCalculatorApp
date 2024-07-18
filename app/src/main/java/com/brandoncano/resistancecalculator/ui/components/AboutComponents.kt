@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Link
+import androidx.compose.material.icons.outlined.FileOpen
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,6 +45,16 @@ fun HeadlineBodyStack(@StringRes label: Int, @StringRes body: Int) {
             modifier = modifier.padding(top = 4.dp),
             style = textStyleBody(),
         )
+    }
+}
+
+@Composable
+fun ViewPrivacyPolicy(context: Context) {
+    ArrowButtonCard(
+        Icons.Outlined.FileOpen,
+        stringResource(id = R.string.about_view_privacy_policy),
+    ) {
+        OpenLink.openPrivacyPolicy(context)
     }
 }
 

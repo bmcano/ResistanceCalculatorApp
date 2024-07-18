@@ -24,6 +24,7 @@ import com.brandoncano.resistancecalculator.ui.components.HeadlineBodyStack
 import com.brandoncano.resistancecalculator.ui.components.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.composables.AppTopAppBar
 import com.brandoncano.resistancecalculator.ui.components.ViewIecStandard
+import com.brandoncano.resistancecalculator.ui.components.ViewPrivacyPolicy
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
 import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
@@ -48,6 +49,7 @@ private fun ContentView(context: Context) {
         AppTopAppBar(stringResource(R.string.about_title))
         AuthorCard()
         AppInfoCard()
+        ViewPrivacyPolicy(context)
         DescriptionCard()
         ViewIecStandard(context)
         OurAppsButtons(context)

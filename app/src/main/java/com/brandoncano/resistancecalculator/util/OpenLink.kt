@@ -24,6 +24,10 @@ object OpenLink {
         open(context, Links.SMD_IEC)
     }
 
+    fun openPrivacyPolicy(context: Context) {
+        open(context, Links.PRIVACY_POLICY)
+    }
+
     private fun open(context: Context, link: String) {
         try {
             val builder = CustomTabsIntent.Builder()
