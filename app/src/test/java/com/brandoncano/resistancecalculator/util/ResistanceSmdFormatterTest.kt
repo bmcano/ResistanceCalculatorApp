@@ -59,6 +59,6 @@ class ResistanceSmdFormatterTest {
         resistor.code = "1XM"
         assertEquals("${Double.NaN}", ResistanceSmdFormatter.execute(resistor))
         resistor.code = "16Z"
-        assertEquals("0.143", ResistanceSmdFormatter.execute(resistor))
+        assertEquals("0.143 ${Symbols.OHMS}", ResistanceSmdFormatter.execute(resistor))
     }
 }
