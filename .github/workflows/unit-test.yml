@@ -7,10 +7,8 @@ on:
   pull_request:
 
 jobs:
-  build:
-
+  build: # test the build of the project
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -37,5 +35,34 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+  test: # run all unit tests of the project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
       - name: Run unit tests
         run: ./gradlew test
+
+      - name: Display test results
+        if: failure()
+        run: cat $(find . -type f -name "*.txt" -exec grep -l "FAILED" {} \;)
