@@ -15,7 +15,8 @@ ui-test-junit4 = "1.6.8"
 # gradle/language
 agp = "8.5.1" # 7/13/24
 kotlin = "2.0.0" # 7/7/24
-ktlint = "11.3.1"
+ktlint = "11.3.1" # 7/21/24
+ostermiller = "1.07.00" # 7/21/24
 
 [libraries]
 # androidx
@@ -39,6 +40,8 @@ gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 # unit testing
 junit = { module = "junit:junit", version.ref = "junit" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+# misc
+ostermiller-util = { module = "org.ostermiller:utils", version.ref = "ostermiller" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

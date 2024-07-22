@@ -78,5 +78,5 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.junit)
     // external libraries
-    implementation(files("libs/ostermillerutils_1_07_00.jar"))
+    implementation(libs.ostermiller.util)
 }
