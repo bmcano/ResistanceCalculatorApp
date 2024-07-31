@@ -10,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,15 +37,16 @@ fun HomeScreen(context: Context, navController: NavController) {
 @Composable
 private fun ContentView(context: Context, navController: NavController) {
     val interactionSource = remember { MutableInteractionSource() }
+    val showMenu = remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        AppMenuTopAppBar(stringResource(R.string.app_name), interactionSource) {
-            FeedbackMenuItem(context, interactionSource)
-            AboutAppMenuItem(navController, interactionSource)
+        AppMenuTopAppBar(stringResource(R.string.app_name), interactionSource, showMenu) {
+            FeedbackMenuItem(context, showMenu)
+            AboutAppMenuItem(navController, showMenu)
         }
         AppIcon()
         AppCalculatorButtons(navController)

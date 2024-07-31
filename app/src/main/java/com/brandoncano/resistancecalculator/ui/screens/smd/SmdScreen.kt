@@ -74,6 +74,7 @@ private fun ContentView(
 ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
+    val showMenu = remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     var reset by remember { mutableStateOf(false) }
     val resistor by smdResistor.observeAsState(SmdResistor())
@@ -101,15 +102,16 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppMenuTopAppBar(stringResource(R.string.title_smd), interactionSource) {
-                ShareMenuItem(context, resistor.toString(), interactionSource)
-                FeedbackMenuItem(context, interactionSource)
-                ClearSelectionsMenuItem(interactionSource) {
+            AppMenuTopAppBar(stringResource(R.string.title_smd), interactionSource, showMenu) {
+                ShareMenuItem(context, resistor.toString(), showMenu)
+                FeedbackMenuItem(context, showMenu)
+                ClearSelectionsMenuItem {
+                    showMenu.value = false
                     viewModel.clear()
                     reset = true
                     focusManager.clearFocus()
                 }
-                AboutAppMenuItem(navController, interactionSource)
+                AboutAppMenuItem(navController, showMenu)
             }
 
             SmdResistorLayout(resistor, isError)

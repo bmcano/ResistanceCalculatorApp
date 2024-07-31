@@ -71,6 +71,7 @@ private fun ContentView(
 ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
+    val showMenu = remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     var resetDropdown by remember { mutableStateOf(false) }
     val resistor by resistorCtv.observeAsState(ResistorCtv())
@@ -89,6 +90,16 @@ private fun ContentView(
             }
         }
     ) { paddingValues ->
+        fun clearScreen() {
+            showMenu.value = false
+            viewModel.clear()
+            resetDropdown = true
+            focusManager.clearFocus()
+            // these are needed since the viewModel doesn't update them automatically
+            band3 = ""
+            band5 = ""
+            band6 = ""
+        }
         fun postSelectionActions() {
             resetDropdown = false
             focusManager.clearFocus()
@@ -101,25 +112,20 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppMenuTopAppBar(stringResource(R.string.title_color_to_value), interactionSource) {
-                ValueToColorMenuItem(navController, interactionSource)
+            AppMenuTopAppBar(
+                titleText = stringResource(R.string.title_color_to_value),
+                interactionSource = interactionSource,
+                showMenu = showMenu,
+            ) {
+                ValueToColorMenuItem(navController, showMenu)
                 val shareableText = "${resistor.formatResistance()}\n$resistor"
-                ShareMenuItem(context, shareableText, interactionSource)
-                FeedbackMenuItem(context, interactionSource)
-                ClearSelectionsMenuItem(interactionSource) {
-                    viewModel.clear()
-                    resetDropdown = true
-                    focusManager.clearFocus()
-                    // these are needed since the viewModel doesn't update them automatically
-                    band3 = ""
-                    band5 = ""
-                    band6 = ""
-                }
-                AboutAppMenuItem(navController, interactionSource)
+                ShareMenuItem(context, shareableText, showMenu)
+                FeedbackMenuItem(context, showMenu)
+                ClearSelectionsMenuItem { clearScreen() }
+                AboutAppMenuItem(navController, showMenu)
             }
 
             ResistorLayout(resistor)
-
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
                 label = R.string.number_band_hint1,

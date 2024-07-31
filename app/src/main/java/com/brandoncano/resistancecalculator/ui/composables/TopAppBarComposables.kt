@@ -20,10 +20,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults.centerAlignedTopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -39,26 +38,26 @@ import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 fun AppMenuTopAppBar(
     titleText: String,
     interactionSource: MutableInteractionSource,
+    showMenu: MutableState<Boolean>,
     content: @Composable (ColumnScope.() -> Unit)
 ) {
-    var expanded by remember { mutableStateOf(false) }
     LaunchedEffect(interactionSource) {
         interactionSource.interactions.collect { interaction ->
             if (interaction is PressInteraction.Release) {
-                expanded = false
+                showMenu.value = false
             }
         }
     }
     AppTopAppBar(titleText) {
-        IconButton(onClick = { expanded = !expanded }) {
+        IconButton(onClick = { showMenu.value = !showMenu.value }) {
             Icon(
                 imageVector = Icons.Filled.MoreVert,
                 contentDescription = stringResource(R.string.content_description_menu_more)
             )
         }
         DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
+            expanded = showMenu.value,
+            onDismissRequest = { showMenu.value = false },
             content = content,
         )
     }
@@ -116,9 +115,10 @@ private fun TitleTopAppBarPreview() {
 @Composable
 private fun MenuTopAppBarPreview() {
     val interactionSource = remember { MutableInteractionSource() }
+    val showMenu = remember { mutableStateOf(false) }
     ResistorCalculatorTheme {
-        AppMenuTopAppBar("MenuTopAppBar", interactionSource) {
-            ClearSelectionsMenuItem(interactionSource) { }
+        AppMenuTopAppBar("MenuTopAppBar", interactionSource, showMenu) {
+            ClearSelectionsMenuItem { }
         }
     }
 }

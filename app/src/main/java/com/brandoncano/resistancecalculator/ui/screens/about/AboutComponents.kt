@@ -91,7 +91,7 @@ fun ViewIecStandard(context: Context) {
         Text(
             text = stringResource(id = R.string.about_iec_header_text),
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 24.dp)
                 .align(Alignment.Start),
             style = textStyleHeadline(),
         )

@@ -74,6 +74,7 @@ private fun ContentView(
 ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
+    val showMenu = remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val resistor by resistorVtc.observeAsState(ResistorVtc())
     var resistance by remember { mutableStateOf(resistor.resistance) }
@@ -96,6 +97,15 @@ private fun ContentView(
             }
         }
     ) { paddingValues ->
+        fun clearScreen() {
+            showMenu.value = false
+            viewModel.clear()
+            focusManager.clearFocus()
+            isError = false
+            reset = true
+            band5 = ""
+            band6 = ""
+        }
         fun postSelectionActions() {
             reset = false
             focusManager.clearFocus()
@@ -111,20 +121,17 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppMenuTopAppBar(stringResource(R.string.title_value_to_color), interactionSource) {
-                ColorToValueMenuItem(navController, interactionSource)
+            AppMenuTopAppBar(
+                titleText = stringResource(R.string.title_value_to_color),
+                interactionSource = interactionSource,
+                showMenu = showMenu,
+            ) {
+                ColorToValueMenuItem(navController, showMenu)
                 val shareableText = "${resistor.getResistorValue()}\n$resistor"
-                ShareMenuItem(context, shareableText, interactionSource)
-                FeedbackMenuItem(context, interactionSource)
-                ClearSelectionsMenuItem(interactionSource) {
-                    viewModel.clear()
-                    focusManager.clearFocus()
-                    isError = false
-                    reset = true
-                    band5 = ""
-                    band6 = ""
-                }
-                AboutAppMenuItem(navController, interactionSource)
+                ShareMenuItem(context, shareableText, showMenu)
+                FeedbackMenuItem(context, showMenu)
+                ClearSelectionsMenuItem { clearScreen() }
+                AboutAppMenuItem(navController, showMenu)
             }
 
             ResistorLayout(resistor, isError)
