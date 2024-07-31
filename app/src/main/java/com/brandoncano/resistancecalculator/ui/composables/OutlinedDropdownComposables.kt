@@ -33,7 +33,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.RoundedSquare
-import com.brandoncano.resistancecalculator.ui.theme.resistor_blank
+import com.brandoncano.resistancecalculator.ui.theme.resistor_beige
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
 import com.brandoncano.resistancecalculator.ui.theme.textStyleCaption
 import com.brandoncano.resistancecalculator.ui.theme.textStyleSubhead
@@ -149,7 +149,7 @@ fun ImageTextDropDownMenu(
     LaunchedEffect(reset) {
         if (reset) {
             selectedText = ""
-            selectedLeadingIcon = resistor_blank
+            selectedLeadingIcon = resistor_beige
         }
     }
     Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
@@ -162,7 +162,7 @@ fun ImageTextDropDownMenu(
                 .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(stringResource(label)) },
-            leadingIcon = if (selectedLeadingIcon != resistor_blank) {
+            leadingIcon = if (selectedLeadingIcon != resistor_beige) {
                 { RoundedSquare(color = selectedLeadingIcon, size = 24.dp) }
             } else null,
             trailingIcon = {

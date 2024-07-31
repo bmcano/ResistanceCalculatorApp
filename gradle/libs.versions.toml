@@ -1,6 +1,6 @@
 [versions]
 # libraries
-activity-compose = "1.9.0" # 7/7/24
+activity-compose = "1.9.1" # 7/31/24
 appcompat = "1.7.0" # 7/7/24
 browser = "1.8.0" # 7/7/24
 compose = "1.6.8" # 7/7/24

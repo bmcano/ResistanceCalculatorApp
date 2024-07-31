@@ -41,7 +41,7 @@ class ValueFinderTest {
         assertEquals("", ValueFinder.getSigFig(C.GOLD))
         assertEquals("", ValueFinder.getSigFig(C.SILVER))
         // else
-        assertEquals("", ValueFinder.getSigFig(C.BLANK))
+        assertEquals("", ValueFinder.getSigFig(C.RESISTOR_BEIGE))
         assertEquals("", ValueFinder.getSigFig("SOME STRING"))
     }
 
@@ -55,7 +55,7 @@ class ValueFinderTest {
         assertEquals("${S.PM}0.05%", ValueFinder.getTolerance(C.GRAY, false))
         assertEquals("${S.PM}5%", ValueFinder.getTolerance(C.GOLD, false))
         assertEquals("${S.PM}10%", ValueFinder.getTolerance(C.SILVER, false))
-        assertEquals("${S.PM}20%", ValueFinder.getTolerance(C.BLANK, false))
+        assertEquals("${S.PM}20%", ValueFinder.getTolerance(C.RESISTOR_BEIGE, false))
         // colors that *should not* be reachable
         assertEquals("", ValueFinder.getTolerance(C.BLACK, false))
         assertEquals("", ValueFinder.getTolerance(C.ORANGE, false))
@@ -65,7 +65,7 @@ class ValueFinderTest {
         assertEquals("", ValueFinder.getTolerance("SOME STRING", false))
         assertEquals("${S.PM}20%", ValueFinder.getTolerance(C.GOLD, true))
         assertEquals("${S.PM}20%", ValueFinder.getTolerance(C.SILVER, true))
-        assertEquals("${S.PM}20%", ValueFinder.getTolerance(C.BLANK, true))
+        assertEquals("${S.PM}20%", ValueFinder.getTolerance(C.RESISTOR_BEIGE, true))
     }
 
     @Test
@@ -84,7 +84,7 @@ class ValueFinderTest {
         assertEquals("", ValueFinder.getPPM(C.GOLD, true))
         assertEquals("", ValueFinder.getPPM(C.SILVER, true))
         // else
-        assertEquals("", ValueFinder.getPPM(C.BLANK, true))
+        assertEquals("", ValueFinder.getPPM(C.RESISTOR_BEIGE, true))
         assertEquals("", ValueFinder.getPPM("SOME STRING", true))
         // 4 or 5 bands
         assertEquals("", ValueFinder.getPPM(C.BLACK, false))

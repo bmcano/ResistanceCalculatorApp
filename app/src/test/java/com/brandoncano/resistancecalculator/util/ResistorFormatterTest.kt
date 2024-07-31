@@ -54,7 +54,7 @@ class ResistorFormatterTest {
             C.BLACK, C.BROWN, C.RED, C.ORANGE,
             C.ORANGE, C.YELLOW, C.GREEN, C.BLUE,
             C.BLUE, C.VIOLET, C.GRAY, C.WHITE,
-            C.WHITE, C.BLANK
+            C.WHITE, C.RESISTOR_BEIGE
         )
 
         val resistor = ResistorVtc()
@@ -114,7 +114,7 @@ class ResistorFormatterTest {
             C.BLACK, C.BROWN, C.RED,
             C.ORANGE, C.YELLOW, C.GREEN,
             C.BLUE, C.VIOLET, C.GRAY,
-            C.WHITE, C.BLANK
+            C.WHITE, C.RESISTOR_BEIGE
         )
 
         val resistor = ResistorVtc()

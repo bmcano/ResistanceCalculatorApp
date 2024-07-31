@@ -16,5 +16,7 @@ object Colors {
     const val WHITE = "White"
     const val GOLD = "Gold"
     const val SILVER = "Silver"
-    const val BLANK = "Blank"
+    const val RESISTOR_BEIGE = "Resistor Beige"
+    const val RESISTOR_BLUE = "Resistor Blue"
+    const val RESISTOR_WIRE = "Resistor Wire"
 }
