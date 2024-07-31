@@ -48,7 +48,7 @@ fun String.adjustValueForSharing(): String {
 }
 
 // smd
-fun SmdResistor.isInputInvalid(): Boolean {
+fun SmdResistor.isSmdInputInvalid(): Boolean {
     return !IsValidSmdCode.execute(this.code, this.getSmdMode())
 }
 

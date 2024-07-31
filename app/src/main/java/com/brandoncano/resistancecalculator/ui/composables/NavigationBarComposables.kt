@@ -39,13 +39,13 @@ fun CalculatorNavigationBar(
         R.string.navbar_three_band,
         R.string.navbar_four_band,
         R.string.navbar_five_band,
-        R.string.navbar_six_band
+        R.string.navbar_six_band,
     )
     val icons = listOf(
         Icons.Outlined.Looks3,
         Icons.Outlined.Looks4,
         Icons.Outlined.Looks5,
-        Icons.Outlined.Looks6
+        Icons.Outlined.Looks6,
     )
     NavigationBar {
         labels.forEachIndexed { index, item ->

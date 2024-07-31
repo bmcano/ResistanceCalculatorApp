@@ -7,9 +7,6 @@ import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 
-/**
- * Job: ViewModel factory for the resistor ViewModels
- */
 class ResistorViewModelFactory(private val context: Context): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

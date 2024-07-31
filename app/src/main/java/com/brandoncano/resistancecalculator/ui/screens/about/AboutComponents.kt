@@ -1,8 +1,9 @@
-package com.brandoncano.resistancecalculator.ui.components
+package com.brandoncano.resistancecalculator.ui.screens.about
 
 import android.content.Context
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -18,33 +19,38 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
+import com.brandoncano.resistancecalculator.ui.composables.AppDivider
+import com.brandoncano.resistancecalculator.ui.composables.AppStandardCard
 import com.brandoncano.resistancecalculator.ui.composables.ArrowButtonCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
 import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
 import com.brandoncano.resistancecalculator.util.OpenLink
 
-/**
- * Job: Holds all the components for the about screen
- */
+@Composable
+fun AuthorCard() {
+    AppStandardCard {
+        HeadlineBodyStack(
+            label = R.string.about_created_by,
+            body = R.string.about_author,
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+    }
+}
 
 @Composable
-fun HeadlineBodyStack(@StringRes label: Int, @StringRes body: Int) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.Start
-    ) {
-        val modifier = Modifier.padding(start = 16.dp, end = 16.dp)
-        Text(
-            text = stringResource(id = label),
-            modifier = modifier.padding(top = 12.dp),
-            style = textStyleHeadline(),
+fun AppInfoCard() {
+    AppStandardCard {
+        HeadlineBodyStack(
+            label = R.string.about_app_version,
+            body = R.string.version,
         )
-        Text(
-            text = stringResource(id = body),
-            modifier = modifier.padding(top = 4.dp),
-            style = textStyleBody(),
+        AppDivider(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp))
+        HeadlineBodyStack(
+            label = R.string.about_last_updated_on,
+            body = R.string.last_updated,
         )
+        Spacer(modifier = Modifier.height(12.dp))
     }
 }
 
@@ -55,6 +61,32 @@ fun ViewPrivacyPolicy(context: Context) {
         stringResource(id = R.string.about_view_privacy_policy),
     ) {
         OpenLink.openPrivacyPolicy(context)
+    }
+}
+
+@Composable
+fun DescriptionCard() {
+    Text(
+        text = stringResource(id = R.string.about_description),
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 24.dp),
+        style = textStyleHeadline(),
+    )
+    AppStandardCard {
+        Text(
+            text = stringResource(id = R.string.about_description_one),
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
+            style = textStyleBody(),
+        )
+        Text(
+            text = stringResource(id = R.string.about_description_two),
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
+            style = textStyleBody(),
+        )
+        Text(
+            text = stringResource(id = R.string.about_description_three),
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 12.dp),
+            style = textStyleBody(),
+        )
     }
 }
 
@@ -81,6 +113,25 @@ fun ViewIecStandard(context: Context) {
                 { OpenLink.openColorIECWebpage(context) },
                 { OpenLink.openSmdIECWebpage(context) }
             ),
+        )
+    }
+}
+
+@Composable
+fun HeadlineBodyStack(@StringRes label: Int, @StringRes body: Int) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.Start
+    ) {
+        Text(
+            text = stringResource(id = label),
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
+            style = textStyleHeadline(),
+        )
+        Text(
+            text = stringResource(id = body),
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp),
+            style = textStyleBody(),
         )
     }
 }

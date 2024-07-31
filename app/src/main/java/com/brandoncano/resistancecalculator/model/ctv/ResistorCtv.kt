@@ -1,8 +1,5 @@
 package com.brandoncano.resistancecalculator.model.ctv
 
-/**
- * Job: Model class for the color to value resistor calculator
- */
 data class ResistorCtv(
     var band1: String = "",
     var band2: String = "",

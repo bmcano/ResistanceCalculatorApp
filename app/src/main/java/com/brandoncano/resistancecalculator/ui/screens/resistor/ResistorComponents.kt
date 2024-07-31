@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.components
+package com.brandoncano.resistancecalculator.ui.screens.resistor
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -27,10 +27,6 @@ import com.brandoncano.resistancecalculator.util.bandFiveForDisplay
 import com.brandoncano.resistancecalculator.util.bandSixForDisplay
 import com.brandoncano.resistancecalculator.util.bandThreeForDisplay
 import com.brandoncano.resistancecalculator.util.formatResistance
-
-/**
- * Job: Holds all the parts for the resistor layout.
- */
 
 private data class ResistorImagePair(@DrawableRes val drawableRes: Int, val color: String? = null)
 
@@ -67,7 +63,10 @@ fun ResistorLayout(resistor: ResistorCtv) {
 }
 
 @Composable
-fun ResistorLayout(resistor: ResistorVtc) {
+fun ResistorLayout(
+    resistor: ResistorVtc,
+    isError: Boolean = false,
+) {
     Column(
         modifier = Modifier.padding(top = 24.dp, start = 32.dp, end = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -87,14 +86,12 @@ fun ResistorLayout(resistor: ResistorVtc) {
             ResistorImagePair(R.drawable.img_resistor_p12, resistor.bandSixForDisplay()),
             ResistorImagePair(R.drawable.img_resistor_p13),
         )
-
-        ResistanceText(
-            if (resistor.isEmpty()) {
-                stringResource(id = R.string.default_vtc_value)
-            } else {
-                resistor.getResistorValue()
-            }
-        )
+        val text = when {
+            resistor.isEmpty() -> stringResource(id = R.string.default_vtc_value)
+            isError -> stringResource(id = R.string.error_na)
+            else -> resistor.getResistorValue()
+        }
+        ResistanceText(text)
     }
 }
 

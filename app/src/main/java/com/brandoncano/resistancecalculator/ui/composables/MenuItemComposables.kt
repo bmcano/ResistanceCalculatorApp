@@ -1,12 +1,24 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
 import android.content.Context
+import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Cancel
+import androidx.compose.material.icons.outlined.Colorize
+import androidx.compose.material.icons.outlined.Feedback
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
@@ -24,13 +36,9 @@ import com.brandoncano.resistancecalculator.util.ShareResistance
 @Composable
 fun AboutAppMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = {
-            Text(
-                text = stringResource(R.string.menu_about),
-                style = textStyleBody(),
-            )
-        },
+        text = { MenuText(stringRes = R.string.menu_about) },
         onClick = { navController.navigate(Screen.About.route) },
+        leadingIcon = { MenuIcon(Icons.Outlined.Info) },
         interactionSource = interactionSource,
     )
 }
@@ -38,13 +46,9 @@ fun AboutAppMenuItem(navController: NavController, interactionSource: MutableInt
 @Composable
 fun ClearSelectionsMenuItem(interactionSource: MutableInteractionSource, onClick: (() -> Unit)) {
     DropdownMenuItem(
-        text = {
-            Text(
-                text = stringResource(R.string.menu_clear_selections),
-                style = textStyleBody(),
-            )
-        },
+        text = { MenuText(stringRes = R.string.menu_clear_selections) },
         onClick = onClick,
+        leadingIcon = { MenuIcon(Icons.Outlined.Cancel) },
         interactionSource = interactionSource,
     )
 }
@@ -55,17 +59,13 @@ fun ColorToValueMenuItem(
     interactionSource: MutableInteractionSource
 ) {
     DropdownMenuItem(
-        text = {
-            Text(
-                text = stringResource(R.string.menu_color_to_value),
-                style = textStyleBody(),
-            )
-        },
+        text = { MenuText(stringRes = R.string.menu_color_to_value) },
         onClick = {
             navController.navigate(Screen.ColorToValue.route) {
                 popUpTo(Screen.Home.route)
             }
         },
+        leadingIcon = { MenuIcon(Icons.Outlined.Colorize) },
         interactionSource = interactionSource,
     )
 }
@@ -73,13 +73,9 @@ fun ColorToValueMenuItem(
 @Composable
 fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = {
-            Text(
-                text = stringResource(R.string.menu_feedback),
-                style = textStyleBody(),
-            )
-        },
+        text = { MenuText(stringRes = R.string.menu_feedback) },
         onClick = { EmailFeedback.execute(context) },
+        leadingIcon = { MenuIcon(Icons.Outlined.Feedback) },
         interactionSource = interactionSource,
     )
 }
@@ -87,31 +83,9 @@ fun FeedbackMenuItem(context: Context, interactionSource: MutableInteractionSour
 @Composable
 fun ShareMenuItem(context: Context, text: String, interactionSource: MutableInteractionSource) {
     DropdownMenuItem(
-        text = {
-            Text(
-                text = stringResource(R.string.menu_share),
-                style = textStyleBody(),
-            )
-        },
+        text = { MenuText(stringRes = R.string.menu_share) },
         onClick = { ShareResistance.execute(context, text) },
-        interactionSource = interactionSource,
-    )
-}
-
-@Composable
-fun SmdMenuItem(navController: NavController, interactionSource: MutableInteractionSource) {
-    DropdownMenuItem(
-        text = {
-            Text(
-                text = stringResource(R.string.menu_smd),
-                style = textStyleBody(),
-            )
-        },
-        onClick = {
-            navController.navigate(Screen.Smd.route) {
-                popUpTo(Screen.Home.route)
-            }
-        },
+        leadingIcon = { MenuIcon(Icons.Outlined.Share) },
         interactionSource = interactionSource,
     )
 }
@@ -122,18 +96,31 @@ fun ValueToColorMenuItem(
     interactionSource: MutableInteractionSource
 ) {
     DropdownMenuItem(
-        text = {
-            Text(
-                text = stringResource(R.string.menu_value_to_color),
-                style = textStyleBody(),
-            )
-        },
+        text = { MenuText(stringRes = R.string.menu_value_to_color) },
         onClick = {
             navController.navigate(Screen.ValueToColor.route) {
                 popUpTo(Screen.Home.route)
             }
         },
+        leadingIcon = { MenuIcon(Icons.Outlined.Search) },
         interactionSource = interactionSource,
+    )
+}
+
+@Composable
+private fun MenuText(@StringRes stringRes: Int) {
+    Text(
+        text = stringResource(id = stringRes),
+        style = textStyleBody(),
+    )
+}
+
+@Composable
+private fun MenuIcon(imageVector: ImageVector) {
+    Image(
+        imageVector = imageVector,
+        contentDescription = null,
+        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
     )
 }
 
@@ -149,7 +136,6 @@ private fun MenuItemsPreview() {
             ColorToValueMenuItem(NavController(app), interactionSource)
             FeedbackMenuItem(app, interactionSource)
             ShareMenuItem(app, "text", interactionSource)
-            SmdMenuItem(NavController(app), interactionSource)
             ValueToColorMenuItem(NavController(app), interactionSource)
         }
     }

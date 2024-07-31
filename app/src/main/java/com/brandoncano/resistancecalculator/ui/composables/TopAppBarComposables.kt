@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.ui.theme.textStyleLargeTitle
+import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 
 @Composable
 fun AppMenuTopAppBar(
@@ -50,9 +50,7 @@ fun AppMenuTopAppBar(
         }
     }
     AppTopAppBar(titleText) {
-        IconButton(
-            onClick = { expanded = !expanded },
-        ) {
+        IconButton(onClick = { expanded = !expanded }) {
             Icon(
                 imageVector = Icons.Filled.MoreVert,
                 contentDescription = stringResource(R.string.content_description_menu_more)
@@ -66,7 +64,7 @@ fun AppMenuTopAppBar(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class) // CenterAlignedTopAppBar
 @Composable
 fun AppTopAppBar(
     titleText: String,
@@ -76,7 +74,7 @@ fun AppTopAppBar(
         title = {
             Text(
                 text = titleText,
-                style = textStyleLargeTitle(),
+                style = textStyleTitle(),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
             )

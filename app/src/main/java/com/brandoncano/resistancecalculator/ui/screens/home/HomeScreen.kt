@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.screens
+package com.brandoncano.resistancecalculator.ui.screens.home
 
 import android.content.Context
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -20,12 +20,8 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.components.StandardCalculatorButtons
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.components.OurAppsButtons
-import com.brandoncano.resistancecalculator.ui.components.RoundAppIcon
-import com.brandoncano.resistancecalculator.ui.components.SmdCalculatorButton
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 @Composable
@@ -50,9 +46,8 @@ private fun ContentView(context: Context, navController: NavController) {
             FeedbackMenuItem(context, interactionSource)
             AboutAppMenuItem(navController, interactionSource)
         }
-        RoundAppIcon()
-        StandardCalculatorButtons(navController)
-        SmdCalculatorButton(navController)
+        AppIcon()
+        AppCalculatorButtons(navController)
         OurAppsButtons(context)
         Spacer(modifier = Modifier.height(16.dp))
     }

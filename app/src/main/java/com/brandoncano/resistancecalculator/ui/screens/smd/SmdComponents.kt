@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.components
+package com.brandoncano.resistancecalculator.ui.screens.smd
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -23,12 +23,11 @@ import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.formatResistance
 
-/**
- * Job: Hold custom components for the SMD screen
- */
-
 @Composable
-fun SmdResistorLayout(resistor: SmdResistor) {
+fun SmdResistorLayout(
+    resistor: SmdResistor,
+    isError: Boolean = false,
+) {
     Column(
         modifier = Modifier.padding(top = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -41,26 +40,28 @@ fun SmdResistorLayout(resistor: SmdResistor) {
                 painter = painterResource(id = R.drawable.img_smd_resistor),
                 contentDescription = stringResource(id = R.string.content_description_app_icon),
             )
+            val text = if (isError) {
+                stringResource(id = R.string.error_na)
+            }  else {
+                resistor.code
+            }
             Text(
-                text = resistor.code,
+                text = text,
                 style = textStyleLargeTitle().white()
             )
         }
-        ResistanceText(
-            if (resistor.isEmpty()) {
-                stringResource(id = R.string.default_smd_value)
-            } else {
-                resistor.formatResistance()
-            }
-        )
+        val text = when {
+            resistor.isEmpty() -> stringResource(id = R.string.default_smd_value)
+            isError -> stringResource(id = R.string.error_na)
+            else -> resistor.formatResistance()
+        }
+        ResistanceText(text)
     }
 }
 
 @Composable
 private fun ResistanceText(resistance: String) {
-    AppCard(
-        modifier = Modifier.padding(top = 12.dp)
-    ) {
+    AppCard(modifier = Modifier.padding(top = 12.dp)) {
         Text(
             text = resistance,
             modifier = Modifier

@@ -1,12 +1,13 @@
-package com.brandoncano.resistancecalculator.ui.screens
+package com.brandoncano.resistancecalculator.ui.screens.resistor
 
 import android.content.Context
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -21,48 +22,44 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.components.BandKey
 import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
-import com.brandoncano.resistancecalculator.model.smd.SmdResistor
-import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.MainActivity
-import com.brandoncano.resistancecalculator.ui.components.SmdResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
+import com.brandoncano.resistancecalculator.ui.composables.AppDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.AppTextField
+import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
+import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.SmdNavigationBar
-import com.brandoncano.resistancecalculator.ui.composables.AppTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.util.formatResistance
+import com.brandoncano.resistancecalculator.util.formatResistor
 import com.brandoncano.resistancecalculator.util.isInputInvalid
-import java.util.Locale
 
 @Composable
-fun SmdScreen(
+fun ValueToColorScreen(
     context: Context,
     navController: NavController,
-    viewModel: SmdResistorViewModel,
+    viewModel: ResistorVtcViewModel,
     navBarPosition: Int,
-    smdResistor: LiveData<SmdResistor>
+    resistorVtc: LiveData<ResistorVtc>
 ) {
     ResistorCalculatorTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            ContentView(context, navController, viewModel, navBarPosition, smdResistor)
+            ContentView(context, navController, viewModel, navBarPosition, resistorVtc)
         }
     }
 }
@@ -71,32 +68,42 @@ fun SmdScreen(
 private fun ContentView(
     context: Context,
     navController: NavController,
-    viewModel: SmdResistorViewModel,
+    viewModel: ResistorVtcViewModel,
     navBarPosition: Int,
-    smdResistor: LiveData<SmdResistor>
+    resistorVtc: LiveData<ResistorVtc>
 ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
-    var reset by remember { mutableStateOf(false) }
-    val resistor by smdResistor.observeAsState(SmdResistor())
-    var code by remember { mutableStateOf(resistor.code) }
+    val resistor by resistorVtc.observeAsState(ResistorVtc())
+    var resistance by remember { mutableStateOf(resistor.resistance) }
     var units by remember { mutableStateOf(resistor.units) }
-    var isError by remember { mutableStateOf(false) }
+    var band5 by remember { mutableStateOf(resistor.band5) }
+    var band6 by remember { mutableStateOf(resistor.band6) }
+    var reset by remember { mutableStateOf(false) }
+    var isError by remember { mutableStateOf(resistor.isInputInvalid()) }
 
     Scaffold(
         bottomBar = {
-            SmdNavigationBar(navBarSelection) {
+            CalculatorNavigationBar(navBarSelection) {
                 navBarSelection = it
                 viewModel.saveNavBarSelection(it)
                 isError = resistor.isInputInvalid()
                 if (!isError) {
                     viewModel.saveResistorValues(resistor)
-                    resistor.formatResistance()
+                    resistor.formatResistor()
                 }
             }
         }
     ) { paddingValues ->
+        fun postSelectionActions() {
+            reset = false
+            focusManager.clearFocus()
+            viewModel.saveResistorValues(resistor)
+            if (!isError) {
+                resistor.formatResistor()
+            }
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -104,64 +111,89 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppMenuTopAppBar(stringResource(R.string.menu_smd), interactionSource) {
+            AppMenuTopAppBar(stringResource(R.string.menu_value_to_color), interactionSource) {
                 ColorToValueMenuItem(navController, interactionSource)
-                ValueToColorMenuItem(navController, interactionSource)
-                ShareMenuItem(context, resistor.toString(), interactionSource)
+                val shareableText = "${resistor.getResistorValue()}\n$resistor"
+                ShareMenuItem(context, shareableText, interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
                     viewModel.clear()
-                    reset = true
                     focusManager.clearFocus()
+                    isError = false
+                    reset = true
+                    band5 = ""
+                    band6 = ""
                 }
                 AboutAppMenuItem(navController, interactionSource)
             }
 
-            SmdResistorLayout(resistor)
+            ResistorLayout(resistor, isError)
             AppTextField(
                 modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
-                label = R.string.hint_smd_code,
-                text = code,
+                label = R.string.type_resistance_hint,
+                text = resistance,
                 reset = reset,
                 isError = isError,
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Characters,
-                    autoCorrect = false,
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Done
-                )
+                errorMessage = stringResource(id = R.string.error_invalid_resistance)
             ) {
                 reset = false
-                code = it.uppercase(Locale.getDefault())
-                viewModel.updateCode(code)
+                resistance = it
+                viewModel.updateResistance(it)
                 isError = resistor.isInputInvalid()
                 if (!isError) {
                     viewModel.saveResistorValues(resistor)
-                    resistor.formatResistance()
+                    resistor.formatResistor()
                 }
             }
-            AppTextDropDownMenu(
+            AppDropDownMenu(
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
                 label = R.string.units_hint,
-                selectedOption = resistor.units,
+                selectedOption = units,
                 items = DropdownLists.UNITS_LIST,
                 reset = reset,
             ) {
                 units = it
                 viewModel.updateUnits(it)
-                reset = false
-                focusManager.clearFocus()
-                viewModel.saveResistorValues(resistor)
+                postSelectionActions()
             }
+            if (navBarSelection != 0) {
+                ImageTextDropDownMenu(
+                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                    label = R.string.tolerance_band_hint,
+                    selectedOption = band5,
+                    items = DropdownLists.TOLERANCE_LIST,
+                    reset = reset,
+                    isVtC = true
+                ) {
+                    band5 = it
+                    viewModel.updateBand(BandKey.Band5, it)
+                    postSelectionActions()
+                }
+            }
+            if (navBarSelection == 3) {
+                ImageTextDropDownMenu(
+                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                    label = R.string.ppm_band_hint,
+                    selectedOption = band6,
+                    items = DropdownLists.PPM_LIST,
+                    reset = reset,
+                    isVtC = true,
+                ) {
+                    band6 = it
+                    viewModel.updateBand(BandKey.Band6, it)
+                    postSelectionActions()
+                }
+            }
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
 
 @AppScreenPreviews
 @Composable
-private fun SmdScreenPreview() {
+private fun ValueToColorScreenPreview() {
     val app = MainActivity()
-    val viewModel = viewModel<SmdResistorViewModel>(factory = ResistorViewModelFactory(app))
-    val resistor = MutableLiveData<SmdResistor>()
-    SmdScreen(app, NavController(app), viewModel, 0, resistor)
+    val viewModel = viewModel<ResistorVtcViewModel>(factory = ResistorViewModelFactory(app))
+    val resistor = MutableLiveData<ResistorVtc>()
+    ValueToColorScreen(app, NavController(app), viewModel, 1, resistor)
 }

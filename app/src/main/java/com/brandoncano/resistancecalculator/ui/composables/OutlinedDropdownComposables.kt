@@ -39,12 +39,8 @@ import com.brandoncano.resistancecalculator.ui.theme.textStyleCaption
 import com.brandoncano.resistancecalculator.ui.theme.textStyleSubhead
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
-/**
- * Job: Holds all the pieces for the custom dropdowns
- */
-
 @Composable
-fun AppTextDropDownMenu(
+fun AppDropDownMenu(
     modifier: Modifier = Modifier,
     @StringRes label: Int,
     selectedOption: String = "",
@@ -269,8 +265,8 @@ private fun TextDropdownPreview() {
     ResistorCalculatorTheme {
         val list = listOf("item1", "item2", "item3", "item4", "item5", "item6")
         Column {
-            AppTextDropDownMenu(Modifier, R.string.units_hint, "", list) { }
-            AppTextDropDownMenu(Modifier, R.string.units_hint, "Red", list) { }
+            AppDropDownMenu(Modifier, R.string.units_hint, "", list) { }
+            AppDropDownMenu(Modifier, R.string.units_hint, "Red", list) { }
         }
     }
 }
