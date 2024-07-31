@@ -136,7 +136,7 @@ private fun ContentView(
 
             ResistorLayout(resistor, isError)
             AppTextField(
-                modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 24.dp),
                 label = R.string.type_resistance_hint,
                 text = resistance,
                 reset = reset,
@@ -153,7 +153,7 @@ private fun ContentView(
                 }
             }
             AppDropDownMenu(
-                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 12.dp),
                 label = R.string.units_hint,
                 selectedOption = units,
                 items = DropdownLists.UNITS_LIST,
@@ -165,7 +165,7 @@ private fun ContentView(
             }
             if (navBarSelection != 0) {
                 ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                    modifier = Modifier.padding(top = 12.dp),
                     label = R.string.tolerance_band_hint,
                     selectedOption = band5,
                     items = DropdownLists.TOLERANCE_LIST,
@@ -179,7 +179,7 @@ private fun ContentView(
             }
             if (navBarSelection == 3) {
                 ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                    modifier = Modifier.padding(top = 12.dp),
                     label = R.string.ppm_band_hint,
                     selectedOption = band6,
                     items = DropdownLists.PPM_LIST,

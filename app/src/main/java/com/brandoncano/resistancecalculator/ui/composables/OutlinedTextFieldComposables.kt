@@ -52,7 +52,7 @@ fun AppTextField(
             selectedText = ""
         }
     }
-    Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
+    Column(Modifier.padding(start = 32.dp, end = 32.dp)) {
         OutlinedTextField(
             value = selectedText,
             onValueChange = {

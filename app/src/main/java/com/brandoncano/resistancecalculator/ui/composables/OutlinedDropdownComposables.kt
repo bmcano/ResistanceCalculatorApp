@@ -65,7 +65,7 @@ fun AppDropDownMenu(
             selectedText = ""
         }
     }
-    Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
+    Column(Modifier.padding(start = 32.dp, end = 32.dp)) {
         OutlinedTextField(
             value = selectedText,
             onValueChange = { selectedText = it },
@@ -152,7 +152,7 @@ fun ImageTextDropDownMenu(
             selectedLeadingIcon = resistor_beige
         }
     }
-    Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
+    Column(Modifier.padding(start = 32.dp, end = 32.dp)) {
         OutlinedTextField(
             value = selectedText,
             onValueChange = { selectedText = it },

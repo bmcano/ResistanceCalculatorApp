@@ -127,7 +127,7 @@ private fun ContentView(
 
             ResistorLayout(resistor)
             ImageTextDropDownMenu(
-                modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 24.dp),
                 label = R.string.number_band_hint1,
                 selectedOption = band1,
                 items = DropdownLists.NUMBER_LIST_NO_BLACK,
@@ -138,7 +138,7 @@ private fun ContentView(
                 postSelectionActions()
             }
             ImageTextDropDownMenu(
-                modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 12.dp),
                 label = R.string.number_band_hint2,
                 selectedOption = band2,
                 items = DropdownLists.NUMBER_LIST,
@@ -150,7 +150,7 @@ private fun ContentView(
             }
             if (navBarSelection == 2 || navBarSelection == 3) {
                 ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                    modifier = Modifier.padding(top = 12.dp),
                     label = R.string.number_band_hint3,
                     selectedOption = band3,
                     items = DropdownLists.NUMBER_LIST,
@@ -162,7 +162,7 @@ private fun ContentView(
                 }
             }
             ImageTextDropDownMenu(
-                modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 12.dp),
                 label = R.string.multiplier_band_hint,
                 selectedOption = band4,
                 items = DropdownLists.MULTIPLIER_LIST,
@@ -174,7 +174,7 @@ private fun ContentView(
             }
             if (navBarSelection != 0) {
                 ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                    modifier = Modifier.padding(top = 12.dp),
                     label = R.string.tolerance_band_hint,
                     selectedOption = band5,
                     items = DropdownLists.TOLERANCE_LIST,
@@ -187,7 +187,7 @@ private fun ContentView(
             }
             if (navBarSelection == 3) {
                 ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                    modifier = Modifier.padding(top = 12.dp),
                     label = R.string.ppm_band_hint,
                     selectedOption = band6,
                     items = DropdownLists.PPM_LIST,

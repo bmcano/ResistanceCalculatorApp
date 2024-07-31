@@ -10,7 +10,7 @@
     <string name="number_band_hint3">Third band</string>
     <string name="multiplier_band_hint">Multiplier</string>
     <string name="tolerance_band_hint">Tolerance</string>
-    <string name="ppm_band_hint">Temp coefficient</string>
+    <string name="ppm_band_hint">Temperature coefficient</string>
     <string name="type_resistance_hint">Resistance</string>
     <string name="units_hint">Units</string>
     <string name="hint_smd_code">Code</string>

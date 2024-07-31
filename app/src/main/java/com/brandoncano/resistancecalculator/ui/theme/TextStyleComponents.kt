@@ -3,6 +3,7 @@ package com.brandoncano.resistancecalculator.ui.theme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -80,6 +81,11 @@ fun TextStyle.white() = this.merge(
     color = white
 )
 
+@Composable
+fun TextStyle.menuText() = this.merge(
+    color = MaterialTheme.colorScheme.onSurfaceVariant
+)
+
 @AppComponentPreviews
 @Composable
 private fun TextStylePreview() {
@@ -131,6 +137,10 @@ private fun TextStyleColorsPreview() {
             Text(
                 text = "White",
                 style = textStyleTitle().white(),
+            )
+            Text(
+                text = "Menu Text",
+                style = textStyleTitle().menuText(),
             )
         }
     }

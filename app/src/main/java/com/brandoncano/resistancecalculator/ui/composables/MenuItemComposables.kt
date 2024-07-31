@@ -26,6 +26,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.menuText
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
 import com.brandoncano.resistancecalculator.util.EmailFeedback
 import com.brandoncano.resistancecalculator.util.ShareResistance
@@ -111,7 +112,7 @@ fun ValueToColorMenuItem(navController: NavController, showMenu: MutableState<Bo
 private fun MenuText(@StringRes stringRes: Int) {
     Text(
         text = stringResource(id = stringRes),
-        style = textStyleBody(),
+        style = textStyleBody().menuText(),
     )
 }
 

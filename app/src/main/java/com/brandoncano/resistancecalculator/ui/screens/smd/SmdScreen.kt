@@ -116,7 +116,7 @@ private fun ContentView(
 
             SmdResistorLayout(resistor, isError)
             AppTextField(
-                modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 24.dp),
                 label = R.string.hint_smd_code,
                 text = code,
                 reset = reset,
@@ -139,7 +139,7 @@ private fun ContentView(
                 }
             }
             AppDropDownMenu(
-                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 12.dp),
                 label = R.string.units_hint,
                 selectedOption = resistor.units,
                 items = DropdownLists.UNITS_LIST,
