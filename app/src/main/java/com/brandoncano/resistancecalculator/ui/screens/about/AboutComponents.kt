@@ -73,17 +73,12 @@ fun DescriptionCard() {
     )
     AppStandardCard {
         Text(
-            text = stringResource(id = R.string.about_description_one),
+            text = stringResource(id = R.string.about_description_01),
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
             style = textStyleBody(),
         )
         Text(
-            text = stringResource(id = R.string.about_description_two),
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
-            style = textStyleBody(),
-        )
-        Text(
-            text = stringResource(id = R.string.about_description_three),
+            text = stringResource(id = R.string.about_description_02),
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 12.dp),
             style = textStyleBody(),
         )

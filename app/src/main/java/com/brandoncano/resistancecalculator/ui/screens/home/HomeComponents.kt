@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.AddToHomeScreen
-import androidx.compose.material.icons.outlined.Calculate
+import androidx.compose.material.icons.outlined.Colorize
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material.icons.outlined.WidthFull
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -69,8 +71,8 @@ fun AppCalculatorButtons(navController: NavController) {
         )
         ArrowButtonCard(
             listOf(
-                Icons.Outlined.Calculate,
-                Icons.Outlined.Calculate
+                Icons.Outlined.Colorize,
+                Icons.Outlined.Search
             ),
             listOf(
                 stringResource(id = R.string.home_button_color_to_value),
@@ -82,7 +84,7 @@ fun AppCalculatorButtons(navController: NavController) {
             ),
         )
         ArrowButtonCard(
-            Icons.Outlined.Calculate,
+            Icons.Outlined.WidthFull,
             stringResource(id = R.string.home_button_smd),
         ) {
             navController.navigate(Screen.Smd.route)

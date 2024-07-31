@@ -101,7 +101,7 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppMenuTopAppBar(stringResource(R.string.menu_smd), interactionSource) {
+            AppMenuTopAppBar(stringResource(R.string.title_smd), interactionSource) {
                 ShareMenuItem(context, resistor.toString(), interactionSource)
                 FeedbackMenuItem(context, interactionSource)
                 ClearSelectionsMenuItem(interactionSource) {
