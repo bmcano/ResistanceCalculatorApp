@@ -195,6 +195,8 @@ private fun ContentView(
                     postSelectionActions()
                 }
             }
+            // this condition and spacer is here so the resistor can update between 4 and 5 bands
+            if (navBarSelection == 2) Spacer(modifier = Modifier.height(0.dp))
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
