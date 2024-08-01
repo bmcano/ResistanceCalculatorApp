@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.smd
 
 import android.content.Context
+import android.graphics.Picture
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,7 +43,8 @@ import com.brandoncano.resistancecalculator.ui.composables.AppDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.AppTextField
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.SmdNavigationBar
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistance
@@ -81,6 +83,7 @@ private fun ContentView(
     var code by remember { mutableStateOf(resistor.code) }
     var units by remember { mutableStateOf(resistor.units) }
     var isError by remember { mutableStateOf(resistor.isSmdInputInvalid()) }
+    var picture = remember { Picture() }
 
     Scaffold(
         bottomBar = {
@@ -103,18 +106,19 @@ private fun ContentView(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AppMenuTopAppBar(stringResource(R.string.title_smd), interactionSource, showMenu) {
-                ShareMenuItem(context, resistor.toString(), showMenu)
-                FeedbackMenuItem(context, showMenu)
                 ClearSelectionsMenuItem {
                     showMenu.value = false
                     viewModel.clear()
                     reset = true
                     focusManager.clearFocus()
                 }
+                ShareTextMenuItem(context, resistor.toString(), showMenu)
+                ShareImageMenuItem(context, showMenu, picture)
+                FeedbackMenuItem(context, showMenu)
                 AboutAppMenuItem(navController, showMenu)
             }
 
-            SmdResistorLayout(resistor, isError)
+            picture = smdResistorPicture(resistor, isError)
             AppTextField(
                 modifier = Modifier.padding(top = 24.dp),
                 label = R.string.hint_smd_code,

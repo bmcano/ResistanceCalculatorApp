@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens.resistor
 
+import android.graphics.Picture
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +23,7 @@ import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.composables.AppCard
 import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
+import com.brandoncano.resistancecalculator.ui.composables.DrawContent
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 import com.brandoncano.resistancecalculator.util.ColorFinder
@@ -34,6 +37,24 @@ import com.brandoncano.resistancecalculator.util.deriveResistorColor
 import com.brandoncano.resistancecalculator.util.formatResistance
 
 private data class ResistorImagePair(@DrawableRes val drawableRes: Int, val color: String)
+
+@Composable
+fun resistorPicture(resistor: ResistorCtv): Picture {
+    val picture = remember { Picture() }
+    DrawContent(picture) {
+        ResistorLayout(resistor)
+    }
+    return picture
+}
+
+@Composable
+fun resistorPicture(resistor: ResistorVtc, isError: Boolean): Picture {
+    val picture = remember { Picture() }
+    DrawContent(picture) {
+        ResistorLayout(resistor, isError)
+    }
+    return picture
+}
 
 @Composable
 fun ResistorLayout(resistor: ResistorCtv) {
@@ -72,7 +93,7 @@ fun ResistorLayout(resistor: ResistorCtv) {
 @Composable
 fun ResistorLayout(
     resistor: ResistorVtc,
-    isError: Boolean = false,
+    isError: Boolean,
 ) {
     Column(
         modifier = Modifier.padding(top = 16.dp, start = 32.dp, end = 32.dp),

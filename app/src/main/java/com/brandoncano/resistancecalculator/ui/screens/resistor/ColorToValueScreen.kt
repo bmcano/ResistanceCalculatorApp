@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.resistor
 
 import android.content.Context
+import android.graphics.Picture
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -41,7 +42,8 @@ import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationB
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistance
@@ -81,6 +83,7 @@ private fun ContentView(
     var band4 by remember { mutableStateOf(resistor.band4) }
     var band5 by remember { mutableStateOf(resistor.band5) }
     var band6 by remember { mutableStateOf(resistor.band6) }
+    var picture = remember { Picture() }
 
     Scaffold(
         bottomBar = {
@@ -118,14 +121,15 @@ private fun ContentView(
                 showMenu = showMenu,
             ) {
                 ValueToColorMenuItem(navController, showMenu)
-                val shareableText = "${resistor.formatResistance()}\n$resistor"
-                ShareMenuItem(context, shareableText, showMenu)
-                FeedbackMenuItem(context, showMenu)
                 ClearSelectionsMenuItem { clearScreen() }
+                val shareableText = "$resistor\n${resistor.formatResistance()}"
+                ShareTextMenuItem(context, shareableText, showMenu)
+                ShareImageMenuItem(context, showMenu, picture)
+                FeedbackMenuItem(context, showMenu)
                 AboutAppMenuItem(navController, showMenu)
             }
 
-            ResistorLayout(resistor)
+            picture = resistorPicture(resistor)
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 24.dp),
                 label = R.string.number_band_hint1,

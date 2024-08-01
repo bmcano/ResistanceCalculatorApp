@@ -11,8 +11,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.AddToHomeScreen
 import androidx.compose.material.icons.outlined.Colorize
+import androidx.compose.material.icons.outlined.Grade
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.outlined.WidthFull
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -104,7 +104,7 @@ fun OurAppsButtons(context: Context) {
         )
         ArrowButtonCard(
             listOf(
-                Icons.Outlined.Star,
+                Icons.Outlined.Grade,
                 Icons.AutoMirrored.Outlined.AddToHomeScreen
             ),
             listOf(

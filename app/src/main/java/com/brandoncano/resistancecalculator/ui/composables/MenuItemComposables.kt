@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.composables
 
 import android.content.Context
+import android.graphics.Picture
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -8,6 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Cancel
 import androidx.compose.material.icons.outlined.Colorize
 import androidx.compose.material.icons.outlined.Feedback
+import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Share
@@ -28,8 +30,11 @@ import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.menuText
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
+import com.brandoncano.resistancecalculator.util.ComposableToBitmap
 import com.brandoncano.resistancecalculator.util.EmailFeedback
+import com.brandoncano.resistancecalculator.util.SaveBitmap
 import com.brandoncano.resistancecalculator.util.ShareResistance
+import com.brandoncano.resistancecalculator.util.ShareResistor
 
 /**
  * Note: Menu items are in alphabetical order
@@ -83,9 +88,23 @@ fun FeedbackMenuItem(context: Context, showMenu: MutableState<Boolean>) {
 }
 
 @Composable
-fun ShareMenuItem(context: Context, text: String, showMenu: MutableState<Boolean>) {
+fun ShareImageMenuItem(context: Context, showMenu: MutableState<Boolean>, picture: Picture) {
     DropdownMenuItem(
-        text = { MenuText(stringRes = R.string.menu_share) },
+        text = { MenuText(stringRes = R.string.menu_share_image) },
+        onClick = {
+            showMenu.value = false
+            val bitmap = ComposableToBitmap.execute(picture)
+            val uri = SaveBitmap.execute(bitmap, context) ?: return@DropdownMenuItem
+            ShareResistor.execute(uri, context)
+        },
+        leadingIcon = { MenuIcon(Icons.Outlined.Image) },
+    )
+}
+
+@Composable
+fun ShareTextMenuItem(context: Context, text: String, showMenu: MutableState<Boolean>) {
+    DropdownMenuItem(
+        text = { MenuText(stringRes = R.string.menu_share_text) },
         onClick = {
             showMenu.value = false
             ShareResistance.execute(context, text)
@@ -136,7 +155,7 @@ private fun MenuItemsPreview() {
             ClearSelectionsMenuItem { }
             ColorToValueMenuItem(NavController(app), showMenu)
             FeedbackMenuItem(app, showMenu)
-            ShareMenuItem(app, "text", showMenu)
+            ShareTextMenuItem(app, "text", showMenu)
             ValueToColorMenuItem(NavController(app), showMenu)
         }
     }

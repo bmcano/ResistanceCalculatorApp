@@ -18,7 +18,8 @@
     <string name="menu_value_to_color">Value to color</string>
     <string name="menu_color_to_value">Color to value</string>
     <string name="menu_clear_selections">Clear selections</string>
-    <string name="menu_share">Share resistor</string>
+    <string name="menu_share_text">Share as text</string>
+    <string name="menu_share_image">Share as image</string>
     <string name="menu_feedback">Feedback</string>
     <string name="menu_about">About the app</string>
     <!-- Default text -->
