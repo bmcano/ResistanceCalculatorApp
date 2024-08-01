@@ -50,6 +50,7 @@ import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistor
 import com.brandoncano.resistancecalculator.util.isInputInvalid
+import com.brandoncano.resistancecalculator.util.shareableText
 
 @Composable
 fun ValueToColorScreen(
@@ -131,8 +132,7 @@ private fun ContentView(
             ) {
                 ColorToValueMenuItem(navController, showMenu)
                 ClearSelectionsMenuItem { clearScreen() }
-                val shareableText = "${resistor.getResistorValue()}\n$resistor"
-                ShareTextMenuItem(context, shareableText, showMenu)
+                ShareTextMenuItem(context, resistor.shareableText(), showMenu)
                 ShareImageMenuItem(context, showMenu, picture)
                 FeedbackMenuItem(context, showMenu)
                 AboutAppMenuItem(navController, showMenu)

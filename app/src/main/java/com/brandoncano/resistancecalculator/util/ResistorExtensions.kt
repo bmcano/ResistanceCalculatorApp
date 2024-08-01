@@ -39,6 +39,10 @@ fun ResistorCtv.formatResistance(): String {
     return ResistanceFormatter.calculate(this)
 }
 
+fun ResistorCtv.shareableText(): String {
+    return "$this\n${this.formatResistance()}"
+}
+
 // value to color
 fun ResistorVtc.bandOneForDisplay(): String {
     return this.band1.ifEmpty { deriveResistorColor() }
@@ -75,6 +79,10 @@ fun ResistorVtc.formatResistor() {
 
 fun ResistorVtc.isInputInvalid(): Boolean {
     return !IsValidResistance.execute(this, this.resistance)
+}
+
+fun ResistorVtc.shareableText(): String {
+    return "$this\n${this.getResistorValue()}"
 }
 
 fun String.adjustValueForSharing(): String {
