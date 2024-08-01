@@ -25,10 +25,6 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleCaption
 
-/**
- * Job: Components for the bottom navigation bar
- */
-
 @Composable
 fun CalculatorNavigationBar(
     selection: Int = 1,

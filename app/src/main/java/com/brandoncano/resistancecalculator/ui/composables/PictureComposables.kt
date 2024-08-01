@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 
 /**
- * Job: Takes a picture object and draws the content for converting to a bitmap
+ * Note: This is used when we want to be able to convert composables into a sharable image
  */
 
 @Composable
