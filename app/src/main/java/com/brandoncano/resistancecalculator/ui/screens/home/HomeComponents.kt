@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.AddToHomeScreen
 import androidx.compose.material.icons.outlined.Colorize
 import androidx.compose.material.icons.outlined.Grade
 import androidx.compose.material.icons.outlined.Search
@@ -21,8 +20,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
@@ -105,7 +106,8 @@ fun OurAppsButtons(context: Context) {
         ArrowButtonCard(
             listOf(
                 Icons.Outlined.Grade,
-                Icons.AutoMirrored.Outlined.AddToHomeScreen
+                // Note: we do this instead because material icons does not have the outlined version
+                ImageVector.vectorResource(id = R.drawable.icon_outline_add_to_home_screen)
             ),
             listOf(
                 stringResource(id = R.string.home_button_rate_us),
