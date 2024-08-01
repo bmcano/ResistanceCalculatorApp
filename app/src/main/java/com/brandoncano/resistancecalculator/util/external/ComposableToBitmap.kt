@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.util
+package com.brandoncano.resistancecalculator.util.external
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -15,7 +15,6 @@ object ComposableToBitmap {
             picture.height,
             Bitmap.Config.ARGB_8888
         )
-
         val canvas = Canvas(bitmap)
         canvas.drawColor(android.graphics.Color.WHITE)
         canvas.drawPicture(picture)

@@ -32,7 +32,7 @@ import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.ArrowButtonCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
-import com.brandoncano.resistancecalculator.util.OpenLink
+import com.brandoncano.resistancecalculator.util.external.OpenLink
 
 @Composable
 fun AppIcon() {

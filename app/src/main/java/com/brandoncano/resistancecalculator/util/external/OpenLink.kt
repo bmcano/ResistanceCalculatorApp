@@ -1,6 +1,5 @@
-package com.brandoncano.resistancecalculator.util
+package com.brandoncano.resistancecalculator.util.external
 
-import android.app.AlertDialog
 import android.content.Context
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
@@ -35,11 +34,7 @@ object OpenLink {
             customTabsIntent.launchUrl(context, Uri.parse(link))
         } catch (e: Exception) {
             e.printStackTrace()
-            val builder = AlertDialog.Builder(context)
-            builder.setTitle("Error")
-                .setMessage("A problem occurred while trying to open the link.")
-                .setPositiveButton("OK", null)
-                .show()
+            ErrorDialog.build(context, "A problem occurred while trying to open the link.")
         }
     }
 }

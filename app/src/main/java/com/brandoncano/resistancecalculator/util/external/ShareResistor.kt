@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.util
+package com.brandoncano.resistancecalculator.util.external
 
 import android.content.Context
 import android.content.Intent

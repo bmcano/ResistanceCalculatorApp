@@ -30,11 +30,11 @@ import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.menuText
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
-import com.brandoncano.resistancecalculator.util.ComposableToBitmap
-import com.brandoncano.resistancecalculator.util.EmailFeedback
-import com.brandoncano.resistancecalculator.util.SaveBitmap
-import com.brandoncano.resistancecalculator.util.ShareResistance
-import com.brandoncano.resistancecalculator.util.ShareResistor
+import com.brandoncano.resistancecalculator.util.external.ComposableToBitmap
+import com.brandoncano.resistancecalculator.util.external.EmailFeedback
+import com.brandoncano.resistancecalculator.util.external.SaveBitmap
+import com.brandoncano.resistancecalculator.util.external.ShareResistance
+import com.brandoncano.resistancecalculator.util.external.ShareResistor
 
 /**
  * Note: Menu items are in alphabetical order

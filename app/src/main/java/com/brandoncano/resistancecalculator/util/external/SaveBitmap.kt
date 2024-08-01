@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.util
+package com.brandoncano.resistancecalculator.util.external
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -14,6 +14,9 @@ import java.io.IOException
  */
 object SaveBitmap {
 
+    private const val APPLICATION_ID = "com.brandoncano.resistancecalculator.provider"
+    private const val ERROR_MESSAGE = "A problem occurred when trying to share the image."
+
     fun execute(bitmap: Bitmap, context: Context): Uri? {
         val imagesFolder = File(context.cacheDir, "images")
         try {
@@ -25,14 +28,16 @@ object SaveBitmap {
             stream.close()
             return FileProvider.getUriForFile(
                 context.applicationContext,
-                "com.brandoncano.resistancecalculator.provider",
+                APPLICATION_ID,
                 file
             )
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
+            ErrorDialog.build(context, ERROR_MESSAGE)
             return null
         } catch (e: IOException) {
             e.printStackTrace()
+            ErrorDialog.build(context, ERROR_MESSAGE)
             return null
         }
     }
