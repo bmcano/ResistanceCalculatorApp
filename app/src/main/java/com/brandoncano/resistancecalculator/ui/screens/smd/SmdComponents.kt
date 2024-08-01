@@ -1,5 +1,6 @@
-package com.brandoncano.resistancecalculator.ui.components
+package com.brandoncano.resistancecalculator.ui.screens.smd
 
+import android.graphics.Picture
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,20 +17,29 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
-import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.AppCard
+import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
+import com.brandoncano.resistancecalculator.ui.composables.DrawContent
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleLargeTitle
 import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.formatResistance
 
-/**
- * Job: Hold custom components for the SMD screen
- */
+@Composable
+fun smdResistorPicture(resistor: SmdResistor, isError: Boolean): Picture {
+    val picture = remember { Picture() }
+    DrawContent(picture) {
+        SmdResistorLayout(resistor, isError)
+    }
+    return picture
+}
 
 @Composable
-fun SmdResistorLayout(resistor: SmdResistor) {
+fun SmdResistorLayout(
+    resistor: SmdResistor,
+    isError: Boolean,
+) {
     Column(
         modifier = Modifier.padding(top = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -41,26 +52,28 @@ fun SmdResistorLayout(resistor: SmdResistor) {
                 painter = painterResource(id = R.drawable.img_smd_resistor),
                 contentDescription = stringResource(id = R.string.content_description_app_icon),
             )
+            val text = if (isError) {
+                stringResource(id = R.string.error_na)
+            }  else {
+                resistor.code
+            }
             Text(
-                text = resistor.code,
+                text = text,
                 style = textStyleLargeTitle().white()
             )
         }
-        ResistanceText(
-            if (resistor.isEmpty()) {
-                stringResource(id = R.string.default_smd_value)
-            } else {
-                resistor.formatResistance()
-            }
-        )
+        val text = when {
+            resistor.isEmpty() -> stringResource(id = R.string.default_smd_value)
+            isError -> stringResource(id = R.string.error_na)
+            else -> resistor.formatResistance()
+        }
+        ResistanceText(text)
     }
 }
 
 @Composable
 private fun ResistanceText(resistance: String) {
-    AppCard(
-        modifier = Modifier.padding(top = 12.dp)
-    ) {
+    AppCard(modifier = Modifier.padding(top = 12.dp)) {
         Text(
             text = resistance,
             modifier = Modifier
@@ -76,6 +89,6 @@ private fun ResistanceText(resistance: String) {
 private fun SmdResistorLayoutPreview() {
     ResistorCalculatorTheme {
         val resistor = SmdResistor(code = "1R4")
-        SmdResistorLayout(resistor)
+        SmdResistorLayout(resistor, false)
     }
 }

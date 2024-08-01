@@ -27,10 +27,6 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.textStyleCallout
 
-/**
- * Job: Holds all the designs for cards and dividers within the app
- */
-
 @Composable
 fun AppDivider(
     modifier: Modifier = Modifier,

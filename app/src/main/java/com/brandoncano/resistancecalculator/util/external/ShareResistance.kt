@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.util
+package com.brandoncano.resistancecalculator.util.external
 
 import android.content.Context
 import android.content.Intent
@@ -12,6 +12,6 @@ object ShareResistance {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
         intent.putExtra(Intent.EXTRA_TEXT, text)
-        context.startActivity(Intent.createChooser(intent, ""))
+        context.startActivity(Intent.createChooser(intent, "Share via"))
     }
 }

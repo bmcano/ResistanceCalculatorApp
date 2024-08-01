@@ -29,10 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-
-/**
- * Job: Outlined text field components
- */
+import com.brandoncano.resistancecalculator.ui.theme.textStyleSubhead
 
 @Composable
 fun AppTextField(
@@ -41,6 +38,7 @@ fun AppTextField(
     text: String = "",
     reset: Boolean = false,
     isError: Boolean = false,
+    errorMessage: String = "",
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
     onOptionSelected: (String) -> Unit,
 ) {
@@ -54,7 +52,7 @@ fun AppTextField(
             selectedText = ""
         }
     }
-    Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
+    Column(Modifier.padding(start = 32.dp, end = 32.dp)) {
         OutlinedTextField(
             value = selectedText,
             onValueChange = {
@@ -75,6 +73,11 @@ fun AppTextField(
                     )
             },
             isError = isError,
+            supportingText = if (isError && errorMessage.isNotEmpty()) {
+                { Text(text = errorMessage, style = textStyleSubhead()) }
+            } else {
+                null
+            },
             keyboardOptions = keyboardOptions,
             singleLine = true,
             interactionSource = interactionSource
@@ -90,6 +93,7 @@ private fun AppTextFieldPreview() {
             AppTextField(label = R.string.units_hint) { }
             AppTextField(label = R.string.units_hint, text = "Example") { }
             AppTextField(label = R.string.units_hint, isError = true) { }
+            AppTextField(label = R.string.units_hint, isError = true, errorMessage = "error") { }
         }
     }
 }

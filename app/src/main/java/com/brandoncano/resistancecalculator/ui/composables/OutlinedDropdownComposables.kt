@@ -33,18 +33,14 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.RoundedSquare
-import com.brandoncano.resistancecalculator.ui.theme.resistor_blank
+import com.brandoncano.resistancecalculator.ui.theme.resistor_beige
 import com.brandoncano.resistancecalculator.ui.theme.textStyleBody
 import com.brandoncano.resistancecalculator.ui.theme.textStyleCaption
 import com.brandoncano.resistancecalculator.ui.theme.textStyleSubhead
 import com.brandoncano.resistancecalculator.util.ColorFinder
 
-/**
- * Job: Holds all the pieces for the custom dropdowns
- */
-
 @Composable
-fun AppTextDropDownMenu(
+fun AppDropDownMenu(
     modifier: Modifier = Modifier,
     @StringRes label: Int,
     selectedOption: String = "",
@@ -69,7 +65,7 @@ fun AppTextDropDownMenu(
             selectedText = ""
         }
     }
-    Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
+    Column(Modifier.padding(start = 32.dp, end = 32.dp)) {
         OutlinedTextField(
             value = selectedText,
             onValueChange = { selectedText = it },
@@ -153,10 +149,10 @@ fun ImageTextDropDownMenu(
     LaunchedEffect(reset) {
         if (reset) {
             selectedText = ""
-            selectedLeadingIcon = resistor_blank
+            selectedLeadingIcon = resistor_beige
         }
     }
-    Column(Modifier.padding(start = 16.dp, end = 16.dp)) {
+    Column(Modifier.padding(start = 32.dp, end = 32.dp)) {
         OutlinedTextField(
             value = selectedText,
             onValueChange = { selectedText = it },
@@ -166,7 +162,7 @@ fun ImageTextDropDownMenu(
                 .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
                 .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(stringResource(label)) },
-            leadingIcon = if (selectedLeadingIcon != resistor_blank) {
+            leadingIcon = if (selectedLeadingIcon != resistor_beige) {
                 { RoundedSquare(color = selectedLeadingIcon, size = 24.dp) }
             } else null,
             trailingIcon = {
@@ -269,8 +265,8 @@ private fun TextDropdownPreview() {
     ResistorCalculatorTheme {
         val list = listOf("item1", "item2", "item3", "item4", "item5", "item6")
         Column {
-            AppTextDropDownMenu(Modifier, R.string.units_hint, "", list) { }
-            AppTextDropDownMenu(Modifier, R.string.units_hint, "Red", list) { }
+            AppDropDownMenu(Modifier, R.string.units_hint, "", list) { }
+            AppDropDownMenu(Modifier, R.string.units_hint, "Red", list) { }
         }
     }
 }

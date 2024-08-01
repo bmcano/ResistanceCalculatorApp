@@ -2,6 +2,7 @@ package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
 import android.content.Intent
+import com.brandoncano.resistancecalculator.util.external.ShareResistance
 import io.mockk.Runs
 import io.mockk.clearAllMocks
 import io.mockk.every

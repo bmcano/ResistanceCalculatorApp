@@ -6,9 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.brandoncano.resistancecalculator.components.BandKey
 
-/**
- * Job: ViewModel for the value to color calculator
- */
 class ResistorVtcViewModel(context: Context): ViewModel() {
 
     private val repository = ResistorVtcRepository.getInstance(context)

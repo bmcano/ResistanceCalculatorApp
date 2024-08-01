@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.screens
+package com.brandoncano.resistancecalculator.ui.screens.home
 
 import android.content.Context
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -10,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,13 +20,9 @@ import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.components.StandardCalculatorButtons
-import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.components.OurAppsButtons
-import com.brandoncano.resistancecalculator.ui.components.RoundAppIcon
-import com.brandoncano.resistancecalculator.ui.components.SmdCalculatorButton
+import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
+import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 @Composable
@@ -40,19 +37,19 @@ fun HomeScreen(context: Context, navController: NavController) {
 @Composable
 private fun ContentView(context: Context, navController: NavController) {
     val interactionSource = remember { MutableInteractionSource() }
+    val showMenu = remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        AppMenuTopAppBar(stringResource(R.string.app_name), interactionSource) {
-            FeedbackMenuItem(context, interactionSource)
-            AboutAppMenuItem(navController, interactionSource)
+        AppMenuTopAppBar(stringResource(R.string.app_name), interactionSource, showMenu) {
+            FeedbackMenuItem(context, showMenu)
+            AboutAppMenuItem(navController, showMenu)
         }
-        RoundAppIcon()
-        StandardCalculatorButtons(navController)
-        SmdCalculatorButton(navController)
+        AppIcon()
+        AppCalculatorButtons(navController)
         OurAppsButtons(context)
         Spacer(modifier = Modifier.height(16.dp))
     }

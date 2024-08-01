@@ -1,6 +1,7 @@
-package com.brandoncano.resistancecalculator.ui.screens
+package com.brandoncano.resistancecalculator.ui.screens.resistor
 
 import android.content.Context
+import android.graphics.Picture
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,22 +35,22 @@ import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.MainActivity
-import com.brandoncano.resistancecalculator.ui.components.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.AppTextDropDownMenu
+import com.brandoncano.resistancecalculator.ui.composables.AppDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.AppTextField
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.SmdMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistor
 import com.brandoncano.resistancecalculator.util.isInputInvalid
+import com.brandoncano.resistancecalculator.util.shareableText
 
 @Composable
 fun ValueToColorScreen(
@@ -76,6 +77,7 @@ private fun ContentView(
 ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
+    val showMenu = remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val resistor by resistorVtc.observeAsState(ResistorVtc())
     var resistance by remember { mutableStateOf(resistor.resistance) }
@@ -84,6 +86,7 @@ private fun ContentView(
     var band6 by remember { mutableStateOf(resistor.band6) }
     var reset by remember { mutableStateOf(false) }
     var isError by remember { mutableStateOf(resistor.isInputInvalid()) }
+    var picture = remember { Picture() }
 
     Scaffold(
         bottomBar = {
@@ -98,6 +101,15 @@ private fun ContentView(
             }
         }
     ) { paddingValues ->
+        fun clearScreen() {
+            showMenu.value = false
+            viewModel.clear()
+            focusManager.clearFocus()
+            isError = false
+            reset = true
+            band5 = ""
+            band6 = ""
+        }
         fun postSelectionActions() {
             reset = false
             focusManager.clearFocus()
@@ -113,30 +125,27 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppMenuTopAppBar(stringResource(R.string.menu_value_to_color), interactionSource) {
-                ColorToValueMenuItem(navController, interactionSource)
-                SmdMenuItem(navController, interactionSource)
-                val shareableText = "${resistor.getResistorValue()}\n$resistor"
-                ShareMenuItem(context, shareableText, interactionSource)
-                FeedbackMenuItem(context, interactionSource)
-                ClearSelectionsMenuItem(interactionSource) {
-                    viewModel.clear()
-                    focusManager.clearFocus()
-                    isError = false
-                    reset = true
-                    band5 = ""
-                    band6 = ""
-                }
-                AboutAppMenuItem(navController, interactionSource)
+            AppMenuTopAppBar(
+                titleText = stringResource(R.string.title_value_to_color),
+                interactionSource = interactionSource,
+                showMenu = showMenu,
+            ) {
+                ColorToValueMenuItem(navController, showMenu)
+                ClearSelectionsMenuItem { clearScreen() }
+                ShareTextMenuItem(context, resistor.shareableText(), showMenu)
+                ShareImageMenuItem(context, showMenu, picture)
+                FeedbackMenuItem(context, showMenu)
+                AboutAppMenuItem(navController, showMenu)
             }
 
-            ResistorLayout(resistor)
+            picture = resistorPicture(resistor, isError)
             AppTextField(
-                modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 24.dp),
                 label = R.string.type_resistance_hint,
                 text = resistance,
                 reset = reset,
                 isError = isError,
+                errorMessage = stringResource(id = R.string.error_invalid_resistance)
             ) {
                 reset = false
                 resistance = it
@@ -147,8 +156,8 @@ private fun ContentView(
                     resistor.formatResistor()
                 }
             }
-            AppTextDropDownMenu(
-                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+            AppDropDownMenu(
+                modifier = Modifier.padding(top = 12.dp),
                 label = R.string.units_hint,
                 selectedOption = units,
                 items = DropdownLists.UNITS_LIST,
@@ -160,7 +169,7 @@ private fun ContentView(
             }
             if (navBarSelection != 0) {
                 ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                    modifier = Modifier.padding(top = 12.dp),
                     label = R.string.tolerance_band_hint,
                     selectedOption = band5,
                     items = DropdownLists.TOLERANCE_LIST,
@@ -174,7 +183,7 @@ private fun ContentView(
             }
             if (navBarSelection == 3) {
                 ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                    modifier = Modifier.padding(top = 12.dp),
                     label = R.string.ppm_band_hint,
                     selectedOption = band6,
                     items = DropdownLists.PPM_LIST,
@@ -186,6 +195,8 @@ private fun ContentView(
                     postSelectionActions()
                 }
             }
+            // this condition and spacer is here so the resistor can update between 4 and 5 bands
+            if (navBarSelection == 2) Spacer(modifier = Modifier.height(0.dp))
             Spacer(modifier = Modifier.height(24.dp))
         }
     }

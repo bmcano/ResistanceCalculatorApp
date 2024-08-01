@@ -9,7 +9,9 @@ import com.brandoncano.resistancecalculator.ui.theme.gray
 import com.brandoncano.resistancecalculator.ui.theme.green
 import com.brandoncano.resistancecalculator.ui.theme.orange
 import com.brandoncano.resistancecalculator.ui.theme.red
-import com.brandoncano.resistancecalculator.ui.theme.resistor_blank
+import com.brandoncano.resistancecalculator.ui.theme.resistor_beige
+import com.brandoncano.resistancecalculator.ui.theme.resistor_blue
+import com.brandoncano.resistancecalculator.ui.theme.resistor_wire
 import com.brandoncano.resistancecalculator.ui.theme.silver
 import com.brandoncano.resistancecalculator.ui.theme.violet
 import com.brandoncano.resistancecalculator.ui.theme.white
@@ -19,7 +21,7 @@ import com.brandoncano.resistancecalculator.constants.Symbols as S
 
 /**
  * Job: Find the correct color, either as a string or resource based on the input.
- * Note: "${S.PM}20%" -> resistor_blank -> hidden in else conditions.
+ * Note: "${S.PM}20%" -> resistor_beige -> hidden in else conditions.
  */
 object ColorFinder {
 
@@ -37,7 +39,9 @@ object ColorFinder {
             C.WHITE                                  -> white
             C.GOLD  , "${S.PM}5%"                    -> gold
             C.SILVER, "${S.PM}10%"                   -> silver
-            else                                     -> resistor_blank
+            C.RESISTOR_BLUE                          -> resistor_blue
+            C.RESISTOR_WIRE                          -> resistor_wire
+            else                                     -> resistor_beige
         }
     }
 
@@ -55,7 +59,7 @@ object ColorFinder {
             white -> C.WHITE
             gold -> C.GOLD
             silver -> C.SILVER
-            else -> C.BLANK
+            else -> C.RESISTOR_BEIGE
         }
     }
 
@@ -71,7 +75,7 @@ object ColorFinder {
             7 -> C.VIOLET
             8 -> C.GRAY
             9 -> C.WHITE
-            else -> C.BLANK
+            else -> C.RESISTOR_BEIGE
         }
     }
 }

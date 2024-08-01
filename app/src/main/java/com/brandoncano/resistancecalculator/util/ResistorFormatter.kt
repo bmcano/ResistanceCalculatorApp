@@ -52,13 +52,13 @@ object ResistorFormatter {
             index = 0
         }
         if (!resistor.isThreeFourBand() && !res.startsWith("0.")) index--
-        return colorsMap[index] ?: C.BLANK
+        return colorsMap[index] ?: C.RESISTOR_BEIGE
     }
 
     private fun numericalInputMultiplier(resistor: ResistorVtc, resistance: Long): String {
         var length = resistance.toString().length
         if (!resistor.isThreeFourBand()) length--
-        return colorsMap[length] ?: C.BLANK
+        return colorsMap[length] ?: C.RESISTOR_BEIGE
     }
 
     private fun checkLeadingZeros(isThreeFourBand: Boolean, value: String): String {

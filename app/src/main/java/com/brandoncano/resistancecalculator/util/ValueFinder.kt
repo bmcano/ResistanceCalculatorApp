@@ -26,7 +26,7 @@ object ValueFinder {
     fun getSigFig(color: String) = getValue(color).first
 
     fun getTolerance(color: String, isThreeBand: Boolean): String {
-        val param = if (isThreeBand) C.BLANK else color
+        val param = if (isThreeBand) C.RESISTOR_BEIGE else color
         val tolerance = getValue(param).second
         return if (tolerance.isNotEmpty()) "${S.PM}$tolerance" else ""
     }
@@ -51,7 +51,7 @@ object ValueFinder {
             C.WHITE  -> Triple("9", "",      "")
             C.GOLD   -> Triple("",  "5%",    "")
             C.SILVER -> Triple("",  "10%",   "")
-            C.BLANK  -> Triple("",  "20%",   "")
+            C.RESISTOR_BEIGE  -> Triple("",  "20%",   "")
             else -> Triple("", "", "")
         }
     }

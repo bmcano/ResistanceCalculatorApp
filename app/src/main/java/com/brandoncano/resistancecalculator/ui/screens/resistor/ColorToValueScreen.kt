@@ -1,6 +1,7 @@
-package com.brandoncano.resistancecalculator.ui.screens
+package com.brandoncano.resistancecalculator.ui.screens.resistor
 
 import android.content.Context
+import android.graphics.Picture
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -35,22 +36,17 @@ import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
 import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
 import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
 import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.components.ResistorLayout
-import com.brandoncano.resistancecalculator.ui.composables.ShareMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.SmdMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.util.formatResistance
-
-/**
- * Job: Holds all the interactions of the CtV screen
- */
+import com.brandoncano.resistancecalculator.util.shareableText
 
 @Composable
 fun ColorToValueScreen(
@@ -77,6 +73,7 @@ private fun ContentView(
 ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
+    val showMenu = remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     var resetDropdown by remember { mutableStateOf(false) }
     val resistor by resistorCtv.observeAsState(ResistorCtv())
@@ -86,6 +83,7 @@ private fun ContentView(
     var band4 by remember { mutableStateOf(resistor.band4) }
     var band5 by remember { mutableStateOf(resistor.band5) }
     var band6 by remember { mutableStateOf(resistor.band6) }
+    var picture = remember { Picture() }
 
     Scaffold(
         bottomBar = {
@@ -95,6 +93,16 @@ private fun ContentView(
             }
         }
     ) { paddingValues ->
+        fun clearScreen() {
+            showMenu.value = false
+            viewModel.clear()
+            resetDropdown = true
+            focusManager.clearFocus()
+            // these are needed since the viewModel doesn't update them automatically
+            band3 = ""
+            band5 = ""
+            band6 = ""
+        }
         fun postSelectionActions() {
             resetDropdown = false
             focusManager.clearFocus()
@@ -107,28 +115,22 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppMenuTopAppBar(stringResource(R.string.menu_color_to_value), interactionSource) {
-                ValueToColorMenuItem(navController, interactionSource)
-                SmdMenuItem(navController, interactionSource)
-                val shareableText = "${resistor.formatResistance()}\n$resistor"
-                ShareMenuItem(context, shareableText, interactionSource)
-                FeedbackMenuItem(context, interactionSource)
-                ClearSelectionsMenuItem(interactionSource) {
-                    viewModel.clear()
-                    resetDropdown = true
-                    focusManager.clearFocus()
-                    // these are needed since the viewModel doesn't update them automatically
-                    band3 = ""
-                    band5 = ""
-                    band6 = ""
-                }
-                AboutAppMenuItem(navController, interactionSource)
+            AppMenuTopAppBar(
+                titleText = stringResource(R.string.title_color_to_value),
+                interactionSource = interactionSource,
+                showMenu = showMenu,
+            ) {
+                ValueToColorMenuItem(navController, showMenu)
+                ClearSelectionsMenuItem { clearScreen() }
+                ShareTextMenuItem(context, resistor.shareableText(), showMenu)
+                ShareImageMenuItem(context, showMenu, picture)
+                FeedbackMenuItem(context, showMenu)
+                AboutAppMenuItem(navController, showMenu)
             }
 
-            ResistorLayout(resistor)
-
+            picture = resistorPicture(resistor)
             ImageTextDropDownMenu(
-                modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 24.dp),
                 label = R.string.number_band_hint1,
                 selectedOption = band1,
                 items = DropdownLists.NUMBER_LIST_NO_BLACK,
@@ -139,7 +141,7 @@ private fun ContentView(
                 postSelectionActions()
             }
             ImageTextDropDownMenu(
-                modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 12.dp),
                 label = R.string.number_band_hint2,
                 selectedOption = band2,
                 items = DropdownLists.NUMBER_LIST,
@@ -151,7 +153,7 @@ private fun ContentView(
             }
             if (navBarSelection == 2 || navBarSelection == 3) {
                 ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                    modifier = Modifier.padding(top = 12.dp),
                     label = R.string.number_band_hint3,
                     selectedOption = band3,
                     items = DropdownLists.NUMBER_LIST,
@@ -163,7 +165,7 @@ private fun ContentView(
                 }
             }
             ImageTextDropDownMenu(
-                modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 12.dp),
                 label = R.string.multiplier_band_hint,
                 selectedOption = band4,
                 items = DropdownLists.MULTIPLIER_LIST,
@@ -175,7 +177,7 @@ private fun ContentView(
             }
             if (navBarSelection != 0) {
                 ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                    modifier = Modifier.padding(top = 12.dp),
                     label = R.string.tolerance_band_hint,
                     selectedOption = band5,
                     items = DropdownLists.TOLERANCE_LIST,
@@ -188,7 +190,7 @@ private fun ContentView(
             }
             if (navBarSelection == 3) {
                 ImageTextDropDownMenu(
-                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                    modifier = Modifier.padding(top = 12.dp),
                     label = R.string.ppm_band_hint,
                     selectedOption = band6,
                     items = DropdownLists.PPM_LIST,

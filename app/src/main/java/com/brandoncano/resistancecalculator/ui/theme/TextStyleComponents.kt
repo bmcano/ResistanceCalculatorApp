@@ -3,6 +3,7 @@ package com.brandoncano.resistancecalculator.ui.theme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,7 +12,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
+import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
+
+/**
+ * Job: Instead of custom typography we use custom text styles for each Text() component
+ * Note: Text styles
+ */
 
 @Composable
 private fun textStyleBase() = TextStyle(
@@ -32,6 +38,10 @@ fun textStyleTitle() = textStyleBase().merge(
     fontSize = TextFontSize.title,
     lineHeight = TextLineHeight.title,
 )
+
+/**
+ * Note: Text colors
+ */
 
 @Composable
 fun textStyleHeadline() = textStyleBase().merge(
@@ -66,7 +76,17 @@ fun textStyleCaption() = textStyleBase().merge(
     lineHeight = TextLineHeight.caption,
 )
 
-@AppScreenPreviews
+@Composable
+fun TextStyle.white() = this.merge(
+    color = white
+)
+
+@Composable
+fun TextStyle.menuText() = this.merge(
+    color = MaterialTheme.colorScheme.onSurfaceVariant
+)
+
+@AppComponentPreviews
 @Composable
 private fun TextStylePreview() {
     ResistorCalculatorTheme {
@@ -106,7 +126,22 @@ private fun TextStylePreview() {
     }
 }
 
+@AppComponentPreviews
 @Composable
-fun TextStyle.white() = this.merge(
-    color = white
-)
+private fun TextStyleColorsPreview() {
+    ResistorCalculatorTheme {
+        Column(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = "White",
+                style = textStyleTitle().white(),
+            )
+            Text(
+                text = "Menu Text",
+                style = textStyleTitle().menuText(),
+            )
+        }
+    }
+}

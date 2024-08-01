@@ -3,9 +3,6 @@ package com.brandoncano.resistancecalculator.model.vtc
 import android.content.Context
 import com.brandoncano.resistancecalculator.components.SharedPreferences
 
-/**
- * Job: Repository to the value to color resistor model, handles shared preferences.
- */
 class ResistorVtcRepository(context: Context) {
 
     private val application = context

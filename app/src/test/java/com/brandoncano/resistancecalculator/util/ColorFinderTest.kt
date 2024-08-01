@@ -9,7 +9,7 @@ import com.brandoncano.resistancecalculator.ui.theme.green
 import com.brandoncano.resistancecalculator.ui.theme.orange
 import com.brandoncano.resistancecalculator.ui.theme.primaryLight
 import com.brandoncano.resistancecalculator.ui.theme.red
-import com.brandoncano.resistancecalculator.ui.theme.resistor_blank
+import com.brandoncano.resistancecalculator.ui.theme.resistor_beige
 import com.brandoncano.resistancecalculator.ui.theme.silver
 import com.brandoncano.resistancecalculator.ui.theme.violet
 import com.brandoncano.resistancecalculator.ui.theme.white
@@ -64,8 +64,8 @@ class ColorFinderTest {
         assertEquals(silver, ColorFinder.textToColor(C.SILVER))
         assertEquals(silver, ColorFinder.textToColor("${S.PM}10%"))
 
-        assertEquals(resistor_blank, ColorFinder.textToColor("Some String"))
-        assertEquals(resistor_blank, ColorFinder.textToColor("Not a color Red"))
+        assertEquals(resistor_beige, ColorFinder.textToColor("Some String"))
+        assertEquals(resistor_beige, ColorFinder.textToColor("Not a color Red"))
     }
 
     @Test
@@ -83,8 +83,8 @@ class ColorFinderTest {
         assertEquals(C.GOLD, ColorFinder.colorToColorText(gold))
         assertEquals(C.SILVER, ColorFinder.colorToColorText(silver))
 
-        assertEquals(C.BLANK, ColorFinder.colorToColorText(resistor_blank))
-        assertEquals(C.BLANK, ColorFinder.colorToColorText(primaryLight))
+        assertEquals(C.RESISTOR_BEIGE, ColorFinder.colorToColorText(resistor_beige))
+        assertEquals(C.RESISTOR_BEIGE, ColorFinder.colorToColorText(primaryLight))
     }
 
     @Test
@@ -100,7 +100,7 @@ class ColorFinderTest {
         assertEquals(C.GRAY, ColorFinder.numberToText(8))
         assertEquals(C.WHITE, ColorFinder.numberToText(9))
 
-        assertEquals(C.BLANK, ColorFinder.numberToText(-1))
-        assertEquals(C.BLANK, ColorFinder.numberToText())
+        assertEquals(C.RESISTOR_BEIGE, ColorFinder.numberToText(-1))
+        assertEquals(C.RESISTOR_BEIGE, ColorFinder.numberToText())
     }
 }
