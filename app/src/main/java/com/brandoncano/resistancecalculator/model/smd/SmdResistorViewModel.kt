@@ -8,10 +8,8 @@ import androidx.lifecycle.ViewModel
 class SmdResistorViewModel(context: Context): ViewModel() {
 
     private val repository = SmdResistorRepository.getInstance(context)
-    private var resistor = MutableLiveData<SmdResistor>()
-
-    init {
-        resistor.value = SmdResistor()
+    private var resistor = MutableLiveData<SmdResistor>().also {
+        it.value = SmdResistor()
     }
 
     override fun onCleared() {
@@ -28,12 +26,8 @@ class SmdResistorViewModel(context: Context): ViewModel() {
         return resistor
     }
 
-    fun updateCode(value: String) {
-        resistor.value = resistor.value?.copy(code = value)
-    }
-
-    fun updateUnits(value: String) {
-        resistor.value = resistor.value?.copy(units = value)
+    fun updateValues(code: String, units: String) {
+        resistor.value = resistor.value?.copy(code = code, units = units)
     }
 
     fun getNavBarSelection(): Int {

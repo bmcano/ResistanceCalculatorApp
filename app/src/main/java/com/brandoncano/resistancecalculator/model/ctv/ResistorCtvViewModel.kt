@@ -4,15 +4,12 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.brandoncano.resistancecalculator.components.BandKey
 
 class ResistorCtvViewModel(context: Context): ViewModel() {
 
     private val repository = ResistorCtvRepository.getInstance(context)
-    private var resistor = MutableLiveData<ResistorCtv>()
-
-    init {
-        resistor.value = ResistorCtv()
+    private var resistor = MutableLiveData<ResistorCtv>().also {
+        it.value = ResistorCtv()
     }
 
     override fun onCleared() {
@@ -29,15 +26,9 @@ class ResistorCtvViewModel(context: Context): ViewModel() {
         return resistor
     }
 
-    fun updateBand(bandKey: BandKey, value: String) {
-        resistor.value = when (bandKey) {
-            BandKey.Band1 -> resistor.value?.copy(band1 = value)
-            BandKey.Band2 -> resistor.value?.copy(band2 = value)
-            BandKey.Band3 -> resistor.value?.copy(band3 = value)
-            BandKey.Band4 -> resistor.value?.copy(band4 = value)
-            BandKey.Band5 -> resistor.value?.copy(band5 = value)
-            BandKey.Band6 -> resistor.value?.copy(band6 = value)
-        }
+    fun updateBands(b1: String, b2: String, b3: String, b4: String, b5: String, b6: String) {
+        resistor.value = resistor.value
+            ?.copy(band1 = b1, band2 = b2, band3 = b3, band4 = b4, band5 = b5, band6 = b6)
     }
 
     fun getNavBarSelection(): Int {

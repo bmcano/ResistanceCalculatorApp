@@ -27,10 +27,8 @@ import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 
 @Composable
 fun HomeScreen(context: Context, navController: NavController) {
-    ResistorCalculatorTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            ContentView(context, navController)
-        }
+    Surface(modifier = Modifier.fillMaxSize()) {
+        ContentView(context, navController)
     }
 }
 
@@ -51,7 +49,7 @@ private fun ContentView(context: Context, navController: NavController) {
         AppIcon()
         AppCalculatorButtons(navController)
         OurAppsButtons(context)
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(24.dp))
     }
 }
 
@@ -59,5 +57,7 @@ private fun ContentView(context: Context, navController: NavController) {
 @Composable
 private fun HomePreview() {
     val app = MainActivity()
-    HomeScreen(app, NavController(app))
+    ResistorCalculatorTheme {
+        HomeScreen(app, NavController(app))
+    }
 }

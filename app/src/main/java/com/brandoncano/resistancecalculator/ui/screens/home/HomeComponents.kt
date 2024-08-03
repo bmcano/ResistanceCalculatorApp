@@ -104,18 +104,24 @@ fun OurAppsButtons(context: Context) {
             style = textStyleHeadline(),
         )
         ArrowButtonCard(
+            Icons.Outlined.Grade,
+            stringResource(id = R.string.home_button_rate_us),
+        ) {
+            OpenLink.openResistorApp(context)
+        }
+        ArrowButtonCard(
             listOf(
-                Icons.Outlined.Grade,
                 // Note: we do this instead because material icons does not have the outlined version
-                ImageVector.vectorResource(id = R.drawable.icon_outline_add_to_home_screen)
+                ImageVector.vectorResource(id = R.drawable.icon_outline_add_to_home_screen),
+                ImageVector.vectorResource(id = R.drawable.icon_outline_add_to_home_screen),
             ),
             listOf(
-                stringResource(id = R.string.home_button_rate_us),
-                stringResource(id = R.string.home_button_view_capacitor_app)
+                stringResource(id = R.string.home_button_view_capacitor_app),
+                stringResource(id = R.string.home_button_view_inductor_app)
             ),
             listOf(
-                { OpenLink.openResistorApp(context) },
-                { OpenLink.openCapacitorApp(context) }
+                { OpenLink.openCapacitorApp(context) },
+                { OpenLink.openInductorApp(context) }
             ),
         )
     }
