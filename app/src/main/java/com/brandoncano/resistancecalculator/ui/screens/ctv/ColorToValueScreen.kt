@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.screens.resistor
+package com.brandoncano.resistancecalculator.ui.screens.ctv
 
 import android.content.Context
 import android.graphics.Picture

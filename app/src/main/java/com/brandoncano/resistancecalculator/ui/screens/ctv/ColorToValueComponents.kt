@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.screens.resistor
+package com.brandoncano.resistancecalculator.ui.screens.ctv
 
 import android.graphics.Picture
 import androidx.annotation.DrawableRes
@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Colors
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.composables.AppCard
 import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
 import com.brandoncano.resistancecalculator.ui.composables.DrawContent
@@ -36,22 +35,13 @@ import com.brandoncano.resistancecalculator.util.bandTwoForDisplay
 import com.brandoncano.resistancecalculator.util.deriveResistorColor
 import com.brandoncano.resistancecalculator.util.formatResistance
 
-private data class ResistorImagePair(@DrawableRes val drawableRes: Int, val color: String)
+data class ResistorImagePair(@DrawableRes val drawableRes: Int, val color: String)
 
 @Composable
 fun resistorPicture(resistor: ResistorCtv): Picture {
     val picture = remember { Picture() }
     DrawContent(picture) {
         ResistorLayout(resistor)
-    }
-    return picture
-}
-
-@Composable
-fun resistorPicture(resistor: ResistorVtc, isError: Boolean): Picture {
-    val picture = remember { Picture() }
-    DrawContent(picture) {
-        ResistorLayout(resistor, isError)
     }
     return picture
 }
@@ -91,43 +81,7 @@ fun ResistorLayout(resistor: ResistorCtv) {
 }
 
 @Composable
-fun ResistorLayout(
-    resistor: ResistorVtc,
-    isError: Boolean,
-) {
-    Column(
-        modifier = Modifier.padding(top = 16.dp, start = 32.dp, end = 32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        val resistorColor = resistor.deriveResistorColor()
-        ResistorRow(
-            ResistorImagePair(R.drawable.img_resistor_wire, Colors.RESISTOR_WIRE),
-            ResistorImagePair(R.drawable.img_resistor_end_left, resistorColor),
-            ResistorImagePair(R.drawable.img_resistor_band_96, resistor.bandOneForDisplay()),
-            ResistorImagePair(R.drawable.img_resistor_curve_left, resistorColor),
-            ResistorImagePair(R.drawable.img_resistor_band_64, resistor.bandTwoForDisplay()),
-            ResistorImagePair(R.drawable.img_resistor_band_64, resistorColor),
-            ResistorImagePair(R.drawable.img_resistor_band_64, resistor.bandThreeForDisplay()),
-            ResistorImagePair(R.drawable.img_resistor_band_64, resistorColor),
-            ResistorImagePair(R.drawable.img_resistor_band_64, resistor.bandFourForDisplay()),
-            ResistorImagePair(R.drawable.img_resistor_band_64_wide, resistorColor),
-            ResistorImagePair(R.drawable.img_resistor_band_64_wide, resistor.bandFiveForDisplay()),
-            ResistorImagePair(R.drawable.img_resistor_curve_right, resistorColor),
-            ResistorImagePair(R.drawable.img_resistor_band_96, resistor.bandSixForDisplay()),
-            ResistorImagePair(R.drawable.img_resistor_end_right, resistorColor),
-            ResistorImagePair(R.drawable.img_resistor_wire, Colors.RESISTOR_WIRE),
-        )
-        val text = when {
-            resistor.isEmpty() -> stringResource(id = R.string.default_vtc_value)
-            isError -> stringResource(id = R.string.error_na)
-            else -> resistor.getResistorValue()
-        }
-        ResistanceText(text)
-    }
-}
-
-@Composable
-private fun ResistorRow(vararg resistorImages: ResistorImagePair) {
+fun ResistorRow(vararg resistorImages: ResistorImagePair) {
     Row(horizontalArrangement = Arrangement.Absolute.Center) {
         resistorImages.forEach { resistorImage ->
             val color = ColorFinder.textToColor(resistorImage.color)
@@ -137,7 +91,7 @@ private fun ResistorRow(vararg resistorImages: ResistorImagePair) {
 }
 
 @Composable
-private fun ResistorImage(@DrawableRes drawableRes: Int, color: Color) {
+fun ResistorImage(@DrawableRes drawableRes: Int, color: Color) {
     Image(
         painter = painterResource(id = drawableRes),
         contentDescription = null,
@@ -146,7 +100,7 @@ private fun ResistorImage(@DrawableRes drawableRes: Int, color: Color) {
 }
 
 @Composable
-private fun ResistanceText(resistance: String) {
+fun ResistanceText(resistance: String) {
     AppCard(modifier = Modifier.padding(top = 12.dp)) {
         Text(
             text = resistance,

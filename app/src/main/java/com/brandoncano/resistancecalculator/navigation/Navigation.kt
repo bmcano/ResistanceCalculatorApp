@@ -17,10 +17,10 @@ import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.screens.about.AboutScreen
-import com.brandoncano.resistancecalculator.ui.screens.resistor.ColorToValueScreen
+import com.brandoncano.resistancecalculator.ui.screens.ctv.ColorToValueScreen
 import com.brandoncano.resistancecalculator.ui.screens.home.HomeScreen
 import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
-import com.brandoncano.resistancecalculator.ui.screens.resistor.ValueToColorScreen
+import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
 import com.brandoncano.resistancecalculator.util.formatResistor
 
 /**
