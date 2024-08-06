@@ -1,6 +1,6 @@
 <resources>
     <!-- Activity title -->
-    <string name="app_name">RCV - Calculator</string>
+    <string name="app_name">Resistor Calculator</string>
     <string name="title_color_to_value">Color to Value</string>
     <string name="title_value_to_color">Value to Color</string>
     <string name="title_smd">SMD Resistor</string>
@@ -49,13 +49,16 @@
     <string name="about_view_privacy_policy">View privacy policy</string>
     <!-- Home screen/components text -->
     <string name="home_calculators_header_text">Calculators</string>
-    <string name="home_button_value_to_color">Value to color</string>
     <string name="home_button_color_to_value">Color to value</string>
+    <string name="home_button_value_to_color">Value to color</string>
     <string name="home_button_smd">SMD resistor</string>
     <string name="home_our_apps_header_text">Our apps</string>
     <string name="home_button_rate_us">Rate this app on Google Play</string>
     <string name="home_button_view_capacitor_app">Check out our capacitor app</string>
+    <string name="home_button_view_inductor_app">Check out our inductor app</string>
     <!-- Content descriptions -->
+    <string name="content_description_expand">Expand options</string>
+    <string name="content_description_collapse">Collapse options</string>
     <string name="content_description_app_icon">App icon</string>
     <string name="content_description_menu_more">More</string>
     <string name="content_description_right_arrow">Right arrow</string>

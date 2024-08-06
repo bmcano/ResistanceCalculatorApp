@@ -13,7 +13,7 @@ android {
         minSdk = 24
         targetSdk = 34
         versionCode = 21
-        versionName = "3.3.0"
+        versionName = "3.3.1"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -21,7 +21,7 @@ android {
     }
     applicationVariants.configureEach {
         resValue("string", "version", versionName)
-        resValue("string", "last_updated", "8/1/2024")
+        resValue("string", "last_updated", "8/6/2024")
     }
     buildTypes {
         release {
@@ -79,4 +79,5 @@ dependencies {
     testImplementation(libs.junit)
     // external libraries
     implementation(libs.ostermiller.util)
+    // implementation(files("libs/app-shared.aar")) // version 1.0.0 - 8/5/24, made by me
 }

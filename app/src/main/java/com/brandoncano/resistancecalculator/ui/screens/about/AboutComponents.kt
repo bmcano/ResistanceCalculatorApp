@@ -113,7 +113,7 @@ fun ViewIecStandard(context: Context) {
 }
 
 @Composable
-fun HeadlineBodyStack(@StringRes label: Int, @StringRes body: Int) {
+private fun HeadlineBodyStack(@StringRes label: Int, @StringRes body: Int) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.Start

@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Picture
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -59,10 +61,8 @@ fun SmdScreen(
     navBarPosition: Int,
     smdResistor: LiveData<SmdResistor>
 ) {
-    ResistorCalculatorTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            ContentView(context, navController, viewModel, navBarPosition, smdResistor)
-        }
+    Surface(modifier = Modifier.fillMaxSize()) {
+        ContentView(context, navController, viewModel, navBarPosition, smdResistor)
     }
 }
 
@@ -77,15 +77,39 @@ private fun ContentView(
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
     val showMenu = remember { mutableStateOf(false) }
-    var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     var reset by remember { mutableStateOf(false) }
+    var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val resistor by smdResistor.observeAsState(SmdResistor())
     var code by remember { mutableStateOf(resistor.code) }
     var units by remember { mutableStateOf(resistor.units) }
     var isError by remember { mutableStateOf(resistor.isSmdInputInvalid()) }
     var picture = remember { Picture() }
 
+    fun postSelectionActions() {
+        reset = false
+        viewModel.updateValues(code, units)
+        isError = resistor.isSmdInputInvalid()
+        if (!isError) {
+            viewModel.saveResistorValues(resistor)
+            resistor.formatResistance()
+        }
+    }
+
     Scaffold(
+        topBar = {
+            AppMenuTopAppBar(stringResource(R.string.title_smd), interactionSource, showMenu) {
+                ClearSelectionsMenuItem {
+                    showMenu.value = false
+                    reset = true
+                    viewModel.clear()
+                    focusManager.clearFocus()
+                }
+                ShareTextMenuItem(context, resistor.toString(), showMenu)
+                ShareImageMenuItem(context, showMenu, picture)
+                FeedbackMenuItem(context, showMenu)
+                AboutAppMenuItem(navController, showMenu)
+            }
+        },
         bottomBar = {
             SmdNavigationBar(navBarSelection) {
                 navBarSelection = it
@@ -105,19 +129,6 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppMenuTopAppBar(stringResource(R.string.title_smd), interactionSource, showMenu) {
-                ClearSelectionsMenuItem {
-                    showMenu.value = false
-                    viewModel.clear()
-                    reset = true
-                    focusManager.clearFocus()
-                }
-                ShareTextMenuItem(context, resistor.toString(), showMenu)
-                ShareImageMenuItem(context, showMenu, picture)
-                FeedbackMenuItem(context, showMenu)
-                AboutAppMenuItem(navController, showMenu)
-            }
-
             picture = smdResistorPicture(resistor, isError)
             AppTextField(
                 modifier = Modifier.padding(top = 24.dp),
@@ -133,14 +144,8 @@ private fun ContentView(
                     imeAction = ImeAction.Done
                 )
             ) {
-                reset = false
                 code = it.uppercase(Locale.getDefault())
-                viewModel.updateCode(code)
-                isError = resistor.isSmdInputInvalid()
-                if (!isError) {
-                    viewModel.saveResistorValues(resistor)
-                    resistor.formatResistance()
-                }
+                postSelectionActions()
             }
             AppDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
@@ -150,11 +155,10 @@ private fun ContentView(
                 reset = reset,
             ) {
                 units = it
-                viewModel.updateUnits(it)
-                reset = false
                 focusManager.clearFocus()
-                viewModel.saveResistorValues(resistor)
+                postSelectionActions()
             }
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
@@ -165,5 +169,7 @@ private fun SmdScreenPreview() {
     val app = MainActivity()
     val viewModel = viewModel<SmdResistorViewModel>(factory = ResistorViewModelFactory(app))
     val resistor = MutableLiveData<SmdResistor>()
-    SmdScreen(app, NavController(app), viewModel, 0, resistor)
+    ResistorCalculatorTheme {
+        SmdScreen(app, NavController(app), viewModel, 0, resistor)
+    }
 }

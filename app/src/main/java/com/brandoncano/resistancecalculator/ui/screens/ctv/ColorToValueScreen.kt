@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.ui.screens.resistor
+package com.brandoncano.resistancecalculator.ui.screens.ctv
 
 import android.content.Context
 import android.graphics.Picture
@@ -29,7 +29,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.components.BandKey
 import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
@@ -56,10 +55,8 @@ fun ColorToValueScreen(
     navBarPosition: Int,
     resistorCtv: LiveData<ResistorCtv>,
 ) {
-    ResistorCalculatorTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            ContentView(context, navController, viewModel, navBarPosition, resistorCtv)
-        }
+    Surface(modifier = Modifier.fillMaxSize()) {
+        ContentView(context, navController, viewModel, navBarPosition, resistorCtv)
     }
 }
 
@@ -74,8 +71,8 @@ private fun ContentView(
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
     val showMenu = remember { mutableStateOf(false) }
+    var reset by remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
-    var resetDropdown by remember { mutableStateOf(false) }
     val resistor by resistorCtv.observeAsState(ResistorCtv())
     var band1 by remember { mutableStateOf(resistor.band1) }
     var band2 by remember { mutableStateOf(resistor.band2) }
@@ -85,7 +82,35 @@ private fun ContentView(
     var band6 by remember { mutableStateOf(resistor.band6) }
     var picture = remember { Picture() }
 
+    fun postSelectionActions() {
+        reset = false
+        focusManager.clearFocus()
+        viewModel.updateBands(band1, band2, band3, band4, band5, band6)
+        viewModel.saveResistorColors(resistor)
+    }
+
     Scaffold(
+        topBar = {
+            AppMenuTopAppBar(
+                titleText = stringResource(R.string.title_color_to_value),
+                interactionSource = interactionSource,
+                showMenu = showMenu,
+            ) {
+                ValueToColorMenuItem(navController, showMenu)
+                ClearSelectionsMenuItem {
+                    showMenu.value = false
+                    reset = true
+                    viewModel.clear()
+                    focusManager.clearFocus()
+                    // Bug: these are needed since the viewModel doesn't update them for clearing
+                    band3 = ""; band5 = ""; band6 = ""
+                }
+                ShareTextMenuItem(context, resistor.shareableText(), showMenu)
+                ShareImageMenuItem(context, showMenu, picture)
+                FeedbackMenuItem(context, showMenu)
+                AboutAppMenuItem(navController, showMenu)
+            }
+        },
         bottomBar = {
             CalculatorNavigationBar(navBarSelection) {
                 navBarSelection = it
@@ -93,21 +118,6 @@ private fun ContentView(
             }
         }
     ) { paddingValues ->
-        fun clearScreen() {
-            showMenu.value = false
-            viewModel.clear()
-            resetDropdown = true
-            focusManager.clearFocus()
-            // these are needed since the viewModel doesn't update them automatically
-            band3 = ""
-            band5 = ""
-            band6 = ""
-        }
-        fun postSelectionActions() {
-            resetDropdown = false
-            focusManager.clearFocus()
-            viewModel.saveResistorColors(resistor)
-        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -115,29 +125,15 @@ private fun ContentView(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppMenuTopAppBar(
-                titleText = stringResource(R.string.title_color_to_value),
-                interactionSource = interactionSource,
-                showMenu = showMenu,
-            ) {
-                ValueToColorMenuItem(navController, showMenu)
-                ClearSelectionsMenuItem { clearScreen() }
-                ShareTextMenuItem(context, resistor.shareableText(), showMenu)
-                ShareImageMenuItem(context, showMenu, picture)
-                FeedbackMenuItem(context, showMenu)
-                AboutAppMenuItem(navController, showMenu)
-            }
-
             picture = resistorPicture(resistor)
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 24.dp),
                 label = R.string.number_band_hint1,
                 selectedOption = band1,
                 items = DropdownLists.NUMBER_LIST_NO_BLACK,
-                reset = resetDropdown,
+                reset = reset,
             ) {
                 band1 = it
-                viewModel.updateBand(BandKey.Band1, it)
                 postSelectionActions()
             }
             ImageTextDropDownMenu(
@@ -145,10 +141,9 @@ private fun ContentView(
                 label = R.string.number_band_hint2,
                 selectedOption = band2,
                 items = DropdownLists.NUMBER_LIST,
-                reset = resetDropdown,
+                reset = reset,
             ) {
                 band2 = it
-                viewModel.updateBand(BandKey.Band2, it)
                 postSelectionActions()
             }
             if (navBarSelection == 2 || navBarSelection == 3) {
@@ -157,10 +152,9 @@ private fun ContentView(
                     label = R.string.number_band_hint3,
                     selectedOption = band3,
                     items = DropdownLists.NUMBER_LIST,
-                    reset = resetDropdown,
+                    reset = reset,
                 ) {
                     band3 = it
-                    viewModel.updateBand(BandKey.Band3, it)
                     postSelectionActions()
                 }
             }
@@ -169,10 +163,9 @@ private fun ContentView(
                 label = R.string.multiplier_band_hint,
                 selectedOption = band4,
                 items = DropdownLists.MULTIPLIER_LIST,
-                reset = resetDropdown,
+                reset = reset,
             ) {
                 band4 = it
-                viewModel.updateBand(BandKey.Band4, it)
                 postSelectionActions()
             }
             if (navBarSelection != 0) {
@@ -181,10 +174,9 @@ private fun ContentView(
                     label = R.string.tolerance_band_hint,
                     selectedOption = band5,
                     items = DropdownLists.TOLERANCE_LIST,
-                    reset = resetDropdown,
+                    reset = reset,
                 ) {
                     band5 = it
-                    viewModel.updateBand(BandKey.Band5, it)
                     postSelectionActions()
                 }
             }
@@ -194,10 +186,9 @@ private fun ContentView(
                     label = R.string.ppm_band_hint,
                     selectedOption = band6,
                     items = DropdownLists.PPM_LIST,
-                    reset = resetDropdown,
+                    reset = reset,
                 ) {
                     band6 = it
-                    viewModel.updateBand(BandKey.Band6, it)
                     postSelectionActions()
                 }
             }
@@ -212,5 +203,7 @@ private fun ColorToValueScreen4BandPreview() {
     val app = MainActivity()
     val viewModel = viewModel<ResistorCtvViewModel>(factory = ResistorViewModelFactory(app))
     val resistor = MutableLiveData<ResistorCtv>()
-    ColorToValueScreen(app, NavController(app), viewModel, 1, resistor)
+    ResistorCalculatorTheme {
+        ColorToValueScreen(app, NavController(app), viewModel, 1, resistor)
+    }
 }
