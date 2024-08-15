@@ -18,12 +18,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
+import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
+import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 
 @Composable
 fun HomeScreen(context: Context, navController: NavController) {
@@ -43,12 +44,12 @@ private fun ContentView(context: Context, navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AppMenuTopAppBar(stringResource(R.string.app_name), interactionSource, showMenu) {
-            FeedbackMenuItem(context, showMenu)
+            FeedbackMenuItem(context, Symbols.APP_NAME, showMenu)
             AboutAppMenuItem(navController, showMenu)
         }
         AppIcon()
         AppCalculatorButtons(navController)
-        OurAppsButtons(context)
+        OurAppsButtons(context, navController)
         Spacer(modifier = Modifier.height(24.dp))
     }
 }

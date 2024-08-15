@@ -17,14 +17,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
-import com.brandoncano.resistancecalculator.ui.composables.AppCard
-import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
-import com.brandoncano.resistancecalculator.ui.composables.DrawContent
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.ui.theme.textStyleLargeTitle
-import com.brandoncano.resistancecalculator.ui.theme.textStyleTitle
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.formatResistance
+import com.brandoncano.sharedcomponents.composables.AppCard
+import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
+import com.brandoncano.sharedcomponents.composables.DrawContent
+import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
+import com.brandoncano.sharedcomponents.text.textStyleTitle
 
 @Composable
 fun smdResistorPicture(resistor: SmdResistor, isError: Boolean): Picture {

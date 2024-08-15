@@ -7,4 +7,6 @@ object Symbols {
     const val GOHMS = "GΩ"
     const val PM = "±"
     const val PPM = "ppm/°C"
+    const val APP_NAME = "Resistor Color Code Calculator"
+    const val APPLICATION_ID = "com.brandoncano.resistancecalculator"
 }

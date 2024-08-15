@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Colors
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
-import com.brandoncano.resistancecalculator.ui.composables.DrawContent
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistanceText
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistorImagePair
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistorRow
@@ -23,6 +22,7 @@ import com.brandoncano.resistancecalculator.util.bandSixForDisplay
 import com.brandoncano.resistancecalculator.util.bandThreeForDisplay
 import com.brandoncano.resistancecalculator.util.bandTwoForDisplay
 import com.brandoncano.resistancecalculator.util.deriveResistorColor
+import com.brandoncano.sharedcomponents.composables.DrawContent
 
 @Composable
 fun resistorPicture(resistor: ResistorVtc, isError: Boolean): Picture {

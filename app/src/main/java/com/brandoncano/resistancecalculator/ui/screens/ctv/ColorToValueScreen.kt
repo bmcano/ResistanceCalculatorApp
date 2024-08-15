@@ -10,6 +10,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Looks3
+import androidx.compose.material.icons.outlined.Looks4
+import androidx.compose.material.icons.outlined.Looks5
+import androidx.compose.material.icons.outlined.Looks6
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -30,22 +35,24 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownLists
+import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
-import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.shareableText
+import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
+import com.brandoncano.sharedcomponents.composables.AppNavigationBar
+import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
+import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
+import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
+import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
+import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
+import com.brandoncano.sharedcomponents.data.NavigationBarOptions
 
 @Composable
 fun ColorToValueScreen(
@@ -106,16 +113,37 @@ private fun ContentView(
                     band3 = ""; band5 = ""; band6 = ""
                 }
                 ShareTextMenuItem(context, resistor.shareableText(), showMenu)
-                ShareImageMenuItem(context, showMenu, picture)
-                FeedbackMenuItem(context, showMenu)
+                ShareImageMenuItem(context, Symbols.APPLICATION_ID, showMenu, picture)
+                FeedbackMenuItem(context, Symbols.APP_NAME, showMenu)
                 AboutAppMenuItem(navController, showMenu)
             }
         },
         bottomBar = {
-            CalculatorNavigationBar(navBarSelection) {
-                navBarSelection = it
-                viewModel.saveNavBarSelection(it)
-            }
+            AppNavigationBar(
+                selection = navBarSelection,
+                onClick = {
+                    navBarSelection = it
+                    viewModel.saveNavBarSelection(it)
+                },
+                options = listOf(
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_three_band),
+                        imageVector = Icons.Outlined.Looks3,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_four_band),
+                        imageVector = Icons.Outlined.Looks4,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_five_band),
+                        imageVector = Icons.Outlined.Looks5,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_six_band),
+                        imageVector = Icons.Outlined.Looks6,
+                    ),
+                ),
+            )
         }
     ) { paddingValues ->
         Column(

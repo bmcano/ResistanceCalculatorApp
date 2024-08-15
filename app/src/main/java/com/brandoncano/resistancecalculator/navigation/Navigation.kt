@@ -22,6 +22,8 @@ import com.brandoncano.resistancecalculator.ui.screens.home.HomeScreen
 import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
 import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
 import com.brandoncano.resistancecalculator.util.formatResistor
+import com.brandoncano.sharedcomponents.data.Apps
+import com.brandoncano.sharedcomponents.screen.ViewOurAppsScreen
 
 /**
  * Note: Keep each navigation route in alphabetical order
@@ -39,7 +41,7 @@ fun Navigation(context: Context) {
             enterTransition = { slideInVertically(initialOffsetY = { it }) },
             exitTransition = { slideOutVertically(targetOffsetY = { it }) },
         ) {
-            AboutScreen(context)
+            AboutScreen(context, navController)
         }
         composable(
             route = Screen.ColorToValue.route,
@@ -78,6 +80,13 @@ fun Navigation(context: Context) {
             val resistor = viewModel.getResistorLiveData()
             resistor.value?.formatResistor()
             ValueToColorScreen(context, navController, viewModel, navBarPosition, resistor)
+        }
+        composable(
+            route = Screen.ViewOurApps.route,
+            enterTransition = { slideInVertically(initialOffsetY = { it }) },
+            exitTransition = { slideOutVertically(targetOffsetY = { it }) },
+        ) {
+            ViewOurAppsScreen(context, Apps.Resistor)
         }
     }
 }

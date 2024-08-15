@@ -9,4 +9,5 @@ sealed class Screen(val route: String) {
     data object Home : Screen("home_screen")
     data object Smd: Screen("smd")
     data object ValueToColor: Screen("value_to_color_screen")
+    data object ViewOurApps : Screen("view_our_apps_screen")
 }

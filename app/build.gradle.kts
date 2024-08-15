@@ -79,5 +79,5 @@ dependencies {
     testImplementation(libs.junit)
     // external libraries
     implementation(libs.ostermiller.util)
-    // implementation(files("libs/app-shared.aar")) // version 1.0.0 - 8/5/24, made by me
+    implementation(libs.bmcano.util)
 }

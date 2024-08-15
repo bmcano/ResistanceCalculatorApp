@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Colorize
 import androidx.compose.material.icons.outlined.Grade
 import androidx.compose.material.icons.outlined.Search
@@ -20,20 +21,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.constants.Links
 import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.ui.MainActivity
-import com.brandoncano.resistancecalculator.ui.composables.AppComponentPreviews
-import com.brandoncano.resistancecalculator.ui.composables.ArrowButtonCard
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.ui.theme.textStyleHeadline
-import com.brandoncano.resistancecalculator.util.external.OpenLink
+import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
+import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
+import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
+import com.brandoncano.sharedcomponents.text.textStyleHeadline
+import com.brandoncano.sharedcomponents.utils.OpenLink
 
 @Composable
 fun AppIcon() {
@@ -70,31 +71,30 @@ fun AppCalculatorButtons(navController: NavController) {
                 .align(Alignment.Start),
             style = textStyleHeadline(),
         )
-        ArrowButtonCard(
-            listOf(
-                Icons.Outlined.Colorize,
-                Icons.Outlined.Search
+        AppArrowCardButton(
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.Colorize,
+                text = stringResource(id = R.string.home_button_color_to_value),
+                onClick = { navController.navigate(Screen.ColorToValue.route) }
             ),
-            listOf(
-                stringResource(id = R.string.home_button_color_to_value),
-                stringResource(id = R.string.home_button_value_to_color)
-            ),
-            listOf(
-                { navController.navigate(Screen.ColorToValue.route) },
-                { navController.navigate(Screen.ValueToColor.route) }
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.Search,
+                text = stringResource(id = R.string.home_button_value_to_color),
+                onClick = { navController.navigate(Screen.ValueToColor.route) }
             ),
         )
-        ArrowButtonCard(
-            Icons.Outlined.WidthFull,
-            stringResource(id = R.string.home_button_smd),
-        ) {
-            navController.navigate(Screen.Smd.route)
-        }
+        AppArrowCardButton(
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.WidthFull,
+                text = stringResource(id = R.string.home_button_smd),
+                onClick = { navController.navigate(Screen.Smd.route) }
+            )
+        )
     }
 }
 
 @Composable
-fun OurAppsButtons(context: Context) {
+fun OurAppsButtons(context: Context, navController: NavController) {
     Column {
         Text(
             text = stringResource(id = R.string.home_our_apps_header_text),
@@ -103,25 +103,16 @@ fun OurAppsButtons(context: Context) {
                 .align(Alignment.Start),
             style = textStyleHeadline(),
         )
-        ArrowButtonCard(
-            Icons.Outlined.Grade,
-            stringResource(id = R.string.home_button_rate_us),
-        ) {
-            OpenLink.openResistorApp(context)
-        }
-        ArrowButtonCard(
-            listOf(
-                // Note: we do this instead because material icons does not have the outlined version
-                ImageVector.vectorResource(id = R.drawable.icon_outline_add_to_home_screen),
-                ImageVector.vectorResource(id = R.drawable.icon_outline_add_to_home_screen),
+        AppArrowCardButton(
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.Grade,
+                text = stringResource(id = R.string.home_button_rate_us),
+                onClick = { OpenLink.execute(context, Links.RESISTOR_PLAYSTORE) }
             ),
-            listOf(
-                stringResource(id = R.string.home_button_view_capacitor_app),
-                stringResource(id = R.string.home_button_view_inductor_app)
-            ),
-            listOf(
-                { OpenLink.openCapacitorApp(context) },
-                { OpenLink.openInductorApp(context) }
+            ArrowCardButtonContents(
+                imageVector = Icons.Outlined.Apps,
+                text = stringResource(id = R.string.home_button_view_apps),
+                onClick = { navController.navigate(Screen.ViewOurApps.route) }
             ),
         )
     }
@@ -149,6 +140,6 @@ private fun StandardCalculatorButtonsPreview() {
 private fun OurAppsButtonsPreview() {
     ResistorCalculatorTheme {
         val app = MainActivity()
-        OurAppsButtons(app)
+        OurAppsButtons(app, NavController(app))
     }
 }

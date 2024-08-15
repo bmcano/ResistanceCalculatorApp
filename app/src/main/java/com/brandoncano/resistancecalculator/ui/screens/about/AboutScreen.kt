@@ -13,22 +13,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.screens.home.OurAppsButtons
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.AppTopAppBar
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
+import com.brandoncano.sharedcomponents.composables.AppTopAppBar
+import com.brandoncano.sharedcomponents.screen.AppInfoCard
+import com.brandoncano.sharedcomponents.screen.AuthorCard
 
 @Composable
-fun AboutScreen(context: Context) {
+fun AboutScreen(context: Context, navController: NavController) {
     Surface(modifier = Modifier.fillMaxSize()) {
-        ContentView(context)
+        ContentView(context, navController)
     }
 }
 
 @Composable
-private fun ContentView(context: Context) {
+private fun ContentView(context: Context, navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -37,11 +40,11 @@ private fun ContentView(context: Context) {
     ) {
         AppTopAppBar(stringResource(R.string.about_title))
         AuthorCard()
-        AppInfoCard()
+        AppInfoCard(R.string.version, R.string.last_updated)
         ViewPrivacyPolicy(context)
         DescriptionCard()
         ViewIecStandard(context)
-        OurAppsButtons(context)
+        OurAppsButtons(context, navController)
         Spacer(modifier = Modifier.height(24.dp))
     }
 }
@@ -51,6 +54,6 @@ private fun ContentView(context: Context) {
 private fun AboutPreview() {
     val app = MainActivity()
     ResistorCalculatorTheme {
-        AboutScreen(app)
+        AboutScreen(app, NavController(app))
     }
 }

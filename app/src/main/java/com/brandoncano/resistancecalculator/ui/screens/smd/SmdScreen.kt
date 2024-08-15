@@ -11,6 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Looks
+import androidx.compose.material.icons.outlined.Looks3
+import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -34,23 +38,25 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownLists
+import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
 import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.AppDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.AppTextField
-import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.SmdNavigationBar
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistance
 import com.brandoncano.resistancecalculator.util.isSmdInputInvalid
+import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
+import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
+import com.brandoncano.sharedcomponents.composables.AppNavigationBar
+import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
+import com.brandoncano.sharedcomponents.composables.AppTextField
+import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
+import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
+import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
+import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
+import com.brandoncano.sharedcomponents.data.NavigationBarOptions
 import java.util.Locale
 
 @Composable
@@ -80,14 +86,14 @@ private fun ContentView(
     var reset by remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val resistor by smdResistor.observeAsState(SmdResistor())
-    var code by remember { mutableStateOf(resistor.code) }
+    val code = remember { mutableStateOf(resistor.code) }
     var units by remember { mutableStateOf(resistor.units) }
     var isError by remember { mutableStateOf(resistor.isSmdInputInvalid()) }
     var picture = remember { Picture() }
 
     fun postSelectionActions() {
         reset = false
-        viewModel.updateValues(code, units)
+        viewModel.updateValues(code.value, units)
         isError = resistor.isSmdInputInvalid()
         if (!isError) {
             viewModel.saveResistorValues(resistor)
@@ -105,21 +111,38 @@ private fun ContentView(
                     focusManager.clearFocus()
                 }
                 ShareTextMenuItem(context, resistor.toString(), showMenu)
-                ShareImageMenuItem(context, showMenu, picture)
-                FeedbackMenuItem(context, showMenu)
+                ShareImageMenuItem(context, Symbols.APPLICATION_ID, showMenu, picture)
+                FeedbackMenuItem(context, Symbols.APP_NAME, showMenu)
                 AboutAppMenuItem(navController, showMenu)
             }
         },
         bottomBar = {
-            SmdNavigationBar(navBarSelection) {
-                navBarSelection = it
-                viewModel.saveNavBarSelection(it)
-                isError = resistor.isSmdInputInvalid()
-                if (!isError) {
-                    viewModel.saveResistorValues(resistor)
-                    resistor.formatResistance()
-                }
-            }
+            AppNavigationBar(
+                selection = navBarSelection,
+                onClick = {
+                    navBarSelection = it
+                    viewModel.saveNavBarSelection(it)
+                    isError = resistor.isSmdInputInvalid()
+                    if (!isError) {
+                        viewModel.saveResistorValues(resistor)
+                        resistor.formatResistance()
+                    }
+                },
+                options = listOf(
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_three_eia),
+                        imageVector = Icons.Outlined.Looks3,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_four_eia),
+                        imageVector = Icons.Outlined.Looks4,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_eia_96),
+                        imageVector = Icons.Outlined.Looks,
+                    ),
+                ),
+            )
         }
     ) { paddingValues ->
         Column(
@@ -131,9 +154,9 @@ private fun ContentView(
         ) {
             picture = smdResistorPicture(resistor, isError)
             AppTextField(
-                modifier = Modifier.padding(top = 24.dp),
-                label = R.string.hint_smd_code,
-                text = code,
+                label = stringResource(id = R.string.hint_smd_code),
+                modifier = Modifier.padding(top = 24.dp, start = 32.dp, end = 32.dp),
+                value = code,
                 reset = reset,
                 isError = isError,
                 errorMessage = stringResource(id = R.string.error_invalid_code),
@@ -144,12 +167,12 @@ private fun ContentView(
                     imeAction = ImeAction.Done
                 )
             ) {
-                code = it.uppercase(Locale.getDefault())
+                code.value = it.uppercase(Locale.getDefault())
                 postSelectionActions()
             }
             AppDropDownMenu(
-                modifier = Modifier.padding(top = 12.dp),
-                label = R.string.units_hint,
+                label = stringResource(id = R.string.units_hint),
+                modifier = Modifier.padding(top = 12.dp, start = 32.dp, end = 32.dp),
                 selectedOption = resistor.units,
                 items = DropdownLists.UNITS_LIST,
                 reset = reset,

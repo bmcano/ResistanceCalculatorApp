@@ -17,10 +17,6 @@
     <!-- Menu items -->
     <string name="menu_value_to_color">Value to color</string>
     <string name="menu_color_to_value">Color to value</string>
-    <string name="menu_clear_selections">Clear selections</string>
-    <string name="menu_share_text">Share as text</string>
-    <string name="menu_share_image">Share as image</string>
-    <string name="menu_feedback">Feedback</string>
     <string name="menu_about">About the app</string>
     <!-- Default text -->
     <string name="default_ctv_value">Select colors</string>
@@ -36,10 +32,6 @@
     <string name="navbar_eia_96">EIA-96</string>
     <!-- About screen/components text -->
     <string name="about_title">About The App</string>
-    <string name="about_app_version">App version</string>
-    <string name="about_created_by">Created by</string>
-    <string name="about_author">Brandon Cano</string>
-    <string name="about_last_updated_on">Last updated on</string>
     <string name="about_description">Description</string>
     <string name="about_description_01">This app features calculators for both standard color-band resistors, capable of converting between color to value and value to color, as well as SMD resistors with three different code standards for determining resistance.</string>
     <string name="about_description_02">This app follows the IEC 60062 international standard for resistor coding to help ensure accuracy. For more detailed information, you can refer to the IEC 60062 links below.</string>
@@ -54,15 +46,11 @@
     <string name="home_button_smd">SMD resistor</string>
     <string name="home_our_apps_header_text">Our apps</string>
     <string name="home_button_rate_us">Rate this app on Google Play</string>
-    <string name="home_button_view_capacitor_app">Check out our capacitor app</string>
-    <string name="home_button_view_inductor_app">Check out our inductor app</string>
+    <string name="home_button_view_apps">Check out our other apps</string>
     <!-- Content descriptions -->
     <string name="content_description_expand">Expand options</string>
     <string name="content_description_collapse">Collapse options</string>
     <string name="content_description_app_icon">App icon</string>
-    <string name="content_description_menu_more">More</string>
-    <string name="content_description_right_arrow">Right arrow</string>
-    <string name="content_description_error">Error</string>
     <!-- Error messages -->
     <string name="error_na">N/A</string>
     <string name="error_invalid_resistance">Invalid resistance</string>

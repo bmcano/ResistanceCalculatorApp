@@ -10,6 +10,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Looks3
+import androidx.compose.material.icons.outlined.Looks4
+import androidx.compose.material.icons.outlined.Looks5
+import androidx.compose.material.icons.outlined.Looks6
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -30,26 +35,28 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownLists
+import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.AppTextField
-import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
-import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.formatResistor
 import com.brandoncano.resistancecalculator.util.isInputInvalid
 import com.brandoncano.resistancecalculator.util.shareableText
+import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
+import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
+import com.brandoncano.sharedcomponents.composables.AppNavigationBar
+import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
+import com.brandoncano.sharedcomponents.composables.AppTextField
+import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
+import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
+import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
+import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
+import com.brandoncano.sharedcomponents.data.NavigationBarOptions
 
 @Composable
 fun ValueToColorScreen(
@@ -78,7 +85,7 @@ private fun ContentView(
     var reset by remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val resistor by resistorVtc.observeAsState(ResistorVtc())
-    var resistance by remember { mutableStateOf(resistor.resistance) }
+    val resistance = remember { mutableStateOf(resistor.resistance) }
     var units by remember { mutableStateOf(resistor.units) }
     var band5 by remember { mutableStateOf(resistor.band5) }
     var band6 by remember { mutableStateOf(resistor.band6) }
@@ -102,26 +109,47 @@ private fun ContentView(
                     band5 = ""; band6 = ""
                 }
                 ShareTextMenuItem(context, resistor.shareableText(), showMenu)
-                ShareImageMenuItem(context, showMenu, picture)
-                FeedbackMenuItem(context, showMenu)
+                ShareImageMenuItem(context, Symbols.APPLICATION_ID, showMenu, picture)
+                FeedbackMenuItem(context, Symbols.APP_NAME, showMenu)
                 AboutAppMenuItem(navController, showMenu)
             }
         },
         bottomBar = {
-            CalculatorNavigationBar(navBarSelection) {
-                navBarSelection = it
-                viewModel.saveNavBarSelection(it)
-                isError = resistor.isInputInvalid()
-                if (!isError) {
-                    viewModel.saveResistorValues(resistor)
-                    resistor.formatResistor()
-                }
-            }
+            AppNavigationBar(
+                selection = navBarSelection,
+                onClick = {
+                    navBarSelection = it
+                    viewModel.saveNavBarSelection(it)
+                    isError = resistor.isInputInvalid()
+                    if (!isError) {
+                        viewModel.saveResistorValues(resistor)
+                        resistor.formatResistor()
+                    }
+                },
+                options = listOf(
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_three_band),
+                        imageVector = Icons.Outlined.Looks3,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_four_band),
+                        imageVector = Icons.Outlined.Looks4,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_five_band),
+                        imageVector = Icons.Outlined.Looks5,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_six_band),
+                        imageVector = Icons.Outlined.Looks6,
+                    ),
+                ),
+            )
         }
     ) { paddingValues ->
         fun postSelectionActions() {
             reset = false
-            viewModel.updateValues(resistance, units, band5, band6)
+            viewModel.updateValues(resistance.value, units, band5, band6)
             isError = resistor.isInputInvalid()
             if (!isError) {
                 viewModel.saveResistorValues(resistor)
@@ -137,19 +165,19 @@ private fun ContentView(
         ) {
             picture = resistorPicture(resistor, isError)
             AppTextField(
-                modifier = Modifier.padding(top = 24.dp),
-                label = R.string.type_resistance_hint,
-                text = resistance,
+                label = stringResource(id = R.string.type_resistance_hint),
+                modifier = Modifier.padding(top = 24.dp, start = 32.dp, end = 32.dp),
+                value = resistance,
                 reset = reset,
                 isError = isError,
                 errorMessage = stringResource(id = R.string.error_invalid_resistance)
             ) {
-                resistance = it
+                resistance.value = it
                 postSelectionActions()
             }
             AppDropDownMenu(
-                modifier = Modifier.padding(top = 12.dp),
-                label = R.string.units_hint,
+                label = stringResource(id = R.string.units_hint),
+                modifier = Modifier.padding(top = 12.dp, start = 32.dp, end = 32.dp),
                 selectedOption = units,
                 items = DropdownLists.UNITS_LIST,
                 reset = reset,
