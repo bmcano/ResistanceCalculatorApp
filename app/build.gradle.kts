@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace = "com.brandoncano.resistancecalculator"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.brandoncano.resistancecalculator"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 22
-        versionName = "3.3.1"
+        versionName = "3.3.2-develop"
 
         vectorDrawables {
             useSupportLibrary = true

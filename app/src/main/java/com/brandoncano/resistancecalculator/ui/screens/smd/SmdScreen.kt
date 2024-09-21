@@ -162,7 +162,7 @@ private fun ContentView(
                 errorMessage = stringResource(id = R.string.error_invalid_code),
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.Characters,
-                    autoCorrect = false,
+                    autoCorrectEnabled = false,
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Done
                 )
