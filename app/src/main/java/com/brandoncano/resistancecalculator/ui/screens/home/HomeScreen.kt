@@ -48,7 +48,9 @@ private fun ContentView(context: Context, navController: NavController) {
             AboutAppMenuItem(navController, showMenu)
         }
         AppIcon()
+        Spacer(modifier = Modifier.height(32.dp))
         AppCalculatorButtons(navController)
+        Spacer(modifier = Modifier.height(32.dp))
         OurAppsButtons(context, navController)
         Spacer(modifier = Modifier.height(24.dp))
     }

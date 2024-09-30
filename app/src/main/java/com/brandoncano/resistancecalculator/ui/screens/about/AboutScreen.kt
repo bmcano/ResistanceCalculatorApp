@@ -39,11 +39,17 @@ private fun ContentView(context: Context, navController: NavController) {
         horizontalAlignment = Alignment.Start
     ) {
         AppTopAppBar(stringResource(R.string.about_title))
+        Spacer(modifier = Modifier.height(12.dp))
         AuthorCard()
+        Spacer(modifier = Modifier.height(16.dp))
         AppInfoCard(R.string.version, R.string.last_updated)
+        Spacer(modifier = Modifier.height(16.dp))
         ViewPrivacyPolicy(context)
+        Spacer(modifier = Modifier.height(32.dp))
         DescriptionCard()
+        Spacer(modifier = Modifier.height(32.dp))
         ViewIecStandard(context)
+        Spacer(modifier = Modifier.height(32.dp))
         OurAppsButtons(context, navController)
         Spacer(modifier = Modifier.height(24.dp))
     }

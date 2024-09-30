@@ -5,6 +5,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -47,7 +49,7 @@ fun AppIcon() {
         modifier = Modifier
             .padding(top = 16.dp)
             .size(128.dp),
-        shape = RoundedCornerShape(16.dp),
+        shape = MaterialTheme.shapes.large,
         elevation = CardDefaults.cardElevation(16.dp),
         colors = CardDefaults.cardColors(containerColor = backgroundColor)
     ) {
@@ -67,10 +69,11 @@ fun AppCalculatorButtons(navController: NavController) {
         Text(
             text = stringResource(id = R.string.home_calculators_header_text),
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, top = 24.dp)
+                .padding(horizontal = 16.dp)
                 .align(Alignment.Start),
             style = textStyleHeadline(),
         )
+        Spacer(modifier = Modifier.height(12.dp))
         AppArrowCardButton(
             ArrowCardButtonContents(
                 imageVector = Icons.Outlined.Colorize,
@@ -83,6 +86,7 @@ fun AppCalculatorButtons(navController: NavController) {
                 onClick = { navController.navigate(Screen.ValueToColor.route) }
             ),
         )
+        Spacer(modifier = Modifier.height(12.dp))
         AppArrowCardButton(
             ArrowCardButtonContents(
                 imageVector = Icons.Outlined.WidthFull,
@@ -99,10 +103,11 @@ fun OurAppsButtons(context: Context, navController: NavController) {
         Text(
             text = stringResource(id = R.string.home_our_apps_header_text),
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, top = 24.dp)
+                .padding(horizontal = 16.dp)
                 .align(Alignment.Start),
             style = textStyleHeadline(),
         )
+        Spacer(modifier = Modifier.height(12.dp))
         AppArrowCardButton(
             ArrowCardButtonContents(
                 imageVector = Icons.Outlined.Grade,
