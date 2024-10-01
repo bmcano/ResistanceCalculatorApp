@@ -15,7 +15,7 @@ navigation-compose = "2.8.1" # 9/20/24
 ostermiller = "1.07.00" # 7/21/24
 ui-test-junit4 = "1.7.2" # 9/20/24
 # gradle/language
-agp = "8.5.2" # 8/15/24
+agp = "8.6.1" # 9/30/24
 kotlin = "2.0.0" # 7/7/24
 ktlint = "11.3.1" # 7/21/24
 

@@ -16,7 +16,6 @@ import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
-import com.brandoncano.resistancecalculator.ui.screens.about.AboutScreen
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ColorToValueScreen
 import com.brandoncano.resistancecalculator.ui.screens.home.HomeScreen
 import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
@@ -36,13 +35,7 @@ fun Navigation(context: Context) {
         navController = navController,
         startDestination = Screen.Home.route
     ) {
-        composable(
-            route = Screen.About.route,
-            enterTransition = { slideInVertically(initialOffsetY = { it }) },
-            exitTransition = { slideOutVertically(targetOffsetY = { it }) },
-        ) {
-            AboutScreen(context, navController)
-        }
+        aboutScreen(navController)
         composable(
             route = Screen.ColorToValue.route,
             enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
