@@ -1,8 +1,6 @@
 package com.brandoncano.resistancecalculator.navigation
 
 import android.content.Context
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
@@ -17,7 +15,6 @@ import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
 import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ColorToValueScreen
-import com.brandoncano.resistancecalculator.ui.screens.home.HomeScreen
 import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
 import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
 import com.brandoncano.resistancecalculator.util.formatResistor
@@ -36,6 +33,8 @@ fun Navigation(context: Context) {
         startDestination = Screen.Home.route
     ) {
         aboutScreen(navController)
+        homeScreen(navController)
+
         composable(
             route = Screen.ColorToValue.route,
             enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
@@ -45,13 +44,6 @@ fun Navigation(context: Context) {
             val navBarPosition = viewModel.getNavBarSelection()
             val resistor = viewModel.getResistorLiveData()
             ColorToValueScreen(context, navController, viewModel, navBarPosition, resistor)
-        }
-        composable(
-            route = Screen.Home.route,
-            enterTransition = { EnterTransition.None },
-            exitTransition = { ExitTransition.None },
-        ) {
-            HomeScreen(context, navController)
         }
         composable(
             route = Screen.Smd.route,

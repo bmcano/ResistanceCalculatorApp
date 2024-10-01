@@ -15,12 +15,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.screens.home.OurAppsButtons
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
@@ -39,14 +36,16 @@ fun AboutScreen(
     onViewPrivacyPolicyTapped: () -> Unit,
     onViewColorCodeIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
-    navController: NavController,
+    onRateThisAppTapped: () -> Unit,
+    onViewOurAppsTapped: () -> Unit,
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
         AboutScreenContent(
             onViewPrivacyPolicyTapped = onViewPrivacyPolicyTapped,
             onViewColorCodeIecTapped = onViewColorCodeIecTapped,
             onViewSmdCodeIecTapped = onViewSmdCodeIecTapped,
-            navController = navController,
+            onRateThisAppTapped = onRateThisAppTapped,
+            onViewOurAppsTapped = onViewOurAppsTapped,
         )
     }
 }
@@ -56,7 +55,8 @@ fun AboutScreenContent(
     onViewPrivacyPolicyTapped: () -> Unit,
     onViewColorCodeIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
-    navController: NavController,
+    onRateThisAppTapped: () -> Unit,
+    onViewOurAppsTapped: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -122,7 +122,10 @@ fun AboutScreenContent(
         )
         Spacer(modifier = Modifier.height(32.dp))
 
-        OurAppsButtons(LocalContext.current, navController)
+        OurAppsButtons(
+            onRateThisAppTapped = onRateThisAppTapped,
+            onViewOurAppsTapped = onViewOurAppsTapped,
+        )
         Spacer(modifier = Modifier.height(24.dp))
     }
 }
@@ -130,13 +133,13 @@ fun AboutScreenContent(
 @AppScreenPreviews
 @Composable
 private fun AboutPreview() {
-    val app = MainActivity()
     ResistorCalculatorTheme {
         AboutScreen(
             onViewPrivacyPolicyTapped = {},
             onViewColorCodeIecTapped = {},
             onViewSmdCodeIecTapped = {},
-            navController = NavController(app)
+            onRateThisAppTapped = {},
+            onViewOurAppsTapped = {},
         )
     }
 }

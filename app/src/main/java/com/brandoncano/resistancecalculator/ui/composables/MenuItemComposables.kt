@@ -28,6 +28,7 @@ import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
  * Note: Menu items are in alphabetical order
  */
 
+@Deprecated("Use other function definition for new compose architecture.")
 @Composable
 fun AboutAppMenuItem(navController: NavController, showMenu: MutableState<Boolean>) {
     DropdownMenuItem(
@@ -36,6 +37,15 @@ fun AboutAppMenuItem(navController: NavController, showMenu: MutableState<Boolea
             showMenu.value = false
             navController.navigate(Screen.About.route)
         },
+        leadingIcon = { MenuIcon(Icons.Outlined.Info) },
+    )
+}
+
+@Composable
+fun AboutAppMenuItem(onAboutTapped: () -> Unit) {
+    DropdownMenuItem(
+        text = { MenuText(stringRes = R.string.menu_about) },
+        onClick = onAboutTapped,
         leadingIcon = { MenuIcon(Icons.Outlined.Info) },
     )
 }
@@ -75,8 +85,8 @@ private fun MenuItemsPreview() {
     val app = MainActivity()
     ResistorCalculatorTheme {
         Column {
-            AboutAppMenuItem(NavController(app), showMenu)
-            ClearSelectionsMenuItem { }
+            AboutAppMenuItem {}
+            ClearSelectionsMenuItem {}
             ColorToValueMenuItem(NavController(app), showMenu)
             FeedbackMenuItem(app, "app", showMenu)
             ShareImageMenuItem(app, "applicationId", showMenu, Picture())

@@ -20,12 +20,12 @@ fun NavGraphBuilder.aboutScreen(
         exitTransition = { slideOutVertically(targetOffsetY = { it }) },
     ) {
         val context = LocalContext.current
-
         AboutScreen(
             onViewPrivacyPolicyTapped = { navigateToPrivacyPolicy(context) },
             onViewColorCodeIecTapped = { navigateToColorCodeIec(context) },
             onViewSmdCodeIecTapped = { navigateToSmdCodeIec(context) },
-            navController = navHostController,
+            onRateThisAppTapped = { navigateToGooglePlay(context) },
+            onViewOurAppsTapped = { navigateToOurApps(navHostController) },
         )
     }
 }
