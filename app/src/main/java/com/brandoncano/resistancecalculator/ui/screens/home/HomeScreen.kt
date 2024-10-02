@@ -66,7 +66,7 @@ fun HomeScreen(
 }
 
 @Composable
-fun HomeScreenContent(
+private fun HomeScreenContent(
     openMenu: MutableState<Boolean>,
     onAboutTapped: () -> Unit,
     onColorToValueTapped: () -> Unit,

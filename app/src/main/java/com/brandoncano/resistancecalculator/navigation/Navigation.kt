@@ -12,10 +12,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
-import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ColorToValueScreen
-import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
 import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
 import com.brandoncano.resistancecalculator.util.formatResistor
 import com.brandoncano.sharedcomponents.data.Apps
@@ -34,6 +32,7 @@ fun Navigation(context: Context) {
     ) {
         aboutScreen(navController)
         homeScreen(navController)
+        smdScreen(navController)
 
         composable(
             route = Screen.ColorToValue.route,
@@ -44,16 +43,6 @@ fun Navigation(context: Context) {
             val navBarPosition = viewModel.getNavBarSelection()
             val resistor = viewModel.getResistorLiveData()
             ColorToValueScreen(context, navController, viewModel, navBarPosition, resistor)
-        }
-        composable(
-            route = Screen.Smd.route,
-            enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-            exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
-        ) {
-            val viewModel = viewModel<SmdResistorViewModel>(factory = ResistorViewModelFactory(context))
-            val navBarPosition = viewModel.getNavBarSelection()
-            val resistor = viewModel.getResistorLiveData()
-            SmdScreen(context, navController, viewModel, navBarPosition, resistor)
         }
         composable(
             route = Screen.ValueToColor.route,

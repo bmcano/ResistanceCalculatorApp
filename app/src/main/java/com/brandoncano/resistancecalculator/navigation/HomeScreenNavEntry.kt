@@ -3,7 +3,6 @@ package com.brandoncano.resistancecalculator.navigation
 import android.content.Context
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -26,7 +25,10 @@ fun NavGraphBuilder.homeScreen(
         val openMenu = remember { mutableStateOf(false) }
         HomeScreen(
             openMenu = openMenu,
-            onAboutTapped = { navigateToAbout(openMenu, navHostController) },
+            onAboutTapped = {
+                openMenu.value = false
+                navigateToAbout(navHostController)
+            },
             onColorToValueTapped = { navigateToColorToValue(navHostController) },
             onValueToColorTapped = { navigateToValueToColor(navHostController) },
             onSmdTapped = { navigateToSmd(navHostController) },
@@ -36,8 +38,7 @@ fun NavGraphBuilder.homeScreen(
     }
 }
 
-fun navigateToAbout(openMenu: MutableState<Boolean>, navController: NavHostController) {
-    openMenu.value = false
+fun navigateToAbout(navController: NavHostController) {
     navController.navigate(Screen.About.route)
 }
 

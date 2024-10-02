@@ -51,7 +51,7 @@ fun AboutScreen(
 }
 
 @Composable
-fun AboutScreenContent(
+private fun AboutScreenContent(
     onViewPrivacyPolicyTapped: () -> Unit,
     onViewColorCodeIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
