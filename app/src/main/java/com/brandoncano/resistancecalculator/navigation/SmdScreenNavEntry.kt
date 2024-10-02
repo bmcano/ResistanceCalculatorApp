@@ -2,6 +2,8 @@ package com.brandoncano.resistancecalculator.navigation
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -23,12 +25,14 @@ fun NavGraphBuilder.smdScreen(
     ) {
         val context = LocalContext.current
         val openMenu = remember { mutableStateOf(false) }
-        val viewModel = viewModel<SmdResistorViewModel>(factory = ResistorViewModelFactory(context))
-        val resistor = viewModel.getResistorLiveData()
+        val viewModel: SmdResistorViewModel = viewModel(factory = ResistorViewModelFactory(context))
+        val resistor by viewModel.resistor.collectAsState()
+        val isError by viewModel.isError.collectAsState()
 
         SmdScreen(
             openMenu = openMenu,
             resistor = resistor,
+            isError = isError,
             onClearSelectionsTapped = {
                 openMenu.value = false
                 viewModel.clear()
@@ -37,14 +41,11 @@ fun NavGraphBuilder.smdScreen(
                 openMenu.value = false
                 navigateToAbout(navHostController)
             },
-            onValueChanged = { code, units, resistorState ->
+            onValueChanged = { code, units ->
                 viewModel.updateValues(code, units)
-                viewModel.saveResistorValues(resistorState)
             },
-            onNavBarSelectionChanged = { selection, resistorState ->
+            onNavBarSelectionChanged = { selection ->
                 viewModel.saveNavBarSelection(selection)
-                viewModel.saveResistorValues(resistorState)
-
             },
             navBarPosition = viewModel.getNavBarSelection(),
         )
