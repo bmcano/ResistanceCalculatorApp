@@ -37,12 +37,12 @@ import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.TempAppTextField
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
+import com.brandoncano.sharedcomponents.composables.AppTextField
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
 import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
@@ -160,9 +160,9 @@ private fun SmdScreenContent(
             DrawContent(picture) {
                 SmdResistorLayout(resistor, isError)
             }
-            TempAppTextField(
+            AppTextField(
                 label = stringResource(id = R.string.hint_smd_code),
-                modifier = Modifier.padding(top = 32.dp, start = 32.dp, end = 32.dp),
+                modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
                 value = code,
                 reset = reset,
                 isError = isError,
@@ -179,7 +179,7 @@ private fun SmdScreenContent(
             }
             AppDropDownMenu(
                 label = stringResource(id = R.string.units_hint),
-                modifier = Modifier.padding(top = 12.dp, start = 32.dp, end = 32.dp),
+                modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp),
                 selectedOption = units,
                 items = DropdownLists.UNITS_LIST,
                 reset = reset,

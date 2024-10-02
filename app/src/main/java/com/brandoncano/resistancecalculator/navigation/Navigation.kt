@@ -31,19 +31,10 @@ fun Navigation(context: Context) {
         startDestination = Screen.Home.route
     ) {
         aboutScreen(navController)
+        colorToValueScreen(navController)
         homeScreen(navController)
         smdScreen(navController)
 
-        composable(
-            route = Screen.ColorToValue.route,
-            enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-            exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
-        ) {
-            val viewModel = viewModel<ResistorCtvViewModel>(factory = ResistorViewModelFactory(context))
-            val navBarPosition = viewModel.getNavBarSelection()
-            val resistor = viewModel.getResistorLiveData()
-            ColorToValueScreen(context, navController, viewModel, navBarPosition, resistor)
-        }
         composable(
             route = Screen.ValueToColor.route,
             enterTransition = { slideInHorizontally(initialOffsetX = { it }) },

@@ -65,15 +65,10 @@ fun ColorToValueMenuItem(navController: NavController, showMenu: MutableState<Bo
 }
 
 @Composable
-fun ValueToColorMenuItem(navController: NavController, showMenu: MutableState<Boolean>) {
+fun ValueToColorMenuItem(onValueToColorTapped: () -> Unit) {
     DropdownMenuItem(
         text = { MenuText(stringRes = R.string.menu_value_to_color) },
-        onClick = {
-            showMenu.value = false
-            navController.navigate(Screen.ValueToColor.route) {
-                popUpTo(Screen.Home.route)
-            }
-        },
+        onClick = onValueToColorTapped,
         leadingIcon = { MenuIcon(Icons.Outlined.Search) },
     )
 }
@@ -91,7 +86,7 @@ private fun MenuItemsPreview() {
             FeedbackMenuItem(app, "app", showMenu)
             ShareImageMenuItem(app, "applicationId", showMenu, Picture())
             ShareTextMenuItem(app, "text", showMenu)
-            ValueToColorMenuItem(NavController(app), showMenu)
+            ValueToColorMenuItem {}
         }
     }
 }

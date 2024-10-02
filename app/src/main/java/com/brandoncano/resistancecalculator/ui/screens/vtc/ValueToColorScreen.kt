@@ -193,7 +193,7 @@ private fun ContentView(
                     selectedOption = band5,
                     items = DropdownLists.TOLERANCE_LIST,
                     reset = reset,
-                    isVtC = true
+                    isValueToColor = true
                 ) {
                     band5 = it
                     focusManager.clearFocus()
@@ -207,7 +207,7 @@ private fun ContentView(
                     selectedOption = band6,
                     items = DropdownLists.PPM_LIST,
                     reset = reset,
-                    isVtC = true,
+                    isValueToColor = true,
                 ) {
                     band6 = it
                     focusManager.clearFocus()

@@ -136,7 +136,7 @@ private fun HomeScreenContent(
 @Composable
 private fun AppIcon() {
     val backgroundColor = if (isSystemInDarkTheme()) {
-        MaterialTheme.colorScheme.surfaceVariant
+        MaterialTheme.colorScheme.surfaceBright
     } else {
         MaterialTheme.colorScheme.primary
     }

@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.ui.screens.ctv
 
-import android.graphics.Picture
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -9,10 +8,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -32,19 +29,9 @@ import com.brandoncano.resistancecalculator.util.deriveResistorColor
 import com.brandoncano.resistancecalculator.util.formatResistance
 import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.text.textStyleTitle
 
 data class ResistorImagePair(@DrawableRes val drawableRes: Int, val color: String)
-
-@Composable
-fun resistorPicture(resistor: ResistorCtv): Picture {
-    val picture = remember { Picture() }
-    DrawContent(picture) {
-        ResistorLayout(resistor)
-    }
-    return picture
-}
 
 @Composable
 fun ResistorLayout(resistor: ResistorCtv) {
@@ -85,18 +72,13 @@ fun ResistorRow(vararg resistorImages: ResistorImagePair) {
     Row(horizontalArrangement = Arrangement.Absolute.Center) {
         resistorImages.forEach { resistorImage ->
             val color = ColorFinder.textToColor(resistorImage.color)
-            ResistorImage(resistorImage.drawableRes, color)
+            Image(
+                painter = painterResource(id = resistorImage.drawableRes),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(color),
+            )
         }
     }
-}
-
-@Composable
-fun ResistorImage(@DrawableRes drawableRes: Int, color: Color) {
-    Image(
-        painter = painterResource(id = drawableRes),
-        contentDescription = null,
-        colorFilter = ColorFilter.tint(color),
-    )
 }
 
 @Composable

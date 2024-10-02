@@ -13,7 +13,7 @@ android {
         minSdk = 24
         targetSdk = 35
         versionCode = 22
-        versionName = "3.3.2-develop"
+        versionName = "3.4.0-develop"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -21,7 +21,7 @@ android {
     }
     applicationVariants.configureEach {
         resValue("string", "version", versionName)
-        resValue("string", "last_updated", "8/6/2024")
+        resValue("string", "last_updated", "10/1/2024")
     }
     buildTypes {
         release {

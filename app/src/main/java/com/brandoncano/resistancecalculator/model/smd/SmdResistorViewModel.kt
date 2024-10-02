@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class SmdResistorViewModel(context: Context) : ViewModel() {
+class SmdResistorViewModel(context: Context): ViewModel() {
 
     private val repository = SmdResistorRepository.getInstance(context)
 

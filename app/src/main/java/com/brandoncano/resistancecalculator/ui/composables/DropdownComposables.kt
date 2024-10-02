@@ -2,18 +2,18 @@ package com.brandoncano.resistancecalculator.ui.composables
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,12 +24,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.toSize
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.components.DropdownItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -40,6 +37,7 @@ import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.text.textStyleCaption
 import com.brandoncano.sharedcomponents.text.textStyleSubhead
 
+@OptIn(ExperimentalMaterial3Api::class) // For ExposedDropdownMenuBox
 @Composable
 fun ImageTextDropDownMenu(
     modifier: Modifier = Modifier,
@@ -47,70 +45,63 @@ fun ImageTextDropDownMenu(
     selectedOption: String = "",
     items: List<DropdownItem>,
     reset: Boolean = false,
-    isVtC: Boolean = false,
+    isValueToColor: Boolean = false,
     onOptionSelected: (String) -> Unit,
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
     var expanded by remember { mutableStateOf(false) }
     var selectedText by remember { mutableStateOf(selectedOption) }
-    var selectedLeadingIcon by remember {
+    var selectedLeadingIconColor by remember {
         val color = ColorFinder.textToColor(selectedOption)
         mutableStateOf(color)
     }
-    var textFieldSize by remember { mutableStateOf(Size.Zero) }
     val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
-    LaunchedEffect(interactionSource) {
-        interactionSource.interactions.collect { interaction ->
-            if (interaction is PressInteraction.Release) {
-                expanded = !expanded
-            }
-        }
-    }
+    val focusManager = LocalFocusManager.current
+
     LaunchedEffect(reset) {
         if (reset) {
             selectedText = ""
-            selectedLeadingIcon = resistor_beige
+            selectedLeadingIconColor = resistor_beige
         }
     }
-    Column(Modifier.padding(start = 32.dp, end = 32.dp)) {
+
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+        modifier = modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .fillMaxWidth(),
+    ) {
         OutlinedTextField(
             value = selectedText,
-            onValueChange = { selectedText = it },
+            onValueChange = {},
             readOnly = true,
-            modifier = modifier
-                .fillMaxWidth()
-                .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
-                .clickable(interactionSource, null, enabled = true) { expanded = !expanded },
             label = { Text(stringResource(label)) },
-            leadingIcon = if (selectedLeadingIcon != resistor_beige) {
-                { RoundedSquare(color = selectedLeadingIcon, size = 24.dp) }
+            leadingIcon = if (selectedLeadingIconColor != resistor_beige) {
+                { RoundedSquare(color = selectedLeadingIconColor, size = 24.dp) }
             } else null,
             trailingIcon = {
-                val description = if (expanded) {
-                    R.string.content_description_collapse
-                } else {
-                    R.string.content_description_expand
-                }
                 Icon(
                     imageVector = icon,
-                    contentDescription = stringResource(id = description),
+                    contentDescription = null,
                     modifier = Modifier.clickable { expanded = !expanded }
                 )
             },
-            interactionSource = interactionSource
+            modifier = Modifier
+                .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                .fillMaxWidth(),
+            colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
         )
-        DropdownMenu(
+        ExposedDropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = Modifier
-                .width(with(LocalDensity.current) { textFieldSize.width.toDp() })
         ) {
             items.forEach {
                 DropdownItemView(it) {
-                    selectedText = if (isVtC) it.value else it.name
-                    selectedLeadingIcon = ColorFinder.textToColor(it.name)
+                    selectedText = if (isValueToColor) it.value else it.name
+                    selectedLeadingIconColor = ColorFinder.textToColor(it.name)
                     expanded = false
-                    onOptionSelected(if (isVtC) it.value else it.name)
+                    onOptionSelected(if (isValueToColor) it.value else it.name)
+                    focusManager.clearFocus()
                 }
             }
         }
