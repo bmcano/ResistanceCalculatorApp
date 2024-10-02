@@ -47,6 +47,9 @@
     <string name="home_our_apps_header_text">Our apps</string>
     <string name="home_button_rate_us">Rate this app on Google Play</string>
     <string name="home_button_view_apps">Check out our other apps</string>
+    <!-- SMD screen/components text -->
+    <string name="smd_headline_text">Learn about SMD codes</string>
+    <string name="smd_button_text">Explore the IEC 60062 standard</string>
     <!-- Content descriptions -->
     <string name="content_description_expand">Expand options</string>
     <string name="content_description_collapse">Collapse options</string>

@@ -38,6 +38,6 @@ private fun navigateToColorCodeIec(context: Context) {
     OpenLink.execute(context, Links.COLOR_IEC)
 }
 
-private fun navigateToSmdCodeIec(context: Context) {
+fun navigateToSmdCodeIec(context: Context) {
     OpenLink.execute(context, Links.SMD_IEC)
 }

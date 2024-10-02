@@ -11,11 +11,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Looks
 import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -38,6 +40,8 @@ import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
+import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
@@ -48,7 +52,9 @@ import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
+import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
 import com.brandoncano.sharedcomponents.data.NavigationBarOptions
+import com.brandoncano.sharedcomponents.text.textStyleHeadline
 import java.util.Locale
 
 @Composable
@@ -61,6 +67,7 @@ fun SmdScreen(
     onValueChanged: (String, String) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
     navBarPosition: Int,
+    onLearnSmdCodesTapped: () -> Unit,
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
         SmdScreenContent(
@@ -72,6 +79,7 @@ fun SmdScreen(
             onValueChanged = onValueChanged,
             onNavBarSelectionChanged = onNavBarSelectionChanged,
             navBarPosition = navBarPosition,
+            onLearnSmdCodesTapped = onLearnSmdCodesTapped,
         )
     }
 }
@@ -86,6 +94,7 @@ private fun SmdScreenContent(
     onValueChanged: (String, String) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
     navBarPosition: Int,
+    onLearnSmdCodesTapped: () -> Unit,
 ) {
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
@@ -188,6 +197,22 @@ private fun SmdScreenContent(
                 focusManager.clearFocus()
                 onValueChanged(code.value, units)
             }
+            Spacer(modifier = Modifier.height(32.dp))
+            AppDivider(onCard = false)
+            Column(horizontalAlignment = Alignment.Start) {
+                Text(
+                    text = stringResource(R.string.smd_headline_text),
+                    modifier = Modifier.padding(16.dp),
+                    style = textStyleHeadline(),
+                )
+                AppArrowCardButton(
+                    ArrowCardButtonContents(
+                        imageVector = Icons.Outlined.Lightbulb,
+                        text = stringResource(R.string.smd_button_text),
+                        onClick = onLearnSmdCodesTapped,
+                    )
+                )
+            }
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
@@ -207,6 +232,7 @@ private fun SmdScreenPreview() {
             onValueChanged = { _, _ -> },
             onNavBarSelectionChanged = { _ -> },
             navBarPosition = 1,
+            onLearnSmdCodesTapped = {},
         )
     }
 }

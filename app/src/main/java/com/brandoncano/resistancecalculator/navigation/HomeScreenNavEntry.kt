@@ -43,15 +43,21 @@ fun navigateToAbout(navController: NavHostController) {
 }
 
 fun navigateToColorToValue(navController: NavHostController) {
-    navController.navigate(Screen.ColorToValue.route)
+    navController.navigate(Screen.ColorToValue.route) {
+        popUpTo(Screen.Home.route)
+    }
 }
 
 fun navigateToValueToColor(navController: NavHostController) {
-    navController.navigate(Screen.ValueToColor.route)
+    navController.navigate(Screen.ValueToColor.route) {
+        popUpTo(Screen.Home.route)
+    }
 }
 
 fun navigateToSmd(navController: NavHostController) {
-    navController.navigate(Screen.Smd.route)
+    navController.navigate(Screen.Smd.route) {
+        popUpTo(Screen.Home.route)
+    }
 }
 
 fun navigateToGooglePlay(context: Context) {

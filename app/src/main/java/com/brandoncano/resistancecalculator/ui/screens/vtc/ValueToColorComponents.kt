@@ -1,10 +1,8 @@
 package com.brandoncano.resistancecalculator.ui.screens.vtc
 
-import android.graphics.Picture
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,16 +20,6 @@ import com.brandoncano.resistancecalculator.util.bandSixForDisplay
 import com.brandoncano.resistancecalculator.util.bandThreeForDisplay
 import com.brandoncano.resistancecalculator.util.bandTwoForDisplay
 import com.brandoncano.resistancecalculator.util.deriveResistorColor
-import com.brandoncano.sharedcomponents.composables.DrawContent
-
-@Composable
-fun resistorPicture(resistor: ResistorVtc, isError: Boolean): Picture {
-    val picture = remember { Picture() }
-    DrawContent(picture) {
-        ResistorLayout(resistor, isError)
-    }
-    return picture
-}
 
 @Composable
 fun ResistorLayout(

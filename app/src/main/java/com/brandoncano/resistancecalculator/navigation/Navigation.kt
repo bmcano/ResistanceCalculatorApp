@@ -1,21 +1,12 @@
 package com.brandoncano.resistancecalculator.navigation
 
 import android.content.Context
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
-import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
-import com.brandoncano.resistancecalculator.ui.screens.ctv.ColorToValueScreen
-import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
-import com.brandoncano.resistancecalculator.util.formatResistor
 import com.brandoncano.sharedcomponents.data.Apps
 import com.brandoncano.sharedcomponents.screen.ViewOurAppsScreen
 
@@ -34,18 +25,8 @@ fun Navigation(context: Context) {
         colorToValueScreen(navController)
         homeScreen(navController)
         smdScreen(navController)
+        valueToColorScreen(navController)
 
-        composable(
-            route = Screen.ValueToColor.route,
-            enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-            exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
-        ) {
-            val viewModel = viewModel<ResistorVtcViewModel>(factory = ResistorViewModelFactory(context))
-            val navBarPosition = viewModel.getNavBarSelection()
-            val resistor = viewModel.getResistorLiveData()
-            resistor.value?.formatResistor()
-            ValueToColorScreen(context, navController, viewModel, navBarPosition, resistor)
-        }
         composable(
             route = Screen.ViewOurApps.route,
             enterTransition = { slideInVertically(initialOffsetY = { it }) },

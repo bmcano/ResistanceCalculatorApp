@@ -12,27 +12,31 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
-import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
-import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
+import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
+import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
+import com.brandoncano.resistancecalculator.util.formatResistor
 
-fun NavGraphBuilder.smdScreen(
+fun NavGraphBuilder.valueToColorScreen(
     navHostController: NavHostController,
 ) {
     composable(
-        route = Screen.Smd.route,
+        route = Screen.ValueToColor.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         val context = LocalContext.current
-        val openMenu = remember { mutableStateOf(false) }
-        val viewModel: SmdResistorViewModel = viewModel(factory = ResistorViewModelFactory(context))
+        val viewModel: ResistorVtcViewModel = viewModel(factory = ResistorViewModelFactory(context))
         val resistor by viewModel.resistor.collectAsState()
+        val navBarSelection by viewModel.navBarSelection.collectAsState()
         val isError by viewModel.isError.collectAsState()
+        val openMenu = remember { mutableStateOf(false) }
+        resistor.formatResistor()
 
-        SmdScreen(
-            openMenu = openMenu,
+        ValueToColorScreen(
             resistor = resistor,
+            navBarPosition = navBarSelection,
             isError = isError,
+            openMenu = openMenu,
             onClearSelectionsTapped = {
                 openMenu.value = false
                 viewModel.clear()
@@ -41,14 +45,16 @@ fun NavGraphBuilder.smdScreen(
                 openMenu.value = false
                 navigateToAbout(navHostController)
             },
-            onValueChanged = { code, units ->
-                viewModel.updateValues(code, units)
+            onColorToValueTapped = {
+                openMenu.value = false
+                navigateToColorToValue(navHostController)
+            },
+            onValueChanged = { resistance, units, band5, band6 ->
+                viewModel.updateValues(resistance, units, band5, band6)
             },
             onNavBarSelectionChanged = { selection ->
                 viewModel.saveNavBarSelection(selection)
             },
-            navBarPosition = viewModel.getNavBarSelection(),
-            onLearnSmdCodesTapped = { navigateToSmdCodeIec(context) },
         )
     }
 }

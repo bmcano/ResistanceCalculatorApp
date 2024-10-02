@@ -43,9 +43,7 @@ fun NavGraphBuilder.colorToValueScreen(
             },
             onValueToColorTapped = {
                 openMenu.value = false
-                navHostController.navigate(Screen.ValueToColor.route) {
-                    popUpTo(Screen.Home.route)
-                }
+                navigateToValueToColor(navHostController)
             },
             onUpdateBand = { bandNumber, color ->
                 viewModel.updateBand(bandNumber, color)
