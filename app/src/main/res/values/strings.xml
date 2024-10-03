@@ -18,6 +18,7 @@
     <string name="menu_value_to_color">Value to color</string>
     <string name="menu_color_to_value">Color to value</string>
     <string name="menu_about">About the app</string>
+    <string name="menu_app_theme">App appearance</string>
     <!-- Default text -->
     <string name="default_ctv_value">Select colors</string>
     <string name="default_vtc_value">Enter resistance</string>

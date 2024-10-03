@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
+import com.brandoncano.resistancecalculator.ui.theme.LocalIsDarkTheme
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
@@ -31,7 +31,7 @@ import com.brandoncano.sharedcomponents.text.textStyleHeadline
 
 @Composable
 fun AppIcon() {
-    val backgroundColor = if (isSystemInDarkTheme()) {
+    val backgroundColor = if (LocalIsDarkTheme.current) {
         MaterialTheme.colorScheme.surfaceBright
     } else {
         MaterialTheme.colorScheme.primary

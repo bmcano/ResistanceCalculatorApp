@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -18,7 +19,7 @@ import com.brandoncano.sharedcomponents.utils.OpenLink
  */
 
 @Composable
-fun Navigation(context: Context) {
+fun Navigation(onOpenThemeDialog: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -26,7 +27,7 @@ fun Navigation(context: Context) {
     ) {
         aboutScreen(navController)
         colorToValueScreen(navController)
-        homeScreen(navController)
+        homeScreen(navController, onOpenThemeDialog)
         learnSmdCodes(navController)
         smdScreen(navController)
         valueToColorScreen(navController)
@@ -36,7 +37,11 @@ fun Navigation(context: Context) {
             enterTransition = { slideInVertically(initialOffsetY = { it }) },
             exitTransition = { slideOutVertically(targetOffsetY = { it }) },
         ) {
-            ViewOurAppsScreen(context, Apps.Resistor)
+            ViewOurAppsScreen(
+                context = LocalContext.current,
+                app = Apps.Resistor,
+                onNavigateBack = { navController.popBackStack() },
+            )
         }
     }
 }

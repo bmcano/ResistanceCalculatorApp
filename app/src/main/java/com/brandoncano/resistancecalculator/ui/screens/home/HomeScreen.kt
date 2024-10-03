@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
@@ -36,6 +37,7 @@ import com.brandoncano.sharedcomponents.text.textStyleHeadline
 @Composable
 fun HomeScreen(
     openMenu: MutableState<Boolean>,
+    onOpenThemeDialog: () -> Unit,
     onAboutTapped: () -> Unit,
     onColorToValueTapped: () -> Unit,
     onValueToColorTapped: () -> Unit,
@@ -46,6 +48,7 @@ fun HomeScreen(
     Surface(modifier = Modifier.fillMaxSize()) {
         HomeScreenContent(
             openMenu = openMenu,
+            onOpenThemeDialog = onOpenThemeDialog,
             onAboutTapped = onAboutTapped,
             onColorToValueTapped = onColorToValueTapped,
             onValueToColorTapped = onValueToColorTapped,
@@ -59,6 +62,7 @@ fun HomeScreen(
 @Composable
 private fun HomeScreenContent(
     openMenu: MutableState<Boolean>,
+    onOpenThemeDialog: () -> Unit,
     onAboutTapped: () -> Unit,
     onColorToValueTapped: () -> Unit,
     onValueToColorTapped: () -> Unit,
@@ -80,6 +84,7 @@ private fun HomeScreenContent(
             onNavigateBack = {},
         ) {
             FeedbackMenuItem(Symbols.APP_NAME, openMenu)
+            AppThemeMenuItem(openMenu, onOpenThemeDialog)
             AboutAppMenuItem(onAboutTapped)
         }
 
@@ -130,6 +135,7 @@ private fun HomePreview() {
     ResistorCalculatorTheme {
         HomeScreen(
             openMenu = remember { mutableStateOf(false) },
+            onOpenThemeDialog = {},
             onAboutTapped = {},
             onColorToValueTapped = {},
             onValueToColorTapped = {},

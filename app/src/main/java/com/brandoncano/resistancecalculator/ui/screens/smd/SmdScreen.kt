@@ -199,7 +199,7 @@ private fun SmdScreenContent(
                 onValueChanged(code.value, units)
             }
             Spacer(modifier = Modifier.height(32.dp))
-            AppDivider(onCard = false)
+            AppDivider()
             Column(horizontalAlignment = Alignment.Start) {
                 Text(
                     text = stringResource(R.string.smd_headline_text),

@@ -100,7 +100,7 @@ fun CodeValueTable(codeValues: List<CodeValue>) {
                     )
                 }
             }
-            AppDivider(onCard = true)
+            AppDivider()
 
             rows.forEach { rowItems ->
                 Row(
