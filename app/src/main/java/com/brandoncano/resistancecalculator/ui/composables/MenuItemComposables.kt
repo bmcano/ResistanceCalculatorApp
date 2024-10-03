@@ -8,12 +8,9 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.navigation.Screen
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
@@ -26,19 +23,6 @@ import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
 /**
  * Note: Menu items are in alphabetical order
  */
-
-@Deprecated("Use other function definition for new compose architecture.")
-@Composable
-fun AboutAppMenuItem(navController: NavController, showMenu: MutableState<Boolean>) {
-    DropdownMenuItem(
-        text = { MenuText(stringRes = R.string.menu_about) },
-        onClick = {
-            showMenu.value = false
-            navController.navigate(Screen.About.route)
-        },
-        leadingIcon = { MenuIcon(Icons.Outlined.Info) },
-    )
-}
 
 @Composable
 fun AboutAppMenuItem(onAboutTapped: () -> Unit) {
