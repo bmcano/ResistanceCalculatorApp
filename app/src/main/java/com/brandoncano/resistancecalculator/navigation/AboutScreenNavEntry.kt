@@ -34,11 +34,3 @@ fun NavGraphBuilder.aboutScreen(
 private fun navigateToPrivacyPolicy(context: Context) {
     OpenLink.execute(context, Links.PRIVACY_POLICY)
 }
-
-fun navigateToColorCodeIec(context: Context) {
-    OpenLink.execute(context, Links.COLOR_IEC)
-}
-
-fun navigateToSmdCodeIec(navController: NavHostController) {
-    navController.navigate(Screen.LearnSmdCodes.route)
-}

@@ -3,7 +3,7 @@ package com.brandoncano.resistancecalculator.ui.theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,7 +17,7 @@ fun RoundedSquare(color: Color, size: Dp) {
     Box(
         modifier = Modifier
             .size(size)
-            .clip(RoundedCornerShape(4.dp))
+            .clip(MaterialTheme.shapes.extraSmall)
             .background(color)
     )
 }
