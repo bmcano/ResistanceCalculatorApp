@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.FileOpen
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material3.Surface
@@ -33,6 +34,7 @@ import com.brandoncano.sharedcomponents.text.textStyleHeadline
 
 @Composable
 fun AboutScreen(
+    onNavigateBack: () -> Unit,
     onViewPrivacyPolicyTapped: () -> Unit,
     onViewColorCodeIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
@@ -41,6 +43,7 @@ fun AboutScreen(
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
         AboutScreenContent(
+            onNavigateBack = onNavigateBack,
             onViewPrivacyPolicyTapped = onViewPrivacyPolicyTapped,
             onViewColorCodeIecTapped = onViewColorCodeIecTapped,
             onViewSmdCodeIecTapped = onViewSmdCodeIecTapped,
@@ -52,6 +55,7 @@ fun AboutScreen(
 
 @Composable
 private fun AboutScreenContent(
+    onNavigateBack: () -> Unit,
     onViewPrivacyPolicyTapped: () -> Unit,
     onViewColorCodeIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
@@ -64,7 +68,11 @@ private fun AboutScreenContent(
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.Start,
     ) {
-        AppTopAppBar(stringResource(R.string.about_title))
+        AppTopAppBar(
+            titleText = stringResource(R.string.about_title),
+            navigationIcon = Icons.Filled.Close,
+            onNavigateBack = onNavigateBack,
+        )
         Spacer(modifier = Modifier.height(12.dp))
 
         AuthorCard()
@@ -135,6 +143,7 @@ private fun AboutScreenContent(
 private fun AboutPreview() {
     ResistorCalculatorTheme {
         AboutScreen(
+            onNavigateBack = {},
             onViewPrivacyPolicyTapped = {},
             onViewColorCodeIecTapped = {},
             onViewSmdCodeIecTapped = {},

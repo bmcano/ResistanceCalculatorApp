@@ -33,6 +33,7 @@ fun NavGraphBuilder.smdScreen(
             openMenu = openMenu,
             resistor = resistor,
             isError = isError,
+            onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
                 viewModel.clear()
@@ -48,7 +49,7 @@ fun NavGraphBuilder.smdScreen(
                 viewModel.saveNavBarSelection(selection)
             },
             navBarPosition = viewModel.getNavBarSelection(),
-            onLearnSmdCodesTapped = { navigateToSmdCodeIec(context) },
+            onLearnSmdCodesTapped = { navigateToSmdCodeIec(navHostController) },
         )
     }
 }

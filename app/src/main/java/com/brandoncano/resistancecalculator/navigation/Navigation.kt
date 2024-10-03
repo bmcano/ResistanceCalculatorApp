@@ -24,6 +24,7 @@ fun Navigation(context: Context) {
         aboutScreen(navController)
         colorToValueScreen(navController)
         homeScreen(navController)
+        learnSmdCodes(navController)
         smdScreen(navController)
         valueToColorScreen(navController)
 

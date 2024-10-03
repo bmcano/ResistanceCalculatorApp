@@ -21,9 +21,10 @@ fun NavGraphBuilder.aboutScreen(
     ) {
         val context = LocalContext.current
         AboutScreen(
+            onNavigateBack = { navHostController.popBackStack() },
             onViewPrivacyPolicyTapped = { navigateToPrivacyPolicy(context) },
             onViewColorCodeIecTapped = { navigateToColorCodeIec(context) },
-            onViewSmdCodeIecTapped = { navigateToSmdCodeIec(context) },
+            onViewSmdCodeIecTapped = { navigateToSmdCodeIec(navHostController) },
             onRateThisAppTapped = { navigateToGooglePlay(context) },
             onViewOurAppsTapped = { navigateToOurApps(navHostController) },
         )
@@ -34,10 +35,10 @@ private fun navigateToPrivacyPolicy(context: Context) {
     OpenLink.execute(context, Links.PRIVACY_POLICY)
 }
 
-private fun navigateToColorCodeIec(context: Context) {
+fun navigateToColorCodeIec(context: Context) {
     OpenLink.execute(context, Links.COLOR_IEC)
 }
 
-fun navigateToSmdCodeIec(context: Context) {
-    OpenLink.execute(context, Links.SMD_IEC)
+fun navigateToSmdCodeIec(navController: NavHostController) {
+    navController.navigate(Screen.LearnSmdCodes.route)
 }

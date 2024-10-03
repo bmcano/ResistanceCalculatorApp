@@ -1,8 +1,6 @@
 package com.brandoncano.resistancecalculator.model.vtc
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.brandoncano.resistancecalculator.util.formatResistor

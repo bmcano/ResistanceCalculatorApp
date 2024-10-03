@@ -33,6 +33,7 @@ fun NavGraphBuilder.colorToValueScreen(
             openMenu = openMenu,
             resistor = resistor,
             navBarPosition = navBarSelection,
+            onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
                 viewModel.clear()
@@ -51,6 +52,7 @@ fun NavGraphBuilder.colorToValueScreen(
             onNavBarSelectionChanged = { selection ->
                 viewModel.saveNavBarSelection(selection)
             },
+            onLearnColorCodesTapped = { navigateToColorCodeIec(context) },
         )
     }
 }

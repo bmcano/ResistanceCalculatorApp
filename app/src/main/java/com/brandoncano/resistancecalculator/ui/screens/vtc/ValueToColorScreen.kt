@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material.icons.outlined.Looks5
@@ -25,7 +26,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -56,6 +56,7 @@ fun ValueToColorScreen(
     navBarPosition: Int,
     isError: Boolean,
     openMenu: MutableState<Boolean>,
+    onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
     onColorToValueTapped: () -> Unit,
@@ -68,6 +69,7 @@ fun ValueToColorScreen(
             navBarPosition = navBarPosition,
             isError = isError,
             openMenu = openMenu,
+            onNavigateBack = onNavigateBack,
             onClearSelectionsTapped = onClearSelectionsTapped,
             onAboutTapped = onAboutTapped,
             onColorToValueTapped = onColorToValueTapped,
@@ -83,13 +85,13 @@ private fun ValueToColorScreenContent(
     navBarPosition: Int,
     isError: Boolean,
     openMenu: MutableState<Boolean>,
+    onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
     onColorToValueTapped: () -> Unit,
     onValueChanged: (String, String, String, String) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
 ) {
-    val context = LocalContext.current
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
     var reset by remember { mutableStateOf(false) }
@@ -106,6 +108,8 @@ private fun ValueToColorScreenContent(
                 titleText = stringResource(R.string.title_value_to_color),
                 interactionSource = interactionSource,
                 showMenu = openMenu,
+                navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                onNavigateBack = onNavigateBack,
             ) {
                 ColorToValueMenuItem(onColorToValueTapped)
                 ClearSelectionsMenuItem {
@@ -114,18 +118,15 @@ private fun ValueToColorScreenContent(
                     focusManager.clearFocus()
                 }
                 ShareTextMenuItem(
-                    context = context,
                     text = resistor.shareableText(),
                     showMenu = openMenu
                 )
                 ShareImageMenuItem(
-                    context = context,
                     applicationId = Symbols.APPLICATION_ID,
                     showMenu = openMenu,
                     picture = picture
                 )
                 FeedbackMenuItem(
-                    context = context,
                     app = Symbols.APP_NAME,
                     showMenu = openMenu
                 )
@@ -234,6 +235,7 @@ private fun ValueToColorScreenPreview() {
             navBarPosition = 1,
             isError = false,
             openMenu = remember { mutableStateOf(false) },
+            onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
             onColorToValueTapped = {},

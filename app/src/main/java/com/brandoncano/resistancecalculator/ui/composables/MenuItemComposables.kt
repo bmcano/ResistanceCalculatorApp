@@ -14,7 +14,6 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.navigation.Screen
-import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
@@ -72,15 +71,14 @@ fun ValueToColorMenuItem(onValueToColorTapped: () -> Unit) {
 @Composable
 private fun MenuItemsPreview() {
     val showMenu = remember { mutableStateOf(false) }
-    val app = MainActivity()
     ResistorCalculatorTheme {
         Column {
             AboutAppMenuItem {}
             ClearSelectionsMenuItem {}
             ColorToValueMenuItem {}
-            FeedbackMenuItem(app, "app", showMenu)
-            ShareImageMenuItem(app, "applicationId", showMenu, Picture())
-            ShareTextMenuItem(app, "text", showMenu)
+            FeedbackMenuItem("app", showMenu)
+            ShareImageMenuItem("applicationId", showMenu, Picture())
+            ShareTextMenuItem("text", showMenu)
             ValueToColorMenuItem {}
         }
     }

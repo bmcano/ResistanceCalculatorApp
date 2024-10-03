@@ -11,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Looks
 import androidx.compose.material.icons.outlined.Looks3
@@ -27,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -62,6 +62,7 @@ fun SmdScreen(
     openMenu: MutableState<Boolean>,
     resistor: SmdResistor,
     isError: Boolean,
+    onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
     onValueChanged: (String, String) -> Unit,
@@ -74,6 +75,7 @@ fun SmdScreen(
             openMenu = openMenu,
             resistor = resistor,
             isError = isError,
+            onNavigateBack = onNavigateBack,
             onClearSelectionsTapped = onClearSelectionsTapped,
             onAboutTapped = onAboutTapped,
             onValueChanged = onValueChanged,
@@ -89,6 +91,7 @@ private fun SmdScreenContent(
     openMenu: MutableState<Boolean>,
     resistor: SmdResistor,
     isError: Boolean,
+    onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
     onValueChanged: (String, String) -> Unit,
@@ -96,7 +99,6 @@ private fun SmdScreenContent(
     navBarPosition: Int,
     onLearnSmdCodesTapped: () -> Unit,
 ) {
-    val context = LocalContext.current
     val focusManager = LocalFocusManager.current
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     var reset by remember { mutableStateOf(false) }
@@ -110,6 +112,8 @@ private fun SmdScreenContent(
                 titleText = stringResource(R.string.title_smd),
                 interactionSource = remember { MutableInteractionSource() },
                 showMenu = openMenu,
+                navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                onNavigateBack = onNavigateBack,
             ) {
                 ClearSelectionsMenuItem {
                     focusManager.clearFocus()
@@ -117,18 +121,15 @@ private fun SmdScreenContent(
                     reset = true
                 }
                 ShareTextMenuItem(
-                    context = context,
                     text = resistor.toString(),
                     showMenu = openMenu,
                 )
                 ShareImageMenuItem(
-                    context = context,
                     applicationId = Symbols.APPLICATION_ID,
                     showMenu = openMenu,
                     picture = picture,
                 )
                 FeedbackMenuItem(
-                    context = context,
                     app = Symbols.APP_NAME,
                     showMenu = openMenu,
                 )
@@ -227,6 +228,7 @@ private fun SmdScreenPreview() {
             openMenu = remember { mutableStateOf(false) },
             resistor = SmdResistor(),
             isError = false,
+            onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
             onValueChanged = { _, _ -> },

@@ -37,6 +37,7 @@ fun NavGraphBuilder.valueToColorScreen(
             navBarPosition = navBarSelection,
             isError = isError,
             openMenu = openMenu,
+            onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
                 viewModel.clear()

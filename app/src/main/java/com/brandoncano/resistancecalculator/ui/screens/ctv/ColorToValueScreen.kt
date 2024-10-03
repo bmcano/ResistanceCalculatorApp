@@ -10,12 +10,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material.icons.outlined.Looks5
 import androidx.compose.material.icons.outlined.Looks6
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -25,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -38,6 +40,8 @@ import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.shareableText
+import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
+import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
@@ -46,29 +50,35 @@ import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
+import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
 import com.brandoncano.sharedcomponents.data.NavigationBarOptions
+import com.brandoncano.sharedcomponents.text.textStyleHeadline
 
 @Composable
 fun ColorToValueScreen(
     openMenu: MutableState<Boolean>,
     resistor: ResistorCtv,
     navBarPosition: Int,
+    onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
     onValueToColorTapped: () -> Unit,
     onUpdateBand: (Int, String) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
+    onLearnColorCodesTapped: () -> Unit,
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
         ColorToValueScreenContent(
             openMenu = openMenu,
             resistor = resistor,
             navBarPosition = navBarPosition,
+            onNavigateBack = onNavigateBack,
             onClearSelectionsTapped = onClearSelectionsTapped,
             onAboutTapped = onAboutTapped,
             onValueToColorTapped = onValueToColorTapped,
             onUpdateBand = onUpdateBand,
             onNavBarSelectionChanged = onNavBarSelectionChanged,
+            onLearnColorCodesTapped = onLearnColorCodesTapped,
         )
     }
 }
@@ -78,13 +88,14 @@ private fun ColorToValueScreenContent(
     openMenu: MutableState<Boolean>,
     resistor: ResistorCtv,
     navBarPosition: Int,
+    onNavigateBack:  () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
     onValueToColorTapped: () -> Unit,
     onUpdateBand: (Int, String) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
+    onLearnColorCodesTapped: () -> Unit,
 ) {
-    val context = LocalContext.current
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
     var reset by remember { mutableStateOf(false) }
@@ -97,6 +108,8 @@ private fun ColorToValueScreenContent(
                 titleText = stringResource(R.string.title_color_to_value),
                 interactionSource = interactionSource,
                 showMenu = openMenu,
+                navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                onNavigateBack = onNavigateBack,
             ) {
                 ValueToColorMenuItem(onValueToColorTapped)
                 ClearSelectionsMenuItem {
@@ -106,18 +119,15 @@ private fun ColorToValueScreenContent(
                     focusManager.clearFocus()
                 }
                 ShareTextMenuItem(
-                    context = context,
                     text = resistor.shareableText(),
                     showMenu = openMenu,
                 )
                 ShareImageMenuItem(
-                    context = context,
                     applicationId = Symbols.APPLICATION_ID,
                     showMenu = openMenu,
                     picture = picture,
                 )
                 FeedbackMenuItem(
-                    context = context,
                     app = Symbols.APP_NAME,
                     showMenu = openMenu,
                 )
@@ -222,6 +232,22 @@ private fun ColorToValueScreenContent(
                     onUpdateBand(6, it)
                 }
             }
+            Spacer(modifier = Modifier.height(32.dp))
+            AppDivider(onCard = false)
+            Column(horizontalAlignment = Alignment.Start) {
+                Text(
+                    text = stringResource(R.string.ctv_headline_text),
+                    modifier = Modifier.padding(16.dp),
+                    style = textStyleHeadline(),
+                )
+                AppArrowCardButton(
+                    ArrowCardButtonContents(
+                        imageVector = Icons.Outlined.Lightbulb,
+                        text = stringResource(R.string.ctv_button_text),
+                        onClick = onLearnColorCodesTapped,
+                    )
+                )
+            }
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
@@ -235,11 +261,13 @@ private fun ColorToValueScreen4BandPreview() {
             openMenu = remember { mutableStateOf(false) },
             resistor = ResistorCtv(),
             navBarPosition = 1,
+            onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
             onValueToColorTapped = {},
             onUpdateBand = { _, _ -> },
             onNavBarSelectionChanged = { _ -> },
+            onLearnColorCodesTapped = {},
         )
     }
 }

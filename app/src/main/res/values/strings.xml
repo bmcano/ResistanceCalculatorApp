@@ -50,9 +50,35 @@
     <!-- SMD screen/components text -->
     <string name="smd_headline_text">Learn about SMD codes</string>
     <string name="smd_button_text">Explore the IEC 60062 standard</string>
+    <!-- CtV screen/components text -->
+    <string name="ctv_headline_text">Learn about color codes</string>
+    <string name="ctv_button_text">Explore the IEC 60062 standard</string>
+    <!-- Info screen/components text -->
+    <string name="info_title">IEC 60062 Standard</string>
+    <string name="info_smd_overview_title">Overview</string>
+    <string name="info_smd_overview_body">The IEC 60062 standard specifies code markings for resistors and capacitors. It defines alphanumeric codes to denote resistance and capacitance values in a compact format suitable for marking on small components like SMD (Surface-Mount Device) resistors.</string>
+    <string name="info_smd_resistor_codes_title">SMD Resistor Codes</string>
+    <string name="info_smd_resistor_codes_body">SMD resistors use different coding systems based on the number of digits or characters used. The most common coding standards are:</string>
+    <string name="info_smd_code_example">Example:</string>
+    <string name="info_smd_three_code_headline">Three-Digit Code</string>
+    <string name="info_smd_three_code_body">The three-digit code is similar to the color code system for resistors. The first two digits represent significant figures, and the third digit is the multiplier (number of zeros to add). The equation is:</string>
+    <string name="info_smd_three_digit_formula">xy \u00D7 10\u1dbb = R</string>
+    <string name="info_smd_three_digit_example">47 \u00D7 10\u00b2 \u03A9 = 4700 \u03A9</string>
+    <string name="info_smd_four_code_headline">Four-Digit Code</string>
+    <string name="info_smd_four_code_body">The four-digit code is used for higher precision resistors. The first three digits are significant figures, and the fourth digit is the multiplier. The equation is:</string>
+    <string name="info_smd_four_digit_formula">wxy \u00D7 10\u1dbb = R</string>
+    <string name="info_smd_four_digit_example">120 \u00D7 10\u00b9 \u03A9 = 1200 \u03A9</string>
+    <string name="info_smd_four_digit_body2">"The letter 'R' is used to indicate the position of a decimal point for resistance values lower than 10 \u03A9. Thus, 0R5 would be 0.5 \u03A9 and 0R01 would be 0.01 \u03A9."</string>
+    <string name="info_smd_eia_headline">EIA-96 Code</string>
+    <string name="info_smd_eia_body">The EIA-96 code is a two-digit code followed by a letter, used for precision resistors with 1% tolerance. The two-digit number corresponds to a value in the E96 series, and the letter represents the multiplier. For example:</string>
+    <string name="info_smd_eia_example">"Value code '43' corresponds to 274 \u03A9, multiplier 'C' is \u00D7100. So, 274 \u00D7 100 = 27400 \u03A9"</string>
+    <string name="info_smd_multipliers_headline">Multipliers</string>
+    <string name="info_smd_multipliers_body">The multiplier indicates the factor by which to multiply the significant figures. In the EIA-96 code, letters represent multipliers as follows:</string>
+    <string name="info_smd_code_value_col1">Code</string>
+    <string name="info_smd_code_value_col2">Value</string>
+    <string name="info_smd_code_value_headline">Value codes</string>
+    <string name="info_smd_code_value_body">"These are the common resistance value codes, but a manufacturer may use a variation on these or even something completely different. It is therefore always important to verify the manufacturer's marking system."</string>
     <!-- Content descriptions -->
-    <string name="content_description_expand">Expand options</string>
-    <string name="content_description_collapse">Collapse options</string>
     <string name="content_description_app_icon">App icon</string>
     <!-- Error messages -->
     <string name="error_na">N/A</string>
