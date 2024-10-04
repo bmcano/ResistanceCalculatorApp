@@ -23,7 +23,7 @@ fun NavGraphBuilder.aboutScreen(
         AboutScreen(
             onNavigateBack = { navHostController.popBackStack() },
             onViewPrivacyPolicyTapped = { navigateToPrivacyPolicy(context) },
-            onViewColorCodeIecTapped = { navigateToColorCodeIec(context) },
+            onViewColorCodeIecTapped = { navigateToColorCodeIec(navHostController) },
             onViewSmdCodeIecTapped = { navigateToSmdCodeIec(navHostController) },
             onRateThisAppTapped = { navigateToGooglePlay(context) },
             onViewOurAppsTapped = { navigateToOurApps(navHostController) },

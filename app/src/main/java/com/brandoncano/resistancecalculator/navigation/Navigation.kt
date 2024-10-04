@@ -28,6 +28,7 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
         aboutScreen(navController)
         colorToValueScreen(navController, onOpenThemeDialog)
         homeScreen(navController, onOpenThemeDialog)
+        learnColorCodes(navController)
         learnSmdCodes(navController)
         smdScreen(navController, onOpenThemeDialog)
         valueToColorScreen(navController, onOpenThemeDialog)
@@ -68,8 +69,8 @@ fun navigateToSmd(navController: NavHostController) {
     }
 }
 
-fun navigateToColorCodeIec(context: Context) {
-    OpenLink.execute(context, Links.COLOR_IEC) // TODO - #75
+fun navigateToColorCodeIec(navController: NavHostController) {
+    navController.navigate(Screen.LearnColorCodes.route)
 }
 
 fun navigateToSmdCodeIec(navController: NavHostController) {

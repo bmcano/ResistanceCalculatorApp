@@ -54,7 +54,7 @@ fun NavGraphBuilder.colorToValueScreen(
             onNavBarSelectionChanged = { selection ->
                 viewModel.saveNavBarSelection(selection)
             },
-            onLearnColorCodesTapped = { navigateToColorCodeIec(context) },
+            onLearnColorCodesTapped = { navigateToColorCodeIec(navHostController) },
         )
     }
 }

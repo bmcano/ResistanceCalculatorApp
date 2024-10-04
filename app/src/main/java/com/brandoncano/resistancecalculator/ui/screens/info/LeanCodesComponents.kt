@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.info
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -7,18 +9,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.ui.theme.black
+import com.brandoncano.resistancecalculator.ui.theme.white
+import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.composables.AppDivider
+import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleCaption
@@ -171,5 +179,126 @@ fun MultiplierTable() {
 fun ValueCodesTablePreview() {
     ResistorCalculatorTheme {
         CodeValueTable(codeValueList)
+    }
+}
+
+data class ResistorColorCode(
+    val color: String,
+    val significantFigures: String,
+    val multiplier: String,
+    val tolerance: String,
+    val tempCoefficient: String,
+)
+
+@AppScreenPreviews
+@Composable
+fun ResistorColorCodeTable() {
+    val resistorColorCodes = listOf(
+        ResistorColorCode("Black", "0", "${Symbols.X}1", "-", "250"),
+        ResistorColorCode("Brown", "1", "${Symbols.X}10", "${Symbols.PM}1%", "100"),
+        ResistorColorCode("Red", "2", "${Symbols.X}100", "${Symbols.PM}2%", "50"),
+        ResistorColorCode("Orange", "3", "${Symbols.X}1k", "-", "15"),
+        ResistorColorCode("Yellow", "4", "${Symbols.X}10k", "-", "25"),
+        ResistorColorCode("Green", "5", "${Symbols.X}100k", "${Symbols.PM}0.5%", "20"),
+        ResistorColorCode("Blue", "6", "${Symbols.X}1M", "${Symbols.PM}0.25%", "10"),
+        ResistorColorCode("Violet", "7", "${Symbols.X}10M", "${Symbols.PM}0.1%", "5"),
+        ResistorColorCode("Gray", "8", "${Symbols.X}100M", "${Symbols.PM}0.05%", "1"),
+        ResistorColorCode("White", "9", "${Symbols.X}1G", "-", "-"),
+        ResistorColorCode("Gold", "-", "${Symbols.X}0.1", "${Symbols.PM}5%", "-"),
+        ResistorColorCode("Silver", "-", "${Symbols.X}0.01", "${Symbols.PM}10%", "-"),
+        ResistorColorCode("None", "-", "-", "20 (M)", "-")
+    )
+
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                val modifier =  Modifier.weight(1f)
+                HeaderCell(modifier, "Color")
+                HeaderCell(Modifier.weight(0.75f), "Digit")
+                HeaderCell(modifier, "Multiplier")
+                HeaderCell(modifier, "Tolerance")
+                HeaderCell(modifier, "Temp. Coeff.")
+            }
+            AppDivider()
+            resistorColorCodes.forEachIndexed { index, resistorColorCode ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    val color = ColorFinder.textToColor(resistorColorCode.color)
+                    TableColorCell(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 8.dp, end = 8.dp)
+                            .background(
+                                color = color,
+                                shape = MaterialTheme.shapes.small
+                            )
+                            .padding(vertical = 4.dp),
+                        text = resistorColorCode.color,
+                        backgroundColor = color,
+                    )
+
+                    val modifier = Modifier.padding(12.dp)
+                    TableCell(modifier.weight(0.75f), resistorColorCode.significantFigures)
+                    TableCell(modifier.weight(1f), resistorColorCode.multiplier)
+                    TableCell(modifier.weight(1f), resistorColorCode.tolerance)
+                    TableCell(modifier.weight(1f), resistorColorCode.tempCoefficient)
+                }
+                if (index != resistorColorCodes.size - 1) {
+                    AppDivider()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun HeaderCell(modifier: Modifier, text: String) {
+    Text(
+        text = text,
+        modifier = modifier,
+        style = textStyleSubhead(),
+        textAlign = TextAlign.Center
+    )
+}
+
+@Composable
+fun TableCell(modifier: Modifier, text: String) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = text,
+            style = textStyleCaption().onSurfaceVariant(),
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Color) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
+    ) {
+        val style = if (backgroundColor == black) {
+            textStyleCaption().white()
+        } else {
+            textStyleCaption().black()
+        }
+        Text(
+            text = text,
+            style = style,
+            textAlign = TextAlign.Center
+        )
     }
 }
