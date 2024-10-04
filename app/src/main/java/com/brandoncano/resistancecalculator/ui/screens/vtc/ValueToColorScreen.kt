@@ -34,6 +34,7 @@ import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -56,6 +57,7 @@ fun ValueToColorScreen(
     navBarPosition: Int,
     isError: Boolean,
     openMenu: MutableState<Boolean>,
+    onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
@@ -69,6 +71,7 @@ fun ValueToColorScreen(
             navBarPosition = navBarPosition,
             isError = isError,
             openMenu = openMenu,
+            onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = onNavigateBack,
             onClearSelectionsTapped = onClearSelectionsTapped,
             onAboutTapped = onAboutTapped,
@@ -85,6 +88,7 @@ private fun ValueToColorScreenContent(
     navBarPosition: Int,
     isError: Boolean,
     openMenu: MutableState<Boolean>,
+    onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
@@ -130,6 +134,7 @@ private fun ValueToColorScreenContent(
                     app = Symbols.APP_NAME,
                     showMenu = openMenu
                 )
+                AppThemeMenuItem(openMenu, onOpenThemeDialog)
                 AboutAppMenuItem(onAboutTapped)
             }
         },
@@ -235,6 +240,7 @@ private fun ValueToColorScreenPreview() {
             navBarPosition = 1,
             isError = false,
             openMenu = remember { mutableStateOf(false) },
+            onOpenThemeDialog = {},
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},

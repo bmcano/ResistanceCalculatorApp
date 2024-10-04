@@ -36,6 +36,7 @@ import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -59,6 +60,7 @@ fun ColorToValueScreen(
     openMenu: MutableState<Boolean>,
     resistor: ResistorCtv,
     navBarPosition: Int,
+    onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
@@ -72,6 +74,7 @@ fun ColorToValueScreen(
             openMenu = openMenu,
             resistor = resistor,
             navBarPosition = navBarPosition,
+            onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = onNavigateBack,
             onClearSelectionsTapped = onClearSelectionsTapped,
             onAboutTapped = onAboutTapped,
@@ -88,6 +91,7 @@ private fun ColorToValueScreenContent(
     openMenu: MutableState<Boolean>,
     resistor: ResistorCtv,
     navBarPosition: Int,
+    onOpenThemeDialog: () -> Unit,
     onNavigateBack:  () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
@@ -131,6 +135,7 @@ private fun ColorToValueScreenContent(
                     app = Symbols.APP_NAME,
                     showMenu = openMenu,
                 )
+                AppThemeMenuItem(openMenu, onOpenThemeDialog)
                 AboutAppMenuItem(onAboutTapped)
             }
         },
@@ -261,6 +266,7 @@ private fun ColorToValueScreen4BandPreview() {
             openMenu = remember { mutableStateOf(false) },
             resistor = ResistorCtv(),
             navBarPosition = 1,
+            onOpenThemeDialog = {},
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},

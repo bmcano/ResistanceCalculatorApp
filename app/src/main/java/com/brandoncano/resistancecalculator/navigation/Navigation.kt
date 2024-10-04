@@ -26,11 +26,11 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
         startDestination = Screen.Home.route
     ) {
         aboutScreen(navController)
-        colorToValueScreen(navController)
+        colorToValueScreen(navController, onOpenThemeDialog)
         homeScreen(navController, onOpenThemeDialog)
         learnSmdCodes(navController)
-        smdScreen(navController)
-        valueToColorScreen(navController)
+        smdScreen(navController, onOpenThemeDialog)
+        valueToColorScreen(navController, onOpenThemeDialog)
         // from shared library
         composable(
             route = Screen.ViewOurApps.route,

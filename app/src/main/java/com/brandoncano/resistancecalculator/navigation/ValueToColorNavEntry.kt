@@ -18,6 +18,7 @@ import com.brandoncano.resistancecalculator.util.formatResistor
 
 fun NavGraphBuilder.valueToColorScreen(
     navHostController: NavHostController,
+    onOpenThemeDialog: () -> Unit,
 ) {
     composable(
         route = Screen.ValueToColor.route,
@@ -37,6 +38,7 @@ fun NavGraphBuilder.valueToColorScreen(
             navBarPosition = navBarSelection,
             isError = isError,
             openMenu = openMenu,
+            onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false

@@ -17,6 +17,7 @@ import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
 
 fun NavGraphBuilder.smdScreen(
     navHostController: NavHostController,
+    onOpenThemeDialog: () -> Unit,
 ) {
     composable(
         route = Screen.Smd.route,
@@ -33,6 +34,7 @@ fun NavGraphBuilder.smdScreen(
             openMenu = openMenu,
             resistor = resistor,
             isError = isError,
+            onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false

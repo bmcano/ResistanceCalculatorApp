@@ -39,6 +39,7 @@ import com.brandoncano.resistancecalculator.components.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
 import com.brandoncano.sharedcomponents.composables.AppDivider
@@ -62,6 +63,7 @@ fun SmdScreen(
     openMenu: MutableState<Boolean>,
     resistor: SmdResistor,
     isError: Boolean,
+    onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
@@ -75,6 +77,7 @@ fun SmdScreen(
             openMenu = openMenu,
             resistor = resistor,
             isError = isError,
+            onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = onNavigateBack,
             onClearSelectionsTapped = onClearSelectionsTapped,
             onAboutTapped = onAboutTapped,
@@ -91,6 +94,7 @@ private fun SmdScreenContent(
     openMenu: MutableState<Boolean>,
     resistor: SmdResistor,
     isError: Boolean,
+    onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
@@ -133,6 +137,7 @@ private fun SmdScreenContent(
                     app = Symbols.APP_NAME,
                     showMenu = openMenu,
                 )
+                AppThemeMenuItem(openMenu, onOpenThemeDialog)
                 AboutAppMenuItem(onAboutTapped)
             }
         },
@@ -228,6 +233,7 @@ private fun SmdScreenPreview() {
             openMenu = remember { mutableStateOf(false) },
             resistor = SmdResistor(),
             isError = false,
+            onOpenThemeDialog = {},
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
