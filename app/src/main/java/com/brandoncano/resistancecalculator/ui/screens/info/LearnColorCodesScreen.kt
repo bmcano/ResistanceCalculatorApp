@@ -97,11 +97,6 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             resistor = ResistorCtv("Yellow", "Violet", "", "Red", "Gold", "", 1),
         )
         Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = stringResource(R.string.info_color_five_band_headline),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleTitle(),
-        )
         BandSection(
             headlineRes = R.string.info_color_five_band_headline,
             bodyRes = R.string.info_color_five_band_body,
@@ -117,6 +112,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             descriptionRes = R.string.info_color_six_band_description,
             resistor = ResistorCtv("Green", "Blue", "Black", "Brown", "Red", "Brown", 3),
         )
+        DisclaimerText()
         Spacer(modifier = Modifier.height(24.dp))
     }
 }

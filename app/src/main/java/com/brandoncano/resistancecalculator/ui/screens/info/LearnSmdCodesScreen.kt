@@ -186,6 +186,7 @@ private fun LearnSmdCodesScreenContent(
             style = textStyleBody().onSurfaceVariant(),
         )
         CodeValueTable(codeValueList)
+        DisclaimerText()
         Spacer(modifier = Modifier.height(24.dp))
     }
 }

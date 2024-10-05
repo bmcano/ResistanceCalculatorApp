@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +23,8 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.black
+import com.brandoncano.resistancecalculator.ui.theme.disclaimer
+import com.brandoncano.resistancecalculator.ui.theme.red
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
@@ -290,7 +293,7 @@ fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Color) {
         modifier = modifier,
         contentAlignment = Alignment.Center,
     ) {
-        val style = if (backgroundColor == black) {
+        val style = if (backgroundColor == black || backgroundColor == red) {
             textStyleCaption().white()
         } else {
             textStyleCaption().black()
@@ -301,4 +304,17 @@ fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Color) {
             textAlign = TextAlign.Center
         )
     }
+}
+
+@Composable
+fun DisclaimerText() {
+    HorizontalDivider(
+        modifier = Modifier.padding(vertical = 32.dp),
+        thickness = 1.dp,
+        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
+    )
+    Text(
+        text = stringResource(R.string.info_disclaimer_footer),
+        style = textStyleCaption().disclaimer(),
+    )
 }
