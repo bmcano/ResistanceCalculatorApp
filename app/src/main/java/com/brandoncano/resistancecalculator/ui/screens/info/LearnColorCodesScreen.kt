@@ -30,6 +30,10 @@ import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 import com.brandoncano.sharedcomponents.text.textStyleTitle
 
+/**
+ * Note: Information originated from - https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-color-code/#
+ */
+
 @Composable
 fun LearnColorCodesScreen(
     onNavigateBack: () -> Unit,
@@ -113,7 +117,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             resistor = ResistorCtv("Green", "Blue", "Black", "Brown", "Red", "Brown", 3),
         )
         DisclaimerText()
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(48.dp))
     }
 }
 

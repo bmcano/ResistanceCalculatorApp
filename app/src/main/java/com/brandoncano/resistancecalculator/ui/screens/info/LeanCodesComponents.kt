@@ -23,7 +23,6 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.black
-import com.brandoncano.resistancecalculator.ui.theme.disclaimer
 import com.brandoncano.resistancecalculator.ui.theme.red
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.ColorFinder
@@ -209,7 +208,7 @@ fun ResistorColorCodeTable() {
         ResistorColorCode("White", "9", "${Symbols.X}1G", "-", "-"),
         ResistorColorCode("Gold", "-", "${Symbols.X}0.1", "${Symbols.PM}5%", "-"),
         ResistorColorCode("Silver", "-", "${Symbols.X}0.01", "${Symbols.PM}10%", "-"),
-        ResistorColorCode("None", "-", "-", "20 (M)", "-")
+        ResistorColorCode("None", "-", "-", "${Symbols.PM}20%", "-")
     )
 
     Card(modifier = Modifier.fillMaxWidth()) {
@@ -315,6 +314,6 @@ fun DisclaimerText() {
     )
     Text(
         text = stringResource(R.string.info_disclaimer_footer),
-        style = textStyleCaption().disclaimer(),
+        style = textStyleCaption().onSurfaceVariant(),
     )
 }

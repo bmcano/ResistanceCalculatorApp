@@ -12,8 +12,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Explicit
 import androidx.compose.material.icons.outlined.Lightbulb
-import androidx.compose.material.icons.outlined.Looks
 import androidx.compose.material.icons.outlined.Looks3
 import androidx.compose.material.icons.outlined.Looks4
 import androidx.compose.material3.Scaffold
@@ -159,7 +159,7 @@ private fun SmdScreenContent(
                     ),
                     NavigationBarOptions(
                         label = stringResource(id = R.string.navbar_eia_96),
-                        imageVector = Icons.Outlined.Looks,
+                        imageVector = Icons.Outlined.Explicit,
                     ),
                 ),
             )

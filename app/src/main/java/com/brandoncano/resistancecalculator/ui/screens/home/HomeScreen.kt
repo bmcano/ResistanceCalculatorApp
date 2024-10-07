@@ -10,8 +10,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Colorize
+import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.WidthFull
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -114,7 +114,7 @@ private fun HomeScreenContent(
         Spacer(modifier = Modifier.height(12.dp))
         AppArrowCardButton(
             ArrowCardButtonContents(
-                imageVector = Icons.Outlined.WidthFull,
+                imageVector = Icons.Outlined.Memory,
                 text = stringResource(id = R.string.home_button_smd),
                 onClick = onSmdTapped
             )

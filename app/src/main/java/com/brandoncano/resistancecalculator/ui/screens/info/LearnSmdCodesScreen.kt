@@ -32,7 +32,7 @@ import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 import com.brandoncano.sharedcomponents.text.textStyleTitle
 
 /**
- * Note: Information originated from: https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-smd-code/
+ * Note: Information originated from - https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-smd-code/
  */
 
 @Composable
@@ -187,7 +187,7 @@ private fun LearnSmdCodesScreenContent(
         )
         CodeValueTable(codeValueList)
         DisclaimerText()
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(48.dp))
     }
 }
 

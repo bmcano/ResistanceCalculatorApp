@@ -9,8 +9,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.outlined.FileOpen
-import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.Colorize
+import androidx.compose.material.icons.outlined.Memory
+import androidx.compose.material.icons.outlined.Policy
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -83,7 +84,7 @@ private fun AboutScreenContent(
 
         AppArrowCardButton(
             ArrowCardButtonContents(
-                imageVector = Icons.Outlined.FileOpen,
+                imageVector = Icons.Outlined.Policy,
                 text = stringResource(id = R.string.about_view_privacy_policy),
                 onClick = onViewPrivacyPolicyTapped,
             )
@@ -118,12 +119,12 @@ private fun AboutScreenContent(
         )
         AppArrowCardButton(
             ArrowCardButtonContents(
-                imageVector = Icons.Outlined.Link,
+                imageVector = Icons.Outlined.Colorize,
                 text = stringResource(id = R.string.about_standard_iec_button),
                 onClick = onViewColorCodeIecTapped,
             ),
             ArrowCardButtonContents(
-                imageVector = Icons.Outlined.Link,
+                imageVector = Icons.Outlined.Memory,
                 text = stringResource(id = R.string.about_smd_iec_button),
                 onClick = onViewSmdCodeIecTapped,
             ),
