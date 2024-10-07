@@ -21,23 +21,40 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Symbols
-import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.black
 import com.brandoncano.resistancecalculator.ui.theme.red
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.composables.AppDivider
-import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleCaption
 import com.brandoncano.sharedcomponents.text.textStyleHeadline
 import com.brandoncano.sharedcomponents.text.textStyleSubhead
 
-data class CodeValue(val code: String, val value: String)
+@Composable
+fun CodeExampleCard(code: String, description: String) {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp)) {
+            Text(
+                text = code,
+                style = textStyleHeadline(),
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = description,
+                style = textStyleBody().onSurfaceVariant(),
+            )
+        }
+    }
+}
 
-val codeValueList = listOf(
+private data class CodeValue(val code: String, val value: String)
+
+private val codeValueList = listOf(
     CodeValue("01", "100"), CodeValue("02", "102"), CodeValue("03", "105"), CodeValue("04", "107"),
     CodeValue("05", "110"), CodeValue("06", "113"), CodeValue("07", "115"), CodeValue("08", "118"),
     CodeValue("09", "121"), CodeValue("10", "124"), CodeValue("11", "127"), CodeValue("12", "130"),
@@ -64,29 +81,11 @@ val codeValueList = listOf(
     CodeValue("93", "909"), CodeValue("94", "931"), CodeValue("95", "953"), CodeValue("96", "976")
 )
 
+@AppComponentPreviews
 @Composable
-fun CodeExampleCard(code: String, description: String) {
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp)) {
-            Text(
-                text = code,
-                style = textStyleHeadline(),
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = description,
-                style = textStyleBody().onSurfaceVariant(),
-            )
-        }
-    }
-}
-
-@Composable
-fun CodeValueTable(codeValues: List<CodeValue>) {
+fun CodeValueTable() {
     val codeValuePairsPerRow = 3
-    val rows = codeValues.chunked(codeValuePairsPerRow)
+    val rows = codeValueList.chunked(codeValuePairsPerRow)
 
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(vertical = 12.dp)) {
@@ -111,7 +110,6 @@ fun CodeValueTable(codeValues: List<CodeValue>) {
                 }
             }
             AppDivider()
-
             rows.forEach { rowItems ->
                 Row(
                     modifier = Modifier
@@ -143,15 +141,8 @@ fun CodeValueTable(codeValues: List<CodeValue>) {
 @Composable
 fun MultiplierTable() {
     val multipliers = listOf(
-        "Z" to "0.001",
-        "Y / R" to "0.01",
-        "X / S" to "0.1",
-        "A" to "1",
-        "B / H" to "10",
-        "C" to "100",
-        "D" to "1,000",
-        "E" to "10,000",
-        "F" to "100,000"
+        "Z" to "0.001", "Y / R" to "0.01", "X / S" to "0.1", "A" to "1", "B / H" to "10",
+        "C" to "100", "D" to "1,000", "E" to "10,000", "F" to "100,000"
     )
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)) {
@@ -178,23 +169,15 @@ fun MultiplierTable() {
 
 @AppComponentPreviews
 @Composable
-fun ValueCodesTablePreview() {
-    ResistorCalculatorTheme {
-        CodeValueTable(codeValueList)
-    }
-}
-
-data class ResistorColorCode(
-    val color: String,
-    val significantFigures: String,
-    val multiplier: String,
-    val tolerance: String,
-    val tempCoefficient: String,
-)
-
-@AppScreenPreviews
-@Composable
 fun ResistorColorCodeTable() {
+    data class ResistorColorCode(
+        val color: String,
+        val significantFigures: String,
+        val multiplier: String,
+        val tolerance: String,
+        val tempCoefficient: String,
+    )
+
     val resistorColorCodes = listOf(
         ResistorColorCode("Black", "0", "${Symbols.X}1", "-", "250"),
         ResistorColorCode("Brown", "1", "${Symbols.X}10", "${Symbols.PM}1%", "100"),
@@ -263,7 +246,7 @@ fun ResistorColorCodeTable() {
 }
 
 @Composable
-fun HeaderCell(modifier: Modifier, text: String) {
+private fun HeaderCell(modifier: Modifier, text: String) {
     Text(
         text = text,
         modifier = modifier,
@@ -273,7 +256,7 @@ fun HeaderCell(modifier: Modifier, text: String) {
 }
 
 @Composable
-fun TableCell(modifier: Modifier, text: String) {
+private fun TableCell(modifier: Modifier, text: String) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center,
@@ -287,7 +270,7 @@ fun TableCell(modifier: Modifier, text: String) {
 }
 
 @Composable
-fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Color) {
+private fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Color) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center,
@@ -305,6 +288,7 @@ fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Color) {
     }
 }
 
+@AppComponentPreviews
 @Composable
 fun DisclaimerText() {
     HorizontalDivider(
