@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.brandoncano.resistancecalculator.components.ThemePreferences
+import com.brandoncano.resistancecalculator.data.ThemePreferences
 import com.brandoncano.sharedcomponents.data.ThemeMode
 import kotlinx.coroutines.flow.MutableStateFlow
 

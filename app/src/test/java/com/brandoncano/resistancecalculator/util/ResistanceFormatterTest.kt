@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 import android.content.Context
-import com.brandoncano.resistancecalculator.components.SharedPreferences
+import com.brandoncano.resistancecalculator.data.SharedPreferences
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import io.mockk.clearAllMocks
 import io.mockk.every

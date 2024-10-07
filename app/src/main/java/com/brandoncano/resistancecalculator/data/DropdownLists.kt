@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.components
+package com.brandoncano.resistancecalculator.data
 
 import com.brandoncano.resistancecalculator.constants.Colors
 import com.brandoncano.resistancecalculator.constants.Symbols

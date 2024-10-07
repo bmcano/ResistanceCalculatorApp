@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.model.vtc
 
 import android.content.Context
-import com.brandoncano.resistancecalculator.components.SharedPreferences
+import com.brandoncano.resistancecalculator.data.SharedPreferences
 
 class ResistorVtcRepository(context: Context) {
 

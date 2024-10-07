@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.components
+package com.brandoncano.resistancecalculator.data
 
 /**
  * Job: Holds the content for the special dropdown menu

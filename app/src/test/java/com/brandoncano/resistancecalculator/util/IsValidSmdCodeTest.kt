@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.util
 
-import com.brandoncano.resistancecalculator.components.SmdMode
+import com.brandoncano.resistancecalculator.data.SmdMode
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
