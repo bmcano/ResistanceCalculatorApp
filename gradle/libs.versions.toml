@@ -2,7 +2,7 @@
 # libraries
 activity-compose = "1.9.2" # 9/20/24
 appcompat = "1.7.0" # 7/7/24
-bmcano = "1.2.1" # 10/3/24 - this is our shared library
+bmcano = "1.2.2" # 10/7/24 - this is our shared library
 browser = "1.8.0" # 7/7/24
 compose = "1.7.3" # 10/2/24
 compose-bom = "2024.09.03" # 10/2/24

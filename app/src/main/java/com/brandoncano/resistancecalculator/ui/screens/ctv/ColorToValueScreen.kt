@@ -237,7 +237,7 @@ private fun ColorToValueScreenContent(
                     onUpdateBand(6, it)
                 }
             }
-            AppDivider(modifier = Modifier.padding(vertical = 24.dp))
+            AppDivider(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp))
             Column(horizontalAlignment = Alignment.Start) {
                 Text(
                     text = stringResource(R.string.ctv_headline_text),

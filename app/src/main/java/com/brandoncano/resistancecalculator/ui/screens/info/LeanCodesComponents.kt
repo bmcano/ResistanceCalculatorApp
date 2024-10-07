@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +26,7 @@ import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.ColorFinder
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.composables.AppDivider
+import com.brandoncano.sharedcomponents.composables.AppStandardDivider
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleCaption
@@ -109,7 +109,7 @@ fun CodeValueTable() {
                     )
                 }
             }
-            AppDivider()
+            AppStandardDivider()
             rows.forEach { rowItems ->
                 Row(
                     modifier = Modifier
@@ -209,7 +209,7 @@ fun ResistorColorCodeTable() {
                 HeaderCell(modifier, "Tolerance")
                 HeaderCell(modifier, "Temp. Coeff.")
             }
-            AppDivider()
+            AppStandardDivider()
             resistorColorCodes.forEachIndexed { index, resistorColorCode ->
                 Row(
                     modifier = Modifier
@@ -238,7 +238,7 @@ fun ResistorColorCodeTable() {
                     TableCell(modifier.weight(1f), resistorColorCode.tempCoefficient)
                 }
                 if (index != resistorColorCodes.size - 1) {
-                    AppDivider()
+                    AppStandardDivider()
                 }
             }
         }
@@ -291,11 +291,7 @@ private fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Co
 @AppComponentPreviews
 @Composable
 fun DisclaimerText() {
-    HorizontalDivider(
-        modifier = Modifier.padding(vertical = 24.dp),
-        thickness = 1.dp,
-        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
-    )
+    AppDivider(modifier = Modifier.padding(vertical = 24.dp))
     Text(
         text = stringResource(R.string.info_disclaimer_footer),
         style = textStyleCaption().onSurfaceVariant(),

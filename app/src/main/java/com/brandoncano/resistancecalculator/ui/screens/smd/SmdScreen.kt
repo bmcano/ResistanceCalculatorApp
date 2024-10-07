@@ -203,7 +203,7 @@ private fun SmdScreenContent(
                 focusManager.clearFocus()
                 onValueChanged(code.value, units)
             }
-            AppDivider(modifier = Modifier.padding(vertical = 24.dp))
+            AppDivider(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp))
             Column(horizontalAlignment = Alignment.Start) {
                 Text(
                     text = stringResource(R.string.smd_headline_text),
