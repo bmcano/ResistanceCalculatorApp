@@ -292,7 +292,7 @@ private fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Co
 @Composable
 fun DisclaimerText() {
     HorizontalDivider(
-        modifier = Modifier.padding(vertical = 32.dp),
+        modifier = Modifier.padding(vertical = 24.dp),
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
     )

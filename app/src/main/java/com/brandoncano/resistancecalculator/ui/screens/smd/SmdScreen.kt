@@ -203,12 +203,11 @@ private fun SmdScreenContent(
                 focusManager.clearFocus()
                 onValueChanged(code.value, units)
             }
-            Spacer(modifier = Modifier.height(32.dp))
-            AppDivider()
+            AppDivider(modifier = Modifier.padding(vertical = 24.dp))
             Column(horizontalAlignment = Alignment.Start) {
                 Text(
                     text = stringResource(R.string.smd_headline_text),
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                     style = textStyleHeadline(),
                 )
                 AppArrowCardButton(

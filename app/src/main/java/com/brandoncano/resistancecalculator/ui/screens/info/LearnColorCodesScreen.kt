@@ -146,7 +146,11 @@ private fun BandSection(
     ) {
         ResistorLayout(resistor)
     }
-    Spacer(modifier = Modifier.height(12.dp))
+    Text(
+        text = stringResource(R.string.info_color_code_explanation),
+        modifier = Modifier.padding(vertical = 12.dp),
+        style = textStyleBody().onSurfaceVariant(),
+    )
     CodeExampleCard(
         code = stringResource(codeRes),
         description = stringResource(descriptionRes),
