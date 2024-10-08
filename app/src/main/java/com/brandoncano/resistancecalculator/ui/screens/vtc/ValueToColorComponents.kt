@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.vtc
 
+import android.graphics.Picture
+import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -20,6 +22,18 @@ import com.brandoncano.resistancecalculator.util.bandSixForDisplay
 import com.brandoncano.resistancecalculator.util.bandThreeForDisplay
 import com.brandoncano.resistancecalculator.util.bandTwoForDisplay
 import com.brandoncano.resistancecalculator.util.deriveResistorColor
+import com.brandoncano.sharedcomponents.composables.DrawContent
+
+@Composable
+fun ResistorDisplay(picture: Picture, resistor: ResistorVtc, isError: Boolean) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+        ResistorLayout(resistor, isError)
+    } else {
+        DrawContent(picture) {
+            ResistorLayout(resistor, isError)
+        }
+    }
+}
 
 @Composable
 fun ResistorLayout(

@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.smd
 
+import android.graphics.Picture
+import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,8 +22,20 @@ import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.formatResistance
 import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
+import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 import com.brandoncano.sharedcomponents.text.textStyleTitle
+
+@Composable
+fun SmdResistorDisplay(picture: Picture, resistor: SmdResistor, isError: Boolean) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+        SmdResistorLayout(resistor, isError)
+    } else {
+        DrawContent(picture) {
+            SmdResistorLayout(resistor, isError)
+        }
+    }
+}
 
 @Composable
 fun SmdResistorLayout(

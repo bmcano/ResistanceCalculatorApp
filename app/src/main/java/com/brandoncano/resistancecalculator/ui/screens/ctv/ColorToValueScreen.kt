@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.ctv
 
 import android.graphics.Picture
+import android.os.Build
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -32,8 +33,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.data.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Symbols
+import com.brandoncano.resistancecalculator.data.DropdownLists
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
@@ -47,7 +48,6 @@ import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
-import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
@@ -126,11 +126,13 @@ private fun ColorToValueScreenContent(
                     text = resistor.shareableText(),
                     showMenu = openMenu,
                 )
-                ShareImageMenuItem(
-                    applicationId = Symbols.APPLICATION_ID,
-                    showMenu = openMenu,
-                    picture = picture,
-                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    ShareImageMenuItem(
+                        applicationId = Symbols.APPLICATION_ID,
+                        showMenu = openMenu,
+                        picture = picture,
+                    )
+                }
                 FeedbackMenuItem(
                     app = Symbols.APP_NAME,
                     showMenu = openMenu,
@@ -174,9 +176,7 @@ private fun ColorToValueScreenContent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            DrawContent(picture) {
-                ResistorLayout(resistor)
-            }
+            ResistorDisplay(picture, resistor)
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 32.dp),
                 label = R.string.number_band_hint1,

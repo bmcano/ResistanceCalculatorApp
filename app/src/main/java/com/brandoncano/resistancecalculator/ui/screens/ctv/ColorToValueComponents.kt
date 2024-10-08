@@ -1,5 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.ctv
 
+import android.graphics.Picture
+import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -29,7 +31,20 @@ import com.brandoncano.resistancecalculator.util.deriveResistorColor
 import com.brandoncano.resistancecalculator.util.formatResistance
 import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
+import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.text.textStyleTitle
+
+
+@Composable
+fun ResistorDisplay(picture: Picture, resistor: ResistorCtv) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+        ResistorLayout(resistor)
+    } else {
+        DrawContent(picture) {
+            ResistorLayout(resistor)
+        }
+    }
+}
 
 data class ResistorImagePair(@DrawableRes val drawableRes: Int, val color: String)
 

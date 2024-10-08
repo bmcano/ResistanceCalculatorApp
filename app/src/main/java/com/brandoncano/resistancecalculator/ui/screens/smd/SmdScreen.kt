@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.smd
 
 import android.graphics.Picture
+import android.os.Build
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -35,8 +36,8 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.data.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Symbols
+import com.brandoncano.resistancecalculator.data.DropdownLists
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
@@ -49,7 +50,6 @@ import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTextField
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
-import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
@@ -128,11 +128,13 @@ private fun SmdScreenContent(
                     text = resistor.toString(),
                     showMenu = openMenu,
                 )
-                ShareImageMenuItem(
-                    applicationId = Symbols.APPLICATION_ID,
-                    showMenu = openMenu,
-                    picture = picture,
-                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    ShareImageMenuItem(
+                        applicationId = Symbols.APPLICATION_ID,
+                        showMenu = openMenu,
+                        picture = picture,
+                    )
+                }
                 FeedbackMenuItem(
                     app = Symbols.APP_NAME,
                     showMenu = openMenu,
@@ -172,9 +174,7 @@ private fun SmdScreenContent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            DrawContent(picture) {
-                SmdResistorLayout(resistor, isError)
-            }
+            SmdResistorDisplay(picture, resistor, isError)
             AppTextField(
                 label = stringResource(id = R.string.hint_smd_code),
                 modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
