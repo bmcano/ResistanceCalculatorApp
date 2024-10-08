@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace = "com.brandoncano.resistancecalculator"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.brandoncano.resistancecalculator"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 22
-        versionName = "3.3.1"
+        targetSdk = 35
+        versionCode = 23
+        versionName = "3.4.0"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -21,7 +21,7 @@ android {
     }
     applicationVariants.configureEach {
         resValue("string", "version", versionName)
-        resValue("string", "last_updated", "8/6/2024")
+        resValue("string", "last_updated", "10/7/2024")
     }
     buildTypes {
         release {
@@ -79,5 +79,5 @@ dependencies {
     testImplementation(libs.junit)
     // external libraries
     implementation(libs.ostermiller.util)
-    // implementation(files("libs/app-shared.aar")) // version 1.0.0 - 8/5/24, made by me
+    implementation(libs.bmcano.util)
 }

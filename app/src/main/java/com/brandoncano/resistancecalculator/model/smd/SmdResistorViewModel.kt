@@ -1,47 +1,67 @@
 package com.brandoncano.resistancecalculator.model.smd
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.brandoncano.resistancecalculator.util.formatResistance
+import com.brandoncano.resistancecalculator.util.isSmdInputInvalid
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class SmdResistorViewModel(context: Context): ViewModel() {
 
     private val repository = SmdResistorRepository.getInstance(context)
-    private var resistor = MutableLiveData<SmdResistor>().also {
-        it.value = SmdResistor()
-    }
 
-    override fun onCleared() {
-        resistor.value = null
+    private val _resistor = MutableStateFlow(SmdResistor())
+    val resistor: StateFlow<SmdResistor> get() = _resistor
+
+    private val _isError = MutableStateFlow(false)
+    val isError: StateFlow<Boolean> get() = _isError
+
+    init {
+        viewModelScope.launch {
+            val loadedResistor = repository.loadResistor()
+            _resistor.value = loadedResistor
+            updateErrorState()
+        }
     }
 
     fun clear() {
-        resistor.value = SmdResistor(navBarSelection = getNavBarSelection())
+        _resistor.value = SmdResistor(navBarSelection = getNavBarSelection())
+        _isError.value = false
         repository.clear()
     }
 
-    fun getResistorLiveData(): LiveData<SmdResistor> {
-        resistor.value = repository.loadResistor()
-        return resistor
-    }
-
     fun updateValues(code: String, units: String) {
-        resistor.value = resistor.value?.copy(code = code, units = units)
+        _resistor.value = _resistor.value.copy(code = code, units = units)
+        updateErrorState()
+        if (!_isError.value) {
+            _resistor.value.formatResistance()
+            saveResistorValues(_resistor.value)
+        }
     }
 
     fun getNavBarSelection(): Int {
-        val resistor = repository.loadResistor()
-        return resistor.navBarSelection
+        return _resistor.value.navBarSelection
     }
 
     fun saveNavBarSelection(number: Int) {
         val navBarSelection = number.coerceIn(0..2)
-        resistor.value = resistor.value?.copy(navBarSelection = navBarSelection)
+        _resistor.value = _resistor.value.copy(navBarSelection = navBarSelection)
+        updateErrorState()
+        if (!_isError.value) {
+            _resistor.value.formatResistance()
+            saveResistorValues(_resistor.value)
+        }
         repository.saveNavBarSelection(navBarSelection)
     }
 
-    fun saveResistorValues(resistor: SmdResistor) {
+    private fun saveResistorValues(resistor: SmdResistor) {
         repository.saveResistor(resistor)
+    }
+
+    private fun updateErrorState() {
+        _isError.value = _resistor.value.isSmdInputInvalid()
     }
 }

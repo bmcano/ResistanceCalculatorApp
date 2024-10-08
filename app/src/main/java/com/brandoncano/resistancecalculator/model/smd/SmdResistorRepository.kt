@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.model.smd
 
 import android.content.Context
-import com.brandoncano.resistancecalculator.components.SharedPreferences
+import com.brandoncano.resistancecalculator.data.SharedPreferences
 
 class SmdResistorRepository(context: Context) {
 

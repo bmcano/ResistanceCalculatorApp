@@ -1,48 +1,52 @@
 package com.brandoncano.resistancecalculator.model.ctv
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class ResistorCtvViewModel(context: Context): ViewModel() {
 
     private val repository = ResistorCtvRepository.getInstance(context)
-    private var resistor = MutableLiveData<ResistorCtv>().also {
-        it.value = ResistorCtv()
-    }
 
-    override fun onCleared() {
-        resistor.value = null
+    private val _resistor = MutableStateFlow(ResistorCtv())
+    val resistor: StateFlow<ResistorCtv> get() = _resistor
+
+    private val _navBarSelection = MutableStateFlow(1)
+    val navBarSelection: StateFlow<Int> get() = _navBarSelection
+
+    init {
+        viewModelScope.launch {
+            val loadedResistor = repository.loadResistor()
+            _resistor.value = loadedResistor
+            _navBarSelection.value = loadedResistor.navBarSelection
+        }
     }
 
     fun clear() {
-        resistor.value = ResistorCtv(navBarSelection = getNavBarSelection())
+        _resistor.value = ResistorCtv(navBarSelection = _navBarSelection.value)
         repository.clear()
     }
 
-    fun getResistorLiveData(): LiveData<ResistorCtv> {
-        resistor.value = repository.loadResistor()
-        return resistor
-    }
-
-    fun updateBands(b1: String, b2: String, b3: String, b4: String, b5: String, b6: String) {
-        resistor.value = resistor.value
-            ?.copy(band1 = b1, band2 = b2, band3 = b3, band4 = b4, band5 = b5, band6 = b6)
-    }
-
-    fun getNavBarSelection(): Int {
-        val resistor = repository.loadResistor()
-        return resistor.navBarSelection
+    fun updateBand(bandNumber: Int, color: String) {
+        _resistor.value = when (bandNumber) {
+            1 -> _resistor.value.copy(band1 = color)
+            2 -> _resistor.value.copy(band2 = color)
+            3 -> _resistor.value.copy(band3 = color)
+            4 -> _resistor.value.copy(band4 = color)
+            5 -> _resistor.value.copy(band5 = color)
+            6 -> _resistor.value.copy(band6 = color)
+            else -> _resistor.value
+        }
+        repository.saveResistor(_resistor.value)
     }
 
     fun saveNavBarSelection(number: Int) {
         val navBarSelection = number.coerceIn(0..3)
-        resistor.value = resistor.value?.copy(navBarSelection = navBarSelection)
+        _navBarSelection.value = navBarSelection
+        _resistor.value = _resistor.value.copy(navBarSelection = navBarSelection)
         repository.saveNavBarSelection(navBarSelection)
-    }
-
-    fun saveResistorColors(resistorCtv: ResistorCtv) {
-        repository.saveResistor(resistorCtv)
     }
 }

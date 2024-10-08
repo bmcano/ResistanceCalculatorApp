@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.components
+package com.brandoncano.resistancecalculator.data
 
 sealed class SmdMode {
     data object ThreeDigit : SmdMode()

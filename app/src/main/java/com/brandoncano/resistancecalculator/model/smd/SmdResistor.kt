@@ -1,6 +1,6 @@
 package com.brandoncano.resistancecalculator.model.smd
 
-import com.brandoncano.resistancecalculator.components.SmdMode
+import com.brandoncano.resistancecalculator.data.SmdMode
 import com.brandoncano.resistancecalculator.util.formatResistance
 
 data class SmdResistor(

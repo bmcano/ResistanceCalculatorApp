@@ -1,83 +1,86 @@
 package com.brandoncano.resistancecalculator.navigation
 
 import android.content.Context
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
-import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
-import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
-import com.brandoncano.resistancecalculator.ui.screens.about.AboutScreen
-import com.brandoncano.resistancecalculator.ui.screens.ctv.ColorToValueScreen
-import com.brandoncano.resistancecalculator.ui.screens.home.HomeScreen
-import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
-import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
-import com.brandoncano.resistancecalculator.util.formatResistor
+import com.brandoncano.resistancecalculator.constants.Links
+import com.brandoncano.sharedcomponents.data.Apps
+import com.brandoncano.sharedcomponents.screen.ViewOurAppsScreen
+import com.brandoncano.sharedcomponents.utils.OpenLink
 
 /**
  * Note: Keep each navigation route in alphabetical order
  */
 
 @Composable
-fun Navigation(context: Context) {
+fun Navigation(onOpenThemeDialog: () -> Unit) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = Screen.Home.route
     ) {
+        aboutScreen(navController)
+        colorToValueScreen(navController, onOpenThemeDialog)
+        homeScreen(navController, onOpenThemeDialog)
+        learnColorCodes(navController)
+        learnSmdCodes(navController)
+        smdScreen(navController, onOpenThemeDialog)
+        valueToColorScreen(navController, onOpenThemeDialog)
+        // from shared library
         composable(
-            route = Screen.About.route,
+            route = Screen.ViewOurApps.route,
             enterTransition = { slideInVertically(initialOffsetY = { it }) },
             exitTransition = { slideOutVertically(targetOffsetY = { it }) },
         ) {
-            AboutScreen(context)
-        }
-        composable(
-            route = Screen.ColorToValue.route,
-            enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-            exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
-        ) {
-            val viewModel = viewModel<ResistorCtvViewModel>(factory = ResistorViewModelFactory(context))
-            val navBarPosition = viewModel.getNavBarSelection()
-            val resistor = viewModel.getResistorLiveData()
-            ColorToValueScreen(context, navController, viewModel, navBarPosition, resistor)
-        }
-        composable(
-            route = Screen.Home.route,
-            enterTransition = { EnterTransition.None },
-            exitTransition = { ExitTransition.None },
-        ) {
-            HomeScreen(context, navController)
-        }
-        composable(
-            route = Screen.Smd.route,
-            enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-            exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
-        ) {
-            val viewModel = viewModel<SmdResistorViewModel>(factory = ResistorViewModelFactory(context))
-            val navBarPosition = viewModel.getNavBarSelection()
-            val resistor = viewModel.getResistorLiveData()
-            SmdScreen(context, navController, viewModel, navBarPosition, resistor)
-        }
-        composable(
-            route = Screen.ValueToColor.route,
-            enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
-            exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
-        ) {
-            val viewModel = viewModel<ResistorVtcViewModel>(factory = ResistorViewModelFactory(context))
-            val navBarPosition = viewModel.getNavBarSelection()
-            val resistor = viewModel.getResistorLiveData()
-            resistor.value?.formatResistor()
-            ValueToColorScreen(context, navController, viewModel, navBarPosition, resistor)
+            ViewOurAppsScreen(
+                context = LocalContext.current,
+                app = Apps.Resistor,
+                onNavigateBack = { navController.popBackStack() },
+            )
         }
     }
+}
+
+fun navigateToAbout(navController: NavHostController) {
+    navController.navigate(Screen.About.route)
+}
+
+fun navigateToColorToValue(navController: NavHostController) {
+    navController.navigate(Screen.ColorToValue.route) {
+        popUpTo(Screen.Home.route)
+    }
+}
+
+fun navigateToValueToColor(navController: NavHostController) {
+    navController.navigate(Screen.ValueToColor.route) {
+        popUpTo(Screen.Home.route)
+    }
+}
+
+fun navigateToSmd(navController: NavHostController) {
+    navController.navigate(Screen.Smd.route) {
+        popUpTo(Screen.Home.route)
+    }
+}
+
+fun navigateToColorCodeIec(navController: NavHostController) {
+    navController.navigate(Screen.LearnColorCodes.route)
+}
+
+fun navigateToSmdCodeIec(navController: NavHostController) {
+    navController.navigate(Screen.LearnSmdCodes.route)
+}
+
+fun navigateToOurApps(navController: NavHostController) {
+    navController.navigate(Screen.ViewOurApps.route)
+}
+
+fun navigateToGooglePlay(context: Context) {
+    OpenLink.execute(context, Links.RESISTOR_PLAYSTORE)
 }

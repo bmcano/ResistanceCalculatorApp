@@ -1,6 +1,5 @@
 package com.brandoncano.resistancecalculator.ui.screens.ctv
 
-import android.content.Context
 import android.graphics.Picture
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -10,11 +9,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Lightbulb
+import androidx.compose.material.icons.outlined.Looks3
+import androidx.compose.material.icons.outlined.Looks4
+import androidx.compose.material.icons.outlined.Looks5
+import androidx.compose.material.icons.outlined.Looks6
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,98 +31,140 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.components.DropdownLists
-import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
+import com.brandoncano.resistancecalculator.data.DropdownLists
+import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
-import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
-import com.brandoncano.resistancecalculator.ui.MainActivity
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.AppMenuTopAppBar
-import com.brandoncano.resistancecalculator.ui.composables.AppScreenPreviews
-import com.brandoncano.resistancecalculator.ui.composables.CalculatorNavigationBar
-import com.brandoncano.resistancecalculator.ui.composables.ClearSelectionsMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.FeedbackMenuItem
+import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
-import com.brandoncano.resistancecalculator.ui.composables.ShareImageMenuItem
-import com.brandoncano.resistancecalculator.ui.composables.ShareTextMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.shareableText
+import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
+import com.brandoncano.sharedcomponents.composables.AppDivider
+import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
+import com.brandoncano.sharedcomponents.composables.AppNavigationBar
+import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
+import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
+import com.brandoncano.sharedcomponents.composables.DrawContent
+import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
+import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
+import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
+import com.brandoncano.sharedcomponents.data.ArrowCardButtonContents
+import com.brandoncano.sharedcomponents.data.NavigationBarOptions
+import com.brandoncano.sharedcomponents.text.textStyleHeadline
 
 @Composable
 fun ColorToValueScreen(
-    context: Context,
-    navController: NavController,
-    viewModel: ResistorCtvViewModel,
+    openMenu: MutableState<Boolean>,
+    resistor: ResistorCtv,
     navBarPosition: Int,
-    resistorCtv: LiveData<ResistorCtv>,
+    onOpenThemeDialog: () -> Unit,
+    onNavigateBack: () -> Unit,
+    onClearSelectionsTapped: () -> Unit,
+    onAboutTapped: () -> Unit,
+    onValueToColorTapped: () -> Unit,
+    onUpdateBand: (Int, String) -> Unit,
+    onNavBarSelectionChanged: (Int) -> Unit,
+    onLearnColorCodesTapped: () -> Unit,
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
-        ContentView(context, navController, viewModel, navBarPosition, resistorCtv)
+        ColorToValueScreenContent(
+            openMenu = openMenu,
+            resistor = resistor,
+            navBarPosition = navBarPosition,
+            onOpenThemeDialog = onOpenThemeDialog,
+            onNavigateBack = onNavigateBack,
+            onClearSelectionsTapped = onClearSelectionsTapped,
+            onAboutTapped = onAboutTapped,
+            onValueToColorTapped = onValueToColorTapped,
+            onUpdateBand = onUpdateBand,
+            onNavBarSelectionChanged = onNavBarSelectionChanged,
+            onLearnColorCodesTapped = onLearnColorCodesTapped,
+        )
     }
 }
 
 @Composable
-private fun ContentView(
-    context: Context,
-    navController: NavController,
-    viewModel: ResistorCtvViewModel,
+private fun ColorToValueScreenContent(
+    openMenu: MutableState<Boolean>,
+    resistor: ResistorCtv,
     navBarPosition: Int,
-    resistorCtv: LiveData<ResistorCtv>,
+    onOpenThemeDialog: () -> Unit,
+    onNavigateBack:  () -> Unit,
+    onClearSelectionsTapped: () -> Unit,
+    onAboutTapped: () -> Unit,
+    onValueToColorTapped: () -> Unit,
+    onUpdateBand: (Int, String) -> Unit,
+    onNavBarSelectionChanged: (Int) -> Unit,
+    onLearnColorCodesTapped: () -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
-    val showMenu = remember { mutableStateOf(false) }
     var reset by remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
-    val resistor by resistorCtv.observeAsState(ResistorCtv())
-    var band1 by remember { mutableStateOf(resistor.band1) }
-    var band2 by remember { mutableStateOf(resistor.band2) }
-    var band3 by remember { mutableStateOf(resistor.band3) }
-    var band4 by remember { mutableStateOf(resistor.band4) }
-    var band5 by remember { mutableStateOf(resistor.band5) }
-    var band6 by remember { mutableStateOf(resistor.band6) }
-    var picture = remember { Picture() }
-
-    fun postSelectionActions() {
-        reset = false
-        focusManager.clearFocus()
-        viewModel.updateBands(band1, band2, band3, band4, band5, band6)
-        viewModel.saveResistorColors(resistor)
-    }
+    val picture = remember { Picture() }
 
     Scaffold(
         topBar = {
             AppMenuTopAppBar(
                 titleText = stringResource(R.string.title_color_to_value),
                 interactionSource = interactionSource,
-                showMenu = showMenu,
+                showMenu = openMenu,
+                navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
+                onNavigateBack = onNavigateBack,
             ) {
-                ValueToColorMenuItem(navController, showMenu)
+                ValueToColorMenuItem(onValueToColorTapped)
                 ClearSelectionsMenuItem {
-                    showMenu.value = false
+                    openMenu.value = false
                     reset = true
-                    viewModel.clear()
+                    onClearSelectionsTapped()
                     focusManager.clearFocus()
-                    // Bug: these are needed since the viewModel doesn't update them for clearing
-                    band3 = ""; band5 = ""; band6 = ""
                 }
-                ShareTextMenuItem(context, resistor.shareableText(), showMenu)
-                ShareImageMenuItem(context, showMenu, picture)
-                FeedbackMenuItem(context, showMenu)
-                AboutAppMenuItem(navController, showMenu)
+                ShareTextMenuItem(
+                    text = resistor.shareableText(),
+                    showMenu = openMenu,
+                )
+                ShareImageMenuItem(
+                    applicationId = Symbols.APPLICATION_ID,
+                    showMenu = openMenu,
+                    picture = picture,
+                )
+                FeedbackMenuItem(
+                    app = Symbols.APP_NAME,
+                    showMenu = openMenu,
+                )
+                AppThemeMenuItem(openMenu, onOpenThemeDialog)
+                AboutAppMenuItem(onAboutTapped)
             }
         },
         bottomBar = {
-            CalculatorNavigationBar(navBarSelection) {
-                navBarSelection = it
-                viewModel.saveNavBarSelection(it)
-            }
+            AppNavigationBar(
+                selection = navBarSelection,
+                onClick = {
+                    navBarSelection = it
+                    onNavBarSelectionChanged(it)
+                },
+                options = listOf(
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_three_band),
+                        imageVector = Icons.Outlined.Looks3,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_four_band),
+                        imageVector = Icons.Outlined.Looks4,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_five_band),
+                        imageVector = Icons.Outlined.Looks5,
+                    ),
+                    NavigationBarOptions(
+                        label = stringResource(id = R.string.navbar_six_band),
+                        imageVector = Icons.Outlined.Looks6,
+                    ),
+                ),
+            )
         }
     ) { paddingValues ->
         Column(
@@ -123,74 +172,85 @@ private fun ContentView(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            picture = resistorPicture(resistor)
+            DrawContent(picture) {
+                ResistorLayout(resistor)
+            }
             ImageTextDropDownMenu(
-                modifier = Modifier.padding(top = 24.dp),
+                modifier = Modifier.padding(top = 32.dp),
                 label = R.string.number_band_hint1,
-                selectedOption = band1,
+                selectedOption = resistor.band1,
                 items = DropdownLists.NUMBER_LIST_NO_BLACK,
                 reset = reset,
             ) {
-                band1 = it
-                postSelectionActions()
+                onUpdateBand(1, it)
             }
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
                 label = R.string.number_band_hint2,
-                selectedOption = band2,
+                selectedOption = resistor.band2,
                 items = DropdownLists.NUMBER_LIST,
                 reset = reset,
             ) {
-                band2 = it
-                postSelectionActions()
+                onUpdateBand(2, it)
             }
             if (navBarSelection == 2 || navBarSelection == 3) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.number_band_hint3,
-                    selectedOption = band3,
+                    selectedOption = resistor.band3,
                     items = DropdownLists.NUMBER_LIST,
                     reset = reset,
                 ) {
-                    band3 = it
-                    postSelectionActions()
+                    onUpdateBand(3, it)
                 }
             }
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
                 label = R.string.multiplier_band_hint,
-                selectedOption = band4,
+                selectedOption = resistor.band4,
                 items = DropdownLists.MULTIPLIER_LIST,
                 reset = reset,
             ) {
-                band4 = it
-                postSelectionActions()
+                onUpdateBand(4, it)
             }
             if (navBarSelection != 0) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.tolerance_band_hint,
-                    selectedOption = band5,
+                    selectedOption = resistor.band5,
                     items = DropdownLists.TOLERANCE_LIST,
                     reset = reset,
                 ) {
-                    band5 = it
-                    postSelectionActions()
+                    onUpdateBand(5, it)
                 }
             }
             if (navBarSelection == 3) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.ppm_band_hint,
-                    selectedOption = band6,
+                    selectedOption = resistor.band6,
                     items = DropdownLists.PPM_LIST,
                     reset = reset,
                 ) {
-                    band6 = it
-                    postSelectionActions()
+                    onUpdateBand(6, it)
                 }
+            }
+            AppDivider(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp))
+            Column(horizontalAlignment = Alignment.Start) {
+                Text(
+                    text = stringResource(R.string.ctv_headline_text),
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    style = textStyleHeadline(),
+                )
+                AppArrowCardButton(
+                    ArrowCardButtonContents(
+                        imageVector = Icons.Outlined.Lightbulb,
+                        text = stringResource(R.string.ctv_button_text),
+                        onClick = onLearnColorCodesTapped,
+                    )
+                )
             }
             Spacer(modifier = Modifier.height(24.dp))
         }
@@ -200,10 +260,19 @@ private fun ContentView(
 @AppScreenPreviews
 @Composable
 private fun ColorToValueScreen4BandPreview() {
-    val app = MainActivity()
-    val viewModel = viewModel<ResistorCtvViewModel>(factory = ResistorViewModelFactory(app))
-    val resistor = MutableLiveData<ResistorCtv>()
     ResistorCalculatorTheme {
-        ColorToValueScreen(app, NavController(app), viewModel, 1, resistor)
+        ColorToValueScreen(
+            openMenu = remember { mutableStateOf(false) },
+            resistor = ResistorCtv(),
+            navBarPosition = 1,
+            onOpenThemeDialog = {},
+            onNavigateBack = {},
+            onClearSelectionsTapped = {},
+            onAboutTapped = {},
+            onValueToColorTapped = {},
+            onUpdateBand = { _, _ -> },
+            onNavBarSelectionChanged = { _ -> },
+            onLearnColorCodesTapped = {},
+        )
     }
 }

@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.util
 
 import com.Ostermiller.util.SignificantFigures
-import com.brandoncano.resistancecalculator.components.SmdMode
+import com.brandoncano.resistancecalculator.data.SmdMode
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 

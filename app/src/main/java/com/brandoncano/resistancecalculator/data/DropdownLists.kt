@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.components
+package com.brandoncano.resistancecalculator.data
 
 import com.brandoncano.resistancecalculator.constants.Colors
 import com.brandoncano.resistancecalculator.constants.Symbols
@@ -24,18 +24,18 @@ object DropdownLists {
     val NUMBER_LIST_NO_BLACK = NUMBER_LIST.drop(1)
 
     val MULTIPLIER_LIST = listOf(
-        DropdownItem(Colors.BLACK, "x 1"),
-        DropdownItem(Colors.BROWN, "x 10"),
-        DropdownItem(Colors.RED, "x 100"),
-        DropdownItem(Colors.ORANGE, "x 1k"),
-        DropdownItem(Colors.YELLOW, "x 10k"),
-        DropdownItem(Colors.GREEN, "x 100k"),
-        DropdownItem(Colors.BLUE, "x 1M"),
-        DropdownItem(Colors.VIOLET, "x 10M"),
-        DropdownItem(Colors.GRAY, "x 100M"),
-        DropdownItem(Colors.WHITE, "x 1G"),
-        DropdownItem(Colors.GOLD, "x 0.1"),
-        DropdownItem(Colors.SILVER, "x 0.01"),
+        DropdownItem(Colors.BLACK, "${Symbols.X}1"),
+        DropdownItem(Colors.BROWN, "${Symbols.X}10"),
+        DropdownItem(Colors.RED, "${Symbols.X}100"),
+        DropdownItem(Colors.ORANGE, "${Symbols.X}1k"),
+        DropdownItem(Colors.YELLOW, "${Symbols.X}10k"),
+        DropdownItem(Colors.GREEN, "${Symbols.X}100k"),
+        DropdownItem(Colors.BLUE, "${Symbols.X}1M"),
+        DropdownItem(Colors.VIOLET, "${Symbols.X}10M"),
+        DropdownItem(Colors.GRAY, "${Symbols.X}100M"),
+        DropdownItem(Colors.WHITE, "${Symbols.X}1G"),
+        DropdownItem(Colors.GOLD, "${Symbols.X}0.1"),
+        DropdownItem(Colors.SILVER, "${Symbols.X}0.01"),
     )
 
     val TOLERANCE_LIST = listOf(
