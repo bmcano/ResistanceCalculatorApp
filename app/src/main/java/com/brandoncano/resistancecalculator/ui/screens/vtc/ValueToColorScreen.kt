@@ -6,6 +6,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -33,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.data.DropdownLists
+import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
@@ -40,6 +42,7 @@ import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.shareableText
+import com.brandoncano.sharedcomponents.composables.AppButton
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
@@ -57,6 +60,7 @@ fun ValueToColorScreen(
     navBarPosition: Int,
     isError: Boolean,
     openMenu: MutableState<Boolean>,
+    isResistanceStandard: ESeriesCardContent,
     onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
@@ -64,6 +68,9 @@ fun ValueToColorScreen(
     onColorToValueTapped: () -> Unit,
     onValueChanged: (String, String, String, String) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
+    onValidateResistanceTapped: () -> Unit,
+    onUseValueTapped: () -> String,
+    onLearnMoreTapped: () -> Unit,
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
         ValueToColorScreenContent(
@@ -71,6 +78,7 @@ fun ValueToColorScreen(
             navBarPosition = navBarPosition,
             isError = isError,
             openMenu = openMenu,
+            isResistanceStandard = isResistanceStandard,
             onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = onNavigateBack,
             onClearSelectionsTapped = onClearSelectionsTapped,
@@ -78,6 +86,9 @@ fun ValueToColorScreen(
             onColorToValueTapped = onColorToValueTapped,
             onValueChanged = onValueChanged,
             onNavBarSelectionChanged = onNavBarSelectionChanged,
+            onValidateResistanceTapped = onValidateResistanceTapped,
+            onUseValueTapped = onUseValueTapped,
+            onLearnMoreTapped = onLearnMoreTapped,
         )
     }
 }
@@ -88,6 +99,7 @@ private fun ValueToColorScreenContent(
     navBarPosition: Int,
     isError: Boolean,
     openMenu: MutableState<Boolean>,
+    isResistanceStandard: ESeriesCardContent,
     onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
@@ -95,6 +107,9 @@ private fun ValueToColorScreenContent(
     onColorToValueTapped: () -> Unit,
     onValueChanged: (String, String, String, String) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
+    onValidateResistanceTapped: () -> Unit,
+    onUseValueTapped: () -> String,
+    onLearnMoreTapped: () -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
@@ -102,9 +117,6 @@ private fun ValueToColorScreenContent(
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val picture = remember { Picture() }
     val resistance = remember { mutableStateOf(resistor.resistance) }
-    var units by remember { mutableStateOf(resistor.units) }
-    var band5 by remember { mutableStateOf(resistor.band5) }
-    var band6 by remember { mutableStateOf(resistor.band6) }
 
     Scaffold(
         topBar = {
@@ -134,7 +146,7 @@ private fun ValueToColorScreenContent(
                 }
                 FeedbackMenuItem(
                     app = Symbols.APP_NAME,
-                    showMenu = openMenu
+                    showMenu = openMenu,
                 )
                 AppThemeMenuItem(openMenu, onOpenThemeDialog)
                 AboutAppMenuItem(onAboutTapped)
@@ -185,47 +197,64 @@ private fun ValueToColorScreenContent(
                 errorMessage = stringResource(id = R.string.error_invalid_resistance)
             ) {
                 resistance.value = it
-                onValueChanged(resistance.value, units, band5, band6)
+                onValueChanged(resistance.value, resistor.units, resistor.band5, resistor.band6)
+                reset = false
             }
             AppDropDownMenu(
                 label = stringResource(id = R.string.units_hint),
                 modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp),
-                selectedOption = units,
+                selectedOption = resistor.units,
                 items = DropdownLists.UNITS_LIST,
                 reset = reset,
             ) {
-                units = it
                 focusManager.clearFocus()
-                onValueChanged(resistance.value, units, band5, band6)
+                onValueChanged(resistance.value, it, resistor.band5, resistor.band6)
+                reset = false
             }
             if (navBarSelection != 0) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.tolerance_band_hint,
-                    selectedOption = band5,
+                    selectedOption = resistor.band5,
                     items = DropdownLists.TOLERANCE_LIST,
                     reset = reset,
                     isValueToColor = true
                 ) {
-                    band5 = it
                     focusManager.clearFocus()
-                    onValueChanged(resistance.value, units, band5, band6)
+                    onValueChanged(resistance.value, resistor.units, it, resistor.band6)
+                    reset = false
                 }
             }
             if (navBarSelection == 3) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.ppm_band_hint,
-                    selectedOption = band6,
+                    selectedOption = resistor.band6,
                     items = DropdownLists.PPM_LIST,
                     reset = reset,
                     isValueToColor = true,
                 ) {
-                    band6 = it
                     focusManager.clearFocus()
-                    onValueChanged(resistance.value, units, band5, band6)
+                    onValueChanged(resistance.value, resistor.units, resistor.band5, it)
+                    reset = false
                 }
             }
+            Spacer(modifier = Modifier.height(24.dp))
+            AppButton(
+                label = stringResource(R.string.vtc_validate_e_series_button),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+            ) {
+                onValidateResistanceTapped()
+            }
+            ESeriesCard(
+                eSeriesCardContent = isResistanceStandard,
+                onLearnMoreTapped = onLearnMoreTapped,
+                onUseValueTapped = {
+                    resistance.value = onUseValueTapped()
+                }
+            )
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
@@ -240,6 +269,7 @@ private fun ValueToColorScreenPreview() {
             navBarPosition = 1,
             isError = false,
             openMenu = remember { mutableStateOf(false) },
+            isResistanceStandard = ESeriesCardContent.NoContent,
             onOpenThemeDialog = {},
             onNavigateBack = {},
             onClearSelectionsTapped = {},
@@ -247,6 +277,9 @@ private fun ValueToColorScreenPreview() {
             onColorToValueTapped = {},
             onValueChanged = { _, _, _, _ -> },
             onNavBarSelectionChanged = { _ -> },
+            onValidateResistanceTapped = {},
+            onUseValueTapped = { "" },
+            onLearnMoreTapped = {},
         )
     }
 }

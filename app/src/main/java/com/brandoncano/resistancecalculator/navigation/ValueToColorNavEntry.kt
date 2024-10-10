@@ -4,17 +4,27 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.brandoncano.resistancecalculator.constants.Symbols
+import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
+import com.brandoncano.resistancecalculator.util.eseries.DeriveESeries
+import com.brandoncano.resistancecalculator.util.eseries.DeriveESeriesString
+import com.brandoncano.resistancecalculator.util.eseries.FindClosestStandardValue
+import com.brandoncano.resistancecalculator.util.eseries.GenerateStandardValues
+import com.brandoncano.resistancecalculator.util.eseries.ParseResistanceValue
 import com.brandoncano.resistancecalculator.util.formatResistor
+import kotlin.math.abs
 
 fun NavGraphBuilder.valueToColorScreen(
     navHostController: NavHostController,
@@ -31,6 +41,8 @@ fun NavGraphBuilder.valueToColorScreen(
         val navBarSelection by viewModel.navBarSelection.collectAsState()
         val isError by viewModel.isError.collectAsState()
         val openMenu = remember { mutableStateOf(false) }
+        var eSeriesCardContent: ESeriesCardContent by remember { mutableStateOf(ESeriesCardContent.NoContent) }
+        val closestStandardValue = remember { mutableDoubleStateOf(10.0) }
         resistor.formatResistor()
 
         ValueToColorScreen(
@@ -38,6 +50,7 @@ fun NavGraphBuilder.valueToColorScreen(
             navBarPosition = navBarSelection,
             isError = isError,
             openMenu = openMenu,
+            isResistanceStandard = eSeriesCardContent,
             onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
@@ -53,11 +66,46 @@ fun NavGraphBuilder.valueToColorScreen(
                 navigateToColorToValue(navHostController)
             },
             onValueChanged = { resistance, units, band5, band6 ->
+                eSeriesCardContent = ESeriesCardContent.NoContent
                 viewModel.updateValues(resistance, units, band5, band6)
             },
             onNavBarSelectionChanged = { selection ->
                 viewModel.saveNavBarSelection(selection)
             },
+            onValidateResistanceTapped = {
+                if (resistor.isEmpty() || isError) return@ValueToColorScreen
+                val resistanceValue = ParseResistanceValue.execute(resistor.resistance, resistor.units) ?: return@ValueToColorScreen
+                val tolerance = if (navBarSelection == 0) "${Symbols.PM}20%" else resistor.band5.ifEmpty { return@ValueToColorScreen }
+                val tolerancePercentage = tolerance.substring(1, tolerance.length - 1).toDoubleOrNull() ?: return@ValueToColorScreen
+
+                val eSeriesList = DeriveESeries.execute(tolerancePercentage, navBarSelection + 3)
+                if (eSeriesList.isNullOrEmpty()) {
+                    eSeriesCardContent = ESeriesCardContent.InvalidTolerance("${navBarSelection + 3}")
+                    return@ValueToColorScreen
+                }
+
+                val eSeriesName = DeriveESeriesString.execute(eSeriesList)
+
+                val standardValues = GenerateStandardValues.execute(eSeriesList)
+                closestStandardValue.doubleValue = FindClosestStandardValue.execute(resistanceValue, standardValues)
+
+                val diff = abs(resistanceValue - closestStandardValue.doubleValue)
+                eSeriesCardContent = if (diff == 0.0) {
+                    ESeriesCardContent.ValidResistance(eSeriesName)
+                } else {
+                    ESeriesCardContent.InvalidResistance("${closestStandardValue.doubleValue} ${Symbols.OHMS}")
+                }
+                return@ValueToColorScreen
+            },
+            onUseValueTapped = {
+                val resistance = closestStandardValue.doubleValue.toString()
+                eSeriesCardContent = ESeriesCardContent.NoContent
+                viewModel.updateValues(resistance, resistor.units, resistor.band5, resistor.band6)
+                return@ValueToColorScreen resistance
+            },
+            onLearnMoreTapped = {
+
+            }
         )
     }
 }
