@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.Colorize
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Policy
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,6 +39,7 @@ fun AboutScreen(
     onNavigateBack: () -> Unit,
     onViewPrivacyPolicyTapped: () -> Unit,
     onViewColorCodeIecTapped: () -> Unit,
+    onViewPreferredValuesIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
@@ -47,6 +49,7 @@ fun AboutScreen(
             onNavigateBack = onNavigateBack,
             onViewPrivacyPolicyTapped = onViewPrivacyPolicyTapped,
             onViewColorCodeIecTapped = onViewColorCodeIecTapped,
+            onViewPreferredValuesIecTapped = onViewPreferredValuesIecTapped,
             onViewSmdCodeIecTapped = onViewSmdCodeIecTapped,
             onRateThisAppTapped = onRateThisAppTapped,
             onViewOurAppsTapped = onViewOurAppsTapped,
@@ -59,6 +62,7 @@ private fun AboutScreenContent(
     onNavigateBack: () -> Unit,
     onViewPrivacyPolicyTapped: () -> Unit,
     onViewColorCodeIecTapped: () -> Unit,
+    onViewPreferredValuesIecTapped: () -> Unit,
     onViewSmdCodeIecTapped: () -> Unit,
     onRateThisAppTapped: () -> Unit,
     onViewOurAppsTapped: () -> Unit,
@@ -124,6 +128,11 @@ private fun AboutScreenContent(
                 onClick = onViewColorCodeIecTapped,
             ),
             ArrowCardButtonContents(
+                imageVector = Icons.Outlined.Search,
+                text = stringResource(id = R.string.about_preferred_values_iec_button),
+                onClick = onViewPreferredValuesIecTapped,
+            ),
+            ArrowCardButtonContents(
                 imageVector = Icons.Outlined.Memory,
                 text = stringResource(id = R.string.about_smd_iec_button),
                 onClick = onViewSmdCodeIecTapped,
@@ -147,6 +156,7 @@ private fun AboutPreview() {
             onNavigateBack = {},
             onViewPrivacyPolicyTapped = {},
             onViewColorCodeIecTapped = {},
+            onViewPreferredValuesIecTapped = {},
             onViewSmdCodeIecTapped = {},
             onRateThisAppTapped = {},
             onViewOurAppsTapped = {},

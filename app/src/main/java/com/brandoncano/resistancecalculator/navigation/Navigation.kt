@@ -29,6 +29,7 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
         colorToValueScreen(navController, onOpenThemeDialog)
         homeScreen(navController, onOpenThemeDialog)
         learnColorCodes(navController)
+        learnPreferredValues(navController)
         learnSmdCodes(navController)
         smdScreen(navController, onOpenThemeDialog)
         valueToColorScreen(navController, onOpenThemeDialog)
@@ -71,6 +72,10 @@ fun navigateToSmd(navController: NavHostController) {
 
 fun navigateToColorCodeIec(navController: NavHostController) {
     navController.navigate(Screen.LearnColorCodes.route)
+}
+
+fun navigateToPreferredValuesIec(navController: NavHostController) {
+    navController.navigate(Screen.LearnPreferredValues.route)
 }
 
 fun navigateToSmdCodeIec(navController: NavHostController) {

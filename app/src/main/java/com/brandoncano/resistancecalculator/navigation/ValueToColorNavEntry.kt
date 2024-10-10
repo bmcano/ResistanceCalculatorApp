@@ -104,7 +104,7 @@ fun NavGraphBuilder.valueToColorScreen(
                 return@ValueToColorScreen resistance
             },
             onLearnMoreTapped = {
-
+                navigateToPreferredValuesIec(navHostController)
             }
         )
     }

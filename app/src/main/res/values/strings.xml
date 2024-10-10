@@ -35,10 +35,11 @@
     <string name="about_title">About The App</string>
     <string name="about_description">Description</string>
     <string name="about_description_01">This app features calculators for both standard color-band resistors, capable of converting between color to value and value to color, as well as SMD resistors with three different code standards for determining resistance.</string>
-    <string name="about_description_02">This app follows the IEC 60062 international standard for resistor coding to help ensure accuracy. For more detailed information, you can refer to the IEC 60062 pages below.</string>
-    <string name="about_iec_header_text">International standard IEC 60062</string>
+    <string name="about_description_02">This app follows the IEC 60062 and IEC 60063 international standard for resistor coding and calculations to help ensure accuracy. For more detailed information, you can refer to the IEC 60062/60063 pages below.</string>
+    <string name="about_iec_header_text">International standard IEC 60062/60063</string>
     <string name="about_standard_iec_button">View resistor color code</string>
     <string name="about_smd_iec_button">View resistor SMD code</string>
+    <string name="about_preferred_values_iec_button">View resistor preferred values</string>
     <string name="about_view_privacy_policy">View privacy policy</string>
     <!-- Home screen/components text -->
     <string name="home_calculators_header_text">Calculators</string>
@@ -66,6 +67,7 @@
     <string name="vtc_invalid_tolerance_body">Adjust your selection to match the supported tolerances for a %1$s-band resistor.</string>
     <!-- Info screen/components text -->
     <string name="info_title">IEC 60062 Standard</string>
+    <string name="info_title_3">IEC 60063 Standard</string>
     <string name="info_color_intro_title">Introduction</string>
     <string name="info_color_intro_body">The resistor color code is a system of colored bands used to indicate the resistance value, tolerance, and sometimes reliability or temperature coefficient of resistors. This coding system allows for easy identification of resistor values in a compact form factor.</string>
     <string name="info_color_meaning_title">Color Bands and Their Meanings</string>
