@@ -2,6 +2,12 @@ package com.brandoncano.resistancecalculator.ui.screens.vtc
 
 import android.graphics.Picture
 import android.os.Build
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -211,7 +217,11 @@ private fun ValueToColorScreenContent(
                 onValueChanged(resistance.value, it, resistor.band5, resistor.band6)
                 reset = false
             }
-            if (navBarSelection != 0) {
+            AnimatedVisibility(
+                visible = navBarSelection != 0,
+                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
+            ) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.tolerance_band_hint,
@@ -225,7 +235,11 @@ private fun ValueToColorScreenContent(
                     reset = false
                 }
             }
-            if (navBarSelection == 3) {
+            AnimatedVisibility(
+                visible = navBarSelection == 3,
+                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
+            ) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.ppm_band_hint,
