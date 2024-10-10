@@ -2,6 +2,12 @@ package com.brandoncano.resistancecalculator.ui.screens.ctv
 
 import android.graphics.Picture
 import android.os.Build
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -195,7 +201,11 @@ private fun ColorToValueScreenContent(
             ) {
                 onUpdateBand(2, it)
             }
-            if (navBarSelection == 2 || navBarSelection == 3) {
+            AnimatedVisibility(
+                visible = navBarSelection == 2 || navBarSelection == 3,
+                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
+            ) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.number_band_hint3,
@@ -215,7 +225,11 @@ private fun ColorToValueScreenContent(
             ) {
                 onUpdateBand(4, it)
             }
-            if (navBarSelection != 0) {
+            AnimatedVisibility(
+                visible = navBarSelection != 0,
+                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
+            ) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.tolerance_band_hint,
@@ -226,7 +240,11 @@ private fun ColorToValueScreenContent(
                     onUpdateBand(5, it)
                 }
             }
-            if (navBarSelection == 3) {
+            AnimatedVisibility(
+                visible = navBarSelection == 3,
+                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
+            ) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.ppm_band_hint,
