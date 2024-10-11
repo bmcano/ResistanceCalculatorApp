@@ -103,12 +103,12 @@ private fun AboutScreenContent(
         AppStandardCard {
             Text(
                 text = stringResource(id = R.string.about_description_01),
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
+                modifier = Modifier.padding(16.dp),
                 style = textStyleBody().onSurfaceVariant(),
             )
             Text(
                 text = stringResource(id = R.string.about_description_02),
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 12.dp),
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                 style = textStyleBody().onSurfaceVariant(),
             )
         }

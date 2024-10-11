@@ -66,7 +66,7 @@ fun ValueToColorScreen(
     navBarPosition: Int,
     isError: Boolean,
     openMenu: MutableState<Boolean>,
-    isResistanceStandard: ESeriesCardContent,
+    eSeriesCardContent: ESeriesCardContent,
     onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
@@ -84,7 +84,7 @@ fun ValueToColorScreen(
             navBarPosition = navBarPosition,
             isError = isError,
             openMenu = openMenu,
-            isResistanceStandard = isResistanceStandard,
+            eSeriesCardContent = eSeriesCardContent,
             onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = onNavigateBack,
             onClearSelectionsTapped = onClearSelectionsTapped,
@@ -105,7 +105,7 @@ private fun ValueToColorScreenContent(
     navBarPosition: Int,
     isError: Boolean,
     openMenu: MutableState<Boolean>,
-    isResistanceStandard: ESeriesCardContent,
+    eSeriesCardContent: ESeriesCardContent,
     onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
@@ -259,11 +259,10 @@ private fun ValueToColorScreenContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-            ) {
-                onValidateResistanceTapped()
-            }
+                onClick = onValidateResistanceTapped,
+            )
             ESeriesCard(
-                eSeriesCardContent = isResistanceStandard,
+                eSeriesCardContent = eSeriesCardContent,
                 onLearnMoreTapped = onLearnMoreTapped,
                 onUseValueTapped = {
                     resistance.value = onUseValueTapped()
@@ -283,7 +282,7 @@ private fun ValueToColorScreenPreview() {
             navBarPosition = 1,
             isError = false,
             openMenu = remember { mutableStateOf(false) },
-            isResistanceStandard = ESeriesCardContent.NoContent,
+            eSeriesCardContent = ESeriesCardContent.NoContent,
             onOpenThemeDialog = {},
             onNavigateBack = {},
             onClearSelectionsTapped = {},

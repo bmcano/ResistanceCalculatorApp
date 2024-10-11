@@ -41,8 +41,8 @@ import com.brandoncano.resistancecalculator.util.bandSixForDisplay
 import com.brandoncano.resistancecalculator.util.bandThreeForDisplay
 import com.brandoncano.resistancecalculator.util.bandTwoForDisplay
 import com.brandoncano.resistancecalculator.util.deriveResistorColor
+import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
-import com.brandoncano.sharedcomponents.composables.AppStandardCard
 import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
@@ -146,8 +146,11 @@ private fun ESeriesCardContent(
 ) {
     val icon = if (isValueValid) Icons.Outlined.CheckCircle else Icons.Rounded.WarningAmber
     val color = if (isValueValid) validGreen else warningGold
-    Spacer(modifier = Modifier.height(12.dp))
-    AppStandardCard {
+    AppCard(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp, top = 12.dp)
+            .fillMaxWidth()
+    ) {
         Row(
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.Top

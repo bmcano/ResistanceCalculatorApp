@@ -13,7 +13,8 @@ object GenerateStandardValues {
         for (exp in exponents) {
             val multiplier = 10.0.pow(exp)
             for (eValue in eSeriesList) {
-                standardValues.add(eValue * multiplier) // TODO - round values to prevent long decimals
+                // Note: rounded of floating point errors is handled in the RoundStandardValue function
+                standardValues.add(eValue * multiplier)
             }
         }
         return standardValues

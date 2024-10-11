@@ -18,11 +18,13 @@ import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
 import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
+import com.brandoncano.resistancecalculator.util.MultiplierFromUnits
 import com.brandoncano.resistancecalculator.util.eseries.DeriveESeries
 import com.brandoncano.resistancecalculator.util.eseries.DeriveESeriesString
 import com.brandoncano.resistancecalculator.util.eseries.FindClosestStandardValue
 import com.brandoncano.resistancecalculator.util.eseries.GenerateStandardValues
 import com.brandoncano.resistancecalculator.util.eseries.ParseResistanceValue
+import com.brandoncano.resistancecalculator.util.eseries.RoundStandardValue
 import com.brandoncano.resistancecalculator.util.formatResistor
 import kotlin.math.abs
 
@@ -50,11 +52,12 @@ fun NavGraphBuilder.valueToColorScreen(
             navBarPosition = navBarSelection,
             isError = isError,
             openMenu = openMenu,
-            isResistanceStandard = eSeriesCardContent,
+            eSeriesCardContent = eSeriesCardContent,
             onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
+                eSeriesCardContent = ESeriesCardContent.NoContent
                 viewModel.clear()
             },
             onAboutTapped = {
@@ -75,7 +78,11 @@ fun NavGraphBuilder.valueToColorScreen(
             onValidateResistanceTapped = {
                 if (resistor.isEmpty() || isError) return@ValueToColorScreen
                 val resistanceValue = ParseResistanceValue.execute(resistor.resistance, resistor.units) ?: return@ValueToColorScreen
-                val tolerance = if (navBarSelection == 0) "${Symbols.PM}20%" else resistor.band5.ifEmpty { return@ValueToColorScreen }
+                val tolerance = if (navBarSelection == 0) "${Symbols.PM}20%" else resistor.band5
+                if (tolerance.isEmpty()) {
+                    eSeriesCardContent = ESeriesCardContent.InvalidTolerance("${navBarSelection + 3}")
+                    return@ValueToColorScreen
+                }
                 val tolerancePercentage = tolerance.substring(1, tolerance.length - 1).toDoubleOrNull() ?: return@ValueToColorScreen
 
                 val eSeriesList = DeriveESeries.execute(tolerancePercentage, navBarSelection + 3)
@@ -84,22 +91,23 @@ fun NavGraphBuilder.valueToColorScreen(
                     return@ValueToColorScreen
                 }
 
-                val eSeriesName = DeriveESeriesString.execute(eSeriesList)
-
                 val standardValues = GenerateStandardValues.execute(eSeriesList)
-                closestStandardValue.doubleValue = FindClosestStandardValue.execute(resistanceValue, standardValues)
+                val closestValueOhms = FindClosestStandardValue.execute(resistanceValue, standardValues)
+                closestStandardValue.doubleValue = closestValueOhms / MultiplierFromUnits.execute(resistor.units)
 
-                val diff = abs(resistanceValue - closestStandardValue.doubleValue)
+                val diff = abs(resistanceValue - closestValueOhms)
                 eSeriesCardContent = if (diff == 0.0) {
+                    val eSeriesName = DeriveESeriesString.execute(eSeriesList)
                     ESeriesCardContent.ValidResistance(eSeriesName)
                 } else {
-                    ESeriesCardContent.InvalidResistance("${closestStandardValue.doubleValue} ${Symbols.OHMS}")
+                    val resistance = RoundStandardValue.execute(closestStandardValue.doubleValue)
+                    ESeriesCardContent.InvalidResistance("$resistance ${resistor.units}")
                 }
                 return@ValueToColorScreen
             },
             onUseValueTapped = {
-                val resistance = closestStandardValue.doubleValue.toString()
                 eSeriesCardContent = ESeriesCardContent.NoContent
+                val resistance = RoundStandardValue.execute(closestStandardValue.doubleValue)
                 viewModel.updateValues(resistance, resistor.units, resistor.band5, resistor.band6)
                 return@ValueToColorScreen resistance
             },

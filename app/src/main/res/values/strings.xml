@@ -35,7 +35,7 @@
     <string name="about_title">About The App</string>
     <string name="about_description">Description</string>
     <string name="about_description_01">This app features calculators for both standard color-band resistors, capable of converting between color to value and value to color, as well as SMD resistors with three different code standards for determining resistance.</string>
-    <string name="about_description_02">This app follows the IEC 60062 and IEC 60063 international standard for resistor coding and calculations to help ensure accuracy. For more detailed information, you can refer to the IEC 60062/60063 pages below.</string>
+    <string name="about_description_02">This app follows the IEC 60062 and IEC 60063 international standards for resistor coding and calculations to help ensure accuracy. For more detailed information, you can refer to the IEC 60062/60063 pages below.</string>
     <string name="about_iec_header_text">International standard IEC 60062/60063</string>
     <string name="about_standard_iec_button">View resistor color code</string>
     <string name="about_smd_iec_button">View resistor SMD code</string>

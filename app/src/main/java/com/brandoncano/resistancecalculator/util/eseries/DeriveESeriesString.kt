@@ -13,12 +13,12 @@ object DeriveESeriesString {
 
     fun execute(eSeries: List<Int>): String {
         return when (eSeries) {
-            E12 -> "E12"
-            E24 -> "E24"
-            E48 -> "E48"
-            E96 -> "E96"
-            E192 -> "E192"
-            else -> "E6"
+            E12 -> "E-12"
+            E24 -> "E-24"
+            E48 -> "E-48"
+            E96 -> "E-96"
+            E192 -> "E-192"
+            else -> "E-6"
         }
     }
 }
