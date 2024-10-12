@@ -63,7 +63,7 @@ private fun LearnColorCodesScreenContent(paddingValues: PaddingValues) {
             .verticalScroll(rememberScrollState()),
     ) {
         Text(
-            text = stringResource(R.string.info_color_intro_title),
+            text = stringResource(R.string.info_intro_title),
             modifier = Modifier.padding(vertical = 12.dp),
             style = textStyleLargeTitle(),
         )

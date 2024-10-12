@@ -68,7 +68,7 @@
     <!-- Info screen/components text -->
     <string name="info_title">IEC 60062 Standard</string>
     <string name="info_title_3">IEC 60063 Standard</string>
-    <string name="info_color_intro_title">Introduction</string>
+    <string name="info_intro_title">Introduction</string>
     <string name="info_color_intro_body">The resistor color code is a system of colored bands used to indicate the resistance value, tolerance, and sometimes reliability or temperature coefficient of resistors. This coding system allows for easy identification of resistor values in a compact form factor.</string>
     <string name="info_color_meaning_title">Color Bands and Their Meanings</string>
     <string name="info_color_meaning_body">Each color represents a specific digit or multiplier according to its position on the resistor. The standard colors and their corresponding values are shown in the table below.</string>
@@ -89,8 +89,7 @@
     <string name="info_color_six_band_body">Six-band resistors add a temperature coefficient band to the five-band code, indicating how resistance changes with temperature.</string>
     <string name="info_color_six_band_code">560 \u00D7 10 ±2%, 100 ppm/°C</string>
     <string name="info_color_six_band_description">"Green (5), Blue (6), Black (0), Brown (×10), Red (±2%), Brown (100 ppm/°C)"</string>
-    <string name="info_smd_overview_title">Overview</string>
-    <string name="info_smd_overview_body">The IEC 60062 standard specifies code markings for resistors and capacitors. It defines alphanumeric codes to denote resistance and capacitance values in a compact format suitable for marking on small components like SMD (Surface-Mount Device) resistors.</string>
+    <string name="info_smd_intro_body">The IEC 60062 standard specifies code markings for resistors and capacitors. It defines alphanumeric codes to denote resistance and capacitance values in a compact format suitable for marking on small components like SMD (Surface-Mount Device) resistors.</string>
     <string name="info_smd_resistor_codes_title">SMD Resistor Codes</string>
     <string name="info_smd_resistor_codes_body">SMD resistors use different coding systems based on the number of digits or characters used. The most common coding standards are:</string>
     <string name="info_smd_code_example">Example:</string>
@@ -112,6 +111,18 @@
     <string name="info_smd_code_value_col2">Value</string>
     <string name="info_smd_code_value_headline">Value codes</string>
     <string name="info_smd_code_value_body">"These are the common resistance value codes, but a manufacturer may use a variation on these or even something completely different. It is therefore always important to verify the manufacturer's marking system."</string>
+    <string name="info_values_intro_body">"The standardization of resistor values, known as 'preferred values' or the 'E-series', serves to simplify the mass production and stock management of resistors by spacing resistance values approximately equally on a logarithmic scale. This approach allows manufacturers to limit the number of different values they need to produce, which benefits electrical engineers. The preferred values also apply to other components like capacitors, inductors, and Zener diodes."</string>
+    <string name="info_values_preferred_values_title">Preferred Values or E-series</string>
+    <string name="info_values_preferred_values_body">The E-Series is a set of preferred resistor values, categorized into different levels of precision. Each E-series is represented by a number (E-6, E-12, E-24, etc.), which corresponds to the number of values per decade (0.1–1.0, 1–10, 10–100, etc.). The more values an E-Series has, the more precise the resistor selection will be.</string>
+    <string name="info_values_preferred_values_low_precision">The E-6 series is typically used for 3-band resistors, which have less precision.</string>
+    <string name="info_values_preferred_values_medium_precision">The E-12 and E-24 series are used for 4-band resistors, offering better precision.</string>
+    <string name="info_values_preferred_values_high_precision">The E-48, E-96, and E-192 series are used for 5 and 6-band resistors, providing high precision with tolerances as low as 0.05%. These series introduce a third significant digit.</string>
+    <string name="info_values_e6_header">E-6 Series (Tolerance: 20%)</string>
+    <string name="info_values_e12_header">E-12 Series (Tolerance: 10%)</string>
+    <string name="info_values_e24_header">E-24 Series (Tolerance: 5%, 1%)</string>
+    <string name="info_values_e48_header">E-48 Series (Tolerance: 2%)</string>
+    <string name="info_values_e96_header">E-96 Series (Tolerance: 1%)</string>
+    <string name="info_values_e192_header">E-192 Series (Tolerance: ≤0.5%)</string>
     <string name="info_disclaimer_footer">The information provided here regarding IEC standards is intended for general guidance. Please note that not all components may strictly adhere to these standards, as manufacturers may have variations or different interpretations. Always consult the specific datasheet or contact the manufacturer directly if you are unsure about the specifications or standards for a particular component.</string>
     <!-- Content descriptions -->
     <string name="content_description_app_icon">App icon</string>

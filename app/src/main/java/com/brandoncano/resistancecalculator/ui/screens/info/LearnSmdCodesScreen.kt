@@ -65,12 +65,12 @@ private fun LearnSmdCodesScreenContent(
         horizontalAlignment = Alignment.Start,
     ) {
         Text(
-            text = stringResource(R.string.info_smd_overview_title),
+            text = stringResource(R.string.info_intro_title),
             modifier = Modifier.padding(vertical = 12.dp),
             style = textStyleLargeTitle(),
         )
         Text(
-            text = stringResource(R.string.info_smd_overview_body),
+            text = stringResource(R.string.info_smd_intro_body),
             modifier = Modifier.padding(bottom = 32.dp),
             style = textStyleBody().onSurfaceVariant(),
         )

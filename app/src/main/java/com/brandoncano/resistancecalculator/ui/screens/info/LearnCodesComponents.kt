@@ -1,6 +1,7 @@
 package com.brandoncano.resistancecalculator.ui.screens.info
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,7 @@ import com.brandoncano.resistancecalculator.ui.theme.black
 import com.brandoncano.resistancecalculator.ui.theme.red
 import com.brandoncano.resistancecalculator.ui.theme.white
 import com.brandoncano.resistancecalculator.util.ColorFinder
+import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppStandardDivider
@@ -285,6 +287,50 @@ private fun TableColorCell(modifier: Modifier, text: String, backgroundColor: Co
             style = style,
             textAlign = TextAlign.Center
         )
+    }
+}
+
+
+@Composable
+fun ESeriesTable(seriesName: String, values: List<Int>) {
+    AppCard(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(vertical = 16.dp)
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = seriesName,
+                modifier = Modifier.padding(bottom = 8.dp),
+                style = textStyleHeadline(),
+            )
+            AppStandardDivider()
+            val columns = 6
+            val rows = (values.size + columns - 1) / columns
+            (0 until rows).forEach { rowIndex ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                ) {
+                    (0 until columns).forEach { columnIndex ->
+                        val index = rowIndex * columns + columnIndex
+                        if (index < values.size) {
+                            Text(
+                                text = values[index].toString(),
+                                style = textStyleBody().onSurfaceVariant(),
+                                modifier = Modifier
+                                    .padding(start = 8.dp, end = 8.dp, top = 8.dp)
+                                    .weight(1f),
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

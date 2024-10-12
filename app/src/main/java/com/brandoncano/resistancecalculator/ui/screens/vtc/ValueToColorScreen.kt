@@ -118,7 +118,6 @@ private fun ValueToColorScreenContent(
     onLearnMoreTapped: () -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
-    val interactionSource = remember { MutableInteractionSource() }
     var reset by remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val picture = remember { Picture() }
@@ -128,7 +127,7 @@ private fun ValueToColorScreenContent(
         topBar = {
             AppMenuTopAppBar(
                 titleText = stringResource(R.string.title_value_to_color),
-                interactionSource = interactionSource,
+                interactionSource = remember { MutableInteractionSource() },
                 showMenu = openMenu,
                 navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
