@@ -3,7 +3,6 @@ package com.brandoncano.resistancecalculator.ui.screens.info
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -46,7 +45,6 @@ fun LearnSmdCodesScreen(
                 onNavigateBack = onNavigateBack,
             )
         },
-        contentWindowInsets = WindowInsets(0),
     ) { paddingValues ->
         LearnSmdCodesScreenContent(paddingValues)
     }

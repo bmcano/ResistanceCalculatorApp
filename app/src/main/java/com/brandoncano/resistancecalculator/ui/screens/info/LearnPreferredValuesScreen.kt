@@ -3,7 +3,6 @@ package com.brandoncano.resistancecalculator.ui.screens.info
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,6 +24,10 @@ import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 
+/**
+ * Note: Information originated from - https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-values/
+ */
+
 @Composable
 fun LearnPreferredValuesScreen(
     onNavigateBack: () -> Unit,
@@ -37,7 +40,6 @@ fun LearnPreferredValuesScreen(
                 onNavigateBack = onNavigateBack,
             )
         },
-        contentWindowInsets = WindowInsets(0),
     ) { paddingValues ->
         LearnPreferredValuesScreenContent(paddingValues)
     }

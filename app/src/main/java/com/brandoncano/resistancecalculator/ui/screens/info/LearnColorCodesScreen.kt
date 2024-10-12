@@ -3,7 +3,6 @@ package com.brandoncano.resistancecalculator.ui.screens.info
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.constants.Colors as C
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistorLayout
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
@@ -30,6 +28,7 @@ import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
 import com.brandoncano.sharedcomponents.text.textStyleTitle
+import com.brandoncano.resistancecalculator.constants.Colors as C
 
 /**
  * Note: Information originated from - https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-color-code/#
@@ -47,7 +46,6 @@ fun LearnColorCodesScreen(
                 onNavigateBack = onNavigateBack,
             )
         },
-        contentWindowInsets = WindowInsets(0),
     ) { paddingValues ->
         LearnColorCodesScreenContent(paddingValues)
     }
