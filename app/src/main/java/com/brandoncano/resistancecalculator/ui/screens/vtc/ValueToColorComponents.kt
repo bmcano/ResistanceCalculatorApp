@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens.vtc
 
 import android.graphics.Picture
-import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,6 +32,7 @@ import com.brandoncano.resistancecalculator.ui.screens.ctv.ResistorRow
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.validGreen
 import com.brandoncano.resistancecalculator.ui.theme.warningGold
+import com.brandoncano.resistancecalculator.util.Sdk
 import com.brandoncano.resistancecalculator.util.bandFiveForDisplay
 import com.brandoncano.resistancecalculator.util.bandFourForDisplay
 import com.brandoncano.resistancecalculator.util.bandOneForDisplay
@@ -49,20 +49,17 @@ import com.brandoncano.sharedcomponents.text.textStyleCallout
 
 @Composable
 fun ResistorDisplay(picture: Picture, resistor: ResistorVtc, isError: Boolean) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-        ResistorLayout(resistor, isError)
-    } else {
+    if (Sdk.isAtLeastAndroid7()) {
         DrawContent(picture) {
             ResistorLayout(resistor, isError)
         }
+    } else {
+        ResistorLayout(resistor, isError)
     }
 }
 
 @Composable
-fun ResistorLayout(
-    resistor: ResistorVtc,
-    isError: Boolean,
-) {
+fun ResistorLayout(resistor: ResistorVtc, isError: Boolean) {
     Column(
         modifier = Modifier.padding(top = 16.dp, start = 32.dp, end = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -93,7 +90,6 @@ fun ResistorLayout(
         ResistanceText(text)
     }
 }
-
 
 @Composable
 fun ESeriesCard(
@@ -128,9 +124,7 @@ fun ESeriesCard(
                 onClick = onUseValueTapped,
             )
         }
-        ESeriesCardContent.NoContent -> {
-            // left intentionally empty to show no card
-        }
+        ESeriesCardContent.NoContent -> { /* left intentionally empty to show no card */ }
     }
 }
 

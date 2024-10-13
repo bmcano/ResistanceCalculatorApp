@@ -27,11 +27,11 @@ fun NavGraphBuilder.colorToValueScreen(
     ) {
         val context = LocalContext.current
         val focusManager = LocalFocusManager.current
+        val openMenu = remember { mutableStateOf(false) }
+        val reset = remember { mutableStateOf(false) }
         val viewModel: ResistorCtvViewModel = viewModel(factory = ResistorViewModelFactory(context))
         val resistor by viewModel.resistor.collectAsState()
         val navBarSelection by viewModel.navBarSelection.collectAsState()
-        val openMenu = remember { mutableStateOf(false) }
-        val reset = remember { mutableStateOf(false) }
 
         ColorToValueScreen(
             openMenu = openMenu,

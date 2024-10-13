@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -38,13 +39,15 @@ fun NavGraphBuilder.valueToColorScreen(
         exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         val context = LocalContext.current
-        val viewModel: ResistorVtcViewModel = viewModel(factory = ResistorViewModelFactory(context))
-        val resistor by viewModel.resistor.collectAsState()
-        val navBarSelection by viewModel.navBarSelection.collectAsState()
-        val isError by viewModel.isError.collectAsState()
+        val focusManager = LocalFocusManager.current
         val openMenu = remember { mutableStateOf(false) }
+        val reset = remember { mutableStateOf(false) }
         var eSeriesCardContent: ESeriesCardContent by remember { mutableStateOf(ESeriesCardContent.NoContent) }
         val closestStandardValue = remember { mutableDoubleStateOf(10.0) }
+        val viewModel: ResistorVtcViewModel = viewModel(factory = ResistorViewModelFactory(context))
+        val resistor by viewModel.resistor.collectAsState()
+        val isError by viewModel.isError.collectAsState()
+        val navBarSelection by viewModel.navBarSelection.collectAsState()
         resistor.formatResistor()
 
         ValueToColorScreen(
@@ -52,13 +55,16 @@ fun NavGraphBuilder.valueToColorScreen(
             navBarPosition = navBarSelection,
             isError = isError,
             openMenu = openMenu,
+            reset = reset,
             eSeriesCardContent = eSeriesCardContent,
             onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
+                reset.value = true
                 eSeriesCardContent = ESeriesCardContent.NoContent
                 viewModel.clear()
+                focusManager.clearFocus()
             },
             onAboutTapped = {
                 openMenu.value = false
@@ -68,9 +74,11 @@ fun NavGraphBuilder.valueToColorScreen(
                 openMenu.value = false
                 navigateToColorToValue(navHostController)
             },
-            onValueChanged = { resistance, units, band5, band6 ->
+            onValueChanged = { resistance, units, band5, band6, clearFocus ->
+                reset.value = false
                 eSeriesCardContent = ESeriesCardContent.NoContent
                 viewModel.updateValues(resistance, units, band5, band6)
+                if (clearFocus) focusManager.clearFocus()
             },
             onNavBarSelectionChanged = { selection ->
                 viewModel.saveNavBarSelection(selection)
