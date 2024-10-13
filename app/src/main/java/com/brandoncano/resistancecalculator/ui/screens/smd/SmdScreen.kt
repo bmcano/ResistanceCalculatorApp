@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens.smd
 
 import android.graphics.Picture
-import android.os.Build
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -42,6 +40,7 @@ import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.util.Sdk
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
 import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
@@ -61,13 +60,14 @@ import java.util.Locale
 @Composable
 fun SmdScreen(
     openMenu: MutableState<Boolean>,
+    reset: MutableState<Boolean>,
     resistor: SmdResistor,
     isError: Boolean,
     onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
-    onValueChanged: (String, String) -> Unit,
+    onValueChanged: (String, String, Boolean) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
     navBarPosition: Int,
     onLearnSmdCodesTapped: () -> Unit,
@@ -75,6 +75,7 @@ fun SmdScreen(
     Surface(modifier = Modifier.fillMaxSize()) {
         SmdScreenContent(
             openMenu = openMenu,
+            reset = reset,
             resistor = resistor,
             isError = isError,
             onOpenThemeDialog = onOpenThemeDialog,
@@ -92,23 +93,21 @@ fun SmdScreen(
 @Composable
 private fun SmdScreenContent(
     openMenu: MutableState<Boolean>,
+    reset: MutableState<Boolean>,
     resistor: SmdResistor,
     isError: Boolean,
     onOpenThemeDialog: () -> Unit,
     onNavigateBack: () -> Unit,
     onClearSelectionsTapped: () -> Unit,
     onAboutTapped: () -> Unit,
-    onValueChanged: (String, String) -> Unit,
+    onValueChanged: (String, String, Boolean) -> Unit,
     onNavBarSelectionChanged: (Int) -> Unit,
     navBarPosition: Int,
     onLearnSmdCodesTapped: () -> Unit,
 ) {
-    val focusManager = LocalFocusManager.current
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
-    var reset by remember { mutableStateOf(false) }
     val picture = remember { Picture() }
     val code = remember { mutableStateOf(resistor.code) }
-    var units by remember { mutableStateOf(resistor.units) }
 
     Scaffold(
         topBar = {
@@ -119,16 +118,12 @@ private fun SmdScreenContent(
                 navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
             ) {
-                ClearSelectionsMenuItem {
-                    focusManager.clearFocus()
-                    onClearSelectionsTapped()
-                    reset = true
-                }
+                ClearSelectionsMenuItem(onClearSelectionsTapped)
                 ShareTextMenuItem(
                     text = resistor.toString(),
                     showMenu = openMenu,
                 )
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (Sdk.isAtLeastAndroid7()) {
                     ShareImageMenuItem(
                         applicationId = Symbols.APPLICATION_ID,
                         showMenu = openMenu,
@@ -179,7 +174,7 @@ private fun SmdScreenContent(
                 label = stringResource(id = R.string.hint_smd_code),
                 modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
                 value = code,
-                reset = reset,
+                reset = reset.value,
                 isError = isError,
                 errorMessage = stringResource(id = R.string.error_invalid_code),
                 keyboardOptions = KeyboardOptions(
@@ -190,19 +185,16 @@ private fun SmdScreenContent(
                 )
             ) {
                 code.value = it.uppercase(Locale.getDefault())
-                onValueChanged(code.value, units)
+                onValueChanged(code.value, resistor.units, false)
             }
             AppDropDownMenu(
                 label = stringResource(id = R.string.units_hint),
                 modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp),
-                selectedOption = units,
+                selectedOption = resistor.units,
                 items = DropdownLists.UNITS_LIST,
-                reset = reset,
-            ) {
-                units = it
-                focusManager.clearFocus()
-                onValueChanged(code.value, units)
-            }
+                reset = reset.value,
+                onOptionSelected = { onValueChanged(code.value, it, true) }
+            )
             AppDivider(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp))
             Column(horizontalAlignment = Alignment.Start) {
                 Text(
@@ -223,20 +215,20 @@ private fun SmdScreenContent(
     }
 }
 
-
 @AppScreenPreviews
 @Composable
 private fun SmdScreenPreview() {
     ResistorCalculatorTheme {
         SmdScreen(
             openMenu = remember { mutableStateOf(false) },
+            reset = remember { mutableStateOf(false) },
             resistor = SmdResistor(),
             isError = false,
             onOpenThemeDialog = {},
             onNavigateBack = {},
             onClearSelectionsTapped = {},
             onAboutTapped = {},
-            onValueChanged = { _, _ -> },
+            onValueChanged = { _, _, _-> },
             onNavBarSelectionChanged = { _ -> },
             navBarPosition = 1,
             onLearnSmdCodesTapped = {},

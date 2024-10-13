@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens.smd
 
 import android.graphics.Picture
-import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +18,7 @@ import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.ui.theme.white
+import com.brandoncano.resistancecalculator.util.Sdk
 import com.brandoncano.resistancecalculator.util.formatResistance
 import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
@@ -28,20 +28,17 @@ import com.brandoncano.sharedcomponents.text.textStyleTitle
 
 @Composable
 fun SmdResistorDisplay(picture: Picture, resistor: SmdResistor, isError: Boolean) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-        SmdResistorLayout(resistor, isError)
-    } else {
+    if (Sdk.isAtLeastAndroid7()) {
         DrawContent(picture) {
             SmdResistorLayout(resistor, isError)
         }
+    } else {
+        SmdResistorLayout(resistor, isError)
     }
 }
 
 @Composable
-fun SmdResistorLayout(
-    resistor: SmdResistor,
-    isError: Boolean,
-) {
+fun SmdResistorLayout(resistor: SmdResistor, isError: Boolean) {
     Column(
         modifier = Modifier.padding(top = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -69,7 +66,6 @@ fun SmdResistorLayout(
             isError -> stringResource(id = R.string.error_na)
             else -> resistor.formatResistance()
         }
-
         AppCard(modifier = Modifier.padding(top = 12.dp)) {
             Text(
                 text = text,

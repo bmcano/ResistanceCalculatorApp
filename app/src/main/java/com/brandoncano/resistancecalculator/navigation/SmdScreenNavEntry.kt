@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -25,27 +26,34 @@ fun NavGraphBuilder.smdScreen(
         exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         val context = LocalContext.current
+        val focusManager = LocalFocusManager.current
         val openMenu = remember { mutableStateOf(false) }
+        val reset = remember { mutableStateOf(false) }
         val viewModel: SmdResistorViewModel = viewModel(factory = ResistorViewModelFactory(context))
         val resistor by viewModel.resistor.collectAsState()
         val isError by viewModel.isError.collectAsState()
 
         SmdScreen(
             openMenu = openMenu,
+            reset = reset,
             resistor = resistor,
             isError = isError,
             onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
+                reset.value = true
                 viewModel.clear()
+                focusManager.clearFocus()
             },
             onAboutTapped = {
                 openMenu.value = false
                 navigateToAbout(navHostController)
             },
-            onValueChanged = { code, units ->
+            onValueChanged = { code, units, clearFocus ->
+                reset.value = false
                 viewModel.updateValues(code, units)
+                if (clearFocus) focusManager.clearFocus()
             },
             onNavBarSelectionChanged = { selection ->
                 viewModel.saveNavBarSelection(selection)
