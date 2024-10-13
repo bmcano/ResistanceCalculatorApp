@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -25,20 +26,25 @@ fun NavGraphBuilder.colorToValueScreen(
         exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         val context = LocalContext.current
+        val focusManager = LocalFocusManager.current
         val viewModel: ResistorCtvViewModel = viewModel(factory = ResistorViewModelFactory(context))
         val resistor by viewModel.resistor.collectAsState()
         val navBarSelection by viewModel.navBarSelection.collectAsState()
         val openMenu = remember { mutableStateOf(false) }
+        val reset = remember { mutableStateOf(false) }
 
         ColorToValueScreen(
             openMenu = openMenu,
+            reset = reset,
             resistor = resistor,
             navBarPosition = navBarSelection,
             onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
+                reset.value = true
                 viewModel.clear()
+                focusManager.clearFocus()
             },
             onAboutTapped = {
                 openMenu.value = false
@@ -49,6 +55,7 @@ fun NavGraphBuilder.colorToValueScreen(
                 navigateToValueToColor(navHostController)
             },
             onUpdateBand = { bandNumber, color ->
+                reset.value = false
                 viewModel.updateBand(bandNumber, color)
             },
             onNavBarSelectionChanged = { selection ->

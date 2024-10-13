@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens.ctv
 
 import android.graphics.Picture
-import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
@@ -35,7 +34,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
@@ -47,6 +45,7 @@ import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
+import com.brandoncano.resistancecalculator.util.Sdk
 import com.brandoncano.resistancecalculator.util.shareableText
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
 import com.brandoncano.sharedcomponents.composables.AppDivider
@@ -64,6 +63,7 @@ import com.brandoncano.sharedcomponents.text.textStyleHeadline
 @Composable
 fun ColorToValueScreen(
     openMenu: MutableState<Boolean>,
+    reset: MutableState<Boolean>,
     resistor: ResistorCtv,
     navBarPosition: Int,
     onOpenThemeDialog: () -> Unit,
@@ -78,6 +78,7 @@ fun ColorToValueScreen(
     Surface(modifier = Modifier.fillMaxSize()) {
         ColorToValueScreenContent(
             openMenu = openMenu,
+            reset = reset,
             resistor = resistor,
             navBarPosition = navBarPosition,
             onOpenThemeDialog = onOpenThemeDialog,
@@ -95,6 +96,7 @@ fun ColorToValueScreen(
 @Composable
 private fun ColorToValueScreenContent(
     openMenu: MutableState<Boolean>,
+    reset: MutableState<Boolean>,
     resistor: ResistorCtv,
     navBarPosition: Int,
     onOpenThemeDialog: () -> Unit,
@@ -106,9 +108,6 @@ private fun ColorToValueScreenContent(
     onNavBarSelectionChanged: (Int) -> Unit,
     onLearnColorCodesTapped: () -> Unit,
 ) {
-    val focusManager = LocalFocusManager.current
-    val interactionSource = remember { MutableInteractionSource() }
-    var reset by remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val picture = remember { Picture() }
 
@@ -116,23 +115,18 @@ private fun ColorToValueScreenContent(
         topBar = {
             AppMenuTopAppBar(
                 titleText = stringResource(R.string.title_color_to_value),
-                interactionSource = interactionSource,
+                interactionSource = remember { MutableInteractionSource() },
                 showMenu = openMenu,
                 navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
             ) {
                 ValueToColorMenuItem(onValueToColorTapped)
-                ClearSelectionsMenuItem {
-                    openMenu.value = false
-                    reset = true
-                    onClearSelectionsTapped()
-                    focusManager.clearFocus()
-                }
+                ClearSelectionsMenuItem(onClearSelectionsTapped)
                 ShareTextMenuItem(
                     text = resistor.shareableText(),
                     showMenu = openMenu,
                 )
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (Sdk.isAtLeastAndroid7()) {
                     ShareImageMenuItem(
                         applicationId = Symbols.APPLICATION_ID,
                         showMenu = openMenu,
@@ -188,19 +182,19 @@ private fun ColorToValueScreenContent(
                 label = R.string.number_band_hint1,
                 selectedOption = resistor.band1,
                 items = DropdownLists.NUMBER_LIST_NO_BLACK,
-                reset = reset,
-            ) {
-                onUpdateBand(1, it)
-            }
+                reset = reset.value,
+                onOptionSelected = { onUpdateBand(1, it) },
+            )
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
                 label = R.string.number_band_hint2,
                 selectedOption = resistor.band2,
                 items = DropdownLists.NUMBER_LIST,
-                reset = reset,
-            ) {
-                onUpdateBand(2, it)
-            }
+                reset = reset.value,
+                onOptionSelected = {
+                    onUpdateBand(2, it)
+                },
+            )
             AnimatedVisibility(
                 visible = navBarSelection == 2 || navBarSelection == 3,
                 enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
@@ -211,20 +205,18 @@ private fun ColorToValueScreenContent(
                     label = R.string.number_band_hint3,
                     selectedOption = resistor.band3,
                     items = DropdownLists.NUMBER_LIST,
-                    reset = reset,
-                ) {
-                    onUpdateBand(3, it)
-                }
+                    reset = reset.value,
+                    onOptionSelected = { onUpdateBand(3, it) },
+                )
             }
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
                 label = R.string.multiplier_band_hint,
                 selectedOption = resistor.band4,
                 items = DropdownLists.MULTIPLIER_LIST,
-                reset = reset,
-            ) {
-                onUpdateBand(4, it)
-            }
+                reset = reset.value,
+                onOptionSelected = { onUpdateBand(4, it) },
+            )
             AnimatedVisibility(
                 visible = navBarSelection != 0,
                 enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
@@ -235,10 +227,9 @@ private fun ColorToValueScreenContent(
                     label = R.string.tolerance_band_hint,
                     selectedOption = resistor.band5,
                     items = DropdownLists.TOLERANCE_LIST,
-                    reset = reset,
-                ) {
-                    onUpdateBand(5, it)
-                }
+                    reset = reset.value,
+                    onOptionSelected = { onUpdateBand(5, it) },
+                )
             }
             AnimatedVisibility(
                 visible = navBarSelection == 3,
@@ -250,10 +241,9 @@ private fun ColorToValueScreenContent(
                     label = R.string.ppm_band_hint,
                     selectedOption = resistor.band6,
                     items = DropdownLists.PPM_LIST,
-                    reset = reset,
-                ) {
-                    onUpdateBand(6, it)
-                }
+                    reset = reset.value,
+                    onOptionSelected = { onUpdateBand(6, it) },
+                )
             }
             AppDivider(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp))
             Column(horizontalAlignment = Alignment.Start) {
@@ -281,6 +271,7 @@ private fun ColorToValueScreen4BandPreview() {
     ResistorCalculatorTheme {
         ColorToValueScreen(
             openMenu = remember { mutableStateOf(false) },
+            reset = remember { mutableStateOf(false) },
             resistor = ResistorCtv(),
             navBarPosition = 1,
             onOpenThemeDialog = {},

@@ -1,7 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens.ctv
 
 import android.graphics.Picture
-import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +20,7 @@ import com.brandoncano.resistancecalculator.constants.Colors
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.ColorFinder
+import com.brandoncano.resistancecalculator.util.Sdk
 import com.brandoncano.resistancecalculator.util.bandFiveForDisplay
 import com.brandoncano.resistancecalculator.util.bandFourForDisplay
 import com.brandoncano.resistancecalculator.util.bandOneForDisplay
@@ -34,15 +34,14 @@ import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
 import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.text.textStyleTitle
 
-
 @Composable
 fun ResistorDisplay(picture: Picture, resistor: ResistorCtv) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-        ResistorLayout(resistor)
-    } else {
+    if (Sdk.isAtLeastAndroid7()) {
         DrawContent(picture) {
             ResistorLayout(resistor)
         }
+    } else {
+        ResistorLayout(resistor)
     }
 }
 
@@ -113,9 +112,7 @@ fun ResistanceText(resistance: String) {
 @Composable
 private fun ResistorLayoutsPreview() {
     ResistorCalculatorTheme {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             ResistorLayout(ResistorCtv())
             ResistorLayout(ResistorCtv(navBarSelection = 2))
             ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "", "", 0))
