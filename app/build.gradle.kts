@@ -21,7 +21,7 @@ android {
     }
     applicationVariants.configureEach {
         resValue("string", "version", versionName)
-        resValue("string", "last_updated", "10/13/2024")
+        resValue("string", "last_updated", "10/14/2024")
     }
     buildTypes {
         release {

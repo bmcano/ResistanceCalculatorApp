@@ -1,19 +1,25 @@
 package com.brandoncano.resistancecalculator.ui.screens.info
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
@@ -25,6 +31,7 @@ import com.brandoncano.sharedcomponents.composables.AppTopAppBar
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
 import com.brandoncano.sharedcomponents.text.textStyleLargeTitle
+import com.brandoncano.sharedcomponents.text.textStyleTitle
 
 /**
  * Note: Information originated from - https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-values/
@@ -74,10 +81,35 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
         )
         Text(
             text = stringResource(R.string.info_values_preferred_values_body),
-            modifier = Modifier.padding(bottom = 24.dp),
             style = textStyleBody().onSurfaceVariant(),
         )
 
+        Image(
+            painter = painterResource(R.drawable.e_series_equation),
+            contentDescription = stringResource(R.string.content_description_e_series_equation),
+            modifier = Modifier
+                .size(128.dp, 56.dp)
+                .align(Alignment.CenterHorizontally),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
+        )
+        Text(
+            text = stringResource(R.string.info_values_preferred_values_where),
+            style = textStyleBody().onSurfaceVariant(),
+        )
+        Image(
+            painter = painterResource(R.drawable.e_series_values),
+            contentDescription = stringResource(R.string.content_description_e_series_values),
+            modifier = Modifier
+                .padding(top = 8.dp, bottom = 24.dp)
+                .align(Alignment.Start),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
+        )
+
+        Text(
+            text = stringResource(R.string.info_values_preferred_values_tables_headline),
+            modifier = Modifier.padding(bottom = 12.dp),
+            style = textStyleTitle(),
+        )
         Text(
             text = stringResource(R.string.info_values_preferred_values_low_precision),
             modifier = Modifier.padding(bottom = 12.dp),
