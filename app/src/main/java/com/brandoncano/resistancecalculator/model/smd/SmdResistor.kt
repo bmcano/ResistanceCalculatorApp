@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.model.smd
 
 import com.brandoncano.resistancecalculator.data.SmdMode
-import com.brandoncano.resistancecalculator.util.formatResistance
+import com.brandoncano.resistancecalculator.util.resistor.formatResistance
 
 data class SmdResistor(
     var code: String = "",

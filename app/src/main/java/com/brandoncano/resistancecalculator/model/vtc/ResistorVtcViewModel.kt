@@ -3,8 +3,8 @@ package com.brandoncano.resistancecalculator.model.vtc
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.brandoncano.resistancecalculator.util.formatResistor
-import com.brandoncano.resistancecalculator.util.isInputInvalid
+import com.brandoncano.resistancecalculator.util.resistor.formatResistor
+import com.brandoncano.resistancecalculator.util.resistor.isInputInvalid
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

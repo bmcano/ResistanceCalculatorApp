@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.util
+package com.brandoncano.resistancecalculator.util.resistor
 
 import com.brandoncano.resistancecalculator.data.SmdMode
 

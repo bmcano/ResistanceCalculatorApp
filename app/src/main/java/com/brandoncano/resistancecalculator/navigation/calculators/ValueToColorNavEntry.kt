@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.navigation
+package com.brandoncano.resistancecalculator.navigation.calculators
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -18,6 +18,10 @@ import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.data.ESeriesCardContent
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
+import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.navigateToAbout
+import com.brandoncano.resistancecalculator.navigation.navigateToColorToValue
+import com.brandoncano.resistancecalculator.navigation.navigateToPreferredValuesIec
 import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
 import com.brandoncano.resistancecalculator.util.MultiplierFromUnits
 import com.brandoncano.resistancecalculator.util.eseries.DeriveESeries
@@ -26,7 +30,7 @@ import com.brandoncano.resistancecalculator.util.eseries.FindClosestStandardValu
 import com.brandoncano.resistancecalculator.util.eseries.GenerateStandardValues
 import com.brandoncano.resistancecalculator.util.eseries.ParseResistanceValue
 import com.brandoncano.resistancecalculator.util.eseries.RoundStandardValue
-import com.brandoncano.resistancecalculator.util.formatResistor
+import com.brandoncano.resistancecalculator.util.resistor.formatResistor
 import kotlin.math.abs
 
 fun NavGraphBuilder.valueToColorScreen(

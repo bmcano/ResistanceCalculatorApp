@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.navigation
+package com.brandoncano.resistancecalculator.navigation.calculators
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -14,6 +14,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtvViewModel
+import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.navigateToAbout
+import com.brandoncano.resistancecalculator.navigation.navigateToColorCodeIec
+import com.brandoncano.resistancecalculator.navigation.navigateToValueToColor
 import com.brandoncano.resistancecalculator.ui.screens.ctv.ColorToValueScreen
 
 fun NavGraphBuilder.colorToValueScreen(

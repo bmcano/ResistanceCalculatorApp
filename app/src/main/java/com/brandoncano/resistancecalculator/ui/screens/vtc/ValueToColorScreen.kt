@@ -46,7 +46,7 @@ import com.brandoncano.resistancecalculator.ui.composables.ColorToValueMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.Sdk
-import com.brandoncano.resistancecalculator.util.shareableText
+import com.brandoncano.resistancecalculator.util.resistor.shareableText
 import com.brandoncano.sharedcomponents.composables.AppButton
 import com.brandoncano.sharedcomponents.composables.AppDropDownMenu
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
@@ -202,7 +202,7 @@ private fun ValueToColorScreenContent(
             }
             AppDropDownMenu(
                 label = stringResource(id = R.string.units_hint),
-                modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 12.dp),
                 selectedOption = resistor.units,
                 items = DropdownLists.UNITS_LIST,
                 reset = reset.value,

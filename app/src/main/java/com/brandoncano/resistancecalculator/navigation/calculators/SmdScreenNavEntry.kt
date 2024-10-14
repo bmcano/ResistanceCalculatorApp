@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.navigation
+package com.brandoncano.resistancecalculator.navigation.calculators
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -14,6 +14,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
 import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
+import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.navigateToAbout
+import com.brandoncano.resistancecalculator.navigation.navigateToSmdCodeIec
 import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
 
 fun NavGraphBuilder.smdScreen(

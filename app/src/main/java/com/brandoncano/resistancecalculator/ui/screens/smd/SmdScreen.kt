@@ -189,7 +189,7 @@ private fun SmdScreenContent(
             }
             AppDropDownMenu(
                 label = stringResource(id = R.string.units_hint),
-                modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp),
+                modifier = Modifier.padding(top = 12.dp),
                 selectedOption = resistor.units,
                 items = DropdownLists.UNITS_LIST,
                 reset = reset.value,

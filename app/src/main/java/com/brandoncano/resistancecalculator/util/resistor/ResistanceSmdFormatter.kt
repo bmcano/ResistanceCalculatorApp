@@ -1,9 +1,12 @@
-package com.brandoncano.resistancecalculator.util
+package com.brandoncano.resistancecalculator.util.resistor
 
 import com.Ostermiller.util.SignificantFigures
 import com.brandoncano.resistancecalculator.data.SmdMode
 import com.brandoncano.resistancecalculator.constants.Symbols
 import com.brandoncano.resistancecalculator.model.smd.SmdResistor
+import com.brandoncano.resistancecalculator.util.FindEIA96Value
+import com.brandoncano.resistancecalculator.util.MultiplierFromDigit
+import com.brandoncano.resistancecalculator.util.MultiplierFromUnits
 
 /**
  * Job: Format the resistance text depending on the mode and code
