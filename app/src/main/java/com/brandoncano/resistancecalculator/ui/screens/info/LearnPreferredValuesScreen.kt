@@ -18,7 +18,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
 import com.brandoncano.resistancecalculator.data.ESeries
+import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.sharedcomponents.composables.AppDivider
+import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.AppTopAppBar
 import com.brandoncano.sharedcomponents.text.onSurfaceVariant
 import com.brandoncano.sharedcomponents.text.textStyleBody
@@ -108,4 +110,10 @@ private fun LearnPreferredValuesScreenContent(paddingValues: PaddingValues) {
         DisclaimerText()
         Spacer(modifier = Modifier.height(48.dp))
     }
+}
+
+@AppScreenPreviews
+@Composable
+private fun LearnPreferredValuesScreenPreview() {
+    ResistorCalculatorTheme { LearnPreferredValuesScreen {} }
 }

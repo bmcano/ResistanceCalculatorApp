@@ -51,9 +51,7 @@ fun LearnSmdCodesScreen(
 }
 
 @Composable
-private fun LearnSmdCodesScreenContent(
-    paddingValues: PaddingValues,
-) {
+private fun LearnSmdCodesScreenContent(paddingValues: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -84,53 +82,23 @@ private fun LearnSmdCodesScreenContent(
             style = textStyleBody().onSurfaceVariant(),
         )
 
-        Text(
-            text = stringResource(R.string.info_smd_three_code_headline),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleTitle(),
-        )
-        Text(
-            text = stringResource(R.string.info_smd_three_code_body),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleBody().onSurfaceVariant(),
-        )
-        CodeExampleCard(
+        CodeInfoSection(
+            headlineRes = R.string.info_smd_three_code_headline,
+            bodyRes = R.string.info_smd_three_code_body,
+            formulaRes = R.string.info_smd_three_digit_formula,
+            exampleRes = R.string.info_smd_three_digit_example,
             code = "Code: xyz",
-            description = stringResource(R.string.info_smd_three_digit_formula),
-        )
-        Text(
-            text = stringResource(R.string.info_smd_code_example),
-            modifier = Modifier.padding(vertical = 12.dp),
-            style = textStyleBody().onSurfaceVariant(),
-        )
-        CodeExampleCard(
-            code = "Code: 472",
-            description = stringResource(R.string.info_smd_three_digit_example),
+            exampleCode = "Code: 472",
         )
         Spacer(modifier = Modifier.height(24.dp))
 
-        Text(
-            text = stringResource(R.string.info_smd_four_code_headline),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleTitle(),
-        )
-        Text(
-            text = stringResource(R.string.info_smd_four_code_body),
-            modifier = Modifier.padding(bottom = 12.dp),
-            style = textStyleBody().onSurfaceVariant(),
-        )
-        CodeExampleCard(
+        CodeInfoSection(
+            headlineRes = R.string.info_smd_four_code_headline,
+            bodyRes = R.string.info_smd_four_code_body,
+            formulaRes = R.string.info_smd_four_digit_formula,
+            exampleRes = R.string.info_smd_four_digit_example,
             code = "Code: wxyz",
-            description = stringResource(R.string.info_smd_four_digit_formula),
-        )
-        Text(
-            text = stringResource(R.string.info_smd_code_example),
-            modifier = Modifier.padding(vertical = 12.dp),
-            style = textStyleBody().onSurfaceVariant(),
-        )
-        CodeExampleCard(
-            code = "Code: 1201",
-            description = stringResource(R.string.info_smd_four_digit_example),
+            exampleCode = "Code: 1201",
         )
         AppDivider(modifier = Modifier.padding(vertical = 16.dp))
         Text(
@@ -184,10 +152,42 @@ private fun LearnSmdCodesScreenContent(
     }
 }
 
+@Composable
+private fun CodeInfoSection(
+    headlineRes: Int,
+    bodyRes: Int,
+    formulaRes: Int,
+    exampleRes: Int,
+    code: String,
+    exampleCode: String,
+) {
+    Text(
+        text = stringResource(headlineRes),
+        modifier = Modifier.padding(bottom = 12.dp),
+        style = textStyleTitle(),
+    )
+    Text(
+        text = stringResource(bodyRes),
+        modifier = Modifier.padding(bottom = 12.dp),
+        style = textStyleBody().onSurfaceVariant(),
+    )
+    CodeExampleCard(
+        code = code,
+        description = stringResource(formulaRes),
+    )
+    Text(
+        text = stringResource(R.string.info_smd_code_example),
+        modifier = Modifier.padding(vertical = 12.dp),
+        style = textStyleBody().onSurfaceVariant(),
+    )
+    CodeExampleCard(
+        code = exampleCode,
+        description = stringResource(exampleRes),
+    )
+}
+
 @AppScreenPreviews
 @Composable
-private fun InfoPreview() {
-    ResistorCalculatorTheme {
-        LearnSmdCodesScreen {  }
-    }
+private fun LearnSmdCodesScreenPreview() {
+    ResistorCalculatorTheme { LearnSmdCodesScreen {} }
 }

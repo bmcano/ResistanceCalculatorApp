@@ -158,7 +158,5 @@ private fun BandSection(
 @AppScreenPreviews
 @Composable
 private fun LearnColorCodesScreenPreview() {
-    ResistorCalculatorTheme {
-        LearnColorCodesScreen {  }
-    }
+    ResistorCalculatorTheme { LearnColorCodesScreen {} }
 }
