@@ -105,7 +105,11 @@ fun NavGraphBuilder.valueToColorScreen(
 
                 val standardValues = GenerateStandardValues.execute(eSeriesList)
                 val closestValueOhms = FindClosestStandardValue.execute(resistanceValue, standardValues)
-                closestStandardValue.doubleValue = closestValueOhms / MultiplierFromUnits.execute(resistor.units)
+                if (resistanceValue > 0.0) {
+                    closestStandardValue.doubleValue = closestValueOhms / MultiplierFromUnits.execute(resistor.units)
+                } else {
+                    closestStandardValue.doubleValue = 0.1
+                }
 
                 val diff = abs(resistanceValue - closestValueOhms)
                 eSeriesCardContent = if (diff == 0.0) {
@@ -121,6 +125,7 @@ fun NavGraphBuilder.valueToColorScreen(
                 eSeriesCardContent = ESeriesCardContent.NoContent
                 val resistance = RoundStandardValue.execute(closestStandardValue.doubleValue)
                 viewModel.updateValues(resistance, resistor.units, resistor.band5, resistor.band6)
+                focusManager.clearFocus()
                 return@ValueToColorScreen resistance
             },
             onLearnMoreTapped = {
