@@ -1,6 +1,12 @@
 package com.brandoncano.resistancecalculator.ui.screens.ctv
 
 import android.graphics.Picture
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,26 +34,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.brandoncano.resistancecalculator.R
-import com.brandoncano.resistancecalculator.data.DropdownLists
 import com.brandoncano.resistancecalculator.constants.Symbols
+import com.brandoncano.resistancecalculator.data.DropdownLists
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.composables.AboutAppMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.AppThemeMenuItem
 import com.brandoncano.resistancecalculator.ui.composables.ImageTextDropDownMenu
 import com.brandoncano.resistancecalculator.ui.composables.ValueToColorMenuItem
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
-import com.brandoncano.resistancecalculator.util.shareableText
+import com.brandoncano.resistancecalculator.util.Sdk
+import com.brandoncano.resistancecalculator.util.resistor.shareableText
 import com.brandoncano.sharedcomponents.composables.AppArrowCardButton
 import com.brandoncano.sharedcomponents.composables.AppDivider
 import com.brandoncano.sharedcomponents.composables.AppMenuTopAppBar
 import com.brandoncano.sharedcomponents.composables.AppNavigationBar
 import com.brandoncano.sharedcomponents.composables.AppScreenPreviews
 import com.brandoncano.sharedcomponents.composables.ClearSelectionsMenuItem
-import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.composables.FeedbackMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareImageMenuItem
 import com.brandoncano.sharedcomponents.composables.ShareTextMenuItem
@@ -58,6 +63,7 @@ import com.brandoncano.sharedcomponents.text.textStyleHeadline
 @Composable
 fun ColorToValueScreen(
     openMenu: MutableState<Boolean>,
+    reset: MutableState<Boolean>,
     resistor: ResistorCtv,
     navBarPosition: Int,
     onOpenThemeDialog: () -> Unit,
@@ -72,6 +78,7 @@ fun ColorToValueScreen(
     Surface(modifier = Modifier.fillMaxSize()) {
         ColorToValueScreenContent(
             openMenu = openMenu,
+            reset = reset,
             resistor = resistor,
             navBarPosition = navBarPosition,
             onOpenThemeDialog = onOpenThemeDialog,
@@ -89,6 +96,7 @@ fun ColorToValueScreen(
 @Composable
 private fun ColorToValueScreenContent(
     openMenu: MutableState<Boolean>,
+    reset: MutableState<Boolean>,
     resistor: ResistorCtv,
     navBarPosition: Int,
     onOpenThemeDialog: () -> Unit,
@@ -100,9 +108,6 @@ private fun ColorToValueScreenContent(
     onNavBarSelectionChanged: (Int) -> Unit,
     onLearnColorCodesTapped: () -> Unit,
 ) {
-    val focusManager = LocalFocusManager.current
-    val interactionSource = remember { MutableInteractionSource() }
-    var reset by remember { mutableStateOf(false) }
     var navBarSelection by remember { mutableIntStateOf(navBarPosition) }
     val picture = remember { Picture() }
 
@@ -110,27 +115,24 @@ private fun ColorToValueScreenContent(
         topBar = {
             AppMenuTopAppBar(
                 titleText = stringResource(R.string.title_color_to_value),
-                interactionSource = interactionSource,
+                interactionSource = remember { MutableInteractionSource() },
                 showMenu = openMenu,
                 navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
                 onNavigateBack = onNavigateBack,
             ) {
                 ValueToColorMenuItem(onValueToColorTapped)
-                ClearSelectionsMenuItem {
-                    openMenu.value = false
-                    reset = true
-                    onClearSelectionsTapped()
-                    focusManager.clearFocus()
-                }
+                ClearSelectionsMenuItem(onClearSelectionsTapped)
                 ShareTextMenuItem(
                     text = resistor.shareableText(),
                     showMenu = openMenu,
                 )
-                ShareImageMenuItem(
-                    applicationId = Symbols.APPLICATION_ID,
-                    showMenu = openMenu,
-                    picture = picture,
-                )
+                if (Sdk.isAtLeastAndroid7()) {
+                    ShareImageMenuItem(
+                        applicationId = Symbols.APPLICATION_ID,
+                        showMenu = openMenu,
+                        picture = picture,
+                    )
+                }
                 FeedbackMenuItem(
                     app = Symbols.APP_NAME,
                     showMenu = openMenu,
@@ -174,68 +176,74 @@ private fun ColorToValueScreenContent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            DrawContent(picture) {
-                ResistorLayout(resistor)
-            }
+            ResistorDisplay(picture, resistor)
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 32.dp),
                 label = R.string.number_band_hint1,
                 selectedOption = resistor.band1,
                 items = DropdownLists.NUMBER_LIST_NO_BLACK,
-                reset = reset,
-            ) {
-                onUpdateBand(1, it)
-            }
+                reset = reset.value,
+                onOptionSelected = { onUpdateBand(1, it) },
+            )
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
                 label = R.string.number_band_hint2,
                 selectedOption = resistor.band2,
                 items = DropdownLists.NUMBER_LIST,
-                reset = reset,
+                reset = reset.value,
+                onOptionSelected = {
+                    onUpdateBand(2, it)
+                },
+            )
+            AnimatedVisibility(
+                visible = navBarSelection == 2 || navBarSelection == 3,
+                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
             ) {
-                onUpdateBand(2, it)
-            }
-            if (navBarSelection == 2 || navBarSelection == 3) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.number_band_hint3,
                     selectedOption = resistor.band3,
                     items = DropdownLists.NUMBER_LIST,
-                    reset = reset,
-                ) {
-                    onUpdateBand(3, it)
-                }
+                    reset = reset.value,
+                    onOptionSelected = { onUpdateBand(3, it) },
+                )
             }
             ImageTextDropDownMenu(
                 modifier = Modifier.padding(top = 12.dp),
                 label = R.string.multiplier_band_hint,
                 selectedOption = resistor.band4,
                 items = DropdownLists.MULTIPLIER_LIST,
-                reset = reset,
+                reset = reset.value,
+                onOptionSelected = { onUpdateBand(4, it) },
+            )
+            AnimatedVisibility(
+                visible = navBarSelection != 0,
+                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
             ) {
-                onUpdateBand(4, it)
-            }
-            if (navBarSelection != 0) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.tolerance_band_hint,
                     selectedOption = resistor.band5,
                     items = DropdownLists.TOLERANCE_LIST,
-                    reset = reset,
-                ) {
-                    onUpdateBand(5, it)
-                }
+                    reset = reset.value,
+                    onOptionSelected = { onUpdateBand(5, it) },
+                )
             }
-            if (navBarSelection == 3) {
+            AnimatedVisibility(
+                visible = navBarSelection == 3,
+                enter = fadeIn(animationSpec = tween(durationMillis = 300)) + expandVertically(),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300)) + shrinkVertically()
+            ) {
                 ImageTextDropDownMenu(
                     modifier = Modifier.padding(top = 12.dp),
                     label = R.string.ppm_band_hint,
                     selectedOption = resistor.band6,
                     items = DropdownLists.PPM_LIST,
-                    reset = reset,
-                ) {
-                    onUpdateBand(6, it)
-                }
+                    reset = reset.value,
+                    onOptionSelected = { onUpdateBand(6, it) },
+                )
             }
             AppDivider(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp))
             Column(horizontalAlignment = Alignment.Start) {
@@ -263,6 +271,7 @@ private fun ColorToValueScreen4BandPreview() {
     ResistorCalculatorTheme {
         ColorToValueScreen(
             openMenu = remember { mutableStateOf(false) },
+            reset = remember { mutableStateOf(false) },
             resistor = ResistorCtv(),
             navBarPosition = 1,
             onOpenThemeDialog = {},

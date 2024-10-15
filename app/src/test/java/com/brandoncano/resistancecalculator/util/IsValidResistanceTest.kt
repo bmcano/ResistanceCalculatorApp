@@ -1,30 +1,20 @@
 package com.brandoncano.resistancecalculator.util
 
-import android.content.Context
-import com.brandoncano.resistancecalculator.data.SharedPreferences
 import com.brandoncano.resistancecalculator.model.vtc.ResistorVtc
-import io.mockk.clearAllMocks
-import io.mockk.every
-import io.mockk.mockk
-import org.junit.After
+import com.brandoncano.resistancecalculator.util.resistor.IsValidResistance
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Test
 import com.brandoncano.resistancecalculator.constants.Symbols as S
 
-/**
- * Notes:
- *   EditText already limits this to decimal and whole numbers and a max of 5 characters
- */
 class IsValidResistanceTest {
 
-    private val context: Context = mockk<Context>()
-
-    @Before
-    fun setup() {
-        every { SharedPreferences.NAVBAR_SELECTION_VTC.saveData(context, "5") } answers { }
-        every { SharedPreferences.NAVBAR_SELECTION_VTC.saveData(context, "6") } answers { }
+    @Test
+    fun validButIncompleteInputs() {
+        val resistor = ResistorVtc()
+        assertTrue(IsValidResistance.execute(resistor, ""))
+        assertTrue(IsValidResistance.execute(resistor, "0"))
+        assertTrue(IsValidResistance.execute(resistor, "0."))
     }
 
     @Test
@@ -33,45 +23,51 @@ class IsValidResistanceTest {
         // four band
         resistor.units = S.OHMS
         assertFalse(IsValidResistance.execute(resistor, "InValid"))
-
+        assertFalse(IsValidResistance.execute(resistor, " "))
+        assertFalse(IsValidResistance.execute(resistor, "12 "))
+        assertFalse(IsValidResistance.execute(resistor, "."))
         assertFalse(IsValidResistance.execute(resistor, "133"))
         assertFalse(IsValidResistance.execute(resistor, "011"))
         assertFalse(IsValidResistance.execute(resistor, "001"))
-
+        assertFalse(IsValidResistance.execute(resistor, ".0"))
         assertFalse(IsValidResistance.execute(resistor, ".1"))
         assertFalse(IsValidResistance.execute(resistor, ".12"))
         assertFalse(IsValidResistance.execute(resistor, ".123"))
-
         assertFalse(IsValidResistance.execute(resistor, "0.0"))
         assertFalse(IsValidResistance.execute(resistor, "0.006"))
+        assertFalse(IsValidResistance.execute(resistor, "0.05"))
         assertFalse(IsValidResistance.execute(resistor, "0.056"))
+        assertFalse(IsValidResistance.execute(resistor, "12.0"))
         assertFalse(IsValidResistance.execute(resistor, "1.02"))
         assertFalse(IsValidResistance.execute(resistor, "1.023"))
-
+        assertFalse(IsValidResistance.execute(resistor, "66.0"))
+        assertFalse(IsValidResistance.execute(resistor, "660.0"))
         resistor.units = S.GOHMS
         assertFalse(IsValidResistance.execute(resistor, "130"))
+        assertFalse(IsValidResistance.execute(resistor, "13.0"))
 
         // five/six band
         resistor.units = S.OHMS
-        resistor.navBarSelection = 5
-
+        resistor.navBarSelection = 2
         assertFalse(IsValidResistance.execute(resistor, "1234"))
         assertFalse(IsValidResistance.execute(resistor, "0123"))
         assertFalse(IsValidResistance.execute(resistor, "0012"))
         assertFalse(IsValidResistance.execute(resistor, "012"))
         assertFalse(IsValidResistance.execute(resistor, "001"))
-
         assertFalse(IsValidResistance.execute(resistor, ".12"))
         assertFalse(IsValidResistance.execute(resistor, ".01"))
-
         assertFalse(IsValidResistance.execute(resistor, "0.123"))
         assertFalse(IsValidResistance.execute(resistor, "0.0123"))
         assertFalse(IsValidResistance.execute(resistor, "1.023"))
         assertFalse(IsValidResistance.execute(resistor, "1.203"))
         assertFalse(IsValidResistance.execute(resistor, "0.001"))
+        assertFalse(IsValidResistance.execute(resistor, "663.0"))
+        assertFalse(IsValidResistance.execute(resistor, "6630."))
+        assertFalse(IsValidResistance.execute(resistor, "6630.0"))
+        assertFalse(IsValidResistance.execute(resistor, "0.01"))
         resistor.units = S.GOHMS
         assertFalse(IsValidResistance.execute(resistor, "1230"))
-        assertFalse(IsValidResistance.execute(resistor, "0.001"))
+        assertFalse(IsValidResistance.execute(resistor, "663.0"))
     }
 
     @Test
@@ -79,49 +75,42 @@ class IsValidResistanceTest {
         val resistor = ResistorVtc()
         // four band
         resistor.units = S.OHMS
+        assertTrue(IsValidResistance.execute(resistor, "0.10"))
+        assertTrue(IsValidResistance.execute(resistor, "0.1"))
         assertTrue(IsValidResistance.execute(resistor, "0"))
-        assertTrue(IsValidResistance.execute(resistor, "12"))
         assertTrue(IsValidResistance.execute(resistor, "10"))
-        assertTrue(IsValidResistance.execute(resistor, "5"))
-        assertTrue(IsValidResistance.execute(resistor, "12.0"))
+        assertTrue(IsValidResistance.execute(resistor, "2"))
+        assertTrue(IsValidResistance.execute(resistor, "34"))
+        assertTrue(IsValidResistance.execute(resistor, "0.5"))
         assertTrue(IsValidResistance.execute(resistor, "0.67"))
-        assertTrue(IsValidResistance.execute(resistor, "6.7"))
-        assertTrue(IsValidResistance.execute(resistor, "0.05"))
-
+        assertTrue(IsValidResistance.execute(resistor, "8."))
+        assertTrue(IsValidResistance.execute(resistor, "890"))
+        assertTrue(IsValidResistance.execute(resistor, "99000000000"))
         resistor.units = S.GOHMS
-        assertTrue(IsValidResistance.execute(resistor, "13.0"))
         assertTrue(IsValidResistance.execute(resistor, "0.67"))
         assertTrue(IsValidResistance.execute(resistor, "0.6"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
+        assertTrue(IsValidResistance.execute(resistor, "99"))
 
         // five band
         resistor.units = S.OHMS
-        resistor.navBarSelection = 5
+        resistor.navBarSelection = 2
         assertTrue(IsValidResistance.execute(resistor, "0"))
+        assertTrue(IsValidResistance.execute(resistor, "1"))
+        assertTrue(IsValidResistance.execute(resistor, "1.0"))
+        assertTrue(IsValidResistance.execute(resistor, "1.00"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
+        assertTrue(IsValidResistance.execute(resistor, "9.80"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
         assertTrue(IsValidResistance.execute(resistor, "63.2"))
-        assertTrue(IsValidResistance.execute(resistor, "663.0"))
-        assertTrue(IsValidResistance.execute(resistor, "0.01"))
-
+        assertTrue(IsValidResistance.execute(resistor, "123"))
+        assertTrue(IsValidResistance.execute(resistor, "999000000000"))
         resistor.units = S.GOHMS
-        resistor.navBarSelection = 5
+        assertTrue(IsValidResistance.execute(resistor, "0.123"))
         assertTrue(IsValidResistance.execute(resistor, "6.7"))
+        assertTrue(IsValidResistance.execute(resistor, "6.70"))
         assertTrue(IsValidResistance.execute(resistor, "6.23"))
         assertTrue(IsValidResistance.execute(resistor, "63.2"))
-        assertTrue(IsValidResistance.execute(resistor, "663.0"))
-    }
-
-    @Test
-    fun `code coverage inputs`() {
-        val resistor = ResistorVtc()
-        assertTrue(IsValidResistance.execute(resistor, ""))
-        assertFalse(IsValidResistance.execute(resistor, " "))
-        assertFalse(IsValidResistance.execute(resistor, ".0"))
-    }
-
-    @After
-    fun tearDown() {
-        clearAllMocks()
+        assertTrue(IsValidResistance.execute(resistor, "999"))
     }
 }

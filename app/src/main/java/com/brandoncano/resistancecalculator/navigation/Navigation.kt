@@ -10,6 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.brandoncano.resistancecalculator.constants.Links
+import com.brandoncano.resistancecalculator.navigation.calculators.colorToValueScreen
+import com.brandoncano.resistancecalculator.navigation.calculators.smdScreen
+import com.brandoncano.resistancecalculator.navigation.calculators.valueToColorScreen
+import com.brandoncano.resistancecalculator.navigation.learn.learnColorCodes
+import com.brandoncano.resistancecalculator.navigation.learn.learnPreferredValues
+import com.brandoncano.resistancecalculator.navigation.learn.learnSmdCodes
 import com.brandoncano.sharedcomponents.data.Apps
 import com.brandoncano.sharedcomponents.screen.ViewOurAppsScreen
 import com.brandoncano.sharedcomponents.utils.OpenLink
@@ -29,6 +35,7 @@ fun Navigation(onOpenThemeDialog: () -> Unit) {
         colorToValueScreen(navController, onOpenThemeDialog)
         homeScreen(navController, onOpenThemeDialog)
         learnColorCodes(navController)
+        learnPreferredValues(navController)
         learnSmdCodes(navController)
         smdScreen(navController, onOpenThemeDialog)
         valueToColorScreen(navController, onOpenThemeDialog)
@@ -71,6 +78,10 @@ fun navigateToSmd(navController: NavHostController) {
 
 fun navigateToColorCodeIec(navController: NavHostController) {
     navController.navigate(Screen.LearnColorCodes.route)
+}
+
+fun navigateToPreferredValuesIec(navController: NavHostController) {
+    navController.navigate(Screen.LearnPreferredValues.route)
 }
 
 fun navigateToSmdCodeIec(navController: NavHostController) {

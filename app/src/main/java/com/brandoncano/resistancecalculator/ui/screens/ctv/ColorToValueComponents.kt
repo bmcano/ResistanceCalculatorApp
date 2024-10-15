@@ -1,5 +1,6 @@
 package com.brandoncano.resistancecalculator.ui.screens.ctv
 
+import android.graphics.Picture
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -19,17 +20,30 @@ import com.brandoncano.resistancecalculator.constants.Colors
 import com.brandoncano.resistancecalculator.model.ctv.ResistorCtv
 import com.brandoncano.resistancecalculator.ui.theme.ResistorCalculatorTheme
 import com.brandoncano.resistancecalculator.util.ColorFinder
-import com.brandoncano.resistancecalculator.util.bandFiveForDisplay
-import com.brandoncano.resistancecalculator.util.bandFourForDisplay
-import com.brandoncano.resistancecalculator.util.bandOneForDisplay
-import com.brandoncano.resistancecalculator.util.bandSixForDisplay
-import com.brandoncano.resistancecalculator.util.bandThreeForDisplay
-import com.brandoncano.resistancecalculator.util.bandTwoForDisplay
-import com.brandoncano.resistancecalculator.util.deriveResistorColor
-import com.brandoncano.resistancecalculator.util.formatResistance
+import com.brandoncano.resistancecalculator.util.Sdk
+import com.brandoncano.resistancecalculator.util.resistor.bandFiveForDisplay
+import com.brandoncano.resistancecalculator.util.resistor.bandFourForDisplay
+import com.brandoncano.resistancecalculator.util.resistor.bandOneForDisplay
+import com.brandoncano.resistancecalculator.util.resistor.bandSixForDisplay
+import com.brandoncano.resistancecalculator.util.resistor.bandThreeForDisplay
+import com.brandoncano.resistancecalculator.util.resistor.bandTwoForDisplay
+import com.brandoncano.resistancecalculator.util.resistor.deriveResistorColor
+import com.brandoncano.resistancecalculator.util.resistor.formatResistance
 import com.brandoncano.sharedcomponents.composables.AppCard
 import com.brandoncano.sharedcomponents.composables.AppComponentPreviews
+import com.brandoncano.sharedcomponents.composables.DrawContent
 import com.brandoncano.sharedcomponents.text.textStyleTitle
+
+@Composable
+fun ResistorDisplay(picture: Picture, resistor: ResistorCtv) {
+    if (Sdk.isAtLeastAndroid7()) {
+        DrawContent(picture) {
+            ResistorLayout(resistor)
+        }
+    } else {
+        ResistorLayout(resistor)
+    }
+}
 
 data class ResistorImagePair(@DrawableRes val drawableRes: Int, val color: String)
 
@@ -98,9 +112,7 @@ fun ResistanceText(resistance: String) {
 @Composable
 private fun ResistorLayoutsPreview() {
     ResistorCalculatorTheme {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             ResistorLayout(ResistorCtv())
             ResistorLayout(ResistorCtv(navBarSelection = 2))
             ResistorLayout(ResistorCtv("Red", "Orange", "", "Yellow", "", "", 0))

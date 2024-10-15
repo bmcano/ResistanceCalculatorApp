@@ -3,8 +3,8 @@ package com.brandoncano.resistancecalculator.model.smd
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.brandoncano.resistancecalculator.util.formatResistance
-import com.brandoncano.resistancecalculator.util.isSmdInputInvalid
+import com.brandoncano.resistancecalculator.util.resistor.formatResistance
+import com.brandoncano.resistancecalculator.util.resistor.isSmdInputInvalid
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

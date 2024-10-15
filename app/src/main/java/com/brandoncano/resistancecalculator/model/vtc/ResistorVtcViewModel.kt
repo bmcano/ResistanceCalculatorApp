@@ -3,8 +3,9 @@ package com.brandoncano.resistancecalculator.model.vtc
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.brandoncano.resistancecalculator.util.formatResistor
-import com.brandoncano.resistancecalculator.util.isInputInvalid
+import com.brandoncano.resistancecalculator.data.ESeriesCardContent
+import com.brandoncano.resistancecalculator.util.resistor.formatResistor
+import com.brandoncano.resistancecalculator.util.resistor.isInputInvalid
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -21,6 +22,9 @@ class ResistorVtcViewModel(context: Context) : ViewModel() {
 
     private val _isError = MutableStateFlow(false)
     val isError: StateFlow<Boolean> get() = _isError
+
+    private val _eSeriesCardContent: MutableStateFlow<ESeriesCardContent> = MutableStateFlow(ESeriesCardContent.NoContent)
+    val eSeriesCardContent: StateFlow<ESeriesCardContent> get() = _eSeriesCardContent
 
     init {
         viewModelScope.launch {
@@ -61,6 +65,10 @@ class ResistorVtcViewModel(context: Context) : ViewModel() {
             saveResistorValues()
         }
         repository.saveNavBarSelection(navBarSelection)
+    }
+
+    fun updateCardContent(content: ESeriesCardContent) {
+        _eSeriesCardContent.value = content
     }
 
     private fun updateErrorState() {

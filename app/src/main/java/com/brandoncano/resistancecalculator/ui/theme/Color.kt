@@ -90,6 +90,6 @@ val brown = Color(0xFFB97A57)
 val resistor_beige = Color(0xFFEFE4B0)
 val resistor_blue = Color(0xFF64BDE1)
 val resistor_wire = Color(0xFFC0C0C0)
-// warning colors - keeping for later
-@Suppress("unused") val warningGoldLight = Color(0xFF996100)
-@Suppress("unused") val warningGoldDark = Color(0xFFDA8A00)
+// misc colors
+val warningGold = Color(0xFFDA8A00)
+val validGreen = Color(0xFF0EB275)

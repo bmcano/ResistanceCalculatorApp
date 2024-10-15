@@ -1,7 +1,7 @@
 package com.brandoncano.resistancecalculator.model.vtc
 
 import com.brandoncano.resistancecalculator.constants.Symbols
-import com.brandoncano.resistancecalculator.util.adjustValueForSharing
+import com.brandoncano.resistancecalculator.util.resistor.adjustValueForSharing
 
 data class ResistorVtc(
     var resistance: String = "",

@@ -1,4 +1,4 @@
-package com.brandoncano.resistancecalculator.navigation
+package com.brandoncano.resistancecalculator.navigation.calculators
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -7,57 +7,62 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.brandoncano.resistancecalculator.model.ResistorViewModelFactory
-import com.brandoncano.resistancecalculator.model.vtc.ResistorVtcViewModel
-import com.brandoncano.resistancecalculator.ui.screens.vtc.ValueToColorScreen
-import com.brandoncano.resistancecalculator.util.formatResistor
+import com.brandoncano.resistancecalculator.model.smd.SmdResistorViewModel
+import com.brandoncano.resistancecalculator.navigation.Screen
+import com.brandoncano.resistancecalculator.navigation.navigateToAbout
+import com.brandoncano.resistancecalculator.navigation.navigateToSmdCodeIec
+import com.brandoncano.resistancecalculator.ui.screens.smd.SmdScreen
 
-fun NavGraphBuilder.valueToColorScreen(
+fun NavGraphBuilder.smdScreen(
     navHostController: NavHostController,
     onOpenThemeDialog: () -> Unit,
 ) {
     composable(
-        route = Screen.ValueToColor.route,
+        route = Screen.Smd.route,
         enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
         exitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
     ) {
         val context = LocalContext.current
-        val viewModel: ResistorVtcViewModel = viewModel(factory = ResistorViewModelFactory(context))
-        val resistor by viewModel.resistor.collectAsState()
-        val navBarSelection by viewModel.navBarSelection.collectAsState()
-        val isError by viewModel.isError.collectAsState()
+        val focusManager = LocalFocusManager.current
         val openMenu = remember { mutableStateOf(false) }
-        resistor.formatResistor()
+        val reset = remember { mutableStateOf(false) }
+        val viewModel: SmdResistorViewModel = viewModel(factory = ResistorViewModelFactory(context))
+        val resistor by viewModel.resistor.collectAsState()
+        val isError by viewModel.isError.collectAsState()
 
-        ValueToColorScreen(
-            resistor = resistor,
-            navBarPosition = navBarSelection,
-            isError = isError,
+        SmdScreen(
             openMenu = openMenu,
+            reset = reset,
+            resistor = resistor,
+            isError = isError,
             onOpenThemeDialog = onOpenThemeDialog,
             onNavigateBack = { navHostController.popBackStack() },
             onClearSelectionsTapped = {
                 openMenu.value = false
+                reset.value = true
                 viewModel.clear()
+                focusManager.clearFocus()
             },
             onAboutTapped = {
                 openMenu.value = false
                 navigateToAbout(navHostController)
             },
-            onColorToValueTapped = {
-                openMenu.value = false
-                navigateToColorToValue(navHostController)
-            },
-            onValueChanged = { resistance, units, band5, band6 ->
-                viewModel.updateValues(resistance, units, band5, band6)
+            onValueChanged = { code, units, clearFocus ->
+                reset.value = false
+                viewModel.updateValues(code, units)
+                if (clearFocus) focusManager.clearFocus()
             },
             onNavBarSelectionChanged = { selection ->
                 viewModel.saveNavBarSelection(selection)
             },
+            navBarPosition = viewModel.getNavBarSelection(),
+            onLearnSmdCodesTapped = { navigateToSmdCodeIec(navHostController) },
         )
     }
 }
