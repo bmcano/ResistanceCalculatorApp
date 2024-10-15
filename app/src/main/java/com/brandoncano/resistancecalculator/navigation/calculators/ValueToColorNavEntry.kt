@@ -91,6 +91,7 @@ fun NavGraphBuilder.valueToColorScreen(
                 if (resistor.isEmpty() || isError) return@ValueToColorScreen
                 val resistanceValue = ParseResistanceValue.execute(resistor.resistance, resistor.units) ?: return@ValueToColorScreen
                 val tolerance = if (navBarSelection == 0) "${Symbols.PM}20%" else resistor.band5
+                focusManager.clearFocus()
                 if (tolerance.isEmpty()) {
                     eSeriesCardContent = ESeriesCardContent.InvalidTolerance("${navBarSelection + 3}")
                     return@ValueToColorScreen
@@ -125,7 +126,6 @@ fun NavGraphBuilder.valueToColorScreen(
                 eSeriesCardContent = ESeriesCardContent.NoContent
                 val resistance = RoundStandardValue.execute(closestStandardValue.doubleValue)
                 viewModel.updateValues(resistance, resistor.units, resistor.band5, resistor.band6)
-                focusManager.clearFocus()
                 return@ValueToColorScreen resistance
             },
             onLearnMoreTapped = {
