@@ -7,7 +7,9 @@ import kotlin.math.abs
  */
 object FindClosestStandardValue {
 
-    // TODO (?) - try to find the closest value greater than the resistanceValue
+    // TODO
+    //  - (?) try to find the closest value greater than the resistanceValue
+    //  - potential chance for a crash if an empty list enters
     fun execute(resistanceValue: Double, standardValues: List<Double>): Double {
         var closestValue = standardValues[0]
         var minDiff = abs(resistanceValue - closestValue)
